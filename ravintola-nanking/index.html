@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Ravintola Nanking — Autenttinen kantoninkiinalainen ruoka Helsingissä</title>
+<meta name="description" content="Ravintola Nanking Helsingissä — autenttinen kantoninkiinalainen ruoka, salainen menu, kohtuulliset hinnat. Avoin 1990-luvulta.">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --bg:#FFF9F3;
+    --ink:#2a2a2a;
+    --ink-soft:#555555;
+    --accent:#D4AF37;
+    --accent-deep:#B8860B;
+    --hero-bg:#5C0A0A;
+    --hero-text:#FFF9F3;
+    --hero-tag:#D4AF37;
+    --hero-meta:#E8D5C4;
+    --menu-bg:#5C0A0A;
+    --menu-text:#FFF9F3;
+    --menu-cat:#D4AF37;
+    --card-bg:#FFFFFF;
+    --line:#E8D5C4;
+    --muted:rgba(255,249,243,.7);
+    --nav-bg:rgba(255,249,243,.95);
+  }
+  html{scroll-behavior:smooth}
+  body{font-family:'DM Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:17px;line-height:1.6;color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased;}
+  a{color:inherit;text-decoration:none}
+  .container{max-width:1100px;margin:0 auto;padding:0 20px}
+  @media(min-width:768px){.container{padding:0 40px}}
+
+  nav{position:sticky;top:0;z-index:10;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:18px 20px;max-width:1100px;margin:0 auto}
+  .logo{font-size:22px;font-weight:700;letter-spacing:-.5px;color:var(--hero-bg)}
+  .nav-links{display:none;gap:32px;font-size:15px;font-weight:500}
+  .nav-links a:hover{color:var(--accent)}
+  @media(min-width:768px){.nav-links{display:flex}}
+
+  .hero{position:relative;min-height:72vh;display:flex;align-items:center;
+    background:radial-gradient(circle at 25% 35%,rgba(212,175,55,.15) 0%,transparent 50%),
+    radial-gradient(circle at 78% 70%,rgba(184,134,11,.15) 0%,transparent 50%),
+    linear-gradient(145deg,#5C0A0A 0%,#4a0808 50%,#5C0A0A 100%);
+    color:var(--hero-text);overflow:hidden;}
+  .hero::before{content:"";position:absolute;inset:0;
+    background:repeating-linear-gradient(45deg,transparent 0,transparent 80px,rgba(255,249,243,.008) 80px,rgba(255,249,243,.008) 81px);
+    pointer-events:none;}
+  .hero-inner{position:relative;padding:100px 20px;width:100%;max-width:1100px;margin:0 auto}
+  @media(min-width:768px){.hero-inner{padding:140px 40px}}
+  .hero-tag{display:inline-block;font-size:13px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--hero-tag);border:1px solid rgba(212,175,55,.5);padding:8px 16px;margin-bottom:28px;}
+  h1.hero-title{font-size:clamp(44px,8vw,88px);font-weight:700;line-height:1.05;letter-spacing:-2px;margin-bottom:24px;font-family:Georgia,'Times New Roman',serif;}
+  .hero-subtitle{font-size:clamp(18px,2.4vw,24px);font-weight:300;color:#E8D5C4;max-width:620px;margin-bottom:44px}
+  .hero-meta{display:flex;gap:32px;flex-wrap:wrap;font-size:14px;color:var(--hero-tag);margin-bottom:44px}
+  .hero-meta span{display:flex;align-items:center;gap:8px}
+  .cta-row{display:flex;gap:16px;flex-wrap:wrap}
+  .btn{display:inline-block;padding:16px 32px;font-size:16px;font-weight:600;letter-spacing:.3px;cursor:pointer;border:none;transition:transform .15s;border-radius:4px;}
+  .btn:hover{transform:translateY(-2px)}
+  .btn-primary{background:var(--accent);color:var(--hero-bg)}
+  .btn-ghost{background:transparent;color:var(--hero-text);border:1px solid rgba(212,175,55,.5)}
+
+  section{padding:90px 0}
+  @media(max-width:767px){section{padding:60px 0}}
+  .section-label{font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--hero-bg);margin-bottom:16px;}
+  h2{font-size:clamp(32px,5vw,52px);font-weight:700;line-height:1.1;letter-spacing:-1px;margin-bottom:28px;color:var(--ink)}
+  .lead{font-size:19px;color:var(--ink-soft);max-width:720px;line-height:1.65}
+
+  .about{background:var(--bg)}
+  .about-grid{display:grid;gap:50px;align-items:center}
+  @media(min-width:900px){.about-grid{grid-template-columns:1.2fr .8fr;gap:80px}}
+  .about-visual{aspect-ratio:4/5;border-radius:2px;
+    background:radial-gradient(circle at 30% 30%,rgba(92,10,10,.15) 0%,transparent 55%),
+    linear-gradient(160deg,#5C0A0A 0%,#6B1515 45%,#5C0A0A 100%);
+    position:relative;overflow:hidden;min-height:360px;}
+  .about-visual::after{content:"龍";position:absolute;right:-10px;bottom:-40px;font-size:260px;font-weight:700;color:rgba(212,175,55,.1);line-height:1;}
+  .about-visual::before{content:"";position:absolute;inset:30px;border:1px solid rgba(212,175,55,.3);}
+
+  .menu{background:var(--menu-bg);color:var(--menu-text)}
+  .menu .section-label{color:var(--menu-cat)}
+  .menu h2{color:var(--menu-text)}
+  .menu .lead{color:rgba(255,249,243,.8)}
+  .menu-grid{display:grid;gap:60px;margin-top:60px}
+  @media(min-width:768px){.menu-grid{grid-template-columns:1fr 1fr;gap:60px 80px}}
+  .menu-cat h3{font-size:22px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;color:var(--menu-cat);padding-bottom:14px;margin-bottom:22px;border-bottom:1px solid rgba(212,175,55,.4);}
+  .menu-item{display:flex;justify-content:space-between;gap:20px;padding:14px 0;border-bottom:1px dashed rgba(255,249,243,.12)}
+  .menu-item:last-child{border-bottom:none}
+  .menu-item-name{font-weight:500;flex:1}
+  .menu-item-desc{font-size:14px;color:rgba(255,249,243,.65);margin-top:4px;font-weight:300}
+  .menu-item-price{font-weight:600;color:var(--menu-cat);white-space:nowrap}
+  .menu-note{margin-top:50px;padding:24px;background:rgba(255,249,243,.08);border-left:3px solid var(--accent);font-size:15px;color:rgba(255,249,243,.85);}
+
+  .visit{background:var(--bg)}
+  .visit-grid{display:grid;gap:40px;margin-top:40px}
+  @media(min-width:768px){.visit-grid{grid-template-columns:1fr 1fr;gap:60px}}
+  .visit-block h3{font-size:13px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--hero-bg);margin-bottom:22px}
+  .hours-list{list-style:none}
+  .hours-list li{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid rgba(42,42,42,.08);font-size:16px}
+  .hours-list li:last-child{border-bottom:none}
+  .hours-list .day{font-weight:500}
+  .hours-list .time{color:var(--ink-soft)}
+  .address-block{font-size:17px;line-height:1.8}
+  .address-block strong{display:block;font-size:19px;margin-bottom:6px;color:var(--ink)}
+  .map-link{display:inline-block;margin-top:20px;padding:12px 24px;background:var(--hero-bg);color:var(--hero-text);font-size:14px;font-weight:600;letter-spacing:.5px;border-radius:4px;}
+  .map-link:hover{background:var(--accent-deep)}
+
+  .contact-sec{background:var(--hero-bg);color:var(--hero-text)}
+  .contact-sec .section-label{color:var(--menu-cat)}
+  .contact-sec h2{color:var(--hero-text)}
+  .contact-grid{display:grid;gap:24px;margin-top:48px}
+  @media(min-width:640px){.contact-grid{grid-template-columns:repeat(2,1fr)}}
+  .contact-card{padding:28px;background:rgba(255,249,243,.08);border:1px solid rgba(212,175,55,.3);transition:background .2s;border-radius:8px;}
+  .contact-card:hover{background:rgba(255,249,243,.12)}
+  .contact-card small{display:block;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--menu-cat);margin-bottom:10px}
+  .contact-card .big{font-size:22px;font-weight:600}
+  @media(min-width:768px){.contact-card .big{font-size:26px}}
+
+  .book-sec{background:#4a0808;padding:80px 20px;color:var(--hero-text)}
+  .book-card{max-width:480px;margin:0 auto;background:#5C0A0A;border:1px solid rgba(212,175,55,.35);border-radius:14px;padding:36px 28px;box-shadow:0 20px 60px rgba(0,0,0,.35)}
+  @media(min-width:640px){.book-card{padding:44px 40px}}
+  .book-card .section-label{font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--menu-cat);text-align:center;margin-bottom:14px}
+  .book-card h2{font-family:Georgia,'Times New Roman',serif;font-size:34px;font-weight:700;color:var(--hero-text);text-align:center;margin:0 0 10px}
+  @media(min-width:640px){.book-card h2{font-size:40px}}
+  .book-card .book-sub{text-align:center;color:rgba(255,249,243,.75);font-size:14px;margin-bottom:28px;line-height:1.5}
+  .book-form{display:grid;gap:14px}
+  @media(min-width:520px){.book-form{grid-template-columns:1fr 1fr;gap:14px}.book-form .field-full{grid-column:1/-1}}
+  .book-field{display:flex;flex-direction:column;gap:6px}
+  .book-field label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--menu-cat);font-weight:600}
+  .book-field input,.book-field select{background:#3a0707;border:1px solid rgba(212,175,55,.35);border-radius:8px;padding:14px 14px;color:var(--hero-text);font-family:inherit;font-size:15px;appearance:none;-webkit-appearance:none}
+  .book-field input:focus,.book-field select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(212,175,55,.2)}
+  .book-cta{margin-top:22px;width:100%;background:var(--accent);color:var(--hero-bg);border:none;border-radius:8px;padding:18px 20px;font-size:15px;font-weight:700;letter-spacing:1px;text-transform:uppercase;cursor:pointer;font-family:inherit;transition:background .15s}
+  .book-cta:hover{background:#D4A837}
+  .book-caption{margin-top:14px;text-align:center;font-size:12px;color:rgba(255,249,243,.65);letter-spacing:.3px}
+  footer.rest-footer{background:#3a0707;color:rgba(255,249,243,.65);padding:44px 20px;text-align:center;font-size:14px}
+  footer.rest-footer .brand{color:var(--accent);font-weight:700;font-size:18px;margin-bottom:8px;display:block}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="logo">Ravintola Nanking</div>
+    <div class="nav-links">
+      <a href="#menu">Ruokalista</a>
+      <a href="#visit">Aukioloajat</a>
+      <a href="#contact">Yhteystiedot</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-inner">
+    <span class="hero-tag">Autenttinen kantoninkiinalainen ruoka · Kamppi</span>
+    <h1 class="hero-title">Ravintola Nanking</h1>
+    <p class="hero-subtitle">Aidon kantoninkiinalaisen ruoan paikka Helsingissä — salainen menu, runsaat annokset ja edulliset hinnakset.</p>
+    <div class="hero-meta">
+      <span>★ 4.3 / 5</span>
+      <span>438 Google-arvostelua</span>
+      <span>Kamppi, Helsinki</span>
+    </div>
+    <div class="cta-row">
+      <a href="#menu" class="btn btn-primary">Näytä ruokalista</a>
+      <a href="#book" class="btn btn-ghost">Varaa pöytä</a>
+    </div>
+  </div>
+</header>
+
+<section class="about" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div>
+        <div class="section-label">Tietoa meistä</div>
+        <h2>Autenttinen kantoninkiinalainen keittiö Helsingissä</h2>
+        <p class="lead">Ravintola Nanking on perheiden rakastama ruokapaikka Kampissa, joka on palvellut asiakkaita 1990-luvulta lähtien. Pääomistaja Baba Ling ja hänen tiiminsä tuo aidon kantoninkiinalaisen keittiön Helsinki. Meillä on salainen menu aitojen kantoninkiinalaisten ruokalajien ystäville — kysykää, niin näytämme sen.</p>
+      </div>
+      <div class="about-visual" aria-hidden="true"></div>
+    </div>
+  </div>
+</section>
+
+<section class="menu" id="menu">
+  <div class="container">
+    <div class="section-label">Ruokalista</div>
+    <h2>Kokonaisruokalista.</h2>
+    <p class="lead">Lounasbuffet, à la carte -herkut ja salainen menu autenttisilta ystäviltämme.</p>
+
+    <div class="menu-grid">
+      <div class="menu-cat">
+        <h3>Suosikkiruoat</h3>
+        <div class="menu-item">
+          <div class="menu-item-name">Silkkiä munakoiso pakastetuilla porsaanlihasuikaleilla<div class="menu-item-desc">Perinteinen kantoninkiinalainen klassikko — pehmeä munakoiso ja rikas kastike</div></div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-name">À la carte -herkut<div class="menu-item-desc">Runsaasti valittavaa — naudanliha, kana, lohi ja vegetaariset vaihtoehdot</div></div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-name">Lounasbuffet<div class="menu-item-desc">Edulliset set-menut — kaikille budjetille sopivaa</div></div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-name">Salainen menu<div class="menu-item-desc">Kysy, niin näytämme — aidit kantoninkiinalaiset ruokalajit, jotka eivät ole painetut ruokalistaan</div></div>
+        </div>
+      </div>
+      <div class="menu-cat">
+        <h3>Erityiset tarjoukset</h3>
+        <div class="menu-item">
+          <div class="menu-item-name">Lähetysliike<div class="menu-item-desc">30 % alennus à la carte -hinnoista — vastaanottavalla ja kotiinkuljetuksella</div></div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-name">Perjantain erikoinen<div class="menu-item-desc">Vaihtuu viikoittain — seuraa meitä Facebookista ja Instagramista</div></div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-name">Ryhmä- ja yritystilaisuudet<div class="menu-item-desc">Ota yhteyttä ryhmäruokailuista ja yritystilauksista</div></div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-name">Wolt ja Foodora<div class="menu-item-desc">Nopeaa kotiinkuljetusta saataville</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-note">
+      Lounas ja illallinen buffetina saataville — tarkemmat hinnat ja aukioloajat alla. Salainen menu on oikea helmi niille, jotka tietävät.
+    </div>
+  </div>
+</section>
+
+<section class="visit" id="visit">
+  <div class="container">
+    <div class="section-label">Aukioloajat ja sijainti</div>
+    <h2>Käy tervehtimässä.</h2>
+
+    <div class="visit-grid">
+      <div class="visit-block">
+        <h3>Aukioloajat</h3>
+        <ul class="hours-list">
+          <li><span class="day">Maanantai – perjantai</span><span class="time">11:00 – 23:00</span></li>
+          <li><span class="day">Lauantai</span><span class="time">12:00 – 23:00</span></li>
+          <li><span class="day">Sunnuntai</span><span class="time">12:00 – 22:00</span></li>
+        </ul>
+      </div>
+      <div class="visit-block">
+        <h3>Löydä meidät</h3>
+        <div class="address-block">
+          <strong>Ravintola Nanking</strong>
+          Kalevankatu 28<br>
+          00100 Helsinki<br>
+          Suomi
+        </div>
+        <a class="map-link" target="_blank" rel="noopener" href="https://maps.google.com/maps?q=Kalevankatu+28,+Helsinki">Avaa Google Maps →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact-sec" id="contact">
+  <div class="container">
+    <div class="section-label">Yhteystiedot</div>
+    <h2>Ota yhteyttä.</h2>
+    <p class="lead" style="color:rgba(255,249,243,.8)">Kysymyksiä tai ryhmävarauksia? Soita tai etsi meidät Instagramista ja Facebookista.</p>
+    <div class="contact-grid">
+      <a class="contact-card" href="tel:+358096940338">
+        <small>Puhelin</small>
+        <div class="big">09 6940338</div>
+      </a>
+      <a class="contact-card" href="https://www.instagram.com/nankingravintola" target="_blank" rel="noopener">
+        <small>Instagram</small>
+        <div class="big">@nankingravintola</div>
+      </a>
+      <a class="contact-card" href="https://www.facebook.com/nanking28" target="_blank" rel="noopener">
+        <small>Facebook</small>
+        <div class="big">NanKing Restaurant</div>
+      </a>
+      <a class="contact-card" href="tel:+358096940338">
+        <small>Varaukset</small>
+        <div class="big">Soita</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="book-sec" id="book">
+  <div class="book-card">
+    <div class="section-label">Pöydän varaus</div>
+    <h2>Varaa pöytä</h2>
+    <p class="book-sub">Soita ja varaa suoraan — ei maksuja, ei tunnusta tarvitaan.</p>
+    <a href="tel:+358096940338" class="btn btn-primary" style="display:block;text-align:center;margin-top:24px;padding:18px 20px;">Soita nyt: 09 6940338</a>
+    <div class="book-caption">Varaukset mahdollisia ma–su. Parhaat pöydät löytyvät iltaisin ja viikonloppuisin.</div>
+  </div>
+</section>
+
+<footer class="rest-footer">
+  <span class="brand">Ravintola Nanking</span>
+  Kalevankatu 28, 00100 Helsinki · 09 6940338<br>
+  © 2026 Ravintola Nanking
+</footer>
+
+</body>
+</html>

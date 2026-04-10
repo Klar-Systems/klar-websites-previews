@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Oishi Sushi — All-You-Can-Eat Sushi, Porvoo</title>
+<meta name="description" content="Oishi Sushi in Porvoo — all-you-can-eat Japanese and Asian sushi buffet. Weekday €13.50, weekend €15.50. Reserve a table now.">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --bg:#FAFAF7;
+    --ink:#181818;
+    --ink-soft:#3A3A3A;
+    --accent:#C41230;
+    --accent-deep:#9B0E26;
+    --hero-bg:#0D0D0D;
+    --hero-text:#FAFAF7;
+    --hero-tag:#F5A0A8;
+    --hero-meta:#ABABAB;
+    --menu-bg:#121212;
+    --menu-text:#FAFAF7;
+    --menu-cat:#F5A0A8;
+    --card-bg:#FFFFFF;
+    --line:#E4E4E0;
+    --muted:rgba(250,250,247,.6);
+    --nav-bg:rgba(250,250,247,.93);
+  }
+  html{scroll-behavior:smooth}
+  body{font-family:'DM Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:17px;line-height:1.6;color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased;}
+  a{color:inherit;text-decoration:none}
+  .container{max-width:1100px;margin:0 auto;padding:0 20px}
+  @media(min-width:768px){.container{padding:0 40px}}
+
+  nav{position:sticky;top:0;z-index:10;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:18px 20px;max-width:1100px;margin:0 auto}
+  .logo{font-size:22px;font-weight:700;letter-spacing:-.5px;color:var(--accent)}
+  .nav-links{display:none;gap:32px;font-size:15px;font-weight:500}
+  .nav-links a:hover{color:var(--accent)}
+  @media(min-width:768px){.nav-links{display:flex}}
+
+  .hero{position:relative;min-height:72vh;display:flex;align-items:center;
+    background:radial-gradient(circle at 25% 35%,rgba(196,18,48,.2) 0%,transparent 50%),
+    radial-gradient(circle at 78% 70%,rgba(150,10,30,.25) 0%,transparent 50%),
+    linear-gradient(145deg,#0D0D0D 0%,#1A1A2E 50%,#0D0D0D 100%);
+    color:var(--hero-text);overflow:hidden;}
+  .hero::before{content:"";position:absolute;inset:0;
+    background:repeating-linear-gradient(45deg,transparent 0,transparent 80px,rgba(250,250,247,.012) 80px,rgba(250,250,247,.012) 81px);
+    pointer-events:none;}
+  .hero-inner{position:relative;padding:100px 20px;width:100%;max-width:1100px;margin:0 auto}
+  @media(min-width:768px){.hero-inner{padding:140px 40px}}
+  .hero-tag{display:inline-block;font-size:13px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--hero-tag);border:1px solid rgba(245,160,168,.4);padding:8px 16px;margin-bottom:28px;}
+  h1.hero-title{font-size:clamp(44px,8vw,88px);font-weight:700;line-height:1.05;letter-spacing:-2px;margin-bottom:24px;}
+  .hero-subtitle{font-size:clamp(18px,2.4vw,24px);font-weight:300;color:#D0D0D0;max-width:620px;margin-bottom:44px}
+  .hero-meta{display:flex;gap:32px;flex-wrap:wrap;font-size:14px;color:var(--hero-tag);margin-bottom:44px}
+  .hero-meta span{display:flex;align-items:center;gap:8px}
+  .cta-row{display:flex;gap:16px;flex-wrap:wrap}
+  .btn{display:inline-block;padding:16px 32px;font-size:16px;font-weight:600;letter-spacing:.3px;cursor:pointer;border:none;transition:transform .15s;}
+  .btn:hover{transform:translateY(-2px)}
+  .btn-primary{background:var(--accent);color:#FAFAF7}
+  .btn-ghost{background:transparent;color:#FAFAF7;border:1px solid rgba(250,250,247,.35)}
+
+  section{padding:90px 0}
+  @media(max-width:767px){section{padding:60px 0}}
+  .section-label{font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:16px;}
+  h2{font-size:clamp(32px,5vw,52px);font-weight:700;line-height:1.1;letter-spacing:-1px;margin-bottom:28px;color:var(--ink)}
+  .lead{font-size:19px;color:var(--ink-soft);max-width:720px;line-height:1.65}
+
+  .about{background:var(--bg)}
+  .about-grid{display:grid;gap:50px;align-items:center}
+  @media(min-width:900px){.about-grid{grid-template-columns:1.2fr .8fr;gap:80px}}
+  .about-visual{aspect-ratio:4/5;border-radius:2px;
+    background:radial-gradient(circle at 30% 30%,rgba(196,18,48,.28) 0%,transparent 55%),
+    linear-gradient(160deg,#1C0505 0%,#3D1010 45%,#1C0505 100%);
+    position:relative;overflow:hidden;min-height:360px;}
+  .about-visual::after{content:"寿";position:absolute;right:-10px;bottom:-40px;font-size:260px;font-weight:700;color:rgba(250,250,247,.07);line-height:1;}
+  .about-visual::before{content:"";position:absolute;inset:30px;border:1px solid rgba(245,160,168,.2);}
+
+  .menu{background:var(--menu-bg);color:var(--menu-text)}
+  .menu .section-label{color:var(--menu-cat)}
+  .menu h2{color:var(--menu-text)}
+  .menu .lead{color:rgba(250,250,247,.75)}
+  .menu-grid{display:grid;gap:60px;margin-top:60px}
+  @media(min-width:768px){.menu-grid{grid-template-columns:1fr 1fr;gap:60px 80px}}
+  .menu-cat h3{font-size:22px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;color:var(--menu-cat);padding-bottom:14px;margin-bottom:22px;border-bottom:1px solid rgba(245,160,168,.25);}
+  .menu-item{display:flex;justify-content:space-between;gap:20px;padding:14px 0;border-bottom:1px dashed rgba(250,250,247,.08)}
+  .menu-item:last-child{border-bottom:none}
+  .menu-item-name{font-weight:500;flex:1}
+  .menu-item-desc{font-size:14px;color:rgba(250,250,247,.55);margin-top:4px;font-weight:300}
+  .menu-item-price{font-weight:600;color:var(--menu-cat);white-space:nowrap}
+  .menu-note{margin-top:50px;padding:24px;background:rgba(250,250,247,.05);border-left:3px solid var(--accent);font-size:15px;color:rgba(250,250,247,.75);}
+
+  .visit{background:var(--bg)}
+  .visit-grid{display:grid;gap:40px;margin-top:40px}
+  @media(min-width:768px){.visit-grid{grid-template-columns:1fr 1fr;gap:60px}}
+  .visit-block h3{font-size:13px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--accent);margin-bottom:22px}
+  .hours-list{list-style:none}
+  .hours-list li{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid rgba(24,24,24,.08);font-size:16px}
+  .hours-list li:last-child{border-bottom:none}
+  .hours-list .day{font-weight:500}
+  .hours-list .time{color:var(--ink-soft)}
+  .address-block{font-size:17px;line-height:1.8}
+  .address-block strong{display:block;font-size:19px;margin-bottom:6px;color:var(--ink)}
+  .map-link{display:inline-block;margin-top:20px;padding:12px 24px;background:var(--accent);color:#FAFAF7;font-size:14px;font-weight:600;letter-spacing:.5px;}
+  .map-link:hover{background:var(--accent-deep)}
+
+  .contact-sec{background:#1C0A0A;color:#FAFAF7}
+  .contact-sec .section-label{color:var(--menu-cat)}
+  .contact-sec h2{color:#FAFAF7}
+  .contact-grid{display:grid;gap:24px;margin-top:48px}
+  @media(min-width:640px){.contact-grid{grid-template-columns:repeat(2,1fr)}}
+  .contact-card{padding:28px;background:rgba(250,250,247,.05);border:1px solid rgba(250,250,247,.1);transition:background .2s;}
+  .contact-card:hover{background:rgba(250,250,247,.08)}
+  .contact-card small{display:block;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--menu-cat);margin-bottom:10px}
+  .contact-card .big{font-size:22px;font-weight:600}
+  @media(min-width:768px){.contact-card .big{font-size:26px}}
+
+  .book-sec{background:#180808;padding:80px 20px;color:#FAFAF7}
+  .book-card{max-width:480px;margin:0 auto;background:#1C0A0A;border:1px solid rgba(245,160,168,.25);border-radius:14px;padding:36px 28px;box-shadow:0 20px 60px rgba(0,0,0,.35)}
+  @media(min-width:640px){.book-card{padding:44px 40px}}
+  .book-card .section-label{font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--menu-cat);text-align:center;margin-bottom:14px}
+  .book-card h2{font-family:Georgia,'Times New Roman',serif;font-size:34px;font-weight:700;color:#FAFAF7;text-align:center;margin:0 0 10px}
+  @media(min-width:640px){.book-card h2{font-size:40px}}
+  .book-card .book-sub{text-align:center;color:rgba(250,250,247,.7);font-size:14px;margin-bottom:28px;line-height:1.5}
+  .book-form{display:grid;gap:14px}
+  @media(min-width:520px){.book-form{grid-template-columns:1fr 1fr;gap:14px}.book-form .field-full{grid-column:1/-1}}
+  .book-field{display:flex;flex-direction:column;gap:6px}
+  .book-field label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--menu-cat);font-weight:600}
+  .book-field input,.book-field select{background:#0D0D0D;border:1px solid rgba(245,160,168,.3);border-radius:8px;padding:14px 14px;color:#FAFAF7;font-family:inherit;font-size:15px;appearance:none;-webkit-appearance:none}
+  .book-field input:focus,.book-field select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(196,18,48,.2)}
+  .book-cta{margin-top:22px;width:100%;background:var(--accent);color:#FAFAF7;border:none;border-radius:8px;padding:18px 20px;font-size:15px;font-weight:700;letter-spacing:1px;text-transform:uppercase;cursor:pointer;font-family:inherit;transition:background .15s}
+  .book-cta:hover{background:var(--accent-deep)}
+  .book-caption{margin-top:14px;text-align:center;font-size:12px;color:rgba(250,250,247,.55);letter-spacing:.3px}
+  footer.rest-footer{background:#0D0D0D;color:rgba(250,250,247,.55);padding:44px 20px;text-align:center;font-size:14px}
+  footer.rest-footer .brand{color:var(--accent);font-weight:700;font-size:18px;margin-bottom:8px;display:block}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="logo">Oishi Sushi</div>
+    <div class="nav-links">
+      <a href="#menu">Menu</a>
+      <a href="#visit">Hours</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-inner">
+    <span class="hero-tag">All-You-Can-Eat Sushi · Porvoo</span>
+    <h1 class="hero-title">Oishi Sushi</h1>
+    <p class="hero-subtitle">Japanese and Asian sushi buffet near Old Porvoo — sushi varieties, Chinese food, Korean kimchi, warm dishes and more, every day.</p>
+    <div class="hero-meta">
+      <span>★ 3.9 / 5</span>
+      <span>707 Google reviews</span>
+      <span>Porvoo, Finland</span>
+    </div>
+    <div class="cta-row">
+      <a href="#menu" class="btn btn-primary">See the menu</a>
+      <a href="#book" class="btn btn-ghost">Reserve a table</a>
+    </div>
+  </div>
+</header>
+
+<section class="about" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div>
+        <div class="section-label">About us</div>
+        <h2>Sushi buffet near Old Porvoo</h2>
+        <p class="lead">Oishi Sushi is a buffet restaurant in Porvoo — fresh sushi, warm dishes and a full menu of Japanese and Asian classics, all you can eat. Located near Old Porvoo, a major tourist destination. Open every day.</p>
+      </div>
+      <div class="about-visual" aria-hidden="true"></div>
+    </div>
+  </div>
+</section>
+
+<section class="menu" id="menu">
+  <div class="container">
+    <div class="section-label">Buffet menu</div>
+    <h2>The full menu.</h2>
+    <p class="lead">Weekday €13.50 · Weekend €15.50.</p>
+
+    <div class="menu-grid">
+      <div class="menu-cat">
+        <h3>Sushi</h3>
+        <div class="menu-item">
+          <div class="menu-item-name">Sushi varieties<div class="menu-item-desc">Salmon, shrimp, tuna and seasonal selections</div></div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-name">Nigiri<div class="menu-item-desc">Fresh cuts and traditional preparations</div></div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-name">Maki rolls<div class="menu-item-desc">Classic and specialty rolls — a full selection</div></div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-name">Vegetarian rolls<div class="menu-item-desc">Avocado, cucumber and seasonal vegetables</div></div>
+        </div>
+      </div>
+      <div class="menu-cat">
+        <h3>Asian specialties</h3>
+        <div class="menu-item">
+          <div class="menu-item-name">Chinese food<div class="menu-item-desc">Traditional Chinese dishes and side selections</div></div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-name">Korean kimchi<div class="menu-item-desc">Authentic fermented vegetables and preparations</div></div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-name">Deep-fried items<div class="menu-item-desc">Crispy selections and tempura preparations</div></div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-name">Soups, salads & desserts<div class="menu-item-desc">Complete your meal with sides and sweet treats</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-note">
+      Weekday buffet (Mon–Fri 11:00–19:00) €13.50 · Weekend buffet (Sat–Sun 11:00–19:00) €15.50. All you can eat — beverages ordered separately.
+    </div>
+  </div>
+</section>
+
+<section class="visit" id="visit">
+  <div class="container">
+    <div class="section-label">Hours &amp; location</div>
+    <h2>Come visit us.</h2>
+
+    <div class="visit-grid">
+      <div class="visit-block">
+        <h3>Opening hours</h3>
+        <ul class="hours-list">
+          <li><span class="day">Monday – Friday</span><span class="time">11:00 – 19:00</span></li>
+          <li><span class="day">Saturday – Sunday</span><span class="time">11:00 – 19:00</span></li>
+        </ul>
+      </div>
+      <div class="visit-block">
+        <h3>Find us</h3>
+        <div class="address-block">
+          <strong>Oishi Sushi</strong>
+          Runeberginkatu 36<br>
+          06100 Porvoo<br>
+          Finland
+        </div>
+        <a class="map-link" target="_blank" rel="noopener" href="https://maps.google.com/?q=Oishi+Sushi+Porvoo">Open in Google Maps →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact-sec" id="contact">
+  <div class="container">
+    <div class="section-label">Contact</div>
+    <h2>Get in touch.</h2>
+    <p class="lead" style="color:rgba(250,250,247,.75)">Questions or group bookings? Call us or find us on Instagram and Facebook.</p>
+    <div class="contact-grid">
+      <a class="contact-card" href="tel:+358440888837">
+        <small>Phone</small>
+        <div class="big">044 0888837</div>
+      </a>
+      <a class="contact-card" href="https://www.instagram.com/oishi.sushi_" target="_blank" rel="noopener">
+        <small>Instagram</small>
+        <div class="big">@oishi.sushi_</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="book-sec" id="book">
+  <div class="book-card">
+    <div class="section-label">Reservations</div>
+    <h2>Book a Table</h2>
+    <p class="book-sub">Reserve in seconds — no fees, no account needed.</p>
+    <form class="book-form" onsubmit="event.preventDefault();return false;">
+      <div class="book-field">
+        <label for="b-date">Date</label>
+        <input type="date" id="b-date" min="2026-04-09" value="2026-04-09">
+      </div>
+      <div class="book-field">
+        <label for="b-time">Time</label>
+        <select id="b-time">
+          <option>11:00</option><option>11:30</option><option>12:00</option>
+          <option>12:30</option><option selected>13:00</option><option>13:30</option>
+          <option>17:00</option><option>17:30</option><option>18:00</option>
+          <option>18:30</option><option>19:00</option>
+        </select>
+      </div>
+      <div class="book-field field-full">
+        <label for="b-party">Party size</label>
+        <select id="b-party">
+          <option>1 guest</option><option selected>2 guests</option><option>3 guests</option>
+          <option>4 guests</option><option>5 guests</option><option>6 guests</option>
+          <option>7 guests</option><option>8 guests</option>
+        </select>
+      </div>
+      <button type="button" class="book-cta field-full">Reserve Now</button>
+    </form>
+    <div class="book-caption">Powered by Klar Bookings — no fees, no commissions.</div>
+  </div>
+</section>
+
+<footer class="rest-footer">
+  <span class="brand">Oishi Sushi</span>
+  Runeberginkatu 36, 06100 Porvoo · 044 0888837<br>
+  © 2026 Oishi Sushi
+</footer>
+
+</body>
+</html>

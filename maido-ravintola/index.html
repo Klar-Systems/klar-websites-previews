@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>MAIDO — Sushi & Wok Buffet in central Kuopio</title>
+<meta name="description" content="MAIDO Sushi & Wok — premium Asian buffet on Kauppakatu, Kuopio. Fresh sushi, hot wok, dim sum, and teppanyaki. 4.0★ on Google, 861 reviews.">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+:root{
+  --bg:#FFF8F0;
+  --ink:#2B2B2B;
+  --ink-soft:#4A4A46;
+  --muted:#8a8580;
+  --line:rgba(43,43,43,.10);
+  --accent:#CC3333;
+  --accent-deep:#A12828;
+  --card:#FFFFFF;
+  --night:#1F1D1A;
+  --warm:#F5EDE0;
+}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  font-size:17px;line-height:1.65;color:var(--ink);background:var(--bg);
+  -webkit-font-smoothing:antialiased;font-weight:400;
+}
+a{color:inherit;text-decoration:none}
+.container{max-width:1100px;margin:0 auto;padding:0 22px}
+@media(min-width:768px){.container{padding:0 44px}}
+
+/* NAV */
+nav{
+  position:sticky;top:0;z-index:10;background:rgba(255,248,240,.94);
+  backdrop-filter:blur(10px);border-bottom:1px solid var(--line);
+}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;padding:18px 22px;max-width:1100px;margin:0 auto}
+.logo{font-size:24px;font-weight:300;letter-spacing:8px;color:var(--ink);text-transform:uppercase}
+.nav-links{display:none;gap:36px;font-size:14px;font-weight:400;letter-spacing:.5px}
+.nav-links a{color:var(--ink-soft)}
+.nav-links a:hover{color:var(--accent)}
+@media(min-width:768px){.nav-links{display:flex}}
+.nav-cta{font-size:13px;font-weight:600;color:#fff;background:var(--accent);padding:10px 22px;border-radius:6px;letter-spacing:.3px}
+.nav-cta:hover{background:var(--accent-deep)}
+
+/* MOBILE MENU */
+.menu-toggle{display:flex;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px}
+.menu-toggle span{width:22px;height:2px;background:var(--ink);border-radius:1px;transition:all .3s}
+@media(min-width:768px){.menu-toggle{display:none}}
+.mobile-menu{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:var(--bg);z-index:100;flex-direction:column;align-items:center;justify-content:center;gap:32px}
+.mobile-menu.open{display:flex}
+.mobile-menu a{font-size:20px;font-weight:500;color:var(--ink)}
+.mobile-menu .close-btn{position:absolute;top:22px;right:22px;font-size:28px;background:none;border:none;cursor:pointer;color:var(--ink)}
+
+/* HERO */
+.hero{
+  position:relative;min-height:78vh;display:flex;align-items:center;
+  background:
+    radial-gradient(ellipse at 20% 0%,rgba(255,255,255,.85) 0%,transparent 55%),
+    radial-gradient(ellipse at 80% 100%,rgba(204,51,51,.08) 0%,transparent 55%),
+    linear-gradient(170deg,#F5EDE0 0%,#EDE3D3 60%,#DDD3C2 100%);
+  color:var(--ink);overflow:hidden;
+}
+.hero::after{
+  content:"";position:absolute;inset:0;
+  background:repeating-linear-gradient(115deg,transparent 0,transparent 120px,rgba(255,255,255,.3) 120px,rgba(255,255,255,.3) 121px);
+  pointer-events:none;
+}
+.hero-inner{position:relative;padding:110px 22px;width:100%;max-width:1100px;margin:0 auto;z-index:1}
+@media(min-width:768px){.hero-inner{padding:150px 44px}}
+.hero-tag{
+  display:inline-block;font-size:11px;font-weight:500;letter-spacing:3.5px;
+  text-transform:uppercase;color:var(--accent);
+  border:1px solid rgba(204,51,51,.35);
+  padding:9px 18px;margin-bottom:34px;background:rgba(255,255,255,.5);
+}
+h1.hero-title{
+  font-size:clamp(48px,9vw,104px);font-weight:300;line-height:1.02;
+  letter-spacing:-2px;margin-bottom:30px;color:var(--ink);
+}
+h1.hero-title em{font-style:normal;color:var(--accent);font-weight:400}
+.hero-subtitle{
+  font-size:clamp(17px,2vw,21px);font-weight:400;color:var(--ink-soft);
+  max-width:560px;margin-bottom:48px;line-height:1.6;
+}
+.hero-meta{display:flex;gap:30px;flex-wrap:wrap;font-size:13px;color:var(--muted);margin-bottom:46px;letter-spacing:.5px}
+.hero-meta span{display:flex;align-items:center;gap:8px}
+.hero-meta strong{color:var(--accent);font-weight:600}
+.cta-row{display:flex;gap:14px;flex-wrap:wrap}
+.btn{
+  display:inline-block;font-size:14px;font-weight:600;padding:14px 32px;
+  border-radius:6px;letter-spacing:.3px;transition:all .2s;
+}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-primary:hover{background:var(--accent-deep)}
+.btn-outline{background:transparent;color:var(--ink);border:1.5px solid var(--ink)}
+.btn-outline:hover{background:var(--ink);color:#fff}
+
+/* SECTIONS */
+.section{padding:80px 0}
+.section-alt{background:var(--warm)}
+.section-label{
+  font-size:11px;font-weight:500;letter-spacing:3px;text-transform:uppercase;
+  color:var(--muted);margin-bottom:16px;
+}
+.section-title{
+  font-size:clamp(28px,5vw,42px);font-weight:300;letter-spacing:-1px;
+  line-height:1.15;margin-bottom:20px;
+}
+.section-title em{font-style:normal;color:var(--accent);font-weight:400}
+.section-lead{font-size:17px;color:var(--ink-soft);max-width:620px;margin-bottom:48px;line-height:1.65}
+
+/* ABOUT */
+.about-grid{display:grid;gap:40px}
+@media(min-width:768px){.about-grid{grid-template-columns:1fr 1fr;gap:60px}}
+.about-text{font-size:17px;color:var(--ink-soft);line-height:1.7}
+.about-text p+p{margin-top:16px}
+.about-image{
+  background:linear-gradient(135deg,#2B2B2B 0%,#5A3A2A 50%,#2B2B2B 100%);
+  border-radius:12px;min-height:300px;
+}
+.about-stats{display:flex;gap:32px;margin-top:32px;flex-wrap:wrap}
+.stat{text-align:left}
+.stat-num{font-size:28px;font-weight:700;color:var(--accent);line-height:1}
+.stat-label{font-size:12px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-top:4px}
+
+/* MENU */
+.menu-grid{display:grid;gap:20px}
+@media(min-width:768px){.menu-grid{grid-template-columns:1fr 1fr;gap:24px}}
+.menu-category{
+  background:var(--card);border-radius:12px;padding:32px;
+  border:1px solid var(--line);
+}
+.menu-cat-title{
+  font-size:18px;font-weight:600;margin-bottom:20px;
+  padding-bottom:12px;border-bottom:1px solid var(--line);
+  color:var(--ink);
+}
+.menu-item{display:flex;justify-content:space-between;align-items:baseline;padding:8px 0;gap:12px}
+.menu-item-name{font-size:15px;color:var(--ink);font-weight:500}
+.menu-item-desc{font-size:13px;color:var(--muted);margin-top:2px}
+.menu-item-price{font-size:15px;font-weight:600;color:var(--accent);white-space:nowrap}
+.menu-note{font-size:14px;color:var(--muted);font-style:italic;margin-top:24px;text-align:center}
+
+/* HOURS */
+.hours-grid{display:grid;gap:40px}
+@media(min-width:768px){.hours-grid{grid-template-columns:1fr 1fr;gap:60px}}
+.hours-table{width:100%}
+.hours-table tr{border-bottom:1px solid var(--line)}
+.hours-table td{padding:14px 0;font-size:15px}
+.hours-table td:first-child{font-weight:500;color:var(--ink)}
+.hours-table td:last-child{text-align:right;color:var(--ink-soft)}
+.location-card{
+  background:var(--card);border-radius:12px;padding:32px;
+  border:1px solid var(--line);
+}
+.location-card h3{font-size:18px;font-weight:600;margin-bottom:16px}
+.location-card p{font-size:15px;color:var(--ink-soft);margin-bottom:8px}
+.location-card a.maps-link{
+  display:inline-block;margin-top:16px;font-size:14px;font-weight:600;
+  color:var(--accent);border-bottom:1px solid var(--accent);
+}
+
+/* CONTACT */
+.contact-grid{display:grid;gap:16px}
+@media(min-width:768px){.contact-grid{grid-template-columns:repeat(3,1fr);gap:16px}}
+.contact-card{
+  background:var(--card);border-radius:12px;padding:28px;
+  border:1px solid var(--line);text-align:center;
+}
+.contact-card .icon{font-size:24px;margin-bottom:12px}
+.contact-card .label{font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.contact-card .value{font-size:15px;font-weight:500;color:var(--ink)}
+.contact-card a{color:var(--accent);font-weight:600}
+
+/* BOOKING WIDGET */
+.booking-section{padding:80px 0;text-align:center}
+.booking-card{
+  max-width:480px;margin:0 auto;background:var(--card);
+  border-radius:16px;padding:40px 32px;border:1px solid var(--line);
+  box-shadow:0 4px 24px rgba(0,0,0,.06);
+}
+.booking-card h2{font-size:26px;font-weight:600;margin-bottom:8px;color:var(--ink)}
+.booking-card .booking-sub{font-size:14px;color:var(--muted);margin-bottom:28px}
+.booking-form{display:flex;flex-direction:column;gap:14px}
+.booking-form label{font-size:12px;font-weight:500;color:var(--ink-soft);text-align:left;letter-spacing:.5px;text-transform:uppercase}
+.booking-form input,.booking-form select{
+  width:100%;padding:14px 16px;font-size:15px;border:1.5px solid var(--line);
+  border-radius:8px;background:var(--bg);color:var(--ink);
+  font-family:inherit;appearance:none;-webkit-appearance:none;
+}
+.booking-form input:focus,.booking-form select:focus{outline:none;border-color:var(--accent)}
+.booking-form select{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238a8580' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 16px center;padding-right:40px;
+}
+.booking-btn{
+  width:100%;padding:16px;font-size:15px;font-weight:600;color:#fff;
+  background:var(--accent);border:none;border-radius:8px;cursor:pointer;
+  font-family:inherit;margin-top:8px;transition:background .2s;
+}
+.booking-btn:hover{background:var(--accent-deep)}
+.booking-caption{font-size:12px;color:var(--muted);margin-top:16px}
+
+/* FOOTER */
+footer{
+  background:var(--night);color:rgba(255,255,255,.5);
+  text-align:center;padding:48px 22px;font-size:13px;
+}
+footer .footer-name{color:rgba(255,255,255,.8);font-size:16px;font-weight:500;letter-spacing:4px;text-transform:uppercase;margin-bottom:8px}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="logo">Maido</a>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#menu">Menu</a>
+      <a href="#hours">Hours</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a href="#book" class="nav-cta">Reserve a Table</a>
+    <button class="menu-toggle" onclick="document.getElementById('mobileMenu').classList.add('open')" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div id="mobileMenu" class="mobile-menu">
+  <button class="close-btn" onclick="this.parentElement.classList.remove('open')" aria-label="Close menu">&times;</button>
+  <a href="#about" onclick="this.parentElement.classList.remove('open')">About</a>
+  <a href="#menu" onclick="this.parentElement.classList.remove('open')">Menu</a>
+  <a href="#hours" onclick="this.parentElement.classList.remove('open')">Hours</a>
+  <a href="#contact" onclick="this.parentElement.classList.remove('open')">Contact</a>
+  <a href="#book" class="btn btn-primary" onclick="this.parentElement.classList.remove('open')">Reserve a Table</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-tag">Sushi &middot; Wok &middot; Dim Sum &middot; Teppanyaki</div>
+    <h1 class="hero-title">MAIDO<br><em>Sushi & Wok</em></h1>
+    <p class="hero-subtitle">Premium Asian buffet on Kauppakatu — fresh sushi, sizzling wok, handmade dim sum, and teppanyaki prepared to order.</p>
+    <div class="hero-meta">
+      <span><strong>4.0★</strong> Google · 861 reviews</span>
+      <span><strong>9.0</strong> Wolt · 100+ reviews</span>
+      <span>Kauppakatu 29, Kuopio</span>
+    </div>
+    <div class="cta-row">
+      <a href="#book" class="btn btn-primary">Reserve a Table</a>
+      <a href="#menu" class="btn btn-outline">See the Menu</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="section">
+  <div class="container">
+    <div class="about-grid">
+      <div>
+        <div class="section-label">About</div>
+        <h2 class="section-title">A new chapter on <em>Kauppakatu</em></h2>
+        <div class="about-text">
+          <p>MAIDO Sushi & Wok opened in December 2024 in the heart of Kuopio, taking over the well-known address at Kauppakatu 29 — home to a beloved Asian restaurant for over 15 years.</p>
+          <p>Under new ownership and with a fully renovated interior, MAIDO brings a fresh take on the Asian buffet: a spread of sushi, wok dishes, dim sum, and teppanyaki that's prepared in the kitchen and served straight to your table.</p>
+        </div>
+        <div class="about-stats">
+          <div class="stat">
+            <div class="stat-num">861</div>
+            <div class="stat-label">Google reviews</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">9.0</div>
+            <div class="stat-label">Wolt rating</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">2024</div>
+            <div class="stat-label">Opened</div>
+          </div>
+        </div>
+      </div>
+      <div class="about-image" role="img" aria-label="MAIDO restaurant interior"></div>
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section id="menu" class="section section-alt">
+  <div class="container">
+    <div class="section-label">Menu</div>
+    <h2 class="section-title">The <em>buffet</em></h2>
+    <p class="section-lead">All-you-can-eat Asian buffet with select teppanyaki dishes prepared fresh and served to your table on request.</p>
+
+    <div class="menu-grid">
+
+      <div class="menu-category">
+        <div class="menu-cat-title">Sushi</div>
+        <div class="menu-item">
+          <div>
+            <div class="menu-item-name">Nigiri selection</div>
+            <div class="menu-item-desc">Salmon, tuna, shrimp, and seasonal fish</div>
+          </div>
+        </div>
+        <div class="menu-item">
+          <div>
+            <div class="menu-item-name">Maki rolls</div>
+            <div class="menu-item-desc">Classic and inside-out rolls, refreshed throughout service</div>
+          </div>
+        </div>
+        <div class="menu-item">
+          <div>
+            <div class="menu-item-name">Sashimi</div>
+            <div class="menu-item-desc">Freshly sliced, served on ice</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-category">
+        <div class="menu-cat-title">Wok</div>
+        <div class="menu-item">
+          <div>
+            <div class="menu-item-name">Stir-fried noodles</div>
+            <div class="menu-item-desc">Rice noodles, egg noodles, and glass noodles with vegetables</div>
+          </div>
+        </div>
+        <div class="menu-item">
+          <div>
+            <div class="menu-item-name">Fried rice dishes</div>
+            <div class="menu-item-desc">Chicken, shrimp, or vegetarian</div>
+          </div>
+        </div>
+        <div class="menu-item">
+          <div>
+            <div class="menu-item-name">Wok vegetables</div>
+            <div class="menu-item-desc">Seasonal vegetables in soy and ginger</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-category">
+        <div class="menu-cat-title">Dim Sum & Starters</div>
+        <div class="menu-item">
+          <div>
+            <div class="menu-item-name">Steamed dim sum</div>
+            <div class="menu-item-desc">Assorted dumplings and buns</div>
+          </div>
+        </div>
+        <div class="menu-item">
+          <div>
+            <div class="menu-item-name">Spring rolls</div>
+            <div class="menu-item-desc">Crispy vegetable and meat rolls</div>
+          </div>
+        </div>
+        <div class="menu-item">
+          <div>
+            <div class="menu-item-name">Edamame</div>
+            <div class="menu-item-desc">Lightly salted soybeans</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-category">
+        <div class="menu-cat-title">Teppanyaki (made to order)</div>
+        <div class="menu-item">
+          <div>
+            <div class="menu-item-name">Teppanyaki chicken</div>
+            <div class="menu-item-desc">Prepared fresh in the kitchen, served to your table</div>
+          </div>
+        </div>
+        <div class="menu-item">
+          <div>
+            <div class="menu-item-name">Teppanyaki steak</div>
+            <div class="menu-item-desc">Seared on the grill, served with house sauce</div>
+          </div>
+        </div>
+        <div class="menu-item">
+          <div>
+            <div class="menu-item-name">Customizable noodle bowls</div>
+            <div class="menu-item-desc">Pick your noodles, protein, and sauce — made fresh</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <p class="menu-note">All-you-can-eat buffet — prices available on-site or via Wolt delivery. Vegetarian and vegan options available.</p>
+  </div>
+</section>
+
+<!-- HOURS & LOCATION -->
+<section id="hours" class="section">
+  <div class="container">
+    <div class="section-label">Hours & Location</div>
+    <h2 class="section-title">Find <em>us</em></h2>
+
+    <div class="hours-grid">
+      <div>
+        <table class="hours-table">
+          <tr><td>Monday</td><td>10:30 – 20:00</td></tr>
+          <tr><td>Tuesday</td><td>10:30 – 20:00</td></tr>
+          <tr><td>Wednesday</td><td>10:30 – 20:00</td></tr>
+          <tr><td>Thursday</td><td>10:30 – 20:00</td></tr>
+          <tr><td>Friday</td><td>10:30 – 21:00</td></tr>
+          <tr><td>Saturday</td><td>11:00 – 21:00</td></tr>
+          <tr><td>Sunday</td><td>12:00 – 19:00</td></tr>
+        </table>
+      </div>
+
+      <div class="location-card">
+        <h3>Location</h3>
+        <p>Kauppakatu 29<br>70100 Kuopio, Finland</p>
+        <p>In the heart of Kuopio city centre, on the main pedestrian street.</p>
+        <a href="https://maps.google.com/?cid=11663546854533978599" target="_blank" rel="noopener" class="maps-link">Open in Google Maps &rarr;</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="section section-alt">
+  <div class="container">
+    <div class="section-label">Contact</div>
+    <h2 class="section-title">Get in <em>touch</em></h2>
+
+    <div class="contact-grid">
+      <div class="contact-card">
+        <div class="icon">📞</div>
+        <div class="label">Phone</div>
+        <div class="value"><a href="tel:+358465486221">046 548 6221</a></div>
+      </div>
+      <div class="contact-card">
+        <div class="icon">📷</div>
+        <div class="label">Instagram</div>
+        <div class="value"><a href="https://www.instagram.com/maido.ravintola/" target="_blank" rel="noopener">@maido.ravintola</a></div>
+      </div>
+      <div class="contact-card">
+        <div class="icon">📘</div>
+        <div class="label">Facebook</div>
+        <div class="value"><a href="https://www.facebook.com/maidoravintola/" target="_blank" rel="noopener">MAIDO Ravintola</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING WIDGET (Segment 1 — Sit-Down) -->
+<section id="book" class="booking-section">
+  <div class="container">
+    <div class="booking-card">
+      <h2>Book a Table</h2>
+      <p class="booking-sub">Reserve in seconds — no fees, no account needed.</p>
+      <form class="booking-form" onsubmit="event.preventDefault();return false;">
+        <div>
+          <label for="booking-date">Date</label>
+          <input type="date" id="booking-date" min="2026-04-09">
+        </div>
+        <div>
+          <label for="booking-time">Time</label>
+          <select id="booking-time">
+            <option value="11:00">11:00</option>
+            <option value="11:30">11:30</option>
+            <option value="12:00">12:00</option>
+            <option value="12:30">12:30</option>
+            <option value="13:00">13:00</option>
+            <option value="13:30">13:30</option>
+            <option value="14:00">14:00</option>
+            <option value="14:30">14:30</option>
+            <option value="15:00">15:00</option>
+            <option value="15:30">15:30</option>
+            <option value="16:00">16:00</option>
+            <option value="16:30">16:30</option>
+            <option value="17:00" selected>17:00</option>
+            <option value="17:30">17:30</option>
+            <option value="18:00">18:00</option>
+            <option value="18:30">18:30</option>
+            <option value="19:00">19:00</option>
+            <option value="19:30">19:30</option>
+            <option value="20:00">20:00</option>
+          </select>
+        </div>
+        <div>
+          <label for="booking-guests">Guests</label>
+          <select id="booking-guests">
+            <option value="1">1 guest</option>
+            <option value="2" selected>2 guests</option>
+            <option value="3">3 guests</option>
+            <option value="4">4 guests</option>
+            <option value="5">5 guests</option>
+            <option value="6">6 guests</option>
+            <option value="7">7 guests</option>
+            <option value="8">8 guests</option>
+          </select>
+        </div>
+        <button type="submit" class="booking-btn">Reserve Now</button>
+      </form>
+      <p class="booking-caption">Powered by Klar Bookings — no fees, no commissions.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-name">Maido</div>
+  <p>&copy; 2026</p>
+</footer>
+
+</body>
+</html>

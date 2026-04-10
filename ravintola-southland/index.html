@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Ravintola Southland — Kiinalainen ravintola Meri-Rastila, Helsinki</title>
+<meta name="description" content="Ravintola Southland — aito kiinalainen ravintola Meri-Rastilassa, Helsingissä. Pehmeä tofu, hyvin paistettu kana ja runsaat annokset. Varaa pöytä nyt.">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --bg:#FFF9F3;
+    --ink:#1A1A1A;
+    --ink-soft:#3D3D3D;
+    --accent:#1B7A4A;
+    --accent-deep:#15603C;
+    --hero-bg:#0A1929;
+    --hero-text:#FFF9F3;
+    --hero-tag:#A8D5BA;
+    --hero-meta:#9A9A9A;
+    --menu-bg:#0A1929;
+    --menu-text:#FFF9F3;
+    --menu-cat:#A8D5BA;
+    --card-bg:#FFFFFF;
+    --line:#E8DCD0;
+    --muted:rgba(255,249,243,.7);
+    --nav-bg:rgba(255,249,243,.93);
+  }
+  html{scroll-behavior:smooth}
+  body{font-family:'Segoe UI',Roboto,'Helvetica Neue',sans-serif;font-size:17px;line-height:1.6;color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased;}
+  a{color:inherit;text-decoration:none}
+  .container{max-width:1100px;margin:0 auto;padding:0 20px}
+  @media(min-width:768px){.container{padding:0 40px}}
+
+  nav{position:sticky;top:0;z-index:10;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:18px 20px;max-width:1100px;margin:0 auto}
+  .logo{font-size:22px;font-weight:700;letter-spacing:-.5px;color:var(--accent)}
+  .nav-links{display:none;gap:32px;font-size:15px;font-weight:500}
+  .nav-links a:hover{color:var(--accent)}
+  @media(min-width:768px){.nav-links{display:flex}}
+
+  .hero{position:relative;min-height:72vh;display:flex;align-items:center;
+    background:radial-gradient(circle at 25% 35%,rgba(27,122,74,.25) 0%,transparent 50%),
+    radial-gradient(circle at 78% 70%,rgba(21,96,60,.3) 0%,transparent 50%),
+    linear-gradient(145deg,#0A1929 0%,#0F2A35 50%,#0A1929 100%);
+    color:var(--hero-text);overflow:hidden;}
+  .hero::before{content:"";position:absolute;inset:0;
+    background:repeating-linear-gradient(45deg,transparent 0,transparent 80px,rgba(255,249,243,.012) 80px,rgba(255,249,243,.012) 81px);
+    pointer-events:none;}
+  .hero-inner{position:relative;padding:100px 20px;width:100%;max-width:1100px;margin:0 auto}
+  @media(min-width:768px){.hero-inner{padding:140px 40px}}
+  .hero-tag{display:inline-block;font-size:13px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--hero-tag);border:1px solid rgba(168,213,186,.4);padding:8px 16px;margin-bottom:28px;}
+  h1.hero-title{font-size:clamp(44px,8vw,88px);font-weight:700;line-height:1.05;letter-spacing:-2px;margin-bottom:24px;}
+  .hero-subtitle{font-size:clamp(18px,2.4vw,24px);font-weight:300;color:#D8D8D8;max-width:620px;margin-bottom:44px}
+  .hero-meta{display:flex;gap:32px;flex-wrap:wrap;font-size:14px;color:var(--hero-tag);margin-bottom:44px}
+  .hero-meta span{display:flex;align-items:center;gap:8px}
+  .cta-row{display:flex;gap:16px;flex-wrap:wrap}
+  .btn{display:inline-block;padding:16px 32px;font-size:16px;font-weight:600;letter-spacing:.3px;cursor:pointer;border:none;transition:transform .15s;border-radius:6px;}
+  .btn:hover{transform:translateY(-2px)}
+  .btn-primary{background:var(--accent);color:#FFF9F3}
+  .btn-ghost{background:transparent;color:#FFF9F3;border:1px solid rgba(255,249,243,.35)}
+
+  section{padding:90px 0}
+  @media(max-width:767px){section{padding:60px 0}}
+  .section-label{font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:16px;}
+  h2{font-size:clamp(32px,5vw,52px);font-weight:700;line-height:1.1;letter-spacing:-1px;margin-bottom:28px;color:var(--ink)}
+  .lead{font-size:19px;color:var(--ink-soft);max-width:720px;line-height:1.65}
+
+  .about{background:var(--bg)}
+  .about-grid{display:grid;gap:50px;align-items:center}
+  @media(min-width:900px){.about-grid{grid-template-columns:1.2fr .8fr;gap:80px}}
+  .about-visual{aspect-ratio:4/5;border-radius:2px;
+    background:radial-gradient(circle at 30% 30%,rgba(27,122,74,.28) 0%,transparent 55%),
+    linear-gradient(160deg,#0A1929 0%,#1a3a2a 45%,#0A1929 100%);
+    position:relative;overflow:hidden;min-height:360px;}
+  .about-visual::after{content:"中";position:absolute;right:-10px;bottom:-40px;font-size:260px;font-weight:700;color:rgba(255,249,243,.07);line-height:1;}
+  .about-visual::before{content:"";position:absolute;inset:30px;border:1px solid rgba(168,213,186,.2);}
+
+  .menu{background:var(--menu-bg);color:var(--menu-text)}
+  .menu .section-label{color:var(--menu-cat)}
+  .menu h2{color:var(--menu-text)}
+  .menu .lead{color:rgba(255,249,243,.75)}
+  .menu-grid{display:grid;gap:60px;margin-top:60px}
+  @media(min-width:768px){.menu-grid{grid-template-columns:1fr 1fr;gap:60px 80px}}
+  .menu-cat h3{font-size:22px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;color:var(--menu-cat);padding-bottom:14px;margin-bottom:22px;border-bottom:1px solid rgba(168,213,186,.25);}
+  .menu-item{display:flex;justify-content:space-between;gap:20px;padding:14px 0;border-bottom:1px dashed rgba(255,249,243,.08)}
+  .menu-item:last-child{border-bottom:none}
+  .menu-item-name{font-weight:500;flex:1}
+  .menu-item-desc{font-size:14px;color:rgba(255,249,243,.55);margin-top:4px;font-weight:300}
+  .menu-item-price{font-weight:600;color:var(--menu-cat);white-space:nowrap}
+  .menu-note{margin-top:50px;padding:24px;background:rgba(255,249,243,.05);border-left:3px solid var(--accent);font-size:15px;color:rgba(255,249,243,.75);}
+
+  .visit{background:var(--bg)}
+  .visit-grid{display:grid;gap:40px;margin-top:40px}
+  @media(min-width:768px){.visit-grid{grid-template-columns:1fr 1fr;gap:60px}}
+  .visit-block h3{font-size:13px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--accent);margin-bottom:22px}
+  .hours-list{list-style:none}
+  .hours-list li{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid rgba(26,26,26,.08);font-size:16px}
+  .hours-list li:last-child{border-bottom:none}
+  .hours-list .day{font-weight:500}
+  .hours-list .time{color:var(--ink-soft)}
+  .address-block{font-size:17px;line-height:1.8}
+  .address-block strong{display:block;font-size:19px;margin-bottom:6px;color:var(--ink)}
+  .map-link{display:inline-block;margin-top:20px;padding:12px 24px;background:var(--accent);color:#FFF9F3;font-size:14px;font-weight:600;letter-spacing:.5px;border-radius:6px;}
+  .map-link:hover{background:var(--accent-deep)}
+
+  .contact-sec{background:#0A1929;color:#FFF9F3}
+  .contact-sec .section-label{color:var(--menu-cat)}
+  .contact-sec h2{color:#FFF9F3}
+  .contact-grid{display:grid;gap:24px;margin-top:48px}
+  @media(min-width:640px){.contact-grid{grid-template-columns:repeat(2,1fr)}}
+  .contact-card{padding:28px;background:rgba(255,249,243,.05);border:1px solid rgba(255,249,243,.1);transition:background .2s;border-radius:8px;}
+  .contact-card:hover{background:rgba(255,249,243,.08)}
+  .contact-card small{display:block;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--menu-cat);margin-bottom:10px}
+  .contact-card .big{font-size:22px;font-weight:600}
+  @media(min-width:768px){.contact-card .big{font-size:26px}}
+
+  .book-sec{background:#0D2018;padding:80px 20px;color:#FFF9F3}
+  .book-card{max-width:480px;margin:0 auto;background:#0A1929;border:1px solid rgba(168,213,186,.25);border-radius:14px;padding:36px 28px;box-shadow:0 20px 60px rgba(0,0,0,.35)}
+  @media(min-width:640px){.book-card{padding:44px 40px}}
+  .book-card .section-label{font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--menu-cat);text-align:center;margin-bottom:14px}
+  .book-card h2{font-family:Georgia,'Times New Roman',serif;font-size:34px;font-weight:700;color:#FFF9F3;text-align:center;margin:0 0 10px}
+  @media(min-width:640px){.book-card h2{font-size:40px}}
+  .book-card .book-sub{text-align:center;color:rgba(255,249,243,.7);font-size:14px;margin-bottom:28px;line-height:1.5}
+  .book-form{display:grid;gap:14px}
+  @media(min-width:520px){.book-form{grid-template-columns:1fr 1fr;gap:14px}.book-form .field-full{grid-column:1/-1}}
+  .book-field{display:flex;flex-direction:column;gap:6px}
+  .book-field label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--menu-cat);font-weight:600}
+  .book-field input,.book-field select{background:#0A1929;border:1px solid rgba(168,213,186,.3);border-radius:8px;padding:14px 14px;color:#FFF9F3;font-family:inherit;font-size:15px;appearance:none;-webkit-appearance:none}
+  .book-field input:focus,.book-field select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(27,122,74,.2)}
+  .book-cta{margin-top:22px;width:100%;background:var(--accent);color:#FFF9F3;border:none;border-radius:8px;padding:18px 20px;font-size:15px;font-weight:700;letter-spacing:1px;text-transform:uppercase;cursor:pointer;font-family:inherit;transition:background .15s}
+  .book-cta:hover{background:var(--accent-deep)}
+  .book-caption{margin-top:14px;text-align:center;font-size:12px;color:rgba(255,249,243,.55);letter-spacing:.3px}
+  footer.rest-footer{background:#0A1929;color:rgba(255,249,243,.55);padding:44px 20px;text-align:center;font-size:14px}
+  footer.rest-footer .brand{color:var(--accent);font-weight:700;font-size:18px;margin-bottom:8px;display:block}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="logo">Ravintola Southland</div>
+    <div class="nav-links">
+      <a href="#menu">Ruokalista</a>
+      <a href="#visit">Aukioloajat</a>
+      <a href="#contact">Yhteystiedot</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-inner">
+    <span class="hero-tag">Kiinalainen ravintola · Meri-Rastila, Helsinki</span>
+    <h1 class="hero-title">Ravintola Southland</h1>
+    <p class="hero-subtitle">Aito kiinalainen ravintola Helsingissä — pehmeä tofu, hyvin paistettu kana ja runsaat annokset, joka päivä.</p>
+    <div class="hero-meta">
+      <span>★ 4.4 / 5</span>
+      <span>435 Google-arvostelua</span>
+      <span>Meri-Rastila, Helsinki</span>
+    </div>
+    <div class="cta-row">
+      <a href="#menu" class="btn btn-primary">Katso ruokalista</a>
+      <a href="#book" class="btn btn-ghost">Varaa pöytä</a>
+    </div>
+  </div>
+</header>
+
+<section class="about" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div>
+        <div class="section-label">Meistä</div>
+        <h2>Kiinalainen ravintola Meri-Rastilassa</h2>
+        <p class="lead">Ravintola Southland on suosittu kiinalainen ravintola Meri-Rastilassa, Helsingissä. Pieni ja viihtyisä paikka, joka tunnetaan pehmeistä tofu-ruoista, hyvin paistettavasta kanasta ja runsaista annoksista. Ilmapiiri on iloinen ja welcoming.</p>
+      </div>
+      <div class="about-visual" aria-hidden="true"></div>
+    </div>
+  </div>
+</section>
+
+<section class="menu" id="menu">
+  <div class="container">
+    <div class="section-label">Ruokalista</div>
+    <h2>Mitä tarjoamme.</h2>
+    <p class="lead">Perinteiset kiinalaiset ruoat, joista Southland on tunnettu. Runsaat annokset, hyvä laatu. Henkilöä kohti 10–15 euroa.</p>
+
+    <div class="menu-grid">
+      <div class="menu-cat">
+        <h3>Tofu &amp; Kasvikset</h3>
+        <div class="menu-item">
+          <div class="menu-item-name">Pehmeä tofu<div class="menu-item-desc">Perinteinen kiinalainen valmistustapa, suolainen tai makea</div></div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-name">Kasvisten pannulla<div class="menu-item-desc">Saisongin parhaita kasviksia</div></div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-name">Peanuttikiisseli<div class="menu-item-desc">Klassinen Southlandin spesialiteetti</div></div>
+        </div>
+      </div>
+      <div class="menu-cat">
+        <h3>Kana &amp; Riisi</h3>
+        <div class="menu-item">
+          <div class="menu-item-name">Hyvin paistettu kana<div class="menu-item-desc">Zesty ja mehevä, perinteisen reseptin mukaan</div></div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-name">Kanan teriyaki<div class="menu-item-desc">Hunajaiset suolainen, kantaliisussa</div></div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-name">Paistettu riisi<div class="menu-item-desc">Kanan, katkarapujen ja munien kanssa</div></div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-name">Kananuudeli<div class="menu-item-desc">Nokkelijuustussa kanan kanssa</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-note">
+      Runsaat annokset, hyvä laatu. Henkilöä kohti noin 10–15 euroa. Wolt ja Foodora saatavilla.
+    </div>
+  </div>
+</section>
+
+<section class="visit" id="visit">
+  <div class="container">
+    <div class="section-label">Aukioloajat &amp; osoite</div>
+    <h2>Tervetuloa käymään.</h2>
+
+    <div class="visit-grid">
+      <div class="visit-block">
+        <h3>Aukioloajat</h3>
+        <ul class="hours-list">
+          <li><span class="day">Maanantai – Tiistai</span><span class="time">11:00 – 22:00</span></li>
+          <li><span class="day">Keskiviikko</span><span class="time">11:00 – 22:00</span></li>
+          <li><span class="day">Torstai – Perjantai</span><span class="time">11:00 – 22:00</span></li>
+          <li><span class="day">Lauantai</span><span class="time">12:00 – 21:00</span></li>
+          <li><span class="day">Sunnuntai</span><span class="time">12:00 – 22:00</span></li>
+        </ul>
+      </div>
+      <div class="visit-block">
+        <h3>Löydät meidät</h3>
+        <div class="address-block">
+          <strong>Ravintola Southland</strong>
+          Meri-Rastilantie 3 C<br>
+          00980 Helsinki<br>
+          Suomi
+        </div>
+        <a class="map-link" target="_blank" rel="noopener" href="https://maps.google.com/?q=Ravintola+Southland+Helsinki">Avaa Google Mapsissa →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact-sec" id="contact">
+  <div class="container">
+    <div class="section-label">Yhteystiedot</div>
+    <h2>Ota yhteyttä.</h2>
+    <p class="lead" style="color:rgba(255,249,243,.75)">Kysymyksiä tai porukkavarausta? Soita meille.</p>
+    <div class="contact-grid">
+      <a class="contact-card" href="tel:+358095865938">
+        <small>Puhelin</small>
+        <div class="big">09 586 5938</div>
+      </a>
+      <a class="contact-card" href="https://www.facebook.com/pages/Ravintola-Southland/586039734766849" target="_blank" rel="noopener">
+        <small>Facebook</small>
+        <div class="big">Ravintola Southland</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="book-sec" id="book">
+  <div class="book-card">
+    <div class="section-label">Varaukset</div>
+    <h2>Varaa pöytä</h2>
+    <p class="book-sub">Varaa helposti — ei maksuja, ei rekisteröintiä.</p>
+    <a href="tel:+358095865938" class="book-cta">Soita nyt</a>
+    <div class="book-caption">Avaa puhelimessa ja soita meille — nopein tapa!</div>
+  </div>
+</section>
+
+<footer class="rest-footer">
+  <span class="brand">Ravintola Southland</span>
+  Meri-Rastilantie 3 C, 00980 Helsinki · 09 586 5938<br>
+  © 2026 Ravintola Southland
+</footer>
+
+</body>
+</html>

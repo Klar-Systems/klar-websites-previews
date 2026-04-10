@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Tawook Lab — Syrian Street Food, Helsinki</title>
+<meta name="description" content="Tawook Lab serves authentic Syrian street food in the heart of Helsinki — tawook, falafel, mezze. Order now.">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+  :root{
+    --bg:#FBF5E9;
+    --ink:#1A1208;
+    --ink-soft:#3D2E1A;
+    --accent:#C0392B;
+    --accent-deep:#922B21;
+    --hero-bg:#1A0C08;
+    --hero-text:#FBF5E9;
+    --hero-tag:#E8A87C;
+    --hero-meta:#C4A882;
+    --menu-bg:#1A0C08;
+    --menu-text:#FBF5E9;
+    --menu-cat:#E8A87C;
+    --card-bg:#FFFFFF;
+    --line:#E8DDD0;
+    --muted:rgba(251,245,233,.6);
+    --nav-bg:rgba(251,245,233,.92);
+  }
+  html{scroll-behavior:smooth}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
+    font-size:17px;line-height:1.6;color:#1a1a1a;background:var(--bg);
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none}
+  .container{max-width:1100px;margin:0 auto;padding:0 20px}
+  @media(min-width:768px){.container{padding:0 40px}}
+
+  /* NAV */
+  nav{
+    position:sticky;top:0;z-index:10;background:var(--nav-bg);
+    backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+  }
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:18px 20px;max-width:1100px;margin:0 auto}
+  .logo{font-size:20px;font-weight:900;letter-spacing:-.5px;color:var(--ink);text-transform:uppercase}
+  .logo span{color:var(--accent)}
+  .nav-links{display:none;gap:32px;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+  .nav-links a:hover{color:var(--accent)}
+  @media(min-width:768px){.nav-links{display:flex}}
+
+  /* HERO */
+  .hero{
+    position:relative;min-height:88vh;display:flex;align-items:center;
+    background:
+      radial-gradient(circle at 15% 40%, rgba(192,57,43,.28) 0%, transparent 55%),
+      radial-gradient(circle at 85% 20%, rgba(232,168,124,.12) 0%, transparent 45%),
+      linear-gradient(155deg,#1A0C08 0%,#3D1A0D 45%,#1A0C08 100%);
+    color:var(--hero-text);overflow:hidden;
+  }
+  .hero::after{
+    content:'';position:absolute;inset:0;
+    background-image:
+      linear-gradient(rgba(192,57,43,.04) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(192,57,43,.04) 1px,transparent 1px);
+    background-size:50px 50px;pointer-events:none;
+  }
+  .hero-content{position:relative;z-index:2;padding:80px 20px;max-width:1100px;margin:0 auto}
+  @media(min-width:768px){.hero-content{padding:120px 40px}}
+  .hero-eyebrow{
+    display:inline-block;font-size:11px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;
+    color:var(--accent);background:rgba(192,57,43,.12);
+    padding:8px 14px;border:1px solid rgba(192,57,43,.4);margin-bottom:24px;
+  }
+  .hero h1{
+    font-size:clamp(48px,9vw,104px);font-weight:900;line-height:.92;letter-spacing:-2px;
+    text-transform:uppercase;margin-bottom:24px;
+  }
+  .hero h1 span{color:var(--accent);display:block;font-style:italic}
+  .hero-tagline{
+    font-size:clamp(18px,2.4vw,22px);font-weight:400;max-width:560px;
+    color:var(--hero-meta);margin-bottom:40px;line-height:1.5;
+  }
+  .hero-stats{display:flex;gap:40px;flex-wrap:wrap;margin-bottom:36px}
+  .stat{border-left:3px solid var(--accent);padding-left:16px}
+  .stat-num{font-size:32px;font-weight:900;color:var(--hero-text);line-height:1}
+  .stat-label{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--hero-meta);margin-top:4px}
+  .hero-cta-row{display:flex;gap:16px;flex-wrap:wrap}
+  .btn-primary{
+    display:inline-block;padding:18px 36px;background:var(--accent);color:#fff;
+    font-size:14px;font-weight:800;letter-spacing:1px;text-transform:uppercase;
+    border:none;cursor:pointer;transition:transform .15s,background .15s;
+  }
+  .btn-primary:hover{background:var(--accent-deep);transform:translateY(-2px)}
+  .btn-ghost{
+    display:inline-block;padding:18px 36px;background:transparent;color:#FBF5E9;
+    font-size:14px;font-weight:800;letter-spacing:1px;text-transform:uppercase;
+    border:2px solid rgba(251,245,233,.35);cursor:pointer;transition:all .15s;
+  }
+  .btn-ghost:hover{background:rgba(251,245,233,.1)}
+
+  /* SECTIONS */
+  section{padding:100px 0}
+  .section-eyebrow{
+    font-size:11px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;
+    color:var(--accent);margin-bottom:16px;display:block;
+  }
+  .section-title{
+    font-size:clamp(36px,6vw,60px);font-weight:900;line-height:1;letter-spacing:-1.5px;
+    text-transform:uppercase;color:var(--ink);margin-bottom:24px;
+  }
+  .section-title span{font-style:italic;color:var(--accent)}
+
+  /* ABOUT */
+  .about{background:var(--bg);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .about-grid{display:grid;grid-template-columns:1fr;gap:48px;align-items:start}
+  @media(min-width:900px){.about-grid{grid-template-columns:1fr 1fr;gap:80px}}
+  .about-text p{margin-bottom:20px;font-size:18px;color:var(--ink-soft);line-height:1.7}
+  .about-text p:first-of-type{font-size:22px;font-weight:600;color:var(--ink)}
+  .about-card{
+    background:var(--menu-bg);color:var(--menu-text);padding:48px 40px;
+    border-left:6px solid var(--accent);
+  }
+  .about-card h3{
+    font-size:14px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;
+    color:var(--accent);margin-bottom:24px;
+  }
+  .about-fact{padding:16px 0;border-bottom:1px solid rgba(251,245,233,.12)}
+  .about-fact:last-child{border-bottom:none}
+  .about-fact-num{font-size:36px;font-weight:900;line-height:1;color:#FBF5E9}
+  .about-fact-label{font-size:13px;font-weight:600;color:rgba(251,245,233,.7);margin-top:4px}
+
+  /* MENU */
+  .menu{background:var(--menu-bg);color:var(--menu-text)}
+  .menu .section-eyebrow{color:var(--accent)}
+  .menu .section-title{color:var(--menu-text)}
+  .menu-intro{
+    max-width:680px;font-size:18px;line-height:1.7;
+    color:var(--muted);margin-bottom:60px;
+  }
+  .menu-grid{display:grid;grid-template-columns:1fr;gap:24px;margin-top:48px}
+  @media(min-width:700px){.menu-grid{grid-template-columns:1fr 1fr}}
+  .menu-card{
+    background:rgba(251,245,233,.04);border:1px solid rgba(192,57,43,.25);
+    padding:36px 32px;transition:border-color .2s,background .2s;
+  }
+  .menu-card:hover{border-color:var(--accent);background:rgba(192,57,43,.06)}
+  .menu-card-num{
+    font-size:11px;font-weight:800;letter-spacing:2px;color:var(--accent);margin-bottom:12px;
+  }
+  .menu-card h3{
+    font-size:24px;font-weight:900;text-transform:uppercase;letter-spacing:-.5px;
+    margin-bottom:14px;color:var(--menu-text);
+  }
+  .menu-card p{font-size:15px;color:var(--muted);line-height:1.6}
+  .menu-note{
+    margin-top:48px;padding:28px 32px;background:rgba(192,57,43,.08);
+    border-left:4px solid var(--accent);font-size:15px;line-height:1.6;color:var(--muted);
+  }
+  .menu-note a{color:var(--accent);font-weight:700;text-decoration:underline}
+
+  /* HOURS */
+  .hours{background:var(--bg);border-top:1px solid var(--line)}
+  .hours-grid{display:grid;grid-template-columns:1fr;gap:48px;margin-top:48px}
+  @media(min-width:900px){.hours-grid{grid-template-columns:1fr 1fr;gap:64px}}
+  .hours-card{background:var(--card-bg);border:1px solid var(--line);padding:40px 36px}
+  .hours-card h3{
+    font-size:14px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;
+    color:var(--accent);margin-bottom:24px;
+  }
+  .hours-row{
+    display:flex;justify-content:space-between;padding:14px 0;
+    border-bottom:1px solid var(--line);font-size:16px;
+  }
+  .hours-row:last-child{border-bottom:none}
+  .hours-day{font-weight:600}
+  .hours-time{font-weight:500;color:#555}
+  .location-info{font-size:17px;line-height:1.7}
+  .location-info strong{display:block;font-size:20px;margin-bottom:6px;color:var(--ink)}
+  .location-info p{margin-bottom:12px;color:var(--ink-soft)}
+  .location-link{
+    display:inline-block;margin-top:20px;padding:14px 28px;
+    background:var(--ink);color:var(--bg);font-size:13px;font-weight:800;
+    letter-spacing:1px;text-transform:uppercase;
+  }
+  .location-link:hover{background:var(--accent)}
+
+  /* CONTACT */
+  .contact{background:var(--menu-bg);color:var(--menu-text);text-align:center}
+  .contact .section-eyebrow{color:var(--accent)}
+  .contact .section-title{color:var(--menu-text)}
+  .contact p{font-size:20px;color:var(--muted);max-width:620px;margin:0 auto 40px}
+  .contact-grid{display:grid;grid-template-columns:1fr;gap:24px;max-width:680px;margin:0 auto}
+  @media(min-width:600px){.contact-grid{grid-template-columns:1fr 1fr}}
+  .contact-card{
+    background:rgba(251,245,233,.04);border:1px solid rgba(192,57,43,.25);
+    padding:32px 24px;text-align:center;
+  }
+  .contact-card h4{
+    font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;
+    color:var(--accent);margin-bottom:14px;
+  }
+  .contact-card a{font-size:18px;font-weight:700;color:var(--menu-text)}
+  .contact-card a:hover{color:var(--accent)}
+
+  /* ORDER CTA */
+  .order-cta{background:#FBF5E9;border-top:1px solid var(--line);padding:100px 0;text-align:center}
+  .order-cta .section-title{color:var(--ink);text-align:center}
+  .order-card{
+    max-width:560px;margin:48px auto 0;background:var(--ink);
+    border-left:6px solid var(--accent);padding:48px 40px;color:#FBF5E9;text-align:left;
+  }
+  .order-card h3{
+    font-size:28px;font-weight:900;text-transform:uppercase;letter-spacing:-.5px;
+    margin-bottom:8px;color:#FBF5E9;
+  }
+  .order-card-sub{font-size:14px;color:rgba(251,245,233,.6);margin-bottom:32px;line-height:1.5}
+  .order-btn{
+    display:block;text-align:center;text-decoration:none;
+    background:var(--accent);color:#fff;border:none;
+    padding:20px 24px;font-size:20px;font-weight:800;letter-spacing:.5px;
+    text-transform:uppercase;cursor:pointer;width:100%;margin-top:16px;
+    transition:background .15s;
+  }
+  .order-btn:hover{background:var(--accent-deep)}
+  .order-caption{font-size:12px;color:rgba(251,245,233,.5);text-align:center;margin-top:20px}
+
+  /* FOOTER */
+  footer{background:var(--ink);color:rgba(251,245,233,.55);padding:60px 0 40px;text-align:center}
+  .footer-logo{display:block;font-size:20px;font-weight:900;letter-spacing:-.5px;color:#FBF5E9;text-transform:uppercase;margin-bottom:24px}
+  .footer-logo span{color:var(--accent)}
+  .footer-line{font-size:14px;line-height:1.8;margin-bottom:8px}
+  .footer-meta{font-size:12px;color:rgba(251,245,233,.3);margin-top:32px;letter-spacing:.5px}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="logo">Tawook <span>Lab</span></div>
+    <div class="nav-links">
+      <a href="#about">Story</a>
+      <a href="#menu">Menu</a>
+      <a href="#hours">Hours</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content container">
+    <span class="hero-eyebrow">Syrian Street Food · Helsinki</span>
+    <h1>Tawook<span>Lab</span></h1>
+    <p class="hero-tagline">Authentic Syrian flavours in the heart of Helsinki. Tawook, falafel, mezze — made from scratch.</p>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">4.8★</div>
+        <div class="stat-label">Google rating</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">849</div>
+        <div class="stat-label">Reviews</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">~50%</div>
+        <div class="stat-label">Vegan options</div>
+      </div>
+    </div>
+    <div class="hero-cta-row">
+      <a href="#menu" class="btn-primary">See the menu</a>
+      <a href="#hours" class="btn-ghost">Find us</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-text">
+        <span class="section-eyebrow">Our story</span>
+        <h2 class="section-title">Syrian food.<br><span>Helsinki kitchen.</span></h2>
+        <p>Tawook Lab brings the street food of Syria to central Helsinki — honest, flavour-forward dishes built around the tawook, the mezze table, and the falafel.</p>
+        <p>Head chef Kasem Al-Hallak has spent over two decades in professional kitchens. At Tawook Lab, that experience goes into every plate.</p>
+        <p>Around half our menu is vegetarian or vegan — the falafel and mezze plates work equally well as a full meal on their own.</p>
+      </div>
+      <div class="about-card">
+        <h3>The numbers</h3>
+        <div class="about-fact">
+          <div class="about-fact-num">4.8★</div>
+          <div class="about-fact-label">Across 849 Google reviews</div>
+        </div>
+        <div class="about-fact">
+          <div class="about-fact-num">~50%</div>
+          <div class="about-fact-label">Vegetarian & vegan options</div>
+        </div>
+        <div class="about-fact">
+          <div class="about-fact-num">2</div>
+          <div class="about-fact-label">Helsinki locations</div>
+        </div>
+        <div class="about-fact">
+          <div class="about-fact-num">€15–20</div>
+          <div class="about-fact-label">Per person</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section class="menu" id="menu">
+  <div class="container">
+    <span class="section-eyebrow">What we make</span>
+    <h2 class="section-title">The <span>menu</span></h2>
+    <p class="menu-intro">Every dish is made from scratch. The menu rotates, so check our Instagram for the current selection.</p>
+
+    <div class="menu-grid">
+      <div class="menu-card">
+        <div class="menu-card-num">01</div>
+        <h3>Smoked Tawook</h3>
+        <p>Our signature — slow-marinated chicken, rice, tahini, pomegranate molasses, toasted nuts. The dish Tawook Lab is built around.</p>
+      </div>
+      <div class="menu-card">
+        <div class="menu-card-num">02</div>
+        <h3>Falafel</h3>
+        <p>House-made from a daily-ground mix. Served with fresh accompaniments. A full meal on its own — popular with both vegetarians and meat-eaters.</p>
+      </div>
+      <div class="menu-card">
+        <div class="menu-card-num">03</div>
+        <h3>Mezze</h3>
+        <p>Hummus, baba ganoush, seasonal accompaniments. Best enjoyed shared — order as a starter or build a full mezze meal.</p>
+      </div>
+      <div class="menu-card">
+        <div class="menu-card-num">04</div>
+        <h3>Syrian Meatballs</h3>
+        <p>Spiced ground meat, slow-cooked, served with rice and sauce. One of the most ordered dishes on the main menu.</p>
+      </div>
+    </div>
+
+    <div class="menu-note">
+      The full menu — including daily specials and seasonal dishes — is posted on <a href="https://www.instagram.com/tawooklab" target="_blank" rel="noopener">@tawooklab</a>. We also deliver via Wolt.
+    </div>
+  </div>
+</section>
+
+<!-- HOURS -->
+<section class="hours" id="hours">
+  <div class="container">
+    <span class="section-eyebrow">When to find us</span>
+    <h2 class="section-title">Hours &amp; <span>location</span></h2>
+
+    <div class="hours-grid">
+      <div class="hours-card">
+        <h3>Opening hours</h3>
+        <div class="hours-row"><span class="hours-day">Monday – Thursday</span><span class="hours-time">11:00 – 21:00</span></div>
+        <div class="hours-row"><span class="hours-day">Friday</span><span class="hours-time">11:00 – 21:30</span></div>
+        <div class="hours-row"><span class="hours-day">Saturday</span><span class="hours-time">12:00 – 21:30</span></div>
+        <div class="hours-row"><span class="hours-day">Sunday</span><span class="hours-time">12:00 – 18:30</span></div>
+      </div>
+
+      <div class="hours-card">
+        <h3>Where we are</h3>
+        <div class="location-info">
+          <strong>Tawook Lab</strong>
+          <p>Aleksanterinkatu 21<br>00100 Helsinki<br>Citycenter Mall</p>
+          <p>Also at Kluuvi Kitchen, Aleksanterinkatu 9</p>
+          <a class="location-link" href="https://maps.google.com/?cid=8138888142032326134" target="_blank" rel="noopener">Open in Google Maps →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="container">
+    <span class="section-eyebrow">Get in touch</span>
+    <h2 class="section-title">Contact <span>us</span></h2>
+    <p>Questions about the menu or our locations? Call us or find us on Instagram.</p>
+    <div class="contact-grid">
+      <div class="contact-card">
+        <h4>Phone</h4>
+        <a href="tel:+358452660008">045 266 0008</a>
+      </div>
+      <div class="contact-card">
+        <h4>Instagram</h4>
+        <a href="https://www.instagram.com/tawooklab" target="_blank" rel="noopener">@tawooklab</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ORDER CTA -->
+<section class="order-cta" id="order">
+  <div class="container">
+    <span class="section-eyebrow" style="display:block;text-align:center">Order &amp; delivery</span>
+    <h2 class="section-title" style="text-align:center">Order <span>now</span></h2>
+    <div class="order-card">
+      <h3>Call to order</h3>
+      <div class="order-card-sub">Prefer to call? We're available during opening hours. Also on Wolt for delivery.</div>
+      <a href="tel:+358452660008" class="order-btn">📞 Call 045 266 0008</a>
+      <div class="order-caption">Mon–Thu 11–21 · Fri 11–21:30 · Sat 12–21:30 · Sun 12–18:30</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <span class="footer-logo">Tawook <span>Lab</span></span>
+    <div class="footer-line">Aleksanterinkatu 21, 00100 Helsinki · 045 266 0008</div>
+    <div class="footer-line">Mon–Thu 11–21 · Fri 11–21:30 · Sat 12–21:30 · Sun 12–18:30</div>
+    <div class="footer-meta">© 2026 Tawook Lab</div>
+  </div>
+</footer>
+
+</body>
+</html>
