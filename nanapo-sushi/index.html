@@ -1,311 +1,920 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fi">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="robots" content="noindex, nofollow">
-<title>Nanapo sushi — All-You-Can-Eat Sushi, Helsinki Kamppi</title>
-<meta name="description" content="Nanapo sushi in Helsinki Kamppi — all-you-can-eat Japanese sushi buffet. Lunch from €15.90. Reserve a table now.">
-<style>
-  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-  :root{
-    --bg:#F9F9F7;
-    --ink:#181818;
-    --ink-soft:#3A3A3A;
-    --accent:#C41230;
-    --accent-deep:#9B0E26;
-    --hero-bg:#0F0F0F;
-    --hero-text:#F9F9F7;
-    --hero-tag:#F5A0A8;
-    --hero-meta:#ABABAB;
-    --menu-bg:#121212;
-    --menu-text:#F9F9F7;
-    --menu-cat:#F5A0A8;
-    --card-bg:#FFFFFF;
-    --line:#E4E4E0;
-    --muted:rgba(249,249,247,.6);
-    --nav-bg:rgba(249,249,247,.93);
-  }
-  html{scroll-behavior:smooth}
-  body{font-family:'DM Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:17px;line-height:1.6;color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased;}
-  a{color:inherit;text-decoration:none}
-  .container{max-width:1100px;margin:0 auto;padding:0 20px}
-  @media(min-width:768px){.container{padding:0 40px}}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Nanapo Sushi – Japanilainen sushi-bufet Helsingissä. Fredrikinkatu 46, Kamppi. Yli 60 annosta – all-you-can-eat.">
+  <title>Nanapo Sushi – Japanilainen sushi-bufet, Helsinki</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;900&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  nav{position:sticky;top:0;z-index:10;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);}
-  .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:18px 20px;max-width:1100px;margin:0 auto}
-  .logo{font-size:22px;font-weight:700;letter-spacing:-.5px;color:var(--accent)}
-  .nav-links{display:none;gap:32px;font-size:15px;font-weight:500}
-  .nav-links a:hover{color:var(--accent)}
-  @media(min-width:768px){.nav-links{display:flex}}
+    :root {
+      --black: #0a0a0a;
+      --surface: #111111;
+      --surface-2: #191919;
+      --surface-3: #222222;
+      --red: #c9393e;
+      --red-dim: #a02d31;
+      --red-glow: rgba(201,57,62,0.15);
+      --text: #f0ece8;
+      --text-dim: #9a9590;
+      --text-muted: #5a5550;
+      --border: rgba(255,255,255,0.07);
+    }
 
-  .hero{position:relative;min-height:72vh;display:flex;align-items:center;
-    background:radial-gradient(circle at 25% 35%,rgba(196,18,48,.2) 0%,transparent 50%),
-    radial-gradient(circle at 78% 70%,rgba(150,10,30,.25) 0%,transparent 50%),
-    linear-gradient(145deg,#0F0F0F 0%,#1C0A0A 50%,#0F0F0F 100%);
-    color:var(--hero-text);overflow:hidden;}
-  .hero::before{content:"";position:absolute;inset:0;
-    background:repeating-linear-gradient(45deg,transparent 0,transparent 80px,rgba(249,249,247,.012) 80px,rgba(249,249,247,.012) 81px);
-    pointer-events:none;}
-  .hero-inner{position:relative;padding:100px 20px;width:100%;max-width:1100px;margin:0 auto}
-  @media(min-width:768px){.hero-inner{padding:140px 40px}}
-  .hero-tag{display:inline-block;font-size:13px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--hero-tag);border:1px solid rgba(245,160,168,.4);padding:8px 16px;margin-bottom:28px;}
-  h1.hero-title{font-size:clamp(44px,8vw,88px);font-weight:700;line-height:1.05;letter-spacing:-2px;margin-bottom:24px;}
-  .hero-subtitle{font-size:clamp(18px,2.4vw,24px);font-weight:300;color:#D0D0D0;max-width:620px;margin-bottom:44px}
-  .hero-meta{display:flex;gap:32px;flex-wrap:wrap;font-size:14px;color:var(--hero-tag);margin-bottom:44px}
-  .hero-meta span{display:flex;align-items:center;gap:8px}
-  .cta-row{display:flex;gap:16px;flex-wrap:wrap}
-  .btn{display:inline-block;padding:16px 32px;font-size:16px;font-weight:600;letter-spacing:.3px;cursor:pointer;border:none;transition:transform .15s;}
-  .btn:hover{transform:translateY(-2px)}
-  .btn-primary{background:var(--accent);color:#F9F9F7}
-  .btn-ghost{background:transparent;color:#F9F9F7;border:1px solid rgba(249,249,247,.35)}
+    html { scroll-behavior: smooth; }
 
-  section{padding:90px 0}
-  @media(max-width:767px){section{padding:60px 0}}
-  .section-label{font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:16px;}
-  h2{font-size:clamp(32px,5vw,52px);font-weight:700;line-height:1.1;letter-spacing:-1px;margin-bottom:28px;color:var(--ink)}
-  .lead{font-size:19px;color:var(--ink-soft);max-width:720px;line-height:1.65}
+    body {
+      background: var(--black);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
 
-  .about{background:var(--bg)}
-  .about-grid{display:grid;gap:50px;align-items:center}
-  @media(min-width:900px){.about-grid{grid-template-columns:1.2fr .8fr;gap:80px}}
-  .about-visual{aspect-ratio:4/5;border-radius:2px;
-    background:radial-gradient(circle at 30% 30%,rgba(196,18,48,.28) 0%,transparent 55%),
-    linear-gradient(160deg,#1C0505 0%,#3D1010 45%,#1C0505 100%);
-    position:relative;overflow:hidden;min-height:360px;}
-  .about-visual::after{content:"寿";position:absolute;right:-10px;bottom:-40px;font-size:260px;font-weight:700;color:rgba(249,249,247,.07);line-height:1;}
-  .about-visual::before{content:"";position:absolute;inset:30px;border:1px solid rgba(245,160,168,.2);}
+    /* ── DEMO BANNER ── */
+    .demo-banner {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: var(--red);
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      font-size: 13px;
+      font-family: 'JetBrains Mono', monospace;
+      color: #fff;
+    }
+    .demo-banner a {
+      color: #fff;
+      font-weight: 600;
+      text-decoration: underline;
+      white-space: nowrap;
+    }
+    @media (max-width: 600px) {
+      .demo-banner { flex-direction: column; gap: 6px; text-align: center; }
+    }
 
-  .menu{background:var(--menu-bg);color:var(--menu-text)}
-  .menu .section-label{color:var(--menu-cat)}
-  .menu h2{color:var(--menu-text)}
-  .menu .lead{color:rgba(249,249,247,.75)}
-  .menu-grid{display:grid;gap:60px;margin-top:60px}
-  @media(min-width:768px){.menu-grid{grid-template-columns:1fr 1fr;gap:60px 80px}}
-  .menu-cat h3{font-size:22px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;color:var(--menu-cat);padding-bottom:14px;margin-bottom:22px;border-bottom:1px solid rgba(245,160,168,.25);}
-  .menu-item{display:flex;justify-content:space-between;gap:20px;padding:14px 0;border-bottom:1px dashed rgba(249,249,247,.08)}
-  .menu-item:last-child{border-bottom:none}
-  .menu-item-name{font-weight:500;flex:1}
-  .menu-item-desc{font-size:14px;color:rgba(249,249,247,.55);margin-top:4px;font-weight:300}
-  .menu-item-price{font-weight:600;color:var(--menu-cat);white-space:nowrap}
-  .menu-note{margin-top:50px;padding:24px;background:rgba(249,249,247,.05);border-left:3px solid var(--accent);font-size:15px;color:rgba(249,249,247,.75);}
+    /* ── LAYOUT ── */
+    .container { max-width: 1040px; margin: 0 auto; padding: 0 24px; }
 
-  .visit{background:var(--bg)}
-  .visit-grid{display:grid;gap:40px;margin-top:40px}
-  @media(min-width:768px){.visit-grid{grid-template-columns:1fr 1fr;gap:60px}}
-  .visit-block h3{font-size:13px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--accent);margin-bottom:22px}
-  .hours-list{list-style:none}
-  .hours-list li{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid rgba(24,24,24,.08);font-size:16px}
-  .hours-list li:last-child{border-bottom:none}
-  .hours-list .day{font-weight:500}
-  .hours-list .time{color:var(--ink-soft)}
-  .address-block{font-size:17px;line-height:1.8}
-  .address-block strong{display:block;font-size:19px;margin-bottom:6px;color:var(--ink)}
-  .map-link{display:inline-block;margin-top:20px;padding:12px 24px;background:var(--accent);color:#F9F9F7;font-size:14px;font-weight:600;letter-spacing:.5px;}
-  .map-link:hover{background:var(--accent-deep)}
+    section { padding: 80px 0; }
+    @media (max-width: 768px) { section { padding: 56px 0; } }
 
-  .contact-sec{background:#1C0A0A;color:#F9F9F7}
-  .contact-sec .section-label{color:var(--menu-cat)}
-  .contact-sec h2{color:#F9F9F7}
-  .contact-grid{display:grid;gap:24px;margin-top:48px}
-  @media(min-width:640px){.contact-grid{grid-template-columns:repeat(2,1fr)}}
-  .contact-card{padding:28px;background:rgba(249,249,247,.05);border:1px solid rgba(249,249,247,.1);transition:background .2s;}
-  .contact-card:hover{background:rgba(249,249,247,.08)}
-  .contact-card small{display:block;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--menu-cat);margin-bottom:10px}
-  .contact-card .big{font-size:22px;font-weight:600}
-  @media(min-width:768px){.contact-card .big{font-size:26px}}
+    /* ── HERO ── */
+    .hero {
+      padding-top: 120px;
+      padding-bottom: 100px;
+      position: relative;
+      overflow: hidden;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+    }
 
-  .book-sec{background:#180808;padding:80px 20px;color:#F9F9F7}
-  .book-card{max-width:480px;margin:0 auto;background:#1C0A0A;border:1px solid rgba(245,160,168,.25);border-radius:14px;padding:36px 28px;box-shadow:0 20px 60px rgba(0,0,0,.35)}
-  @media(min-width:640px){.book-card{padding:44px 40px}}
-  .book-card .section-label{font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--menu-cat);text-align:center;margin-bottom:14px}
-  .book-card h2{font-family:Georgia,'Times New Roman',serif;font-size:34px;font-weight:700;color:#F9F9F7;text-align:center;margin:0 0 10px}
-  @media(min-width:640px){.book-card h2{font-size:40px}}
-  .book-card .book-sub{text-align:center;color:rgba(249,249,247,.7);font-size:14px;margin-bottom:28px;line-height:1.5}
-  .book-form{display:grid;gap:14px}
-  @media(min-width:520px){.book-form{grid-template-columns:1fr 1fr;gap:14px}.book-form .field-full{grid-column:1/-1}}
-  .book-field{display:flex;flex-direction:column;gap:6px}
-  .book-field label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--menu-cat);font-weight:600}
-  .book-field input,.book-field select{background:#0F0F0F;border:1px solid rgba(245,160,168,.3);border-radius:8px;padding:14px 14px;color:#F9F9F7;font-family:inherit;font-size:15px;appearance:none;-webkit-appearance:none}
-  .book-field input:focus,.book-field select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(196,18,48,.2)}
-  .book-cta{margin-top:22px;width:100%;background:var(--accent);color:#F9F9F7;border:none;border-radius:8px;padding:18px 20px;font-size:15px;font-weight:700;letter-spacing:1px;text-transform:uppercase;cursor:pointer;font-family:inherit;transition:background .15s}
-  .book-cta:hover{background:var(--accent-deep)}
-  .book-caption{margin-top:14px;text-align:center;font-size:12px;color:rgba(249,249,247,.55);letter-spacing:.3px}
-  footer.rest-footer{background:#0F0F0F;color:rgba(249,249,247,.55);padding:44px 20px;text-align:center;font-size:14px}
-  footer.rest-footer .brand{color:var(--accent);font-weight:700;font-size:18px;margin-bottom:8px;display:block}
-</style>
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 70% 50%, rgba(201,57,62,0.12) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 40% at 20% 80%, rgba(201,57,62,0.06) 0%, transparent 60%),
+        linear-gradient(180deg, #0a0a0a 0%, #110a0a 100%);
+    }
+
+    .hero-grid {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+    @media (max-width: 768px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+    }
+
+    .hero-eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      color: var(--red);
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .hero-name {
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(48px, 7vw, 80px);
+      font-weight: 900;
+      line-height: 0.95;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      margin-bottom: 24px;
+    }
+
+    .hero-name span { color: var(--red); }
+
+    .hero-desc {
+      font-size: 18px;
+      color: var(--text-dim);
+      margin-bottom: 32px;
+      line-height: 1.5;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 40px;
+    }
+
+    .hero-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      color: var(--text-dim);
+    }
+
+    .hero-meta-item .dot {
+      width: 6px;
+      height: 6px;
+      background: var(--red);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .hero-rating {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 6px;
+      background: var(--red-glow);
+      border: 1px solid rgba(201,57,62,0.3);
+      border-radius: 8px;
+      padding: 8px 16px;
+      margin-bottom: 32px;
+    }
+
+    .hero-rating .num {
+      font-family: 'Outfit', sans-serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--red);
+    }
+
+    .hero-rating .denom {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      color: var(--text-dim);
+    }
+
+    .hero-rating .reviews {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-left: 4px;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--red);
+      color: #fff;
+      padding: 14px 28px;
+      border-radius: 6px;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 600;
+      font-size: 15px;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+      border: none;
+      cursor: pointer;
+    }
+    .btn-primary:hover { background: var(--red-dim); transform: translateY(-1px); }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: var(--text);
+      padding: 14px 28px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      font-family: 'Outfit', sans-serif;
+      font-weight: 500;
+      font-size: 15px;
+      text-decoration: none;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .btn-secondary:hover { border-color: var(--red); background: var(--red-glow); }
+
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+    /* Hero visual side */
+    .hero-visual {
+      display: grid;
+      grid-template-rows: 1fr 1fr;
+      gap: 12px;
+      height: 400px;
+    }
+
+    .hero-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--red), transparent);
+    }
+
+    .hero-card-top {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .menu-preview-card {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .menu-preview-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--red);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-bottom: 8px;
+    }
+
+    .menu-preview-items {
+      list-style: none;
+    }
+    .menu-preview-items li {
+      font-size: 13px;
+      color: var(--text-dim);
+      padding: 2px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .menu-preview-items li:last-child { border-bottom: none; }
+
+    .open-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(34, 197, 94, 0.15);
+      border: 1px solid rgba(34, 197, 94, 0.25);
+      color: #4ade80;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 100px;
+    }
+    .open-badge::before { content: ''; width: 6px; height: 6px; background: #4ade80; border-radius: 50%; }
+
+    @media (max-width: 768px) { .hero-visual { display: none; } }
+
+    /* ── SECTION TITLES ── */
+    .section-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      color: var(--red);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(28px, 4vw, 40px);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 16px;
+      color: var(--text);
+    }
+
+    .section-body {
+      font-size: 17px;
+      color: var(--text-dim);
+      line-height: 1.7;
+      max-width: 560px;
+    }
+
+    /* ── ABOUT ── */
+    .about { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+    @media (max-width: 768px) { .about-grid { grid-template-columns: 1fr; gap: 32px; } }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .stat-card {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px;
+    }
+
+    .stat-num {
+      font-family: 'Outfit', sans-serif;
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--red);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .stat-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    /* ── MENU ── */
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-top: 40px;
+    }
+
+    .menu-category {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      transition: border-color 0.2s;
+    }
+    .menu-category:hover { border-color: var(--red); }
+
+    .menu-category-name {
+      font-family: 'Outfit', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--red);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 14px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .menu-item-list {
+      list-style: none;
+    }
+    .menu-item-list li {
+      font-size: 14px;
+      color: var(--text-dim);
+      padding: 5px 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .menu-item-list li::before {
+      content: '';
+      width: 3px;
+      height: 3px;
+      background: var(--red);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .menu-note {
+      margin-top: 24px;
+      padding: 14px 18px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* ── BOOKING ── */
+    .booking-section { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+
+    .booking-card {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 40px;
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .booking-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--red), #ff6b35, var(--red));
+    }
+
+    .booking-card .section-title { margin-bottom: 8px; }
+    .booking-card .section-body { margin: 0 auto 32px; text-align: center; }
+
+    .booking-form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .booking-input {
+      background: var(--surface-3);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 16px;
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.2s;
+      width: 100%;
+    }
+    .booking-input:focus { border-color: var(--red); }
+
+    .booking-select {
+      grid-column: 1 / -1;
+      background: var(--surface-3);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 16px;
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      outline: none;
+      appearance: none;
+      cursor: pointer;
+    }
+
+    .booking-btn {
+      grid-column: 1 / -1;
+      background: var(--red);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 15px;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 600;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.2s;
+      width: 100%;
+    }
+    .booking-btn:hover { background: var(--red-dim); }
+
+    .booking-footer-note {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 12px;
+    }
+
+    /* ── HOURS & LOCATION ── */
+    .hours-location-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 40px;
+      margin-top: 40px;
+      align-items: start;
+    }
+    @media (max-width: 768px) { .hours-location-grid { grid-template-columns: 1fr; } }
+
+    .hours-table {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .hours-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 20px;
+      border-bottom: 1px solid var(--border);
+      font-size: 14px;
+    }
+    .hours-row:last-child { border-bottom: none; }
+
+    .hours-day { color: var(--text-dim); font-weight: 500; }
+    .hours-time { font-family: 'JetBrains Mono', monospace; color: var(--text); font-size: 13px; }
+
+    .map-embed {
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      height: 280px;
+    }
+    .map-embed iframe { width: 100%; height: 100%; border: none; }
+
+    /* ── CONTACT ── */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-top: 40px;
+    }
+
+    .contact-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      text-decoration: none;
+      color: var(--text);
+      transition: border-color 0.2s, background 0.2s;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .contact-card:hover { border-color: var(--red); background: var(--red-glow); }
+
+    .contact-card-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--red);
+    }
+
+    .contact-card-value {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 40px 0;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-name {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--text);
+    }
+
+    .footer-address {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .footer-klar {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--text-muted);
+      text-align: right;
+    }
+
+    .footer-klar a {
+      color: var(--red);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .footer-copy {
+      text-align: center;
+      padding-top: 24px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border);
+      margin-top: 24px;
+    }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+  </style>
 </head>
 <body>
 
-<nav>
-  <div class="nav-inner">
-    <div class="logo">Nanapo sushi</div>
-    <div class="nav-links">
-      <a href="#menu">Menu</a>
-      <a href="#visit">Hours</a>
-      <a href="#contact">Contact</a>
-    </div>
+  <!-- DEMO BANNER -->
+  <div class="demo-banner">
+    <span>Tämä on demo — lopullinen sivusto rakennetaan yhdessä teidän toiveiden mukaan.</span>
+    <a href="https://preview.klarsystems.com/nanapo-sushi/proposal/">Katso tarjous →</a>
   </div>
-</nav>
 
-<header class="hero">
-  <div class="hero-inner">
-    <span class="hero-tag">All-You-Can-Eat Sushi · Helsinki Kamppi</span>
-    <h1 class="hero-title">Nanapo sushi</h1>
-    <p class="hero-subtitle">Japanese sushi buffet in the heart of Helsinki — nigiri, maki, warm dishes and more, every day.</p>
-    <div class="hero-meta">
-      <span>★ 4.5 / 5</span>
-      <span>708 Google reviews</span>
-      <span>Kamppi, Helsinki</span>
-    </div>
-    <div class="cta-row">
-      <a href="#menu" class="btn btn-primary">See the menu</a>
-      <a href="#book" class="btn btn-ghost">Reserve a table</a>
-    </div>
-  </div>
-</header>
-
-<section class="about" id="about">
-  <div class="container">
-    <div class="about-grid">
-      <div>
-        <div class="section-label">About us</div>
-        <h2>Sushi buffet in the centre of Helsinki</h2>
-        <p class="lead">Nanapo sushi is a buffet restaurant in Kamppi, Helsinki — fresh sushi, warm dishes and a full menu of Japanese and Asian classics, all you can eat. Open every day.</p>
-      </div>
-      <div class="about-visual" aria-hidden="true"></div>
-    </div>
-  </div>
-</section>
-
-<section class="menu" id="menu">
-  <div class="container">
-    <div class="section-label">Buffet menu</div>
-    <h2>The full menu.</h2>
-    <p class="lead">Lunch buffet from €15.90 · Evening and weekend buffet €19.90.</p>
-
-    <div class="menu-grid">
-      <div class="menu-cat">
-        <h3>Sushi</h3>
-        <div class="menu-item">
-          <div class="menu-item-name">Nigiri<div class="menu-item-desc">Salmon, tuna, prawn and seasonal selections</div></div>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="container">
+      <div class="hero-grid">
+        <div>
+          <div class="hero-eyebrow">Kamppi · Helsinki · Japanilainen</div>
+          <h1 class="hero-name">Nanapo<br><span>Sushi</span></h1>
+          <p class="hero-desc">All-you-can-eat sushi-bufet — yli 60 annosta, jatkuvasti täydennetty</p>
+          <div class="hero-rating">
+            <span class="num">4.5</span>
+            <span class="denom">/ 5</span>
+            <span class="reviews">· 708 arvostelua</span>
+          </div>
+          <div class="hero-meta">
+            <div class="hero-meta-item">
+              <span class="dot"></span>
+              <span>Fredrikinkatu 46, 00100 Helsinki</span>
+            </div>
+            <div class="hero-meta-item">
+              <span class="dot"></span>
+              <span>Ma–Pe 11:00–21:00 · La–Su 12:00–21:00</span>
+            </div>
+          </div>
+          <div class="hero-actions">
+            <a href="#varaus" class="btn-primary">Varaa pöytä</a>
+            <a href="tel:+358403613656" class="btn-secondary">+358 40 3613656</a>
+          </div>
         </div>
-        <div class="menu-item">
-          <div class="menu-item-name">Maki rolls<div class="menu-item-desc">Classic and specialty rolls — a full selection</div></div>
+        <div class="hero-visual">
+          <div class="hero-card hero-card-top">
+            <div class="menu-preview-card">
+              <div>
+                <div class="menu-preview-label">Sushi-bufet</div>
+                <ul class="menu-preview-items">
+                  <li>Nigiri-valikoima</li>
+                  <li>Maki-rullat</li>
+                  <li>Sashimi</li>
+                  <li>Erikoisrullat</li>
+                </ul>
+              </div>
+              <div class="open-badge">Avoinna tänään</div>
+            </div>
+            <div class="menu-preview-card">
+              <div class="menu-preview-label">Lämpimät ruoat</div>
+              <ul class="menu-preview-items">
+                <li>Tempura-katkarapu</li>
+                <li>Korean fried chicken</li>
+                <li>Gyoza</li>
+                <li>Nuudeliruoat</li>
+              </ul>
+            </div>
+          </div>
+          <div class="hero-card" style="display:flex;align-items:center;gap:20px;">
+            <div>
+              <div class="section-label" style="margin-bottom:4px">Arvosana</div>
+              <div style="font-family:'Outfit',sans-serif;font-size:48px;font-weight:900;color:var(--red);line-height:1;">4.5</div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-muted);">708 Google-arvostelua</div>
+            </div>
+            <div style="flex:1;border-left:1px solid var(--border);padding-left:20px;">
+              <div style="font-size:13px;color:var(--text-dim);line-height:1.6;">
+                "Yksi Helsingin parhaista sushi-bufeteista — jatkuvasti täydennetty ja tuoreet raaka-aineet."
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="menu-item">
-          <div class="menu-item-name">Sashimi<div class="menu-item-desc">Fresh cuts of salmon and tuna</div></div>
-        </div>
-        <div class="menu-item">
-          <div class="menu-item-name">Vegetarian rolls<div class="menu-item-desc">Avocado, cucumber and seasonal vegetables</div></div>
-        </div>
-      </div>
-      <div class="menu-cat">
-        <h3>Warm dishes</h3>
-        <div class="menu-item">
-          <div class="menu-item-name">Gyoza<div class="menu-item-desc">Pan-fried dumplings with dipping sauce</div></div>
-        </div>
-        <div class="menu-item">
-          <div class="menu-item-name">Tempura<div class="menu-item-desc">Lightly battered prawn and vegetables</div></div>
-        </div>
-        <div class="menu-item">
-          <div class="menu-item-name">Teriyaki<div class="menu-item-desc">Glazed chicken or salmon — classic preparation</div></div>
-        </div>
-        <div class="menu-item">
-          <div class="menu-item-name">Korean fried chicken<div class="menu-item-desc">Crispy, spiced — one of the most popular dishes</div></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="menu-note">
-      Lunch buffet (11:00–16:30) €15.90 · Evening &amp; weekend buffet €19.90. All you can eat — beverages ordered separately.
-    </div>
-  </div>
-</section>
-
-<section class="visit" id="visit">
-  <div class="container">
-    <div class="section-label">Hours &amp; location</div>
-    <h2>Come visit us.</h2>
-
-    <div class="visit-grid">
-      <div class="visit-block">
-        <h3>Opening hours</h3>
-        <ul class="hours-list">
-          <li><span class="day">Monday – Friday</span><span class="time">11:00 – 21:00</span></li>
-          <li><span class="day">Saturday – Sunday</span><span class="time">12:00 – 21:00</span></li>
-        </ul>
-      </div>
-      <div class="visit-block">
-        <h3>Find us</h3>
-        <div class="address-block">
-          <strong>Nanapo sushi</strong>
-          Fredrikinkatu 46<br>
-          00100 Helsinki<br>
-          Finland
-        </div>
-        <a class="map-link" target="_blank" rel="noopener" href="https://maps.google.com/?cid=16774887456986378409">Open in Google Maps →</a>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section class="contact-sec" id="contact">
-  <div class="container">
-    <div class="section-label">Contact</div>
-    <h2>Get in touch.</h2>
-    <p class="lead" style="color:rgba(249,249,247,.75)">Questions or group bookings? Call us or find us on Instagram.</p>
-    <div class="contact-grid">
-      <a class="contact-card" href="tel:+358403613656">
-        <small>Phone</small>
-        <div class="big">040 361 3656</div>
-      </a>
-      <a class="contact-card" href="https://www.instagram.com/nanapokamppi" target="_blank" rel="noopener">
-        <small>Instagram</small>
-        <div class="big">@nanapokamppi</div>
-      </a>
+  <!-- ABOUT -->
+  <section class="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="reveal">
+          <div class="section-label">Meistä</div>
+          <h2 class="section-title">Sushi-bufet<br>Kampissa</h2>
+          <p class="section-body">Avattiin 2023 Kamppi Autotaloon. All-you-can-eat sushi-bufet, jossa yli 60 annosta — jatkuvasti täydennetty. Hinta n. 20–35 € / henkilö.</p>
+          <div style="margin-top:24px;">
+            <a href="tel:+358403613656" class="btn-primary">Soita meille</a>
+          </div>
+        </div>
+        <div class="about-stats reveal reveal-delay-1">
+          <div class="stat-card">
+            <div class="stat-num">60+</div>
+            <div class="stat-label">Annosta bufetissa</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">4.5</div>
+            <div class="stat-label">Google-arvosana</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">708</div>
+            <div class="stat-label">Arvostelua</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">2023</div>
+            <div class="stat-label">Perustettu</div>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section class="book-sec" id="book">
-  <div class="book-card">
-    <div class="section-label">Reservations</div>
-    <h2>Book a Table</h2>
-    <p class="book-sub">Reserve in seconds — no fees, no account needed.</p>
-    <form class="book-form" onsubmit="event.preventDefault();return false;">
-      <div class="book-field">
-        <label for="b-date">Date</label>
-        <input type="date" id="b-date" min="2026-04-09" value="2026-04-09">
+  <!-- MENU -->
+  <section>
+    <div class="container">
+      <div class="reveal">
+        <div class="section-label">Bufet-valikoima</div>
+        <h2 class="section-title">Mitä tarjoamme</h2>
+        <p class="section-body">All-you-can-eat — kaikki alla olevat kategoriat sisältyvät bufet-hintaan.</p>
       </div>
-      <div class="book-field">
-        <label for="b-time">Time</label>
-        <select id="b-time">
-          <option>11:00</option><option>11:30</option><option>12:00</option>
-          <option>12:30</option><option selected>13:00</option><option>13:30</option>
-          <option>17:00</option><option>17:30</option><option>18:00</option>
-          <option>18:30</option><option>19:00</option><option>19:30</option><option>20:00</option>
-        </select>
+      <div class="menu-grid">
+        <div class="menu-category reveal reveal-delay-1">
+          <div class="menu-category-name">Sushi-bufet</div>
+          <ul class="menu-item-list">
+            <li>Nigiri-valikoima</li>
+            <li>Maki-rullat</li>
+            <li>Sashimi</li>
+            <li>Erikoisrullat</li>
+          </ul>
+        </div>
+        <div class="menu-category reveal reveal-delay-2">
+          <div class="menu-category-name">Lämpimät ruoat</div>
+          <ul class="menu-item-list">
+            <li>Tempura-katkarapu</li>
+            <li>Korean fried chicken</li>
+            <li>Gyoza</li>
+            <li>Nuudeliruoat</li>
+          </ul>
+        </div>
+        <div class="menu-category reveal reveal-delay-3">
+          <div class="menu-category-name">Kylmät välipalat</div>
+          <ul class="menu-item-list">
+            <li>Kevätrullat</li>
+            <li>Salaatit</li>
+            <li>Miso-keitto</li>
+          </ul>
+        </div>
+        <div class="menu-category reveal">
+          <div class="menu-category-name">Jälkiruoat</div>
+          <ul class="menu-item-list">
+            <li>Jäätelö</li>
+            <li>Hedelmät</li>
+          </ul>
+        </div>
       </div>
-      <div class="book-field field-full">
-        <label for="b-party">Party size</label>
-        <select id="b-party">
-          <option>1 guest</option><option selected>2 guests</option><option>3 guests</option>
-          <option>4 guests</option><option>5 guests</option><option>6 guests</option>
-          <option>7 guests</option><option>8 guests</option>
-        </select>
-      </div>
-      <button type="button" class="book-cta field-full">Reserve Now</button>
-    </form>
-    <div class="book-caption">Powered by Klar Bookings — no fees, no commissions.</div>
-  </div>
-</section>
+      <div class="menu-note reveal">Tämä on demo — ruokalista päivitetään yhdessä. Kaikki annokset sisältyvät bufet-hintaan.</div>
+    </div>
+  </section>
 
-<footer class="rest-footer">
-  <span class="brand">Nanapo sushi</span>
-  Fredrikinkatu 46, 00100 Helsinki · 040 361 3656<br>
-  © 2026 Nanapo sushi
-</footer>
+  <!-- BOOKING -->
+  <section class="booking-section" id="varaus">
+    <div class="container">
+      <div class="booking-card reveal">
+        <div class="section-label">Varaukset</div>
+        <h2 class="section-title">Varaa pöytä</h2>
+        <p class="section-body">Varaa sekunneissa — ei tilin luomista, ei maksuja.</p>
+        <div class="booking-form">
+          <input type="date" class="booking-input">
+          <input type="time" class="booking-input" value="18:00">
+          <select class="booking-select booking-input">
+            <option>2 henkilöä</option>
+            <option>3 henkilöä</option>
+            <option>4 henkilöä</option>
+            <option>5 henkilöä</option>
+            <option>6+ henkilöä</option>
+          </select>
+          <button class="booking-btn">Varaa nyt</button>
+        </div>
+        <div class="booking-footer-note">Powered by Klar Bookings — ei maksuja, ei komissiota</div>
+      </div>
+    </div>
+  </section>
 
+  <!-- HOURS + LOCATION -->
+  <section>
+    <div class="container">
+      <div class="reveal">
+        <div class="section-label">Aukioloajat & sijainti</div>
+        <h2 class="section-title">Löydä meidät</h2>
+      </div>
+      <div class="hours-location-grid">
+        <div class="hours-table reveal reveal-delay-1">
+          <div class="hours-row"><span class="hours-day">Maanantai</span><span class="hours-time">11:00–21:00</span></div>
+          <div class="hours-row"><span class="hours-day">Tiistai</span><span class="hours-time">11:00–21:00</span></div>
+          <div class="hours-row"><span class="hours-day">Keskiviikko</span><span class="hours-time">11:00–21:00</span></div>
+          <div class="hours-row"><span class="hours-day">Torstai</span><span class="hours-time">11:00–21:00</span></div>
+          <div class="hours-row"><span class="hours-day">Perjantai</span><span class="hours-time">11:00–21:00</span></div>
+          <div class="hours-row"><span class="hours-day">Lauantai</span><span class="hours-time">12:00–21:00</span></div>
+          <div class="hours-row"><span class="hours-day">Sunnuntai</span><span class="hours-time">12:00–21:00</span></div>
+        </div>
+        <div class="reveal reveal-delay-2">
+          <div class="map-embed">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1984.5!2d24.933014!3d60.168970!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46920bc6ac1bc0b5%3A0xe8f3c96c7a0890a9!2sNanapo+Sushi!5e0!3m2!1sfi!2sfi!4v1681000000000"
+              allowfullscreen loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+          </div>
+          <div style="margin-top:12px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text-muted);">
+            Fredrikinkatu 46, 00100 Helsinki · Kamppi Autotalo
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section style="background:var(--surface);border-top:1px solid var(--border);">
+    <div class="container">
+      <div class="reveal">
+        <div class="section-label">Yhteystiedot</div>
+        <h2 class="section-title">Ota yhteyttä</h2>
+      </div>
+      <div class="contact-grid">
+        <a href="tel:+358403613656" class="contact-card reveal reveal-delay-1">
+          <div class="contact-card-label">Puhelin</div>
+          <div class="contact-card-value">+358 40 3613656</div>
+        </a>
+        <a href="https://www.instagram.com/nanapokamppi/" target="_blank" rel="noopener" class="contact-card reveal reveal-delay-2">
+          <div class="contact-card-label">Instagram</div>
+          <div class="contact-card-value">@nanapokamppi</div>
+        </a>
+        <a href="mailto:nanapo.kamppi@gmail.com" class="contact-card reveal reveal-delay-3">
+          <div class="contact-card-label">Sähköposti</div>
+          <div class="contact-card-value">nanapo.kamppi@gmail.com</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div>
+          <div class="footer-name">Nanapo Sushi</div>
+          <div class="footer-address">Fredrikinkatu 46, 00100 Helsinki · +358 40 3613656</div>
+        </div>
+        <div class="footer-klar">
+          © 2026 Nanapo Sushi<br>
+          Powered by <a href="https://klarsystems.com" target="_blank">Klar</a>
+        </div>
+      </div>
+      <div class="footer-copy">© 2026 Nanapo Sushi — Kaikki oikeudet pidätetään</div>
+    </div>
+  </footer>
+
+  <script>
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => observer.observe(el));
+
+    // Set min date for booking
+    const dateInput = document.querySelector('input[type="date"]');
+    if (dateInput) {
+      const today = new Date().toISOString().split('T')[0];
+      dateInput.min = today;
+      dateInput.value = today;
+    }
+  </script>
 </body>
 </html>
