@@ -3,644 +3,406 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Nanapo Sushi – Japanilainen sushi-bufet Helsingissä. Fredrikinkatu 46, Kamppi. Yli 60 annosta – all-you-can-eat.">
-  <title>Nanapo Sushi – Japanilainen sushi-bufet, Helsinki</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;900&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <meta name="description" content="Nanapo Sushi – Japanilainen all-you-can-eat sushi-bufet Helsingissä. Kamppi. Yli 60 annosta, jatkuvasti täydennetty.">
+  <title>Nanapo Sushi — Helsinki</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;900&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --black: #0a0a0a;
-      --surface: #111111;
-      --surface-2: #191919;
-      --surface-3: #222222;
+      --bg: #1a1a1a;
       --red: #c9393e;
-      --red-dim: #a02d31;
-      --red-glow: rgba(201,57,62,0.15);
-      --text: #f0ece8;
-      --text-dim: #9a9590;
-      --text-muted: #5a5550;
-      --border: rgba(255,255,255,0.07);
+      --red-dim: rgba(201,57,62,0.12);
+      --white: #f2ece6;
+      --dim: #7a736c;
+      --muted: #3a3530;
+      --rule: rgba(242,236,230,0.08);
     }
 
     html { scroll-behavior: smooth; }
-
     body {
-      background: var(--black);
-      color: var(--text);
+      background: var(--bg);
+      color: var(--white);
       font-family: 'DM Sans', sans-serif;
-      font-size: 16px;
-      line-height: 1.6;
       -webkit-font-smoothing: antialiased;
     }
 
     /* ── DEMO BANNER ── */
     .demo-banner {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 1000;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       background: var(--red);
-      padding: 10px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 16px;
-      font-size: 13px;
+      display: flex; align-items: center; justify-content: center; gap: 14px;
+      padding: 9px 20px;
+      font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #fff;
+    }
+    .demo-banner a { color: #fff; text-decoration: underline; font-weight: 600; white-space: nowrap; }
+    @media (max-width:560px) { .demo-banner { flex-direction: column; gap: 4px; text-align: center; } }
+
+    /* ── GLOBAL ── */
+    .wrap { max-width: 1080px; margin: 0 auto; padding: 0 32px; }
+    @media (max-width: 640px) { .wrap { padding: 0 20px; } }
+
+    hr.rule { border: none; border-top: 1px solid var(--rule); }
+
+    .label {
       font-family: 'JetBrains Mono', monospace;
-      color: #fff;
-    }
-    .demo-banner a {
-      color: #fff;
-      font-weight: 600;
-      text-decoration: underline;
-      white-space: nowrap;
-    }
-    @media (max-width: 600px) {
-      .demo-banner { flex-direction: column; gap: 6px; text-align: center; }
+      font-size: 11px; letter-spacing: 0.2em;
+      color: var(--red); text-transform: uppercase;
     }
 
-    /* ── LAYOUT ── */
-    .container { max-width: 1040px; margin: 0 auto; padding: 0 24px; }
-
-    section { padding: 80px 0; }
-    @media (max-width: 768px) { section { padding: 56px 0; } }
-
-    /* ── HERO ── */
+    /* ── HERO — minimal, type-forward ── */
     .hero {
-      padding-top: 120px;
-      padding-bottom: 100px;
-      position: relative;
-      overflow: hidden;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
+      padding: 130px 0 80px;
+      border-bottom: 1px solid var(--rule);
     }
 
-    .hero-bg {
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 80% 60% at 70% 50%, rgba(201,57,62,0.12) 0%, transparent 70%),
-        radial-gradient(ellipse 40% 40% at 20% 80%, rgba(201,57,62,0.06) 0%, transparent 60%),
-        linear-gradient(180deg, #0a0a0a 0%, #110a0a 100%);
+    .hero-top {
+      display: flex; align-items: flex-start;
+      justify-content: space-between; gap: 40px;
+      flex-wrap: wrap;
     }
 
-    .hero-grid {
-      position: relative;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
-      align-items: center;
-    }
-    @media (max-width: 768px) {
-      .hero-grid { grid-template-columns: 1fr; gap: 40px; }
-    }
-
-    .hero-eyebrow {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      letter-spacing: 0.2em;
-      color: var(--red);
-      text-transform: uppercase;
-      margin-bottom: 20px;
-    }
-
-    .hero-name {
+    .hero-h1 {
       font-family: 'Outfit', sans-serif;
-      font-size: clamp(48px, 7vw, 80px);
+      font-size: clamp(56px, 9vw, 112px);
       font-weight: 900;
-      line-height: 0.95;
-      letter-spacing: -0.02em;
-      color: var(--text);
-      margin-bottom: 24px;
+      line-height: 0.92;
+      letter-spacing: -0.03em;
+      color: var(--white);
     }
 
-    .hero-name span { color: var(--red); }
+    .hero-h1 .red { color: var(--red); }
 
-    .hero-desc {
-      font-size: 18px;
-      color: var(--text-dim);
-      margin-bottom: 32px;
-      line-height: 1.5;
-    }
-
-    .hero-meta {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-bottom: 40px;
+    .hero-meta-col {
+      padding-top: 8px;
+      display: flex; flex-direction: column; gap: 14px;
+      min-width: 200px;
     }
 
     .hero-meta-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
+      display: flex; flex-direction: column; gap: 2px;
+    }
+
+    .hero-meta-label {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 13px;
-      color: var(--text-dim);
+      font-size: 10px; letter-spacing: 0.18em;
+      color: var(--dim); text-transform: uppercase;
     }
 
-    .hero-meta-item .dot {
-      width: 6px;
-      height: 6px;
-      background: var(--red);
-      border-radius: 50%;
-      flex-shrink: 0;
+    .hero-meta-value {
+      font-size: 14px; color: var(--white);
     }
 
-    .hero-rating {
-      display: inline-flex;
-      align-items: baseline;
-      gap: 6px;
-      background: var(--red-glow);
-      border: 1px solid rgba(201,57,62,0.3);
-      border-radius: 8px;
-      padding: 8px 16px;
-      margin-bottom: 32px;
+    .hero-rating-large {
+      margin-top: 48px;
+      display: flex; align-items: baseline; gap: 8px;
     }
 
-    .hero-rating .num {
+    .hero-rating-num {
       font-family: 'Outfit', sans-serif;
-      font-size: 28px;
-      font-weight: 700;
-      color: var(--red);
+      font-size: 72px; font-weight: 900;
+      color: var(--red); line-height: 1;
     }
 
-    .hero-rating .denom {
+    .hero-rating-denom {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 14px;
-      color: var(--text-dim);
+      font-size: 18px; color: var(--dim);
     }
 
-    .hero-rating .reviews {
+    .hero-rating-count {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      color: var(--text-muted);
+      font-size: 12px; color: var(--muted);
       margin-left: 4px;
     }
 
-    .btn-primary {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--red);
-      color: #fff;
-      padding: 14px 28px;
-      border-radius: 6px;
-      font-family: 'Outfit', sans-serif;
-      font-weight: 600;
-      font-size: 15px;
-      text-decoration: none;
-      transition: background 0.2s, transform 0.15s;
-      border: none;
-      cursor: pointer;
+    .hero-tagline {
+      margin-top: 24px;
+      font-size: 20px; color: var(--dim);
+      line-height: 1.5; max-width: 480px;
     }
-    .btn-primary:hover { background: var(--red-dim); transform: translateY(-1px); }
 
-    .btn-secondary {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: transparent;
-      color: var(--text);
-      padding: 14px 28px;
-      border-radius: 6px;
-      border: 1px solid var(--border);
-      font-family: 'Outfit', sans-serif;
-      font-weight: 500;
-      font-size: 15px;
-      text-decoration: none;
-      transition: border-color 0.2s, background 0.2s;
+    .hero-cta-row {
+      margin-top: 40px;
+      display: flex; gap: 12px; flex-wrap: wrap;
     }
-    .btn-secondary:hover { border-color: var(--red); background: var(--red-glow); }
 
-    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 28px; border-radius: 4px;
+      font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 15px;
+      text-decoration: none; transition: all 0.18s;
+    }
+    .btn-red { background: var(--red); color: #fff; }
+    .btn-red:hover { opacity: 0.85; }
+    .btn-ghost { border: 1px solid var(--rule); color: var(--white); }
+    .btn-ghost:hover { border-color: var(--red); }
 
-    /* Hero visual side */
-    .hero-visual {
+    /* ── MENU — comes FIRST, food is the star ── */
+    .menu { padding: 80px 0; border-bottom: 1px solid var(--rule); }
+
+    .menu-header {
+      display: flex; align-items: flex-end;
+      justify-content: space-between; gap: 20px;
+      margin-bottom: 56px; flex-wrap: wrap;
+    }
+
+    .menu-h2 {
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(36px, 5vw, 60px);
+      font-weight: 900; letter-spacing: -0.02em;
+      line-height: 1;
+    }
+
+    .menu-sub {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px; color: var(--dim);
+      max-width: 220px; text-align: right;
+      line-height: 1.6;
+    }
+    @media (max-width: 640px) { .menu-sub { text-align: left; max-width: 100%; } }
+
+    /* Full-width menu rows — not cards */
+    .menu-category-row {
+      border-top: 1px solid var(--rule);
+      padding: 32px 0;
       display: grid;
-      grid-template-rows: 1fr 1fr;
-      gap: 12px;
-      height: 400px;
+      grid-template-columns: 220px 1fr;
+      gap: 32px;
+      align-items: start;
+    }
+    @media (max-width: 640px) {
+      .menu-category-row { grid-template-columns: 1fr; gap: 16px; }
     }
 
-    .hero-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 24px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, var(--red), transparent);
-    }
-
-    .hero-card-top {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-
-    .menu-preview-card {
-      background: var(--surface-2);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 16px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .menu-preview-label {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 10px;
-      color: var(--red);
-      text-transform: uppercase;
-      letter-spacing: 0.15em;
-      margin-bottom: 8px;
-    }
-
-    .menu-preview-items {
-      list-style: none;
-    }
-    .menu-preview-items li {
-      font-size: 13px;
-      color: var(--text-dim);
-      padding: 2px 0;
-      border-bottom: 1px solid var(--border);
-    }
-    .menu-preview-items li:last-child { border-bottom: none; }
-
-    .open-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: rgba(34, 197, 94, 0.15);
-      border: 1px solid rgba(34, 197, 94, 0.25);
-      color: #4ade80;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      padding: 4px 10px;
-      border-radius: 100px;
-    }
-    .open-badge::before { content: ''; width: 6px; height: 6px; background: #4ade80; border-radius: 50%; }
-
-    @media (max-width: 768px) { .hero-visual { display: none; } }
-
-    /* ── SECTION TITLES ── */
-    .section-label {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      letter-spacing: 0.2em;
-      color: var(--red);
-      text-transform: uppercase;
-      margin-bottom: 12px;
-    }
-
-    .section-title {
+    .menu-cat-name {
       font-family: 'Outfit', sans-serif;
-      font-size: clamp(28px, 4vw, 40px);
-      font-weight: 700;
-      line-height: 1.1;
-      margin-bottom: 16px;
-      color: var(--text);
+      font-size: 22px; font-weight: 700;
+      color: var(--red);
     }
 
-    .section-body {
-      font-size: 17px;
-      color: var(--text-dim);
-      line-height: 1.7;
-      max-width: 560px;
+    .menu-items-inline {
+      display: flex; flex-wrap: wrap; gap: 8px 24px;
+    }
+
+    .menu-item {
+      font-size: 15px; color: var(--dim);
+      padding: 4px 0;
+    }
+
+    .menu-note-row {
+      border-top: 1px solid var(--rule);
+      padding-top: 24px; margin-top: 8px;
+    }
+    .menu-note-text {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px; color: var(--muted);
     }
 
     /* ── ABOUT ── */
-    .about { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .about {
+      padding: 80px 0;
+      border-bottom: 1px solid var(--rule);
+    }
 
     .about-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 60px;
-      align-items: center;
+      gap: 80px; align-items: start;
     }
-    @media (max-width: 768px) { .about-grid { grid-template-columns: 1fr; gap: 32px; } }
+    @media (max-width: 768px) { .about-grid { grid-template-columns: 1fr; gap: 40px; } }
+
+    .about-h2 {
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(32px, 4vw, 48px);
+      font-weight: 800; letter-spacing: -0.02em;
+      margin-top: 12px; margin-bottom: 20px;
+      line-height: 1.1;
+    }
+
+    .about-body {
+      font-size: 17px; color: var(--dim);
+      line-height: 1.75; max-width: 440px;
+    }
 
     .about-stats {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1px; background: var(--rule);
+      border: 1px solid var(--rule);
     }
 
-    .stat-card {
-      background: var(--surface-2);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 20px;
+    .stat-cell {
+      background: var(--bg);
+      padding: 28px 24px;
     }
 
-    .stat-num {
+    .stat-n {
       font-family: 'Outfit', sans-serif;
-      font-size: 32px;
-      font-weight: 800;
-      color: var(--red);
-      line-height: 1;
-      margin-bottom: 4px;
+      font-size: 44px; font-weight: 900;
+      color: var(--white); line-height: 1;
+      margin-bottom: 6px;
     }
 
-    .stat-label {
+    .stat-l {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-    }
-
-    /* ── MENU ── */
-    .menu-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 16px;
-      margin-top: 40px;
-    }
-
-    .menu-category {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 24px;
-      transition: border-color 0.2s;
-    }
-    .menu-category:hover { border-color: var(--red); }
-
-    .menu-category-name {
-      font-family: 'Outfit', sans-serif;
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--red);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin-bottom: 14px;
-      padding-bottom: 10px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .menu-item-list {
-      list-style: none;
-    }
-    .menu-item-list li {
-      font-size: 14px;
-      color: var(--text-dim);
-      padding: 5px 0;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .menu-item-list li::before {
-      content: '';
-      width: 3px;
-      height: 3px;
-      background: var(--red);
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
-
-    .menu-note {
-      margin-top: 24px;
-      padding: 14px 18px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
-      color: var(--text-muted);
+      font-size: 11px; color: var(--dim);
+      text-transform: uppercase; letter-spacing: 0.12em;
     }
 
     /* ── BOOKING ── */
-    .booking-section { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .booking { padding: 80px 0; border-bottom: 1px solid var(--rule); }
 
-    .booking-card {
-      background: var(--surface-2);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 40px;
-      max-width: 600px;
-      margin: 0 auto;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
+    .booking-inner {
+      max-width: 640px;
     }
 
-    .booking-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, var(--red), #ff6b35, var(--red));
+    .booking-h2 {
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(32px, 4vw, 48px);
+      font-weight: 800; margin-top: 12px; margin-bottom: 8px;
     }
 
-    .booking-card .section-title { margin-bottom: 8px; }
-    .booking-card .section-body { margin: 0 auto 32px; text-align: center; }
+    .booking-sub {
+      font-size: 16px; color: var(--dim); margin-bottom: 36px;
+    }
 
     .booking-form {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-bottom: 16px;
+      gap: 10px;
     }
 
-    .booking-input {
-      background: var(--surface-3);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 12px 16px;
-      color: var(--text);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 14px;
-      outline: none;
-      transition: border-color 0.2s;
+    .b-input, .b-select {
+      background: transparent;
+      border: 1px solid var(--rule);
+      border-radius: 4px; padding: 13px 16px;
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif; font-size: 14px;
+      outline: none; transition: border-color 0.2s;
       width: 100%;
     }
-    .booking-input:focus { border-color: var(--red); }
-
-    .booking-select {
+    .b-input:focus, .b-select:focus { border-color: var(--red); }
+    .b-select { appearance: none; cursor: pointer; grid-column: 1 / -1; }
+    .b-btn {
       grid-column: 1 / -1;
-      background: var(--surface-3);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 12px 16px;
-      color: var(--text);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 14px;
-      outline: none;
-      appearance: none;
-      cursor: pointer;
+      background: var(--red); color: #fff; border: none;
+      border-radius: 4px; padding: 15px;
+      font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 16px;
+      cursor: pointer; transition: opacity 0.18s;
     }
+    .b-btn:hover { opacity: 0.85; }
 
-    .booking-btn {
-      grid-column: 1 / -1;
-      background: var(--red);
-      color: #fff;
-      border: none;
-      border-radius: 8px;
-      padding: 15px;
-      font-family: 'Outfit', sans-serif;
-      font-weight: 600;
-      font-size: 16px;
-      cursor: pointer;
-      transition: background 0.2s;
-      width: 100%;
-    }
-    .booking-btn:hover { background: var(--red-dim); }
-
-    .booking-footer-note {
+    .booking-note {
+      margin-top: 14px;
       font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      color: var(--text-muted);
-      margin-top: 12px;
+      font-size: 11px; color: var(--muted);
     }
 
-    /* ── HOURS & LOCATION ── */
-    .hours-location-grid {
+    /* ── HOURS + MAP ── */
+    .info { padding: 80px 0; border-bottom: 1px solid var(--rule); }
+
+    .info-grid {
       display: grid;
-      grid-template-columns: 1fr 1.5fr;
-      gap: 40px;
-      margin-top: 40px;
-      align-items: start;
+      grid-template-columns: 300px 1fr;
+      gap: 60px; align-items: start;
     }
-    @media (max-width: 768px) { .hours-location-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 768px) { .info-grid { grid-template-columns: 1fr; gap: 40px; } }
 
-    .hours-table {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      overflow: hidden;
-    }
+    .hours-list { margin-top: 16px; }
 
-    .hours-row {
-      display: flex;
-      justify-content: space-between;
-      padding: 12px 20px;
-      border-bottom: 1px solid var(--border);
+    .h-row {
+      display: flex; justify-content: space-between;
+      padding: 11px 0;
+      border-bottom: 1px solid var(--rule);
       font-size: 14px;
     }
-    .hours-row:last-child { border-bottom: none; }
+    .h-row:last-child { border-bottom: none; }
+    .h-day { color: var(--dim); }
+    .h-time { font-family: 'JetBrains Mono', monospace; font-size: 13px; }
 
-    .hours-day { color: var(--text-dim); font-weight: 500; }
-    .hours-time { font-family: 'JetBrains Mono', monospace; color: var(--text); font-size: 13px; }
-
-    .map-embed {
-      border-radius: 12px;
-      overflow: hidden;
-      border: 1px solid var(--border);
-      height: 280px;
+    .map-frame {
+      border: 1px solid var(--rule);
+      border-radius: 4px; overflow: hidden;
+      height: 280px; margin-top: 16px;
     }
-    .map-embed iframe { width: 100%; height: 100%; border: none; }
+    .map-frame iframe { width: 100%; height: 100%; border: none; filter: grayscale(0.4) contrast(1.05); }
 
     /* ── CONTACT ── */
-    .contact-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 16px;
-      margin-top: 40px;
+    .contact { padding: 80px 0; }
+
+    .contact-links {
+      margin-top: 32px;
+      display: flex; flex-wrap: wrap; gap: 0;
+      border: 1px solid var(--rule);
     }
 
-    .contact-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 24px;
-      text-decoration: none;
-      color: var(--text);
-      transition: border-color 0.2s, background 0.2s;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
+    .c-link {
+      flex: 1; min-width: 180px;
+      display: flex; flex-direction: column; gap: 6px;
+      padding: 24px 28px;
+      border-right: 1px solid var(--rule);
+      text-decoration: none; color: var(--white);
+      transition: background 0.18s;
     }
-    .contact-card:hover { border-color: var(--red); background: var(--red-glow); }
+    .c-link:last-child { border-right: none; }
+    .c-link:hover { background: var(--red-dim); }
 
-    .contact-card-label {
+    .c-lbl {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 10px;
-      text-transform: uppercase;
-      letter-spacing: 0.15em;
-      color: var(--red);
+      font-size: 10px; text-transform: uppercase;
+      letter-spacing: 0.18em; color: var(--red);
     }
-
-    .contact-card-value {
-      font-size: 15px;
-      font-weight: 500;
-      color: var(--text);
-    }
+    .c-val { font-size: 15px; font-weight: 500; }
 
     /* ── FOOTER ── */
     footer {
-      background: var(--surface);
-      border-top: 1px solid var(--border);
-      padding: 40px 0;
+      border-top: 1px solid var(--rule);
+      padding: 32px 0;
     }
 
-    .footer-inner {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 16px;
+    .footer-row {
+      display: flex; justify-content: space-between;
+      align-items: center; flex-wrap: wrap; gap: 12px;
     }
 
     .footer-name {
       font-family: 'Outfit', sans-serif;
-      font-weight: 700;
-      font-size: 18px;
-      color: var(--text);
+      font-weight: 800; font-size: 16px;
     }
 
-    .footer-address {
+    .footer-right {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      color: var(--text-muted);
-      margin-top: 4px;
+      font-size: 11px; color: var(--dim); text-align: right;
     }
+    .footer-right a { color: var(--red); text-decoration: none; }
 
-    .footer-klar {
+    /* ── IMAGE PLACEHOLDERS ── */
+    .img-placeholder {
+      background: linear-gradient(135deg, #2a2520 0%, #1a1a1a 100%);
+      border: 1px solid var(--rule);
+      border-radius: 4px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      color: var(--dim);
+    }
+    .img-placeholder svg { opacity: 0.35; }
+    .img-placeholder-label {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      color: var(--text-muted);
-      text-align: right;
+      font-size: 11px; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--muted);
     }
+    .ph-hero { aspect-ratio: 21/7; margin-top: 48px; }
+    .ph-menu { aspect-ratio: 16/5; margin-bottom: 48px; }
+    .ph-about { aspect-ratio: 4/3; width: 100%; }
 
-    .footer-klar a {
-      color: var(--red);
-      text-decoration: none;
-      font-weight: 600;
-    }
-
-    .footer-copy {
-      text-align: center;
-      padding-top: 24px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      color: var(--text-muted);
-      border-top: 1px solid var(--border);
-      margin-top: 24px;
-    }
-
-    /* ── SCROLL REVEAL ── */
-    .reveal {
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-    .reveal.visible { opacity: 1; transform: none; }
-
-    .reveal-delay-1 { transition-delay: 0.1s; }
-    .reveal-delay-2 { transition-delay: 0.2s; }
-    .reveal-delay-3 { transition-delay: 0.3s; }
+    /* ── FADE IN ── */
+    .fade { opacity: 0; transform: translateY(18px); transition: opacity 0.5s ease, transform 0.5s ease; }
+    .fade.in { opacity: 1; transform: none; }
+    .d1 { transition-delay: 0.08s; }
+    .d2 { transition-delay: 0.16s; }
+    .d3 { transition-delay: 0.24s; }
   </style>
 </head>
 <body>
@@ -653,231 +415,215 @@
 
   <!-- HERO -->
   <section class="hero">
-    <div class="hero-bg"></div>
-    <div class="container">
-      <div class="hero-grid">
+    <div class="wrap">
+      <div class="hero-top">
         <div>
-          <div class="hero-eyebrow">Kamppi · Helsinki · Japanilainen</div>
-          <h1 class="hero-name">Nanapo<br><span>Sushi</span></h1>
-          <p class="hero-desc">All-you-can-eat sushi-bufet — yli 60 annosta, jatkuvasti täydennetty</p>
-          <div class="hero-rating">
-            <span class="num">4.5</span>
-            <span class="denom">/ 5</span>
-            <span class="reviews">· 708 arvostelua</span>
+          <div class="label">Kamppi · Helsinki · Sushi-bufet</div>
+          <h1 class="hero-h1" style="margin-top:20px;">
+            Nanapo<br><span class="red">Sushi</span>
+          </h1>
+        </div>
+        <div class="hero-meta-col">
+          <div class="hero-meta-item">
+            <span class="hero-meta-label">Osoite</span>
+            <span class="hero-meta-value">Fredrikinkatu 46, Helsinki</span>
           </div>
-          <div class="hero-meta">
-            <div class="hero-meta-item">
-              <span class="dot"></span>
-              <span>Fredrikinkatu 46, 00100 Helsinki</span>
-            </div>
-            <div class="hero-meta-item">
-              <span class="dot"></span>
-              <span>Ma–Pe 11:00–21:00 · La–Su 12:00–21:00</span>
-            </div>
+          <div class="hero-meta-item">
+            <span class="hero-meta-label">Ma–Pe</span>
+            <span class="hero-meta-value">11:00 – 21:00</span>
           </div>
-          <div class="hero-actions">
-            <a href="#varaus" class="btn-primary">Varaa pöytä</a>
-            <a href="tel:+358403613656" class="btn-secondary">+358 40 3613656</a>
+          <div class="hero-meta-item">
+            <span class="hero-meta-label">La–Su</span>
+            <span class="hero-meta-value">12:00 – 21:00</span>
           </div>
         </div>
-        <div class="hero-visual">
-          <div class="hero-card hero-card-top">
-            <div class="menu-preview-card">
-              <div>
-                <div class="menu-preview-label">Sushi-bufet</div>
-                <ul class="menu-preview-items">
-                  <li>Nigiri-valikoima</li>
-                  <li>Maki-rullat</li>
-                  <li>Sashimi</li>
-                  <li>Erikoisrullat</li>
-                </ul>
-              </div>
-              <div class="open-badge">Avoinna tänään</div>
-            </div>
-            <div class="menu-preview-card">
-              <div class="menu-preview-label">Lämpimät ruoat</div>
-              <ul class="menu-preview-items">
-                <li>Tempura-katkarapu</li>
-                <li>Korean fried chicken</li>
-                <li>Gyoza</li>
-                <li>Nuudeliruoat</li>
-              </ul>
-            </div>
-          </div>
-          <div class="hero-card" style="display:flex;align-items:center;gap:20px;">
-            <div>
-              <div class="section-label" style="margin-bottom:4px">Arvosana</div>
-              <div style="font-family:'Outfit',sans-serif;font-size:48px;font-weight:900;color:var(--red);line-height:1;">4.5</div>
-              <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-muted);">708 Google-arvostelua</div>
-            </div>
-            <div style="flex:1;border-left:1px solid var(--border);padding-left:20px;">
-              <div style="font-size:13px;color:var(--text-dim);line-height:1.6;">
-                "Yksi Helsingin parhaista sushi-bufeteista — jatkuvasti täydennetty ja tuoreet raaka-aineet."
-              </div>
-            </div>
-          </div>
+      </div>
+      <div class="hero-rating-large">
+        <span class="hero-rating-num">4.5</span>
+        <span class="hero-rating-denom">/ 5</span>
+        <span class="hero-rating-count">· 708 arvostelua</span>
+      </div>
+      <p class="hero-tagline">All-you-can-eat sushi-bufet — yli 60 annosta, jatkuvasti täydennetty. Kamppi Autotalo, 2023.</p>
+      <div class="hero-cta-row">
+        <a href="#varaus" class="btn btn-red">Varaa pöytä</a>
+        <a href="tel:+358403613656" class="btn btn-ghost">+358 40 3613656</a>
+      </div>
+      <!-- Hero image placeholder: restaurant / atmosphere -->
+      <div class="img-placeholder ph-hero fade">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="2" y="7" width="20" height="14" rx="2"/><circle cx="12" cy="14" r="3"/><path d="M8 7V5a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2"/></svg>
+        <span class="img-placeholder-label">Ravintolan kuvat lisätään</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- MENU — food first -->
+  <section class="menu">
+    <div class="wrap">
+      <div class="menu-header">
+        <div>
+          <div class="label">Bufet-valikoima</div>
+          <h2 class="menu-h2">Mitä löydät<br>bufetista</h2>
         </div>
+        <div class="menu-sub">All-you-can-eat — kaikki sisältyy bufet-hintaan · n. 20–35 € / hlö</div>
+      </div>
+
+      <!-- Menu food photo placeholder -->
+      <div class="img-placeholder ph-menu fade">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/><path d="M12 6v6l4 2"/></svg>
+        <span class="img-placeholder-label">Ruokakuvat lisätään</span>
+      </div>
+
+      <div class="menu-category-row fade">
+        <div class="menu-cat-name">Sushi-bufet</div>
+        <div class="menu-items-inline">
+          <span class="menu-item">Nigiri-valikoima</span>
+          <span class="menu-item">Maki-rullat</span>
+          <span class="menu-item">Sashimi</span>
+          <span class="menu-item">Erikoisrullat</span>
+        </div>
+      </div>
+
+      <div class="menu-category-row fade d1">
+        <div class="menu-cat-name">Lämpimät ruoat</div>
+        <div class="menu-items-inline">
+          <span class="menu-item">Tempura-katkarapu</span>
+          <span class="menu-item">Korean fried chicken</span>
+          <span class="menu-item">Gyoza</span>
+          <span class="menu-item">Nuudeliruoat</span>
+        </div>
+      </div>
+
+      <div class="menu-category-row fade d2">
+        <div class="menu-cat-name">Kylmät välipalat</div>
+        <div class="menu-items-inline">
+          <span class="menu-item">Kevätrullat</span>
+          <span class="menu-item">Salaatit</span>
+          <span class="menu-item">Miso-keitto</span>
+        </div>
+      </div>
+
+      <div class="menu-category-row fade d3">
+        <div class="menu-cat-name">Jälkiruoat</div>
+        <div class="menu-items-inline">
+          <span class="menu-item">Jäätelö</span>
+          <span class="menu-item">Hedelmät</span>
+        </div>
+      </div>
+
+      <div class="menu-note-row">
+        <span class="menu-note-text">Tämä on demo — ruokalista päivitetään yhdessä. Kaikki annokset sisältyvät bufet-hintaan.</span>
       </div>
     </div>
   </section>
 
   <!-- ABOUT -->
   <section class="about">
-    <div class="container">
+    <div class="wrap">
       <div class="about-grid">
-        <div class="reveal">
-          <div class="section-label">Meistä</div>
-          <h2 class="section-title">Sushi-bufet<br>Kampissa</h2>
-          <p class="section-body">Avattiin 2023 Kamppi Autotaloon. All-you-can-eat sushi-bufet, jossa yli 60 annosta — jatkuvasti täydennetty. Hinta n. 20–35 € / henkilö.</p>
-          <div style="margin-top:24px;">
-            <a href="tel:+358403613656" class="btn-primary">Soita meille</a>
+        <div class="fade">
+          <div class="label">Meistä</div>
+          <h2 class="about-h2">Kamppin uusi sushi-instituutio</h2>
+          <p class="about-body">Avattiin 2023 Kamppi Autotaloon. All-you-can-eat sushi-bufet, jossa yli 60 annosta — jatkuvasti täydennetty. Hinta n. 20–35 € / henkilö.</p>
+          <div style="margin-top:32px;">
+            <a href="tel:+358403613656" class="btn btn-red" style="display:inline-flex;">Soita meille</a>
           </div>
         </div>
-        <div class="about-stats reveal reveal-delay-1">
-          <div class="stat-card">
-            <div class="stat-num">60+</div>
-            <div class="stat-label">Annosta bufetissa</div>
+        <div class="fade d1" style="display:flex;flex-direction:column;gap:20px;">
+          <!-- About / interior photo placeholder -->
+          <div class="img-placeholder ph-about">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="2" y="7" width="20" height="14" rx="2"/><circle cx="12" cy="14" r="3"/><path d="M8 7V5a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2"/></svg>
+            <span class="img-placeholder-label">Sisäkuva lisätään</span>
           </div>
-          <div class="stat-card">
-            <div class="stat-num">4.5</div>
-            <div class="stat-label">Google-arvosana</div>
+          <div class="about-stats">
+          <div class="stat-cell">
+            <div class="stat-n">60+</div>
+            <div class="stat-l">Annosta bufetissa</div>
           </div>
-          <div class="stat-card">
-            <div class="stat-num">708</div>
-            <div class="stat-label">Arvostelua</div>
+          <div class="stat-cell">
+            <div class="stat-n">4.5</div>
+            <div class="stat-l">Google-arvosana</div>
           </div>
-          <div class="stat-card">
-            <div class="stat-num">2023</div>
-            <div class="stat-label">Perustettu</div>
+          <div class="stat-cell">
+            <div class="stat-n">708</div>
+            <div class="stat-l">Arvostelua</div>
           </div>
-        </div>
+          <div class="stat-cell">
+            <div class="stat-n">2023</div>
+            <div class="stat-l">Perustettu</div>
+          </div>
+        </div><!-- end about-stats -->
+        </div><!-- end right col -->
       </div>
-    </div>
-  </section>
-
-  <!-- MENU -->
-  <section>
-    <div class="container">
-      <div class="reveal">
-        <div class="section-label">Bufet-valikoima</div>
-        <h2 class="section-title">Mitä tarjoamme</h2>
-        <p class="section-body">All-you-can-eat — kaikki alla olevat kategoriat sisältyvät bufet-hintaan.</p>
-      </div>
-      <div class="menu-grid">
-        <div class="menu-category reveal reveal-delay-1">
-          <div class="menu-category-name">Sushi-bufet</div>
-          <ul class="menu-item-list">
-            <li>Nigiri-valikoima</li>
-            <li>Maki-rullat</li>
-            <li>Sashimi</li>
-            <li>Erikoisrullat</li>
-          </ul>
-        </div>
-        <div class="menu-category reveal reveal-delay-2">
-          <div class="menu-category-name">Lämpimät ruoat</div>
-          <ul class="menu-item-list">
-            <li>Tempura-katkarapu</li>
-            <li>Korean fried chicken</li>
-            <li>Gyoza</li>
-            <li>Nuudeliruoat</li>
-          </ul>
-        </div>
-        <div class="menu-category reveal reveal-delay-3">
-          <div class="menu-category-name">Kylmät välipalat</div>
-          <ul class="menu-item-list">
-            <li>Kevätrullat</li>
-            <li>Salaatit</li>
-            <li>Miso-keitto</li>
-          </ul>
-        </div>
-        <div class="menu-category reveal">
-          <div class="menu-category-name">Jälkiruoat</div>
-          <ul class="menu-item-list">
-            <li>Jäätelö</li>
-            <li>Hedelmät</li>
-          </ul>
-        </div>
-      </div>
-      <div class="menu-note reveal">Tämä on demo — ruokalista päivitetään yhdessä. Kaikki annokset sisältyvät bufet-hintaan.</div>
     </div>
   </section>
 
   <!-- BOOKING -->
-  <section class="booking-section" id="varaus">
-    <div class="container">
-      <div class="booking-card reveal">
-        <div class="section-label">Varaukset</div>
-        <h2 class="section-title">Varaa pöytä</h2>
-        <p class="section-body">Varaa sekunneissa — ei tilin luomista, ei maksuja.</p>
+  <section class="booking" id="varaus">
+    <div class="wrap">
+      <div class="booking-inner fade">
+        <div class="label">Varaukset</div>
+        <h2 class="booking-h2">Varaa pöytä</h2>
+        <p class="booking-sub">Varaa sekunneissa — ei tilin luomista, ei maksuja.</p>
         <div class="booking-form">
-          <input type="date" class="booking-input">
-          <input type="time" class="booking-input" value="18:00">
-          <select class="booking-select booking-input">
+          <input type="date" class="b-input">
+          <input type="time" class="b-input" value="18:00">
+          <select class="b-select">
             <option>2 henkilöä</option>
             <option>3 henkilöä</option>
             <option>4 henkilöä</option>
             <option>5 henkilöä</option>
             <option>6+ henkilöä</option>
           </select>
-          <button class="booking-btn">Varaa nyt</button>
+          <button class="b-btn">Varaa nyt</button>
         </div>
-        <div class="booking-footer-note">Powered by Klar Bookings — ei maksuja, ei komissiota</div>
+        <div class="booking-note">Powered by Klar Bookings — ei maksuja, ei komissiota</div>
       </div>
     </div>
   </section>
 
-  <!-- HOURS + LOCATION -->
-  <section>
-    <div class="container">
-      <div class="reveal">
-        <div class="section-label">Aukioloajat & sijainti</div>
-        <h2 class="section-title">Löydä meidät</h2>
-      </div>
-      <div class="hours-location-grid">
-        <div class="hours-table reveal reveal-delay-1">
-          <div class="hours-row"><span class="hours-day">Maanantai</span><span class="hours-time">11:00–21:00</span></div>
-          <div class="hours-row"><span class="hours-day">Tiistai</span><span class="hours-time">11:00–21:00</span></div>
-          <div class="hours-row"><span class="hours-day">Keskiviikko</span><span class="hours-time">11:00–21:00</span></div>
-          <div class="hours-row"><span class="hours-day">Torstai</span><span class="hours-time">11:00–21:00</span></div>
-          <div class="hours-row"><span class="hours-day">Perjantai</span><span class="hours-time">11:00–21:00</span></div>
-          <div class="hours-row"><span class="hours-day">Lauantai</span><span class="hours-time">12:00–21:00</span></div>
-          <div class="hours-row"><span class="hours-day">Sunnuntai</span><span class="hours-time">12:00–21:00</span></div>
+  <!-- HOURS + MAP -->
+  <section class="info">
+    <div class="wrap">
+      <div class="info-grid">
+        <div class="fade">
+          <div class="label">Aukioloajat</div>
+          <div class="hours-list">
+            <div class="h-row"><span class="h-day">Maanantai</span><span class="h-time">11:00–21:00</span></div>
+            <div class="h-row"><span class="h-day">Tiistai</span><span class="h-time">11:00–21:00</span></div>
+            <div class="h-row"><span class="h-day">Keskiviikko</span><span class="h-time">11:00–21:00</span></div>
+            <div class="h-row"><span class="h-day">Torstai</span><span class="h-time">11:00–21:00</span></div>
+            <div class="h-row"><span class="h-day">Perjantai</span><span class="h-time">11:00–21:00</span></div>
+            <div class="h-row"><span class="h-day">Lauantai</span><span class="h-time">12:00–21:00</span></div>
+            <div class="h-row"><span class="h-day">Sunnuntai</span><span class="h-time">12:00–21:00</span></div>
+          </div>
         </div>
-        <div class="reveal reveal-delay-2">
-          <div class="map-embed">
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1984.5!2d24.933014!3d60.168970!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46920bc6ac1bc0b5%3A0xe8f3c96c7a0890a9!2sNanapo+Sushi!5e0!3m2!1sfi!2sfi!4v1681000000000"
-              allowfullscreen loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade">
-            </iframe>
+        <div class="fade d1">
+          <div class="label">Sijainti</div>
+          <div class="map-frame">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1984.5!2d24.933014!3d60.168970!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46920bc6ac1bc0b5%3A0xe8f3c96c7a0890a9!2sNanapo+Sushi!5e0!3m2!1sfi!2sfi!4v1681000000000" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
           </div>
-          <div style="margin-top:12px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text-muted);">
-            Fredrikinkatu 46, 00100 Helsinki · Kamppi Autotalo
-          </div>
+          <div style="margin-top:10px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--dim);">Fredrikinkatu 46, 00100 Helsinki · Kamppi Autotalo</div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- CONTACT -->
-  <section style="background:var(--surface);border-top:1px solid var(--border);">
-    <div class="container">
-      <div class="reveal">
-        <div class="section-label">Yhteystiedot</div>
-        <h2 class="section-title">Ota yhteyttä</h2>
-      </div>
-      <div class="contact-grid">
-        <a href="tel:+358403613656" class="contact-card reveal reveal-delay-1">
-          <div class="contact-card-label">Puhelin</div>
-          <div class="contact-card-value">+358 40 3613656</div>
+  <section class="contact">
+    <div class="wrap">
+      <div class="label">Yhteystiedot</div>
+      <div class="contact-links fade">
+        <a href="tel:+358403613656" class="c-link">
+          <span class="c-lbl">Puhelin</span>
+          <span class="c-val">+358 40 3613656</span>
         </a>
-        <a href="https://www.instagram.com/nanapokamppi/" target="_blank" rel="noopener" class="contact-card reveal reveal-delay-2">
-          <div class="contact-card-label">Instagram</div>
-          <div class="contact-card-value">@nanapokamppi</div>
+        <a href="https://www.instagram.com/nanapokamppi/" target="_blank" rel="noopener" class="c-link">
+          <span class="c-lbl">Instagram</span>
+          <span class="c-val">@nanapokamppi</span>
         </a>
-        <a href="mailto:nanapo.kamppi@gmail.com" class="contact-card reveal reveal-delay-3">
-          <div class="contact-card-label">Sähköposti</div>
-          <div class="contact-card-value">nanapo.kamppi@gmail.com</div>
+        <a href="mailto:nanapo.kamppi@gmail.com" class="c-link">
+          <span class="c-lbl">Sähköposti</span>
+          <span class="c-val">nanapo.kamppi@gmail.com</span>
         </a>
       </div>
     </div>
@@ -885,36 +631,28 @@
 
   <!-- FOOTER -->
   <footer>
-    <div class="container">
-      <div class="footer-inner">
+    <div class="wrap">
+      <div class="footer-row">
         <div>
           <div class="footer-name">Nanapo Sushi</div>
-          <div class="footer-address">Fredrikinkatu 46, 00100 Helsinki · +358 40 3613656</div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--dim);margin-top:4px;">Fredrikinkatu 46, 00100 Helsinki · +358 40 3613656</div>
         </div>
-        <div class="footer-klar">
+        <div class="footer-right">
           © 2026 Nanapo Sushi<br>
-          Powered by <a href="https://klarsystems.com" target="_blank">Klar</a>
+          <a href="https://klarsystems.com" target="_blank">Powered by Klar</a>
         </div>
       </div>
-      <div class="footer-copy">© 2026 Nanapo Sushi — Kaikki oikeudet pidätetään</div>
     </div>
   </footer>
 
   <script>
-    // Scroll reveal
-    const reveals = document.querySelectorAll('.reveal');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
-    }, { threshold: 0.1 });
-    reveals.forEach(el => observer.observe(el));
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.fade').forEach(el => obs.observe(el));
 
-    // Set min date for booking
-    const dateInput = document.querySelector('input[type="date"]');
-    if (dateInput) {
-      const today = new Date().toISOString().split('T')[0];
-      dateInput.min = today;
-      dateInput.value = today;
-    }
+    const di = document.querySelector('input[type="date"]');
+    if (di) { di.min = new Date().toISOString().split('T')[0]; di.value = di.min; }
   </script>
 </body>
 </html>
