@@ -1,348 +1,769 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fi">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="robots" content="noindex, nofollow">
-<title>Moi Ravintola — Moi Ravintola — Japanilainen ravintola Lohjalla</title>
-<meta name="description" content="Aito japanilainen ruoka Lohjalla. Teppanyaki, sushi ja klassikot perinteisellä tavalla.">
-<style>
-  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moi Ravintola — Korean & Japanese in Lohja</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  /* === TEMPLATE COLOR VARIABLES — set per restaurant === */
-  :root{
-    --bg:#FAFAF8;
-    --ink:#1C1C1C;
-    --ink-soft:#444444;
-    --accent:#C4302B;
-    --accent-deep:#991F1F;
-    --hero-bg:linear-gradient(135deg, #1A1A2E 0%, #16213E 50%, #0F3460 100%);
-    --hero-text:#FFFFFF;
-    --hero-tag:#C4302B;
-    --hero-meta:#AABBCC;
-    --menu-bg:#F5F5F0;
-    --menu-text:#1C1C1C;
-    --menu-cat:#C4302B;
-    --card-bg:#FFFFFF;
-    --line:#E0DDD8;
-    --muted:#7A7268;
-    --nav-bg:#1C1C1C;
-  }
-  html{scroll-behavior:smooth}
-  body{
-    font-family:'DM Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
-    font-size:17px;line-height:1.6;color:var(--ink);background:var(--bg);
-    -webkit-font-smoothing:antialiased;
-  }
-  a{color:inherit;text-decoration:none}
-  .container{max-width:1100px;margin:0 auto;padding:0 20px}
-  @media(min-width:768px){.container{padding:0 40px}}
+        html {
+            scroll-behavior: smooth;
+        }
 
-  /* NAV */
-  nav{
-    position:sticky;top:0;z-index:10;background:var(--nav-bg);
-    backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
-  }
-  .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:18px 20px;max-width:1100px;margin:0 auto}
-  .logo{font-size:22px;font-weight:700;letter-spacing:-.5px;color:var(--accent)}
-  .nav-links{display:none;gap:32px;font-size:15px;font-weight:500}
-  .nav-links a:hover{color:var(--accent)}
-  @media(min-width:768px){.nav-links{display:flex}}
+        body {
+            background-color: #0d0d0d;
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
 
-  /* HERO */
-  .hero{
-    position:relative;min-height:72vh;display:flex;align-items:center;
-    background:
-      radial-gradient(circle at 20% 20%, rgba(204,51,51,.22) 0%, transparent 50%),
-      radial-gradient(circle at 80% 80%, rgba(122,31,31,.35) 0%, transparent 55%),
-      linear-gradient(135deg,#2B1A17 0%,#4A1F1A 50%,#2B1A17 100%);
-    color:#FFF8F0;overflow:hidden;
-  }
-  .hero::before{
-    content:"";position:absolute;inset:0;
-    background:repeating-linear-gradient(45deg,transparent 0,transparent 80px,rgba(255,248,240,.015) 80px,rgba(255,248,240,.015) 81px);
-    pointer-events:none;
-  }
-  .hero-inner{position:relative;padding:100px 20px;width:100%;max-width:1100px;margin:0 auto}
-  @media(min-width:768px){.hero-inner{padding:140px 40px}}
-  .hero-tag{
-    display:inline-block;font-size:13px;font-weight:600;letter-spacing:2px;
-    text-transform:uppercase;color:#F5C58C;border:1px solid rgba(245,197,140,.4);
-    padding:8px 16px;margin-bottom:28px;
-  }
-  h1.hero-title{
-    font-size:clamp(44px,8vw,88px);font-weight:700;line-height:1.05;
-    letter-spacing:-2px;margin-bottom:24px;
-  }
-  .hero-subtitle{font-size:clamp(18px,2.4vw,24px);font-weight:300;color:#F5E6D3;max-width:620px;margin-bottom:44px}
-  .hero-meta{display:flex;gap:32px;flex-wrap:wrap;font-size:14px;color:#F5C58C;margin-bottom:44px}
-  .hero-meta span{display:flex;align-items:center;gap:8px}
-  .cta-row{display:flex;gap:16px;flex-wrap:wrap}
-  .btn{
-    display:inline-block;padding:16px 32px;font-size:16px;font-weight:600;
-    letter-spacing:.3px;cursor:pointer;border:none;transition:transform .15s;
-  }
-  .btn:hover{transform:translateY(-2px)}
-  .btn-primary{background:#CC3333;color:#FFF8F0}
-  .btn-ghost{background:transparent;color:#FFF8F0;border:1px solid rgba(255,248,240,.35)}
+        /* Demo Banner */
+        .demo-banner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(90deg, #c9393e 0%, #a02a2f 100%);
+            color: white;
+            padding: 12px 20px;
+            text-align: center;
+            font-size: 13px;
+            font-weight: 500;
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
 
-  /* SECTION */
-  section{padding:90px 0}
-  @media(max-width:767px){section{padding:60px 0}}
-  .section-label{
-    font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;
-    color:#CC3333;margin-bottom:16px;
-  }
-  h2{font-size:clamp(32px,5vw,52px);font-weight:700;line-height:1.1;letter-spacing:-1px;margin-bottom:28px;color:#2B2B2B}
-  .lead{font-size:19px;color:#5A4A42;max-width:720px;line-height:1.65}
+        .demo-banner a {
+            color: white;
+            text-decoration: underline;
+            font-weight: 600;
+            transition: opacity 0.3s;
+        }
 
-  /* ABOUT */
-  .about{background:#FFF8F0}
-  .about-grid{display:grid;gap:50px;align-items:center}
-  @media(min-width:900px){.about-grid{grid-template-columns:1.2fr .8fr;gap:80px}}
-  .about-visual{
-    aspect-ratio:4/5;border-radius:2px;
-    background:
-      radial-gradient(circle at 30% 30%, rgba(204,51,51,.35) 0%, transparent 55%),
-      linear-gradient(160deg,#7A1F1F 0%,#4A1F1A 45%,#2B1A17 100%);
-    position:relative;overflow:hidden;min-height:360px;
-  }
-  .about-visual::after{
-    content:"九九";position:absolute;right:-20px;bottom:-60px;
-    font-size:280px;font-weight:700;color:rgba(255,248,240,.08);line-height:1;
-  }
-  .about-visual::before{
-    content:"";position:absolute;inset:30px;border:1px solid rgba(245,197,140,.2);
-  }
+        .demo-banner a:hover {
+            opacity: 0.85;
+        }
 
-  /* MENU */
-  .menu{background:#2B1A17;color:#FFF8F0}
-  .menu .section-label{color:#F5C58C}
-  .menu h2{color:#FFF8F0}
-  .menu .lead{color:rgba(255,248,240,.75)}
-  .menu-grid{display:grid;gap:60px;margin-top:60px}
-  @media(min-width:768px){.menu-grid{grid-template-columns:1fr 1fr;gap:60px 80px}}
-  .menu-cat h3{
-    font-size:22px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;
-    color:#F5C58C;padding-bottom:14px;margin-bottom:22px;
-    border-bottom:1px solid rgba(245,197,140,.25);
-  }
-  .menu-item{display:flex;justify-content:space-between;gap:20px;padding:14px 0;border-bottom:1px dashed rgba(255,248,240,.08)}
-  .menu-item:last-child{border-bottom:none}
-  .menu-item-name{font-weight:500;flex:1}
-  .menu-item-desc{font-size:14px;color:rgba(255,248,240,.55);margin-top:4px;font-weight:300}
-  .menu-item-price{font-weight:600;color:#F5C58C;white-space:nowrap}
-  .menu-note{
-    margin-top:50px;padding:24px;background:rgba(255,248,240,.05);
-    border-left:3px solid #CC3333;font-size:15px;color:rgba(255,248,240,.75);
-  }
+        body {
+            padding-top: 44px;
+        }
 
-  /* HOURS & LOCATION */
-  .visit{background:#FFF8F0}
-  .visit-grid{display:grid;gap:40px;margin-top:40px}
-  @media(min-width:768px){.visit-grid{grid-template-columns:1fr 1fr;gap:60px}}
-  .visit-block h3{font-size:13px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:#CC3333;margin-bottom:22px}
-  .hours-list{list-style:none}
-  .hours-list li{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid rgba(43,43,43,.08);font-size:16px}
-  .hours-list li:last-child{border-bottom:none}
-  .hours-list .day{font-weight:500}
-  .hours-list .time{color:#5A4A42}
-  .hours-list .closed{color:#CC3333;font-weight:500}
-  .address-block{font-size:17px;line-height:1.8}
-  .address-block strong{display:block;font-size:19px;margin-bottom:6px;color:#2B2B2B}
-  .map-link{
-    display:inline-block;margin-top:20px;padding:12px 24px;
-    background:#CC3333;color:#FFF8F0;font-size:14px;font-weight:600;letter-spacing:.5px;
-  }
-  .map-link:hover{background:#A82828}
+        /* Header */
+        header {
+            padding: 16px 0;
+            background: #0d0d0d;
+            border-bottom: 1px solid rgba(201, 57, 62, 0.2);
+            position: sticky;
+            top: 44px;
+            z-index: 100;
+        }
 
-  /* CONTACT */
-  .contact-sec{background:#4A1F1A;color:#FFF8F0}
-  .contact-sec .section-label{color:#F5C58C}
-  .contact-sec h2{color:#FFF8F0}
-  .contact-grid{display:grid;gap:24px;margin-top:48px}
-  @media(min-width:640px){.contact-grid{grid-template-columns:repeat(2,1fr)}}
-  .contact-card{
-    padding:28px;background:rgba(255,248,240,.05);
-    border:1px solid rgba(255,248,240,.1);transition:background .2s;
-  }
-  .contact-card:hover{background:rgba(255,248,240,.08)}
-  .contact-card small{display:block;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#F5C58C;margin-bottom:10px}
-  .contact-card .big{font-size:22px;font-weight:600}
-  @media(min-width:768px){.contact-card .big{font-size:26px}}
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-  /* RESTAURANT FOOTER */
-  /* Demo booking widget */
-  .book-sec{background:#3B1714;padding:80px 20px;color:#FFF8F0}
-  .book-card{max-width:480px;margin:0 auto;background:#4A1F1A;border:1px solid rgba(245,197,140,.25);border-radius:14px;padding:36px 28px;box-shadow:0 20px 60px rgba(0,0,0,.35)}
-  @media(min-width:640px){.book-card{padding:44px 40px}}
-  .book-card .section-label{font-size:12px;letter-spacing:3px;text-transform:uppercase;color:#F5C58C;text-align:center;margin-bottom:14px}
-  .book-card h2{font-family:Georgia,'Times New Roman',serif;font-size:34px;font-weight:700;color:#FFF8F0;text-align:center;margin:0 0 10px}
-  @media(min-width:640px){.book-card h2{font-size:40px}}
-  .book-card .book-sub{text-align:center;color:rgba(255,248,240,.7);font-size:14px;margin-bottom:28px;line-height:1.5}
-  .book-form{display:grid;gap:14px}
-  @media(min-width:520px){.book-form{grid-template-columns:1fr 1fr;gap:14px}.book-form .field-full{grid-column:1/-1}}
-  .book-field{display:flex;flex-direction:column;gap:6px}
-  .book-field label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#F5C58C;font-weight:600}
-  .book-field input,.book-field select{background:#2B1A17;border:1px solid rgba(245,197,140,.3);border-radius:8px;padding:14px 14px;color:#FFF8F0;font-family:inherit;font-size:15px;appearance:none;-webkit-appearance:none}
-  .book-field input:focus,.book-field select:focus{outline:none;border-color:#CC3333;box-shadow:0 0 0 3px rgba(204,51,51,.2)}
-  .book-field select{background-image:linear-gradient(45deg,transparent 50%,#F5C58C 50%),linear-gradient(135deg,#F5C58C 50%,transparent 50%);background-position:calc(100% - 18px) 50%,calc(100% - 13px) 50%;background-size:5px 5px,5px 5px;background-repeat:no-repeat;padding-right:40px}
-  .book-field input::-webkit-calendar-picker-indicator{filter:invert(1) sepia(1) saturate(3) hue-rotate(350deg)}
-  .book-cta{margin-top:22px;width:100%;background:#CC3333;color:#FFF8F0;border:none;border-radius:8px;padding:18px 20px;font-size:15px;font-weight:700;letter-spacing:1px;text-transform:uppercase;cursor:pointer;font-family:inherit;transition:background .15s}
-  .book-cta:hover{background:#B82828}
-  .book-caption{margin-top:14px;text-align:center;font-size:12px;color:rgba(255,248,240,.55);letter-spacing:.3px}
-  footer.rest-footer{background:#2B1A17;color:rgba(255,248,240,.55);padding:44px 20px;text-align:center;font-size:14px}
-  footer.rest-footer .brand{color:#CC3333;font-weight:700;font-size:18px;margin-bottom:8px;display:block}
+        .logo {
+            font-family: 'Poppins', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: 0;
+        }
 
-</style>
+        .logo span {
+            color: #c9393e;
+        }
+
+        nav {
+            display: flex;
+            gap: 25px;
+        }
+
+        nav a {
+            color: #999;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #c9393e;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 60px 20px;
+            background: linear-gradient(135deg, #0d0d0d 0%, rgba(201, 57, 62, 0.08) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: linear-gradient(135deg, rgba(201, 57, 62, 0.15) 0%, transparent 70%);
+            border-radius: 30%;
+            top: -100px;
+            right: -100px;
+            animation: slideIn 3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(200px) translateY(-200px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0) translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .hero-text {
+            flex: 1;
+            z-index: 2;
+            max-width: 600px;
+        }
+
+        .hero h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: clamp(42px, 7vw, 72px);
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero h1 span {
+            color: #c9393e;
+        }
+
+        .hero p {
+            font-size: 17px;
+            color: #bbb;
+            margin-bottom: 40px;
+            line-height: 1.7;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #c9393e;
+            color: white;
+            padding: 12px 32px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.3s;
+            border-radius: 3px;
+            border: 2px solid #c9393e;
+        }
+
+        .cta-button:hover {
+            background: #a02a2f;
+            border-color: #a02a2f;
+            transform: translateY(-2px);
+        }
+
+        .cta-secondary {
+            background: transparent;
+            color: #c9393e;
+            border: 2px solid #c9393e;
+        }
+
+        .cta-secondary:hover {
+            background: #c9393e;
+            color: white;
+        }
+
+        .rating {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 10px 0;
+            font-size: 13px;
+            color: #999;
+        }
+
+        .rating strong {
+            color: #c9393e;
+            font-weight: 600;
+        }
+
+        /* About Section */
+        .about {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 30px;
+            line-height: 1.3;
+        }
+
+        .about-text h2 span {
+            color: #c9393e;
+        }
+
+        .about-text p {
+            font-size: 16px;
+            color: #aaa;
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        .about-features {
+            margin-top: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .feature {
+            display: flex;
+            gap: 15px;
+            align-items: flex-start;
+        }
+
+        .feature-icon {
+            width: 8px;
+            height: 8px;
+            background: #c9393e;
+            border-radius: 50%;
+            margin-top: 8px;
+            flex-shrink: 0;
+        }
+
+        .feature-text {
+            font-size: 14px;
+            color: #999;
+            line-height: 1.6;
+        }
+
+        .about-image {
+            height: 400px;
+            background: linear-gradient(135deg, rgba(201, 57, 62, 0.2) 0%, rgba(201, 57, 62, 0.05) 100%);
+            border-radius: 8px;
+            border: 1px solid rgba(201, 57, 62, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-image::before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(201, 57, 62, 0.3) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.2); opacity: 0.3; }
+        }
+
+        .about-image p {
+            position: relative;
+            z-index: 2;
+            font-size: 14px;
+            color: #999;
+            font-style: italic;
+        }
+
+        /* Menu Section */
+        .menu {
+            padding: 80px 20px;
+            background: linear-gradient(180deg, rgba(201, 57, 62, 0.05) 0%, transparent 100%);
+        }
+
+        .menu-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .menu h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 60px;
+            text-align: center;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .menu-section {
+            background: rgba(201, 57, 62, 0.05);
+            border: 1px solid rgba(201, 57, 62, 0.15);
+            border-radius: 8px;
+            padding: 40px;
+            transition: all 0.3s;
+        }
+
+        .menu-section:hover {
+            background: rgba(201, 57, 62, 0.1);
+            border-color: #c9393e;
+            transform: translateY(-4px);
+        }
+
+        .menu-section h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: #c9393e;
+            margin-bottom: 25px;
+            border-bottom: 2px solid #c9393e;
+            padding-bottom: 15px;
+        }
+
+        .menu-items {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .menu-item {
+            font-size: 14px;
+            color: #aaa;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .menu-item:last-child {
+            border-bottom: none;
+        }
+
+        .menu-note {
+            text-align: center;
+            margin-top: 50px;
+            font-size: 13px;
+            color: #666;
+            font-style: italic;
+        }
+
+        /* Hours Section */
+        .hours {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hours h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 60px;
+            text-align: center;
+        }
+
+        .hours-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .hours-card {
+            background: rgba(201, 57, 62, 0.08);
+            border-left: 3px solid #c9393e;
+            padding: 30px;
+            border-radius: 4px;
+        }
+
+        .hours-card h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: #c9393e;
+            margin-bottom: 15px;
+        }
+
+        .hours-card p {
+            font-size: 14px;
+            color: #aaa;
+            line-height: 1.8;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 80px 20px;
+            background: linear-gradient(180deg, transparent 0%, rgba(201, 57, 62, 0.05) 100%);
+        }
+
+        .contact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .contact h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 60px;
+            text-align: center;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: start;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .contact-block {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+        }
+
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            background: #c9393e;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: white;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .contact-details h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #999;
+            margin-bottom: 10px;
+        }
+
+        .contact-details a {
+            color: #c9393e;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+
+        .contact-details a:hover {
+            color: #ffffff;
+        }
+
+        .contact-details p {
+            color: #aaa;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        .maps-wrapper {
+            border-radius: 8px;
+            overflow: hidden;
+            height: 450px;
+            border: 1px solid rgba(201, 57, 62, 0.2);
+        }
+
+        .maps-wrapper iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Footer */
+        footer {
+            background: #0a0a0a;
+            border-top: 1px solid rgba(201, 57, 62, 0.15);
+            padding: 40px 20px;
+            text-align: center;
+            color: #666;
+            font-size: 12px;
+        }
+
+        footer a {
+            color: #c9393e;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        footer a:hover {
+            color: #ffffff;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            nav {
+                justify-content: center;
+                gap: 15px;
+                flex-wrap: wrap;
+            }
+
+            .hero {
+                height: auto;
+                min-height: 70vh;
+                flex-direction: column;
+                justify-content: center;
+            }
+
+            .hero::before {
+                width: 300px;
+                height: 300px;
+                top: 50%;
+                right: 50%;
+                transform: translate(50%, -50%);
+            }
+
+            .hero-text {
+                max-width: none;
+            }
+
+            .cta-group {
+                justify-content: center;
+            }
+
+            .about {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .about-text h2 {
+                font-size: 32px;
+            }
+
+            .about-image {
+                height: 300px;
+                order: -1;
+            }
+
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hours-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .maps-wrapper {
+                height: 300px;
+            }
+        }
+    </style>
 </head>
 <body>
-
-<nav>
-  <div class="nav-inner">
-    <div class="logo">Moi Ravintola</div>
-    <div class="nav-links">
-      <a href="#menu">Menu</a>
-      <a href="#visit">Hours</a>
-      <a href="#contact">Contact</a>
+    <!-- Demo Banner -->
+    <div class="demo-banner">
+        Tämä on demo — lopullinen sivusto rakennetaan yhdessä teidän toiveiden mukaan.
+        <a href="https://preview.klarsystems.com/moi-ravintola/proposal/">Katso tarjous →</a>
     </div>
-  </div>
-</nav>
 
-<!-- ========== RESTAURANT SITE (English) ========== -->
-<header class="hero">
-  <div class="hero-inner">
-    <span class="hero-tag">Japanilainen ruoka — Lohja</span>
-    <h1 class="hero-title">Moi Ravintola</h1>
-    <p class="hero-subtitle">Japanilainen ravintola Lohjalla</p>
-    <div class="hero-meta">
-      <span>★ 4.7 / 5</span>
-      <span>309 Google reviews</span>
-      <span>Lohja</span>
-    </div>
-    <div class="cta-row">
-      <a href="#menu" class="btn btn-primary">See the menu</a>
-      <a href="#visit" class="btn btn-ghost">Opening hours</a>
-    </div>
-  </div>
-</header>
-
-<section class="about" id="about">
-  <div class="container">
-    <div class="about-grid">
-      <div>
-        <div class="section-label">About us</div>
-        <h2>Tervetuloa Moi Ravintolaan</h2>
-        <p class="lead">Moi Ravintola tuo japanilaista makua Lohjalle. Perinteiset reseptit ja tuoreet raaka-aineet tekevät jokaisesta ateriasta erityisen kokemuksen.</p>
-      </div>
-      <div class="about-visual" aria-hidden="true"></div>
-    </div>
-  </div>
-</section>
-
-<section class="menu" id="menu">
-  <div class="container">
-    <div class="section-label">Menu</div>
-    <h2>Ruokalista</h2>
-    <p class="lead">Japanilaisen keittiön parhaat</p>
-
-    <div class='menu-category'><h3>Sushi & Sashimi</h3><div class='menu-item'><span class='item-name'>California roll</span></div><div class='menu-item'><span class='item-name'>Philadelphia roll</span></div><div class='menu-item'><span class='item-name'>Dragon roll</span></div><div class='menu-item'><span class='item-name'>Sashimi sekoitus</span></div></div><div class='menu-category'><h3>Teppanyaki</h3><div class='menu-item'><span class='item-name'>Kana teppanyaki</span></div><div class='menu-item'><span class='item-name'>Nauta teppanyaki</span></div><div class='menu-item'><span class='item-name'>Äyriäiset teppanyaki</span></div></div><div class='menu-category'><h3>Muut</h3><div class='menu-item'><span class='item-name'>Gyoza - keitetyt sillit</span></div><div class='menu-item'><span class='item-name'>Edamame - soijapapu</span></div></div>
-
-    <div class="menu-note">
-      Hinnat saattavat muuttua. Kysy henkilökunnalta allergeeneista.
-    </div>
-  </div>
-</section>
-
-<section class="visit" id="visit">
-  <div class="container">
-    <div class="section-label">Hours &amp; location</div>
-    <h2>Aukioloajat</h2>
-
-    <div class="visit-grid">
-      <div class="visit-block">
-        <h3>Opening hours</h3>
-        <li><span>Ma–Pe</span><span>10:30–20:30</span></li><li><span>La–Su</span><span>11:30–20:30</span></li>
-      </div>
-
-      <div class="visit-block">
-        <h3>Find us</h3>
-        <div class="address-block">
-          <strong>Moi Ravintola</strong>
-          Suurlohjankatu 4<br>
-          08100 Lohja<br>
-          Finland
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <div class="logo">moi<span>.</span></div>
+            <nav>
+                <a href="#about">About</a>
+                <a href="#menu">Menu</a>
+                <a href="#hours">Hours</a>
+                <a href="#contact">Contact</a>
+            </nav>
         </div>
-        <a class="map-link" target="_blank" rel="noopener" href="https://maps.google.com/?q=Suurlohjankatu+4,+08100+Lohja">Open in Google Maps →</a>
-      </div>
-    </div>
-  </div>
-</section>
+    </header>
 
-<section class="contact-sec" id="contact">
-  <div class="container">
-    <div class="section-label">Contact</div>
-    <h2>Get in touch.</h2>
-    <p class="lead" style="color:rgba(255,248,240,.75)">Varaa pöytä tai kysy lisää — olemme mielellämme apuna.</p>
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-text">
+            <h1>Korean & <span>Japanese</span> Fusion</h1>
+            <p>Lohjan uusi suosikki — moderni, tilava ja hyvähenkinen. Sekä Korean BBQ että japanilainen keittiö saman katon alla.</p>
+            <div class="cta-group">
+                <a href="tel:+358447611302" class="cta-button">Call to Order</a>
+                <a href="https://wa.me/358447611302" class="cta-secondary">WhatsApp</a>
+            </div>
+            <div class="rating"><strong>4.7 / 5</strong> (309 reviews)</div>
+        </div>
+    </section>
 
-    <div class="contact-grid">
-      <a class="contact-card" href="tel:+358447611302">
-        <small>Phone</small>
-        <div class="big">044 761 1302</div>
-      </a>
-      <a class="contact-card" href="#" target="_blank" rel="noopener">
-        <small>Instagram</small>
-        <div class="big"></div>
-      </a>
-    </div>
-  </div>
-</section>
+    <!-- About -->
+    <section id="about" class="about">
+        <div class="about-text">
+            <h2>Welcome to <span>Moi</span></h2>
+            <p>Moi is Lohja's newest Korean and Japanese restaurant. A 100-seat space — one of Lohja's largest. Good food makes life happier. That's what Moi's creators think too.</p>
+            <div class="about-features">
+                <div class="feature">
+                    <div class="feature-icon"></div>
+                    <div class="feature-text">100-seat restaurant — one of Lohja's largest</div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon"></div>
+                    <div class="feature-text">Both Korean BBQ and Japanese kitchen under one roof</div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon"></div>
+                    <div class="feature-text">Family-friendly, spacious, and relaxed atmosphere</div>
+                </div>
+            </div>
+        </div>
+        <div class="about-image">
+            <p>Spacious & Welcoming</p>
+        </div>
+    </section>
 
-<!-- Demo booking widget -->
-<section class="book-sec" id="book">
-  <div class="book-card">
-    <div class="section-label">Reservations</div>
-    <h2>Book a Table</h2>
-    <p class="book-sub">Reserve in seconds — no fees, no account needed.</p>
-    <form class="book-form" onsubmit="event.preventDefault();return false;">
-      <div class="book-field">
-        <label for="b-date">Date</label>
-        <input type="date" id="b-date" min="2026-04-10" value="2026-04-10">
-      </div>
-      <div class="book-field">
-        <label for="b-time">Time</label>
-        <select id="b-time">
-          <option>17:00</option><option>17:30</option><option>18:00</option>
-          <option>18:30</option><option selected>19:00</option><option>19:30</option>
-          <option>20:00</option><option>20:30</option><option>21:00</option>
-          <option>21:30</option><option>22:00</option>
-        </select>
-      </div>
-      <div class="book-field field-full">
-        <label for="b-party">Party size</label>
-        <select id="b-party">
-          <option>1 guest</option>
-          <option selected>2 guests</option>
-          <option>3 guests</option>
-          <option>4 guests</option>
-          <option>5 guests</option>
-          <option>6 guests</option>
-          <option>7 guests</option>
-          <option>8 guests</option>
-        </select>
-      </div>
-      <button type="button" class="book-cta field-full">Reserve Now</button>
-    </form>
-    <div class="book-caption">Powered by Klar Bookings — no fees, no commissions.</div>
-  </div>
-</section>
+    <!-- Menu -->
+    <section id="menu" class="menu">
+        <div class="menu-container">
+            <h2>Our Menu</h2>
+            <div class="menu-grid">
+                <div class="menu-section">
+                    <h3>Korean BBQ</h3>
+                    <div class="menu-items">
+                        <div class="menu-item">Bulgogi-riisilautanen</div>
+                        <div class="menu-item">Bibimbap</div>
+                        <div class="menu-item">Korealainen BBQ-lautanen</div>
+                    </div>
+                </div>
+                <div class="menu-section">
+                    <h3>Japanese</h3>
+                    <div class="menu-items">
+                        <div class="menu-item">Ramen</div>
+                        <div class="menu-item">Katsu curry</div>
+                        <div class="menu-item">Gyoza</div>
+                    </div>
+                </div>
+                <div class="menu-section">
+                    <h3>Vegetarian</h3>
+                    <div class="menu-items">
+                        <div class="menu-item">Kasvis-bibimbap</div>
+                        <div class="menu-item">Tofu-annos</div>
+                    </div>
+                </div>
+            </div>
+            <p class="menu-note">Tämä on demo — ruokalista päivitetään yhdessä.</p>
+        </div>
+    </section>
 
-<footer class="rest-footer">
-  <span class="brand">Moi Ravintola</span>
-  Suurlohjankatu 4, Lohja · 044 761 1302<br>
-  © 2026 Moi Ravintola
-</footer>
+    <!-- Hours -->
+    <section id="hours" class="hours">
+        <h2>Opening Hours</h2>
+        <div class="hours-grid">
+            <div class="hours-card">
+                <h3>Monday – Friday</h3>
+                <p>10:30 – 20:30</p>
+            </div>
+            <div class="hours-card">
+                <h3>Saturday – Sunday</h3>
+                <p>11:30 – 20:30</p>
+            </div>
+        </div>
+    </section>
 
+    <!-- Contact -->
+    <section id="contact" class="contact">
+        <div class="contact-container">
+            <h2>Get in Touch</h2>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <div class="contact-block">
+                        <div class="contact-icon">📍</div>
+                        <div class="contact-details">
+                            <h3>Location</h3>
+                            <p>Suurlohjankatu 4, 08100 Lohja</p>
+                        </div>
+                    </div>
+                    <div class="contact-block">
+                        <div class="contact-icon">☎</div>
+                        <div class="contact-details">
+                            <h3>Phone</h3>
+                            <a href="tel:+358447611302">+358 44 7611302</a>
+                        </div>
+                    </div>
+                    <div class="contact-block">
+                        <div class="contact-icon">💬</div>
+                        <div class="contact-details">
+                            <h3>WhatsApp</h3>
+                            <a href="https://wa.me/358447611302">Message us</a>
+                        </div>
+                    </div>
+                    <div class="contact-block">
+                        <div class="contact-icon">f</div>
+                        <div class="contact-details">
+                            <h3>Facebook</h3>
+                            <a href="https://www.facebook.com/p/Ravintola-MOI-61558228386477/" target="_blank">Follow us</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="maps-wrapper">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1984.5!2d23.9!3d60.25!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x468d54f4a49c6565%3A0xceb9d4b42ae8a991!2sMoi%20Ravintola!5e0!3m2!1sfi!2sfi!4v1744380000000" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
 
+    <!-- Footer -->
+    <footer>
+        <p>Powered by <a href="https://klarsystems.com">Klar</a> — Custom website solutions for restaurants</p>
+        <p style="margin-top: 8px; color: #555;">© 2026 Moi Ravintola. All rights reserved.</p>
+    </footer>
 </body>
 </html>

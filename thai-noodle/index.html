@@ -1,348 +1,667 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fi">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="robots" content="noindex, nofollow">
-<title>Thai Noodle — Thai Noodle — Aidot thainuudelit Helsingissä</title>
-<meta name="description" content="Perinteisiä thainuudeleita Pursimiehenkadulla. Lämmintävät nuudeliliemet ja aitoa Thai-makua joka kerta.">
-<style>
-  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thai Noodle — Helsingin salaisuus | Punavuori</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  /* === TEMPLATE COLOR VARIABLES — set per restaurant === */
-  :root{
-    --bg:#FFFBF0;
-    --ink:#2B2B2B;
-    --ink-soft:#555555;
-    --accent:#D4AC0D;
-    --accent-deep:#A87800;
-    --hero-bg:linear-gradient(135deg, #1A1200 0%, #3A2800 50%, #1A1A1A 100%);
-    --hero-text:#FFFFFF;
-    --hero-tag:#D4AC0D;
-    --hero-meta:#CCBBAA;
-    --menu-bg:#FFF8E0;
-    --menu-text:#2B2B2B;
-    --menu-cat:#D4AC0D;
-    --card-bg:#FFFFFF;
-    --line:#E8DDD0;
-    --muted:#8B7D6B;
-    --nav-bg:#2B2B2B;
-  }
-  html{scroll-behavior:smooth}
-  body{
-    font-family:'DM Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
-    font-size:17px;line-height:1.6;color:var(--ink);background:var(--bg);
-    -webkit-font-smoothing:antialiased;
-  }
-  a{color:inherit;text-decoration:none}
-  .container{max-width:1100px;margin:0 auto;padding:0 20px}
-  @media(min-width:768px){.container{padding:0 40px}}
+        body {
+            background-color: #1a0f00;
+            color: #f5f1ed;
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
 
-  /* NAV */
-  nav{
-    position:sticky;top:0;z-index:10;background:var(--nav-bg);
-    backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
-  }
-  .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:18px 20px;max-width:1100px;margin:0 auto}
-  .logo{font-size:22px;font-weight:700;letter-spacing:-.5px;color:var(--accent)}
-  .nav-links{display:none;gap:32px;font-size:15px;font-weight:500}
-  .nav-links a:hover{color:var(--accent)}
-  @media(min-width:768px){.nav-links{display:flex}}
+        /* Demo Banner */
+        .demo-banner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, #2d1810 0%, #3d2416 100%);
+            border-bottom: 2px solid #e8a020;
+            padding: 12px 20px;
+            text-align: center;
+            z-index: 1000;
+            font-size: 14px;
+        }
 
-  /* HERO */
-  .hero{
-    position:relative;min-height:72vh;display:flex;align-items:center;
-    background:
-      radial-gradient(circle at 20% 20%, rgba(204,51,51,.22) 0%, transparent 50%),
-      radial-gradient(circle at 80% 80%, rgba(122,31,31,.35) 0%, transparent 55%),
-      linear-gradient(135deg,#2B1A17 0%,#4A1F1A 50%,#2B1A17 100%);
-    color:#FFF8F0;overflow:hidden;
-  }
-  .hero::before{
-    content:"";position:absolute;inset:0;
-    background:repeating-linear-gradient(45deg,transparent 0,transparent 80px,rgba(255,248,240,.015) 80px,rgba(255,248,240,.015) 81px);
-    pointer-events:none;
-  }
-  .hero-inner{position:relative;padding:100px 20px;width:100%;max-width:1100px;margin:0 auto}
-  @media(min-width:768px){.hero-inner{padding:140px 40px}}
-  .hero-tag{
-    display:inline-block;font-size:13px;font-weight:600;letter-spacing:2px;
-    text-transform:uppercase;color:#F5C58C;border:1px solid rgba(245,197,140,.4);
-    padding:8px 16px;margin-bottom:28px;
-  }
-  h1.hero-title{
-    font-size:clamp(44px,8vw,88px);font-weight:700;line-height:1.05;
-    letter-spacing:-2px;margin-bottom:24px;
-  }
-  .hero-subtitle{font-size:clamp(18px,2.4vw,24px);font-weight:300;color:#F5E6D3;max-width:620px;margin-bottom:44px}
-  .hero-meta{display:flex;gap:32px;flex-wrap:wrap;font-size:14px;color:#F5C58C;margin-bottom:44px}
-  .hero-meta span{display:flex;align-items:center;gap:8px}
-  .cta-row{display:flex;gap:16px;flex-wrap:wrap}
-  .btn{
-    display:inline-block;padding:16px 32px;font-size:16px;font-weight:600;
-    letter-spacing:.3px;cursor:pointer;border:none;transition:transform .15s;
-  }
-  .btn:hover{transform:translateY(-2px)}
-  .btn-primary{background:#CC3333;color:#FFF8F0}
-  .btn-ghost{background:transparent;color:#FFF8F0;border:1px solid rgba(255,248,240,.35)}
+        .demo-banner p {
+            display: inline;
+            margin-right: 15px;
+        }
 
-  /* SECTION */
-  section{padding:90px 0}
-  @media(max-width:767px){section{padding:60px 0}}
-  .section-label{
-    font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;
-    color:#CC3333;margin-bottom:16px;
-  }
-  h2{font-size:clamp(32px,5vw,52px);font-weight:700;line-height:1.1;letter-spacing:-1px;margin-bottom:28px;color:#2B2B2B}
-  .lead{font-size:19px;color:#5A4A42;max-width:720px;line-height:1.65}
+        .demo-banner a {
+            color: #e8a020;
+            text-decoration: none;
+            font-weight: 600;
+            border-bottom: 1px solid #e8a020;
+            transition: opacity 0.2s;
+        }
 
-  /* ABOUT */
-  .about{background:#FFF8F0}
-  .about-grid{display:grid;gap:50px;align-items:center}
-  @media(min-width:900px){.about-grid{grid-template-columns:1.2fr .8fr;gap:80px}}
-  .about-visual{
-    aspect-ratio:4/5;border-radius:2px;
-    background:
-      radial-gradient(circle at 30% 30%, rgba(204,51,51,.35) 0%, transparent 55%),
-      linear-gradient(160deg,#7A1F1F 0%,#4A1F1A 45%,#2B1A17 100%);
-    position:relative;overflow:hidden;min-height:360px;
-  }
-  .about-visual::after{
-    content:"九九";position:absolute;right:-20px;bottom:-60px;
-    font-size:280px;font-weight:700;color:rgba(255,248,240,.08);line-height:1;
-  }
-  .about-visual::before{
-    content:"";position:absolute;inset:30px;border:1px solid rgba(245,197,140,.2);
-  }
+        .demo-banner a:hover {
+            opacity: 0.8;
+        }
 
-  /* MENU */
-  .menu{background:#2B1A17;color:#FFF8F0}
-  .menu .section-label{color:#F5C58C}
-  .menu h2{color:#FFF8F0}
-  .menu .lead{color:rgba(255,248,240,.75)}
-  .menu-grid{display:grid;gap:60px;margin-top:60px}
-  @media(min-width:768px){.menu-grid{grid-template-columns:1fr 1fr;gap:60px 80px}}
-  .menu-cat h3{
-    font-size:22px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;
-    color:#F5C58C;padding-bottom:14px;margin-bottom:22px;
-    border-bottom:1px solid rgba(245,197,140,.25);
-  }
-  .menu-item{display:flex;justify-content:space-between;gap:20px;padding:14px 0;border-bottom:1px dashed rgba(255,248,240,.08)}
-  .menu-item:last-child{border-bottom:none}
-  .menu-item-name{font-weight:500;flex:1}
-  .menu-item-desc{font-size:14px;color:rgba(255,248,240,.55);margin-top:4px;font-weight:300}
-  .menu-item-price{font-weight:600;color:#F5C58C;white-space:nowrap}
-  .menu-note{
-    margin-top:50px;padding:24px;background:rgba(255,248,240,.05);
-    border-left:3px solid #CC3333;font-size:15px;color:rgba(255,248,240,.75);
-  }
+        main {
+            margin-top: 50px;
+        }
 
-  /* HOURS & LOCATION */
-  .visit{background:#FFF8F0}
-  .visit-grid{display:grid;gap:40px;margin-top:40px}
-  @media(min-width:768px){.visit-grid{grid-template-columns:1fr 1fr;gap:60px}}
-  .visit-block h3{font-size:13px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:#CC3333;margin-bottom:22px}
-  .hours-list{list-style:none}
-  .hours-list li{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid rgba(43,43,43,.08);font-size:16px}
-  .hours-list li:last-child{border-bottom:none}
-  .hours-list .day{font-weight:500}
-  .hours-list .time{color:#5A4A42}
-  .hours-list .closed{color:#CC3333;font-weight:500}
-  .address-block{font-size:17px;line-height:1.8}
-  .address-block strong{display:block;font-size:19px;margin-bottom:6px;color:#2B2B2B}
-  .map-link{
-    display:inline-block;margin-top:20px;padding:12px 24px;
-    background:#CC3333;color:#FFF8F0;font-size:14px;font-weight:600;letter-spacing:.5px;
-  }
-  .map-link:hover{background:#A82828}
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #0f0804 0%, #1a0f00 50%, #2d1810 100%);
+            padding: 60px 20px 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
 
-  /* CONTACT */
-  .contact-sec{background:#4A1F1A;color:#FFF8F0}
-  .contact-sec .section-label{color:#F5C58C}
-  .contact-sec h2{color:#FFF8F0}
-  .contact-grid{display:grid;gap:24px;margin-top:48px}
-  @media(min-width:640px){.contact-grid{grid-template-columns:repeat(2,1fr)}}
-  .contact-card{
-    padding:28px;background:rgba(255,248,240,.05);
-    border:1px solid rgba(255,248,240,.1);transition:background .2s;
-  }
-  .contact-card:hover{background:rgba(255,248,240,.08)}
-  .contact-card small{display:block;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#F5C58C;margin-bottom:10px}
-  .contact-card .big{font-size:22px;font-weight:600}
-  @media(min-width:768px){.contact-card .big{font-size:26px}}
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(232, 160, 32, 0.05) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
 
-  /* RESTAURANT FOOTER */
-  /* Demo booking widget */
-  .book-sec{background:#3B1714;padding:80px 20px;color:#FFF8F0}
-  .book-card{max-width:480px;margin:0 auto;background:#4A1F1A;border:1px solid rgba(245,197,140,.25);border-radius:14px;padding:36px 28px;box-shadow:0 20px 60px rgba(0,0,0,.35)}
-  @media(min-width:640px){.book-card{padding:44px 40px}}
-  .book-card .section-label{font-size:12px;letter-spacing:3px;text-transform:uppercase;color:#F5C58C;text-align:center;margin-bottom:14px}
-  .book-card h2{font-family:Georgia,'Times New Roman',serif;font-size:34px;font-weight:700;color:#FFF8F0;text-align:center;margin:0 0 10px}
-  @media(min-width:640px){.book-card h2{font-size:40px}}
-  .book-card .book-sub{text-align:center;color:rgba(255,248,240,.7);font-size:14px;margin-bottom:28px;line-height:1.5}
-  .book-form{display:grid;gap:14px}
-  @media(min-width:520px){.book-form{grid-template-columns:1fr 1fr;gap:14px}.book-form .field-full{grid-column:1/-1}}
-  .book-field{display:flex;flex-direction:column;gap:6px}
-  .book-field label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#F5C58C;font-weight:600}
-  .book-field input,.book-field select{background:#2B1A17;border:1px solid rgba(245,197,140,.3);border-radius:8px;padding:14px 14px;color:#FFF8F0;font-family:inherit;font-size:15px;appearance:none;-webkit-appearance:none}
-  .book-field input:focus,.book-field select:focus{outline:none;border-color:#CC3333;box-shadow:0 0 0 3px rgba(204,51,51,.2)}
-  .book-field select{background-image:linear-gradient(45deg,transparent 50%,#F5C58C 50%),linear-gradient(135deg,#F5C58C 50%,transparent 50%);background-position:calc(100% - 18px) 50%,calc(100% - 13px) 50%;background-size:5px 5px,5px 5px;background-repeat:no-repeat;padding-right:40px}
-  .book-field input::-webkit-calendar-picker-indicator{filter:invert(1) sepia(1) saturate(3) hue-rotate(350deg)}
-  .book-cta{margin-top:22px;width:100%;background:#CC3333;color:#FFF8F0;border:none;border-radius:8px;padding:18px 20px;font-size:15px;font-weight:700;letter-spacing:1px;text-transform:uppercase;cursor:pointer;font-family:inherit;transition:background .15s}
-  .book-cta:hover{background:#B82828}
-  .book-caption{margin-top:14px;text-align:center;font-size:12px;color:rgba(255,248,240,.55);letter-spacing:.3px}
-  footer.rest-footer{background:#2B1A17;color:rgba(255,248,240,.55);padding:44px 20px;text-align:center;font-size:14px}
-  footer.rest-footer .brand{color:#CC3333;font-weight:700;font-size:18px;margin-bottom:8px;display:block}
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -50%;
+            left: -10%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(232, 160, 32, 0.03) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
 
-</style>
+        .hero-content {
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 56px;
+            font-weight: 900;
+            margin-bottom: 10px;
+            color: #fff;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+            letter-spacing: -1px;
+        }
+
+        .hero-tagline {
+            font-size: 20px;
+            color: #e8a020;
+            font-weight: 600;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        .hero-image {
+            width: 280px;
+            height: 280px;
+            margin: 40px auto;
+            position: relative;
+        }
+
+        .hero-bowl {
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 30%, #d4a853, #b8860b, #1a0f00);
+            border-radius: 50%;
+            box-shadow:
+                0 20px 60px rgba(232, 160, 32, 0.3),
+                inset -10px -10px 20px rgba(0, 0, 0, 0.8),
+                inset 5px 5px 15px rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            animation: steam 3s ease-in-out infinite;
+        }
+
+        .hero-bowl::before {
+            content: '🥢';
+            font-size: 60px;
+            position: absolute;
+        }
+
+        .noodle-steam {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .steam-line {
+            position: absolute;
+            width: 8px;
+            height: 40px;
+            background: radial-gradient(circle, rgba(232, 160, 32, 0.4), transparent);
+            border-radius: 50%;
+            left: 50%;
+            top: -20px;
+        }
+
+        .steam-line:nth-child(1) { left: 35%; animation: steam-rise 2s ease-in infinite; }
+        .steam-line:nth-child(2) { left: 50%; animation: steam-rise 2.3s ease-in infinite 0.3s; }
+        .steam-line:nth-child(3) { left: 65%; animation: steam-rise 2.1s ease-in infinite 0.6s; }
+
+        @keyframes steam-rise {
+            0% {
+                opacity: 0.6;
+                transform: translateY(0) scaleX(1);
+            }
+            50% {
+                opacity: 0.3;
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-80px) scaleX(0.8);
+            }
+        }
+
+        @keyframes steam {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        .hero-subtitle {
+            font-size: 16px;
+            color: #d4c4b0;
+            margin-top: 20px;
+        }
+
+        .rating-badge {
+            display: inline-block;
+            margin: 20px 0;
+            background: rgba(232, 160, 32, 0.15);
+            padding: 12px 24px;
+            border: 1px solid #e8a020;
+            border-radius: 4px;
+        }
+
+        .rating-badge .number {
+            font-size: 24px;
+            font-weight: 700;
+            color: #e8a020;
+        }
+
+        .rating-badge .meta {
+            font-size: 13px;
+            color: #b8a890;
+            margin-top: 5px;
+        }
+
+        /* About Section */
+        .about {
+            background: #0f0804;
+            padding: 80px 20px;
+            border-top: 1px solid rgba(232, 160, 32, 0.1);
+        }
+
+        .about-content {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .about h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 42px;
+            margin-bottom: 30px;
+            color: #e8a020;
+        }
+
+        .about p {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #d4c4b0;
+            margin-bottom: 20px;
+        }
+
+        .highlight {
+            color: #e8a020;
+            font-weight: 600;
+        }
+
+        .seats-callout {
+            background: rgba(232, 160, 32, 0.1);
+            border: 1px solid rgba(232, 160, 32, 0.3);
+            padding: 25px;
+            margin: 40px 0;
+            border-radius: 3px;
+            font-size: 16px;
+            line-height: 1.8;
+        }
+
+        /* Menu Section */
+        .menu {
+            background: linear-gradient(180deg, #1a0f00 0%, #0f0804 100%);
+            padding: 80px 20px;
+            border-top: 1px solid rgba(232, 160, 32, 0.1);
+        }
+
+        .menu-container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .menu h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 42px;
+            margin-bottom: 50px;
+            text-align: center;
+            color: #e8a020;
+        }
+
+        .menu-category {
+            margin-bottom: 50px;
+        }
+
+        .menu-category h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            color: #e8a020;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(232, 160, 32, 0.2);
+            padding-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 18px;
+        }
+
+        .menu-items {
+            list-style: none;
+        }
+
+        .menu-item {
+            padding: 12px 0;
+            border-bottom: 1px dashed rgba(232, 160, 32, 0.1);
+            font-size: 16px;
+            color: #d4c4b0;
+        }
+
+        .menu-item:last-child {
+            border-bottom: none;
+        }
+
+        .menu-note {
+            text-align: center;
+            font-size: 14px;
+            color: #8b7a6b;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(232, 160, 32, 0.1);
+            font-style: italic;
+        }
+
+        /* Location Section */
+        .location {
+            background: #0f0804;
+            padding: 80px 20px;
+            border-top: 1px solid rgba(232, 160, 32, 0.1);
+        }
+
+        .location-container {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .location h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 42px;
+            margin-bottom: 40px;
+            color: #e8a020;
+        }
+
+        .address-box {
+            background: rgba(232, 160, 32, 0.08);
+            border: 1px solid rgba(232, 160, 32, 0.3);
+            padding: 30px;
+            border-radius: 3px;
+            margin-bottom: 30px;
+        }
+
+        .address-box p {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #d4c4b0;
+        }
+
+        .maps-link {
+            display: inline-block;
+            margin-top: 15px;
+            color: #e8a020;
+            text-decoration: none;
+            border-bottom: 1px solid #e8a020;
+            font-weight: 500;
+            transition: opacity 0.2s;
+        }
+
+        .maps-link:hover {
+            opacity: 0.8;
+        }
+
+        .hours-note {
+            font-size: 14px;
+            color: #8b7a6b;
+            margin-top: 20px;
+            font-style: italic;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: linear-gradient(135deg, #1a0f00 0%, #2d1810 100%);
+            padding: 80px 20px;
+            border-top: 1px solid rgba(232, 160, 32, 0.1);
+        }
+
+        .contact-container {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 42px;
+            margin-bottom: 40px;
+            color: #e8a020;
+        }
+
+        .contact-intro {
+            font-size: 16px;
+            color: #d4c4b0;
+            margin-bottom: 30px;
+        }
+
+        .phone-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #e8a020, #d4851a);
+            color: #0f0804;
+            padding: 18px 40px;
+            font-size: 20px;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 3px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 8px 25px rgba(232, 160, 32, 0.3);
+            letter-spacing: 0.5px;
+        }
+
+        .phone-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 35px rgba(232, 160, 32, 0.4);
+        }
+
+        .phone-button:active {
+            transform: translateY(0);
+        }
+
+        .booking-note {
+            font-size: 14px;
+            color: #8b7a6b;
+            margin-top: 25px;
+            font-style: italic;
+        }
+
+        .facebook-link {
+            display: inline-block;
+            margin-top: 25px;
+            color: #e8a020;
+            text-decoration: none;
+            font-size: 14px;
+            border-bottom: 1px solid #e8a020;
+            transition: opacity 0.2s;
+        }
+
+        .facebook-link:hover {
+            opacity: 0.8;
+        }
+
+        /* Footer */
+        footer {
+            background: #0a0603;
+            padding: 30px 20px;
+            text-align: center;
+            border-top: 1px solid rgba(232, 160, 32, 0.1);
+            font-size: 13px;
+            color: #6b5a4a;
+        }
+
+        footer a {
+            color: #e8a020;
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+
+        footer a:hover {
+            opacity: 0.8;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 42px;
+            }
+
+            .hero-tagline {
+                font-size: 18px;
+            }
+
+            .hero-image {
+                width: 220px;
+                height: 220px;
+            }
+
+            .about h2,
+            .menu h2,
+            .location h2,
+            .contact h2 {
+                font-size: 32px;
+            }
+
+            .about p,
+            .menu-item {
+                font-size: 16px;
+            }
+
+            .phone-button {
+                padding: 16px 32px;
+                font-size: 18px;
+            }
+
+            .demo-banner {
+                font-size: 12px;
+            }
+
+            .demo-banner p {
+                display: block;
+                margin-right: 0;
+                margin-bottom: 8px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding: 40px 15px 60px;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .hero-image {
+                width: 180px;
+                height: 180px;
+                margin: 30px auto;
+            }
+
+            .about,
+            .menu,
+            .location,
+            .contact {
+                padding: 50px 15px;
+            }
+
+            .about h2,
+            .menu h2,
+            .location h2,
+            .contact h2 {
+                font-size: 26px;
+                margin-bottom: 25px;
+            }
+
+            .about p {
+                font-size: 15px;
+            }
+
+            .rating-badge .number {
+                font-size: 20px;
+            }
+
+            .menu-category h3 {
+                font-size: 16px;
+            }
+
+            .phone-button {
+                padding: 14px 28px;
+                font-size: 16px;
+                width: 100%;
+            }
+        }
+    </style>
 </head>
 <body>
-
-<nav>
-  <div class="nav-inner">
-    <div class="logo">Thai Noodle</div>
-    <div class="nav-links">
-      <a href="#menu">Menu</a>
-      <a href="#visit">Hours</a>
-      <a href="#contact">Contact</a>
+    <!-- Demo Banner -->
+    <div class="demo-banner">
+        <p>Tämä on demo — lopullinen sivusto rakennetaan yhdessä teidän toiveiden mukaan.</p>
+        <a href="https://preview.klarsystems.com/thai-noodle/proposal/">Katso tarjous →</a>
     </div>
-  </div>
-</nav>
 
-<!-- ========== RESTAURANT SITE (English) ========== -->
-<header class="hero">
-  <div class="hero-inner">
-    <span class="hero-tag">Thainuudelit — Helsinki</span>
-    <h1 class="hero-title">Thai Noodle</h1>
-    <p class="hero-subtitle">Aidot thainuudelit Helsingissä</p>
-    <div class="hero-meta">
-      <span>★ 5.0 / 5</span>
-      <span>353 Google reviews</span>
-      <span>Helsinki</span>
-    </div>
-    <div class="cta-row">
-      <a href="#menu" class="btn btn-primary">See the menu</a>
-      <a href="#visit" class="btn btn-ghost">Opening hours</a>
-    </div>
-  </div>
-</header>
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Thai Noodle</h1>
+                <p class="hero-tagline">Helsingin parhaiten pidetty salaisuus</p>
 
-<section class="about" id="about">
-  <div class="container">
-    <div class="about-grid">
-      <div>
-        <div class="section-label">About us</div>
-        <h2>Tervetuloa Thai Noodleen</h2>
-        <p class="lead">Thai Noodle tuo Thaimaan makuja Helsinkiin. Jokainen annos valmistetaan tuoreista raaka-aineista ja perinteisillä resepteillä — aivan kuten Thaimaan kaduilla. Jokainen ateria on matka makujen maailmaan.</p>
-      </div>
-      <div class="about-visual" aria-hidden="true"></div>
-    </div>
-  </div>
-</section>
+                <div class="hero-image">
+                    <div class="hero-bowl">
+                        <div class="noodle-steam">
+                            <div class="steam-line"></div>
+                            <div class="steam-line"></div>
+                            <div class="steam-line"></div>
+                        </div>
+                    </div>
+                </div>
 
-<section class="menu" id="menu">
-  <div class="container">
-    <div class="section-label">Menu</div>
-    <h2>Ruokalista</h2>
-    <p class="lead">Perinteisiä thainuudeleita ja keittojen klassikoita</p>
+                <div class="rating-badge">
+                    <div class="number">5.0 / 5</div>
+                    <div class="meta">353 arvostelua</div>
+                </div>
 
-    <div class='menu-category'><h3>Nuudeliliemet</h3><div class='menu-item'><span class='item-name'>Naudanlihanuudelikeitto</span></div><div class='menu-item'><span class='item-name'>Kananpoikaisen nuudelikeitto</span></div><div class='menu-item'><span class='item-name'>Äyriäisten nuudelikeitto</span></div><div class='menu-item'><span class='item-name'>Kasvisten nuudelikeitto</span></div></div><div class='menu-category'><h3>Riisiruoat</h3><div class='menu-item'><span class='item-name'>Khao Pad - paistettu riisi</span></div><div class='menu-item'><span class='item-name'>Khao Man Gai - kanariisi</span></div></div><div class='menu-category'><h3>Salaatit</h3><div class='menu-item'><span class='item-name'>Som Tam - papayasalaatti</span></div><div class='menu-item'><span class='item-name'>Laab - lihasalaatti</span></div></div>
+                <p class="hero-subtitle">Aito thaimaalainen nuudeligrilli Punavuoressa</p>
+            </div>
+        </section>
 
-    <div class="menu-note">
-      Hinnat saattavat muuttua. Kysy henkilökunnalta allergeeneista.
-    </div>
-  </div>
-</section>
+        <!-- About Section -->
+        <section class="about">
+            <div class="about-content">
+                <h2>Tarina</h2>
+                <p>Pieni, aito thaimaalainen nuudeligrilli Punavuoressa — <span class="highlight">vain 8 paikkaa</span>. Talon oma chilikastike, tuore street food -henki ja huikeat arvostelut.</p>
 
-<section class="visit" id="visit">
-  <div class="container">
-    <div class="section-label">Hours &amp; location</div>
-    <h2>Aukioloajat</h2>
+                <div class="seats-callout">
+                    <p>Täydellinen 5.0 tähden arvostelu 353 arvostelussa. Täällä syödään kuin Bangkokissa. Ei some-tiliä, ei markkinointia — löydetään vain, jos tietää.</p>
+                </div>
 
-    <div class="visit-grid">
-      <div class="visit-block">
-        <h3>Opening hours</h3>
-        <li><span>Ma–La</span><span>11:00–21:00</span></li><li><span>Su</span><span>12:00–21:00</span></li>
-      </div>
+                <p>Jokainen raaka-aine on valittu huolella. Jokainen lautanen valmistetaan intohimolla. Intiimiys ei ole valinta — se on identiteetti.</p>
+            </div>
+        </section>
 
-      <div class="visit-block">
-        <h3>Find us</h3>
-        <div class="address-block">
-          <strong>Thai Noodle</strong>
-          Pursimiehenkatu 12<br>
-          00150 Helsinki<br>
-          Finland
-        </div>
-        <a class="map-link" target="_blank" rel="noopener" href="https://maps.google.com/?q=Pursimiehenkatu+12,+00150+Helsinki">Open in Google Maps →</a>
-      </div>
-    </div>
-  </div>
-</section>
+        <!-- Menu Section -->
+        <section class="menu">
+            <div class="menu-container">
+                <h2>Ruokalista</h2>
 
-<section class="contact-sec" id="contact">
-  <div class="container">
-    <div class="section-label">Contact</div>
-    <h2>Get in touch.</h2>
-    <p class="lead" style="color:rgba(255,248,240,.75)">Varaa pöytä tai kysy lisää — olemme mielellämme apuna.</p>
+                <div class="menu-category">
+                    <h3>Nuudelikeitto</h3>
+                    <ul class="menu-items">
+                        <li class="menu-item">Naudan liha nuudelissa</li>
+                        <li class="menu-item">Porsaan nuudelikeitto</li>
+                        <li class="menu-item">Pad Thai</li>
+                    </ul>
+                </div>
 
-    <div class="contact-grid">
-      <a class="contact-card" href="tel:+358442421738">
-        <small>Phone</small>
-        <div class="big">044 242 1738</div>
-      </a>
-      <a class="contact-card" href="#" target="_blank" rel="noopener">
-        <small>Instagram</small>
-        <div class="big"></div>
-      </a>
-    </div>
-  </div>
-</section>
+                <div class="menu-category">
+                    <h3>Riisiannokset</h3>
+                    <ul class="menu-items">
+                        <li class="menu-item">Khao Man Gai — kana ja riisi kastikkeella</li>
+                    </ul>
+                </div>
 
-<!-- Demo booking widget -->
-<section class="book-sec" id="book">
-  <div class="book-card">
-    <div class="section-label">Reservations</div>
-    <h2>Book a Table</h2>
-    <p class="book-sub">Reserve in seconds — no fees, no account needed.</p>
-    <form class="book-form" onsubmit="event.preventDefault();return false;">
-      <div class="book-field">
-        <label for="b-date">Date</label>
-        <input type="date" id="b-date" min="2026-04-10" value="2026-04-10">
-      </div>
-      <div class="book-field">
-        <label for="b-time">Time</label>
-        <select id="b-time">
-          <option>17:00</option><option>17:30</option><option>18:00</option>
-          <option>18:30</option><option selected>19:00</option><option>19:30</option>
-          <option>20:00</option><option>20:30</option><option>21:00</option>
-          <option>21:30</option><option>22:00</option>
-        </select>
-      </div>
-      <div class="book-field field-full">
-        <label for="b-party">Party size</label>
-        <select id="b-party">
-          <option>1 guest</option>
-          <option selected>2 guests</option>
-          <option>3 guests</option>
-          <option>4 guests</option>
-          <option>5 guests</option>
-          <option>6 guests</option>
-          <option>7 guests</option>
-          <option>8 guests</option>
-        </select>
-      </div>
-      <button type="button" class="book-cta field-full">Reserve Now</button>
-    </form>
-    <div class="book-caption">Powered by Klar Bookings — no fees, no commissions.</div>
-  </div>
-</section>
+                <div class="menu-category">
+                    <h3>Salaatit</h3>
+                    <ul class="menu-items">
+                        <li class="menu-item">Som Tam — papayasalaatti</li>
+                    </ul>
+                </div>
 
-<footer class="rest-footer">
-  <span class="brand">Thai Noodle</span>
-  Pursimiehenkatu 12, Helsinki · 044 242 1738<br>
-  © 2026 Thai Noodle
-</footer>
+                <div class="menu-category">
+                    <h3>Keitot</h3>
+                    <ul class="menu-items">
+                        <li class="menu-item">Tom Yum talon omalla chilikastikkeella</li>
+                    </ul>
+                </div>
 
+                <p class="menu-note">Tämä on demo — ruokalista päivitetään yhdessä.</p>
+            </div>
+        </section>
 
+        <!-- Location Section -->
+        <section class="location">
+            <div class="location-container">
+                <h2>Osoite</h2>
+                <div class="address-box">
+                    <p>Pursimiehenkatu 12<br>00150 Helsinki</p>
+                    <a href="https://www.google.com/maps/search/Thai+Noodle+Pursimiehenkatu+12+Helsinki" target="_blank" class="maps-link">Näytä kartalla</a>
+                </div>
+                <p class="hours-note">Aukioloajat: tarkista ravintolalta suoraan puhelimitse.</p>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="contact">
+            <div class="contact-container">
+                <h2>Ota yhteyttä</h2>
+                <p class="contact-intro">Varaa paikka tai kysy lisää ruokalistan vaihtoehdoista.</p>
+                <a href="tel:+358442421738" class="phone-button">+358 44 2421738</a>
+                <p class="booking-note">Pieni ravintola, rajoitettu paikkojen määrä. Varaa hyvissä ajoin.</p>
+                <a href="https://www.facebook.com/p/Thai-Noodle-61552427690662/" target="_blank" class="facebook-link">Thai Noodle on Facebookissa</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>Thai Noodle &mdash; <a href="https://www.klarsystems.com" target="_blank">Powered by Klar</a></p>
+    </footer>
 </body>
 </html>

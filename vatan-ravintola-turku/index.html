@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vätän ravintola — Turku</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Crimson+Text:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Crimson Text', serif;
+            background-color: #0c0b09;
+            color: #d4ccc1;
+        }
+
+        /* Demo Banner */
+        .demo-banner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: #c9943e;
+            color: #0c0b09;
+            padding: 12px 20px;
+            font-size: 14px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            z-index: 999;
+        }
+
+        .demo-banner a {
+            color: #0c0b09;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .demo-banner a:hover {
+            text-decoration: underline;
+        }
+
+        body {
+            padding-top: 50px;
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, #0c0b09 0%, #1a1815 100%);
+            color: #d4ccc1;
+            padding: 120px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(201, 148, 62, 0.06) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -10%;
+            left: -10%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(201, 148, 62, 0.04) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 72px;
+            margin-bottom: 12px;
+            font-weight: 700;
+            color: #c9943e;
+            letter-spacing: 3px;
+        }
+
+        .hero .subtitle {
+            font-size: 20px;
+            margin-bottom: 24px;
+            color: #a89080;
+            font-style: italic;
+        }
+
+        .hero .rating {
+            font-size: 16px;
+            color: #8a7a6f;
+            margin-top: 16px;
+        }
+
+        /* About Section */
+        .about-section {
+            background: linear-gradient(180deg, #1a1815 0%, #0c0b09 100%);
+            padding: 80px 20px;
+            position: relative;
+        }
+
+        .about-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #c9943e, transparent);
+        }
+
+        .about-content {
+            max-width: 750px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .about-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            color: #c9943e;
+            margin-bottom: 30px;
+            letter-spacing: 2px;
+        }
+
+        .about-content p {
+            font-size: 18px;
+            line-height: 1.9;
+            color: #c4b8ac;
+            margin-bottom: 20px;
+        }
+
+        /* Menu Section */
+        .menu-section {
+            background-color: #0c0b09;
+            padding: 80px 20px;
+            border-top: 1px solid rgba(201, 148, 62, 0.15);
+            border-bottom: 1px solid rgba(201, 148, 62, 0.15);
+        }
+
+        .menu-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 42px;
+            color: #c9943e;
+            text-align: center;
+            margin-bottom: 50px;
+            letter-spacing: 2px;
+        }
+
+        .menu-placeholder {
+            max-width: 700px;
+            margin: 0 auto;
+            background: rgba(201, 148, 62, 0.08);
+            border-left: 3px solid #c9943e;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .menu-placeholder p {
+            font-size: 18px;
+            color: #a89080;
+            line-height: 1.8;
+        }
+
+        /* Info Section */
+        .info-section {
+            background: linear-gradient(180deg, #1a1815 0%, #0c0b09 100%);
+            padding: 80px 20px;
+        }
+
+        .info-container {
+            max-width: 900px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+        }
+
+        .info-block h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            color: #c9943e;
+            margin-bottom: 24px;
+            letter-spacing: 1px;
+        }
+
+        .address-text {
+            font-size: 18px;
+            color: #b8a896;
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        .hours-placeholder {
+            font-size: 18px;
+            color: #a89080;
+            line-height: 1.8;
+            background: rgba(201, 148, 62, 0.05);
+            padding: 20px;
+            border-left: 2px solid #c9943e;
+        }
+
+        .contact-link {
+            display: inline-block;
+            color: #c9943e;
+            text-decoration: none;
+            margin-top: 16px;
+            font-weight: 600;
+            font-size: 17px;
+            transition: opacity 0.2s;
+        }
+
+        .contact-link:hover {
+            opacity: 0.8;
+        }
+
+        /* Maps */
+        .maps-section {
+            background-color: #0c0b09;
+            padding: 80px 20px;
+            border-top: 1px solid rgba(201, 148, 62, 0.15);
+        }
+
+        .maps-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            color: #c9943e;
+            text-align: center;
+            margin-bottom: 40px;
+            letter-spacing: 2px;
+        }
+
+        .map-container {
+            max-width: 900px;
+            margin: 0 auto;
+            border-radius: 2px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 450px;
+            border: none;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background: linear-gradient(135deg, #c9943e 0%, #a87c2a 100%);
+            color: #0c0b09;
+            padding: 70px 20px;
+            text-align: center;
+        }
+
+        .contact-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 42px;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+
+        .contact-section p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+
+        .contact-button {
+            display: inline-block;
+            background-color: #0c0b09;
+            color: #c9943e;
+            padding: 16px 48px;
+            border: none;
+            border-radius: 0;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            letter-spacing: 1px;
+            font-family: 'Crimson Text', serif;
+        }
+
+        .contact-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #050403;
+            color: #6a5f55;
+            padding: 40px 20px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        footer a {
+            color: #c9943e;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 48px;
+            }
+
+            .about-content h2 {
+                font-size: 28px;
+            }
+
+            .info-container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-banner">
+        Tämä on demo — lopullinen sivusto rakennetaan yhdessä teidän toiveiden mukaan.
+        <a href="https://preview.klarsystems.com/vatan-ravintola-turku/proposal/">Katso tarjous →</a>
+    </div>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Vätän ravintola</h1>
+            <p class="subtitle">Turun paikallinen suosikki</p>
+            <p class="rating">⭐ 4.1 / 5 (588 arvostelua)</p>
+        </div>
+    </section>
+
+    <section class="about-section">
+        <div class="about-content">
+            <h2>Meistä</h2>
+            <p>Lisätietoja päivitetään yhdessä ravintolan kanssa. Vätän ravintola on vakiintunut paikallinen suosikki Turussa, jota asiakkaat arvostavat luotettavuuden ja pitkän historian vuoksi.</p>
+        </div>
+    </section>
+
+    <section class="menu-section">
+        <h2>Ruokalista</h2>
+        <div class="menu-placeholder">
+            <p>Ruokalista päivitetään yhdessä ravintolan kanssa</p>
+        </div>
+    </section>
+
+    <section class="info-section">
+        <div class="info-container">
+            <div class="info-block">
+                <h3>Aukioloajat</h3>
+                <div class="hours-placeholder">
+                    Aukioloajat lisätään yhdessä ravintolan kanssa
+                </div>
+            </div>
+            <div class="info-block">
+                <h3>Sijainti & Yhteystiedot</h3>
+                <p class="address-text">Tammitie 5<br>20540 Turku</p>
+                <a href="tel:+358400909051" class="contact-link">+358 40 0909051</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="maps-section">
+        <h2>Löydä meidät kartalta</h2>
+        <div class="map-container">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2015.5!2d22.2833!3d60.4518!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x468c76b2a7f3f767%3A0xf5b21e1e5f78dcea!2sVätän%20ravintola!5e0!3m2!1sfi!2sfi!4v1744380000000" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </section>
+
+    <section class="contact-section">
+        <h2>Ota yhteyttä</h2>
+        <p>Varaa paikka ja tule vierailemaan</p>
+        <a href="tel:+358400909051" class="contact-button">Soita nyt</a>
+    </section>
+
+    <footer>
+        <p>© 2026 Vätän ravintola. Powered by Klar</p>
+    </footer>
+</body>
+</html>

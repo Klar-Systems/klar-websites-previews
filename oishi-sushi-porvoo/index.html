@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oishi Sushi — Buffet Porvoo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fff9f8;
+            color: #333;
+        }
+
+        /* Demo Banner */
+        .demo-banner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: #c9393e;
+            color: white;
+            padding: 12px 20px;
+            font-size: 14px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            z-index: 999;
+        }
+
+        .demo-banner a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .demo-banner a:hover {
+            text-decoration: underline;
+        }
+
+        body {
+            padding-top: 50px;
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, #c9393e 0%, #a01d22 100%);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 400px;
+            height: 400px;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 56px;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        .hero .subtitle {
+            font-size: 18px;
+            margin-bottom: 8px;
+            opacity: 0.95;
+        }
+
+        .hero .rating {
+            font-size: 16px;
+            margin-top: 20px;
+            opacity: 0.9;
+        }
+
+        /* Buffet Pricing Section */
+        .buffet-section {
+            background-color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .buffet-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 42px;
+            color: #c9393e;
+            margin-bottom: 40px;
+        }
+
+        .buffet-prices {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .price-card {
+            background-color: #fff9f8;
+            border: 2px solid #c9393e;
+            padding: 30px;
+            border-radius: 8px;
+        }
+
+        .price-card h3 {
+            font-size: 16px;
+            margin-bottom: 12px;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .price-card .amount {
+            font-family: 'Playfair Display', serif;
+            font-size: 48px;
+            color: #c9393e;
+            font-weight: 700;
+        }
+
+        /* Menu Section */
+        .menu-section {
+            background-color: #fff9f8;
+            padding: 60px 20px;
+        }
+
+        .menu-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 42px;
+            color: #c9393e;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .menu-container {
+            max-width: 900px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .menu-category h3 {
+            font-size: 18px;
+            color: #c9393e;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .menu-item {
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+            font-size: 15px;
+            color: #555;
+        }
+
+        .menu-item:last-child {
+            border-bottom: none;
+        }
+
+        /* Info Section */
+        .info-section {
+            background-color: white;
+            padding: 60px 20px;
+        }
+
+        .info-container {
+            max-width: 900px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+
+        .info-block h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            color: #c9393e;
+            margin-bottom: 20px;
+        }
+
+        .hours-list {
+            font-size: 15px;
+            line-height: 1.8;
+            color: #555;
+        }
+
+        .address-text {
+            font-size: 15px;
+            color: #555;
+            margin-bottom: 16px;
+        }
+
+        .phone-link {
+            display: inline-block;
+            font-size: 18px;
+            font-weight: 600;
+            color: #c9393e;
+            text-decoration: none;
+            margin-top: 12px;
+        }
+
+        .phone-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Maps */
+        .maps-section {
+            background-color: #fff9f8;
+            padding: 60px 20px;
+        }
+
+        .maps-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            color: #c9393e;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .map-container {
+            max-width: 900px;
+            margin: 0 auto;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 400px;
+            border: none;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background-color: #c9393e;
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .contact-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            margin-bottom: 30px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: white;
+            color: #c9393e;
+            padding: 16px 40px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Social Links */
+        .social-links {
+            margin-top: 30px;
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .social-link {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            opacity: 0.9;
+            transition: opacity 0.2s;
+        }
+
+        .social-link:hover {
+            opacity: 1;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        footer a {
+            color: white;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .buffet-prices {
+                grid-template-columns: 1fr;
+            }
+
+            .menu-container {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .info-container {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .price-card .amount {
+                font-size: 36px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-banner">
+        Tämä on demo — lopullinen sivusto rakennetaan yhdessä teidän toiveiden mukaan.
+        <a href="https://preview.klarsystems.com/oishi-sushi-porvoo/proposal/">Katso tarjous →</a>
+    </div>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Oishi Sushi</h1>
+            <p class="subtitle">Buffet-sushi Porvoon sydämessä</p>
+            <p class="rating">⭐ 3.9 / 5 (707 arvostelua)</p>
+        </div>
+    </section>
+
+    <section class="buffet-section">
+        <h2>Kaikki sisältyy hintaan</h2>
+        <div class="buffet-prices">
+            <div class="price-card">
+                <h3>Arkisin (ma–pe)</h3>
+                <div class="amount">€13.50</div>
+            </div>
+            <div class="price-card">
+                <h3>Viikonloppuisin (la–su)</h3>
+                <div class="amount">€15.50</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="menu-section">
+        <h2>Ruokalista</h2>
+        <div class="menu-container">
+            <div class="menu-category">
+                <h3>Sushi-buffet</h3>
+                <div class="menu-item">Kaikki sisältyy hintaan — viikonpäivä €13.50 / viikonloppu €15.50</div>
+            </div>
+            <div class="menu-category">
+                <h3>Suositut annokset</h3>
+                <div class="menu-item">Lohenigiri</div>
+                <div class="menu-item">Grillattua lohi-nigiriä</div>
+                <div class="menu-item">Katkarapu-nigiri</div>
+                <div class="menu-item">Philadelphia maki</div>
+                <div class="menu-item">California-rulla</div>
+            </div>
+            <div class="menu-category">
+                <h3>Alkuruoat</h3>
+                <div class="menu-item">Paistettua mozzarellaa</div>
+                <div class="menu-item">Japanilainen karaage-kana</div>
+            </div>
+            <div class="menu-category">
+                <h3>Keitot</h3>
+                <div class="menu-item">Miso-keitto (vegaani, gluteeniton, laktoositon)</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="info-section">
+        <div class="info-container">
+            <div class="info-block">
+                <h3>Aukioloajat</h3>
+                <div class="hours-list">
+                    Ma–Su: 11:00–19:00
+                </div>
+            </div>
+            <div class="info-block">
+                <h3>Sijainti & Yhteystiedot</h3>
+                <p class="address-text">Runeberginkatu 36<br>06100 Porvoo</p>
+                <a href="tel:+358440888837" class="phone-link">+358 44 0888837</a>
+                <br>
+                <a href="mailto:mingfengoy@gmail.com" class="phone-link" style="display: block; margin-top: 12px;">mingfengoy@gmail.com</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="maps-section">
+        <h2>Löydä meidät kartalta</h2>
+        <div class="map-container">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2007.5!2d25.6565!3d60.3928!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x469276e6d9b24e69%3A0x756e35e98ca94004!2sOishi%20Sushi!5e0!3m2!1sfi!2sfi!4v1744380000000" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </section>
+
+    <section class="contact-section">
+        <h2>Tule syömään</h2>
+        <p style="margin-bottom: 30px; font-size: 16px;">Avoin kaikille joka päivä 11:00–19:00. Kävellessä tervetulleet — varaamista ei tarvita!</p>
+        <a href="https://www.instagram.com/oishi.sushi_/" class="cta-button">Seuraa meitä Instagramissa</a>
+        <div class="social-links">
+            <a href="https://www.facebook.com/Oishi.sushi.Porvoo/" class="social-link">Facebook</a>
+            <a href="https://www.instagram.com/oishi.sushi_/" class="social-link">Instagram</a>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 Oishi Sushi. Powered by Klar</p>
+    </footer>
+</body>
+</html>

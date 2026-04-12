@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phad Thai Restaurant — Helsinki</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #2B2B2B;
+            background: #FFF8F0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, #B8860B 0%, #D4A574 100%);
+            color: white;
+            padding: 120px 20px;
+            text-align: center;
+            min-height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+
+        .hero a {
+            display: inline-block;
+            background: white;
+            color: #B8860B;
+            padding: 14px 32px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .hero a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+
+        /* About */
+        .about {
+            padding: 80px 20px;
+            background: #FFFAF7;
+        }
+
+        .about h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            font-weight: 700;
+            color: #2B2B2B;
+        }
+
+        .about p {
+            font-size: 16px;
+            margin-bottom: 15px;
+            line-height: 1.8;
+            color: #555;
+        }
+
+        /* Menu */
+        .menu {
+            padding: 80px 20px;
+            background: #FFF8F0;
+        }
+
+        .menu h2 {
+            font-size: 36px;
+            margin-bottom: 40px;
+            font-weight: 700;
+            color: #2B2B2B;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .menu-category h3 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #B8860B;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #B8860B;
+            padding-bottom: 10px;
+        }
+
+        .menu-item {
+            margin-bottom: 15px;
+        }
+
+        .menu-item-name {
+            font-weight: 600;
+            color: #2B2B2B;
+            font-size: 15px;
+        }
+
+        .menu-item-desc {
+            font-size: 13px;
+            color: #777;
+            margin-top: 3px;
+        }
+
+        /* Reviews */
+        .reviews {
+            padding: 80px 20px;
+            background: #FFFAF7;
+        }
+
+        .reviews h2 {
+            font-size: 36px;
+            margin-bottom: 40px;
+            font-weight: 700;
+            color: #2B2B2B;
+        }
+
+        .review-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .review-card {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            border: 1px solid #E8D4C0;
+        }
+
+        .review-stars {
+            color: #B8860B;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .review-text {
+            font-size: 15px;
+            color: #555;
+            margin-bottom: 12px;
+            line-height: 1.6;
+        }
+
+        .review-author {
+            font-weight: 600;
+            color: #2B2B2B;
+            font-size: 14px;
+        }
+
+        /* Hours & Location */
+        .hours-location {
+            padding: 80px 20px;
+            background: #FFF8F0;
+        }
+
+        .hours-location h2 {
+            font-size: 36px;
+            margin-bottom: 40px;
+            font-weight: 700;
+            color: #2B2B2B;
+        }
+
+        .hours-location-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .hours-table {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            border: 1px solid #E8D4C0;
+        }
+
+        .hours-table h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #2B2B2B;
+            margin-bottom: 15px;
+        }
+
+        .hours-table table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 15px;
+        }
+
+        .hours-table td {
+            padding: 10px;
+            border-bottom: 1px solid #E8D4C0;
+        }
+
+        .hours-table td:first-child {
+            font-weight: 600;
+            color: #B8860B;
+        }
+
+        .location-card {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            border: 1px solid #E8D4C0;
+        }
+
+        .location-card h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #2B2B2B;
+            margin-bottom: 15px;
+        }
+
+        .location-card p {
+            font-size: 15px;
+            color: #555;
+            margin-bottom: 12px;
+            line-height: 1.6;
+        }
+
+        .location-card a {
+            display: inline-block;
+            color: #B8860B;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        .location-card a:hover {
+            text-decoration: underline;
+        }
+
+        /* Contact */
+        .contact {
+            padding: 80px 20px;
+            background: #FFFAF7;
+        }
+
+        .contact h2 {
+            font-size: 36px;
+            margin-bottom: 40px;
+            font-weight: 700;
+            color: #2B2B2B;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .contact-item {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            border: 1px solid #E8D4C0;
+        }
+
+        .contact-item h3 {
+            font-size: 14px;
+            font-weight: 600;
+            color: #B8860B;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+        }
+
+        .contact-item a {
+            color: #2B2B2B;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        .contact-item a:hover {
+            color: #B8860B;
+        }
+
+        /* Booking Widget */
+        .booking-section {
+            padding: 80px 20px;
+            background: #FFF8F0;
+            text-align: center;
+        }
+
+        .booking-card {
+            max-width: 480px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px 30px;
+            border-radius: 12px;
+            border: 1px solid #E8D4C0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .booking-card h3 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #2B2B2B;
+            margin-bottom: 10px;
+        }
+
+        .booking-card-subtitle {
+            font-size: 14px;
+            color: #777;
+            margin-bottom: 25px;
+        }
+
+        .booking-inputs {
+            display: grid;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .booking-inputs input,
+        .booking-inputs select {
+            padding: 12px 15px;
+            border: 1px solid #E8D4C0;
+            border-radius: 6px;
+            font-size: 14px;
+            font-family: inherit;
+            background: #FFFAF7;
+            color: #2B2B2B;
+        }
+
+        .booking-inputs input:focus,
+        .booking-inputs select:focus {
+            outline: none;
+            border-color: #B8860B;
+            background: white;
+        }
+
+        .booking-btn {
+            width: 100%;
+            padding: 14px 20px;
+            background: #B8860B;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .booking-btn:hover {
+            background: #9A7108;
+        }
+
+        .booking-caption {
+            font-size: 12px;
+            color: #888;
+            margin-top: 15px;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 40px 20px;
+            text-align: center;
+            background: #2B2B2B;
+            color: white;
+        }
+
+        .footer p {
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hours-location-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about, .menu, .reviews, .hours-location, .contact {
+                padding: 60px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container">
+            <h1>Phad Thai Restaurant</h1>
+            <p>Authentic Thai Cuisine in Helsinki</p>
+            <a href="#menu">See the menu</a>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section class="about">
+        <div class="container">
+            <h2>About Us</h2>
+            <p>Phad Thai Restaurant brings authentic Thai flavors to the heart of Helsinki. Our kitchen specializes in traditional Thai dishes prepared with fresh ingredients and time-honored recipes.</p>
+            <p>Located in Taka-Töölö, we're committed to delivering an authentic taste of Thailand with warm hospitality and a welcoming atmosphere for all our guests.</p>
+        </div>
+    </section>
+
+    <!-- Menu -->
+    <section class="menu" id="menu">
+        <div class="container">
+            <h2>Menu</h2>
+            <div class="menu-grid">
+                <div class="menu-category">
+                    <h3>Curries</h3>
+                    <div class="menu-item">
+                        <div class="menu-item-name">Green Curry</div>
+                        <div class="menu-item-desc">Aromatic green curry with coconut milk</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-name">Massaman Curry</div>
+                        <div class="menu-item-desc">Rich and spiced Massaman curry</div>
+                    </div>
+                </div>
+
+                <div class="menu-category">
+                    <h3>Noodles & Rice</h3>
+                    <div class="menu-item">
+                        <div class="menu-item-name">Pad Thai with Chicken</div>
+                        <div class="menu-item-desc">Classic stir-fried rice noodles</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-name">Chicken Noodles</div>
+                        <div class="menu-item-desc">Fresh noodles with tender chicken</div>
+                    </div>
+                </div>
+
+                <div class="menu-category">
+                    <h3>Salads & Appetizers</h3>
+                    <div class="menu-item">
+                        <div class="menu-item-name">Chicken Satay</div>
+                        <div class="menu-item-desc">Grilled chicken skewers with peanut sauce</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-name">Som Tam</div>
+                        <div class="menu-item-desc">Spicy green papaya salad</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-name">Yam Yaang</div>
+                        <div class="menu-item-desc">Fresh and spicy grilled salad</div>
+                    </div>
+                </div>
+
+                <div class="menu-category">
+                    <h3>Soups</h3>
+                    <div class="menu-item">
+                        <div class="menu-item-name">Tom Yum</div>
+                        <div class="menu-item-desc">Hot and sour soup with lemongrass</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-name">Tom Kha</div>
+                        <div class="menu-item-desc">Creamy coconut soup</div>
+                    </div>
+                </div>
+
+                <div class="menu-category">
+                    <h3>Specials</h3>
+                    <div class="menu-item">
+                        <div class="menu-item-name">Lunch Buffet</div>
+                        <div class="menu-item-desc">Monday–Friday 11:00–15:00. All-you-can-eat selection</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews -->
+    <section class="reviews">
+        <div class="container">
+            <h2>What Guests Say</h2>
+            <div class="review-grid">
+                <div class="review-card">
+                    <div class="review-stars">★★★★★ 5 stars</div>
+                    <div class="review-text">"Great service and friendly staff. The à la carte menu is excellent with very reasonable prices."</div>
+                    <div class="review-author">— Jari M.</div>
+                </div>
+
+                <div class="review-card">
+                    <div class="review-stars">★★★★★ 5 stars</div>
+                    <div class="review-text">"Authentic Thai flavors. The satay chicken and pad thai are our favorites. Highly recommended!"</div>
+                    <div class="review-author">— Mika T.</div>
+                </div>
+
+                <div class="review-card">
+                    <div class="review-stars">★★★★☆ 4 stars</div>
+                    <div class="review-text">"Good quality Thai food at reasonable prices. Perfect spot for lunch in the neighborhood."</div>
+                    <div class="review-author">— Anne K.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hours & Location -->
+    <section class="hours-location">
+        <div class="container">
+            <h2>Hours & Location</h2>
+            <div class="hours-location-grid">
+                <div class="hours-table">
+                    <h3>Opening Hours</h3>
+                    <table>
+                        <tr>
+                            <td>Monday–Thursday</td>
+                            <td>11:00–21:00</td>
+                        </tr>
+                        <tr>
+                            <td>Friday</td>
+                            <td>11:00–22:00</td>
+                        </tr>
+                        <tr>
+                            <td>Saturday</td>
+                            <td>12:00–22:00</td>
+                        </tr>
+                        <tr>
+                            <td>Sunday</td>
+                            <td>Call for hours</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="location-card">
+                    <h3>Location</h3>
+                    <p><strong>Urheilukatu 36</strong><br>00250 Helsinki, Finland</p>
+                    <a href="https://maps.google.com/?cid=13058815425957905900" target="_blank">View on Google Maps</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="contact">
+        <div class="container">
+            <h2>Get in Touch</h2>
+            <div class="contact-grid">
+                <div class="contact-item">
+                    <h3>Phone</h3>
+                    <a href="tel:+358406615504">+358 40 6615504</a>
+                </div>
+
+                <div class="contact-item">
+                    <h3>Instagram</h3>
+                    <a href="https://instagram.com/phadthaihelsinki" target="_blank">@phadthaihelsinki</a>
+                </div>
+
+                <div class="contact-item">
+                    <h3>Facebook</h3>
+                    <a href="https://www.facebook.com/PhadThaiRestaurant/" target="_blank">Follow us</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Widget -->
+    <section class="booking-section">
+        <div class="booking-card">
+            <h3>Book a Table</h3>
+            <p class="booking-card-subtitle">Reserve in seconds — no fees, no account needed.</p>
+            <div class="booking-inputs">
+                <input type="date" min="" placeholder="Select date">
+                <select>
+                    <option value="">Select time</option>
+                    <option value="17:00">17:00</option>
+                    <option value="17:30">17:30</option>
+                    <option value="18:00">18:00</option>
+                    <option value="18:30">18:30</option>
+                    <option value="19:00">19:00</option>
+                    <option value="19:30">19:30</option>
+                    <option value="20:00">20:00</option>
+                    <option value="20:30">20:30</option>
+                    <option value="21:00">21:00</option>
+                </select>
+                <select>
+                    <option value="2">2 guests</option>
+                    <option value="1">1 guest</option>
+                    <option value="3">3 guests</option>
+                    <option value="4">4 guests</option>
+                    <option value="5">5 guests</option>
+                    <option value="6">6 guests</option>
+                    <option value="7">7 guests</option>
+                    <option value="8">8 guests</option>
+                </select>
+            </div>
+            <button class="booking-btn" onclick="event.preventDefault();">Reserve Now</button>
+            <p class="booking-caption">Powered by Klar Bookings — no fees, no commissions.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p><strong>Phad Thai Restaurant</strong></p>
+        <p>&copy; 2026</p>
+    </footer>
+</body>
+</html>

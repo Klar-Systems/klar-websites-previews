@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ravintola Chaiyaphum — Raahe</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Lora:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lora', serif;
+            background-color: #0d1a0d;
+            color: #e8e8e8;
+        }
+
+        /* Demo Banner */
+        .demo-banner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: #d4a020;
+            color: #0d1a0d;
+            padding: 12px 20px;
+            font-size: 14px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            z-index: 999;
+        }
+
+        .demo-banner a {
+            color: #0d1a0d;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .demo-banner a:hover {
+            text-decoration: underline;
+        }
+
+        body {
+            padding-top: 50px;
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, #0d1a0d 0%, #1a2e1a 100%);
+            color: #e8e8e8;
+            padding: 100px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -30%;
+            left: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(212, 160, 32, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 64px;
+            margin-bottom: 16px;
+            font-weight: 700;
+            color: #d4a020;
+            letter-spacing: 2px;
+        }
+
+        .hero .subtitle {
+            font-size: 18px;
+            margin-bottom: 24px;
+            color: #b8b8b8;
+        }
+
+        .hero .rating {
+            font-size: 16px;
+            color: #a8a8a8;
+        }
+
+        /* Buffet Section */
+        .buffet-section {
+            background: linear-gradient(180deg, #0d1a0d 0%, #1a2e1a 100%);
+            padding: 80px 20px;
+            position: relative;
+        }
+
+        .buffet-section::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #d4a020, transparent);
+        }
+
+        .buffet-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 48px;
+            color: #d4a020;
+            text-align: center;
+            margin-bottom: 50px;
+            letter-spacing: 1px;
+        }
+
+        .buffet-grid {
+            max-width: 900px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 30px;
+        }
+
+        .buffet-card {
+            background: rgba(212, 160, 32, 0.05);
+            border-left: 3px solid #d4a020;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .buffet-card h3 {
+            font-size: 14px;
+            color: #b8b8b8;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .buffet-card .price {
+            font-family: 'Playfair Display', serif;
+            font-size: 40px;
+            color: #d4a020;
+            margin-bottom: 8px;
+        }
+
+        .buffet-card .time {
+            font-size: 13px;
+            color: #888;
+        }
+
+        /* Menu Section */
+        .menu-section {
+            background-color: #0d1a0d;
+            padding: 80px 20px;
+        }
+
+        .menu-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 48px;
+            color: #d4a020;
+            text-align: center;
+            margin-bottom: 60px;
+            letter-spacing: 1px;
+        }
+
+        .menu-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+        }
+
+        .menu-category h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            color: #d4a020;
+            margin-bottom: 24px;
+            border-bottom: 2px solid rgba(212, 160, 32, 0.3);
+            padding-bottom: 12px;
+            letter-spacing: 1px;
+        }
+
+        .menu-item {
+            padding: 14px 0;
+            border-bottom: 1px solid rgba(212, 160, 32, 0.1);
+            font-size: 15px;
+            color: #c8c8c8;
+        }
+
+        .menu-item:last-child {
+            border-bottom: none;
+        }
+
+        /* Accessibility */
+        .accessibility-section {
+            background: rgba(212, 160, 32, 0.08);
+            padding: 40px 20px;
+            text-align: center;
+            border-top: 1px solid rgba(212, 160, 32, 0.2);
+            border-bottom: 1px solid rgba(212, 160, 32, 0.2);
+        }
+
+        .accessibility-section p {
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: 15px;
+            color: #b8b8b8;
+        }
+
+        /* Info Section */
+        .info-section {
+            background: linear-gradient(180deg, #1a2e1a 0%, #0d1a0d 100%);
+            padding: 80px 20px;
+        }
+
+        .info-container {
+            max-width: 900px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+        }
+
+        .info-block h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 26px;
+            color: #d4a020;
+            margin-bottom: 24px;
+            letter-spacing: 1px;
+        }
+
+        .hours-list {
+            font-size: 15px;
+            line-height: 2;
+            color: #b8b8b8;
+        }
+
+        .address-text {
+            font-size: 15px;
+            color: #b8b8b8;
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        .contact-link {
+            display: inline-block;
+            color: #d4a020;
+            text-decoration: none;
+            margin-top: 12px;
+            font-weight: 600;
+            transition: opacity 0.2s;
+        }
+
+        .contact-link:hover {
+            opacity: 0.8;
+        }
+
+        /* Maps */
+        .maps-section {
+            background-color: #0d1a0d;
+            padding: 80px 20px;
+            border-top: 1px solid rgba(212, 160, 32, 0.2);
+        }
+
+        .maps-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            color: #d4a020;
+            text-align: center;
+            margin-bottom: 40px;
+            letter-spacing: 1px;
+        }
+
+        .map-container {
+            max-width: 900px;
+            margin: 0 auto;
+            border-radius: 2px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 450px;
+            border: none;
+        }
+
+        /* Booking Section */
+        .booking-section {
+            background: linear-gradient(135deg, #d4a020 0%, #b8860b 100%);
+            color: #0d1a0d;
+            padding: 70px 20px;
+            text-align: center;
+        }
+
+        .booking-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 42px;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        .booking-section p {
+            font-size: 16px;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+
+        .booking-button {
+            display: inline-block;
+            background-color: #0d1a0d;
+            color: #d4a020;
+            padding: 16px 45px;
+            border: none;
+            border-radius: 2px;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            letter-spacing: 1px;
+        }
+
+        .booking-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Social Links */
+        .social-links {
+            margin-top: 30px;
+            display: flex;
+            gap: 25px;
+            justify-content: center;
+        }
+
+        .social-link {
+            color: #0d1a0d;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: opacity 0.2s;
+        }
+
+        .social-link:hover {
+            opacity: 0.8;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #050905;
+            color: #666;
+            padding: 40px 20px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        footer a {
+            color: #d4a020;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 42px;
+            }
+
+            .buffet-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .menu-container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .info-container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-banner">
+        Tämä on demo — lopullinen sivusto rakennetaan yhdessä teidän toiveiden mukaan.
+        <a href="https://preview.klarsystems.com/ravintola-chaiyaphum-raahe/proposal/">Katso tarjous →</a>
+    </div>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Ravintola Chaiyaphum</h1>
+            <p class="subtitle">Raahen paras thairavintola</p>
+            <p class="rating">⭐ 4.6 / 5 (484 arvostelua)</p>
+        </div>
+    </section>
+
+    <section class="buffet-section">
+        <h2>Lounasbuffet</h2>
+        <div class="buffet-grid">
+            <div class="buffet-card">
+                <h3>Arkisin</h3>
+                <div class="price">€13.90</div>
+                <div class="time">Ma–Pe 10:30–15:00</div>
+            </div>
+            <div class="buffet-card">
+                <h3>Lauantaina</h3>
+                <div class="price">€15.90</div>
+                <div class="time">La 10:30–15:00</div>
+            </div>
+            <div class="buffet-card">
+                <h3>Mukaan</h3>
+                <div class="price">€12.90</div>
+                <div class="time">Kaikille päiville</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="menu-section">
+        <h2>Ruokalista</h2>
+        <div class="menu-container">
+            <div class="menu-category">
+                <h3>Curryt</h3>
+                <div class="menu-item">Punainen curry äyriäisillä</div>
+                <div class="menu-item">Vihreä curry</div>
+                <div class="menu-item">Panang curry</div>
+                <div class="menu-item">Tom Kha Gai</div>
+            </div>
+            <div class="menu-category">
+                <h3>Nuudeliannokset</h3>
+                <div class="menu-item">Pad Thai</div>
+                <div class="menu-item">Pad See Ew</div>
+                <div class="menu-item">Pad Krapow</div>
+            </div>
+            <div class="menu-category">
+                <h3>Keitot</h3>
+                <div class="menu-item">Tom Yum</div>
+            </div>
+            <div class="menu-category">
+                <h3>Lounasbuffet</h3>
+                <div class="menu-item">Arkisin €13.90</div>
+                <div class="menu-item">Lauantaina €15.90</div>
+                <div class="menu-item">Mukaan €12.90</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="accessibility-section">
+        <p>♿ Ravintola on esteetön — tervetulleet kaikki. Pyörätuolia käyttäville sopiva sisäänkäynti ja sisätilat.</p>
+    </section>
+
+    <section class="info-section">
+        <div class="info-container">
+            <div class="info-block">
+                <h3>Aukioloajat</h3>
+                <div class="hours-list">
+                    <strong>Lounas:</strong><br>
+                    Ma–Pe: 10:30–15:00<br>
+                    La: 10:30–15:00<br><br>
+                    <strong>Illallinen:</strong><br>
+                    Tarkista ravintolalta
+                </div>
+            </div>
+            <div class="info-block">
+                <h3>Sijainti & Yhteystiedot</h3>
+                <p class="address-text">Sovionkatu 16<br>92100 Raahe</p>
+                <a href="tel:+358449755370" class="contact-link">+358 44 9755370</a>
+                <br>
+                <a href="mailto:saisamornmehtala58@gmail.com" class="contact-link">saisamornmehtala58@gmail.com</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="maps-section">
+        <h2>Löydä meidät kartalta</h2>
+        <div class="map-container">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1888.2!2d24.474!3d64.681!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x469b5c7d97a7f1e7%3A0xad1578e81e9e5b5d!2sRavintola%20Chaiyaphum!5e0!3m2!1sfi!2sfi!4v1744380000000" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </section>
+
+    <section class="booking-section">
+        <h2>Varaa pöytä</h2>
+        <p>Tule nauttimaan autenttisesta thaimaalaisen ruoasta Raahessa</p>
+        <a href="tel:+358449755370" class="booking-button">Varaa nyt</a>
+        <div class="social-links">
+            <a href="https://www.instagram.com/chai_yaphumraahe16/" class="social-link">Instagram</a>
+            <a href="https://www.facebook.com/p/Ravintola-Chaiyaphum-100063610178896/" class="social-link">Facebook</a>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 Ravintola Chaiyaphum. Powered by Klar</p>
+    </footer>
+</body>
+</html>

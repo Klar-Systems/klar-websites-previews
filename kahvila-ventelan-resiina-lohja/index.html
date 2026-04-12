@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kahvila Ventelän Resiina — Lohja Café</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #1B2A4A;
+            background: #F5F5F0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, #1B2A4A 0%, #3A4A6A 100%);
+            color: white;
+            padding: 120px 20px;
+            text-align: center;
+            min-height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+
+        .hero a {
+            display: inline-block;
+            background: #FAFAF7;
+            color: #1B2A4A;
+            padding: 14px 32px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .hero a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+
+        /* About */
+        .about {
+            padding: 80px 20px;
+            background: #FAFAF7;
+        }
+
+        .about h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            font-weight: 700;
+            color: #1B2A4A;
+        }
+
+        .about p {
+            font-size: 16px;
+            margin-bottom: 15px;
+            line-height: 1.8;
+            color: #555;
+        }
+
+        /* Menu */
+        .menu {
+            padding: 80px 20px;
+            background: #F5F5F0;
+        }
+
+        .menu h2 {
+            font-size: 36px;
+            margin-bottom: 40px;
+            font-weight: 700;
+            color: #1B2A4A;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .menu-category h3 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1B2A4A;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #1B2A4A;
+            padding-bottom: 10px;
+        }
+
+        .menu-item {
+            margin-bottom: 15px;
+        }
+
+        .menu-item-name {
+            font-weight: 600;
+            color: #1B2A4A;
+            font-size: 15px;
+        }
+
+        .menu-item-desc {
+            font-size: 13px;
+            color: #777;
+            margin-top: 3px;
+        }
+
+        /* Reviews */
+        .reviews {
+            padding: 80px 20px;
+            background: #FAFAF7;
+        }
+
+        .reviews h2 {
+            font-size: 36px;
+            margin-bottom: 40px;
+            font-weight: 700;
+            color: #1B2A4A;
+        }
+
+        .review-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .review-card {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            border: 1px solid #E0DCD8;
+        }
+
+        .review-stars {
+            color: #1B2A4A;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .review-text {
+            font-size: 15px;
+            color: #555;
+            margin-bottom: 12px;
+            line-height: 1.6;
+        }
+
+        .review-author {
+            font-weight: 600;
+            color: #1B2A4A;
+            font-size: 14px;
+        }
+
+        /* Hours & Location */
+        .hours-location {
+            padding: 80px 20px;
+            background: #F5F5F0;
+        }
+
+        .hours-location h2 {
+            font-size: 36px;
+            margin-bottom: 40px;
+            font-weight: 700;
+            color: #1B2A4A;
+        }
+
+        .hours-location-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .hours-table {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            border: 1px solid #E0DCD8;
+        }
+
+        .hours-table h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1B2A4A;
+            margin-bottom: 15px;
+        }
+
+        .hours-table table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 15px;
+        }
+
+        .hours-table td {
+            padding: 10px;
+            border-bottom: 1px solid #E0DCD8;
+        }
+
+        .hours-table td:first-child {
+            font-weight: 600;
+            color: #1B2A4A;
+        }
+
+        .location-card {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            border: 1px solid #E0DCD8;
+        }
+
+        .location-card h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1B2A4A;
+            margin-bottom: 15px;
+        }
+
+        .location-card p {
+            font-size: 15px;
+            color: #555;
+            margin-bottom: 12px;
+            line-height: 1.6;
+        }
+
+        .location-card a {
+            display: inline-block;
+            color: #1B2A4A;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        .location-card a:hover {
+            text-decoration: underline;
+        }
+
+        /* Contact */
+        .contact {
+            padding: 80px 20px;
+            background: #FAFAF7;
+        }
+
+        .contact h2 {
+            font-size: 36px;
+            margin-bottom: 40px;
+            font-weight: 700;
+            color: #1B2A4A;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .contact-item {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            border: 1px solid #E0DCD8;
+        }
+
+        .contact-item h3 {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1B2A4A;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+        }
+
+        .contact-item a {
+            color: #1B2A4A;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        .contact-item a:hover {
+            color: #3A4A6A;
+        }
+
+        /* Events Section */
+        .events-section {
+            padding: 80px 20px;
+            background: #F5F5F0;
+            text-align: center;
+        }
+
+        .events-card {
+            max-width: 480px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px 30px;
+            border-radius: 12px;
+            border: 1px solid #E0DCD8;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .events-card h3 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1B2A4A;
+            margin-bottom: 10px;
+        }
+
+        .events-card-subtitle {
+            font-size: 14px;
+            color: #777;
+            margin-bottom: 25px;
+        }
+
+        .events-list {
+            text-align: left;
+            margin-bottom: 25px;
+        }
+
+        .event-item {
+            padding: 15px 0;
+            border-bottom: 1px solid #E0DCD8;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .event-item:last-child {
+            border-bottom: none;
+        }
+
+        .event-dot {
+            width: 8px;
+            height: 8px;
+            background: #1B2A4A;
+            border-radius: 50%;
+            margin-right: 12px;
+            margin-top: 6px;
+            flex-shrink: 0;
+        }
+
+        .event-content {
+            flex: 1;
+        }
+
+        .event-title {
+            font-weight: 600;
+            color: #1B2A4A;
+            font-size: 14px;
+        }
+
+        .event-detail {
+            font-size: 13px;
+            color: #777;
+            margin-top: 2px;
+        }
+
+        .newsletter-input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #E0DCD8;
+            border-radius: 6px;
+            font-size: 14px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        .newsletter-btn {
+            width: 100%;
+            padding: 12px 20px;
+            background: #1B2A4A;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .newsletter-btn:hover {
+            background: #0F1A2F;
+        }
+
+        .events-caption {
+            font-size: 12px;
+            color: #888;
+            margin-top: 15px;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 40px 20px;
+            text-align: center;
+            background: #1B2A4A;
+            color: white;
+        }
+
+        .footer p {
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hours-location-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about, .menu, .reviews, .hours-location, .contact {
+                padding: 60px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container">
+            <h1>Kahvila Ventelän Resiina</h1>
+            <p>Charming Railroad Café in Lohja</p>
+            <a href="#events">What's On</a>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section class="about">
+        <div class="container">
+            <h2>About Us</h2>
+            <p>Established in 2013, Kahvila Ventelän Resiina is a charming café with an idyllic railroad atmosphere located near the Lohja train station.</p>
+            <p>We specialize in freshly baked pastries and filled savory goods prepared daily, paired with excellent coffee. Our cozy space has become a beloved local gathering spot for travelers and regulars alike.</p>
+        </div>
+    </section>
+
+    <!-- Menu -->
+    <section class="menu" id="menu">
+        <div class="container">
+            <h2>What We Offer</h2>
+            <div class="menu-grid">
+                <div class="menu-category">
+                    <h3>Coffee & Beverages</h3>
+                    <div class="menu-item">
+                        <div class="menu-item-name">Espresso Selection</div>
+                        <div class="menu-item-desc">Single shot, double, or lungo — freshly prepared</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-name">Specialty Coffee</div>
+                        <div class="menu-item-desc">Cappuccino, latte, flat white, and more</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-name">Tea Selection</div>
+                        <div class="menu-item-desc">Selection of loose leaf and herbal teas</div>
+                    </div>
+                </div>
+
+                <div class="menu-category">
+                    <h3>Fresh Pastries Daily</h3>
+                    <div class="menu-item">
+                        <div class="menu-item-name">Croissants & Breads</div>
+                        <div class="menu-item-desc">Buttery croissants, sourdough, and fresh rolls</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-name">Sweet Treats</div>
+                        <div class="menu-item-desc">Cinnamon rolls, cookies, and seasonal cakes</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-name">Savory Bites</div>
+                        <div class="menu-item-desc">Filled pastries, sandwiches, and savory goods</div>
+                    </div>
+                </div>
+
+                <div class="menu-category">
+                    <h3>Breakfast Items</h3>
+                    <div class="menu-item">
+                        <div class="menu-item-name">Full Breakfast</div>
+                        <div class="menu-item-desc">Eggs, toast, cheese, and preserves with coffee</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-name">Light Breakfast</div>
+                        <div class="menu-item-desc">Pastry and coffee combination — quick and satisfying</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-name">Brunch Specials</div>
+                        <div class="menu-item-desc">Weekend brunch with savoury and sweet options</div>
+                    </div>
+                </div>
+
+                <div class="menu-category">
+                    <h3>Light Lunch</h3>
+                    <div class="menu-item">
+                        <div class="menu-item-name">Soups & Salads</div>
+                        <div class="menu-item-desc">Seasonal soups and fresh salad combinations</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-name">Sandwiches</div>
+                        <div class="menu-item-desc">Fresh bread with cheese, ham, and vegetables</div>
+                    </div>
+                </div>
+
+                <div class="menu-category">
+                    <h3>Atmosphere</h3>
+                    <div class="menu-item">
+                        <div class="menu-item-name">Train Station Location</div>
+                        <div class="menu-item-desc">Perfect spot to catch your train or meet friends</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-name">Idyllic Railroad Vibe</div>
+                        <div class="menu-item-desc">Charming historic atmosphere with local charm</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews -->
+    <section class="reviews">
+        <div class="container">
+            <h2>What Guests Say</h2>
+            <div class="review-grid">
+                <div class="review-card">
+                    <div class="review-stars">★★★★★ 5 stars</div>
+                    <div class="review-text">"Amazing pastries and excellent coffee. The atmosphere is so cozy and welcoming. Perfect place for breakfast or a quick coffee break."</div>
+                    <div class="review-author">— Auli V.</div>
+                </div>
+
+                <div class="review-card">
+                    <div class="review-stars">★★★★★ 5 stars</div>
+                    <div class="review-text">"Everything is made fresh daily. The staff is friendly and the railroad setting is unique. A real gem in Lohja!"</div>
+                    <div class="review-author">— Risto K.</div>
+                </div>
+
+                <div class="review-card">
+                    <div class="review-stars">★★★★☆ 4 stars</div>
+                    <div class="review-text">"Great coffee and freshly baked pastries. It's the perfect spot before catching your train or for a casual meet-up with friends."</div>
+                    <div class="review-author">— Heli M.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hours & Location -->
+    <section class="hours-location">
+        <div class="container">
+            <h2>Hours & Location</h2>
+            <div class="hours-location-grid">
+                <div class="hours-table">
+                    <h3>Opening Hours</h3>
+                    <table>
+                        <tr>
+                            <td>Monday–Friday</td>
+                            <td>07:00–15:00</td>
+                        </tr>
+                        <tr>
+                            <td>Saturday</td>
+                            <td>09:00–15:00</td>
+                        </tr>
+                        <tr>
+                            <td>Sunday</td>
+                            <td>Closed</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="location-card">
+                    <h3>Location</h3>
+                    <p><strong>Venteläntie 11</strong><br>08500 Lohja, Finland<br>Near the Train Station</p>
+                    <a href="https://maps.google.com/?cid=4912244359090819570" target="_blank">View on Google Maps</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="contact">
+        <div class="container">
+            <h2>Get in Touch</h2>
+            <div class="contact-grid">
+                <div class="contact-item">
+                    <h3>Phone</h3>
+                    <a href="tel:+358405514098">+358 40 5514098</a>
+                </div>
+
+                <div class="contact-item">
+                    <h3>Instagram</h3>
+                    <a href="https://instagram.com/kahvilaventelanresiina" target="_blank">@kahvilaventelanresiina</a>
+                </div>
+
+                <div class="contact-item">
+                    <h3>Facebook</h3>
+                    <a href="https://www.facebook.com/kahvila resiina" target="_blank">Follow us</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Events Section -->
+    <section class="events-section" id="events">
+        <div class="events-card">
+            <h3>What's On</h3>
+            <p class="events-card-subtitle">This month at Kahvila Ventelän Resiina.</p>
+            <div class="events-list">
+                <div class="event-item">
+                    <div class="event-dot"></div>
+                    <div class="event-content">
+                        <div class="event-title">New Pastry Flavors</div>
+                        <div class="event-detail">Seasonal specials — ask us what's new</div>
+                    </div>
+                </div>
+                <div class="event-item">
+                    <div class="event-dot"></div>
+                    <div class="event-content">
+                        <div class="event-title">Weekend Brunch</div>
+                        <div class="event-detail">Saturdays 10am–2pm — full brunch menu</div>
+                    </div>
+                </div>
+                <div class="event-item">
+                    <div class="event-dot"></div>
+                    <div class="event-content">
+                        <div class="event-title">Train Station Café</div>
+                        <div class="event-detail">Perfect morning stop before your journey</div>
+                    </div>
+                </div>
+            </div>
+            <input type="email" class="newsletter-input" placeholder="your@email.com">
+            <button class="newsletter-btn">Get Updates</button>
+            <p class="events-caption">Powered by Klar — your asset, not Meta's.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p><strong>Kahvila Ventelän Resiina</strong></p>
+        <p>&copy; 2026</p>
+    </footer>
+</body>
+</html>

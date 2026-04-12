@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kebab Pizzeria Selin — Pori</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #2a2a2a;
+            background: #ffffff;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, #F5E6D3 0%, #D4A848 50%, #7A1F1F 100%);
+            color: white;
+            padding: 120px 20px;
+            text-align: center;
+            min-height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+
+        .hero a {
+            display: inline-block;
+            background: #F5E6D3;
+            color: #7A1F1F;
+            padding: 14px 32px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .hero a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+
+        /* About */
+        .about {
+            padding: 80px 20px;
+            background: #fafaf8;
+        }
+
+        .about h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            font-weight: 700;
+            color: #7A1F1F;
+        }
+
+        .about p {
+            font-size: 16px;
+            margin-bottom: 15px;
+            line-height: 1.8;
+            color: #555;
+        }
+
+        /* Menu */
+        .menu {
+            padding: 80px 20px;
+            background: #ffffff;
+        }
+
+        .menu h2 {
+            font-size: 36px;
+            margin-bottom: 40px;
+            font-weight: 700;
+            color: #7A1F1F;
+            text-align: center;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .menu-category h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: #D4A848;
+            font-weight: 600;
+            border-bottom: 2px solid #F5E6D3;
+            padding-bottom: 10px;
+        }
+
+        .menu-item {
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #f0ebe3;
+        }
+
+        .menu-item:last-child {
+            border-bottom: none;
+        }
+
+        .menu-item-name {
+            font-weight: 600;
+            color: #2a2a2a;
+            font-size: 15px;
+        }
+
+        .menu-item-desc {
+            font-size: 13px;
+            color: #666;
+            margin-top: 4px;
+            font-style: italic;
+        }
+
+        /* Reviews */
+        .reviews {
+            padding: 80px 20px;
+            background: #fafaf8;
+        }
+
+        .reviews h2 {
+            font-size: 36px;
+            margin-bottom: 40px;
+            font-weight: 700;
+            color: #7A1F1F;
+            text-align: center;
+        }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .review-card {
+            background: white;
+            padding: 24px;
+            border-radius: 8px;
+            border-left: 4px solid #D4A848;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .review-stars {
+            color: #D4A848;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .review-text {
+            font-size: 15px;
+            line-height: 1.6;
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        .review-author {
+            font-size: 13px;
+            color: #888;
+            font-weight: 600;
+        }
+
+        /* Hours & Location */
+        .hours-location {
+            padding: 80px 20px;
+            background: #ffffff;
+        }
+
+        .hours-location h2 {
+            font-size: 36px;
+            margin-bottom: 40px;
+            font-weight: 700;
+            color: #7A1F1F;
+            text-align: center;
+        }
+
+        .hours-location-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hours-table {
+            border-collapse: collapse;
+        }
+
+        .hours-table td {
+            padding: 10px 0;
+            border-bottom: 1px solid #f0ebe3;
+            font-size: 15px;
+        }
+
+        .hours-table td:first-child {
+            font-weight: 600;
+            color: #2a2a2a;
+            width: 100px;
+        }
+
+        .hours-table td:last-child {
+            color: #555;
+            text-align: right;
+        }
+
+        .location-info {
+            background: #fafaf8;
+            padding: 24px;
+            border-radius: 8px;
+        }
+
+        .location-info h3 {
+            color: #7A1F1F;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+
+        .location-info p {
+            font-size: 15px;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 12px;
+        }
+
+        .location-info a {
+            color: #D4A848;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .location-info a:hover {
+            text-decoration: underline;
+        }
+
+        /* Contact */
+        .contact {
+            padding: 80px 20px;
+            background: #fafaf8;
+        }
+
+        .contact h2 {
+            font-size: 36px;
+            margin-bottom: 40px;
+            font-weight: 700;
+            color: #7A1F1F;
+            text-align: center;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .contact-item {
+            text-align: center;
+        }
+
+        .contact-item a {
+            color: #D4A848;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .contact-item a:hover {
+            text-decoration: underline;
+        }
+
+        .contact-label {
+            font-size: 12px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        /* Order Card */
+        .order-card-section {
+            padding: 60px 20px;
+            background: #ffffff;
+            text-align: center;
+        }
+
+        .order-card {
+            max-width: 480px;
+            margin: 0 auto;
+            background: white;
+            border: 1px solid #f0ebe3;
+            border-radius: 12px;
+            padding: 40px 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .order-card h3 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #2a2a2a;
+            margin-bottom: 8px;
+        }
+
+        .order-card p {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 24px;
+        }
+
+        .order-phone-btn {
+            display: block;
+            width: 100%;
+            background: #7A1F1F;
+            color: #F5E6D3;
+            padding: 16px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            text-align: center;
+            transition: background 0.2s;
+        }
+
+        .order-phone-btn:hover {
+            background: #5d1717;
+        }
+
+        .order-hours {
+            font-size: 13px;
+            color: #888;
+            margin-bottom: 20px;
+        }
+
+        .order-caption {
+            font-size: 12px;
+            color: #888;
+            margin-top: 20px;
+            font-style: italic;
+        }
+
+        /* Footer */
+        footer {
+            background: #2a2a2a;
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .about, .menu, .reviews, .hours-location, .contact {
+                padding: 60px 20px;
+            }
+
+            .about h2, .menu h2, .reviews h2, .hours-location h2, .contact h2 {
+                font-size: 28px;
+            }
+
+            .hours-location-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container">
+            <h1>Kebab Pizzeria Selin</h1>
+            <p>Authentic kebabs & wood-fired pizza</p>
+            <a href="#menu">See the menu</a>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section class="about">
+        <div class="container">
+            <h2>About Us</h2>
+            <p>Kebab Pizzeria Selin brings the warmth and flavors of authentic Middle Eastern and Italian cuisine to Pori. With a focus on quality ingredients and traditional preparation methods, we craft each kebab and pizza with care.</p>
+            <p>Whether you're grabbing a quick lunch or a satisfying dinner, our menu offers something for everyone. Open daily for dine-in and takeaway.</p>
+        </div>
+    </section>
+
+    <!-- Menu -->
+    <section class="menu" id="menu">
+        <div class="container">
+            <h2>Menu</h2>
+            <div class="menu-grid">
+                <div class="menu-category">
+                    <h3>Kebab</h3>
+                    <div class="menu-item">
+                        <div class="menu-item-name">Chicken Kebab</div>
+                        <div class="menu-item-desc">Tender grilled chicken in pita with fresh vegetables and sauce</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-name">Lamb Kebab</div>
+                        <div class="menu-item-desc">Succulent lamb cooked to perfection, served with all the trimmings</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-name">Mixed Kebab</div>
+                        <div class="menu-item-desc">Chicken and lamb combination for the best of both worlds</div>
+                    </div>
+                </div>
+                <div class="menu-category">
+                    <h3>Pizza</h3>
+                    <div class="menu-item">
+                        <div class="menu-item-name">Margherita</div>
+                        <div class="menu-item-desc">Classic tomato, mozzarella, and fresh basil</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-name">Pepperoni</div>
+                        <div class="menu-item-desc">Loaded with premium pepperoni and cheese</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-name">Kebab Pizza</div>
+                        <div class="menu-item-desc">Your favorite kebab flavors on a crispy pizza base</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-name">Quattro Formaggi</div>
+                        <div class="menu-item-desc">Four cheeses for the true cheese lover</div>
+                    </div>
+                </div>
+                <div class="menu-category">
+                    <h3>Sides</h3>
+                    <div class="menu-item">
+                        <div class="menu-item-name">Spring Rolls</div>
+                        <div class="menu-item-desc">Crispy rolls filled with vegetables</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-name">Garlic Bread</div>
+                        <div class="menu-item-desc">Perfectly toasted with garlic and herbs</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-name">Fries</div>
+                        <div class="menu-item-desc">Golden, crispy, and always fresh</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews -->
+    <section class="reviews">
+        <div class="container">
+            <h2>What Our Guests Say</h2>
+            <div class="reviews-grid">
+                <div class="review-card">
+                    <div class="review-stars">★★★★★</div>
+                    <div class="review-text">Great kebabs, fresh ingredients, and friendly service. Always a reliable choice for a quick, quality meal.</div>
+                    <div class="review-author">Customer</div>
+                </div>
+                <div class="review-card">
+                    <div class="review-stars">★★★★☆</div>
+                    <div class="review-text">Good value for money. The pizza is consistently good and the kebabs are made fresh. Highly recommend.</div>
+                    <div class="review-author">Customer</div>
+                </div>
+                <div class="review-card">
+                    <div class="review-stars">★★★★★</div>
+                    <div class="review-text">Fast service and delicious food. One of the best options in Pori for a quick dinner.</div>
+                    <div class="review-author">Customer</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hours & Location -->
+    <section class="hours-location">
+        <div class="container">
+            <h2>Hours & Location</h2>
+            <div class="hours-location-grid">
+                <div>
+                    <h3 style="color: #7A1F1F; margin-bottom: 20px; font-size: 20px;">Opening Hours</h3>
+                    <table class="hours-table">
+                        <tr>
+                            <td>Monday</td>
+                            <td>10:30–22:00</td>
+                        </tr>
+                        <tr>
+                            <td>Tuesday</td>
+                            <td>10:30–22:00</td>
+                        </tr>
+                        <tr>
+                            <td>Wednesday</td>
+                            <td>10:30–22:00</td>
+                        </tr>
+                        <tr>
+                            <td>Thursday</td>
+                            <td>10:30–22:00</td>
+                        </tr>
+                        <tr>
+                            <td>Friday</td>
+                            <td>10:30–22:00</td>
+                        </tr>
+                        <tr>
+                            <td>Saturday</td>
+                            <td>10:30–22:00</td>
+                        </tr>
+                        <tr>
+                            <td>Sunday</td>
+                            <td>11:00–22:00</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="location-info">
+                    <h3>Visit Us</h3>
+                    <p><strong>Harry Gullichsenintie 6</strong><br>28800 Pori, Suomi</p>
+                    <p>📞 <a href="tel:+358 2 648 0618">+358 2 648 0618</a></p>
+                    <p><a href="https://www.google.com/maps/search/Harry+Gullichsenintie+6+28800+Pori" target="_blank">View on Google Maps →</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="contact">
+        <div class="container">
+            <h2>Get in Touch</h2>
+            <div class="contact-grid">
+                <div class="contact-item">
+                    <div class="contact-label">Phone</div>
+                    <a href="tel:+358 2 648 0618">+358 2 648 0618</a>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-label">Email</div>
+                    <a href="mailto:selin.pizzeria.pihlava@gmail.com">selin.pizzeria.pihlava@gmail.com</a>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-label">Facebook</div>
+                    <a href="https://www.facebook.com/pages/Kebab-Pizzeria-Selin/249831021729904" target="_blank">Follow Us</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Order Card -->
+    <section class="order-card-section">
+        <div class="order-card">
+            <h3>Order Now</h3>
+            <p>Pick up in 20 minutes — call us directly.</p>
+            <a href="tel:+358 2 648 0618" class="order-phone-btn">📞 Call +358 2 648 0618</a>
+            <div class="order-hours">Open today: 10:30–22:00</div>
+            <div class="order-caption">Powered by Klar — built to convert calls.</div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>Kebab Pizzeria Selin</p>
+        <p>© 2026</p>
+    </footer>
+</body>
+</html>

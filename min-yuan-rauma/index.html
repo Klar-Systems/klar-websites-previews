@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Min Yuan Chinese Restaurant - Rauma</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #2B2B2B;
+            background: #FFF8F0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, #CC3333 0%, #FFD700 100%);
+            color: white;
+            padding: 120px 20px;
+            text-align: center;
+            min-height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+
+        .hero a {
+            display: inline-block;
+            background: white;
+            color: #CC3333;
+            padding: 14px 32px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+        }
+
+        .hero a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+
+        /* About */
+        .about {
+            padding: 80px 20px;
+            background: #f9f9f9;
+        }
+
+        .about h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            font-weight: 700;
+            color: #CC3333;
+        }
+
+        .about p {
+            font-size: 16px;
+            margin-bottom: 15px;
+            line-height: 1.8;
+            color: #555;
+        }
+
+        /* Menu */
+        .menu {
+            padding: 80px 20px;
+        }
+
+        .menu h2 {
+            font-size: 36px;
+            margin-bottom: 40px;
+            font-weight: 700;
+            color: #CC3333;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .menu-category h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #2B2B2B;
+        }
+
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 12px 0;
+            border-bottom: 1px solid #EEE;
+        }
+
+        .menu-item-name {
+            font-weight: 600;
+            color: #2B2B2B;
+            flex: 1;
+        }
+
+        .menu-item-price {
+            color: #CC3333;
+            font-weight: 700;
+            margin-left: 20px;
+            white-space: nowrap;
+        }
+
+        /* Hours & Location */
+        .hours-location {
+            padding: 80px 20px;
+            background: #f9f9f9;
+        }
+
+        .hours-location h2 {
+            font-size: 36px;
+            margin-bottom: 40px;
+            font-weight: 700;
+            color: #CC3333;
+        }
+
+        .hours-table {
+            max-width: 500px;
+            margin-bottom: 40px;
+        }
+
+        .hours-row {
+            display: grid;
+            grid-template-columns: 150px 1fr;
+            gap: 20px;
+            padding: 12px 0;
+            border-bottom: 1px solid #DDD;
+        }
+
+        .hours-day {
+            font-weight: 600;
+            color: #2B2B2B;
+        }
+
+        .hours-time {
+            color: #555;
+        }
+
+        .location {
+            margin-top: 40px;
+        }
+
+        .location h3 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #2B2B2B;
+        }
+
+        .address {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        .maps-link {
+            display: inline-block;
+            color: #CC3333;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .maps-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Contact */
+        .contact {
+            padding: 80px 20px;
+        }
+
+        .contact h2 {
+            font-size: 36px;
+            margin-bottom: 40px;
+            font-weight: 700;
+            color: #CC3333;
+        }
+
+        .contact-item {
+            margin-bottom: 20px;
+            font-size: 16px;
+            color: #555;
+        }
+
+        .contact-item a {
+            color: #CC3333;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .contact-item a:hover {
+            text-decoration: underline;
+        }
+
+        /* Demo Card (Booking Widget) */
+        .demo-card {
+            padding: 80px 20px;
+            background: #f9f9f9;
+        }
+
+        .demo-card-wrapper {
+            max-width: 480px;
+            margin: 0 auto;
+        }
+
+        .booking-card {
+            background: white;
+            border: 1px solid #DDD;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .booking-card h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #2B2B2B;
+        }
+
+        .booking-card-subtitle {
+            font-size: 14px;
+            color: #777;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        .booking-inputs {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .booking-input {
+            padding: 12px 14px;
+            border: 1px solid #DDD;
+            border-radius: 6px;
+            font-size: 14px;
+            font-family: inherit;
+            color: #2B2B2B;
+        }
+
+        .booking-input:focus {
+            outline: none;
+            border-color: #CC3333;
+            box-shadow: 0 0 0 2px rgba(204, 51, 51, 0.1);
+        }
+
+        .booking-btn {
+            background: #CC3333;
+            color: white;
+            padding: 14px 20px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.2s;
+        }
+
+        .booking-btn:hover {
+            background: #B02E2E;
+        }
+
+        .booking-caption {
+            font-size: 12px;
+            color: #999;
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        /* Footer */
+        footer {
+            padding: 40px 20px;
+            background: #2B2B2B;
+            color: white;
+            text-align: center;
+        }
+
+        footer p {
+            font-size: 14px;
+            margin: 5px 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .menu-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .hours-row {
+                grid-template-columns: 1fr;
+                gap: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero -->
+    <section class="hero">
+        <h1>Min Yuan</h1>
+        <p>Authentic Chinese Cuisine</p>
+        <a href="#menu">See the menu</a>
+    </section>
+
+    <!-- About -->
+    <section class="about">
+        <div class="container">
+            <h2>About</h2>
+            <p>Min Yuan is a traditional Chinese restaurant in Rauma, serving authentic Cantonese cuisine with quality ingredients and generous portions. Our warm, welcoming atmosphere makes it the perfect destination for both casual dining and group meals.</p>
+        </div>
+    </section>
+
+    <!-- Menu -->
+    <section class="menu" id="menu">
+        <div class="container">
+            <h2>Menu</h2>
+            <div class="menu-grid">
+                <div class="menu-category">
+                    <h3>Appetizers</h3>
+                    <div class="menu-item">
+                        <span class="menu-item-name">Spring Rolls</span>
+                        <span class="menu-item-price">6.50€</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="menu-item-name">Dumplings (6 pcs)</span>
+                        <span class="menu-item-price">7.00€</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="menu-item-name">Chicken Satay</span>
+                        <span class="menu-item-price">7.50€</span>
+                    </div>
+                </div>
+
+                <div class="menu-category">
+                    <h3>Main Dishes</h3>
+                    <div class="menu-item">
+                        <span class="menu-item-name">Canton Chicken with Rice</span>
+                        <span class="menu-item-price">15.00€</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="menu-item-name">Curry Chicken</span>
+                        <span class="menu-item-price">15.50€</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="menu-item-name">Sweet and Sour Pork</span>
+                        <span class="menu-item-price">16.00€</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="menu-item-name">Mixed Vegetables</span>
+                        <span class="menu-item-price">12.00€</span>
+                    </div>
+                </div>
+
+                <div class="menu-category">
+                    <h3>Noodles & Rice</h3>
+                    <div class="menu-item">
+                        <span class="menu-item-name">Fried Rice with Chicken</span>
+                        <span class="menu-item-price">13.50€</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="menu-item-name">Egg Noodle Soup</span>
+                        <span class="menu-item-price">12.00€</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="menu-item-name">Chow Mein with Beef</span>
+                        <span class="menu-item-price">14.50€</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hours & Location -->
+    <section class="hours-location">
+        <div class="container">
+            <h2>Hours & Location</h2>
+
+            <div class="hours-table">
+                <div class="hours-row">
+                    <div class="hours-day">Monday–Friday</div>
+                    <div class="hours-time">11:00 AM – 11:00 PM</div>
+                </div>
+                <div class="hours-row">
+                    <div class="hours-day">Saturday</div>
+                    <div class="hours-time">12:00 PM – 11:00 PM</div>
+                </div>
+                <div class="hours-row">
+                    <div class="hours-day">Sunday</div>
+                    <div class="hours-time">12:00 PM – 10:00 PM</div>
+                </div>
+            </div>
+
+            <div class="location">
+                <h3>Location</h3>
+                <div class="address">Kuninkaankatu 4, 26100 Rauma</div>
+                <a href="https://maps.google.com/?q=Min+Yuan+Kuninkaankatu+4+Rauma" target="_blank" rel="noopener" class="maps-link">View on Google Maps</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="contact">
+        <div class="container">
+            <h2>Contact</h2>
+            <div class="contact-item">
+                <strong>Phone:</strong> <a href="tel:+358282226869">+358 2 822 6869</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Card -->
+    <section class="demo-card">
+        <div class="demo-card-wrapper">
+            <div class="booking-card">
+                <h3>Book a Table</h3>
+                <p class="booking-card-subtitle">Reserve in seconds — no fees, no account needed.</p>
+
+                <div class="booking-inputs">
+                    <input type="date" class="booking-input" placeholder="Select Date">
+                    <select class="booking-input">
+                        <option>Select Time</option>
+                        <option>17:00</option>
+                        <option>17:30</option>
+                        <option>18:00</option>
+                        <option>18:30</option>
+                        <option>19:00</option>
+                        <option>19:30</option>
+                        <option>20:00</option>
+                        <option>20:30</option>
+                        <option>21:00</option>
+                        <option>21:30</option>
+                        <option>22:00</option>
+                    </select>
+                    <select class="booking-input">
+                        <option>2 guests</option>
+                        <option>1 guest</option>
+                        <option>3 guests</option>
+                        <option>4 guests</option>
+                        <option>5 guests</option>
+                        <option>6 guests</option>
+                        <option>7 guests</option>
+                        <option>8 guests</option>
+                    </select>
+                </div>
+
+                <button class="booking-btn" type="button" onclick="event.preventDefault();">Reserve Now</button>
+                <div class="booking-caption">Powered by Klar Bookings — no fees, no commissions.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p><strong>Min Yuan</strong></p>
+        <p>© 2026</p>
+    </footer>
+</body>
+</html>

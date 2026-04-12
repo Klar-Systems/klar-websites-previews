@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wu Kong Ravintola — Rauman paras sushi ja aasialainen fuusio</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: #1a0a00;
+            color: #f5f5f5;
+            line-height: 1.6;
+        }
+
+        /* Demo Banner */
+        .demo-banner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, #d4a040 0%, #e8b857 100%);
+            color: #1a0a00;
+            padding: 12px 20px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 600;
+            z-index: 999;
+            animation: slideDown 0.5s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .demo-banner a {
+            color: #1a0a00;
+            text-decoration: none;
+            font-weight: 700;
+            margin-left: 8px;
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+
+        .demo-banner a:hover {
+            transform: translateX(4px);
+        }
+
+        /* Header Spacing */
+        body {
+            padding-top: 45px;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(212, 160, 64, 0.15) 0%, rgba(26, 10, 0, 0.95) 100%),
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><defs><pattern id="dots" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1" fill="%23d4a040" opacity="0.1"/></pattern></defs><rect width="1200" height="600" fill="%231a0a00"/><rect width="1200" height="600" fill="url(%23dots)"/></svg>');
+            background-size: cover;
+            padding: 100px 20px 120px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -50%;
+            width: 200%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 50%, rgba(212, 160, 64, 0.05) 0%, transparent 50%);
+            animation: shimmer 8s infinite;
+            pointer-events: none;
+        }
+
+        @keyframes shimmer {
+            0%, 100% {
+                transform: translateX(0);
+            }
+            50% {
+                transform: translateX(20px);
+            }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 52px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, #d4a040 0%, #f0c87f 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero .tagline {
+            font-size: 20px;
+            color: #d4a040;
+            margin-bottom: 24px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        .hero-meta {
+            display: flex;
+            gap: 24px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 30px 0;
+            font-size: 15px;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .rating {
+            color: #d4a040;
+            font-weight: 600;
+        }
+
+        .review-count {
+            color: #b8860b;
+        }
+
+        /* Buttons */
+        .button-primary {
+            display: inline-block;
+            background: linear-gradient(135deg, #d4a040 0%, #e8b857 100%);
+            color: #1a0a00;
+            padding: 14px 32px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .button-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(212, 160, 64, 0.25);
+        }
+
+        /* Menu Section */
+        .menu-section {
+            padding: 80px 20px;
+            background: linear-gradient(180deg, #1a0a00 0%, #2a1515 100%);
+            position: relative;
+        }
+
+        .menu-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #d4a040, transparent);
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 50px;
+            text-align: center;
+            color: #d4a040;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .menu-category {
+            background: rgba(212, 160, 64, 0.08);
+            border: 1px solid rgba(212, 160, 64, 0.2);
+            border-radius: 8px;
+            padding: 30px;
+            transition: all 0.4s ease;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .menu-category:hover {
+            background: rgba(212, 160, 64, 0.15);
+            border-color: rgba(212, 160, 64, 0.4);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(212, 160, 64, 0.15);
+        }
+
+        .menu-category h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: #d4a040;
+            margin-bottom: 18px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid rgba(212, 160, 64, 0.3);
+        }
+
+        .menu-items {
+            list-style: none;
+        }
+
+        .menu-item {
+            padding: 10px 0;
+            color: #e8e8e8;
+            font-size: 14px;
+            border-bottom: 1px solid rgba(212, 160, 64, 0.1);
+            transition: color 0.3s ease;
+        }
+
+        .menu-item:last-child {
+            border-bottom: none;
+        }
+
+        .menu-item:hover {
+            color: #d4a040;
+            padding-left: 4px;
+        }
+
+        .menu-item::before {
+            content: '✦ ';
+            color: #d4a040;
+            margin-right: 6px;
+            font-size: 12px;
+        }
+
+        .menu-note {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 2px solid rgba(212, 160, 64, 0.2);
+            font-size: 14px;
+            color: #b8860b;
+            font-style: italic;
+        }
+
+        /* About Section */
+        .about-section {
+            padding: 80px 20px;
+            background: #1a0a00;
+            position: relative;
+        }
+
+        .about-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .about-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 38px;
+            font-weight: 700;
+            color: #d4a040;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .about-text {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #e0e0e0;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .highlight {
+            color: #d4a040;
+            font-weight: 600;
+        }
+
+        /* Hours & Location */
+        .hours-section {
+            padding: 80px 20px;
+            background: linear-gradient(180deg, #2a1515 0%, #1a0a00 100%);
+            position: relative;
+        }
+
+        .hours-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #d4a040, transparent);
+        }
+
+        .hours-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            max-width: 1100px;
+            margin: 0 auto;
+            align-items: start;
+        }
+
+        @media (max-width: 768px) {
+            .hours-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .hours-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            font-weight: 700;
+            color: #d4a040;
+            margin-bottom: 30px;
+        }
+
+        .hours-list {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+
+        .hours-item {
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(212, 160, 64, 0.1);
+            display: flex;
+            justify-content: space-between;
+            font-size: 15px;
+        }
+
+        .hours-item:last-child {
+            border-bottom: none;
+        }
+
+        .day {
+            font-weight: 600;
+            color: #d4a040;
+        }
+
+        .time {
+            color: #e0e0e0;
+        }
+
+        .address-block {
+            background: rgba(212, 160, 64, 0.08);
+            padding: 20px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            border-left: 3px solid #d4a040;
+        }
+
+        .address-block p {
+            margin: 8px 0;
+            font-size: 15px;
+        }
+
+        .address-label {
+            font-weight: 600;
+            color: #d4a040;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .phone-link {
+            color: #d4a040;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .phone-link:hover {
+            color: #f0c87f;
+        }
+
+        .maps-container {
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(212, 160, 64, 0.15);
+        }
+
+        .maps-container iframe {
+            width: 100%;
+            height: 350px;
+            border: none;
+            display: block;
+        }
+
+        /* Booking CTA Section */
+        .booking-section {
+            padding: 70px 20px;
+            background: linear-gradient(135deg, rgba(212, 160, 64, 0.15) 0%, rgba(26, 10, 0, 0.8) 100%);
+            text-align: center;
+            position: relative;
+            border-top: 2px solid rgba(212, 160, 64, 0.2);
+            border-bottom: 2px solid rgba(212, 160, 64, 0.2);
+        }
+
+        .booking-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            font-weight: 700;
+            color: #d4a040;
+            margin-bottom: 20px;
+        }
+
+        .booking-section p {
+            font-size: 16px;
+            color: #e0e0e0;
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .booking-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .button-call {
+            display: inline-block;
+            background: linear-gradient(135deg, #d4a040 0%, #e8b857 100%);
+            color: #1a0a00;
+            padding: 16px 40px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .button-call:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(212, 160, 64, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            background: #0d0604;
+            padding: 50px 20px 30px;
+            border-top: 2px solid rgba(212, 160, 64, 0.2);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+
+        .footer-column h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: #d4a040;
+            margin-bottom: 16px;
+        }
+
+        .footer-column p {
+            font-size: 14px;
+            color: #b8b8b8;
+            line-height: 1.7;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(212, 160, 64, 0.15);
+            color: #d4a040;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-size: 13px;
+        }
+
+        .social-link:hover {
+            background: #d4a040;
+            color: #1a0a00;
+            transform: translateY(-2px);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(212, 160, 64, 0.1);
+            padding-top: 30px;
+            text-align: center;
+            font-size: 13px;
+            color: #888;
+        }
+
+        .footer-bottom .powered {
+            font-size: 12px;
+            margin-top: 15px;
+        }
+
+        .powered-link {
+            color: #d4a040;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .powered-link:hover {
+            color: #f0c87f;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero .tagline {
+                font-size: 16px;
+            }
+
+            .section-title {
+                font-size: 32px;
+            }
+
+            .hours-content h2 {
+                font-size: 26px;
+            }
+
+            .booking-section h2 {
+                font-size: 28px;
+            }
+
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-meta {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .maps-container iframe {
+                height: 300px;
+            }
+        }
+
+        /* Accessibility */
+        a:focus, button:focus {
+            outline: 2px solid #d4a040;
+            outline-offset: 2px;
+        }
+
+        /* Animation for sections */
+        .menu-category {
+            animation-delay: calc(var(--index, 0) * 0.1s);
+        }
+    </style>
+</head>
+<body>
+    <!-- Demo Banner -->
+    <div class="demo-banner">
+        Tämä on demo — lopullinen sivusto rakennetaan yhdessä teidän toiveiden mukaan.
+        <a href="https://preview.klarsystems.com/wu-kong-ravintola/proposal/">Katso tarjous →</a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Wu Kong Ravintola</h1>
+            <p class="tagline">Aasialainen fuusio & sushi</p>
+
+            <div class="hero-meta">
+                <div class="meta-item">
+                    <span class="rating">4.4 / 5</span>
+                </div>
+                <div class="meta-item">
+                    <span class="review-count">609 arvostelua</span>
+                </div>
+                <div class="meta-item">
+                    <span>Rauma</span>
+                </div>
+            </div>
+
+            <p style="font-size: 16px; color: #d4a040; margin-top: 30px; letter-spacing: 0.3px;">
+                Tuore sushi, laadukas lounasbuffet, modernit wok-annokset
+            </p>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section class="menu-section">
+        <h2 class="section-title">Ruokalista</h2>
+
+        <div class="menu-grid">
+            <!-- Sushi Category -->
+            <div class="menu-category">
+                <h3>Sushi</h3>
+                <ul class="menu-items">
+                    <li class="menu-item">Lohenigiri</li>
+                    <li class="menu-item">Nigiri-valikoima</li>
+                    <li class="menu-item">Maki-rullat</li>
+                    <li class="menu-item">Sushilautaset</li>
+                </ul>
+            </div>
+
+            <!-- Buffet Category -->
+            <div class="menu-category">
+                <h3>Buffet</h3>
+                <ul class="menu-items">
+                    <li class="menu-item">Lounasbuffet ma-pe</li>
+                    <li class="menu-item">Sushivalikoima</li>
+                    <li class="menu-item">Lämmin ruoka</li>
+                    <li class="menu-item">Välineet ja juomat</li>
+                </ul>
+            </div>
+
+            <!-- Wok Category -->
+            <div class="menu-category">
+                <h3>Wok</h3>
+                <ul class="menu-items">
+                    <li class="menu-item">Kanawok</li>
+                    <li class="menu-item">Vihannekset wok-pannulla</li>
+                    <li class="menu-item">Nuudeliannokset</li>
+                    <li class="menu-item">Teriyaki-variaatiot</li>
+                </ul>
+            </div>
+        </div>
+
+        <p class="menu-note">
+            Tämä on demo — ruokalista päivitetään yhdessä. Lähde: Wolt — vahvistettu huhtikuu 2026
+        </p>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section">
+        <div class="about-content">
+            <h2>Tervetuloa Wu Kongiin</h2>
+
+            <p class="about-text">
+                Wu Kong on aasialainen fuusioravintola <span class="highlight">Rauman kauppakadulla</span> torilla. Tarjolla laadukas sushi-lounasbuffet sekä à la carte -annoksia. Suosittu niin lounaalla kuin illallakin.
+            </p>
+
+            <p class="about-text">
+                <span class="highlight">Sekä buffet- että à la carte -vaihtoehto</span> — joustava konsepti lounaalle ja illalliselle. Tuore sushi on ravintolan sydän, ja jokainen annos valmistetaan ammattitaidolla ja huolella.
+            </p>
+        </div>
+    </section>
+
+    <!-- Hours & Location Section -->
+    <section class="hours-section">
+        <h2 class="section-title" style="margin-bottom: 50px;">Aukioloajat & Sijainti</h2>
+
+        <div class="hours-grid">
+            <div class="hours-content">
+                <h2>Aukioloajat</h2>
+
+                <ul class="hours-list">
+                    <li class="hours-item">
+                        <span class="day">Maanantai – Perjantai</span>
+                        <span class="time">10:30 – 20:00</span>
+                    </li>
+                    <li class="hours-item">
+                        <span class="day">Lauantai</span>
+                        <span class="time">11:30 – 20:00</span>
+                    </li>
+                    <li class="hours-item">
+                        <span class="day">Sunnuntai</span>
+                        <span class="time">12:00 – 20:00</span>
+                    </li>
+                </ul>
+
+                <div class="address-block">
+                    <p class="address-label">Osoite</p>
+                    <p>Kauppakatu 11<br>26100 Rauma</p>
+                </div>
+
+                <div class="address-block">
+                    <p class="address-label">Puhelin</p>
+                    <p><a href="tel:+358253336801" class="phone-link">+358 2 5336801</a></p>
+                </div>
+            </div>
+
+            <div class="maps-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1981.2!2d21.506!3d61.128!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x468ed65b673d1f49%3A0x762f5db10c9e56ae!2sWu%20Kong%20Ravintola!5e0!3m2!1sfi!2sfi!4v1744380000000" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking CTA Section -->
+    <section class="booking-section">
+        <h2>Varaa pöytä nyt</h2>
+        <p>Soita meille ja varaa pöytä seuraavalle illallisellesi. Tervetuloa Wu Kongiin!</p>
+
+        <div class="booking-buttons">
+            <a href="tel:+358253336801" class="button-call">📞 Soita ja varaa</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3>Wu Kong Ravintola</h3>
+                    <p>Rauman paras aasialainen fuusioravintola. Tuore sushi, laadukas lounasbuffet, modernit wok-annokset.</p>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Yhteystiedot</h3>
+                    <p>
+                        <strong>Puhelin:</strong><br>
+                        <a href="tel:+358253336801" class="phone-link">+358 2 5336801</a>
+                    </p>
+                    <p style="margin-top: 12px;">
+                        <strong>Sähköposti:</strong><br>
+                        lichenghao963@gmail.com
+                    </p>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Seuraa meitä</h3>
+                    <div class="social-links">
+                        <a href="https://instagram.com/ravintolawukong" target="_blank" rel="noopener noreferrer" class="social-link" title="Instagram">📷</a>
+                        <a href="https://wa.me/358451617223" target="_blank" rel="noopener noreferrer" class="social-link" title="WhatsApp">💬</a>
+                        <a href="https://www.facebook.com/p/Ravintola-Wukong-Rauma-61573811882455/" target="_blank" rel="noopener noreferrer" class="social-link" title="Facebook">f</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 Wu Kong Ravintola. Kaikki oikeudet pidätetään.</p>
+                <p class="powered">
+                    <span>Powered by <a href="https://klarsystems.com/" class="powered-link">Klar</a></span>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

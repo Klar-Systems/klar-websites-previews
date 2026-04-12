@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Halikon Pizzamestarit</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #2a2a2a;
+            background: #ffffff;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, #D4442A 0%, #FFF8F0 100%);
+            color: #2a2a2a;
+            padding: 120px 20px;
+            text-align: center;
+            min-height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .hero a {
+            display: inline-block;
+            background: #2a2a2a;
+            color: #FFF8F0;
+            padding: 14px 32px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .hero a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+        }
+
+        /* About */
+        .about {
+            padding: 80px 20px;
+            background: #f9f9f9;
+        }
+
+        .about h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .about p {
+            font-size: 16px;
+            margin-bottom: 15px;
+            line-height: 1.8;
+            color: #555;
+        }
+
+        /* Menu */
+        .menu {
+            padding: 80px 20px;
+        }
+
+        .menu h2 {
+            font-size: 36px;
+            margin-bottom: 40px;
+            font-weight: 700;
+        }
+
+        .menu-categories {
+            display: grid;
+            gap: 40px;
+        }
+
+        .category {
+            background: #f9f9f9;
+            padding: 30px;
+            border-radius: 12px;
+        }
+
+        .category h3 {
+            font-size: 22px;
+            margin-bottom: 20px;
+            color: #D4442A;
+            font-weight: 600;
+        }
+
+        .menu-item {
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .menu-item:last-child {
+            border-bottom: none;
+        }
+
+        .item-name {
+            font-weight: 500;
+            color: #2a2a2a;
+        }
+
+        .item-price {
+            color: #D4442A;
+            font-weight: 600;
+        }
+
+        /* Reviews */
+        .reviews {
+            padding: 80px 20px;
+            background: #f9f9f9;
+        }
+
+        .reviews h2 {
+            font-size: 36px;
+            margin-bottom: 40px;
+            font-weight: 700;
+        }
+
+        .reviews-grid {
+            display: grid;
+            gap: 20px;
+        }
+
+        .review {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid #eee;
+        }
+
+        .review-text {
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 12px;
+            color: #555;
+            font-style: italic;
+        }
+
+        .review-author {
+            font-size: 14px;
+            color: #888;
+        }
+
+        .stars {
+            color: #FFB800;
+        }
+
+        /* Hours & Location */
+        .hours {
+            padding: 80px 20px;
+        }
+
+        .hours h2 {
+            font-size: 36px;
+            margin-bottom: 40px;
+            font-weight: 700;
+        }
+
+        .hours-table {
+            background: #f9f9f9;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+        }
+
+        .hours-row {
+            display: grid;
+            grid-template-columns: 150px 1fr;
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+            gap: 20px;
+        }
+
+        .hours-row:last-child {
+            border-bottom: none;
+        }
+
+        .day {
+            font-weight: 600;
+            color: #2a2a2a;
+        }
+
+        .time {
+            color: #555;
+        }
+
+        .location-info {
+            background: #f9f9f9;
+            padding: 30px;
+            border-radius: 12px;
+        }
+
+        .location-info p {
+            margin-bottom: 15px;
+            font-size: 16px;
+            line-height: 1.8;
+        }
+
+        .location-link {
+            color: #D4442A;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .location-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Contact */
+        .contact {
+            padding: 80px 20px;
+            background: #f9f9f9;
+        }
+
+        .contact h2 {
+            font-size: 36px;
+            margin-bottom: 40px;
+            font-weight: 700;
+        }
+
+        .contact-grid {
+            display: grid;
+            gap: 20px;
+        }
+
+        .contact-item {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid #eee;
+        }
+
+        .contact-label {
+            font-size: 12px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .contact-value {
+            font-size: 18px;
+            color: #2a2a2a;
+            font-weight: 600;
+        }
+
+        .contact-value a {
+            color: #D4442A;
+            text-decoration: none;
+        }
+
+        .contact-value a:hover {
+            text-decoration: underline;
+        }
+
+        /* Order Card */
+        .order-section {
+            padding: 80px 20px;
+        }
+
+        .order-card {
+            max-width: 480px;
+            margin: 0 auto;
+            background: white;
+            border: 1px solid #eee;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .order-card h3 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            font-weight: 700;
+            color: #2a2a2a;
+        }
+
+        .order-subtitle {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 25px;
+        }
+
+        .call-button {
+            width: 100%;
+            padding: 18px;
+            background: #D4442A;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: background 0.2s;
+            margin-bottom: 12px;
+        }
+
+        .call-button:hover {
+            background: #b83522;
+        }
+
+        .call-button a {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+        }
+
+        .order-hours {
+            font-size: 13px;
+            color: #888;
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+
+        .order-caption {
+            text-align: center;
+            font-size: 12px;
+            color: #888;
+            margin-top: 20px;
+        }
+
+        /* Footer */
+        footer {
+            padding: 40px 20px;
+            text-align: center;
+            background: #2a2a2a;
+            color: white;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                padding: 0 40px;
+            }
+
+            .hero {
+                padding: 140px 40px;
+            }
+
+            .about, .menu, .reviews, .hours, .contact, .order-section {
+                padding: 100px 40px;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .container {
+                padding: 0 60px;
+            }
+
+            .hero {
+                padding: 160px 60px;
+            }
+
+            .about, .menu, .reviews, .hours, .contact, .order-section {
+                padding: 120px 60px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero -->
+    <section class="hero">
+        <h1>Halikon Pizzamestarit</h1>
+        <p>Authentic Pizzas & Kebabs</p>
+        <a href="#menu">See the menu</a>
+    </section>
+
+    <!-- About -->
+    <section class="about">
+        <div class="container">
+            <h2>Welcome to Halikon Pizzamestarit</h2>
+            <p>Your favorite pizzeria and kebab restaurant in Salo, known for crispy, authentic pizzas and quality kebabs. Over 302 satisfied customers trust us for fast service and consistently delicious food.</p>
+            <p>We've been serving the community with passion for quality ingredients and traditional recipes. Order now and taste the difference.</p>
+        </div>
+    </section>
+
+    <!-- Menu -->
+    <section class="menu" id="menu">
+        <div class="container">
+            <h2>Our Menu</h2>
+            <div class="menu-categories">
+                <div class="category">
+                    <h3>Pizzas</h3>
+                    <div class="menu-item">
+                        <span class="item-name">Margherita</span>
+                        <span class="item-price">€9.90</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="item-name">Pepperoni</span>
+                        <span class="item-price">€11.90</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="item-name">Quattro Formaggi</span>
+                        <span class="item-price">€12.90</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="item-name">Halikko Special</span>
+                        <span class="item-price">€13.90</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="item-name">Vegetarian</span>
+                        <span class="item-price">€10.90</span>
+                    </div>
+                </div>
+
+                <div class="category">
+                    <h3>Kebabs</h3>
+                    <div class="menu-item">
+                        <span class="item-name">Chicken Kebab</span>
+                        <span class="item-price">€9.90</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="item-name">Lamb Kebab</span>
+                        <span class="item-price">€11.90</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="item-name">Mixed Kebab</span>
+                        <span class="item-price">€12.90</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="item-name">Vegetable Kebab</span>
+                        <span class="item-price">€8.90</span>
+                    </div>
+                </div>
+
+                <div class="category">
+                    <h3>Sides & Extras</h3>
+                    <div class="menu-item">
+                        <span class="item-name">Fresh Salad</span>
+                        <span class="item-price">€4.90</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="item-name">Garlic Bread</span>
+                        <span class="item-price">€3.90</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="item-name">Fries</span>
+                        <span class="item-price">€3.50</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="item-name">Soft Drinks</span>
+                        <span class="item-price">€2.50</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews -->
+    <section class="reviews">
+        <div class="container">
+            <h2>What Customers Love</h2>
+            <div class="reviews-grid">
+                <div class="review">
+                    <div class="review-text">"Crispy pizza crust and generous toppings. Always fresh, always delicious!"</div>
+                    <div class="review-author"><span class="stars">★★★★★</span> Pekka</div>
+                </div>
+                <div class="review">
+                    <div class="review-text">"Best kebabs in Salo. Fast service, friendly staff, and great quality."</div>
+                    <div class="review-author"><span class="stars">★★★★★</span> Sari</div>
+                </div>
+                <div class="review">
+                    <div class="review-text">"Reliable, tasty, and affordable. My go-to place for a quick meal."</div>
+                    <div class="review-author"><span class="stars">★★★★☆</span> Mikko</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hours & Location -->
+    <section class="hours">
+        <div class="container">
+            <h2>Opening Hours & Location</h2>
+            <div class="hours-table">
+                <div class="hours-row">
+                    <div class="day">Monday - Thursday</div>
+                    <div class="time">10:00 - 23:00</div>
+                </div>
+                <div class="hours-row">
+                    <div class="day">Friday</div>
+                    <div class="time">10:00 - 01:00</div>
+                </div>
+                <div class="hours-row">
+                    <div class="day">Saturday</div>
+                    <div class="time">11:00 - 01:00</div>
+                </div>
+                <div class="hours-row">
+                    <div class="day">Sunday</div>
+                    <div class="time">11:00 - 23:00</div>
+                </div>
+            </div>
+
+            <div class="location-info">
+                <p><strong>Address:</strong> Halikontie 2, 24800 Salo, Finland</p>
+                <p><a href="https://www.google.com/maps/search/Halikontie+2,+24800+Salo" class="location-link" target="_blank">View on Google Maps →</a></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="contact">
+        <div class="container">
+            <h2>Get in Touch</h2>
+            <div class="contact-grid">
+                <div class="contact-item">
+                    <div class="contact-label">Phone</div>
+                    <div class="contact-value"><a href="tel:+358273711111">+358 2 737 1111</a></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Order Card -->
+    <section class="order-section">
+        <div class="order-card">
+            <h3>Order Now</h3>
+            <p class="order-subtitle">Pick up in 20 minutes — call us directly.</p>
+            <button class="call-button"><a href="tel:+358273711111">📞 Call +358 2 737 1111</a></button>
+            <div class="order-hours">Open today: 11:00 - 23:00</div>
+            <div class="order-caption">Powered by Klar — built to convert calls.</div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Halikon Pizzamestarit. All rights reserved.</p>
+    </footer>
+</body>
+</html>

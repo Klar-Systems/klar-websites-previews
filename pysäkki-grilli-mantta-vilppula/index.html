@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pysäkki Grilli</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #f0ede8;
+            background: #1a1a1a;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: #f0ede8;
+            padding: 120px 20px;
+            text-align: center;
+            min-height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-bottom: 4px solid #F5C518;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            color: #F5C518;
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .hero a {
+            display: inline-block;
+            background: #F5C518;
+            color: #1a1a1a;
+            padding: 14px 32px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .hero a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(245, 197, 24, 0.3);
+        }
+
+        /* About */
+        .about {
+            padding: 80px 20px;
+            background: #2a2a2a;
+        }
+
+        .about h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            font-weight: 700;
+            color: #F5C518;
+        }
+
+        .about p {
+            font-size: 16px;
+            margin-bottom: 15px;
+            line-height: 1.8;
+            color: #bbb;
+        }
+
+        /* Menu */
+        .menu {
+            padding: 80px 20px;
+            background: #1a1a1a;
+        }
+
+        .menu h2 {
+            font-size: 36px;
+            margin-bottom: 40px;
+            font-weight: 700;
+            color: #F5C518;
+        }
+
+        .menu-categories {
+            display: grid;
+            gap: 40px;
+        }
+
+        .category {
+            background: #2a2a2a;
+            padding: 30px;
+            border-radius: 12px;
+            border-left: 4px solid #F5C518;
+        }
+
+        .category h3 {
+            font-size: 22px;
+            margin-bottom: 20px;
+            color: #F5C518;
+            font-weight: 600;
+        }
+
+        .menu-item {
+            padding: 12px 0;
+            border-bottom: 1px solid #444;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .menu-item:last-child {
+            border-bottom: none;
+        }
+
+        .item-name {
+            font-weight: 500;
+            color: #f0ede8;
+        }
+
+        .item-price {
+            color: #F5C518;
+            font-weight: 600;
+        }
+
+        /* Reviews */
+        .reviews {
+            padding: 80px 20px;
+            background: #2a2a2a;
+        }
+
+        .reviews h2 {
+            font-size: 36px;
+            margin-bottom: 40px;
+            font-weight: 700;
+            color: #F5C518;
+        }
+
+        .reviews-grid {
+            display: grid;
+            gap: 20px;
+        }
+
+        .review {
+            background: #1a1a1a;
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 3px solid #F5C518;
+        }
+
+        .review-text {
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 12px;
+            color: #bbb;
+            font-style: italic;
+        }
+
+        .review-author {
+            font-size: 14px;
+            color: #888;
+        }
+
+        .stars {
+            color: #F5C518;
+        }
+
+        /* Hours & Location */
+        .hours {
+            padding: 80px 20px;
+            background: #1a1a1a;
+        }
+
+        .hours h2 {
+            font-size: 36px;
+            margin-bottom: 40px;
+            font-weight: 700;
+            color: #F5C518;
+        }
+
+        .hours-table {
+            background: #2a2a2a;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            border-left: 4px solid #F5C518;
+        }
+
+        .hours-row {
+            display: grid;
+            grid-template-columns: 150px 1fr;
+            padding: 12px 0;
+            border-bottom: 1px solid #444;
+            gap: 20px;
+        }
+
+        .hours-row:last-child {
+            border-bottom: none;
+        }
+
+        .day {
+            font-weight: 600;
+            color: #f0ede8;
+        }
+
+        .time {
+            color: #bbb;
+        }
+
+        .location-info {
+            background: #2a2a2a;
+            padding: 30px;
+            border-radius: 12px;
+            border-left: 4px solid #F5C518;
+        }
+
+        .location-info p {
+            margin-bottom: 15px;
+            font-size: 16px;
+            line-height: 1.8;
+            color: #bbb;
+        }
+
+        .location-link {
+            color: #F5C518;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .location-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Contact */
+        .contact {
+            padding: 80px 20px;
+            background: #2a2a2a;
+        }
+
+        .contact h2 {
+            font-size: 36px;
+            margin-bottom: 40px;
+            font-weight: 700;
+            color: #F5C518;
+        }
+
+        .contact-grid {
+            display: grid;
+            gap: 20px;
+        }
+
+        .contact-item {
+            background: #1a1a1a;
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid #444;
+        }
+
+        .contact-label {
+            font-size: 12px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .contact-value {
+            font-size: 18px;
+            color: #f0ede8;
+            font-weight: 600;
+        }
+
+        .contact-value a {
+            color: #F5C518;
+            text-decoration: none;
+        }
+
+        .contact-value a:hover {
+            text-decoration: underline;
+        }
+
+        /* Order Card */
+        .order-section {
+            padding: 80px 20px;
+            background: #1a1a1a;
+        }
+
+        .order-card {
+            max-width: 480px;
+            margin: 0 auto;
+            background: #2a2a2a;
+            border: 2px solid #F5C518;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 2px 8px rgba(245, 197, 24, 0.15);
+        }
+
+        .order-card h3 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            font-weight: 700;
+            color: #F5C518;
+        }
+
+        .order-subtitle {
+            font-size: 14px;
+            color: #bbb;
+            margin-bottom: 25px;
+        }
+
+        .call-button {
+            width: 100%;
+            padding: 18px;
+            background: #F5C518;
+            color: #1a1a1a;
+            border: none;
+            border-radius: 6px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: background 0.2s;
+            margin-bottom: 12px;
+        }
+
+        .call-button:hover {
+            background: #e6b200;
+        }
+
+        .call-button a {
+            color: #1a1a1a;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+        }
+
+        .order-hours {
+            font-size: 13px;
+            color: #888;
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+        }
+
+        .order-caption {
+            text-align: center;
+            font-size: 12px;
+            color: #888;
+            margin-top: 20px;
+        }
+
+        /* Footer */
+        footer {
+            padding: 40px 20px;
+            text-align: center;
+            background: #1a1a1a;
+            color: #f0ede8;
+            border-top: 2px solid #F5C518;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                padding: 0 40px;
+            }
+
+            .hero {
+                padding: 140px 40px;
+            }
+
+            .about, .menu, .reviews, .hours, .contact, .order-section {
+                padding: 100px 40px;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .container {
+                padding: 0 60px;
+            }
+
+            .hero {
+                padding: 160px 60px;
+            }
+
+            .about, .menu, .reviews, .hours, .contact, .order-section {
+                padding: 120px 60px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero -->
+    <section class="hero">
+        <h1>PYSÄKKI GRILLI</h1>
+        <p>Quality Grilled Specialties</p>
+        <a href="#menu">See the menu</a>
+    </section>
+
+    <!-- About -->
+    <section class="about">
+        <div class="container">
+            <h2>Welcome to Pysäkki Grilli</h2>
+            <p>Your favorite grill house in Mänttä-Vilppula, open late and serving the best grilled specialties, pizzas, and kebabs in town. With 297 satisfied customers and a 4.2 star rating, we've earned a reputation for quality and reliability.</p>
+            <p>Whether you're in for a quick bite or a late-night feast, Pysäkki Grilli delivers delicious food every time.</p>
+        </div>
+    </section>
+
+    <!-- Menu -->
+    <section class="menu" id="menu">
+        <div class="container">
+            <h2>Our Menu</h2>
+            <div class="menu-categories">
+                <div class="category">
+                    <h3>Grilled Specialties</h3>
+                    <div class="menu-item">
+                        <span class="item-name">Grilled Chicken Breast</span>
+                        <span class="item-price">€11.90</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="item-name">Grilled Pork Chop</span>
+                        <span class="item-price">€12.90</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="item-name">Grilled Fish</span>
+                        <span class="item-price">€14.90</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="item-name">Mixed Grill Platter</span>
+                        <span class="item-price">€16.90</span>
+                    </div>
+                </div>
+
+                <div class="category">
+                    <h3>Pizzas</h3>
+                    <div class="menu-item">
+                        <span class="item-name">Margherita</span>
+                        <span class="item-price">€8.90</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="item-name">Pepperoni</span>
+                        <span class="item-price">€10.90</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="item-name">Meat Lovers</span>
+                        <span class="item-price">€12.90</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="item-name">Vegetarian Special</span>
+                        <span class="item-price">€9.90</span>
+                    </div>
+                </div>
+
+                <div class="category">
+                    <h3>Kebabs & Sides</h3>
+                    <div class="menu-item">
+                        <span class="item-name">Chicken Kebab</span>
+                        <span class="item-price">€8.90</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="item-name">Fries</span>
+                        <span class="item-price">€3.50</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="item-name">Grilled Vegetables</span>
+                        <span class="item-price">€5.90</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="item-name">Soft Drinks</span>
+                        <span class="item-price">€2.50</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews -->
+    <section class="reviews">
+        <div class="container">
+            <h2>What Customers Say</h2>
+            <div class="reviews-grid">
+                <div class="review">
+                    <div class="review-text">"The best grilled meats in town. Always fresh and perfectly cooked!"</div>
+                    <div class="review-author"><span class="stars">★★★★★</span> Antti</div>
+                </div>
+                <div class="review">
+                    <div class="review-text">"Great late-night option with reliable quality. My favorite grill house."</div>
+                    <div class="review-author"><span class="stars">★★★★★</span> Liisa</div>
+                </div>
+                <div class="review">
+                    <div class="review-text">"Fast service and delicious food. Perfect place for a quick dinner."</div>
+                    <div class="review-author"><span class="stars">★★★★☆</span> Tuomas</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hours & Location -->
+    <section class="hours">
+        <div class="container">
+            <h2>Opening Hours & Location</h2>
+            <div class="hours-table">
+                <div class="hours-row">
+                    <div class="day">Monday - Thursday</div>
+                    <div class="time">10:30 - 22:00</div>
+                </div>
+                <div class="hours-row">
+                    <div class="day">Friday</div>
+                    <div class="time">10:30 - 04:30</div>
+                </div>
+                <div class="hours-row">
+                    <div class="day">Saturday</div>
+                    <div class="time">12:00 - 05:00</div>
+                </div>
+                <div class="hours-row">
+                    <div class="day">Sunday</div>
+                    <div class="time">12:00 - 22:00</div>
+                </div>
+            </div>
+
+            <div class="location-info">
+                <p><strong>Address:</strong> Kauppaneuvoksenkatu 1, 35800 Mänttä-Vilppula, Finland</p>
+                <p><a href="https://www.google.com/maps/search/Kauppaneuvoksenkatu+1,+35800+M%C3%A4ntt%C3%A4-Vilppula" class="location-link" target="_blank">View on Google Maps →</a></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="contact">
+        <div class="container">
+            <h2>Get in Touch</h2>
+            <div class="contact-grid">
+                <div class="contact-item">
+                    <div class="contact-label">Phone</div>
+                    <div class="contact-value"><a href="tel:+358347472 92">+358 3 474 7292</a></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Order Card -->
+    <section class="order-section">
+        <div class="order-card">
+            <h3>Order Now</h3>
+            <p class="order-subtitle">Pick up in 20 minutes — call us directly.</p>
+            <button class="call-button"><a href="tel:+3583474729 2">📞 Call +358 3 474 7292</a></button>
+            <div class="order-hours">Open tonight: 12:00 - 22:00</div>
+            <div class="order-caption">Powered by Klar — built to convert calls.</div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Pysäkki Grilli. All rights reserved.</p>
+    </footer>
+</body>
+</html>

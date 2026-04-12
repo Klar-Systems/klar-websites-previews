@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kulttuuritalo Oldi — Lahti Bar</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #1B2A4A;
+            background: #F5F5F0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, #1B2A4A 0%, #3A4A6A 100%);
+            color: white;
+            padding: 120px 20px;
+            text-align: center;
+            min-height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+
+        .hero a {
+            display: inline-block;
+            background: #FAFAF7;
+            color: #1B2A4A;
+            padding: 14px 32px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .hero a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+
+        /* About */
+        .about {
+            padding: 80px 20px;
+            background: #FAFAF7;
+        }
+
+        .about h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            font-weight: 700;
+            color: #1B2A4A;
+        }
+
+        .about p {
+            font-size: 16px;
+            margin-bottom: 15px;
+            line-height: 1.8;
+            color: #555;
+        }
+
+        /* Menu */
+        .menu {
+            padding: 80px 20px;
+            background: #F5F5F0;
+        }
+
+        .menu h2 {
+            font-size: 36px;
+            margin-bottom: 40px;
+            font-weight: 700;
+            color: #1B2A4A;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .menu-category h3 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1B2A4A;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #1B2A4A;
+            padding-bottom: 10px;
+        }
+
+        .menu-item {
+            margin-bottom: 15px;
+        }
+
+        .menu-item-name {
+            font-weight: 600;
+            color: #1B2A4A;
+            font-size: 15px;
+        }
+
+        .menu-item-desc {
+            font-size: 13px;
+            color: #777;
+            margin-top: 3px;
+        }
+
+        /* Reviews */
+        .reviews {
+            padding: 80px 20px;
+            background: #FAFAF7;
+        }
+
+        .reviews h2 {
+            font-size: 36px;
+            margin-bottom: 40px;
+            font-weight: 700;
+            color: #1B2A4A;
+        }
+
+        .review-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .review-card {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            border: 1px solid #E0DCD8;
+        }
+
+        .review-stars {
+            color: #1B2A4A;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .review-text {
+            font-size: 15px;
+            color: #555;
+            margin-bottom: 12px;
+            line-height: 1.6;
+        }
+
+        .review-author {
+            font-weight: 600;
+            color: #1B2A4A;
+            font-size: 14px;
+        }
+
+        /* Hours & Location */
+        .hours-location {
+            padding: 80px 20px;
+            background: #F5F5F0;
+        }
+
+        .hours-location h2 {
+            font-size: 36px;
+            margin-bottom: 40px;
+            font-weight: 700;
+            color: #1B2A4A;
+        }
+
+        .hours-location-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .hours-table {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            border: 1px solid #E0DCD8;
+        }
+
+        .hours-table h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1B2A4A;
+            margin-bottom: 15px;
+        }
+
+        .hours-table table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 15px;
+        }
+
+        .hours-table td {
+            padding: 10px;
+            border-bottom: 1px solid #E0DCD8;
+        }
+
+        .hours-table td:first-child {
+            font-weight: 600;
+            color: #1B2A4A;
+        }
+
+        .location-card {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            border: 1px solid #E0DCD8;
+        }
+
+        .location-card h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1B2A4A;
+            margin-bottom: 15px;
+        }
+
+        .location-card p {
+            font-size: 15px;
+            color: #555;
+            margin-bottom: 12px;
+            line-height: 1.6;
+        }
+
+        .location-card a {
+            display: inline-block;
+            color: #1B2A4A;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        .location-card a:hover {
+            text-decoration: underline;
+        }
+
+        /* Contact */
+        .contact {
+            padding: 80px 20px;
+            background: #FAFAF7;
+        }
+
+        .contact h2 {
+            font-size: 36px;
+            margin-bottom: 40px;
+            font-weight: 700;
+            color: #1B2A4A;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .contact-item {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            border: 1px solid #E0DCD8;
+        }
+
+        .contact-item h3 {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1B2A4A;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+        }
+
+        .contact-item a {
+            color: #1B2A4A;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        .contact-item a:hover {
+            color: #3A4A6A;
+        }
+
+        /* Events Section */
+        .events-section {
+            padding: 80px 20px;
+            background: #F5F5F0;
+            text-align: center;
+        }
+
+        .events-card {
+            max-width: 480px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px 30px;
+            border-radius: 12px;
+            border: 1px solid #E0DCD8;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .events-card h3 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1B2A4A;
+            margin-bottom: 10px;
+        }
+
+        .events-card-subtitle {
+            font-size: 14px;
+            color: #777;
+            margin-bottom: 25px;
+        }
+
+        .events-list {
+            text-align: left;
+            margin-bottom: 25px;
+        }
+
+        .event-item {
+            padding: 15px 0;
+            border-bottom: 1px solid #E0DCD8;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .event-item:last-child {
+            border-bottom: none;
+        }
+
+        .event-dot {
+            width: 8px;
+            height: 8px;
+            background: #1B2A4A;
+            border-radius: 50%;
+            margin-right: 12px;
+            margin-top: 6px;
+            flex-shrink: 0;
+        }
+
+        .event-content {
+            flex: 1;
+        }
+
+        .event-title {
+            font-weight: 600;
+            color: #1B2A4A;
+            font-size: 14px;
+        }
+
+        .event-detail {
+            font-size: 13px;
+            color: #777;
+            margin-top: 2px;
+        }
+
+        .newsletter-input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #E0DCD8;
+            border-radius: 6px;
+            font-size: 14px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        .newsletter-btn {
+            width: 100%;
+            padding: 12px 20px;
+            background: #1B2A4A;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .newsletter-btn:hover {
+            background: #0F1A2F;
+        }
+
+        .events-caption {
+            font-size: 12px;
+            color: #888;
+            margin-top: 15px;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 40px 20px;
+            text-align: center;
+            background: #1B2A4A;
+            color: white;
+        }
+
+        .footer p {
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hours-location-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about, .menu, .reviews, .hours-location, .contact {
+                padding: 60px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container">
+            <h1>Kulttuuritalo Oldi</h1>
+            <p>Bar & Café in the Heart of Lahti</p>
+            <a href="#events">What's On</a>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section class="about">
+        <div class="container">
+            <h2>About Us</h2>
+            <p>Kulttuuritalo Oldi is a charming establishment located in Lahti's cultural quarter, featuring a warm, rustic atmosphere with a modern edge.</p>
+            <p>With a selection of local craft beers, creative cocktails, and food available throughout the day, Oldi is the perfect spot for breakfast, lunch, dinner, or evening drinks. Our pinball machines and view of the square make it a true local favorite.</p>
+        </div>
+    </section>
+
+    <!-- Menu -->
+    <section class="menu" id="menu">
+        <div class="container">
+            <h2>What We Serve</h2>
+            <div class="menu-grid">
+                <div class="menu-category">
+                    <h3>Breakfast & Brunch</h3>
+                    <div class="menu-item">
+                        <div class="menu-item-name">Morning Favorites</div>
+                        <div class="menu-item-desc">Coffee, pastries, and hearty breakfast plates</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-name">Brunch Special</div>
+                        <div class="menu-item-desc">Weekend brunch selection with savoury and sweet options</div>
+                    </div>
+                </div>
+
+                <div class="menu-category">
+                    <h3>Local Beers</h3>
+                    <div class="menu-item">
+                        <div class="menu-item-name">Craft Beer Selection</div>
+                        <div class="menu-item-desc">Rotating selection of Finnish craft beers on tap</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-name">Beer Recommendations</div>
+                        <div class="menu-item-desc">Our staff recommends seasonal and rare brews</div>
+                    </div>
+                </div>
+
+                <div class="menu-category">
+                    <h3>Cocktails</h3>
+                    <div class="menu-item">
+                        <div class="menu-item-name">Classic Cocktails</div>
+                        <div class="menu-item-desc">Traditional recipes prepared with care</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-name">House Specials</div>
+                        <div class="menu-item-desc">Creative signature cocktails featuring seasonal ingredients</div>
+                    </div>
+                </div>
+
+                <div class="menu-category">
+                    <h3>Lunch & Dinner</h3>
+                    <div class="menu-item">
+                        <div class="menu-item-name">Lunch Menu</div>
+                        <div class="menu-item-desc">Daily lunch specials, 11:00–14:00</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-name">Evening Menu</div>
+                        <div class="menu-item-desc">Full menu of satisfying dinner plates and shareable bites</div>
+                    </div>
+                </div>
+
+                <div class="menu-category">
+                    <h3>Atmosphere</h3>
+                    <div class="menu-item">
+                        <div class="menu-item-name">Pinball Machines</div>
+                        <div class="menu-item-desc">Vintage machines that rotate throughout the year</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-name">Second Floor View</div>
+                        <div class="menu-item-desc">Perfect vantage point overlooking the square</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews -->
+    <section class="reviews">
+        <div class="container">
+            <h2>What Guests Say</h2>
+            <div class="review-grid">
+                <div class="review-card">
+                    <div class="review-stars">★★★★★ 5 stars</div>
+                    <div class="review-text">"Great atmosphere and friendly service. The beer selection is excellent and the food is always reliable. A real local gem."</div>
+                    <div class="review-author">— Markku H.</div>
+                </div>
+
+                <div class="review-card">
+                    <div class="review-stars">★★★★☆ 4 stars</div>
+                    <div class="review-text">"Good spot for drinks and food. Love the vintage pinball machines. The view of the square is perfect for people-watching."</div>
+                    <div class="review-author">— Sanna L.</div>
+                </div>
+
+                <div class="review-card">
+                    <div class="review-stars">★★★★☆ 4 stars</div>
+                    <div class="review-text">"A cozy place to meet friends. Great cocktails and the atmosphere is always welcoming. Highly recommend for an evening out."</div>
+                    <div class="review-author">— Tero J.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hours & Location -->
+    <section class="hours-location">
+        <div class="container">
+            <h2>Hours & Location</h2>
+            <div class="hours-location-grid">
+                <div class="hours-table">
+                    <h3>Opening Hours</h3>
+                    <table>
+                        <tr>
+                            <td>Monday–Thursday</td>
+                            <td>08:00–00:00</td>
+                        </tr>
+                        <tr>
+                            <td>Friday–Saturday</td>
+                            <td>08:00–02:00</td>
+                        </tr>
+                        <tr>
+                            <td>Sunday</td>
+                            <td>10:00–00:00</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="location-card">
+                    <h3>Location</h3>
+                    <p><strong>Aleksanterinkatu 9</strong><br>15110 Lahti, Finland<br>Second Floor – Cultural Quarter</p>
+                    <a href="https://maps.google.com/?cid=15545154032255187334" target="_blank">View on Google Maps</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="contact">
+        <div class="container">
+            <h2>Get in Touch</h2>
+            <div class="contact-grid">
+                <div class="contact-item">
+                    <h3>Phone</h3>
+                    <a href="tel:+358375520066">+358 3 7520066</a>
+                </div>
+
+                <div class="contact-item">
+                    <h3>Website</h3>
+                    <a href="https://maps.google.com/?cid=15545154032255187334" target="_blank">Find on Maps</a>
+                </div>
+
+                <div class="contact-item">
+                    <h3>Hours</h3>
+                    <a href="#hours-location">See Full Hours</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Events Section -->
+    <section class="events-section" id="events">
+        <div class="events-card">
+            <h3>What's On</h3>
+            <p class="events-card-subtitle">This month at Kulttuuritalo Oldi.</p>
+            <div class="events-list">
+                <div class="event-item">
+                    <div class="event-dot"></div>
+                    <div class="event-content">
+                        <div class="event-title">Live Music</div>
+                        <div class="event-detail">Fridays & Saturdays from 8pm</div>
+                    </div>
+                </div>
+                <div class="event-item">
+                    <div class="event-dot"></div>
+                    <div class="event-content">
+                        <div class="event-title">Brunch</div>
+                        <div class="event-detail">Saturdays & Sundays, 10am–2pm</div>
+                    </div>
+                </div>
+                <div class="event-item">
+                    <div class="event-dot"></div>
+                    <div class="event-content">
+                        <div class="event-title">Happy Hour</div>
+                        <div class="event-detail">Daily 4pm–6pm — select drinks 25% off</div>
+                    </div>
+                </div>
+            </div>
+            <input type="email" class="newsletter-input" placeholder="your@email.com">
+            <button class="newsletter-btn">Get Updates</button>
+            <p class="events-caption">Powered by Klar — your asset, not Meta's.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p><strong>Kulttuuritalo Oldi</strong></p>
+        <p>&copy; 2026</p>
+    </footer>
+</body>
+</html>

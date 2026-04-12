@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jalla Jalla — Tamperen yökyöpelin kebab- ja pizzapaikka</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #1a0a00;
+            color: #f0f0f0;
+            line-height: 1.6;
+        }
+
+        /* Demo Banner */
+        .demo-banner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, #d4af37 0%, #c9943e 100%);
+            color: #1a0a00;
+            padding: 12px 20px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 13px;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        .demo-banner a {
+            color: #1a0a00;
+            text-decoration: none;
+            font-weight: 700;
+            margin-left: 8px;
+        }
+
+        .demo-banner a:hover {
+            text-decoration: underline;
+        }
+
+        body {
+            padding-top: 44px;
+        }
+
+        /* Typography */
+        h1, h2, h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #d4af37;
+        }
+
+        h1 {
+            font-size: 72px;
+            line-height: 1.1;
+            margin-bottom: 12px;
+        }
+
+        h2 {
+            font-size: 48px;
+            margin-bottom: 24px;
+            position: relative;
+            display: inline-block;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: #d4af37;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1a0a00 0%, #2d1a0f 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 60px 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -15%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.06) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+        }
+
+        .hero .subtitle {
+            font-size: 20px;
+            color: #d4af37;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+
+        .hero h1 {
+            font-size: 90px;
+            margin-bottom: 20px;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.7);
+        }
+
+        .hero .tagline {
+            font-size: 24px;
+            color: #f0f0f0;
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+
+        /* Phone CTA */
+        .phone-cta-container {
+            margin-bottom: 40px;
+        }
+
+        .phone-cta {
+            display: inline-block;
+            background: #d4af37;
+            color: #1a0a00;
+            padding: 24px 48px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 32px;
+            letter-spacing: 2px;
+            font-weight: 700;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 24px rgba(212, 175, 55, 0.3);
+            border: 3px solid #d4af37;
+        }
+
+        .phone-cta:hover {
+            background: transparent;
+            color: #d4af37;
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(212, 175, 55, 0.4);
+        }
+
+        .phone-number-display {
+            font-size: 48px;
+            font-family: 'Bebas Neue', sans-serif;
+            color: #d4af37;
+            letter-spacing: 2px;
+            margin-top: 12px;
+            font-weight: 700;
+        }
+
+        /* Section Spacing */
+        section {
+            padding: 80px 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Menu Section */
+        .menu-section {
+            background: #0f0600;
+        }
+
+        .menu-section h2 {
+            margin-bottom: 60px;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+        }
+
+        .menu-category {
+            background: rgba(212, 175, 55, 0.08);
+            padding: 32px;
+            border-left: 4px solid #d4af37;
+            border-radius: 4px;
+            backdrop-filter: blur(10px);
+        }
+
+        .menu-category h3 {
+            font-size: 22px;
+            margin-bottom: 20px;
+        }
+
+        .menu-item {
+            color: #d4d4d4;
+            margin-bottom: 12px;
+            font-size: 15px;
+        }
+
+        /* Hours Section */
+        .hours-section {
+            background: linear-gradient(135deg, #1a0a00 0%, #251410 100%);
+        }
+
+        .hours-section h2 {
+            margin-bottom: 50px;
+        }
+
+        .hours-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .hours-box {
+            background: rgba(212, 175, 55, 0.1);
+            padding: 32px;
+            border-radius: 8px;
+            border: 2px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .hours-box h3 {
+            color: #d4af37;
+            font-size: 18px;
+            margin-bottom: 16px;
+        }
+
+        .hours-content {
+            color: #d4d4d4;
+            line-height: 1.8;
+            font-size: 15px;
+        }
+
+        .highlight-late-night {
+            background: rgba(212, 175, 55, 0.15);
+            padding: 16px;
+            border-radius: 4px;
+            margin-top: 16px;
+            border-left: 4px solid #d4af37;
+            color: #d4af37;
+            font-weight: 600;
+        }
+
+        /* Location & Maps */
+        .location-section {
+            background: #0f0600;
+        }
+
+        .location-section h2 {
+            margin-bottom: 50px;
+        }
+
+        .location-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: start;
+        }
+
+        .location-info h3 {
+            font-size: 20px;
+            margin-bottom: 24px;
+        }
+
+        .location-info p {
+            color: #d4d4d4;
+            margin-bottom: 16px;
+            font-size: 15px;
+        }
+
+        .address-box {
+            background: rgba(212, 175, 55, 0.08);
+            padding: 24px;
+            border-left: 4px solid #d4af37;
+            margin-top: 20px;
+            border-radius: 4px;
+        }
+
+        .address-box strong {
+            color: #d4af37;
+        }
+
+        .maps-embed {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+        }
+
+        .maps-embed iframe {
+            width: 100%;
+            height: 400px;
+            border: none;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background: linear-gradient(135deg, #1a0a00 0%, #2d1a0f 100%);
+            text-align: center;
+        }
+
+        .contact-section h2 {
+            margin-bottom: 50px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-top: 32px;
+            flex-wrap: wrap;
+        }
+
+        .social-link {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            background: rgba(212, 175, 55, 0.15);
+            border: 2px solid #d4af37;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: #d4af37;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            font-size: 20px;
+        }
+
+        .social-link:hover {
+            background: #d4af37;
+            color: #1a0a00;
+            transform: translateY(-4px);
+        }
+
+        /* Footer */
+        footer {
+            background: #000;
+            padding: 30px;
+            text-align: center;
+            font-size: 13px;
+            color: #888;
+        }
+
+        footer a {
+            color: #d4af37;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Rating */
+        .rating {
+            display: inline-block;
+            background: rgba(212, 175, 55, 0.15);
+            padding: 12px 24px;
+            border-radius: 4px;
+            border: 1px solid #d4af37;
+            color: #d4af37;
+            font-weight: 600;
+            margin-top: 20px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 54px;
+            }
+
+            h2 {
+                font-size: 36px;
+            }
+
+            .hero .tagline {
+                font-size: 18px;
+            }
+
+            .phone-cta {
+                font-size: 24px;
+                padding: 18px 36px;
+            }
+
+            .phone-number-display {
+                font-size: 36px;
+            }
+
+            .hours-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .location-content {
+                grid-template-columns: 1fr;
+            }
+
+            .maps-embed iframe {
+                height: 300px;
+            }
+
+            section {
+                padding: 50px 20px;
+            }
+
+            .hero {
+                padding: 40px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Demo Banner -->
+    <div class="demo-banner">
+        Tämä on demo — lopullinen sivusto rakennetaan yhdessä teidän toiveiden mukaan. <a href="https://preview.klarsystems.com/jalla-jalla-tampere/proposal/">Katso tarjous →</a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="subtitle">Tampere</div>
+            <h1>JALLA JALLA</h1>
+            <p class="tagline">Kebab • Pizza • Falafel</p>
+            <div class="rating">3.7 / 5 — 585 arvostelua</div>
+            <div class="phone-cta-container">
+                <a href="tel:+358321443776" class="phone-cta">Tilaa nyt</a>
+                <div class="phone-number-display">+358 3 214 4376</div>
+            </div>
+            <p style="color: #888; font-size: 13px; margin-top: 24px;">Soita ja tilaa nyt — avoinna viikonloppuina aamuviiteen saakka</p>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section class="menu-section">
+        <h2>Ruokalista</h2>
+        <div class="menu-grid">
+            <div class="menu-category">
+                <h3>Kebabit</h3>
+                <div class="menu-item">• Pitakebab</div>
+                <div class="menu-item">• Kebab-lautanen</div>
+                <div class="menu-item">• Lihakebab</div>
+            </div>
+            <div class="menu-category">
+                <h3>Pizzat</h3>
+                <div class="menu-item">• Perinteinen pizza</div>
+                <div class="menu-item">• Kebab-pizza</div>
+                <div class="menu-item">• Erikoispizzat</div>
+            </div>
+            <div class="menu-category">
+                <h3>Falafelit</h3>
+                <div class="menu-item">• Falafel-lautanen</div>
+                <div class="menu-item">• Falafel-rulla</div>
+            </div>
+            <div class="menu-category">
+                <h3>Salaatit</h3>
+                <div class="menu-item">• Tuore salaatti</div>
+                <div class="menu-item">• Arabisalaatti</div>
+            </div>
+        </div>
+        <p style="color: #888; font-size: 13px; margin-top: 40px; text-align: center;">Tämä on demo — ruokalista päivitetään yhdessä.</p>
+    </section>
+
+    <!-- Hours Section -->
+    <section class="hours-section">
+        <h2>Aukioloajat</h2>
+        <div class="hours-grid">
+            <div class="hours-box">
+                <h3>Arkisin & sunnuntai</h3>
+                <div class="hours-content">
+                    <strong>Maanantai – Torstai</strong><br>
+                    11:00 – 23:00<br><br>
+                    <strong>Sunnuntai</strong><br>
+                    12:00 – 22:00
+                </div>
+            </div>
+            <div class="hours-box">
+                <h3>Viikonloppu</h3>
+                <div class="hours-content">
+                    <strong>Perjantai & Lauantai</strong><br>
+                    11:00 – 05:00
+                </div>
+                <div class="highlight-late-night">
+                    🌙 Yksi Tampereen harvoista late-night kebab -paikoista. Avoimena viikonloppuina aamuviiteen!
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location Section -->
+    <section class="location-section">
+        <h2>Sijainti & Kartta</h2>
+        <div class="location-content">
+            <div class="location-info">
+                <h3>Löydä meidät</h3>
+                <p>Jalla Jalla sijaitsee Tampereella Näsilinnankadulla. Nopea, helppo ja myöhään auki — täydellinen paikka yökyöpeille ja nautijoille.</p>
+                <div class="address-box">
+                    <strong>Osoite</strong><br>
+                    Näsilinnankatu 16<br>
+                    33210 Tampere<br><br>
+                    <strong>Puhelinnumero</strong><br>
+                    <a href="tel:+358321443776" style="color: #d4af37; text-decoration: none; font-weight: 700;">+358 3 214 4376</a><br><br>
+                    <strong>Sähköposti</strong><br>
+                    <a href="mailto:jallajallaravintola@gmail.com" style="color: #d4af37; text-decoration: none;">jallajallaravintola@gmail.com</a>
+                </div>
+            </div>
+            <div class="maps-embed">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2043.5!2d23.7491!3d61.5075!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x468f5a59e9d47fed%3A0x4b8b0a48b17bc524!2sJalla%20Jalla!5e0!3m2!1sfi!2sfi!4v1744380000000" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <h2>Ota yhteyttä</h2>
+        <p style="font-size: 18px; color: #d4d4d4; margin-bottom: 32px;">Seuraa meitä sosiaalisessa mediassa tai ota yhteyttä suoraan</p>
+        <a href="tel:+358321443776" class="phone-cta">Soita & Tilaa</a>
+        <div class="social-links">
+            <a href="https://www.instagram.com/jallajallaravintola/" class="social-link" title="Instagram">📷</a>
+            <a href="https://www.facebook.com/RavintolaJallaJalla/" class="social-link" title="Facebook">f</a>
+            <a href="mailto:jallajallaravintola@gmail.com" class="social-link" title="Email">✉</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Jalla Jalla, Tampere. Powered by <a href="https://klarsystems.com">Klar</a> — Demo-versio</p>
+    </footer>
+</body>
+</html>

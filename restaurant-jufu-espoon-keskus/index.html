@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Jufu Espoon keskus — Asian Buffet in Espoo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #FFF8F0;
+            color: #2B2B2B;
+            line-height: 1.6;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #CC3333 0%, #8B0000 100%);
+            color: #FFFFFF;
+            padding: 100px 20px;
+            text-align: center;
+            min-height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            letter-spacing: -1px;
+        }
+
+        .hero .cuisine {
+            font-size: 20px;
+            font-weight: 400;
+            margin-bottom: 40px;
+            opacity: 0.95;
+        }
+
+        .hero .cta-button {
+            display: inline-block;
+            background: #FFF8F0;
+            color: #CC3333;
+            padding: 16px 40px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .hero .cta-button:hover {
+            background: #FFFFFF;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* About Section */
+        section {
+            padding: 60px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        section h2 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 32px;
+            color: #2B2B2B;
+        }
+
+        .about-content {
+            max-width: 700px;
+            font-size: 16px;
+            line-height: 1.8;
+        }
+
+        /* Menu Section */
+        .menu-section {
+            background: #F5F0E8;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 32px;
+        }
+
+        .menu-category {
+            background: #FFFFFF;
+            padding: 24px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .menu-category h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #CC3333;
+        }
+
+        .menu-category p {
+            font-size: 14px;
+            color: #555555;
+            line-height: 1.6;
+        }
+
+        /* Reviews Section */
+        .reviews-section {
+            background: #FFFFFF;
+        }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-top: 32px;
+        }
+
+        .review-card {
+            background: #F5F0E8;
+            padding: 24px;
+            border-left: 4px solid #CC3333;
+            border-radius: 4px;
+        }
+
+        .review-quote {
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 12px;
+            color: #2B2B2B;
+            font-style: italic;
+        }
+
+        .review-author {
+            font-size: 13px;
+            color: #888888;
+        }
+
+        /* Hours & Location Section */
+        .hours-section {
+            background: #FFFFFF;
+        }
+
+        .hours-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 32px;
+            max-width: 600px;
+        }
+
+        .hours-day {
+            background: #F5F0E8;
+            padding: 16px;
+            border-radius: 6px;
+        }
+
+        .hours-day strong {
+            display: block;
+            margin-bottom: 8px;
+            color: #CC3333;
+        }
+
+        .location-info {
+            background: #F5F0E8;
+            padding: 24px;
+            border-radius: 6px;
+            margin-top: 32px;
+            max-width: 600px;
+        }
+
+        .location-info p {
+            margin-bottom: 12px;
+        }
+
+        .location-info a {
+            color: #CC3333;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .location-info a:hover {
+            text-decoration: underline;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background: #F5F0E8;
+        }
+
+        .contact-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+            margin-top: 32px;
+        }
+
+        .contact-item {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .contact-item a {
+            display: inline-block;
+            background: #CC3333;
+            color: #FFFFFF;
+            padding: 16px 24px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item a:hover {
+            background: #8B0000;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(204, 51, 51, 0.3);
+        }
+
+        /* Demo Card - Booking Widget (Segment 1) */
+        .demo-section {
+            background: #FFFFFF;
+            padding: 60px 20px;
+        }
+
+        .demo-card {
+            max-width: 480px;
+            margin: 0 auto;
+            background: #FFFFFF;
+            border: 2px solid #CC3333;
+            border-radius: 12px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: 0 4px 16px rgba(204, 51, 51, 0.1);
+        }
+
+        .demo-card h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #2B2B2B;
+        }
+
+        .demo-card .subtitle {
+            font-size: 14px;
+            color: #888888;
+            margin-bottom: 24px;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #555555;
+            text-transform: uppercase;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #DDD6C8;
+            border-radius: 6px;
+            font-size: 14px;
+            font-family: inherit;
+            background: #F5F0E8;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #CC3333;
+            background: #FFFFFF;
+        }
+
+        .reserve-button {
+            width: 100%;
+            padding: 16px;
+            background: #CC3333;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 16px;
+        }
+
+        .reserve-button:hover {
+            background: #8B0000;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(204, 51, 51, 0.3);
+        }
+
+        .demo-caption {
+            font-size: 12px;
+            color: #888888;
+            margin-top: 20px;
+        }
+
+        /* Footer */
+        footer {
+            background: #2B2B2B;
+            color: #FFFFFF;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        footer p {
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            section {
+                padding: 40px 20px;
+            }
+
+            section h2 {
+                font-size: 24px;
+            }
+
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .reviews-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-links {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <div class="hero">
+        <h1>Restaurant Jufu</h1>
+        <p class="cuisine">Espoon keskus — Authentic Asian buffet</p>
+        <a href="#menu" class="cta-button">See the menu</a>
+    </div>
+
+    <!-- About Section -->
+    <section class="about-section">
+        <h2>About us</h2>
+        <div class="about-content">
+            <p>Restaurant Jufu is a beloved spot in Espoon keskus (Entresse shopping center) bringing fresh Asian cuisine to Espoo. With a focus on quality ingredients and authentic preparation, we offer both all-you-can-eat buffet and à la carte options. Whether you're looking for a quick lunch or a full dinner experience, Jufu delivers consistent, delicious Asian food with a welcoming atmosphere.</p>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section class="menu-section" id="menu">
+        <h2>Menu</h2>
+        <div class="menu-grid">
+            <div class="menu-category">
+                <h3>Appetizers</h3>
+                <p>Fresh spring rolls, edamame, gyoza, and vegetable tempura. Perfect starters to share.</p>
+            </div>
+            <div class="menu-category">
+                <h3>Noodles & Rice</h3>
+                <p>Pad Thai, lo mein, fried rice with chicken or beef. Cooked fresh to your preference.</p>
+            </div>
+            <div class="menu-category">
+                <h3>Main Dishes</h3>
+                <p>Curries, stir-fries with meat and vegetables. Choose your spice level and protein.</p>
+            </div>
+            <div class="menu-category">
+                <h3>Sushi</h3>
+                <p>Fresh rolls, nigiri, and sashimi selection. Quality fish and expert preparation.</p>
+            </div>
+            <div class="menu-category">
+                <h3>Buffet Service</h3>
+                <p>All-you-can-eat lunch and evening service. Full selection of starters, mains, and desserts.</p>
+            </div>
+            <div class="menu-category">
+                <h3>Desserts & Drinks</h3>
+                <p>Mango sticky rice, spring rolls, soft drinks, and beer selection available.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section class="reviews-section">
+        <h2>What guests say</h2>
+        <div class="reviews-grid">
+            <div class="review-card">
+                <p class="review-quote">"Great buffet with a good selection of fresh dishes. The sushi is always excellent."</p>
+                <p class="review-author">Based on 706 Google reviews • 3.9★ average rating</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hours & Location Section -->
+    <section class="hours-section">
+        <h2>Hours & Location</h2>
+        <div class="hours-grid">
+            <div class="hours-day">
+                <strong>Mon–Fri</strong>
+                10:30 – 21:00
+            </div>
+            <div class="hours-day">
+                <strong>Sat–Sun</strong>
+                11:30 – 21:00
+            </div>
+        </div>
+        <div class="location-info">
+            <p><strong>Address:</strong><br>Kauppakeskus Entresse<br>Siltakatu 11<br>02770 Espoo, Finland</p>
+            <p><strong>Phone:</strong><br><a href="tel:+358942890558">+358 9 4289 0558</a></p>
+            <p><a href="https://www.google.com/maps/search/Restaurant+Jufu+Espoon+keskus/@60.202,24.8328" target="_blank" rel="noopener">View on Google Maps →</a></p>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <h2>Contact</h2>
+        <div class="contact-links">
+            <div class="contact-item">
+                <a href="tel:+358942890558">📞 Call us</a>
+            </div>
+            <div class="contact-item">
+                <a href="https://www.facebook.com/ravintolajufu/" target="_blank" rel="noopener">f Facebook</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Card: Booking Widget (Segment 1) -->
+    <section class="demo-section">
+        <div class="demo-card">
+            <h3>Book a Table</h3>
+            <p class="subtitle">Reserve in seconds — no fees, no account needed.</p>
+            <form onsubmit="event.preventDefault(); return false;">
+                <div class="form-group">
+                    <label for="date">Date</label>
+                    <input type="date" id="date" name="date" required>
+                </div>
+                <div class="form-group">
+                    <label for="time">Time</label>
+                    <select id="time" name="time" required>
+                        <option value="">Select a time</option>
+                        <option value="17:00">17:00</option>
+                        <option value="17:30">17:30</option>
+                        <option value="18:00">18:00</option>
+                        <option value="18:30">18:30</option>
+                        <option value="19:00">19:00</option>
+                        <option value="19:30">19:30</option>
+                        <option value="20:00">20:00</option>
+                        <option value="20:30">20:30</option>
+                        <option value="21:00">21:00</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="guests">Party size</label>
+                    <select id="guests" name="guests" required>
+                        <option value="">Select guests</option>
+                        <option value="1">1 guest</option>
+                        <option value="2" selected>2 guests</option>
+                        <option value="3">3 guests</option>
+                        <option value="4">4 guests</option>
+                        <option value="5">5 guests</option>
+                        <option value="6">6 guests</option>
+                        <option value="7">7 guests</option>
+                        <option value="8">8 guests</option>
+                    </select>
+                </div>
+                <button type="button" class="reserve-button">Reserve Now</button>
+            </form>
+            <p class="demo-caption">Powered by Klar Bookings — no fees, no commissions.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>Restaurant Jufu Espoon keskus</p>
+        <p>© 2026</p>
+    </footer>
+</body>
+</html>
