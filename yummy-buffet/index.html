@@ -4,345 +4,565 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
-<title>Yummy Buffet — Yummy Buffet — Aasialainen buffet Helsingissä</title>
-<meta name="description" content="Laadukas aasialainen buffet Kaisaniemessä. Sushi, nuudelit, kastikkeet ja paljon muuta.">
+<title>Yummy Buffet — All-day Asian buffet on Kaisaniemenkatu, Helsinki</title>
 <style>
-  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-
-  /* === TEMPLATE COLOR VARIABLES — set per restaurant === */
-  :root{
-    --bg:#FFF8F0;
-    --ink:#2B2B2B;
-    --ink-soft:#555555;
-    --accent:#CC3333;
-    --accent-deep:#991F1F;
-    --hero-bg:linear-gradient(135deg, #2B1A1A 0%, #4A1E1E 50%, #2B2B2B 100%);
-    --hero-text:#FFFFFF;
-    --hero-tag:#CC3333;
-    --hero-meta:#CCBBAA;
-    --menu-bg:#FFF3E8;
-    --menu-text:#2B2B2B;
-    --menu-cat:#CC3333;
-    --card-bg:#FFFFFF;
-    --line:#E8DDD0;
-    --muted:#8B7D6B;
-    --nav-bg:#2B2B2B;
-  }
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
   html{scroll-behavior:smooth}
-  body{
-    font-family:'DM Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
-    font-size:17px;line-height:1.6;color:var(--ink);background:var(--bg);
-    -webkit-font-smoothing:antialiased;
+  :root{
+    --bg:#0F1A14;
+    --bg-soft:#15241D;
+    --bg-card:#1A2D24;
+    --bg-raised:#1E342A;
+    --text:#F2EAD3;
+    --muted:rgba(242,234,211,0.62);
+    --mute-strong:rgba(242,234,211,0.86);
+    --primary:#C8392E;
+    --primary-hi:#E04A3E;
+    --accent:#E0A53A;
+    --accent-soft:rgba(224,165,58,0.18);
+    --rule:#26392F;
+    --jade:#3F8C6E;
+    --serif:'Playfair Display','Noto Serif','Georgia',Cambria,serif;
+    --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
+    --mono:'SF Mono','Menlo','Consolas',monospace;
   }
+  html,body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.6;-webkit-font-smoothing:antialiased}
+  body{min-height:100vh}
   a{color:inherit;text-decoration:none}
-  .container{max-width:1100px;margin:0 auto;padding:0 20px}
-  @media(min-width:768px){.container{padding:0 40px}}
+  img{max-width:100%;display:block}
 
-  /* NAV */
-  nav{
-    position:sticky;top:0;z-index:10;background:var(--nav-bg);
-    backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
-  }
-  .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:18px 20px;max-width:1100px;margin:0 auto}
-  .logo{font-size:22px;font-weight:700;letter-spacing:-.5px;color:var(--accent)}
-  .nav-links{display:none;gap:32px;font-size:15px;font-weight:500}
+  /* —— Demo banner —— */
+  .demo-banner{background:#091210;border-bottom:1px solid var(--rule);font-size:13px}
+  .demo-banner .inner{max-width:1200px;margin:0 auto;padding:11px 24px;display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center;justify-content:space-between;color:var(--mute-strong)}
+  .demo-banner strong{color:var(--accent);font-weight:700;letter-spacing:0.08em;text-transform:uppercase;font-size:11px;margin-right:6px}
+  .demo-banner a.cta{color:var(--bg);background:var(--accent);padding:7px 14px;font-weight:700;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;border-radius:2px}
+  .demo-banner a.cta:hover{background:#fff}
+
+  .container{max-width:1200px;margin:0 auto;padding:0 24px}
+
+  /* —— Top nav —— */
+  .nav{border-bottom:1px solid var(--rule);background:rgba(15,26,20,0.92);backdrop-filter:blur(8px);position:sticky;top:0;z-index:30}
+  .nav .inner{max-width:1200px;margin:0 auto;padding:20px 24px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+  .wordmark{display:flex;align-items:baseline;gap:12px;font-family:var(--serif);font-size:23px;letter-spacing:-0.01em}
+  .wordmark .y{color:var(--accent);font-weight:700;font-style:italic}
+  .wordmark .sub{font-family:var(--sans);font-size:10px;letter-spacing:0.32em;text-transform:uppercase;color:var(--muted)}
+  .nav-links{display:flex;gap:28px;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted)}
   .nav-links a:hover{color:var(--accent)}
-  @media(min-width:768px){.nav-links{display:flex}}
+  .nav-phone{font-family:var(--serif);font-size:17px;color:var(--accent)}
+  .nav-phone:hover{color:#fff}
+  @media (max-width:900px){.nav-links{display:none}}
 
-  /* HERO */
-  .hero{
-    position:relative;min-height:72vh;display:flex;align-items:center;
-    background:
-      radial-gradient(circle at 20% 20%, rgba(204,51,51,.22) 0%, transparent 50%),
-      radial-gradient(circle at 80% 80%, rgba(122,31,31,.35) 0%, transparent 55%),
-      linear-gradient(135deg,#2B1A17 0%,#4A1F1A 50%,#2B1A17 100%);
-    color:#FFF8F0;overflow:hidden;
-  }
-  .hero::before{
-    content:"";position:absolute;inset:0;
-    background:repeating-linear-gradient(45deg,transparent 0,transparent 80px,rgba(255,248,240,.015) 80px,rgba(255,248,240,.015) 81px);
-    pointer-events:none;
-  }
-  .hero-inner{position:relative;padding:100px 20px;width:100%;max-width:1100px;margin:0 auto}
-  @media(min-width:768px){.hero-inner{padding:140px 40px}}
-  .hero-tag{
-    display:inline-block;font-size:13px;font-weight:600;letter-spacing:2px;
-    text-transform:uppercase;color:#F5C58C;border:1px solid rgba(245,197,140,.4);
-    padding:8px 16px;margin-bottom:28px;
-  }
-  h1.hero-title{
-    font-size:clamp(44px,8vw,88px);font-weight:700;line-height:1.05;
-    letter-spacing:-2px;margin-bottom:24px;
-  }
-  .hero-subtitle{font-size:clamp(18px,2.4vw,24px);font-weight:300;color:#F5E6D3;max-width:620px;margin-bottom:44px}
-  .hero-meta{display:flex;gap:32px;flex-wrap:wrap;font-size:14px;color:#F5C58C;margin-bottom:44px}
-  .hero-meta span{display:flex;align-items:center;gap:8px}
-  .cta-row{display:flex;gap:16px;flex-wrap:wrap}
-  .btn{
-    display:inline-block;padding:16px 32px;font-size:16px;font-weight:600;
-    letter-spacing:.3px;cursor:pointer;border:none;transition:transform .15s;
-  }
-  .btn:hover{transform:translateY(-2px)}
-  .btn-primary{background:#CC3333;color:#FFF8F0}
-  .btn-ghost{background:transparent;color:#FFF8F0;border:1px solid rgba(255,248,240,.35)}
+  /* —— Hero — buffet stations strip —— */
+  .hero{padding:80px 0 100px;position:relative;overflow:hidden}
+  .hero::before{content:"";position:absolute;left:0;right:0;top:0;height:1px;background:linear-gradient(90deg,transparent,var(--jade) 25%,var(--accent) 50%,var(--primary) 75%,transparent)}
+  .hero .grid{display:grid;grid-template-columns:1.05fr 0.95fr;gap:64px;align-items:center}
+  @media (max-width:980px){.hero{padding:56px 0 72px}.hero .grid{grid-template-columns:1fr;gap:48px}}
+  .eyebrow{font-size:12px;letter-spacing:0.22em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:24px;display:flex;align-items:center;gap:14px}
+  .eyebrow::before{content:"";flex:0 0 32px;height:1px;background:var(--accent)}
+  .hero h1{font-family:var(--serif);font-size:clamp(48px,8vw,102px);line-height:0.98;letter-spacing:-0.018em;font-weight:700}
+  .hero h1 .it{font-style:italic;color:var(--accent);font-weight:400}
+  .hero h1 .dot{color:var(--primary-hi);font-weight:700;font-style:normal}
+  .hero .tagline{margin-top:26px;font-size:19px;line-height:1.55;color:var(--mute-strong);max-width:540px}
+  .hero .tagline em{font-family:var(--serif);font-style:italic;color:var(--accent);font-weight:400}
+  .hero .meta-row{margin-top:32px;display:flex;flex-wrap:wrap;gap:14px 28px;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)}
+  .hero .meta-row span{display:flex;align-items:center;gap:10px}
+  .hero .meta-row span::before{content:"";width:6px;height:6px;background:var(--jade);transform:rotate(45deg);display:inline-block}
+  .hero-cta{margin-top:40px;display:flex;flex-wrap:wrap;gap:14px}
+  .btn{display:inline-flex;align-items:center;gap:10px;padding:17px 26px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;font-size:12px;border:1.5px solid transparent;transition:all 0.18s ease;cursor:pointer;border-radius:2px}
+  .btn-primary{background:var(--primary);color:var(--text)}
+  .btn-primary:hover{background:var(--primary-hi);transform:translateY(-1px)}
+  .btn-outline{border-color:var(--text);color:var(--text);background:transparent}
+  .btn-outline:hover{border-color:var(--accent);color:var(--accent)}
+  .btn-gold{background:var(--accent);color:var(--bg)}
+  .btn-gold:hover{background:#fff}
 
-  /* SECTION */
-  section{padding:90px 0}
-  @media(max-width:767px){section{padding:60px 0}}
-  .section-label{
-    font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;
-    color:#CC3333;margin-bottom:16px;
-  }
-  h2{font-size:clamp(32px,5vw,52px);font-weight:700;line-height:1.1;letter-spacing:-1px;margin-bottom:28px;color:#2B2B2B}
-  .lead{font-size:19px;color:#5A4A42;max-width:720px;line-height:1.65}
+  /* —— Hero image stack: "stations" tile preview —— */
+  .stations-stack{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1.2fr 1fr;gap:14px;height:520px}
+  @media (max-width:980px){.stations-stack{height:440px}}
+  .station-tile{position:relative;background:var(--bg-card);border:1px solid var(--rule);overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:24px}
+  .station-tile.tall{grid-row:span 2}
+  .station-tile::before{content:"";position:absolute;inset:0;background:linear-gradient(160deg,transparent 30%,rgba(15,26,20,0.78) 100%);z-index:1}
+  .station-tile .ph-bg{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:9px;letter-spacing:0.3em;text-transform:uppercase;text-align:center;padding:10px}
+  .station-tile .ph-bg.tile-sushi{background:radial-gradient(circle at 35% 30%,rgba(200,57,46,0.22),transparent 60%),linear-gradient(150deg,#1d342a,#0e1a14)}
+  .station-tile .ph-bg.tile-thai{background:radial-gradient(circle at 60% 40%,rgba(224,165,58,0.20),transparent 60%),linear-gradient(160deg,#1d342a,#0e1a14)}
+  .station-tile .ph-bg.tile-wok{background:radial-gradient(circle at 30% 60%,rgba(63,140,110,0.22),transparent 60%),linear-gradient(140deg,#1d342a,#0e1a14)}
+  .station-tile .ph-bg.tile-dessert{background:radial-gradient(circle at 50% 50%,rgba(242,234,211,0.10),transparent 60%),linear-gradient(170deg,#1d342a,#0e1a14)}
+  .station-tile .label{position:relative;z-index:2}
+  .station-tile .label .num{font-family:var(--serif);font-style:italic;color:var(--accent);font-size:14px;letter-spacing:0.04em;display:block;margin-bottom:4px}
+  .station-tile .label .name{font-family:var(--serif);font-size:22px;line-height:1.15;color:var(--text)}
+  .station-tile .label .sub{font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:var(--muted);margin-top:6px}
+  .station-tile .ph-text{position:relative;z-index:2;align-self:flex-start;font-family:var(--mono);font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);background:rgba(15,26,20,0.7);padding:5px 9px;border:1px solid var(--rule);margin-bottom:auto}
 
-  /* ABOUT */
-  .about{background:#FFF8F0}
-  .about-grid{display:grid;gap:50px;align-items:center}
-  @media(min-width:900px){.about-grid{grid-template-columns:1.2fr .8fr;gap:80px}}
-  .about-visual{
-    aspect-ratio:4/5;border-radius:2px;
-    background:
-      radial-gradient(circle at 30% 30%, rgba(204,51,51,.35) 0%, transparent 55%),
-      linear-gradient(160deg,#7A1F1F 0%,#4A1F1A 45%,#2B1A17 100%);
-    position:relative;overflow:hidden;min-height:360px;
-  }
-  .about-visual::after{
-    content:"九九";position:absolute;right:-20px;bottom:-60px;
-    font-size:280px;font-weight:700;color:rgba(255,248,240,.08);line-height:1;
-  }
-  .about-visual::before{
-    content:"";position:absolute;inset:30px;border:1px solid rgba(245,197,140,.2);
-  }
+  /* —— Section frame —— */
+  .section{padding:104px 0;border-top:1px solid var(--rule);position:relative}
+  .section-eyebrow{font-family:var(--serif);font-style:italic;font-size:14px;color:var(--primary-hi);margin-bottom:14px;letter-spacing:0.02em}
+  .section-title{font-family:var(--serif);font-size:clamp(36px,5.4vw,64px);line-height:1.04;letter-spacing:-0.012em;margin-bottom:24px;max-width:820px;font-weight:700}
+  .section-title em{font-style:italic;color:var(--accent);font-weight:400}
+  .section-intro{font-size:17px;line-height:1.65;color:var(--mute-strong);max-width:640px;margin-bottom:60px}
 
-  /* MENU */
-  .menu{background:#2B1A17;color:#FFF8F0}
-  .menu .section-label{color:#F5C58C}
-  .menu h2{color:#FFF8F0}
-  .menu .lead{color:rgba(255,248,240,.75)}
-  .menu-grid{display:grid;gap:60px;margin-top:60px}
-  @media(min-width:768px){.menu-grid{grid-template-columns:1fr 1fr;gap:60px 80px}}
-  .menu-cat h3{
-    font-size:22px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;
-    color:#F5C58C;padding-bottom:14px;margin-bottom:22px;
-    border-bottom:1px solid rgba(245,197,140,.25);
-  }
-  .menu-item{display:flex;justify-content:space-between;gap:20px;padding:14px 0;border-bottom:1px dashed rgba(255,248,240,.08)}
-  .menu-item:last-child{border-bottom:none}
-  .menu-item-name{font-weight:500;flex:1}
-  .menu-item-desc{font-size:14px;color:rgba(255,248,240,.55);margin-top:4px;font-weight:300}
-  .menu-item-price{font-weight:600;color:#F5C58C;white-space:nowrap}
-  .menu-note{
-    margin-top:50px;padding:24px;background:rgba(255,248,240,.05);
-    border-left:3px solid #CC3333;font-size:15px;color:rgba(255,248,240,.75);
-  }
+  /* —— Stations grid (full menu categories) —— */
+  .stations-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  @media (max-width:880px){.stations-grid{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:540px){.stations-grid{grid-template-columns:1fr}}
+  .station-card{background:var(--bg-card);border:1px solid var(--rule);padding:30px 28px 26px;display:flex;flex-direction:column;gap:14px;transition:border-color 0.18s ease, transform 0.18s ease}
+  .station-card:hover{border-color:var(--accent);transform:translateY(-2px)}
+  .station-card .num{font-family:var(--serif);font-style:italic;font-size:38px;color:var(--primary-hi);line-height:1}
+  .station-card h3{font-family:var(--serif);font-size:21px;line-height:1.2;color:var(--text);font-weight:700}
+  .station-card .desc{font-size:13px;line-height:1.55;color:var(--muted)}
 
-  /* HOURS & LOCATION */
-  .visit{background:#FFF8F0}
-  .visit-grid{display:grid;gap:40px;margin-top:40px}
-  @media(min-width:768px){.visit-grid{grid-template-columns:1fr 1fr;gap:60px}}
-  .visit-block h3{font-size:13px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:#CC3333;margin-bottom:22px}
-  .hours-list{list-style:none}
-  .hours-list li{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid rgba(43,43,43,.08);font-size:16px}
-  .hours-list li:last-child{border-bottom:none}
-  .hours-list .day{font-weight:500}
-  .hours-list .time{color:#5A4A42}
-  .hours-list .closed{color:#CC3333;font-weight:500}
-  .address-block{font-size:17px;line-height:1.8}
-  .address-block strong{display:block;font-size:19px;margin-bottom:6px;color:#2B2B2B}
-  .map-link{
-    display:inline-block;margin-top:20px;padding:12px 24px;
-    background:#CC3333;color:#FFF8F0;font-size:14px;font-weight:600;letter-spacing:.5px;
-  }
-  .map-link:hover{background:#A82828}
+  /* —— Featured dish row —— */
+  .featured-row{margin-top:60px;display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  @media (max-width:880px){.featured-row{grid-template-columns:1fr}}
+  .dish-card{background:var(--bg-soft);border:1px solid var(--rule);border-left:3px solid var(--accent);padding:26px;display:flex;flex-direction:column;gap:14px;min-height:170px}
+  .dish-card .name{font-family:var(--serif);font-size:18px;line-height:1.25;color:var(--text);font-weight:700}
+  .dish-card .price-row{display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:14px;border-top:1px solid var(--rule)}
+  .dish-card .price{font-family:var(--serif);font-size:20px;color:var(--accent);font-weight:700}
+  .dish-card .badge{font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:var(--muted)}
 
-  /* CONTACT */
-  .contact-sec{background:#4A1F1A;color:#FFF8F0}
-  .contact-sec .section-label{color:#F5C58C}
-  .contact-sec h2{color:#FFF8F0}
-  .contact-grid{display:grid;gap:24px;margin-top:48px}
-  @media(min-width:640px){.contact-grid{grid-template-columns:repeat(2,1fr)}}
-  .contact-card{
-    padding:28px;background:rgba(255,248,240,.05);
-    border:1px solid rgba(255,248,240,.1);transition:background .2s;
-  }
-  .contact-card:hover{background:rgba(255,248,240,.08)}
-  .contact-card small{display:block;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#F5C58C;margin-bottom:10px}
-  .contact-card .big{font-size:22px;font-weight:600}
-  @media(min-width:768px){.contact-card .big{font-size:26px}}
+  .menu-cta{margin-top:44px;display:flex;flex-wrap:wrap;gap:24px;align-items:center;justify-content:space-between;padding:30px 32px;background:var(--bg-card);border-left:3px solid var(--primary)}
+  .menu-cta .text{font-size:15px;line-height:1.6;color:var(--mute-strong);max-width:560px}
+  .menu-cta .text strong{color:var(--accent);display:block;margin-bottom:4px;font-family:var(--serif);font-size:17px;font-weight:700}
 
-  /* RESTAURANT FOOTER */
-  /* Demo booking widget */
-  .book-sec{background:#3B1714;padding:80px 20px;color:#FFF8F0}
-  .book-card{max-width:480px;margin:0 auto;background:#4A1F1A;border:1px solid rgba(245,197,140,.25);border-radius:14px;padding:36px 28px;box-shadow:0 20px 60px rgba(0,0,0,.35)}
-  @media(min-width:640px){.book-card{padding:44px 40px}}
-  .book-card .section-label{font-size:12px;letter-spacing:3px;text-transform:uppercase;color:#F5C58C;text-align:center;margin-bottom:14px}
-  .book-card h2{font-family:Georgia,'Times New Roman',serif;font-size:34px;font-weight:700;color:#FFF8F0;text-align:center;margin:0 0 10px}
-  @media(min-width:640px){.book-card h2{font-size:40px}}
-  .book-card .book-sub{text-align:center;color:rgba(255,248,240,.7);font-size:14px;margin-bottom:28px;line-height:1.5}
-  .book-form{display:grid;gap:14px}
-  @media(min-width:520px){.book-form{grid-template-columns:1fr 1fr;gap:14px}.book-form .field-full{grid-column:1/-1}}
-  .book-field{display:flex;flex-direction:column;gap:6px}
-  .book-field label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#F5C58C;font-weight:600}
-  .book-field input,.book-field select{background:#2B1A17;border:1px solid rgba(245,197,140,.3);border-radius:8px;padding:14px 14px;color:#FFF8F0;font-family:inherit;font-size:15px;appearance:none;-webkit-appearance:none}
-  .book-field input:focus,.book-field select:focus{outline:none;border-color:#CC3333;box-shadow:0 0 0 3px rgba(204,51,51,.2)}
-  .book-field select{background-image:linear-gradient(45deg,transparent 50%,#F5C58C 50%),linear-gradient(135deg,#F5C58C 50%,transparent 50%);background-position:calc(100% - 18px) 50%,calc(100% - 13px) 50%;background-size:5px 5px,5px 5px;background-repeat:no-repeat;padding-right:40px}
-  .book-field input::-webkit-calendar-picker-indicator{filter:invert(1) sepia(1) saturate(3) hue-rotate(350deg)}
-  .book-cta{margin-top:22px;width:100%;background:#CC3333;color:#FFF8F0;border:none;border-radius:8px;padding:18px 20px;font-size:15px;font-weight:700;letter-spacing:1px;text-transform:uppercase;cursor:pointer;font-family:inherit;transition:background .15s}
-  .book-cta:hover{background:#B82828}
-  .book-caption{margin-top:14px;text-align:center;font-size:12px;color:rgba(255,248,240,.55);letter-spacing:.3px}
-  footer.rest-footer{background:#2B1A17;color:rgba(255,248,240,.55);padding:44px 20px;text-align:center;font-size:14px}
-  footer.rest-footer .brand{color:#CC3333;font-weight:700;font-size:18px;margin-bottom:8px;display:block}
+  /* —— Story / About —— */
+  .story-layout{display:grid;grid-template-columns:1fr 0.9fr;gap:72px;align-items:center}
+  @media (max-width:980px){.story-layout{grid-template-columns:1fr;gap:44px}}
+  .story-text p{font-size:18px;line-height:1.7;color:var(--mute-strong);margin-bottom:18px}
+  .story-text .pull-quote{font-family:var(--serif);font-style:italic;font-size:28px;line-height:1.32;color:var(--accent);border-left:3px solid var(--primary);padding:6px 0 6px 22px;margin:30px 0;font-weight:400}
+  .story-text cite{display:block;margin-top:12px;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);font-style:normal}
+  .story-side .ph-card{aspect-ratio:3/4;background:linear-gradient(150deg,#1e342a,#0e1a14);border:1px solid var(--rule);position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:30px;overflow:hidden}
+  .story-side .ph-card::before{content:"";position:absolute;inset:18px;border:1px solid rgba(224,165,58,0.22)}
+  .story-side .ph-card .ph-label{text-align:center;color:var(--muted);font-size:10px;letter-spacing:0.3em;text-transform:uppercase;z-index:2;max-width:220px;line-height:1.8}
+  .story-side .ph-card .ph-label strong{display:block;font-family:var(--serif);font-style:italic;font-size:46px;color:var(--accent);margin-bottom:14px;letter-spacing:normal;text-transform:none}
 
+  /* —— Reviews —— */
+  .reviews-top{display:grid;grid-template-columns:auto 1fr;gap:48px;align-items:end;margin-bottom:50px}
+  @media (max-width:720px){.reviews-top{grid-template-columns:1fr;gap:20px}}
+  .rating-block .rating-num{font-family:var(--serif);font-size:104px;line-height:1;color:var(--accent);font-weight:700}
+  .rating-block .rating-label{margin-top:10px;font-size:13px;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted)}
+  .rating-desc{font-size:18px;line-height:1.6;color:var(--mute-strong);max-width:480px}
+  .rating-desc em{color:var(--accent);font-style:italic;font-family:var(--serif);font-weight:400}
+  .quotes-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+  @media (max-width:720px){.quotes-grid{grid-template-columns:1fr}}
+  .quote-card{padding:32px;background:var(--bg-card);border:1px solid var(--rule);border-top:2px solid var(--primary);position:relative}
+  .quote-card::before{content:"\201C";position:absolute;top:8px;left:18px;font-family:var(--serif);font-size:54px;color:var(--primary);opacity:0.55;line-height:1}
+  .quote-card blockquote{font-family:var(--serif);font-size:19px;line-height:1.5;color:var(--text);padding-left:4px;padding-top:18px}
+  .quote-card cite{display:block;margin-top:18px;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);font-style:normal}
+  .quote-card.wide{grid-column:1/-1;background:transparent;border:1px dashed var(--rule);padding:22px 28px;display:flex;flex-wrap:wrap;align-items:center;gap:18px}
+  .quote-card.wide::before{display:none}
+  .quote-card.wide blockquote{font-size:16px;padding:0;color:var(--mute-strong);font-family:var(--sans);font-style:italic}
+  .quote-card.wide cite{margin:0;padding-left:18px;border-left:1px solid var(--rule)}
+
+  /* —— Booking widget (Klar Bookings demo) —— */
+  .booking-card{background:var(--bg-card);border:1px solid var(--rule);padding:52px;display:grid;grid-template-columns:0.9fr 1.1fr;gap:52px;align-items:center;border-top:3px solid var(--primary)}
+  @media (max-width:880px){.booking-card{grid-template-columns:1fr;padding:32px;gap:30px}}
+  .booking-card .booking-title{font-family:var(--serif);font-size:32px;line-height:1.15;margin-bottom:14px;font-weight:700}
+  .booking-card .booking-title em{color:var(--accent);font-style:italic;font-weight:400}
+  .booking-card .booking-desc{font-size:15px;color:var(--muted);line-height:1.65;margin-bottom:22px}
+  .booking-card .booking-badge{display:inline-block;font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:var(--accent);border:1px solid var(--accent);padding:6px 12px;margin-bottom:22px;border-radius:2px}
+  .booking-form{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .booking-form .full{grid-column:1/-1}
+  .booking-form label{display:block;font-size:10px;letter-spacing:0.24em;text-transform:uppercase;color:var(--muted);margin-bottom:7px}
+  .booking-form .field{background:var(--bg);border:1px solid var(--rule);padding:14px 16px;font-family:var(--sans);font-size:14px;color:var(--text);cursor:pointer;display:flex;align-items:center;justify-content:space-between;border-radius:2px}
+  .booking-form .field:hover{border-color:var(--accent)}
+  .booking-form .field .chev{color:var(--muted);font-size:10px}
+
+  /* —— Hours & location —— */
+  .hl-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px}
+  @media (max-width:880px){.hl-grid{grid-template-columns:1fr;gap:40px}}
+  .hours-heading{font-family:var(--serif);font-size:24px;margin-bottom:22px;color:var(--accent);font-weight:700}
+  .hours-line{display:flex;justify-content:space-between;padding:11px 0;border-bottom:1px solid var(--rule);font-size:15px;color:var(--mute-strong)}
+  .hours-line .day{letter-spacing:0.12em;text-transform:uppercase;font-size:12px;color:var(--muted)}
+  .hours-line .time{font-family:var(--serif);font-size:16px;color:var(--text)}
+  .hours-note{margin-top:18px;font-size:13px;color:var(--muted);line-height:1.6}
+  .location-block{background:var(--bg-card);border:1px solid var(--rule);padding:32px;display:flex;flex-direction:column;gap:20px}
+  .location-block address{font-style:normal;font-family:var(--serif);font-size:21px;line-height:1.4;color:var(--text)}
+  .location-block address span{display:block;font-family:var(--sans);font-size:13px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-top:8px}
+  .map-frame{aspect-ratio:16/10;background:linear-gradient(135deg,#1d342a,#0d1812);border:1px dashed var(--rule);display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--muted);font-size:11px;letter-spacing:0.22em;text-transform:uppercase;gap:8px;padding:18px;text-align:center}
+  .map-frame .pin{width:14px;height:14px;border:2px solid var(--accent);border-radius:50%;position:relative}
+  .map-frame .pin::after{content:"";position:absolute;left:50%;top:100%;transform:translateX(-50%);border:5px solid transparent;border-top-color:var(--accent)}
+
+  /* —— Contact —— */
+  .contact-row{display:grid;grid-template-columns:1.2fr 1fr;gap:52px;align-items:start}
+  @media (max-width:880px){.contact-row{grid-template-columns:1fr;gap:32px}}
+  .phone-huge{display:block;font-family:var(--serif);font-size:clamp(36px,5.6vw,58px);line-height:1;color:var(--accent);margin-bottom:18px;font-weight:700;letter-spacing:0.01em}
+  .phone-huge:hover{color:#fff}
+  .contact-desc{font-size:15px;color:var(--muted);max-width:440px;line-height:1.7}
+  .channels{display:flex;flex-direction:column;gap:10px;margin-top:4px}
+  .channels a{padding:16px 22px;border:1px solid var(--rule);display:flex;align-items:center;justify-content:space-between;font-size:13px;letter-spacing:0.05em;color:var(--mute-strong);transition:all 0.18s ease;gap:14px;background:var(--bg-soft)}
+  .channels a:hover{border-color:var(--accent);color:var(--accent)}
+  .channels a .platform{font-family:var(--serif);font-style:italic;color:var(--accent)}
+
+  /* —— Footer —— */
+  footer{padding:64px 0 36px;border-top:1px solid var(--rule);margin-top:56px;background:#0a1410}
+  footer .grid{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:36px;margin-bottom:36px}
+  @media (max-width:720px){footer .grid{grid-template-columns:1fr;gap:26px}}
+  footer h4{font-size:10px;letter-spacing:0.25em;text-transform:uppercase;color:var(--muted);margin-bottom:14px;font-weight:700}
+  footer p,footer a{font-size:14px;color:var(--mute-strong);line-height:1.85}
+  footer a:hover{color:var(--accent)}
+  footer .tagline{font-family:var(--serif);font-size:16px;color:var(--text);line-height:1.5;max-width:340px;margin-top:10px;font-style:italic}
+  footer .bottom{padding-top:26px;border-top:1px solid var(--rule);display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;font-size:11px;color:var(--muted);letter-spacing:0.08em}
+  footer .bottom a.klar{color:var(--muted);letter-spacing:0.12em;text-transform:uppercase;font-size:11px}
+  footer .bottom a.klar:hover{color:var(--accent)}
 </style>
 </head>
 <body>
 
-<nav>
-  <div class="nav-inner">
-    <div class="logo">Yummy Buffet</div>
-    <div class="nav-links">
+<div class="demo-banner">
+  <div class="inner">
+    <span><strong>This is a demo.</strong> A Klar Systems preview built for Yummy Buffet.</span>
+    <a class="cta" href="https://preview.klarsystems.com/yummy-buffet/proposal/">See the proposal →</a>
+  </div>
+</div>
+
+<nav class="nav">
+  <div class="inner">
+    <a href="#top" class="wordmark"><span class="y">Y</span>ummy Buffet <span class="sub">Kaisaniemi</span></a>
+    <span class="nav-links">
+      <a href="#stations">Stations</a>
       <a href="#menu">Menu</a>
-      <a href="#visit">Hours</a>
-      <a href="#contact">Contact</a>
-    </div>
+      <a href="#story">Room</a>
+      <a href="#reserve">Book a table</a>
+      <a href="#hours">Hours</a>
+    </span>
+    <a class="nav-phone" href="tel:+358442302138">044 2302138</a>
   </div>
 </nav>
 
-<!-- ========== RESTAURANT SITE (English) ========== -->
-<header class="hero">
-  <div class="hero-inner">
-    <span class="hero-tag">Buffet ravintola — Helsinki</span>
-    <h1 class="hero-title">Yummy Buffet</h1>
-    <p class="hero-subtitle">Aasialainen buffet Helsingin keskustassa</p>
-    <div class="hero-meta">
-      <span>★ 4.1 / 5</span>
-      <span>339 Google reviews</span>
-      <span>Helsinki</span>
-    </div>
-    <div class="cta-row">
-      <a href="#menu" class="btn btn-primary">See the menu</a>
-      <a href="#visit" class="btn btn-ghost">Opening hours</a>
-    </div>
-  </div>
-</header>
-
-<section class="about" id="about">
+<section class="hero" id="top">
   <div class="container">
-    <div class="about-grid">
+    <div class="grid">
       <div>
-        <div class="section-label">About us</div>
-        <h2>Tervetuloa Yummy Buffetiin</h2>
-        <p class="lead">Yummy Buffet tarjoaa laajaa valikoimaa aasialaisia herkkuja Kaisaniemessä. Susista ja nuudelista perinteisiin kastikkeisiin — kaikki on valmiiksi juuri sinua varten.</p>
-      </div>
-      <div class="about-visual" aria-hidden="true"></div>
-    </div>
-  </div>
-</section>
-
-<section class="menu" id="menu">
-  <div class="container">
-    <div class="section-label">Menu</div>
-    <h2>Ruokalista</h2>
-    <p class="lead">Monipuolinen aasialainen buffet</p>
-
-    <div class='menu-category'><h3>Sushi & rullat</h3><div class='menu-item'><span class='item-name'>Kalifornia-rulla</span></div><div class='menu-item'><span class='item-name'>Philadelphia-rulla</span></div><div class='menu-item'><span class='item-name'>Teriyaki-rulla</span></div></div><div class='menu-category'><h3>Nuudelit ja riisit</h3><div class='menu-item'><span class='item-name'>Pad Thai</span></div><div class='menu-item'><span class='item-name'>Paistettu riisi</span></div><div class='menu-item'><span class='item-name'>Noodle wok</span></div></div><div class='menu-category'><h3>Kastikkeet</h3><div class='menu-item'><span class='item-name'>Thai curry</span></div><div class='menu-item'><span class='item-name'>Teriyaki-kastike</span></div><div class='menu-item'><span class='item-name'>Chili-kastike</span></div></div>
-
-    <div class="menu-note">
-      Hinnat saattavat muuttua. Kysy henkilökunnalta allergeeneista.
-    </div>
-  </div>
-</section>
-
-<section class="visit" id="visit">
-  <div class="container">
-    <div class="section-label">Hours &amp; location</div>
-    <h2>Aukioloajat</h2>
-
-    <div class="visit-grid">
-      <div class="visit-block">
-        <h3>Opening hours</h3>
-        <li><span>Ma–To</span><span>10:30–20:30</span></li><li><span>Pe</span><span>10:30–21:30</span></li><li><span>La</span><span>12:00–21:30</span></li><li><span>Su</span><span>12:00–20:30</span></li>
-      </div>
-
-      <div class="visit-block">
-        <h3>Find us</h3>
-        <div class="address-block">
-          <strong>Yummy Buffet</strong>
-          Kaisaniemenkatu 2 B, 2. kerros<br>
-          00100 Helsinki<br>
-          Finland
+        <div class="eyebrow">Asian buffet · Helsinki · Kaisaniemenkatu 2</div>
+        <h1>One floor<span class="dot">.</span><br>Many <span class="it">stations</span>.</h1>
+        <p class="tagline">A second-floor Asian buffet in the Fennia block — sushi, dumplings, Thai curry, wok mains, salads and a dessert bar in the same room. The Wolt page calls it <em>"a wide selection of Asian flavours"</em>; reviewers just call it variety.</p>
+        <div class="meta-row">
+          <span>4.1 — 339 Google reviews</span>
+          <span>Open daily · 10:30 onwards</span>
+          <span>€€ · Lunch &amp; dinner</span>
         </div>
-        <a class="map-link" target="_blank" rel="noopener" href="https://maps.google.com/?q=Kaisaniemenkatu+2+B,+00100+Helsinki">Open in Google Maps →</a>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#reserve">Book a table</a>
+          <a class="btn btn-outline" href="#menu">See the menu</a>
+          <a class="btn btn-gold" href="tel:+358442302138">044 2302138</a>
+        </div>
+      </div>
+      <div class="stations-stack" aria-hidden="true">
+        <div class="station-tile tall">
+          <div class="ph-bg tile-sushi"></div>
+          <span class="ph-text">Your photo here</span>
+          <div class="label">
+            <span class="num">01</span>
+            <span class="name">Sushi line</span>
+            <span class="sub">Salmon Dream · Sushi Bento</span>
+          </div>
+        </div>
+        <div class="station-tile">
+          <div class="ph-bg tile-thai"></div>
+          <span class="ph-text">Your photo here</span>
+          <div class="label">
+            <span class="num">02</span>
+            <span class="name">Thai &amp; curry</span>
+          </div>
+        </div>
+        <div class="station-tile">
+          <div class="ph-bg tile-wok"></div>
+          <span class="ph-text">Your photo here</span>
+          <div class="label">
+            <span class="num">03</span>
+            <span class="name">Wok mains</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="contact-sec" id="contact">
+<section class="section" id="stations">
   <div class="container">
-    <div class="section-label">Contact</div>
-    <h2>Get in touch.</h2>
-    <p class="lead" style="color:rgba(255,248,240,.75)">Varaa pöytä tai kysy lisää — olemme mielellämme apuna.</p>
+    <div class="section-eyebrow">From the line</div>
+    <h2 class="section-title">Nine <em>stations</em>, one floor.</h2>
+    <p class="section-intro">The categories on the menu mirror the room. Sushi by the front, hot mains and wok in the middle, bento boxes, Yummy bowls and tacos near the counter, drinks at the end. Browse the categories below — full menu and à la carte ordering live on Wolt.</p>
 
-    <div class="contact-grid">
-      <a class="contact-card" href="tel:+358442302138">
-        <small>Phone</small>
-        <div class="big">044 230 2138</div>
-      </a>
-      <a class="contact-card" href="#" target="_blank" rel="noopener">
-        <small>Instagram</small>
-        <div class="big"></div>
-      </a>
+    <div class="stations-grid">
+      <div class="station-card">
+        <span class="num">I</span>
+        <h3>Starters</h3>
+        <p class="desc">Spring rolls, dumplings, ha gao — small starters from across the menu.</p>
+      </div>
+      <div class="station-card">
+        <span class="num">II</span>
+        <h3>Mains</h3>
+        <p class="desc">Chinese and pan-Asian mains — Kung Po chicken and the wok favourites.</p>
+      </div>
+      <div class="station-card">
+        <span class="num">III</span>
+        <h3>Rice &amp; noodles</h3>
+        <p class="desc">Stir-fried rice and noodle bases to round out a plate.</p>
+      </div>
+      <div class="station-card">
+        <span class="num">IV</span>
+        <h3>Japanese Bento</h3>
+        <p class="desc">Composed bento boxes — rice, mains, sides in one tray.</p>
+      </div>
+      <div class="station-card">
+        <span class="num">V</span>
+        <h3>Sushi Bento</h3>
+        <p class="desc">Sushi-led bentos for the lunch bench at the office upstairs.</p>
+      </div>
+      <div class="station-card">
+        <span class="num">VI</span>
+        <h3>Sushi</h3>
+        <p class="desc">Salmon Dream and the rest of the sushi line — by the piece or by the set.</p>
+      </div>
+      <div class="station-card">
+        <span class="num">VII</span>
+        <h3>Yummy Tacos</h3>
+        <p class="desc">House tacos — crispy chicken, by the duo or trio.</p>
+      </div>
+      <div class="station-card">
+        <span class="num">VIII</span>
+        <h3>Yummy Bowls</h3>
+        <p class="desc">Build-a-bowl: rice, protein, sauce. The fastest plate at lunch.</p>
+      </div>
+      <div class="station-card">
+        <span class="num">IX</span>
+        <h3>Drinks</h3>
+        <p class="desc">Soft drinks, water, tea — alongside the buffet plate.</p>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- Demo booking widget -->
-<section class="book-sec" id="book">
-  <div class="book-card">
-    <div class="section-label">Reservations</div>
-    <h2>Book a Table</h2>
-    <p class="book-sub">Reserve in seconds — no fees, no account needed.</p>
-    <form class="book-form" onsubmit="event.preventDefault();return false;">
-      <div class="book-field">
-        <label for="b-date">Date</label>
-        <input type="date" id="b-date" min="2026-04-10" value="2026-04-10">
+<section class="section" id="menu">
+  <div class="container">
+    <div class="section-eyebrow">Six picks from Wolt</div>
+    <h2 class="section-title">A handful of <em>house</em> dishes.</h2>
+    <p class="section-intro">Six items from the Wolt à la carte side, picked across the categories. Prices below are Wolt's; the dine-in buffet plate is its own thing — call to ask.</p>
+
+    <div class="featured-row">
+      <div class="dish-card">
+        <span class="badge">Wok · chicken</span>
+        <h3 class="name">Kung po-kana</h3>
+        <div class="price-row">
+          <span class="badge">Mains</span>
+          <span class="price">€14.90</span>
+        </div>
       </div>
-      <div class="book-field">
-        <label for="b-time">Time</label>
-        <select id="b-time">
-          <option>17:00</option><option>17:30</option><option>18:00</option>
-          <option>18:30</option><option selected>19:00</option><option>19:30</option>
-          <option>20:00</option><option>20:30</option><option>21:00</option>
-          <option>21:30</option><option>22:00</option>
-        </select>
+      <div class="dish-card">
+        <span class="badge">Sushi · 10 pcs</span>
+        <h3 class="name">Salmon Dream (10 pcs)</h3>
+        <div class="price-row">
+          <span class="badge">Sushi</span>
+          <span class="price">€14.90</span>
+        </div>
       </div>
-      <div class="book-field field-full">
-        <label for="b-party">Party size</label>
-        <select id="b-party">
-          <option>1 guest</option>
-          <option selected>2 guests</option>
-          <option>3 guests</option>
-          <option>4 guests</option>
-          <option>5 guests</option>
-          <option>6 guests</option>
-          <option>7 guests</option>
-          <option>8 guests</option>
-        </select>
+      <div class="dish-card">
+        <span class="badge">Dim sum · 4 pcs</span>
+        <h3 class="name">Ha gao — shrimp dumplings (4 pcs)</h3>
+        <div class="price-row">
+          <span class="badge">Starters</span>
+          <span class="price">€7.00</span>
+        </div>
       </div>
-      <button type="button" class="book-cta field-full">Reserve Now</button>
-    </form>
-    <div class="book-caption">Powered by Klar Bookings — no fees, no commissions.</div>
+      <div class="dish-card">
+        <span class="badge">Tacos · house</span>
+        <h3 class="name">Yummy crispy chicken tacos</h3>
+        <div class="price-row">
+          <span class="badge">Yummy Tacos</span>
+          <span class="price">€16.90</span>
+        </div>
+      </div>
+      <div class="dish-card">
+        <span class="badge">Bowl · house</span>
+        <h3 class="name">Yummy chicken bowl</h3>
+        <div class="price-row">
+          <span class="badge">Yummy Bowls</span>
+          <span class="price">€16.90</span>
+        </div>
+      </div>
+      <div class="dish-card">
+        <span class="badge">Vegan · bento</span>
+        <h3 class="name">Yummy vegan bento</h3>
+        <div class="price-row">
+          <span class="badge">Japanese Bento</span>
+          <span class="price">€16.80</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-cta">
+      <div class="text"><strong>Full à la carte on Wolt; the buffet line is at the counter.</strong>Seasonal additions and the day's sushi land at the counter first. Call ahead for groups so we can keep the line stocked.</div>
+      <a class="btn btn-outline" href="https://wolt.com/en/fin/helsinki/restaurant/yummy-buffet" rel="noopener">Open Wolt menu →</a>
+    </div>
   </div>
 </section>
 
-<footer class="rest-footer">
-  <span class="brand">Yummy Buffet</span>
-  Kaisaniemenkatu 2 B, Helsinki · 044 230 2138<br>
-  © 2026 Yummy Buffet
-</footer>
+<section class="section" id="story">
+  <div class="container">
+    <div class="story-layout">
+      <div class="story-text">
+        <div class="section-eyebrow">The room</div>
+        <h2 class="section-title">Second floor, <em>Kaisaniemenkatu 2</em>.</h2>
+        <p>Yummy Buffet sits on the second floor of the Fennia-kortteli block in central Helsinki — three minutes' walk from the Central station, one minute from Finnkino Kaisaniemi. Take the stairs up, the dining room opens out across the floor.</p>
+        <blockquote class="pull-quote">"A spacious, peaceful place to eat with a generous variety of dishes. Great sushi, dumplings and it has a salad and dessert bar too."<cite>— Wanderlog reviewer</cite></blockquote>
+        <p>It's a sit-down room, not a takeaway counter — solo lunches at the front, larger groups at the back. Sushi line, hot Asian mains, Thai curry, salad table and dessert bar all under one roof.</p>
+      </div>
+      <div class="story-side">
+        <div class="ph-card">
+          <div class="ph-label"><strong>Y</strong>Your photo here — the second-floor dining room, the buffet line, the view onto Kaisaniemenkatu.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
+<section class="section" id="reserve">
+  <div class="container">
+    <div class="section-eyebrow">Reserve a table</div>
+    <h2 class="section-title">Book a table in one <em>click</em>.</h2>
+    <div class="booking-card">
+      <div>
+        <div class="booking-badge">Klar Bookings — demo</div>
+        <h3 class="booking-title">No <em>per-cover</em> fees.<br>No third party.</h3>
+        <p class="booking-desc">The final site will run a real reservation calendar — group tables and lunch rush handled separately, the contact details staying with you. Try the demo on the right:</p>
+      </div>
+      <div class="booking-form" role="form" aria-label="Demo: table reservation">
+        <div>
+          <label>Date</label>
+          <div class="field" tabindex="0">Sat 18 Apr<span class="chev">▼</span></div>
+        </div>
+        <div>
+          <label>Time</label>
+          <div class="field" tabindex="0">12:30<span class="chev">▼</span></div>
+        </div>
+        <div>
+          <label>Party</label>
+          <div class="field" tabindex="0">4 people<span class="chev">▼</span></div>
+        </div>
+        <div>
+          <label>Seating</label>
+          <div class="field" tabindex="0">Any<span class="chev">▼</span></div>
+        </div>
+        <div class="full">
+          <a class="btn btn-primary" style="width:100%;justify-content:center" href="#reserve">Confirm reservation →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-eyebrow">What guests say</div>
+    <h2 class="section-title">339 reviews. <em>4.1</em> average.</h2>
+
+    <div class="reviews-top">
+      <div class="rating-block">
+        <div class="rating-num">4.1</div>
+        <div class="rating-label">Google · 339 reviews</div>
+      </div>
+      <p class="rating-desc">Most reviewers come for the <em>variety</em> — sushi, hot mains, salads and a dessert bar in the same plate. A few notes from RestaurantGuru, TripAdvisor and Wanderlog below.</p>
+    </div>
+
+    <div class="quotes-grid">
+      <div class="quote-card">
+        <blockquote>This Asian buffet has a very good selection of excellent sushi, a tasty selection of salads and cold meals and of Asian food.</blockquote>
+        <cite>— Jarkko L · TripAdvisor</cite>
+      </div>
+      <div class="quote-card">
+        <blockquote>Great variety of food. Sushi is super good, delicious spicy chicken and a good salad buffet.</blockquote>
+        <cite>— Lina Maria S · TripAdvisor</cite>
+      </div>
+      <div class="quote-card wide">
+        <blockquote>"This buffet has a variety of Chinese dishes and sushi, as well as salads, with some ice cream for dessert."</blockquote>
+        <cite>needmoretravel2 · TripAdvisor</cite>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="hours">
+  <div class="container">
+    <div class="section-eyebrow">Hours &amp; location</div>
+    <h2 class="section-title">Open daily. <em>Kaisaniemenkatu 2.</em></h2>
+
+    <div class="hl-grid">
+      <div>
+        <h3 class="hours-heading">Opening hours</h3>
+        <div class="hours-line"><span class="day">Monday</span><span class="time">10:30 — 20:30</span></div>
+        <div class="hours-line"><span class="day">Tuesday</span><span class="time">10:30 — 20:30</span></div>
+        <div class="hours-line"><span class="day">Wednesday</span><span class="time">10:30 — 20:30</span></div>
+        <div class="hours-line"><span class="day">Thursday</span><span class="time">10:30 — 20:30</span></div>
+        <div class="hours-line"><span class="day">Friday</span><span class="time">10:30 — 21:30</span></div>
+        <div class="hours-line"><span class="day">Saturday</span><span class="time">12:00 — 21:30</span></div>
+        <div class="hours-line"><span class="day">Sunday</span><span class="time">12:00 — 20:30</span></div>
+        <p class="hours-note">All-day buffet — same line at lunch and dinner. Wolt delivery during opening hours.</p>
+      </div>
+      <div class="location-block">
+        <address>
+          Kaisaniemenkatu 2 b, 2nd floor<br>
+          00100 Helsinki
+          <span>Three minutes from Helsinki Central station · Fennia block</span>
+        </address>
+        <div class="map-frame">
+          <span class="pin"></span>
+          Map view · embedded at launch
+        </div>
+        <a class="btn btn-outline" href="https://maps.google.com/maps?q=Kaisaniemenkatu+2+Helsinki" rel="noopener">Open in Google Maps →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-eyebrow">Contact</div>
+    <h2 class="section-title">Phone, <em>Wolt</em>, the door.</h2>
+    <div class="contact-row">
+      <div>
+        <a class="phone-huge" href="tel:+358442302138">044 2302138</a>
+        <p class="contact-desc">Call to hold a table for a group, ask what's on the line tonight, or check that the sushi run has come out. Answered during opening hours.</p>
+      </div>
+      <div class="channels">
+        <a href="https://wolt.com/en/fin/helsinki/restaurant/yummy-buffet" rel="noopener">
+          <span>Order delivery</span><span class="platform">Wolt →</span>
+        </a>
+        <a href="https://restaurantguru.com/Yummy-Buffet-Helsinki" rel="noopener">
+          <span>Read reviews</span><span class="platform">RestaurantGuru →</span>
+        </a>
+        <a href="https://www.tripadvisor.com/Restaurant_Review-g189934-d27797903-Reviews-Yummy_Buffet_Helsinki-Helsinki_Uusimaa.html" rel="noopener">
+          <span>More reviews</span><span class="platform">TripAdvisor →</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="grid">
+      <div>
+        <div class="wordmark" style="margin-bottom:8px"><span class="y">Y</span>ummy Buffet <span class="sub">Kaisaniemi</span></div>
+        <p class="tagline">All-day Asian buffet on the second floor of the Fennia block.</p>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <p><a href="tel:+358442302138">044 2302138</a></p>
+        <p>Kaisaniemenkatu 2 b, 2nd floor<br>00100 Helsinki</p>
+      </div>
+      <div>
+        <h4>Eat</h4>
+        <p><a href="https://wolt.com/en/fin/helsinki/restaurant/yummy-buffet" rel="noopener">Wolt menu</a></p>
+        <p><a href="#reserve">Book a table</a></p>
+        <p><a href="#stations">Stations</a></p>
+      </div>
+    </div>
+    <div class="bottom">
+      <span>© Yummy Buffet · Kaisaniemenkatu 2 b, 00100 Helsinki</span>
+      <a class="klar" href="https://klarsystems.com" rel="noopener">Powered by Klar Systems</a>
+    </div>
+  </div>
+</footer>
 
 </body>
 </html>
