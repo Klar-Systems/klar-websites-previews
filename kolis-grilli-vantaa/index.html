@@ -1,395 +1,313 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Koli's grilli & kahvila</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Koli's grilli &amp; kahvila — Vantaa</title>
+<style>
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  :root{
+    --bg:#141414;
+    --bg-soft:#1d1d1d;
+    --text:#F5F1EA;
+    --muted:rgba(245,241,234,0.62);
+    --primary:#E04B1E;
+    --accent:#F2C75C;
+    --stack-body:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
+    --stack-heading:'Arial Black','Helvetica Neue',Impact,sans-serif;
+  }
+  html,body{background:var(--bg);color:var(--text);font-family:var(--stack-body);line-height:1.55;-webkit-font-smoothing:antialiased}
+  body{min-height:100vh}
+  a{color:inherit;text-decoration:none}
 
-        html {
-            scroll-behavior: smooth;
-        }
+  /* ——— demo banner ——— */
+  .demo-banner{background:#0b0b0b;border-bottom:1px solid #272727;color:var(--text);font-size:13px;letter-spacing:0.02em}
+  .demo-banner .inner{max-width:1120px;margin:0 auto;padding:12px 20px;display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center;justify-content:space-between}
+  .demo-banner strong{color:var(--accent);font-weight:700;letter-spacing:0.04em;text-transform:uppercase;font-size:11px}
+  .demo-banner a.cta{color:var(--bg);background:var(--accent);padding:7px 14px;font-weight:700;font-size:12px;letter-spacing:0.05em;text-transform:uppercase;border-radius:2px}
+  .demo-banner a.cta:hover{background:#fff}
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            line-height: 1.6;
-            color: #2a2a2a;
-            background: #ffffff;
-        }
+  .container{max-width:1120px;margin:0 auto;padding:0 20px}
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
+  /* ——— top nav ——— */
+  .nav{border-bottom:1px solid #262626}
+  .nav .inner{max-width:1120px;margin:0 auto;padding:22px 20px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+  .wordmark{font-family:var(--stack-heading);font-size:18px;letter-spacing:0.04em;text-transform:uppercase}
+  .wordmark .and{color:var(--primary)}
+  .nav-links{display:flex;gap:26px;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted)}
+  .nav-links a:hover{color:var(--accent)}
+  @media (max-width:720px){.nav-links{display:none}}
 
-        /* Hero */
-        .hero {
-            background: linear-gradient(135deg, #c41e3a 0%, #ffd700 100%);
-            color: white;
-            padding: 120px 20px;
-            text-align: center;
-            min-height: 60vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
+  /* ——— hero ——— */
+  .hero{padding:72px 0 96px;position:relative;overflow:hidden}
+  .hero .grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:56px;align-items:center}
+  @media (max-width:880px){.hero{padding:52px 0 64px}.hero .grid{grid-template-columns:1fr;gap:36px}}
+  .eyebrow{font-size:12px;letter-spacing:0.22em;text-transform:uppercase;color:var(--primary);font-weight:700;margin-bottom:18px}
+  .hero h1{font-family:var(--stack-heading);font-size:clamp(48px,9vw,108px);line-height:0.92;letter-spacing:-0.01em;text-transform:uppercase}
+  .hero h1 .ampersand{color:var(--primary);font-style:italic;font-family:Georgia,serif;font-weight:400;text-transform:none}
+  .hero .tagline{margin-top:22px;font-size:18px;color:var(--muted);max-width:520px}
+  .hero .meta-row{margin-top:36px;display:flex;flex-wrap:wrap;gap:18px 32px;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted)}
+  .hero .meta-row span{display:flex;align-items:center;gap:10px}
+  .hero .meta-row span::before{content:"";width:6px;height:6px;background:var(--accent);border-radius:50%;display:inline-block}
 
-        .hero h1 {
-            font-size: 48px;
-            font-weight: 700;
-            margin-bottom: 20px;
-            line-height: 1.2;
-        }
+  .hero-cta{margin-top:40px;display:flex;flex-wrap:wrap;gap:14px}
+  .btn{display:inline-flex;align-items:center;gap:10px;padding:18px 28px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;font-size:13px;border-radius:2px;border:2px solid transparent;transition:transform 0.15s ease,background 0.15s ease}
+  .btn-primary{background:var(--primary);color:var(--bg)}
+  .btn-primary:hover{background:var(--accent);transform:translateY(-2px)}
+  .btn-ghost{border-color:var(--text);color:var(--text)}
+  .btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
 
-        .hero p {
-            font-size: 20px;
-            margin-bottom: 30px;
-            opacity: 0.95;
-        }
+  /* placeholder block, keyed to palette */
+  .photo-placeholder{aspect-ratio:4/5;background:linear-gradient(135deg,var(--primary),var(--accent));opacity:0.72;position:relative;border-radius:4px;overflow:hidden}
+  .photo-placeholder::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(-45deg,transparent 0 14px,rgba(0,0,0,0.08) 14px 28px)}
+  .photo-placeholder span{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;color:var(--bg);font-family:var(--stack-body);font-weight:700;font-size:13px;letter-spacing:0.18em;text-transform:uppercase;padding:20px;z-index:1}
 
-        .hero a {
-            display: inline-block;
-            background: white;
-            color: #c41e3a;
-            padding: 14px 32px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
+  /* ——— sections ——— */
+  .section{padding:88px 0;border-top:1px solid #222}
+  .section-eyebrow{font-size:11px;letter-spacing:0.25em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+  .section-title{font-family:var(--stack-heading);font-size:clamp(34px,6vw,64px);line-height:0.96;text-transform:uppercase;letter-spacing:-0.005em;margin-bottom:28px;max-width:760px}
+  .section-intro{font-size:17px;color:var(--muted);max-width:620px;margin-bottom:52px}
 
-        .hero a:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-        }
+  /* menu */
+  .menu-grid{display:grid;grid-template-columns:1fr 1fr;gap:44px}
+  @media (max-width:880px){.menu-grid{grid-template-columns:1fr}}
+  .signature-card{background:var(--bg-soft);border:1px solid #262626;padding:36px;border-radius:4px;display:flex;flex-direction:column;justify-content:space-between;min-height:320px}
+  .signature-label{font-size:11px;letter-spacing:0.25em;text-transform:uppercase;color:var(--primary);font-weight:700;margin-bottom:18px}
+  .signature-name{font-family:var(--stack-heading);font-size:38px;line-height:0.95;text-transform:uppercase;margin-bottom:16px}
+  .signature-sub{font-size:15px;color:var(--muted);line-height:1.55}
+  .menu-placeholder{display:flex;align-items:center;justify-content:center;min-height:320px;background:linear-gradient(160deg,#1d1d1d,#141414);border:1px dashed #343434;border-radius:4px;padding:32px;text-align:center}
+  .menu-placeholder .label{color:var(--muted);font-size:12px;letter-spacing:0.2em;text-transform:uppercase;max-width:260px;line-height:1.7}
+  .menu-placeholder .label strong{color:var(--accent);display:block;margin-bottom:6px}
 
-        /* About */
-        .about {
-            padding: 80px 20px;
-            background: #f9f9f9;
-        }
+  .menu-cta{margin-top:52px;padding:28px 32px;background:var(--bg-soft);border:1px solid #262626;border-radius:4px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px}
+  .menu-cta .text{font-size:15px;color:var(--muted);max-width:520px}
+  .menu-cta .text strong{color:var(--text);display:block;margin-bottom:4px;font-weight:700}
 
-        .about h2 {
-            font-size: 36px;
-            margin-bottom: 20px;
-            font-weight: 700;
-        }
+  /* reviews */
+  .reviews-row{display:grid;grid-template-columns:auto 1fr;gap:48px;align-items:end;margin-bottom:44px}
+  @media (max-width:720px){.reviews-row{grid-template-columns:1fr;gap:16px}}
+  .rating-block .rating-number{font-family:var(--stack-heading);font-size:96px;line-height:1;color:var(--accent)}
+  .rating-block .rating-meta{margin-top:8px;font-size:13px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)}
+  .rating-block .rating-meta a{border-bottom:1px solid var(--muted)}
+  .rating-desc{font-size:17px;color:var(--muted);max-width:460px}
 
-        .about p {
-            font-size: 16px;
-            margin-bottom: 15px;
-            line-height: 1.8;
-            color: #555;
-        }
+  .quotes-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+  @media (max-width:720px){.quotes-grid{grid-template-columns:1fr}}
+  .quote-card{padding:32px;border-left:3px solid var(--primary);background:var(--bg-soft);border-radius:0 4px 4px 0}
+  .quote-card blockquote{font-size:19px;line-height:1.5;color:var(--text);font-weight:500}
+  .quote-card cite{display:block;margin-top:18px;font-style:normal;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted)}
 
-        /* Menu */
-        .menu {
-            padding: 80px 20px;
-        }
+  /* hours & location */
+  .hours-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px}
+  @media (max-width:880px){.hours-grid{grid-template-columns:1fr;gap:36px}}
+  .hours-table{font-size:16px}
+  .hours-row{display:flex;justify-content:space-between;padding:14px 0;border-bottom:1px solid #262626;color:var(--muted)}
+  .hours-row.today{color:var(--text);border-bottom-color:var(--primary)}
+  .hours-row .day{letter-spacing:0.05em;text-transform:uppercase;font-weight:700;font-size:13px}
+  .hours-row .time{font-family:var(--stack-heading);font-size:15px;letter-spacing:0.02em}
+  .location-card{background:var(--bg-soft);border:1px solid #262626;border-radius:4px;padding:32px}
+  .location-card address{font-style:normal;font-size:17px;color:var(--text);margin-bottom:20px;line-height:1.6}
+  .map-frame{aspect-ratio:16/10;background:linear-gradient(135deg,#1d1d1d,#111);border:1px dashed #343434;border-radius:4px;margin-top:24px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:12px;letter-spacing:0.2em;text-transform:uppercase}
 
-        .menu h2 {
-            font-size: 36px;
-            margin-bottom: 40px;
-            font-weight: 700;
-            text-align: center;
-        }
+  /* contact */
+  .contact-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:48px;align-items:start}
+  @media (max-width:880px){.contact-grid{grid-template-columns:1fr;gap:32px}}
+  .phone-big{display:block;font-family:var(--stack-heading);font-size:clamp(34px,6vw,56px);text-transform:uppercase;margin-bottom:14px;letter-spacing:0.02em}
+  .phone-big:hover{color:var(--accent)}
+  .contact-hint{font-size:15px;color:var(--muted);max-width:420px}
+  .socials{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+  .socials a{padding:12px 20px;border:1px solid #343434;font-size:12px;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);border-radius:2px;transition:all 0.15s ease}
+  .socials a:hover{border-color:var(--accent);color:var(--accent)}
 
-        .menu-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-        }
-
-        .menu-item {
-            padding: 20px;
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            background: #fafafa;
-        }
-
-        .menu-item h4 {
-            color: #c41e3a;
-            margin-bottom: 10px;
-            font-size: 18px;
-        }
-
-        /* Hours & Location */
-        .hours {
-            padding: 80px 20px;
-            background: #f9f9f9;
-        }
-
-        .hours h2 {
-            font-size: 36px;
-            margin-bottom: 40px;
-            font-weight: 700;
-        }
-
-        .hours-table {
-            margin-bottom: 40px;
-        }
-
-        .hours-table table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        .hours-table td {
-            padding: 12px;
-            border-bottom: 1px solid #e0e0e0;
-        }
-
-        .hours-table tr td:first-child {
-            font-weight: 600;
-            color: #c41e3a;
-            width: 120px;
-        }
-
-        /* Contact */
-        .contact {
-            padding: 80px 20px;
-        }
-
-        .contact h2 {
-            font-size: 36px;
-            margin-bottom: 30px;
-            font-weight: 700;
-        }
-
-        .contact-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 30px;
-            margin-bottom: 60px;
-        }
-
-        .contact-item {
-            padding: 20px;
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-        }
-
-        .contact-item a {
-            color: #c41e3a;
-            text-decoration: none;
-            font-weight: 600;
-        }
-
-        .contact-item a:hover {
-            text-decoration: underline;
-        }
-
-        /* Demo Card Container */
-        .demo-section {
-            padding: 80px 20px;
-            background: #f9f9f9;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .demo-card {
-            max-width: 480px;
-            background: white;
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-            border: 1px solid #e0e0e0;
-            width: 100%;
-        }
-
-        .demo-card h3 {
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 10px;
-            color: #c41e3a;
-        }
-
-        .demo-card .subtitle {
-            color: #666;
-            margin-bottom: 20px;
-            font-size: 14px;
-        }
-
-        .demo-card input,
-        .demo-card select {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 15px;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            font-family: inherit;
-            font-size: 14px;
-        }
-
-        .demo-card input:focus,
-        .demo-card select:focus {
-            outline: none;
-            border-color: #c41e3a;
-            box-shadow: 0 0 0 3px rgba(#c41e3a, 0.1);
-        }
-
-        .demo-card button {
-            width: 100%;
-            padding: 14px;
-            background: #c41e3a;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: opacity 0.2s;
-        }
-
-        .demo-card button:hover {
-            opacity: 0.9;
-        }
-
-        .demo-card .caption {
-            text-align: center;
-            font-size: 12px;
-            color: #888;
-            margin-top: 15px;
-        }
-
-        /* Phone button for takeaway */
-        .phone-button {
-            display: block;
-            width: 100%;
-            padding: 16px;
-            background: #c41e3a;
-            color: white;
-            text-decoration: none;
-            border-radius: 6px;
-            text-align: center;
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 15px;
-            transition: opacity 0.2s;
-        }
-
-        .phone-button:hover {
-            opacity: 0.9;
-        }
-
-        /* Footer */
-        footer {
-            padding: 40px 20px;
-            text-align: center;
-            background: #2a2a2a;
-            color: white;
-            border-top: 1px solid #e0e0e0;
-        }
-
-        footer p {
-            margin: 5px 0;
-            font-size: 14px;
-        }
-
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 32px;
-            }
-
-            .about h2, .menu h2, .hours h2, .contact h2 {
-                font-size: 24px;
-            }
-
-            .menu-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+  /* footer */
+  footer{padding:56px 0 40px;border-top:1px solid #222;margin-top:40px}
+  footer .grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:40px;margin-bottom:36px}
+  @media (max-width:720px){footer .grid{grid-template-columns:1fr;gap:24px}}
+  footer h4{font-size:11px;letter-spacing:0.25em;text-transform:uppercase;color:var(--muted);margin-bottom:14px;font-weight:700}
+  footer p,footer a{font-size:14px;color:var(--text);line-height:1.8}
+  footer a:hover{color:var(--accent)}
+  footer .bottom{padding-top:24px;border-top:1px solid #222;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:12px;color:var(--muted);letter-spacing:0.04em}
+  footer .bottom a.klar{color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;font-size:11px}
+  footer .bottom a.klar:hover{color:var(--accent)}
+</style>
 </head>
 <body>
-    <!-- Hero -->
-    <section class="hero">
-        <div class="container">
-            <h1>Koli's grilli & kahvila</h1>
-            <p>Experience authentic cuisine</p>
-            <a href="#menu">See the menu</a>
-        </div>
-    </section>
 
-    <!-- About -->
-    <section class="about">
-        <div class="container">
-            <h2>About Koli's grilli & kahvila</h2>
-            <p>Koli's grilli & kahvila is an original grill kiosk in East Vantaa, established in 2011. Known for serving quality grilled items made fresh to order with generous portions.</p>
-        </div>
-    </section>
+<!-- demo banner -->
+<div class="demo-banner">
+  <div class="inner">
+    <span><strong>Tämä on demo —</strong> Tämä sivusto on Klar Systemsin tekemä esikatselu Koli's grilli &amp; kahvilalle.</span>
+    <a class="cta" href="https://preview.klarsystems.com/kolis-grilli-vantaa/proposal/">Katso tarjous →</a>
+  </div>
+</div>
 
-    <!-- Menu -->
-    <section class="menu" id="menu">
-        <div class="container">
-            <h2>Menu</h2>
-            <div class="menu-grid">
-                <div class='menu-item'><h4>Burgerit</h4><p>Coming soon</p></div><div class='menu-item'><h4>Makkarapyyristöt</h4><p>Coming soon</p></div><div class='menu-item'><h4>Grilliannokset</h4><p>Coming soon</p></div><div class='menu-item'><h4>Kahvijuomat</h4><p>Coming soon</p></div><div class='menu-item'><h4>Limsät ja juomat</h4><p>Coming soon</p></div>
-            </div>
-        </div>
-    </section>
+<!-- top nav -->
+<nav class="nav">
+  <div class="inner">
+    <span class="wordmark">Koli's grilli <span class="and">&amp;</span> kahvila</span>
+    <span class="nav-links">
+      <a href="#ruokalista">Ruokalista</a>
+      <a href="#arvostelut">Arvostelut</a>
+      <a href="#aukioloajat">Aukioloajat</a>
+      <a href="#yhteys">Yhteys</a>
+    </span>
+  </div>
+</nav>
 
-    <!-- Hours & Location -->
-    <section class="hours">
-        <div class="container">
-            <h2>Hours & Location</h2>
-            <div class="hours-table">
-                <table>
-                    <tr><td>Mon</td><td>10:00-20:00</td></tr><tr><td>Tue</td><td>10:00-20:00</td></tr><tr><td>Wed</td><td>10:00-20:00</td></tr><tr><td>Thu</td><td>10:00-20:00</td></tr><tr><td>Fri</td><td>10:00-20:00</td></tr><tr><td>Sat</td><td>10:00-20:00</td></tr><tr><td>Sun</td><td>12:00-20:00</td></tr>
-                </table>
-            </div>
-            <h3>Pohjolantie 2 B, 01260 Vantaa</h3>
-            <p><a href="https://maps.google.com/maps/search/Koli's+grilli+kahvila+Vantaa">View on Google Maps →</a></p>
+<!-- hero -->
+<section class="hero">
+  <div class="container">
+    <div class="grid">
+      <div>
+        <div class="eyebrow">Grillikioski · Itä-Vantaa · Vuodesta 2011</div>
+        <h1>Koli's<br>grilli <span class="ampersand">&amp;</span><br>kahvila</h1>
+        <p class="tagline">Pohjolantien kulmassa tehdään tilauksesta. Reilut annokset, ystävällinen palvelu, ei kikkoja.</p>
+        <div class="meta-row">
+          <span>Pohjolantie 2 B, Vantaa</span>
+          <span>Ma–La 10–20 · Su 12–20</span>
         </div>
-    </section>
-
-    <!-- Contact -->
-    <section class="contact">
-        <div class="container">
-            <h2>Contact</h2>
-            <div class="contact-grid">
-                <div class="contact-item"><strong>Phone</strong><br><a href="tel:050 4111918">050 4111918</a></div>
-                <div class="contact-item"><strong>Instagram</strong><br><a href="https://instagram.com/kolis_grilli">@kolis_grilli</a></div>
-            </div>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="tel:+358409341941">Soita ja tilaa · 040 934 1941</a>
+          <a class="btn btn-ghost" href="#ruokalista">Ruokalista</a>
         </div>
-    </section>
-
-    <!-- Demo Card -->
-    <section class="demo-section">
-        <div class="demo-card">
-        <h3>What's On</h3>
-        <p class="subtitle">This month at Koli's grilli & kahvila.</p>
-        <div style="margin-bottom: 20px;">
-            <div style="margin-bottom: 15px;">
-                <strong style="color: #c41e3a;">Live Music</strong>
-                <p style="font-size: 14px; color: #666;">Fridays from 8pm</p>
-            </div>
-            <div style="margin-bottom: 15px;">
-                <strong style="color: #c41e3a;">Weekend Brunch</strong>
-                <p style="font-size: 14px; color: #666;">Saturdays & Sundays 10am-2pm</p>
-            </div>
-            <div>
-                <strong style="color: #c41e3a;">Happy Hour</strong>
-                <p style="font-size: 14px; color: #666;">Daily 4–6pm</p>
-            </div>
-        </div>
-        <input type="email" placeholder="your@email.com" style="margin-bottom: 10px;">
-        <button type="button" style="margin-bottom: 15px;">Get Updates</button>
-        <div class="caption">Powered by Klar — your asset, not Meta's.</div>
+      </div>
+      <div>
+        <div class="photo-placeholder"><span>Teidän kuvanne tähän — grillikioski Pohjolantiellä</span></div>
+      </div>
     </div>
-    </section>
+  </div>
+</section>
 
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2026 Koli's grilli & kahvila</p>
-    </footer>
+<!-- menu -->
+<section class="section" id="ruokalista">
+  <div class="container">
+    <div class="section-eyebrow">Mitä grillistä saa</div>
+    <h2 class="section-title">Tehdään tilauksesta.<br>Lautanen kerrallaan.</h2>
+    <p class="section-intro">Ruokalista elää päivittäin — parhaat annokset näkyvät paikan päällä taulussa. Alla yksi klassikko, ja kuvat lisätään pian.</p>
+    <div class="menu-grid">
+      <div class="signature-card">
+        <div class="signature-label">Talon suositus</div>
+        <div class="signature-name">Koli's Premium Ateria</div>
+        <p class="signature-sub">Talon oma kokoonpano. Kysy tiskiltä mitä siinä tänään on — kokoonpano vaihtelee sen mukaan, mikä grillistä parhaiten sinä päivänä irtoaa.</p>
+      </div>
+      <div class="menu-placeholder">
+        <div class="label"><strong>Ruokakuvat</strong>Kuvat lisätään pian — teidän ruokakuvanne tähän, ei stock-kuvia.</div>
+      </div>
+    </div>
+    <div class="menu-cta">
+      <div class="text"><strong>Koko ruokalista paikan päällä</strong>Burgerit, grilliannokset, makkaraperunat — hinnat taulussa. Soita jos haluat varmistaa, että tämänpäiväinen suosikki on saatavilla.</div>
+      <a class="btn btn-primary" href="tel:+358409341941">Soita 040 934 1941</a>
+    </div>
+  </div>
+</section>
+
+<!-- reviews -->
+<section class="section" id="arvostelut">
+  <div class="container">
+    <div class="section-eyebrow">Mitä asiakkaat sanovat</div>
+    <h2 class="section-title">274 Google-arvostelua.<br>Keskiarvo 4.4.</h2>
+    <div class="reviews-row">
+      <div class="rating-block">
+        <div class="rating-number">4.4</div>
+        <div class="rating-meta">Google · 274 arvostelua</div>
+      </div>
+      <p class="rating-desc">Asiakkaat kiittävät ystävällistä palvelua ja sitä, että ruoka on hyvää. Alla kaksi arviota omissa sanoissa.</p>
+    </div>
+    <div class="quotes-grid">
+      <div class="quote-card">
+        <blockquote>"Ystävällinen henkilökunta. Ruoka oli hyvää."</blockquote>
+        <cite>— Anu K.</cite>
+      </div>
+      <div class="quote-card">
+        <blockquote>"Smakade super gott."</blockquote>
+        <cite>— Kjell Beijar</cite>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- hours & location -->
+<section class="section" id="aukioloajat">
+  <div class="container">
+    <div class="section-eyebrow">Aukiolo ja sijainti</div>
+    <h2 class="section-title">Joka päivä.<br>Vuodesta 2011.</h2>
+    <div class="hours-grid">
+      <div>
+        <div class="hours-table">
+          <div class="hours-row"><span class="day">Maanantai</span><span class="time">10:00 — 20:00</span></div>
+          <div class="hours-row"><span class="day">Tiistai</span><span class="time">10:00 — 20:00</span></div>
+          <div class="hours-row"><span class="day">Keskiviikko</span><span class="time">10:00 — 20:00</span></div>
+          <div class="hours-row"><span class="day">Torstai</span><span class="time">10:00 — 20:00</span></div>
+          <div class="hours-row"><span class="day">Perjantai</span><span class="time">10:00 — 20:00</span></div>
+          <div class="hours-row"><span class="day">Lauantai</span><span class="time">10:00 — 20:00</span></div>
+          <div class="hours-row"><span class="day">Sunnuntai</span><span class="time">12:00 — 20:00</span></div>
+        </div>
+      </div>
+      <div>
+        <div class="location-card">
+          <h4 style="font-size:11px;letter-spacing:0.25em;text-transform:uppercase;color:var(--muted);margin-bottom:14px;font-weight:700">Löydä grilli</h4>
+          <address>
+            Koli's grilli &amp; kahvila<br>
+            Pohjolantie 2 B<br>
+            01260 Vantaa
+          </address>
+          <a class="btn btn-ghost" href="https://maps.google.com/maps?q=Pohjolantie+2B+Vantaa" style="font-size:11px;padding:12px 18px">Avaa kartta →</a>
+          <div class="map-frame">Karttanäkymä · lisätään julkaisun yhteydessä</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- contact -->
+<section class="section" id="yhteys">
+  <div class="container">
+    <div class="section-eyebrow">Yhteystiedot</div>
+    <h2 class="section-title">Puhelin ratkaisee.</h2>
+    <div class="contact-grid">
+      <div>
+        <a class="phone-big" href="tel:+358409341941">040 934 1941</a>
+        <p class="contact-hint">Soita kun haluat tilata, kysyä päivän suositusta tai varmistaa, että lempiannoksesi on saatavilla. Grilli on paras kanava — oikeat vastaukset nopeasti.</p>
+      </div>
+      <div>
+        <h4 style="font-size:11px;letter-spacing:0.25em;text-transform:uppercase;color:var(--muted);margin-bottom:14px;font-weight:700">Sosiaalinen media</h4>
+        <p class="contact-hint">Päivityksiä, päivän ruokakuvia ja aukioloaikojen muutoksia julkaistaan somessa.</p>
+        <div class="socials">
+          <a href="https://www.instagram.com/kolis_grilli/" rel="noopener">Instagram @kolis_grilli</a>
+          <a href="https://www.facebook.com/p/Kolis-grilli-kahvila-100058297074370/" rel="noopener">Facebook</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- footer -->
+<footer>
+  <div class="container">
+    <div class="grid">
+      <div>
+        <div class="wordmark" style="margin-bottom:12px">Koli's grilli <span class="and">&amp;</span> kahvila</div>
+        <p style="color:var(--muted);max-width:340px;font-size:14px">Itä-Vantaan grillikioski vuodesta 2011. Pohjolantien kulmassa.</p>
+      </div>
+      <div>
+        <h4>Yhteys</h4>
+        <p><a href="tel:+358409341941">040 934 1941</a></p>
+        <p>Pohjolantie 2 B<br>01260 Vantaa</p>
+      </div>
+      <div>
+        <h4>Seuraa</h4>
+        <p><a href="https://www.instagram.com/kolis_grilli/" rel="noopener">Instagram</a></p>
+        <p><a href="https://www.facebook.com/p/Kolis-grilli-kahvila-100058297074370/" rel="noopener">Facebook</a></p>
+      </div>
+    </div>
+    <div class="bottom">
+      <span>© Koli's grilli &amp; kahvila</span>
+      <a class="klar" href="https://klarsystems.com" rel="noopener">Powered by Klar Systems</a>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>
