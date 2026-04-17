@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kreeta-Adria — Greek &amp; Mediterranean in Kouvola</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#0F1520;--bg-r:#161D2A;--bg-c:#1E2636;--fg:#F0EBE1;--fg-d:#9A9486;--pri:#2B6CB0;--acc:#E8C170;--rule:rgba(43,108,176,.18);--serif:'Playfair Display',Georgia,serif;--sans:'DM Sans',-apple-system,sans-serif}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{font-family:var(--sans);background:var(--bg);color:var(--fg);line-height:1.65;-webkit-font-smoothing:antialiased}
+    .bn{position:fixed;top:0;left:0;right:0;z-index:1000;background:var(--pri);color:#fff;text-align:center;padding:10px 16px;font-size:.82rem}.bn a{color:#fff;font-weight:700;text-decoration:underline;margin-left:8px}
+    .w{max-width:1060px;margin:0 auto;padding:0 24px}section{padding:76px 0}
+    .l{font-size:.7rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--acc);margin-bottom:10px}
+    h2{font-family:var(--serif);font-size:clamp(1.8rem,4vw,2.5rem);font-weight:600;line-height:1.2;margin-bottom:16px}
+    p.s{color:var(--fg-d);max-width:540px;font-size:.95rem}
+    .ph{background:var(--bg-r);border:1px solid var(--rule);display:flex;align-items:center;justify-content:center;color:var(--fg-d);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;border-radius:8px}
+    .ph-h{aspect-ratio:4/3;width:100%}.ph-f{aspect-ratio:1/1;width:100%}.ph-i{aspect-ratio:3/2;width:100%}
+    .hero{padding-top:128px;padding-bottom:36px}.hg{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+    .hero h1{font-family:var(--serif);font-size:clamp(2.2rem,5vw,3.2rem);font-weight:700;line-height:1.1;margin-bottom:14px}.hero h1 .hl{color:var(--acc)}
+    .hd{color:var(--fg-d);font-size:1rem;margin-bottom:20px;max-width:440px}
+    .mt{display:flex;gap:18px;align-items:center;flex-wrap:wrap}.mt .r{font-size:1.3rem;font-weight:700;color:var(--acc)}.mt .r small{font-size:.75rem;color:var(--fg-d);font-weight:400}.mt .rv{font-size:.85rem;color:var(--fg-d)}
+    .ms{background:var(--bg-r)}.mg{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px;margin-top:32px}
+    .mc h3{font-family:var(--serif);font-size:1.1rem;margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--rule)}
+    .mc li{list-style:none;padding:6px 0;font-size:.9rem;color:var(--fg-d);border-bottom:1px solid rgba(255,255,255,.03)}
+    .mn{margin-top:24px;font-size:.82rem;color:var(--fg-d);font-style:italic;text-align:center}
+    .bk{background:linear-gradient(155deg,#0A1025 0%,var(--bg) 100%);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+    .bg{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center}
+    .bc{background:var(--bg-c);border-radius:12px;padding:30px;border:1px solid var(--rule)}
+    .bc h3{font-family:var(--serif);font-size:1.3rem;margin-bottom:5px}.bc .bs{font-size:.84rem;color:var(--fg-d);margin-bottom:18px}
+    .bf{display:grid;gap:11px}.bf label{font-size:.7rem;text-transform:uppercase;letter-spacing:.12em;color:var(--fg-d)}
+    .bf input,.bf select{width:100%;padding:11px 13px;background:var(--bg);border:1px solid rgba(255,255,255,.1);border-radius:6px;color:var(--fg);font-family:var(--sans);font-size:.9rem}
+    .bf button{padding:13px;background:var(--pri);color:#fff;border:none;border-radius:6px;font-family:var(--sans);font-size:1rem;font-weight:500;cursor:pointer;margin-top:5px}.bf button:hover{background:#225999}
+    .bp{font-size:.7rem;color:var(--fg-d);margin-top:9px;text-align:center}
+    .ig{display:grid;grid-template-columns:1fr 1fr;gap:44px;margin-top:32px}
+    .ht{width:100%}.ht td{padding:8px 0;font-size:.9rem}.ht td:first-child{color:var(--fg-d);width:120px}.ht td:last-child{text-align:right}
+    .mf{width:100%;aspect-ratio:16/9;border:0;border-radius:8px;filter:grayscale(.7) invert(.9) contrast(.85)}
+    .ct{background:var(--bg-r)}.cg{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:24px;margin-top:24px}
+    .ci h4{font-size:.7rem;text-transform:uppercase;letter-spacing:.12em;color:var(--acc);margin-bottom:5px}
+    .ci a{color:var(--fg);text-decoration:none;font-size:1.05rem;font-weight:500}.ci a:hover{color:var(--acc)}
+    footer{padding:32px 0;text-align:center;font-size:.76rem;color:var(--fg-d);border-top:1px solid rgba(255,255,255,.05)}
+    .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}.reveal.visible{opacity:1;transform:none}
+    @media(max-width:768px){.hg,.bg,.ig{grid-template-columns:1fr}section{padding:52px 0}.hero{padding-top:96px}}
+  </style>
+</head>
+<body>
+  <div class="bn">This is a demo — the final website will be built together based on your preferences.<a href="https://preview.klarsystems.com/ravintola-kreeta-adria-kouvola/proposal/">See the offer</a></div>
+
+  <section class="hero"><div class="w"><div class="hg">
+    <div>
+      <div class="l">Kouvola</div>
+      <h1><span class="hl">Kreeta-Adria</span></h1>
+      <p class="hd">Greek and Mediterranean cuisine in the heart of Kouvola. Gyros, grilled meats, fresh salads — served with warmth and care since day one.</p>
+      <div class="mt"><div class="r">4.8 <small>/ 5</small></div><div class="rv">600 Google reviews</div></div>
+    </div>
+    <div class="ph ph-h" aria-label="Your photo here"><span>Your photo here</span></div>
+  </div></div></section>
+
+  <section class="ms reveal"><div class="w">
+    <div class="l">Menu</div>
+    <h2>A taste of the Mediterranean</h2>
+    <p class="s">From the grill to the table — authentic Greek dishes made with care. Gyros, souvlaki, fresh salads, and house-made pizza.</p>
+    <div class="mg">
+      <div class="mc"><h3>Greek Grill</h3><ul><li>Gyros plate</li><li>Souvlaki skewers</li><li>Grilled chicken</li><li>Mixed grill platter</li></ul></div>
+      <div class="mc"><h3>Pizza</h3><ul><li>House specials</li><li>Classic Mediterranean</li></ul></div>
+      <div class="mc"><h3>Sides &amp; Salads</h3><ul><li>Greek salad</li><li>Fresh sides</li><li>Desserts</li></ul></div>
+    </div>
+    <div class="ph ph-f" style="max-width:260px;margin:32px auto 0" aria-label="Food photos coming soon"><span>Food photos coming soon</span></div>
+    <p class="mn">This is a demo — the menu will be updated together with you.</p>
+  </div></section>
+
+  <section class="bk reveal" id="booking"><div class="w"><div class="bg">
+    <div>
+      <div class="l">Reserve</div>
+      <h2>Book your table</h2>
+      <p class="s">Family dinner, a night out with friends, or just a quiet meal — reserve in seconds and we will have your table ready.</p>
+      <div class="ph ph-i" style="margin-top:24px" aria-label="Interior photo coming soon"><span>Interior photo coming soon</span></div>
+    </div>
+    <div class="bc klar-bookings" id="klar-bookings-widget">
+      <h3>Varaa pöytä</h3>
+      <p class="bs">Varaa sekunneissa — ei tilin luomista, ei maksuja.</p>
+      <form class="bf" onsubmit="return false;">
+        <div><label for="bd">Date</label><input type="date" id="bd" name="date" required></div>
+        <div><label for="bt">Time</label>
+          <select id="bt" name="time">
+            <option value="11:00">11:00</option><option value="12:00" selected>12:00</option><option value="13:00">13:00</option>
+            <option value="17:00">17:00</option><option value="18:00">18:00</option><option value="19:00">19:00</option><option value="20:00">20:00</option>
+          </select>
+        </div>
+        <div><label for="bg2">Guests</label>
+          <select id="bg2" name="guests">
+            <option value="1">1</option><option value="2" selected>2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6+</option>
+          </select>
+        </div>
+        <button type="submit">Reserve</button>
+      </form>
+      <div class="bp">Powered by Klar Bookings — no fees, no commissions</div>
+    </div>
+  </div></div></section>
+
+  <section class="reveal"><div class="w">
+    <div class="l">Visit</div><h2>Hours and location</h2>
+    <div class="ig">
+      <div><table class="ht">
+        <tr><td>Mon–Thu</td><td>10:30 – 21:00</td></tr><tr><td>Friday</td><td>10:30 – 22:00</td></tr>
+        <tr><td>Saturday</td><td>11:00 – 22:00</td></tr><tr><td>Sunday</td><td>12:00 – 21:00</td></tr>
+      </table></div>
+      <div><iframe class="mf" src="https://maps.google.com/maps?q=Valtakatu+36+Kouvola&output=embed" allowfullscreen loading="lazy"></iframe></div>
+    </div>
+  </div></section>
+
+  <section class="ct reveal"><div class="w">
+    <div class="l">Contact</div><h2>Get in touch</h2>
+    <div class="cg">
+      <div class="ci"><h4>Phone</h4><a href="tel:+358400139232">+358 40 013 9232</a></div>
+      <div class="ci"><h4>Address</h4><span>Valtakatu 36, 45700 Kouvola</span></div>
+      <div class="ci"><h4>Facebook</h4><a href="https://www.facebook.com/Ravintola-Kreeta-Adria-925597270826592/" target="_blank" rel="noopener">Kreeta-Adria</a></div>
+    </div>
+  </div></section>
+
+  <footer><div class="w">
+    <p>Kreeta-Adria — Valtakatu 36, 45700 Kouvola — <a href="tel:+358400139232" style="color:var(--fg-d)">+358 40 013 9232</a></p>
+    <p style="margin-top:5px">&copy; 2026 Ravintola Kreeta-Adria. Powered by Klar.</p>
+  </div></footer>
+  <script>document.addEventListener('DOMContentLoaded',function(){var o=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting)x.target.classList.add('visible')})},{threshold:.12});document.querySelectorAll('.reveal').forEach(function(el){o.observe(el)})});</script>
+</body>
+</html>

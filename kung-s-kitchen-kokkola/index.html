@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kung's Kitchen — Asian Fusion Buffet in Kokkola</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <!-- palette: inferred Asian fusion — dark bg, red primary, gold accent -->
+  <style>
+    :root {
+      --bg: #0C0C0C;
+      --bg-r: #141210;
+      --bg-card: #1E1C18;
+      --fg: #F2EDE4;
+      --fg-dim: #9C9486;
+      --primary: #C9393E;
+      --accent: #D4A04A;
+      --rule: rgba(201,57,62,0.2);
+      --head: 'Bebas Neue', Impact, sans-serif;
+      --body: 'Inter', -apple-system, sans-serif;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:var(--body);background:var(--bg);color:var(--fg);line-height:1.65;-webkit-font-smoothing:antialiased}
+    .banner{position:fixed;top:0;left:0;right:0;z-index:1000;background:var(--primary);color:#fff;text-align:center;padding:10px 16px;font-size:.82rem}
+    .banner a{color:#fff;font-weight:700;text-decoration:underline;margin-left:8px}
+    .wrap{max-width:1060px;margin:0 auto;padding:0 24px}
+    section{padding:80px 0}
+    .lbl{font-family:var(--body);font-size:.7rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--primary);margin-bottom:10px}
+    h2{font-family:var(--head);font-size:clamp(2rem,5vw,3rem);line-height:1.05;letter-spacing:.03em;margin-bottom:18px;text-transform:uppercase}
+    p.s{color:var(--fg-dim);max-width:560px;font-size:.95rem}
+    .ph{background:var(--bg-r);border:1px solid var(--rule);display:flex;align-items:center;justify-content:center;color:var(--fg-dim);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;border-radius:8px}
+    .ph-h{aspect-ratio:4/3;width:100%}.ph-f{aspect-ratio:1/1;width:100%}.ph-i{aspect-ratio:3/2;width:100%}
+
+    /* Hero */
+    .hero{padding-top:130px;padding-bottom:40px}
+    .hero-g{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+    .hero h1{font-family:var(--head);font-size:clamp(2.6rem,6vw,4rem);line-height:1;letter-spacing:.04em;text-transform:uppercase;margin-bottom:14px}
+    .hero h1 .hl{color:var(--primary)}
+    .hero-d{color:var(--fg-dim);font-size:1rem;margin-bottom:22px;max-width:440px}
+    .meta{display:flex;gap:20px;align-items:center;flex-wrap:wrap}
+    .meta .rt{font-size:1.4rem;font-weight:700;color:var(--accent)}.meta .rt small{font-size:.75rem;color:var(--fg-dim);font-weight:400}
+    .meta .rv{font-size:.85rem;color:var(--fg-dim)}
+
+    /* Menu */
+    .menu-s{background:var(--bg-r)}
+    .mg{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:28px;margin-top:36px}
+    .mc h3{font-family:var(--head);font-size:1.3rem;letter-spacing:.04em;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid var(--primary);text-transform:uppercase}
+    .mc li{list-style:none;padding:7px 0;font-size:.9rem;color:var(--fg-dim);border-bottom:1px solid rgba(255,255,255,.04)}
+    .mn{margin-top:28px;font-size:.82rem;color:var(--fg-dim);font-style:italic;text-align:center}
+
+    /* Reviews */
+    .rg{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;margin-top:36px}
+    .rc{background:var(--bg-card);border-radius:8px;padding:28px;border-left:3px solid var(--accent)}
+    .rc blockquote{font-size:.94rem;font-style:italic;line-height:1.7;margin-bottom:10px}
+    .rc cite{font-size:.76rem;color:var(--fg-dim);font-style:normal}
+
+    /* Booking */
+    .bk{background:linear-gradient(150deg,#1A0A0A 0%,var(--bg) 100%);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+    .bk-g{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+    .bk-c{background:var(--bg-card);border-radius:12px;padding:32px;border:1px solid var(--rule)}
+    .bk-c h3{font-family:var(--head);font-size:1.4rem;letter-spacing:.03em;margin-bottom:6px}
+    .bk-c .bk-sub{font-size:.84rem;color:var(--fg-dim);margin-bottom:20px}
+    .bf{display:grid;gap:12px}
+    .bf label{font-size:.7rem;text-transform:uppercase;letter-spacing:.12em;color:var(--fg-dim)}
+    .bf input,.bf select{width:100%;padding:11px 14px;background:var(--bg);border:1px solid rgba(255,255,255,.1);border-radius:6px;color:var(--fg);font-family:var(--body);font-size:.9rem}
+    .bf button{padding:13px;background:var(--primary);color:#fff;border:none;border-radius:6px;font-family:var(--head);font-size:1.1rem;letter-spacing:.06em;cursor:pointer;margin-top:6px;text-transform:uppercase}
+    .bf button:hover{background:#B02E33}
+    .bk-pw{font-size:.7rem;color:var(--fg-dim);margin-top:10px;text-align:center}
+
+    /* Info */
+    .ig{display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:36px}
+    .ht{width:100%}.ht td{padding:9px 0;font-size:.9rem}.ht td:first-child{color:var(--fg-dim);width:130px}.ht td:last-child{text-align:right}
+    .mf{width:100%;aspect-ratio:16/9;border:0;border-radius:8px;filter:grayscale(.7) invert(.9) contrast(.85)}
+
+    .ct{background:var(--bg-r)}
+    .cg{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:28px;margin-top:28px}
+    .ci h4{font-size:.7rem;text-transform:uppercase;letter-spacing:.12em;color:var(--primary);margin-bottom:6px}
+    .ci a{color:var(--fg);text-decoration:none;font-size:1.05rem;font-weight:500}.ci a:hover{color:var(--accent)}
+    footer{padding:36px 0;text-align:center;font-size:.76rem;color:var(--fg-dim);border-top:1px solid rgba(255,255,255,.05)}
+    .reveal{opacity:0;transform:translateY(20px);transition:opacity .5s ease,transform .5s ease}.reveal.visible{opacity:1;transform:none}
+    @media(max-width:768px){.hero-g,.bk-g,.ig{grid-template-columns:1fr}.mg{grid-template-columns:1fr}section{padding:56px 0}.hero{padding-top:100px}}
+  </style>
+</head>
+<body>
+
+  <div class="banner">
+    This is a demo — the final website will be built together based on your preferences.
+    <a href="https://preview.klarsystems.com/kung-s-kitchen-kokkola/proposal/">See the offer</a>
+  </div>
+
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-g">
+        <div>
+          <div class="lbl">Kokkola</div>
+          <h1><span class="hl">Kung's</span> Kitchen</h1>
+          <p class="hero-d">Asian fusion buffet in the heart of Kokkola. Sushi, Chinese, Thai — all under one roof. Generous variety, friendly service, every day of the week.</p>
+          <div class="meta">
+            <div class="rt">4.4 <small>/ 5</small></div>
+            <div class="rv">956 Google reviews</div>
+          </div>
+        </div>
+        <div class="ph ph-h" aria-label="Your photo here"><span>Your photo here</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="menu-s reveal">
+    <div class="wrap">
+      <div class="lbl">Buffet</div>
+      <h2>One kitchen, three cuisines</h2>
+      <p class="s">Fresh sushi, wok-fried Chinese classics, Thai curries, and vegetarian dishes — all laid out on the buffet. Take what you love, come back for more.</p>
+      <div class="mg">
+        <div class="mc">
+          <h3>Sushi</h3>
+          <ul>
+            <li>Assorted nigiri</li>
+            <li>Maki rolls</li>
+            <li>Sashimi selection</li>
+          </ul>
+        </div>
+        <div class="mc">
+          <h3>Chinese &amp; Thai</h3>
+          <ul>
+            <li>Egg rolls</li>
+            <li>Vegetable spring rolls</li>
+            <li>Wok dishes</li>
+            <li>Thai curries</li>
+          </ul>
+        </div>
+        <div class="mc">
+          <h3>Sides &amp; More</h3>
+          <ul>
+            <li>Salad bar</li>
+            <li>Rice and noodles</li>
+            <li>Desserts and ice cream</li>
+          </ul>
+        </div>
+      </div>
+      <div class="ph ph-f" style="max-width:280px;margin:36px auto 0" aria-label="Food photos coming soon"><span>Food photos coming soon</span></div>
+      <p class="mn">This is a demo — the menu will be updated together with you.</p>
+    </div>
+  </section>
+
+  <section class="reveal">
+    <div class="wrap">
+      <div class="lbl">Reviews</div>
+      <h2>What Kokkola says</h2>
+      <div class="rg">
+        <div class="rc">
+          <blockquote>"Large variety of foods at an affordable price. The staff was very friendly and the premises were clean with a great atmosphere."</blockquote>
+          <cite>via RestaurantGuru</cite>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bk reveal" id="booking">
+    <div class="wrap">
+      <div class="bk-g">
+        <div>
+          <div class="lbl">Reserve</div>
+          <h2>Book your table</h2>
+          <p class="s">Reserve in seconds — no account needed, no fees. Walk in or book ahead, either way there is a seat for you.</p>
+          <div class="ph ph-i" style="margin-top:28px" aria-label="Interior photo coming soon"><span>Interior photo coming soon</span></div>
+        </div>
+        <div class="bk-c klar-bookings" id="klar-bookings-widget">
+          <h3>Varaa pöytä</h3>
+          <p class="bk-sub">Varaa sekunneissa — ei tilin luomista, ei maksuja.</p>
+          <form class="bf" onsubmit="return false;">
+            <div><label for="bd">Date</label><input type="date" id="bd" name="date" required></div>
+            <div><label for="bt">Time</label>
+              <select id="bt" name="time">
+                <option value="11:00">11:00</option><option value="11:30">11:30</option>
+                <option value="12:00" selected>12:00</option><option value="12:30">12:30</option>
+                <option value="13:00">13:00</option><option value="17:00">17:00</option>
+                <option value="17:30">17:30</option><option value="18:00">18:00</option>
+                <option value="18:30">18:30</option><option value="19:00">19:00</option>
+              </select>
+            </div>
+            <div><label for="bg">Guests</label>
+              <select id="bg" name="guests">
+                <option value="1">1 guest</option><option value="2" selected>2 guests</option>
+                <option value="3">3 guests</option><option value="4">4 guests</option>
+                <option value="5">5 guests</option><option value="6">6+ guests</option>
+              </select>
+            </div>
+            <button type="submit">Reserve</button>
+          </form>
+          <div class="bk-pw">Powered by Klar Bookings — no fees, no commissions</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="reveal">
+    <div class="wrap">
+      <div class="lbl">Visit</div>
+      <h2>Hours &amp; Location</h2>
+      <div class="ig">
+        <div>
+          <table class="ht">
+            <tr><td>Monday</td><td>10:45 – 20:00</td></tr>
+            <tr><td>Tuesday</td><td>10:45 – 20:00</td></tr>
+            <tr><td>Wednesday</td><td>10:45 – 20:00</td></tr>
+            <tr><td>Thursday</td><td>10:45 – 20:00</td></tr>
+            <tr><td>Friday</td><td>10:45 – 20:00</td></tr>
+            <tr><td>Saturday</td><td>10:45 – 20:00</td></tr>
+            <tr><td>Sunday</td><td>12:00 – 18:00</td></tr>
+          </table>
+        </div>
+        <div><iframe class="mf" src="https://maps.google.com/maps?q=Pitk%C3%A4nsillankatu+23+Kokkola&output=embed" allowfullscreen loading="lazy"></iframe></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ct reveal">
+    <div class="wrap">
+      <div class="lbl">Contact</div>
+      <h2>Get in touch</h2>
+      <div class="cg">
+        <div class="ci"><h4>Phone</h4><a href="tel:+35868220122">+358 6 822 0122</a></div>
+        <div class="ci"><h4>Address</h4><span>Pitkänsillankatu 23, 67100 Kokkola</span></div>
+        <div class="ci"><h4>Facebook</h4><a href="https://www.facebook.com/KungsKitchen/" target="_blank" rel="noopener">Kung's Kitchen</a></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <p>Kung's Kitchen — Pitkänsillankatu 23, 67100 Kokkola — <a href="tel:+35868220122" style="color:var(--fg-dim)">+358 6 822 0122</a></p>
+      <p style="margin-top:6px">&copy; 2026 Kung's Kitchen. Powered by Klar.</p>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded',function(){
+      var o=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting)x.target.classList.add('visible')})},{threshold:.12});
+      document.querySelectorAll('.reveal').forEach(function(el){o.observe(el)});
+    });
+  </script>
+</body>
+</html>

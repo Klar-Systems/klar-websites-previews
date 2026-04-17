@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ylöjärven Lempi — Pizza &amp; Kebab in Ylöjärvi</title>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#141414;--bg-r:#1C1A16;--bg-c:#252218;--fg:#F5F1EA;--fg-d:#A09882;--pri:#E04B1E;--acc:#F2C75C;--rule:rgba(224,75,30,.15);--head:'Archivo Black',Impact,sans-serif;--body:'DM Sans',-apple-system,sans-serif}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{font-family:var(--body);background:var(--bg);color:var(--fg);line-height:1.65;-webkit-font-smoothing:antialiased}
+    .bn{position:fixed;top:0;left:0;right:0;z-index:1000;background:var(--pri);color:#fff;text-align:center;padding:10px 16px;font-size:.82rem}.bn a{color:#fff;font-weight:700;text-decoration:underline;margin-left:8px}
+    .w{max-width:1060px;margin:0 auto;padding:0 24px}section{padding:72px 0}
+    .l{font-size:.7rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--pri);margin-bottom:10px}
+    h2{font-family:var(--head);font-size:clamp(1.8rem,4.5vw,2.6rem);line-height:1.08;margin-bottom:14px;text-transform:uppercase}
+    p.s{color:var(--fg-d);max-width:520px;font-size:.95rem}
+    .ph{background:var(--bg-r);border:1px solid var(--rule);display:flex;align-items:center;justify-content:center;color:var(--fg-d);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;border-radius:8px}
+    .ph-h{aspect-ratio:16/9;width:100%}.ph-f{aspect-ratio:1/1;width:100%}.ph-i{aspect-ratio:3/2;width:100%}
+    .hero{padding-top:124px;padding-bottom:32px}.hg{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+    .hero h1{font-family:var(--head);font-size:clamp(2.2rem,5vw,3.2rem);line-height:1;text-transform:uppercase;margin-bottom:12px}.hero h1 .hl{color:var(--pri)}
+    .hd{color:var(--fg-d);font-size:1rem;margin-bottom:18px;max-width:420px}
+    .mt{display:flex;gap:16px;align-items:center;flex-wrap:wrap}.mt .r{font-size:1.3rem;font-weight:700;color:var(--acc)}.mt .r small{font-size:.75rem;color:var(--fg-d);font-weight:400}.mt .rv{font-size:.85rem;color:var(--fg-d)}
+    .ms{background:var(--bg-r)}.mg{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;margin-top:28px}
+    .mc h3{font-family:var(--head);font-size:1.05rem;margin-bottom:8px;padding-bottom:5px;border-bottom:2px solid var(--pri);text-transform:uppercase}
+    .mc li{list-style:none;padding:5px 0;font-size:.88rem;color:var(--fg-d)}
+    .mn{margin-top:20px;font-size:.82rem;color:var(--fg-d);font-style:italic;text-align:center}
+    .bk{background:linear-gradient(155deg,#1E0E08 0%,var(--bg) 100%);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+    .bg{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+    .bc{background:var(--bg-c);border-radius:12px;padding:28px;border:1px solid var(--rule)}
+    .bc h3{font-family:var(--head);font-size:1.2rem;margin-bottom:4px;text-transform:uppercase}.bc .bs{font-size:.82rem;color:var(--fg-d);margin-bottom:16px}
+    .bf{display:grid;gap:10px}.bf label{font-size:.68rem;text-transform:uppercase;letter-spacing:.12em;color:var(--fg-d)}
+    .bf input,.bf select{width:100%;padding:10px 12px;background:var(--bg);border:1px solid rgba(255,255,255,.1);border-radius:5px;color:var(--fg);font-family:var(--body);font-size:.88rem}
+    .bf button{padding:12px;background:var(--pri);color:#fff;border:none;border-radius:5px;font-family:var(--head);font-size:1rem;cursor:pointer;margin-top:4px;text-transform:uppercase;letter-spacing:.04em}.bf button:hover{background:#C43A14}
+    .bp{font-size:.68rem;color:var(--fg-d);margin-top:8px;text-align:center}
+    .ig{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:28px}
+    .ht{width:100%}.ht td{padding:7px 0;font-size:.88rem}.ht td:first-child{color:var(--fg-d);width:110px}.ht td:last-child{text-align:right}
+    .mf{width:100%;aspect-ratio:16/9;border:0;border-radius:6px;filter:grayscale(.7) invert(.9) contrast(.85)}
+    .ct{background:var(--bg-r)}.cg{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;margin-top:20px}
+    .ci h4{font-size:.68rem;text-transform:uppercase;letter-spacing:.12em;color:var(--pri);margin-bottom:4px}
+    .ci a{color:var(--fg);text-decoration:none;font-size:1rem;font-weight:500}.ci a:hover{color:var(--acc)}
+    footer{padding:28px 0;text-align:center;font-size:.74rem;color:var(--fg-d);border-top:1px solid rgba(255,255,255,.04)}
+    .reveal{opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s ease}.reveal.visible{opacity:1;transform:none}
+    @media(max-width:768px){.hg,.bg,.ig{grid-template-columns:1fr}section{padding:48px 0}.hero{padding-top:92px}}
+  </style>
+</head>
+<body>
+  <div class="bn">This is a demo — the final website will be built together based on your preferences.<a href="https://preview.klarsystems.com/ylojarven-lempi-ylojarvi/proposal/">See the offer</a></div>
+
+  <section class="hero"><div class="w"><div class="hg">
+    <div>
+      <div class="l">Ylöjärvi</div>
+      <h1>Ylöjärven <span class="hl">Lempi</span></h1>
+      <p class="hd">Pizza, kebab, and grill classics in Ylöjärvi. Fresh, fast, friendly — the neighbourhood favourite where flavour always comes first.</p>
+      <div class="mt"><div class="r">3.9 <small>/ 5</small></div><div class="rv">472 Google reviews</div></div>
+    </div>
+    <div class="ph ph-h" aria-label="Your photo here"><span>Your photo here</span></div>
+  </div></div></section>
+
+  <section class="ms reveal"><div class="w">
+    <div class="l">Menu</div>
+    <h2>Pizza, kebab &amp; grill</h2>
+    <p class="s">From crispy pizza to generous kebab plates and fresh falafel — all made in-house, all served fast.</p>
+    <div class="mg">
+      <div class="mc"><h3>Pizza</h3><ul><li>Classic margherita</li><li>Kebab pizza</li><li>House specials</li></ul></div>
+      <div class="mc"><h3>Kebab</h3><ul><li>Kebab plate</li><li>Kebab with fries</li><li>Kebab pita</li></ul></div>
+      <div class="mc"><h3>Grill &amp; More</h3><ul><li>Falafel</li><li>Burgers</li><li>Salads</li></ul></div>
+    </div>
+    <div class="ph ph-f" style="max-width:240px;margin:24px auto 0" aria-label="Food photos coming soon"><span>Food photos coming soon</span></div>
+    <p class="mn">This is a demo — the menu will be updated together with you.</p>
+  </div></section>
+
+  <section class="bk reveal" id="booking"><div class="w"><div class="bg">
+    <div>
+      <div class="l">Reserve</div><h2>Book a table</h2>
+      <p class="s">Group order, family visit, or just want to make sure there is space — reserve in seconds.</p>
+      <div class="ph ph-i" style="margin-top:20px" aria-label="Interior photo coming soon"><span>Interior photo coming soon</span></div>
+    </div>
+    <div class="bc klar-bookings" id="klar-bookings-widget">
+      <h3>Varaa pöytä</h3><p class="bs">Varaa sekunneissa — ei tilin luomista, ei maksuja.</p>
+      <form class="bf" onsubmit="return false;">
+        <div><label for="bd">Date</label><input type="date" id="bd" name="date" required></div>
+        <div><label for="bt">Time</label><select id="bt" name="time"><option value="11:00">11:00</option><option value="12:00" selected>12:00</option><option value="13:00">13:00</option><option value="17:00">17:00</option><option value="18:00">18:00</option><option value="19:00">19:00</option><option value="20:00">20:00</option></select></div>
+        <div><label for="bg2">Guests</label><select id="bg2" name="guests"><option value="1">1</option><option value="2" selected>2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6+</option></select></div>
+        <button type="submit">Reserve</button>
+      </form>
+      <div class="bp">Powered by Klar Bookings — no fees, no commissions</div>
+    </div>
+  </div></div></section>
+
+  <section class="reveal"><div class="w">
+    <div class="l">Visit</div><h2>Hours &amp; Location</h2>
+    <div class="ig">
+      <div><table class="ht"><tr><td>Mon–Thu</td><td>10:00 – 21:00</td></tr><tr><td>Friday</td><td>10:00 – 22:00</td></tr><tr><td>Saturday</td><td>11:00 – 22:00</td></tr><tr><td>Sunday</td><td>12:00 – 21:00</td></tr></table></div>
+      <div><iframe class="mf" src="https://maps.google.com/maps?q=Pallotie+2+Yl%C3%B6j%C3%A4rvi&output=embed" allowfullscreen loading="lazy"></iframe></div>
+    </div>
+  </div></section>
+
+  <section class="ct reveal"><div class="w">
+    <div class="l">Contact</div><h2>Get in touch</h2>
+    <div class="cg">
+      <div class="ci"><h4>Phone</h4><a href="tel:+358442490305">+358 44 249 0305</a></div>
+      <div class="ci"><h4>Address</h4><span>Pallotie 2 A, 33470 Ylöjärvi</span></div>
+      <div class="ci"><h4>Facebook</h4><a href="https://www.facebook.com/LempiOy/" target="_blank" rel="noopener">Ylöjärven Lempi</a></div>
+    </div>
+  </div></section>
+
+  <footer><div class="w"><p>Ylöjärven Lempi — Pallotie 2 A, 33470 Ylöjärvi — <a href="tel:+358442490305" style="color:var(--fg-d)">+358 44 249 0305</a></p><p style="margin-top:4px">&copy; 2026 Ylöjärven Lempi. Powered by Klar.</p></div></footer>
+  <script>document.addEventListener('DOMContentLoaded',function(){var o=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting)x.target.classList.add('visible')})},{threshold:.12});document.querySelectorAll('.reveal').forEach(function(el){o.observe(el)})});</script>
+</body>
+</html>

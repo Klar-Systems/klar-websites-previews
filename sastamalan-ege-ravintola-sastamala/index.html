@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EGE Ravintola — Kebab &amp; Pizza in Sastamala</title>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <!-- palette: segment-2 default adapted for kebab-pizzeria energy -->
+  <style>
+    :root {
+      --bg:#141414;--bg-r:#1C1A16;--bg-c:#252218;--fg:#F5F1EA;--fg-d:#A09882;
+      --pri:#E04B1E;--acc:#F2C75C;--rule:rgba(224,75,30,.18);
+      --head:'Archivo Black',Impact,sans-serif;--body:'Inter',-apple-system,sans-serif;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}body{font-family:var(--body);background:var(--bg);color:var(--fg);line-height:1.65;-webkit-font-smoothing:antialiased}
+    .bn{position:fixed;top:0;left:0;right:0;z-index:1000;background:var(--pri);color:#fff;text-align:center;padding:10px 16px;font-size:.82rem}
+    .bn a{color:#fff;font-weight:700;text-decoration:underline;margin-left:8px}
+    .w{max-width:1060px;margin:0 auto;padding:0 24px}section{padding:76px 0}
+    .l{font-size:.7rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--pri);margin-bottom:10px}
+    h2{font-family:var(--head);font-size:clamp(1.8rem,4.5vw,2.8rem);line-height:1.08;margin-bottom:16px;text-transform:uppercase}
+    p.s{color:var(--fg-d);max-width:540px;font-size:.95rem}
+    .ph{background:var(--bg-r);border:1px solid var(--rule);display:flex;align-items:center;justify-content:center;color:var(--fg-d);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;border-radius:8px}
+    .ph-h{aspect-ratio:16/9;width:100%}.ph-f{aspect-ratio:1/1;width:100%}.ph-i{aspect-ratio:3/2;width:100%}
+
+    .hero{padding-top:128px;padding-bottom:36px}
+    .hg{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center}
+    .hero h1{font-family:var(--head);font-size:clamp(2.4rem,5.5vw,3.6rem);line-height:1;text-transform:uppercase;margin-bottom:14px}
+    .hero h1 .hl{color:var(--pri)}
+    .hd{color:var(--fg-d);font-size:1rem;margin-bottom:20px;max-width:440px}
+    .mt{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+    .mt .r{font-size:1.3rem;font-weight:700;color:var(--acc)}.mt .r small{font-size:.75rem;color:var(--fg-d);font-weight:400}
+    .mt .rv{font-size:.85rem;color:var(--fg-d)}
+
+    .ms{background:var(--bg-r)}
+    .mg{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px;margin-top:32px}
+    .mc h3{font-family:var(--head);font-size:1.15rem;margin-bottom:10px;padding-bottom:6px;border-bottom:2px solid var(--pri);text-transform:uppercase}
+    .mc li{list-style:none;padding:6px 0;font-size:.9rem;color:var(--fg-d);border-bottom:1px solid rgba(255,255,255,.03)}
+    .mn{margin-top:24px;font-size:.82rem;color:var(--fg-d);font-style:italic;text-align:center}
+
+    .bk{background:linear-gradient(155deg,#1E0E08 0%,var(--bg) 100%);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+    .bg{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center}
+    .bc{background:var(--bg-c);border-radius:12px;padding:30px;border:1px solid var(--rule)}
+    .bc h3{font-family:var(--head);font-size:1.3rem;margin-bottom:5px;text-transform:uppercase}
+    .bc .bs{font-size:.84rem;color:var(--fg-d);margin-bottom:18px}
+    .bf{display:grid;gap:11px}
+    .bf label{font-size:.7rem;text-transform:uppercase;letter-spacing:.12em;color:var(--fg-d)}
+    .bf input,.bf select{width:100%;padding:11px 13px;background:var(--bg);border:1px solid rgba(255,255,255,.1);border-radius:6px;color:var(--fg);font-family:var(--body);font-size:.9rem}
+    .bf button{padding:13px;background:var(--pri);color:#fff;border:none;border-radius:6px;font-family:var(--head);font-size:1rem;cursor:pointer;margin-top:5px;text-transform:uppercase;letter-spacing:.04em}
+    .bf button:hover{background:#C43A14}
+    .bp{font-size:.7rem;color:var(--fg-d);margin-top:9px;text-align:center}
+
+    .ig{display:grid;grid-template-columns:1fr 1fr;gap:44px;margin-top:32px}
+    .ht{width:100%}.ht td{padding:8px 0;font-size:.9rem}.ht td:first-child{color:var(--fg-d);width:120px}.ht td:last-child{text-align:right}
+    .mf{width:100%;aspect-ratio:16/9;border:0;border-radius:8px;filter:grayscale(.7) invert(.9) contrast(.85)}
+
+    .ct{background:var(--bg-r)}
+    .cg{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:24px;margin-top:24px}
+    .ci h4{font-size:.7rem;text-transform:uppercase;letter-spacing:.12em;color:var(--pri);margin-bottom:5px}
+    .ci a{color:var(--fg);text-decoration:none;font-size:1.05rem;font-weight:500}.ci a:hover{color:var(--acc)}
+    footer{padding:32px 0;text-align:center;font-size:.76rem;color:var(--fg-d);border-top:1px solid rgba(255,255,255,.05)}
+    .reveal{opacity:0;transform:translateY(18px);transition:opacity .5s ease,transform .5s ease}.reveal.visible{opacity:1;transform:none}
+    @media(max-width:768px){.hg,.bg,.ig{grid-template-columns:1fr}.mg{grid-template-columns:1fr}section{padding:52px 0}.hero{padding-top:96px}}
+  </style>
+</head>
+<body>
+  <div class="bn">This is a demo — the final website will be built together based on your preferences.<a href="https://preview.klarsystems.com/sastamalan-ege-ravintola-sastamala/proposal/">See the offer</a></div>
+
+  <section class="hero">
+    <div class="w">
+      <div class="hg">
+        <div>
+          <div class="l">Sastamala</div>
+          <h1><span class="hl">EGE</span> Ravintola</h1>
+          <p class="hd">Kebab and pizza in the heart of Sastamala. Fresh dough, real grill, friendly faces — the neighbourhood classic since day one.</p>
+          <div class="mt"><div class="r">4.2 <small>/ 5</small></div><div class="rv">680 Google reviews</div></div>
+        </div>
+        <div class="ph ph-h" aria-label="Your photo here"><span>Your photo here</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ms reveal">
+    <div class="w">
+      <div class="l">Menu</div>
+      <h2>Pizza, kebab &amp; more</h2>
+      <p class="s">Classic Finnish kebab-pizzeria — everything made fresh, from the pizza dough to the kebab grill. Eat in or take away.</p>
+      <div class="mg">
+        <div class="mc"><h3>Pizza</h3><ul><li>Classic margherita</li><li>Kebab-pizza</li><li>Quattro stagioni</li><li>House specials</li></ul></div>
+        <div class="mc"><h3>Kebab</h3><ul><li>Kebab with rice</li><li>Kebab with fries</li><li>Iskender kebab</li><li>Kebab pita</li><li>Talon kebab (double meat)</li></ul></div>
+        <div class="mc"><h3>Grill &amp; Salads</h3><ul><li>Chicken dishes</li><li>Fresh salads</li><li>Sides and drinks</li></ul></div>
+      </div>
+      <div class="ph ph-f" style="max-width:260px;margin:32px auto 0" aria-label="Food photos coming soon"><span>Food photos coming soon</span></div>
+      <p class="mn">This is a demo — the menu will be updated together with you.</p>
+    </div>
+  </section>
+
+  <section class="bk reveal" id="booking">
+    <div class="w">
+      <div class="bg">
+        <div>
+          <div class="l">Reserve</div>
+          <h2>Book your table</h2>
+          <p class="s">Group dinner, family celebration, or just want to make sure there is a spot — reserve in seconds.</p>
+          <div class="ph ph-i" style="margin-top:24px" aria-label="Interior photo coming soon"><span>Interior photo coming soon</span></div>
+        </div>
+        <div class="bc klar-bookings" id="klar-bookings-widget">
+          <h3>Varaa pöytä</h3>
+          <p class="bs">Varaa sekunneissa — ei tilin luomista, ei maksuja.</p>
+          <form class="bf" onsubmit="return false;">
+            <div><label for="bd">Date</label><input type="date" id="bd" name="date" required></div>
+            <div><label for="bt">Time</label>
+              <select id="bt" name="time">
+                <option value="11:00">11:00</option><option value="12:00" selected>12:00</option>
+                <option value="13:00">13:00</option><option value="17:00">17:00</option>
+                <option value="18:00">18:00</option><option value="19:00">19:00</option>
+                <option value="20:00">20:00</option><option value="21:00">21:00</option>
+              </select>
+            </div>
+            <div><label for="bg2">Guests</label>
+              <select id="bg2" name="guests">
+                <option value="1">1 guest</option><option value="2" selected>2 guests</option>
+                <option value="3">3 guests</option><option value="4">4 guests</option>
+                <option value="5">5 guests</option><option value="6">6+ guests</option>
+              </select>
+            </div>
+            <button type="submit">Reserve</button>
+          </form>
+          <div class="bp">Powered by Klar Bookings — no fees, no commissions</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="reveal">
+    <div class="w">
+      <div class="l">Visit</div>
+      <h2>Hours &amp; Location</h2>
+      <div class="ig">
+        <div>
+          <table class="ht">
+            <tr><td>Mon–Thu</td><td>10:30 – 22:00</td></tr>
+            <tr><td>Friday</td><td>10:30 – 00:00</td></tr>
+            <tr><td>Saturday</td><td>11:00 – 00:00</td></tr>
+            <tr><td>Sunday</td><td>12:00 – 22:00</td></tr>
+          </table>
+        </div>
+        <div><iframe class="mf" src="https://maps.google.com/maps?q=Marttilankatu+8+Sastamala&output=embed" allowfullscreen loading="lazy"></iframe></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ct reveal">
+    <div class="w">
+      <div class="l">Contact</div>
+      <h2>Get in touch</h2>
+      <div class="cg">
+        <div class="ci"><h4>Phone</h4><a href="tel:+35835114111">+358 3 511 4111</a></div>
+        <div class="ci"><h4>Address</h4><span>Marttilankatu 8, 38200 Sastamala</span></div>
+        <div class="ci"><h4>Facebook</h4><a href="https://www.facebook.com/sastamalanEGE/" target="_blank" rel="noopener">Sastamalan EGE</a></div>
+        <div class="ci"><h4>Instagram</h4><a href="https://instagram.com/sastamalanege" target="_blank" rel="noopener">@sastamalanege</a></div>
+      </div>
+    </div>
+  </section>
+
+  <footer><div class="w">
+    <p>EGE Ravintola — Marttilankatu 8, 38200 Sastamala — <a href="tel:+35835114111" style="color:var(--fg-d)">+358 3 511 4111</a></p>
+    <p style="margin-top:5px">&copy; 2026 Sastamalan EGE Ravintola. Powered by Klar.</p>
+  </div></footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded',function(){
+      var o=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting)x.target.classList.add('visible')})},{threshold:.12});
+      document.querySelectorAll('.reveal').forEach(function(el){o.observe(el)});
+    });
+  </script>
+</body>
+</html>

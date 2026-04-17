@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cafe Mondeo — Open 24/7 in Seinäjoki</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+  <!-- palette: segment-1 default warm, adapted for always-open café energy -->
+  <style>
+    :root {
+      --bg: #0F0E0C;
+      --bg-warm: #1A1610;
+      --bg-card: #23201A;
+      --fg: #F0EBE1;
+      --fg-dim: #998F7E;
+      --primary: #D4883A;
+      --accent: #E8C170;
+      --rule: rgba(212,136,58,0.18);
+      --heading: 'Outfit', -apple-system, sans-serif;
+      --body: 'DM Sans', -apple-system, sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--body);
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+    .demo-banner {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      background: var(--primary); color: #fff; text-align: center;
+      padding: 10px 16px; font-size: 0.82rem;
+    }
+    .demo-banner a { color: #fff; font-weight: 700; text-decoration: underline; margin-left: 8px; }
+    .container { max-width: 1060px; margin: 0 auto; padding: 0 24px; }
+    section { padding: 80px 0; }
+    .label {
+      font-family: var(--heading); font-size: 0.7rem; font-weight: 700;
+      letter-spacing: 0.18em; text-transform: uppercase; color: var(--primary); margin-bottom: 12px;
+    }
+    h2 {
+      font-family: var(--heading); font-size: clamp(1.8rem, 4vw, 2.5rem);
+      font-weight: 700; line-height: 1.15; margin-bottom: 20px;
+    }
+    p.sub { color: var(--fg-dim); max-width: 560px; font-size: 0.95rem; }
+
+    /* Hero */
+    .hero { padding-top: 130px; padding-bottom: 40px; }
+    .hero-inner { display: grid; grid-template-columns: 1.2fr 1fr; gap: 48px; align-items: center; }
+    .hero h1 {
+      font-family: var(--heading); font-size: clamp(2.2rem, 5vw, 3.2rem);
+      font-weight: 700; line-height: 1.08; margin-bottom: 16px;
+    }
+    .hero h1 .hl { color: var(--primary); }
+    .hero-desc { color: var(--fg-dim); font-size: 1rem; margin-bottom: 24px; max-width: 460px; }
+    .badge-row { display: flex; gap: 20px; align-items: center; flex-wrap: wrap; }
+    .badge { display: inline-flex; align-items: center; gap: 6px; background: var(--bg-card); padding: 8px 16px; border-radius: 40px; font-size: 0.82rem; }
+    .badge .num { font-weight: 700; color: var(--accent); font-size: 1.1rem; }
+    .open-badge { background: #1C3A1C; color: #6FD86F; }
+    .img-placeholder {
+      background: var(--bg-warm); border: 1px solid var(--rule);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--fg-dim); font-size: 0.72rem; letter-spacing: 0.1em;
+      text-transform: uppercase; border-radius: 10px;
+    }
+    .img-hero { aspect-ratio: 4/3; width: 100%; }
+    .img-food { aspect-ratio: 1/1; width: 100%; }
+    .img-interior { aspect-ratio: 3/2; width: 100%; }
+
+    /* Features */
+    .features { background: var(--bg-warm); }
+    .feat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-top: 36px; }
+    .feat-card {
+      background: var(--bg-card); border-radius: 10px; padding: 28px;
+      border-top: 3px solid var(--primary);
+    }
+    .feat-card h3 { font-family: var(--heading); font-size: 1.1rem; margin-bottom: 8px; }
+    .feat-card p { font-size: 0.88rem; color: var(--fg-dim); }
+
+    /* Menu */
+    .menu-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 36px; }
+    .menu-block h3 {
+      font-family: var(--heading); font-size: 1.15rem; margin-bottom: 14px;
+      padding-bottom: 8px; border-bottom: 1px solid var(--rule);
+    }
+    .menu-block li { list-style: none; padding: 7px 0; font-size: 0.9rem; color: var(--fg-dim);
+      border-bottom: 1px solid rgba(255,255,255,0.03); }
+    .menu-note { margin-top: 28px; font-size: 0.82rem; color: var(--fg-dim); font-style: italic; text-align: center; }
+
+    /* Reviews */
+    .rev-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-top: 36px; }
+    .rev-card { background: var(--bg-card); border-radius: 10px; padding: 28px; border-left: 3px solid var(--accent); }
+    .rev-card blockquote { font-size: 0.94rem; font-style: italic; line-height: 1.7; margin-bottom: 10px; }
+    .rev-card cite { font-size: 0.76rem; color: var(--fg-dim); font-style: normal; }
+
+    /* Booking */
+    .booking { background: linear-gradient(160deg, #1A1408 0%, var(--bg) 100%);
+      border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+    .book-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+    .book-card {
+      background: var(--bg-card); border-radius: 12px; padding: 32px;
+      border: 1px solid var(--rule);
+    }
+    .book-card h3 { font-family: var(--heading); font-size: 1.3rem; margin-bottom: 6px; }
+    .book-card .book-sub { font-size: 0.84rem; color: var(--fg-dim); margin-bottom: 20px; }
+    .book-form { display: grid; gap: 12px; }
+    .book-form label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--fg-dim); }
+    .book-form input, .book-form select {
+      width: 100%; padding: 11px 14px; background: var(--bg); border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 6px; color: var(--fg); font-family: var(--body); font-size: 0.9rem;
+    }
+    .book-form button {
+      padding: 13px; background: var(--primary); color: #fff; border: none; border-radius: 6px;
+      font-family: var(--heading); font-size: 1rem; font-weight: 700; cursor: pointer; margin-top: 6px;
+    }
+    .book-form button:hover { background: #C07830; }
+    .book-powered { font-size: 0.7rem; color: var(--fg-dim); margin-top: 10px; text-align: center; }
+
+    /* Hours + Map */
+    .info-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-top: 36px; }
+    .hours-tbl { width: 100%; }
+    .hours-tbl td { padding: 9px 0; font-size: 0.9rem; }
+    .hours-tbl td:first-child { color: var(--fg-dim); width: 130px; }
+    .hours-tbl td:last-child { text-align: right; }
+    .map-frame { width: 100%; aspect-ratio: 16/9; border: 0; border-radius: 8px;
+      filter: grayscale(0.7) invert(0.9) contrast(0.85); }
+
+    /* Contact */
+    .contact { background: var(--bg-warm); }
+    .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 28px; margin-top: 28px; }
+    .contact-item h4 { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--primary); margin-bottom: 6px; }
+    .contact-item a { color: var(--fg); text-decoration: none; font-size: 1.05rem; font-weight: 500; }
+    .contact-item a:hover { color: var(--accent); }
+
+    footer { padding: 36px 0; text-align: center; font-size: 0.76rem; color: var(--fg-dim);
+      border-top: 1px solid rgba(255,255,255,0.05); }
+
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    @media (max-width: 768px) {
+      .hero-inner, .book-grid, .info-cols, .menu-cols { grid-template-columns: 1fr; }
+      .feat-grid { grid-template-columns: 1fr; }
+      section { padding: 56px 0; }
+      .hero { padding-top: 100px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="demo-banner">
+    This is a demo — the final website will be built together based on your preferences.
+    <a href="https://preview.klarsystems.com/cafe-mondeo-oy-seinajoki/proposal/">See the offer</a>
+  </div>
+
+  <section class="hero">
+    <div class="container">
+      <div class="hero-inner">
+        <div>
+          <div class="label">Seinäjoki</div>
+          <h1><span class="hl">Cafe Mondeo</span></h1>
+          <p class="hero-desc">Home-style lunch buffet and 24/7 café-grill on Herralankatu. Seinäjoki's most reliable kitchen — always open, always warm, always worth the stop.</p>
+          <div class="badge-row">
+            <div class="badge"><span class="num">4.3</span> / 5 &nbsp;|&nbsp; 1,399 reviews</div>
+            <div class="badge open-badge">Open 24/7</div>
+          </div>
+        </div>
+        <div class="img-placeholder img-hero" aria-label="Your photo here"><span>Your photo here</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="features reveal">
+    <div class="container">
+      <div class="label">Why Mondeo</div>
+      <h2>Three reasons locals keep coming back</h2>
+      <div class="feat-grid">
+        <div class="feat-card">
+          <h3>Always Open</h3>
+          <p>24 hours, 7 days a week. Early breakfast, late-night grilli, holiday lunch — Mondeo is there when you need it.</p>
+        </div>
+        <div class="feat-card">
+          <h3>Buffet Lunch</h3>
+          <p>Rotating home-style hot dishes, generous salad bar, and sides. Daily 10:30–16:00. Weekdays from 13 EUR.</p>
+        </div>
+        <div class="feat-card">
+          <h3>Free Parking</h3>
+          <p>Plenty of space right outside the door. No circling, no meters — pull up and walk in.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="reveal">
+    <div class="container">
+      <div class="label">Menu</div>
+      <h2>From buffet to grill — eat your way</h2>
+      <div class="menu-cols">
+        <div class="menu-block">
+          <h3>Buffet Lunch</h3>
+          <ul>
+            <li>Daily rotating hot dishes</li>
+            <li>Generous salad bar</li>
+            <li>Bread, butter, and sides</li>
+            <li>Coffee included</li>
+          </ul>
+          <p style="font-size: 0.82rem; color: var(--fg-dim); margin-top: 12px;">
+            Mon–Fri: 13 EUR &nbsp;|&nbsp; Weekends & holidays: 15 EUR<br>
+            Served 10:30–16:00
+          </p>
+        </div>
+        <div class="menu-block">
+          <h3>Grill (24/7)</h3>
+          <ul>
+            <li>Makkaraperunat sulatejuustolla (sausage, fries, melted cheese)</li>
+            <li>Hamburgers</li>
+            <li>Cafe products, pastries</li>
+            <li>Munkkikahvi (donut with coffee)</li>
+          </ul>
+        </div>
+      </div>
+      <div class="img-placeholder img-food" style="max-width: 300px; margin: 36px auto 0;" aria-label="Food photos coming soon"><span>Food photos coming soon</span></div>
+      <p class="menu-note">This is a demo — the menu will be updated together with you.</p>
+    </div>
+  </section>
+
+  <section class="reveal" style="background: var(--bg-warm);">
+    <div class="container">
+      <div class="label">Reviews</div>
+      <h2>What Seinäjoki says</h2>
+      <div class="rev-grid">
+        <div class="rev-card">
+          <blockquote>"Hienosti remontoitu, aina auki ja ruoka edelleen Seinäjoen parasta!"</blockquote>
+          <cite>via Eat.fi</cite>
+        </div>
+        <div class="rev-card">
+          <blockquote>"Parhaita lounaspaikkoja Seinäjoella."</blockquote>
+          <cite>via Eat.fi</cite>
+        </div>
+        <div class="rev-card">
+          <blockquote>"Hyvä ruoka, monipuolinen."</blockquote>
+          <cite>Helena Hohenthal, via RestaurantGuru</cite>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="booking reveal" id="booking">
+    <div class="container">
+      <div class="book-grid">
+        <div>
+          <div class="label">Reserve</div>
+          <h2>Book a table for your group</h2>
+          <p class="sub">Mondeo hosts groups and teams — evening events, lunch meetings, celebrations. Reserve ahead and we will have everything ready.</p>
+          <div class="img-placeholder img-interior" style="margin-top: 28px;" aria-label="Interior photo coming soon"><span>Interior photo coming soon</span></div>
+        </div>
+        <div class="book-card klar-bookings" id="klar-bookings-widget">
+          <h3>Varaa pöytä</h3>
+          <p class="book-sub">Varaa sekunneissa — ei tilin luomista, ei maksuja.</p>
+          <form class="book-form" onsubmit="return false;">
+            <div>
+              <label for="b-date">Date</label>
+              <input type="date" id="b-date" name="date" required>
+            </div>
+            <div>
+              <label for="b-time">Time</label>
+              <select id="b-time" name="time">
+                <option value="10:30">10:30</option>
+                <option value="11:00">11:00</option>
+                <option value="11:30">11:30</option>
+                <option value="12:00" selected>12:00</option>
+                <option value="12:30">12:30</option>
+                <option value="13:00">13:00</option>
+                <option value="13:30">13:30</option>
+                <option value="14:00">14:00</option>
+                <option value="17:00">17:00</option>
+                <option value="18:00">18:00</option>
+                <option value="19:00">19:00</option>
+              </select>
+            </div>
+            <div>
+              <label for="b-guests">Guests</label>
+              <select id="b-guests" name="guests">
+                <option value="1">1 guest</option>
+                <option value="2">2 guests</option>
+                <option value="3">3 guests</option>
+                <option value="4" selected>4 guests</option>
+                <option value="5">5 guests</option>
+                <option value="6">6+ guests</option>
+              </select>
+            </div>
+            <button type="submit">Reserve</button>
+          </form>
+          <div class="book-powered">Powered by Klar Bookings — no fees, no commissions</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="reveal">
+    <div class="container">
+      <div class="label">Visit</div>
+      <h2>Find us on Herralankatu</h2>
+      <div class="info-cols">
+        <div>
+          <table class="hours-tbl">
+            <tr><td>Monday</td><td>Open 24 h</td></tr>
+            <tr><td>Tuesday</td><td>Open 24 h</td></tr>
+            <tr><td>Wednesday</td><td>Open 24 h</td></tr>
+            <tr><td>Thursday</td><td>Open 24 h</td></tr>
+            <tr><td>Friday</td><td>Open 24 h</td></tr>
+            <tr><td>Saturday</td><td>Open 24 h</td></tr>
+            <tr><td>Sunday</td><td>Open 24 h</td></tr>
+          </table>
+          <p style="font-size: 0.82rem; color: var(--fg-dim); margin-top: 12px;">
+            Buffet lunch served 10:30–16:00 daily
+          </p>
+        </div>
+        <div>
+          <iframe class="map-frame" src="https://maps.google.com/maps?q=Herralankatu+41+Sein%C3%A4joki&output=embed" allowfullscreen loading="lazy"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact reveal">
+    <div class="container">
+      <div class="label">Contact</div>
+      <h2>Get in touch</h2>
+      <div class="contact-grid">
+        <div class="contact-item">
+          <h4>Phone</h4>
+          <a href="tel:+358449835777">+358 44 983 5777</a>
+        </div>
+        <div class="contact-item">
+          <h4>Address</h4>
+          <span>Herralankatu 41, 60320 Seinäjoki</span>
+        </div>
+        <div class="contact-item">
+          <h4>Facebook</h4>
+          <a href="https://www.facebook.com/cafemondeolounas/" target="_blank" rel="noopener">Cafe Mondeo lounas</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>Cafe Mondeo Oy — Herralankatu 41, 60320 Seinäjoki — <a href="tel:+358449835777" style="color:var(--fg-dim);">+358 44 983 5777</a></p>
+      <p style="margin-top: 6px;">&copy; 2026 Cafe Mondeo Oy. Powered by Klar.</p>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var obs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('visible'); });
+      }, { threshold: 0.12 });
+      document.querySelectorAll('.reveal').forEach(function(el) { obs.observe(el); });
+    });
+  </script>
+</body>
+</html>

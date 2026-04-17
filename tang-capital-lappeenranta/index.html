@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tang Capital — Chinese &amp; Sushi in Lappeenranta</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#0A0A0A;--bg-r:#151311;--bg-c:#1E1B17;--fg:#F2EDE4;--fg-d:#9C9486;--pri:#C9393E;--acc:#D4A04A;--rule:rgba(201,57,62,.18);--head:'Outfit',-apple-system,sans-serif;--body:'DM Sans',-apple-system,sans-serif}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{font-family:var(--body);background:var(--bg);color:var(--fg);line-height:1.65;-webkit-font-smoothing:antialiased}
+    .bn{position:fixed;top:0;left:0;right:0;z-index:1000;background:var(--pri);color:#fff;text-align:center;padding:10px 16px;font-size:.82rem}.bn a{color:#fff;font-weight:700;text-decoration:underline;margin-left:8px}
+    .w{max-width:1060px;margin:0 auto;padding:0 24px}section{padding:76px 0}
+    .l{font-size:.7rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--pri);margin-bottom:10px}
+    h2{font-family:var(--head);font-size:clamp(1.8rem,4vw,2.5rem);font-weight:700;line-height:1.12;margin-bottom:16px}
+    p.s{color:var(--fg-d);max-width:540px;font-size:.95rem}
+    .ph{background:var(--bg-r);border:1px solid var(--rule);display:flex;align-items:center;justify-content:center;color:var(--fg-d);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;border-radius:8px}
+    .ph-h{aspect-ratio:16/9;width:100%}.ph-f{aspect-ratio:1/1;width:100%}.ph-i{aspect-ratio:3/2;width:100%}
+    .hero{padding-top:128px;padding-bottom:36px}
+    .hg{display:grid;grid-template-columns:1.1fr 1fr;gap:44px;align-items:center}
+    .hero h1{font-family:var(--head);font-size:clamp(2.4rem,5.5vw,3.4rem);font-weight:700;line-height:1.05;margin-bottom:14px}.hero h1 .hl{color:var(--pri)}
+    .hd{color:var(--fg-d);font-size:1rem;margin-bottom:20px;max-width:440px}
+    .mt{display:flex;gap:18px;align-items:center;flex-wrap:wrap}.mt .r{font-size:1.3rem;font-weight:700;color:var(--acc)}.mt .r small{font-size:.75rem;color:var(--fg-d);font-weight:400}.mt .rv{font-size:.85rem;color:var(--fg-d)}
+    .ms{background:var(--bg-r)}
+    .mg{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px;margin-top:32px}
+    .mc h3{font-family:var(--head);font-size:1.1rem;font-weight:600;margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--rule)}
+    .mc li{list-style:none;padding:6px 0;font-size:.9rem;color:var(--fg-d);border-bottom:1px solid rgba(255,255,255,.03)}
+    .mn{margin-top:24px;font-size:.82rem;color:var(--fg-d);font-style:italic;text-align:center}
+    .bk{background:linear-gradient(155deg,#1A0A08 0%,var(--bg) 100%);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+    .bg{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center}
+    .bc{background:var(--bg-c);border-radius:12px;padding:30px;border:1px solid var(--rule)}
+    .bc h3{font-family:var(--head);font-size:1.3rem;font-weight:600;margin-bottom:5px}.bc .bs{font-size:.84rem;color:var(--fg-d);margin-bottom:18px}
+    .bf{display:grid;gap:11px}.bf label{font-size:.7rem;text-transform:uppercase;letter-spacing:.12em;color:var(--fg-d)}
+    .bf input,.bf select{width:100%;padding:11px 13px;background:var(--bg);border:1px solid rgba(255,255,255,.1);border-radius:6px;color:var(--fg);font-family:var(--body);font-size:.9rem}
+    .bf button{padding:13px;background:var(--pri);color:#fff;border:none;border-radius:6px;font-family:var(--head);font-size:1rem;font-weight:600;cursor:pointer;margin-top:5px}.bf button:hover{background:#B02E33}
+    .bp{font-size:.7rem;color:var(--fg-d);margin-top:9px;text-align:center}
+    .ig{display:grid;grid-template-columns:1fr 1fr;gap:44px;margin-top:32px}
+    .ht{width:100%}.ht td{padding:8px 0;font-size:.9rem}.ht td:first-child{color:var(--fg-d);width:120px}.ht td:last-child{text-align:right}
+    .mf{width:100%;aspect-ratio:16/9;border:0;border-radius:8px;filter:grayscale(.7) invert(.9) contrast(.85)}
+    .ct{background:var(--bg-r)}
+    .cg{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:24px;margin-top:24px}
+    .ci h4{font-size:.7rem;text-transform:uppercase;letter-spacing:.12em;color:var(--pri);margin-bottom:5px}
+    .ci a{color:var(--fg);text-decoration:none;font-size:1.05rem;font-weight:500}.ci a:hover{color:var(--acc)}
+    footer{padding:32px 0;text-align:center;font-size:.76rem;color:var(--fg-d);border-top:1px solid rgba(255,255,255,.05)}
+    .reveal{opacity:0;transform:translateY(18px);transition:opacity .5s ease,transform .5s ease}.reveal.visible{opacity:1;transform:none}
+    @media(max-width:768px){.hg,.bg,.ig{grid-template-columns:1fr}section{padding:52px 0}.hero{padding-top:96px}}
+  </style>
+</head>
+<body>
+  <div class="bn">This is a demo — the final website will be built together based on your preferences.<a href="https://preview.klarsystems.com/tang-capital-lappeenranta/proposal/">See the offer</a></div>
+
+  <section class="hero"><div class="w"><div class="hg">
+    <div>
+      <div class="l">IsoKristiina, Lappeenranta</div>
+      <h1><span class="hl">Tang</span> Capital</h1>
+      <p class="hd">Chinese cuisine, fresh sushi, and poke bowls in the heart of Lappeenranta. All the flavours of Asia — one convenient stop in IsoKristiina.</p>
+      <div class="mt"><div class="r">3.9 <small>/ 5</small></div><div class="rv">625 Google reviews</div></div>
+    </div>
+    <div class="ph ph-h" aria-label="Your photo here"><span>Your photo here</span></div>
+  </div></div></section>
+
+  <section class="ms reveal"><div class="w">
+    <div class="l">Menu</div>
+    <h2>Sushi, Chinese and everything between</h2>
+    <p class="s">From hand-rolled sushi to wok-fried classics and fresh poke bowls — something for every taste, served fast and fresh.</p>
+    <div class="mg">
+      <div class="mc"><h3>Sushi</h3><ul><li>Assorted nigiri</li><li>Maki rolls</li><li>Sashimi selection</li></ul></div>
+      <div class="mc"><h3>Chinese Classics</h3><ul><li>Crispy duck</li><li>Wok dishes</li><li>Fried rice and noodles</li></ul></div>
+      <div class="mc"><h3>Poke &amp; More</h3><ul><li>Poke bowls</li><li>Buffet selection</li><li>Desserts and coffee</li></ul></div>
+    </div>
+    <div class="ph ph-f" style="max-width:260px;margin:32px auto 0" aria-label="Food photos coming soon"><span>Food photos coming soon</span></div>
+    <p class="mn">This is a demo — the menu will be updated together with you.</p>
+  </div></section>
+
+  <section class="bk reveal" id="booking"><div class="w"><div class="bg">
+    <div>
+      <div class="l">Reserve</div>
+      <h2>Book your table</h2>
+      <p class="s">Heading to IsoKristiina? Reserve ahead and your table will be waiting when you arrive.</p>
+      <div class="ph ph-i" style="margin-top:24px" aria-label="Interior photo coming soon"><span>Interior photo coming soon</span></div>
+    </div>
+    <div class="bc klar-bookings" id="klar-bookings-widget">
+      <h3>Varaa pöytä</h3>
+      <p class="bs">Varaa sekunneissa — ei tilin luomista, ei maksuja.</p>
+      <form class="bf" onsubmit="return false;">
+        <div><label for="bd">Date</label><input type="date" id="bd" name="date" required></div>
+        <div><label for="bt">Time</label>
+          <select id="bt" name="time">
+            <option value="11:00">11:00</option><option value="11:30">11:30</option>
+            <option value="12:00" selected>12:00</option><option value="12:30">12:30</option>
+            <option value="13:00">13:00</option><option value="17:00">17:00</option>
+            <option value="17:30">17:30</option><option value="18:00">18:00</option>
+            <option value="18:30">18:30</option><option value="19:00">19:00</option>
+          </select>
+        </div>
+        <div><label for="bg2">Guests</label>
+          <select id="bg2" name="guests">
+            <option value="1">1 guest</option><option value="2" selected>2 guests</option>
+            <option value="3">3 guests</option><option value="4">4 guests</option>
+            <option value="5">5 guests</option><option value="6">6+ guests</option>
+          </select>
+        </div>
+        <button type="submit">Reserve</button>
+      </form>
+      <div class="bp">Powered by Klar Bookings — no fees, no commissions</div>
+    </div>
+  </div></div></section>
+
+  <section class="reveal"><div class="w">
+    <div class="l">Visit</div>
+    <h2>Hours and location</h2>
+    <div class="ig">
+      <div>
+        <table class="ht">
+          <tr><td>Mon–Fri</td><td>10:30 – 20:00</td></tr>
+          <tr><td>Saturday</td><td>10:30 – 18:00</td></tr>
+          <tr><td>Sunday</td><td>12:00 – 18:00</td></tr>
+        </table>
+      </div>
+      <div><iframe class="mf" src="https://maps.google.com/maps?q=Brahenkatu+5+Lappeenranta&output=embed" allowfullscreen loading="lazy"></iframe></div>
+    </div>
+  </div></section>
+
+  <section class="ct reveal"><div class="w">
+    <div class="l">Contact</div>
+    <h2>Get in touch</h2>
+    <div class="cg">
+      <div class="ci"><h4>Phone</h4><a href="tel:+358106668612">+358 10 666 8612</a></div>
+      <div class="ci"><h4>Address</h4><span>IsoKristiina, Brahenkatu 5, 53100 Lappeenranta</span></div>
+    </div>
+  </div></section>
+
+  <footer><div class="w">
+    <p>Tang Capital — IsoKristiina, Brahenkatu 5, 53100 Lappeenranta — <a href="tel:+358106668612" style="color:var(--fg-d)">+358 10 666 8612</a></p>
+    <p style="margin-top:5px">&copy; 2026 Tang Capital. Powered by Klar.</p>
+  </div></footer>
+
+  <script>document.addEventListener('DOMContentLoaded',function(){var o=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting)x.target.classList.add('visible')})},{threshold:.12});document.querySelectorAll('.reveal').forEach(function(el){o.observe(el)})});</script>
+</body>
+</html>

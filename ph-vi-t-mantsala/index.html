@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Phở Việt — Authentic Vietnamese in Helsinki</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+  <!-- palette: research-derived dark Vietnamese street-food energy -->
+  <style>
+    :root {
+      --bg: #111111;
+      --bg-raised: #1A1A1A;
+      --bg-card: #222222;
+      --fg: #F5F0E6;
+      --fg-dim: #9A9484;
+      --primary: #C94C30;
+      --accent: #E8C170;
+      --rule: rgba(201,76,48,0.2);
+      --serif: 'Playfair Display', Georgia, serif;
+      --sans: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Demo banner */
+    .demo-banner {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      background: var(--primary);
+      color: #fff;
+      text-align: center;
+      padding: 10px 16px;
+      font-size: 0.82rem;
+      letter-spacing: 0.01em;
+    }
+    .demo-banner a { color: #fff; font-weight: 700; text-decoration: underline; margin-left: 8px; }
+
+    /* Layout */
+    .container { max-width: 1060px; margin: 0 auto; padding: 0 24px; }
+    section { padding: 80px 0; }
+    .section-label {
+      font-family: var(--sans);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 12px;
+    }
+    h2 {
+      font-family: var(--serif);
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 600;
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+    p { color: var(--fg-dim); max-width: 600px; }
+    .divider { width: 60px; height: 2px; background: var(--primary); margin: 40px 0; }
+
+    /* Hero */
+    .hero {
+      padding-top: 140px;
+      padding-bottom: 60px;
+      position: relative;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+    .hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(2.4rem, 5.5vw, 3.6rem);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+    .hero h1 span { color: var(--primary); }
+    .hero-sub {
+      font-size: 1.05rem;
+      color: var(--fg-dim);
+      margin-bottom: 24px;
+      max-width: 480px;
+    }
+    .hero-meta {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .hero-meta .rating {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+    .hero-meta .rating small { font-size: 0.75rem; color: var(--fg-dim); font-weight: 400; }
+    .hero-meta .reviews { font-size: 0.85rem; color: var(--fg-dim); }
+
+    /* Image placeholders */
+    .img-placeholder {
+      background: var(--bg-raised);
+      border: 1px solid var(--rule);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--fg-dim);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .img-placeholder-hero { aspect-ratio: 4/3; width: 100%; }
+    .img-placeholder-food { aspect-ratio: 1/1; width: 100%; }
+    .img-placeholder-interior { aspect-ratio: 3/2; width: 100%; }
+
+    /* Menu */
+    .menu-section { background: var(--bg-raised); }
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 32px;
+      margin-top: 40px;
+    }
+    .menu-category h3 {
+      font-family: var(--serif);
+      font-size: 1.2rem;
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--rule);
+    }
+    .menu-category ul { list-style: none; }
+    .menu-category li {
+      padding: 8px 0;
+      font-size: 0.92rem;
+      color: var(--fg-dim);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .menu-category li:last-child { border-bottom: none; }
+    .menu-note {
+      margin-top: 32px;
+      font-size: 0.82rem;
+      color: var(--fg-dim);
+      font-style: italic;
+      text-align: center;
+    }
+
+    /* Reviews */
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+      margin-top: 40px;
+    }
+    .review-card {
+      background: var(--bg-card);
+      border-radius: 8px;
+      padding: 28px;
+      border-left: 3px solid var(--primary);
+    }
+    .review-card blockquote {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: var(--fg);
+      font-style: italic;
+      margin-bottom: 12px;
+    }
+    .review-card cite {
+      font-size: 0.78rem;
+      color: var(--fg-dim);
+      font-style: normal;
+    }
+
+    /* Booking */
+    .booking-section {
+      background: linear-gradient(135deg, #1A0F0A 0%, #111 100%);
+      border-top: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+    }
+    .booking-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+    .booking-card {
+      background: var(--bg-card);
+      border-radius: 12px;
+      padding: 36px;
+      border: 1px solid var(--rule);
+    }
+    .booking-card h3 {
+      font-family: var(--serif);
+      font-size: 1.4rem;
+      margin-bottom: 8px;
+    }
+    .booking-card .booking-sub {
+      font-size: 0.85rem;
+      color: var(--fg-dim);
+      margin-bottom: 24px;
+    }
+    .booking-form {
+      display: grid;
+      gap: 12px;
+    }
+    .booking-form label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--fg-dim);
+      margin-bottom: 2px;
+    }
+    .booking-form input,
+    .booking-form select {
+      width: 100%;
+      padding: 12px 14px;
+      background: var(--bg);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 6px;
+      color: var(--fg);
+      font-family: var(--sans);
+      font-size: 0.92rem;
+    }
+    .booking-form button {
+      padding: 14px 24px;
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-family: var(--sans);
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 8px;
+      transition: background 0.2s;
+    }
+    .booking-form button:hover { background: #B04228; }
+    .booking-powered {
+      font-size: 0.72rem;
+      color: var(--fg-dim);
+      margin-top: 12px;
+      text-align: center;
+    }
+
+    /* Hours + Info */
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      margin-top: 40px;
+    }
+    .hours-table { width: 100%; }
+    .hours-table tr { border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .hours-table td {
+      padding: 10px 0;
+      font-size: 0.92rem;
+    }
+    .hours-table td:first-child { color: var(--fg-dim); width: 140px; }
+    .hours-table td:last-child { text-align: right; }
+    .map-embed {
+      width: 100%;
+      aspect-ratio: 16/9;
+      border: 0;
+      border-radius: 8px;
+      filter: grayscale(0.8) invert(0.92) contrast(0.9);
+    }
+
+    /* Contact */
+    .contact-section { background: var(--bg-raised); }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 32px;
+      margin-top: 32px;
+    }
+    .contact-item h4 {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+    .contact-item a {
+      color: var(--fg);
+      text-decoration: none;
+      font-size: 1.1rem;
+      font-weight: 500;
+    }
+    .contact-item a:hover { color: var(--accent); }
+
+    /* Footer */
+    footer {
+      padding: 40px 0;
+      text-align: center;
+      font-size: 0.78rem;
+      color: var(--fg-dim);
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    footer a { color: var(--fg-dim); text-decoration: none; }
+
+    /* Scroll animation */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero-grid,
+      .booking-grid,
+      .info-grid { grid-template-columns: 1fr; }
+      section { padding: 60px 0; }
+      .hero { padding-top: 100px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Demo Banner -->
+  <div class="demo-banner">
+    This is a demo — the final website will be built together based on your preferences.
+    <a href="https://preview.klarsystems.com/ph-vi-t-mantsala/proposal/">See the offer</a>
+  </div>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <div>
+          <div class="section-label">Kamppi, Helsinki</div>
+          <h1><span>Phở Việt</span></h1>
+          <p class="hero-sub">Authentic Vietnamese pho and noodle dishes in the heart of Helsinki. Generous portions, honest prices, the kind of place locals keep coming back to.</p>
+          <div class="hero-meta">
+            <div class="rating">4.5 <small>/ 5</small></div>
+            <div class="reviews">1,849 Google reviews</div>
+          </div>
+        </div>
+        <div class="img-placeholder img-placeholder-hero" aria-label="Your photo here">
+          <span>Your photo here</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Menu -->
+  <section class="menu-section reveal">
+    <div class="container">
+      <div class="section-label">Menu</div>
+      <h2>The bowl is the star</h2>
+      <p>Vietnamese classics — from slow-simmered pho to crispy spring rolls and fragrant fried rice. Every dish made to order.</p>
+      <div class="menu-grid">
+        <div class="menu-category">
+          <h3>Pho Soup</h3>
+          <ul>
+            <li>Phở bò — medium rare beef</li>
+            <li>Phở nạm bò — beef flank</li>
+            <li>Phở bắp bò — beef shank</li>
+            <li>Phở gà Việt — asian chicken</li>
+            <li>Phở gà tây — chicken fillet</li>
+            <li>Phở đậu — tofu</li>
+            <li>Phở Thập Cẩm — house special</li>
+          </ul>
+        </div>
+        <div class="menu-category">
+          <h3>Rice Noodles</h3>
+          <ul>
+            <li>Bún nem — spring rolls with noodles</li>
+            <li>Bún thịt nướng — grilled pork</li>
+            <li>Bún bò trộn — mixed beef</li>
+          </ul>
+          <div style="margin-top: 24px;">
+            <h3>Rolls</h3>
+            <ul>
+              <li>Nem cuốn — fresh summer rolls</li>
+              <li>Nem rán — fried spring rolls</li>
+            </ul>
+          </div>
+        </div>
+        <div class="menu-category">
+          <h3>Fried Rice</h3>
+          <ul>
+            <li>Cơm rang bò — beef</li>
+            <li>Cơm rang gà — chicken</li>
+            <li>Cơm rang tôm — shrimp</li>
+            <li>Cơm rang đậu — tofu</li>
+          </ul>
+          <div style="margin-top: 24px;">
+            <h3>Fried Noodles</h3>
+            <ul>
+              <li>Phở xào bò — beef</li>
+              <li>Phở xào gà — chicken</li>
+              <li>Phở xào hải sản — seafood</li>
+              <li>Phở xào rau củ — vegetable</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="img-placeholder img-placeholder-food" style="max-width: 320px; margin-top: 40px;" aria-label="Food photos coming soon">
+        <span>Food photos coming soon</span>
+      </div>
+      <p class="menu-note">This is a demo — the menu will be updated together with you.</p>
+    </div>
+  </section>
+
+  <!-- Reviews -->
+  <section class="reveal">
+    <div class="container">
+      <div class="section-label">What customers say</div>
+      <h2>1,849 reasons to visit</h2>
+      <div class="reviews-grid">
+        <div class="review-card">
+          <blockquote>"Pho bo like a wagyu steak — tender and delicious. The best Pho I've had in 30 years."</blockquote>
+          <cite>via RestaurantGuru</cite>
+        </div>
+        <div class="review-card">
+          <blockquote>"Very nice place, super good and quality food, at normal prices and large portions!"</blockquote>
+          <cite>via TripAdvisor</cite>
+        </div>
+        <div class="review-card">
+          <blockquote>"Price/quality was unbeatable. Most friendly people."</blockquote>
+          <cite>via Wanderlog</cite>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Booking Widget — Segment 1 REQUIRED -->
+  <section class="booking-section reveal" id="booking">
+    <div class="container">
+      <div class="booking-grid">
+        <div>
+          <div class="section-label">Reserve</div>
+          <h2>Book your table</h2>
+          <p>Skip the queue. Reserve in seconds — no account needed, no fees, no commissions.</p>
+          <div class="img-placeholder img-placeholder-interior" style="margin-top: 32px;" aria-label="Interior photo coming soon">
+            <span>Interior photo coming soon</span>
+          </div>
+        </div>
+        <div class="booking-card klar-bookings" id="klar-bookings-widget">
+          <h3>Varaa pöytä</h3>
+          <p class="booking-sub">Varaa sekunneissa — ei tilin luomista, ei maksuja.</p>
+          <form class="booking-form" onsubmit="return false;">
+            <div>
+              <label for="booking-date">Date</label>
+              <input type="date" id="booking-date" name="date" required>
+            </div>
+            <div>
+              <label for="booking-time">Time</label>
+              <select id="booking-time" name="time">
+                <option value="11:00">11:00</option>
+                <option value="11:30">11:30</option>
+                <option value="12:00">12:00</option>
+                <option value="12:30">12:30</option>
+                <option value="13:00">13:00</option>
+                <option value="17:00">17:00</option>
+                <option value="17:30">17:30</option>
+                <option value="18:00" selected>18:00</option>
+                <option value="18:30">18:30</option>
+                <option value="19:00">19:00</option>
+                <option value="19:30">19:30</option>
+                <option value="20:00">20:00</option>
+                <option value="20:30">20:30</option>
+                <option value="21:00">21:00</option>
+              </select>
+            </div>
+            <div>
+              <label for="booking-guests">Guests</label>
+              <select id="booking-guests" name="guests">
+                <option value="1">1 guest</option>
+                <option value="2" selected>2 guests</option>
+                <option value="3">3 guests</option>
+                <option value="4">4 guests</option>
+                <option value="5">5 guests</option>
+                <option value="6">6+ guests</option>
+              </select>
+            </div>
+            <button type="submit">Reserve</button>
+          </form>
+          <div class="booking-powered">Powered by Klar Bookings — no fees, no commissions</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Hours + Map -->
+  <section class="reveal">
+    <div class="container">
+      <div class="section-label">Visit us</div>
+      <h2>Hours and location</h2>
+      <div class="info-grid">
+        <div>
+          <table class="hours-table">
+            <tr><td>Monday</td><td>10:30 – 22:30</td></tr>
+            <tr><td>Tuesday</td><td>10:30 – 22:30</td></tr>
+            <tr><td>Wednesday</td><td>10:30 – 22:30</td></tr>
+            <tr><td>Thursday</td><td>10:30 – 22:30</td></tr>
+            <tr><td>Friday</td><td>10:30 – 22:30</td></tr>
+            <tr><td>Saturday</td><td>10:30 – 22:30</td></tr>
+            <tr><td>Sunday</td><td>12:00 – 22:00</td></tr>
+          </table>
+        </div>
+        <div>
+          <iframe class="map-embed" src="https://maps.google.com/maps?q=Eerikinkatu+1+Helsinki&output=embed" allowfullscreen loading="lazy"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="contact-section reveal">
+    <div class="container">
+      <div class="section-label">Contact</div>
+      <h2>Get in touch</h2>
+      <div class="contact-grid">
+        <div class="contact-item">
+          <h4>Phone</h4>
+          <a href="tel:+358413171616">+358 41 317 1616</a>
+        </div>
+        <div class="contact-item">
+          <h4>Address</h4>
+          <span>Eerikinkatu 1, 00100 Helsinki</span>
+        </div>
+        <div class="contact-item">
+          <h4>Instagram</h4>
+          <a href="https://instagram.com/phoviet.helsinki" target="_blank" rel="noopener">@phoviet.helsinki</a>
+        </div>
+        <div class="contact-item">
+          <h4>Facebook</h4>
+          <a href="https://www.facebook.com/phoviethelsinki/" target="_blank" rel="noopener">Phở Việt Helsinki</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>Phở Việt — Eerikinkatu 1, 00100 Helsinki — <a href="tel:+358413171616">+358 41 317 1616</a></p>
+      <p style="margin-top: 8px;">&copy; 2026 Phở Việt. Powered by Klar.</p>
+    </div>
+  </footer>
+
+  <!-- Scroll reveal -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.15 });
+      document.querySelectorAll('.reveal').forEach(function(el) {
+        observer.observe(el);
+      });
+    });
+  </script>
+
+</body>
+</html>
