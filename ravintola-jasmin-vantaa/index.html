@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ravintola Jasmin — Vantaa</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* palette: research-derived — Syrian warmth: amber + maroon on dark */
+    :root {
+      --bg: #1B1510;
+      --bg-raised: #261E17;
+      --bg-card: #2E241C;
+      --fg: #F5EDE0;
+      --fg-dim: #A89A8A;
+      --primary: #C47D2A;
+      --accent: #8B2E2E;
+      --rule: rgba(196,125,42,0.16);
+      --glow: rgba(196,125,42,0.08);
+      --heading: 'Cormorant Garamond', Georgia, serif;
+      --body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      --mono: 'JetBrains Mono', 'Consolas', monospace;
+      --max-w: 1060px;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      font-family: var(--body);
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ---- DEMO BANNER ---- */
+    .demo-banner {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: var(--accent);
+      color: #fff;
+      text-align: center;
+      padding: 10px 16px;
+      font-size: 0.82rem;
+      letter-spacing: 0.02em;
+      font-family: var(--body);
+      font-weight: 500;
+    }
+    .demo-banner a {
+      color: #fff;
+      font-weight: 600;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      margin-left: 8px;
+    }
+
+    /* ---- HERO ---- */
+    .hero {
+      margin-top: 44px;
+      padding: 100px 24px 64px;
+      text-align: center;
+      background: linear-gradient(180deg, var(--bg) 0%, var(--bg-raised) 100%);
+      border-bottom: 1px solid var(--rule);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 600px; height: 600px;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(circle, var(--glow) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-badge {
+      display: inline-block;
+      font-family: var(--body);
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--primary);
+      border: 1px solid rgba(196,125,42,0.4);
+      padding: 5px 18px;
+      border-radius: 2px;
+      margin-bottom: 24px;
+      position: relative;
+    }
+    .hero h1 {
+      font-family: var(--heading);
+      font-size: clamp(2.6rem, 7vw, 4.4rem);
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      line-height: 1.08;
+      margin-bottom: 12px;
+      position: relative;
+    }
+    .hero-sub {
+      font-size: 1rem;
+      color: var(--fg-dim);
+      margin-bottom: 28px;
+      font-weight: 300;
+      letter-spacing: 0.02em;
+      position: relative;
+    }
+    .hero-rating {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--body);
+      font-size: 0.95rem;
+      color: var(--primary);
+      position: relative;
+    }
+    .hero-rating .score {
+      font-weight: 600;
+      font-size: 1.4rem;
+    }
+    .hero-rating .count {
+      color: var(--fg-dim);
+      font-size: 0.82rem;
+      font-weight: 400;
+    }
+
+    /* ---- HERO IMAGE PLACEHOLDER ---- */
+    .hero-img {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    .img-placeholder {
+      background: var(--bg-raised);
+      border: 1px solid var(--rule);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--fg-dim);
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .img-placeholder-hero {
+      aspect-ratio: 16/9;
+      width: 100%;
+      border-radius: 4px;
+      margin-top: -20px;
+    }
+    .img-placeholder-food {
+      aspect-ratio: 1/1;
+      width: 100%;
+      border-radius: 4px;
+    }
+    .img-placeholder-interior {
+      aspect-ratio: 3/2;
+      width: 100%;
+      border-radius: 4px;
+    }
+
+    /* ---- SECTIONS ---- */
+    section {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 72px 24px;
+    }
+    .section-label {
+      font-family: var(--body);
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+    section h2 {
+      font-family: var(--heading);
+      font-size: clamp(1.7rem, 4vw, 2.4rem);
+      font-weight: 600;
+      margin-bottom: 28px;
+      line-height: 1.18;
+    }
+
+    /* ---- ORNAMENT DIVIDER ---- */
+    .ornament {
+      text-align: center;
+      padding: 8px 0;
+      color: var(--primary);
+      opacity: 0.4;
+      font-size: 1.4rem;
+      letter-spacing: 0.4em;
+    }
+
+    /* ---- SIGNATURE DISHES ---- */
+    .sig-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2px;
+      margin-bottom: 36px;
+    }
+    .sig-dish {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 16px 20px;
+      background: var(--bg-card);
+      border-left: 3px solid transparent;
+      transition: border-color 0.25s, background 0.25s;
+    }
+    .sig-dish:hover {
+      border-left-color: var(--primary);
+      background: var(--bg-raised);
+    }
+    .sig-dish .name {
+      font-family: var(--heading);
+      font-weight: 600;
+      font-size: 1.05rem;
+    }
+    .sig-dish .desc {
+      font-size: 0.78rem;
+      color: var(--fg-dim);
+      display: block;
+      margin-top: 2px;
+      font-family: var(--body);
+    }
+    .sig-dish .price {
+      color: var(--primary);
+      font-family: var(--body);
+      font-weight: 600;
+      font-size: 0.92rem;
+      white-space: nowrap;
+      margin-left: 16px;
+    }
+
+    /* ---- MENU CATEGORIES ---- */
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .menu-card {
+      background: var(--bg-card);
+      border: 1px solid var(--rule);
+      border-radius: 6px;
+      padding: 24px;
+      transition: border-color 0.2s;
+    }
+    .menu-card:hover {
+      border-color: var(--primary);
+    }
+    .menu-card h3 {
+      font-family: var(--heading);
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 14px;
+    }
+    .menu-card ul {
+      list-style: none;
+    }
+    .menu-card li {
+      font-size: 0.86rem;
+      color: var(--fg-dim);
+      padding: 4px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.03);
+    }
+    .menu-card li:last-child { border-bottom: none; }
+    .menu-note {
+      text-align: center;
+      color: var(--fg-dim);
+      font-size: 0.82rem;
+      font-style: italic;
+      margin-top: 16px;
+    }
+
+    /* ---- ABOUT ---- */
+    .about-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+    .about-text p {
+      color: var(--fg-dim);
+      font-size: 0.95rem;
+      margin-bottom: 16px;
+      line-height: 1.7;
+    }
+    .about-text .highlight {
+      color: var(--fg);
+      font-weight: 500;
+    }
+    .about-detail {
+      background: var(--bg-card);
+      border: 1px solid var(--rule);
+      border-left: 3px solid var(--primary);
+      padding: 20px 24px;
+      border-radius: 0 6px 6px 0;
+      margin-top: 16px;
+    }
+    .about-detail p {
+      font-size: 0.88rem;
+      color: var(--fg);
+      font-style: italic;
+      margin: 0;
+    }
+
+    /* ---- REVIEWS ---- */
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    .review-card {
+      background: var(--bg-card);
+      border: 1px solid var(--rule);
+      border-radius: 6px;
+      padding: 28px;
+      position: relative;
+    }
+    .review-card::before {
+      content: '\201C';
+      position: absolute;
+      top: 12px; left: 20px;
+      font-family: var(--heading);
+      font-size: 3rem;
+      color: var(--primary);
+      opacity: 0.25;
+      line-height: 1;
+    }
+    .review-card blockquote {
+      font-size: 0.94rem;
+      color: var(--fg);
+      font-style: italic;
+      line-height: 1.65;
+      margin-bottom: 14px;
+      padding-top: 8px;
+    }
+    .review-author {
+      font-size: 0.78rem;
+      color: var(--fg-dim);
+      font-family: var(--body);
+      font-weight: 500;
+    }
+
+    /* ---- HOURS & LOCATION ---- */
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+    .hours-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .hours-table td {
+      padding: 12px 0;
+      font-size: 0.92rem;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .hours-table td:first-child {
+      color: var(--fg-dim);
+      font-size: 0.85rem;
+    }
+    .hours-table td:last-child {
+      text-align: right;
+      font-family: var(--body);
+      font-weight: 600;
+    }
+    .hours-table .closed {
+      color: var(--accent);
+      font-weight: 500;
+    }
+    .map-frame {
+      width: 100%;
+      aspect-ratio: 4/3;
+      border: 1px solid var(--rule);
+      border-radius: 6px;
+    }
+    .address-block {
+      margin-top: 20px;
+    }
+    .address-block a {
+      color: var(--fg);
+      text-decoration: none;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+      transition: color 0.2s;
+    }
+    .address-block a:hover { color: var(--primary); }
+    .address-block svg {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      stroke: var(--primary);
+    }
+
+    /* ---- BOOKING ---- */
+    .booking-section {
+      background: var(--bg-raised);
+      border: 1px solid var(--rule);
+      border-radius: 8px;
+      padding: 48px 40px;
+      text-align: center;
+      max-width: 560px;
+      margin: 0 auto;
+      position: relative;
+    }
+    .booking-section::before {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      z-index: -1;
+      opacity: 0.15;
+    }
+    .booking-section h2 {
+      color: var(--fg);
+      margin-bottom: 8px;
+    }
+    .booking-section p {
+      color: var(--fg-dim);
+      font-size: 0.9rem;
+      margin-bottom: 28px;
+    }
+    .booking-form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .booking-form input,
+    .booking-form select {
+      background: var(--bg);
+      border: 1px solid var(--rule);
+      color: var(--fg);
+      padding: 13px 14px;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      font-family: var(--body);
+      transition: border-color 0.2s;
+    }
+    .booking-form input:focus,
+    .booking-form select:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+    .booking-form .full-width {
+      grid-column: 1 / -1;
+    }
+    .btn-book {
+      grid-column: 1 / -1;
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      padding: 15px;
+      border-radius: 4px;
+      font-family: var(--body);
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-book:hover { background: #A86A22; }
+    .booking-note {
+      font-size: 0.75rem;
+      color: var(--fg-dim);
+      margin-top: 10px;
+    }
+
+    /* ---- FOOTER ---- */
+    footer {
+      border-top: 1px solid var(--rule);
+      padding: 48px 24px;
+      text-align: center;
+    }
+    .footer-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+    .footer-name {
+      font-family: var(--heading);
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    .footer-info {
+      font-size: 0.82rem;
+      color: var(--fg-dim);
+      line-height: 1.9;
+    }
+    .footer-info a {
+      color: var(--fg-dim);
+      text-decoration: none;
+    }
+    .footer-info a:hover { color: var(--primary); }
+    .footer-social {
+      margin-top: 16px;
+    }
+    .footer-social a {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--fg-dim);
+      text-decoration: none;
+      font-size: 0.8rem;
+      transition: color 0.2s;
+    }
+    .footer-social a:hover { color: var(--primary); }
+    .footer-social svg {
+      width: 16px;
+      height: 16px;
+      stroke: currentColor;
+      fill: none;
+    }
+    .footer-powered {
+      margin-top: 24px;
+      font-size: 0.72rem;
+      color: var(--fg-dim);
+      letter-spacing: 0.06em;
+    }
+
+    /* ---- SCROLL REVEAL ---- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ---- RESPONSIVE ---- */
+    @media (max-width: 680px) {
+      .about-content { grid-template-columns: 1fr; }
+      .info-grid { grid-template-columns: 1fr; }
+      .booking-form { grid-template-columns: 1fr; }
+      .hero { padding: 70px 20px 48px; }
+      section { padding: 52px 20px; }
+      .booking-section { padding: 28px 20px; }
+      .sig-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- DEMO BANNER -->
+  <div class="demo-banner">
+    This is a demo — the final website will be built together with you.
+    <a href="https://preview.klarsystems.com/ravintola-jasmin-vantaa/proposal/">See our offer</a>
+  </div>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-badge">Syrian &middot; Yemeni &middot; Myyrmaki</div>
+    <h1>Ravintola Jasmin</h1>
+    <p class="hero-sub">Norotie 7, 01600 Vantaa</p>
+    <div class="hero-rating">
+      <span class="score">4.6 / 5</span>
+      <span class="count">810 Google reviews</span>
+    </div>
+  </header>
+
+  <!-- HERO IMAGE PLACEHOLDER -->
+  <div class="hero-img">
+    <div class="img-placeholder img-placeholder-hero">Your photo here</div>
+  </div>
+
+  <!-- MENU -->
+  <section class="reveal">
+    <div class="section-label">The Menu</div>
+    <h2>From Damascus to Myyrmaki</h2>
+
+    <div class="sig-grid">
+      <div class="sig-dish">
+        <div>
+          <span class="name">Chicken Mandi</span>
+          <span class="desc">Slow-cooked chicken with spiced rice</span>
+        </div>
+        <span class="price">14.90</span>
+      </div>
+      <div class="sig-dish">
+        <div>
+          <span class="name">Lamb Mandi</span>
+          <span class="desc">Slow-cooked lamb with fragrant rice</span>
+        </div>
+        <span class="price">19.90</span>
+      </div>
+      <div class="sig-dish">
+        <div>
+          <span class="name">Shawarma Arabi</span>
+          <span class="desc">Arabic-style shawarma</span>
+        </div>
+        <span class="price">12.00</span>
+      </div>
+      <div class="sig-dish">
+        <div>
+          <span class="name">Chicken Kabsa</span>
+          <span class="desc">Spiced chicken with rice</span>
+        </div>
+        <span class="price">14.90</span>
+      </div>
+      <div class="sig-dish">
+        <div>
+          <span class="name">Hanid Lammas</span>
+          <span class="desc">Traditional slow-roasted lamb</span>
+        </div>
+        <span class="price">21.00</span>
+      </div>
+      <div class="sig-dish">
+        <div>
+          <span class="name">Shish Tauk</span>
+          <span class="desc">Grilled chicken skewers</span>
+        </div>
+        <span class="price">18.00</span>
+      </div>
+      <div class="sig-dish">
+        <div>
+          <span class="name">Falafel with Rice</span>
+          <span class="desc">Crispy falafel served with rice</span>
+        </div>
+        <span class="price">14.90</span>
+      </div>
+      <div class="sig-dish">
+        <div>
+          <span class="name">Shawarma Wrap</span>
+          <span class="desc">Shawarma in a fresh roll</span>
+        </div>
+        <span class="price">9.00</span>
+      </div>
+    </div>
+
+    <div class="ornament">- - -</div>
+
+    <div class="menu-grid">
+      <div class="menu-card">
+        <h3>Starters</h3>
+        <ul>
+          <li>Hummus</li>
+          <li>Baba Ghanoosh</li>
+          <li>Tabbouleh</li>
+          <li>Fattoush</li>
+          <li>Tzatziki</li>
+          <li>Sambussa</li>
+        </ul>
+      </div>
+      <div class="menu-card">
+        <h3>Mains</h3>
+        <ul>
+          <li>Grilled Salmon</li>
+          <li>Grilled Fish</li>
+          <li>Whole Grilled Chicken</li>
+          <li>Lamb Bowl</li>
+          <li>Chicken Fajita</li>
+          <li>Liver</li>
+        </ul>
+      </div>
+      <div class="menu-card">
+        <h3>Breakfast</h3>
+        <ul>
+          <li>Hummus with Oil</li>
+          <li>Hummus with Beef</li>
+          <li>Foul Tahini</li>
+          <li>Foul with Oil</li>
+          <li>Mekhlema</li>
+        </ul>
+      </div>
+      <div class="menu-card">
+        <h3>Shawarma</h3>
+        <ul>
+          <li>Shawarma Arabi</li>
+          <li>Shawarma with Rice</li>
+          <li>Shawarma with Fries</li>
+          <li>Shawarma with Hummus</li>
+          <li>Shawarma Wrap</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="img-placeholder img-placeholder-food" style="max-width:320px;margin:0 auto;">Food photos coming soon</div>
+
+    <p class="menu-note">This is a demo menu — the full menu will be updated together with you.</p>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="reveal" style="border-top:1px solid var(--rule);">
+    <div class="section-label">About</div>
+    <h2>Family recipes, generous portions</h2>
+    <div class="about-content">
+      <div class="about-text">
+        <p>With <span class="highlight">over 800 Google reviews</span> and a 4.6-star rating, Ravintola Jasmin has become one of Myyrmaki's most loved restaurants since opening on Norotie.</p>
+        <p>The menu spans authentic Syrian and Yemeni cuisine: slow-cooked mandi, fragrant kabsa, hand-rolled shawarma, and traditional starters like hummus, baba ghanoosh, and tabbouleh. Every dish is made from family recipes with over 20 years of culinary tradition behind them.</p>
+        <p>Customers keep coming back for the <span class="highlight">generous portions</span>, the warm hospitality, and a small detail that says everything about how this family runs their restaurant: complimentary soup and tea with every dine-in order.</p>
+        <div class="about-detail">
+          <p>Complimentary soup and tea with every dine-in order — a hallmark of Syrian hospitality.</p>
+        </div>
+      </div>
+      <div>
+        <div class="img-placeholder img-placeholder-interior">Restaurant interior</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section class="reveal" style="border-top:1px solid var(--rule);">
+    <div class="section-label">What Customers Say</div>
+    <h2>4.6 / 5 from 810 reviews</h2>
+    <div class="reviews-grid">
+      <div class="review-card">
+        <blockquote>"Very tasty and very delicious."</blockquote>
+        <div class="review-author">Google review</div>
+      </div>
+      <div class="review-card">
+        <blockquote>"Best Syrian food."</blockquote>
+        <div class="review-author">Google review</div>
+      </div>
+      <div class="review-card">
+        <blockquote>"Portion sizes are huge, and the owners are incredibly generous."</blockquote>
+        <div class="review-author">Google review</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOURS & LOCATION -->
+  <section class="reveal" style="border-top:1px solid var(--rule);">
+    <div class="section-label">Visit Us</div>
+    <h2>Hours & Location</h2>
+    <div class="info-grid">
+      <div>
+        <table class="hours-table">
+          <tr><td>Monday</td><td class="closed">Closed</td></tr>
+          <tr><td>Tuesday - Thursday</td><td>10:00 - 21:00</td></tr>
+          <tr><td>Friday - Saturday</td><td>10:00 - 24:00</td></tr>
+          <tr><td>Sunday</td><td>10:00 - 21:00</td></tr>
+        </table>
+        <div class="address-block">
+          <a href="tel:+358449826970">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+            +358 44 9826970
+          </a>
+          <a href="https://maps.google.com/?q=Norotie+7+01600+Vantaa" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+            Norotie 7, 01600 Vantaa
+          </a>
+          <a href="https://www.instagram.com/syyrian_makuja/" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+            @syyrian_makuja
+          </a>
+        </div>
+      </div>
+      <div>
+        <iframe class="map-frame" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1980!2d24.8470!3d60.2630!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x468df7a4f27ef1c1%3A0xcfb1f0951488c453!2sRavintola%20Jasmin!5e0!3m2!1sfi!2sfi!4v1" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOOKING WIDGET -->
+  <section class="reveal">
+    <div class="booking-section">
+      <div class="section-label">Reservations</div>
+      <h2>Book a Table</h2>
+      <p>Book in seconds — no account needed, no fees.</p>
+      <div class="booking-form">
+        <input type="date" aria-label="Date">
+        <input type="time" value="18:00" aria-label="Time">
+        <select aria-label="Party size">
+          <option>2 guests</option>
+          <option>3 guests</option>
+          <option>4 guests</option>
+          <option>5 guests</option>
+          <option>6+ guests</option>
+        </select>
+        <input type="text" class="full-width" aria-label="Name">
+        <button class="btn-book full-width">Book Now</button>
+      </div>
+      <p class="booking-note">Powered by Klar Bookings — no fees, no commissions</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-name">Ravintola Jasmin</div>
+      <div class="footer-info">
+        Norotie 7, 01600 Vantaa<br>
+        <a href="tel:+358449826970">+358 44 9826970</a>
+      </div>
+      <div class="footer-social">
+        <a href="https://www.instagram.com/syyrian_makuja/" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+          @syyrian_makuja
+        </a>
+      </div>
+      <div class="footer-powered">Powered by Klar</div>
+    </div>
+  </footer>
+
+  <!-- SCROLL REVEAL -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var els = document.querySelectorAll('.reveal');
+      if ('IntersectionObserver' in window) {
+        var observer = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.1 });
+        els.forEach(function(el) { observer.observe(el); });
+      } else {
+        els.forEach(function(el) { el.classList.add('visible'); });
+      }
+    });
+  </script>
+</body>
+</html>

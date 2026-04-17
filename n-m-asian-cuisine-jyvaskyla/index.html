@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NÔM Asian Cuisine — Jyväskylä</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #2a2a2a;
+            background: #ffffff;
+        }
+
+        /* Demo Banner */
+        .demo-banner {
+            background: #1A1A2E;
+            color: #F5F0E8;
+            text-align: center;
+            padding: 12px 20px;
+            font-size: 13px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .demo-banner a {
+            color: #C19A6B;
+            text-decoration: underline;
+            font-weight: 600;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(160deg, #1A1A2E 0%, #2D2D44 50%, #1A1A2E 100%);
+            color: #F5F0E8;
+            padding: 120px 20px;
+            text-align: center;
+            min-height: 55vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero h1 {
+            font-size: 56px;
+            font-weight: 300;
+            margin-bottom: 12px;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            color: #F5F0E8;
+        }
+
+        .hero-divider {
+            width: 60px;
+            height: 2px;
+            background: #C19A6B;
+            margin: 20px auto;
+        }
+
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            color: #C19A6B;
+            letter-spacing: 2px;
+            font-weight: 300;
+        }
+
+        .hero-rating {
+            font-size: 15px;
+            color: #E8D5B7;
+            margin-bottom: 30px;
+            letter-spacing: 1px;
+        }
+
+        .hero a {
+            display: inline-block;
+            background: transparent;
+            color: #C19A6B;
+            padding: 14px 40px;
+            border: 1px solid #C19A6B;
+            text-decoration: none;
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-size: 13px;
+            transition: all 0.3s;
+        }
+
+        .hero a:hover {
+            background: #C19A6B;
+            color: #1A1A2E;
+        }
+
+        /* About */
+        .about {
+            padding: 80px 20px;
+            background: #FAFAF7;
+        }
+
+        .about .container {
+            max-width: 800px;
+        }
+
+        .section-label {
+            font-size: 12px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #C19A6B;
+            margin-bottom: 16px;
+            font-weight: 500;
+        }
+
+        .about h2 {
+            font-size: 32px;
+            margin-bottom: 24px;
+            font-weight: 400;
+            color: #1A1A2E;
+        }
+
+        .about p {
+            font-size: 16px;
+            margin-bottom: 16px;
+            line-height: 1.8;
+            color: #555;
+        }
+
+        /* Photo placeholders */
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 4px;
+            padding: 0;
+        }
+
+        .photo-placeholder {
+            aspect-ratio: 1;
+            background: #EDEBE5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #B0ADA5;
+            font-size: 13px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* Buffet */
+        .buffet {
+            padding: 80px 20px;
+            background: #ffffff;
+        }
+
+        .buffet h2 {
+            font-size: 32px;
+            margin-bottom: 12px;
+            font-weight: 400;
+            color: #1A1A2E;
+        }
+
+        .buffet-intro {
+            font-size: 16px;
+            color: #777;
+            margin-bottom: 40px;
+            max-width: 600px;
+        }
+
+        .buffet-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .buffet-card {
+            background: #FAFAF7;
+            padding: 32px;
+            border-radius: 2px;
+            border-top: 2px solid #C19A6B;
+        }
+
+        .buffet-card h3 {
+            font-size: 18px;
+            margin-bottom: 16px;
+            color: #1A1A2E;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+
+        .buffet-card p {
+            font-size: 14px;
+            color: #777;
+            line-height: 1.7;
+        }
+
+        .pricing-bar {
+            margin-top: 40px;
+            display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .price-item {
+            text-align: center;
+        }
+
+        .price-amount {
+            font-size: 28px;
+            font-weight: 300;
+            color: #1A1A2E;
+        }
+
+        .price-label {
+            font-size: 12px;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 4px;
+        }
+
+        /* Reviews */
+        .reviews {
+            padding: 80px 20px;
+            background: #1A1A2E;
+            color: #F5F0E8;
+        }
+
+        .reviews .section-label {
+            color: #C19A6B;
+        }
+
+        .reviews h2 {
+            font-size: 32px;
+            margin-bottom: 40px;
+            font-weight: 400;
+            color: #F5F0E8;
+        }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        .review {
+            padding: 28px;
+            border: 1px solid rgba(193, 154, 107, 0.2);
+            border-radius: 2px;
+        }
+
+        .review-text {
+            font-size: 15px;
+            line-height: 1.7;
+            margin-bottom: 16px;
+            color: #D4D0C8;
+            font-style: italic;
+        }
+
+        .review-author {
+            font-size: 13px;
+            color: #C19A6B;
+            letter-spacing: 1px;
+        }
+
+        /* Hours & Location */
+        .hours {
+            padding: 80px 20px;
+            background: #FAFAF7;
+        }
+
+        .hours h2 {
+            font-size: 32px;
+            margin-bottom: 40px;
+            font-weight: 400;
+            color: #1A1A2E;
+        }
+
+        .hours-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .hours-table {
+            background: #ffffff;
+            padding: 32px;
+            border-radius: 2px;
+            border-top: 2px solid #C19A6B;
+        }
+
+        .hours-row {
+            display: grid;
+            grid-template-columns: 140px 1fr;
+            padding: 10px 0;
+            border-bottom: 1px solid #F0EDE5;
+        }
+
+        .hours-row:last-child {
+            border-bottom: none;
+        }
+
+        .day {
+            font-weight: 500;
+            color: #1A1A2E;
+            font-size: 14px;
+        }
+
+        .time {
+            color: #777;
+            font-size: 14px;
+        }
+
+        .day.closed {
+            color: #B0ADA5;
+        }
+
+        .time.closed {
+            color: #B0ADA5;
+        }
+
+        .location-card {
+            background: #ffffff;
+            padding: 32px;
+            border-radius: 2px;
+            border-top: 2px solid #C19A6B;
+        }
+
+        .location-card h3 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: #1A1A2E;
+            font-weight: 500;
+        }
+
+        .location-card p {
+            margin-bottom: 12px;
+            font-size: 15px;
+            color: #555;
+            line-height: 1.7;
+        }
+
+        .location-link {
+            color: #C19A6B;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            letter-spacing: 1px;
+        }
+
+        .location-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Contact */
+        .contact {
+            padding: 80px 20px;
+            background: #ffffff;
+        }
+
+        .contact h2 {
+            font-size: 32px;
+            margin-bottom: 40px;
+            font-weight: 400;
+            color: #1A1A2E;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .contact-item {
+            background: #FAFAF7;
+            padding: 24px;
+            border-radius: 2px;
+        }
+
+        .contact-label {
+            font-size: 11px;
+            color: #B0ADA5;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        .contact-value {
+            font-size: 16px;
+            color: #1A1A2E;
+            font-weight: 500;
+        }
+
+        .contact-value a {
+            color: #1A1A2E;
+            text-decoration: none;
+        }
+
+        .contact-value a:hover {
+            color: #C19A6B;
+        }
+
+        /* Booking Widget */
+        .booking {
+            padding: 80px 20px;
+            background: #1A1A2E;
+        }
+
+        .booking-card {
+            max-width: 440px;
+            margin: 0 auto;
+            background: #2D2D44;
+            border: 1px solid rgba(193, 154, 107, 0.2);
+            border-radius: 2px;
+            padding: 40px;
+        }
+
+        .booking-card h3 {
+            font-size: 24px;
+            margin-bottom: 8px;
+            font-weight: 400;
+            color: #F5F0E8;
+            letter-spacing: 1px;
+        }
+
+        .booking-subtitle {
+            font-size: 13px;
+            color: #B0ADA5;
+            margin-bottom: 28px;
+            letter-spacing: 0.5px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 11px;
+            color: #B0ADA5;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid rgba(193, 154, 107, 0.3);
+            border-radius: 2px;
+            font-size: 14px;
+            font-family: inherit;
+            color: #F5F0E8;
+            background: #1A1A2E;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #C19A6B;
+        }
+
+        .booking-button {
+            width: 100%;
+            padding: 14px;
+            background: #C19A6B;
+            color: #1A1A2E;
+            border: none;
+            border-radius: 2px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: background 0.3s;
+            margin-top: 8px;
+        }
+
+        .booking-button:hover {
+            background: #D4AA7D;
+        }
+
+        .booking-caption {
+            text-align: center;
+            font-size: 11px;
+            color: #777;
+            margin-top: 16px;
+            letter-spacing: 0.5px;
+        }
+
+        /* Footer */
+        footer {
+            padding: 40px 20px;
+            text-align: center;
+            background: #0F0F1A;
+            color: #777;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 13px;
+            letter-spacing: 0.5px;
+        }
+
+        footer a {
+            color: #C19A6B;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                padding: 0 40px;
+            }
+
+            .hero {
+                padding: 160px 40px;
+            }
+
+            .about, .buffet, .reviews, .hours, .contact, .booking {
+                padding: 100px 40px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 36px;
+                letter-spacing: 4px;
+            }
+
+            .hours-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .photo-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .pricing-bar {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Demo Banner -->
+    <div class="demo-banner">
+        This is a demo preview — <a href="https://preview.klarsystems.com/n-m-asian-cuisine-jyvaskyla/proposal/">see the full proposal</a>
+    </div>
+
+    <!-- Hero -->
+    <section class="hero">
+        <h1>NÔM</h1>
+        <div class="hero-divider"></div>
+        <p>Asian Cuisine</p>
+        <div class="hero-rating">4.4 / 5 — 732 reviews on Google</div>
+        <a href="#booking">Book a Table</a>
+    </section>
+
+    <!-- About -->
+    <section class="about">
+        <div class="container">
+            <div class="section-label">About</div>
+            <h2>Pan-Asian Flavors in the Heart of Jyväskylä</h2>
+            <p>NÔM Asian Cuisine brings the flavors of Asia to central Jyväskylä. Located in the Agora building on Puistokatu, NÔM offers an all-day buffet featuring sushi, Southeast Asian curries, stir-fries, noodles, and desserts — all in a stylish, contemporary setting.</p>
+            <p>With generous vegan and vegetarian options, a welcoming atmosphere described as cozy and charming, and prices starting from just 11.90, NÔM has earned a 4.4-star reputation from over 700 satisfied guests.</p>
+        </div>
+    </section>
+
+    <!-- Photo Placeholders -->
+    <section class="photo-grid">
+        <div class="photo-placeholder">Photo 1</div>
+        <div class="photo-placeholder">Photo 2</div>
+        <div class="photo-placeholder">Photo 3</div>
+    </section>
+
+    <!-- Buffet -->
+    <section class="buffet">
+        <div class="container">
+            <div class="section-label">The Buffet</div>
+            <h2>All-Day Asian Buffet</h2>
+            <p class="buffet-intro">A generous spread that changes throughout the day. Sushi hand-rolled on site, warm Southeast Asian dishes, fresh salads, and house desserts.</p>
+
+            <div class="buffet-grid">
+                <div class="buffet-card">
+                    <h3>Sushi</h3>
+                    <p>A rotating selection of fresh sushi, including dedicated vegan sushi options prepared separately. Maki, nigiri, and specialty rolls.</p>
+                </div>
+                <div class="buffet-card">
+                    <h3>Warm Dishes</h3>
+                    <p>Curries, stir-fried noodles, fried rice, ginger chicken, chili dishes, and tofu options. Southeast Asian flavors with generous portions.</p>
+                </div>
+                <div class="buffet-card">
+                    <h3>Salads & Sides</h3>
+                    <p>Fresh salad table with Asian-inspired dressings. Deep-fried sweet potato, steamed vegetables, and seasonal sides.</p>
+                </div>
+                <div class="buffet-card">
+                    <h3>Desserts & Drinks</h3>
+                    <p>House desserts, ice cream, and caramel selections. Tea and coffee included with every buffet.</p>
+                </div>
+            </div>
+
+            <div class="pricing-bar">
+                <div class="price-item">
+                    <div class="price-amount">11.90</div>
+                    <div class="price-label">Weekday Lunch</div>
+                </div>
+                <div class="price-item">
+                    <div class="price-amount">15.90</div>
+                    <div class="price-label">Weekend / Dinner</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews -->
+    <section class="reviews">
+        <div class="container">
+            <div class="section-label">Guest Reviews</div>
+            <h2>What People Are Saying</h2>
+            <div class="reviews-grid">
+                <div class="review">
+                    <div class="review-text">"The buffet is full of delicious choices, from the salad table to sushis to warm meal and dessert."</div>
+                    <div class="review-author">Nikola E</div>
+                </div>
+                <div class="review">
+                    <div class="review-text">"Lovely buffet with perfect vegan options, Sushi etc. Very tasty, wonderful atmosphere."</div>
+                    <div class="review-author">Christian S</div>
+                </div>
+                <div class="review">
+                    <div class="review-text">"The ambience is very attractive and charming...beautiful home-decor that makes it very cozy."</div>
+                    <div class="review-author">Sang N</div>
+                </div>
+                <div class="review">
+                    <div class="review-text">"Delicious food...friendly service...food is tasty, and the prices are reasonable."</div>
+                    <div class="review-author">Bartosz G</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hours & Location -->
+    <section class="hours">
+        <div class="container">
+            <div class="section-label">Visit Us</div>
+            <h2>Hours & Location</h2>
+            <div class="hours-grid">
+                <div class="hours-table">
+                    <div class="hours-row">
+                        <div class="day closed">Monday</div>
+                        <div class="time closed">Closed</div>
+                    </div>
+                    <div class="hours-row">
+                        <div class="day">Tuesday</div>
+                        <div class="time">10:30 - 20:00</div>
+                    </div>
+                    <div class="hours-row">
+                        <div class="day">Wednesday</div>
+                        <div class="time">10:30 - 20:00</div>
+                    </div>
+                    <div class="hours-row">
+                        <div class="day">Thursday</div>
+                        <div class="time">10:30 - 20:00</div>
+                    </div>
+                    <div class="hours-row">
+                        <div class="day">Friday</div>
+                        <div class="time">10:30 - 20:00</div>
+                    </div>
+                    <div class="hours-row">
+                        <div class="day">Saturday</div>
+                        <div class="time">11:00 - 20:00</div>
+                    </div>
+                    <div class="hours-row">
+                        <div class="day">Sunday</div>
+                        <div class="time">12:00 - 18:00</div>
+                    </div>
+                </div>
+
+                <div class="location-card">
+                    <h3>Find Us</h3>
+                    <p>Puistokatu 5, 40100 Jyväskylä, Finland</p>
+                    <p>Located in the Agora building, right in the center of Jyväskylä.</p>
+                    <a href="https://www.google.com/maps/search/Puistokatu+5,+40100+Jyv%C3%A4skyl%C3%A4" class="location-link" target="_blank">View on Google Maps</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="contact">
+        <div class="container">
+            <div class="section-label">Contact</div>
+            <h2>Get in Touch</h2>
+            <div class="contact-grid">
+                <div class="contact-item">
+                    <div class="contact-label">Phone</div>
+                    <div class="contact-value"><a href="tel:+358400997303">+358 40 0997303</a></div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-label">Email</div>
+                    <div class="contact-value"><a href="mailto:nom.jyvaskyla@gmail.com">nom.jyvaskyla@gmail.com</a></div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-label">Instagram</div>
+                    <div class="contact-value"><a href="https://www.instagram.com/nomjyvaskyla/" target="_blank">@nomjyvaskyla</a></div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-label">Facebook</div>
+                    <div class="contact-value"><a href="https://www.facebook.com/nomjyvaskyla/" target="_blank">NÔM Asian Cuisine</a></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Widget -->
+    <section class="booking" id="booking">
+        <div class="booking-card">
+            <h3>Book a Table</h3>
+            <p class="booking-subtitle">Reserve your spot — no fees, no account needed.</p>
+            <form onsubmit="event.preventDefault();return false;">
+                <div class="form-group">
+                    <label for="date">Date</label>
+                    <input type="date" id="date" min="">
+                </div>
+                <div class="form-group">
+                    <label for="time">Time</label>
+                    <select id="time">
+                        <option value="">Select a time</option>
+                        <option value="11:00">11:00</option>
+                        <option value="11:30">11:30</option>
+                        <option value="12:00">12:00</option>
+                        <option value="12:30">12:30</option>
+                        <option value="13:00">13:00</option>
+                        <option value="13:30">13:30</option>
+                        <option value="14:00">14:00</option>
+                        <option value="15:00">15:00</option>
+                        <option value="16:00">16:00</option>
+                        <option value="17:00">17:00</option>
+                        <option value="17:30">17:30</option>
+                        <option value="18:00">18:00</option>
+                        <option value="18:30">18:30</option>
+                        <option value="19:00">19:00</option>
+                        <option value="19:30">19:30</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="guests">Party Size</label>
+                    <select id="guests">
+                        <option value="2">2 guests</option>
+                        <option value="1">1 guest</option>
+                        <option value="3">3 guests</option>
+                        <option value="4">4 guests</option>
+                        <option value="5">5 guests</option>
+                        <option value="6">6 guests</option>
+                        <option value="7">7 guests</option>
+                        <option value="8">8 guests</option>
+                    </select>
+                </div>
+                <button type="button" class="booking-button">Reserve Now</button>
+            </form>
+            <div class="booking-caption">Powered by Klar Bookings — no fees, no commissions.</div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>NÔM Asian Cuisine — Puistokatu 5, 40100 Jyväskylä</p>
+        <p style="margin-top: 8px;">Powered by <a href="https://klarsystems.com" target="_blank">Klar</a></p>
+    </footer>
+
+    <script>
+        const dateInput = document.getElementById('date');
+        const today = new Date();
+        const minDate = today.toISOString().split('T')[0];
+        dateInput.setAttribute('min', minDate);
+    </script>
+</body>
+</html>

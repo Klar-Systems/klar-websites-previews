@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sun Steak House — Siuntio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- palette: inferred from cuisine type and segment (research palette empty) -->
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            background-color: #1A1A1A;
+            color: #F5E6D3;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Demo Banner */
+        .demo-banner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(90deg, #C84B31 0%, #8B3421 100%);
+            color: white;
+            padding: 14px 20px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 500;
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .demo-banner a {
+            color: white;
+            text-decoration: underline;
+            font-weight: 600;
+            transition: opacity 0.3s;
+        }
+        .demo-banner a:hover { opacity: 0.85; }
+        body { padding-top: 48px; }
+
+        /* Header */
+        header {
+            padding: 20px 0;
+            background: #1A1A1A;
+            border-bottom: 1px solid rgba(200, 75, 49, 0.2);
+            position: sticky;
+            top: 48px;
+            z-index: 100;
+        }
+        .header-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 26px;
+            font-weight: 700;
+            color: #F5E6D3;
+            letter-spacing: 1px;
+        }
+        nav a {
+            color: #999;
+            text-decoration: none;
+            margin-left: 28px;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+        nav a:hover { color: #C84B31; }
+
+        /* Hero */
+        .hero {
+            padding: 100px 20px 80px;
+            text-align: center;
+            background: linear-gradient(180deg, #1A1A1A 0%, #231A14 100%);
+        }
+        .hero h1 {
+            font-size: 52px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: #F5E6D3;
+            letter-spacing: 1px;
+        }
+        .hero .tagline {
+            font-size: 20px;
+            color: #D4A574;
+            margin-bottom: 8px;
+            font-weight: 400;
+        }
+        .hero .location-line {
+            font-size: 15px;
+            color: #888;
+            margin-bottom: 32px;
+        }
+        .hero .rating-badge {
+            display: inline-block;
+            background: rgba(200, 75, 49, 0.15);
+            border: 1px solid rgba(200, 75, 49, 0.3);
+            padding: 10px 24px;
+            border-radius: 8px;
+            font-size: 15px;
+            color: #D4A574;
+            margin-bottom: 36px;
+        }
+        .hero .cta-row {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .btn-primary {
+            display: inline-block;
+            background: #C84B31;
+            color: white;
+            padding: 14px 32px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            transition: background 0.3s, transform 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-primary:hover { background: #A63D28; transform: translateY(-1px); }
+        .btn-secondary {
+            display: inline-block;
+            background: transparent;
+            color: #D4A574;
+            padding: 14px 32px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            border: 1px solid rgba(212, 165, 116, 0.4);
+            transition: border-color 0.3s;
+        }
+        .btn-secondary:hover { border-color: #D4A574; }
+
+        /* Section styling */
+        .section { padding: 80px 20px; }
+        .section-alt { background: #211A14; }
+        .container { max-width: 1100px; margin: 0 auto; }
+        .section-title {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #F5E6D3;
+        }
+        .section-subtitle {
+            font-size: 16px;
+            color: #999;
+            margin-bottom: 48px;
+        }
+
+        /* About */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: start;
+        }
+        .about-text p {
+            color: #ccc;
+            font-size: 15px;
+            margin-bottom: 16px;
+            line-height: 1.8;
+        }
+        .about-highlights {
+            display: grid;
+            gap: 20px;
+        }
+        .highlight-card {
+            background: rgba(200, 75, 49, 0.08);
+            border: 1px solid rgba(200, 75, 49, 0.15);
+            border-radius: 10px;
+            padding: 20px;
+        }
+        .highlight-card h4 {
+            font-size: 14px;
+            font-weight: 600;
+            color: #D4A574;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .highlight-card p {
+            font-size: 14px;
+            color: #bbb;
+            line-height: 1.6;
+        }
+
+        /* Photo placeholders */
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-top: 48px;
+        }
+        .img-placeholder {
+            aspect-ratio: 4/3;
+            background: linear-gradient(135deg, #2a2018 0%, #1e1610 100%);
+            border: 1px dashed rgba(212, 165, 116, 0.2);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            color: #666;
+        }
+
+        /* Menu */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+        }
+        .menu-category {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(212, 165, 116, 0.1);
+            border-radius: 12px;
+            padding: 28px;
+        }
+        .menu-category h3 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #D4A574;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(212, 165, 116, 0.15);
+        }
+        .menu-item {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        }
+        .menu-item:last-child { border-bottom: none; }
+        .menu-item h4 {
+            font-size: 15px;
+            font-weight: 500;
+            color: #F5E6D3;
+            margin-bottom: 4px;
+        }
+        .menu-item p {
+            font-size: 13px;
+            color: #888;
+        }
+        .menu-note {
+            text-align: center;
+            font-size: 13px;
+            color: #888;
+            margin-top: 32px;
+            font-style: italic;
+        }
+
+        /* Reviews */
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+        }
+        .review-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(212, 165, 116, 0.1);
+            border-radius: 12px;
+            padding: 24px;
+        }
+        .review-card .stars {
+            color: #C84B31;
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+        .review-card blockquote {
+            font-size: 14px;
+            color: #ccc;
+            line-height: 1.7;
+            margin-bottom: 12px;
+            font-style: italic;
+        }
+        .review-card .author {
+            font-size: 13px;
+            color: #888;
+            font-weight: 500;
+        }
+
+        /* Booking */
+        .booking-section {
+            text-align: center;
+            background: linear-gradient(180deg, #231A14 0%, #1A1A1A 100%);
+        }
+        .booking-card {
+            max-width: 500px;
+            margin: 0 auto;
+            background: rgba(200, 75, 49, 0.08);
+            border: 1px solid rgba(200, 75, 49, 0.2);
+            border-radius: 16px;
+            padding: 40px;
+        }
+        .booking-card h3 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #F5E6D3;
+            margin-bottom: 8px;
+        }
+        .booking-card .subtitle {
+            font-size: 14px;
+            color: #999;
+            margin-bottom: 24px;
+        }
+        .booking-card .phone-link {
+            display: block;
+            font-size: 28px;
+            font-weight: 700;
+            color: #C84B31;
+            text-decoration: none;
+            margin-bottom: 8px;
+            transition: opacity 0.3s;
+        }
+        .booking-card .phone-link:hover { opacity: 0.8; }
+        .booking-card .alt-text {
+            font-size: 13px;
+            color: #888;
+        }
+
+        /* Location */
+        .location-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+        .hours-table {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(212, 165, 116, 0.1);
+            border-radius: 12px;
+            padding: 28px;
+        }
+        .hours-table h3 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #D4A574;
+            margin-bottom: 20px;
+        }
+        .hours-table table { width: 100%; border-collapse: collapse; }
+        .hours-table td {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            font-size: 14px;
+            color: #ccc;
+        }
+        .hours-table td:first-child {
+            font-weight: 600;
+            color: #F5E6D3;
+            width: 45%;
+        }
+        .address-block {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(212, 165, 116, 0.1);
+            border-radius: 12px;
+            padding: 28px;
+        }
+        .address-block h3 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #D4A574;
+            margin-bottom: 20px;
+        }
+        .address-block p {
+            font-size: 14px;
+            color: #ccc;
+            margin-bottom: 16px;
+            line-height: 1.7;
+        }
+        .address-block a {
+            color: #C84B31;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .address-block a:hover { text-decoration: underline; }
+
+        /* Footer */
+        footer {
+            padding: 40px 20px;
+            text-align: center;
+            background: #111;
+            border-top: 1px solid rgba(200, 75, 49, 0.1);
+        }
+        footer p {
+            font-size: 13px;
+            color: #666;
+        }
+        footer a {
+            color: #888;
+            text-decoration: none;
+        }
+        footer a:hover { color: #C84B31; }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 36px; }
+            .hero .tagline { font-size: 17px; }
+            .about-grid { grid-template-columns: 1fr; gap: 32px; }
+            .photo-grid { grid-template-columns: 1fr 1fr; }
+            .menu-grid { grid-template-columns: 1fr; }
+            .reviews-grid { grid-template-columns: 1fr; }
+            .location-grid { grid-template-columns: 1fr; }
+            nav { display: none; }
+            .header-content { justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Demo Banner -->
+    <div class="demo-banner">
+        This is a demo website built for Sun Steak House.
+        <a href="https://preview.klarsystems.com/sun-steak-house-kirkkonummi/proposal/">See the full proposal</a>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <div class="logo">Sun Steak House</div>
+            <nav>
+                <a href="#about">About</a>
+                <a href="#menu">Menu</a>
+                <a href="#reviews">Reviews</a>
+                <a href="#booking">Book a Table</a>
+                <a href="#location">Location</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container">
+            <h1>Sun Steak House</h1>
+            <p class="tagline">Steaks, Pizza & Kebabs in Siuntio</p>
+            <p class="location-line">Rannikkotie 31, Siuntio</p>
+            <div class="rating-badge">4.1 / 5 -- 317 Google reviews</div>
+            <div class="cta-row">
+                <a href="#booking" class="btn-primary">Book a Table</a>
+                <a href="#menu" class="btn-secondary">See the Menu</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section class="section section-alt" id="about">
+        <div class="container">
+            <h2 class="section-title">Welcome</h2>
+            <p class="section-subtitle">A family-friendly grill restaurant on Rannikkotie</p>
+            <div class="about-grid">
+                <div class="about-text">
+                    <p>Sun Steak House is a neighbourhood grill restaurant in Siuntio, serving generous portions of steaks, pizzas, kebabs, and burgers. With a 4.1-star rating across 317 Google reviews, guests keep coming back for the food and the friendly service.</p>
+                    <p>The spacious dining area seats groups of all sizes, and the outdoor terrace offers views of the surrounding meadows -- a perfect spot for a relaxed dinner in the countryside.</p>
+                </div>
+                <div class="about-highlights">
+                    <div class="highlight-card">
+                        <h4>Generous Portions</h4>
+                        <p>Reviewers consistently praise the size of the servings and the value for money.</p>
+                    </div>
+                    <div class="highlight-card">
+                        <h4>Outdoor Terrace</h4>
+                        <p>Dine outside with views over Siuntio meadows during the warmer months.</p>
+                    </div>
+                    <div class="highlight-card">
+                        <h4>On-site Parking</h4>
+                        <p>Convenient parking available right at the restaurant.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="photo-grid">
+                <div class="img-placeholder">Photo coming soon</div>
+                <div class="img-placeholder">Photo coming soon</div>
+                <div class="img-placeholder">Photo coming soon</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu -->
+    <section class="section" id="menu">
+        <div class="container">
+            <h2 class="section-title">Menu</h2>
+            <p class="section-subtitle">From the grill to your plate</p>
+            <div class="menu-grid">
+                <div class="menu-category">
+                    <h3>Steaks</h3>
+                    <div class="menu-item">
+                        <h4>House Steak</h4>
+                        <p>Grilled to order, served with sides</p>
+                    </div>
+                    <div class="menu-item">
+                        <h4>Grilled Cutlets</h4>
+                        <p>Generous portions, seasoned and grilled</p>
+                    </div>
+                </div>
+                <div class="menu-category">
+                    <h3>Pizzas</h3>
+                    <div class="menu-item">
+                        <h4>Classic Pizzas</h4>
+                        <p>Crisp crust, fresh sauce, generous toppings</p>
+                    </div>
+                    <div class="menu-item">
+                        <h4>House Special Pizza</h4>
+                        <p>Ask about today's special</p>
+                    </div>
+                </div>
+                <div class="menu-category">
+                    <h3>Kebabs</h3>
+                    <div class="menu-item">
+                        <h4>Kebab Plate</h4>
+                        <p>Served with rice and salad</p>
+                    </div>
+                    <div class="menu-item">
+                        <h4>Kebab Roll</h4>
+                        <p>Freshly wrapped to order</p>
+                    </div>
+                </div>
+                <div class="menu-category">
+                    <h3>Burgers & More</h3>
+                    <div class="menu-item">
+                        <h4>Classic Burger</h4>
+                        <p>House-made patty with fresh toppings</p>
+                    </div>
+                    <div class="menu-item">
+                        <h4>Pasta Selection</h4>
+                        <p>Various preparations available</p>
+                    </div>
+                    <div class="menu-item">
+                        <h4>Salad Bar</h4>
+                        <p>Fresh seasonal selection</p>
+                    </div>
+                </div>
+            </div>
+            <p class="menu-note">This is a demo site -- the full menu with prices will be added together with the restaurant.</p>
+        </div>
+    </section>
+
+    <!-- Reviews -->
+    <section class="section section-alt" id="reviews">
+        <div class="container">
+            <h2 class="section-title">What Guests Say</h2>
+            <p class="section-subtitle">Selected reviews from Google</p>
+            <div class="reviews-grid">
+                <div class="review-card">
+                    <div class="stars">4/5</div>
+                    <blockquote>"We ordered the cutlets -- generous portions and the flavour was excellent."</blockquote>
+                    <span class="author">-- Mikaela K.</span>
+                </div>
+                <div class="review-card">
+                    <div class="stars">5/5</div>
+                    <blockquote>"Friendly staff and the food came out fast. Tasted great too."</blockquote>
+                    <span class="author">-- Ari M.</span>
+                </div>
+                <div class="review-card">
+                    <div class="stars">4/5</div>
+                    <blockquote>"Excellent kebab -- haven't tried the other dishes yet."</blockquote>
+                    <span class="author">-- Sami T.</span>
+                </div>
+                <div class="review-card">
+                    <div class="stars">4/5</div>
+                    <blockquote>"Good service and pizzas. Slightly pricey compared to local standards."</blockquote>
+                    <span class="author">-- Lenita V.</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking -->
+    <section class="section booking-section" id="booking">
+        <div class="container">
+            <h2 class="section-title">Book a Table</h2>
+            <p class="section-subtitle">Reserve your spot at Sun Steak House</p>
+            <div class="booking-card">
+                <h3>Call to Reserve</h3>
+                <p class="subtitle">The easiest way to book your table</p>
+                <a href="tel:+358442419900" class="phone-link">044 241 9900</a>
+                <p class="alt-text">We'll confirm your reservation right away</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location -->
+    <section class="section section-alt" id="location">
+        <div class="container">
+            <h2 class="section-title">Find Us</h2>
+            <p class="section-subtitle">Rannikkotie 31, Siuntio</p>
+            <div class="location-grid">
+                <div class="hours-table">
+                    <h3>Opening Hours</h3>
+                    <table>
+                        <tr><td>Monday</td><td>10:30 - 20:00</td></tr>
+                        <tr><td>Tuesday</td><td>10:30 - 20:00</td></tr>
+                        <tr><td>Wednesday</td><td>10:30 - 20:00</td></tr>
+                        <tr><td>Thursday</td><td>10:30 - 20:00</td></tr>
+                        <tr><td>Friday</td><td>10:30 - 21:00</td></tr>
+                        <tr><td>Saturday</td><td>10:30 - 21:00</td></tr>
+                        <tr><td>Sunday</td><td>11:00 - 20:00</td></tr>
+                    </table>
+                </div>
+                <div class="address-block">
+                    <h3>Address & Contact</h3>
+                    <p>Rannikkotie 31<br>02580 Siuntio</p>
+                    <p>Phone: <a href="tel:+358442419900">044 241 9900</a></p>
+                    <p>On-site parking available for up to 5 cars.</p>
+                    <p><a href="https://www.facebook.com/Sunsteakhouse" target="_blank" rel="noopener">Follow us on Facebook</a></p>
+                    <p style="margin-top: 20px;"><a href="https://www.google.com/maps/search/?api=1&query=Sun+Steak+House+Rannikkotie+31+Siuntio" target="_blank" rel="noopener">Open in Google Maps</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>Sun Steak House -- Rannikkotie 31, 02580 Siuntio</p>
+            <p style="margin-top: 8px;">Powered by <a href="https://klarsystems.com" target="_blank" rel="noopener">Klar</a></p>
+        </div>
+    </footer>
+
+</body>
+</html>

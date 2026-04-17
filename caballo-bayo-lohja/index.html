@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Caballo Bayo — Lohja</title>
+<style>
+  /* palette: segment 1 inferred (Tex-Mex warm tones) */
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  :root{
+    --bg:#1F2933;
+    --bg-soft:#2a3540;
+    --text:#EFE7DA;
+    --muted:rgba(239,231,218,0.62);
+    --primary:#C0392B;
+    --accent:#E67E22;
+    --stack-body:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
+    --stack-heading:'Playfair Display',Georgia,serif;
+  }
+  html,body{background:var(--bg);color:var(--text);font-family:var(--stack-body);line-height:1.55;-webkit-font-smoothing:antialiased}
+  body{min-height:100vh}
+  a{color:inherit;text-decoration:none}
+
+  /* --- demo banner --- */
+  .demo-banner{background:#0f161d;border-bottom:1px solid #2a3540;color:var(--text);font-size:13px;letter-spacing:0.02em}
+  .demo-banner .inner{max-width:1120px;margin:0 auto;padding:12px 20px;display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center;justify-content:space-between}
+  .demo-banner strong{color:var(--accent);font-weight:700;letter-spacing:0.04em;text-transform:uppercase;font-size:11px}
+  .demo-banner a.cta{color:var(--bg);background:var(--accent);padding:7px 14px;font-weight:700;font-size:12px;letter-spacing:0.05em;text-transform:uppercase;border-radius:2px}
+  .demo-banner a.cta:hover{background:#fff}
+
+  .container{max-width:1120px;margin:0 auto;padding:0 20px}
+
+  /* --- nav --- */
+  .nav{border-bottom:1px solid rgba(239,231,218,0.1)}
+  .nav .inner{max-width:1120px;margin:0 auto;padding:22px 20px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+  .wordmark{font-family:var(--stack-heading);font-size:20px;letter-spacing:0.02em}
+  .nav-links{display:flex;gap:26px;font-size:13px;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted)}
+  .nav-links a:hover{color:var(--accent)}
+  @media(max-width:720px){.nav-links{display:none}}
+
+  /* --- hero --- */
+  .hero{padding:80px 0 100px;text-align:center}
+  .hero .eyebrow{font-size:12px;letter-spacing:0.22em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:18px}
+  .hero h1{font-family:var(--stack-heading);font-size:clamp(40px,8vw,80px);line-height:1.05;margin-bottom:20px}
+  .hero .tagline{font-size:18px;color:var(--muted);max-width:560px;margin:0 auto 36px}
+  .hero .btn{display:inline-block;background:var(--primary);color:#fff;padding:16px 36px;border-radius:6px;font-weight:700;font-size:15px;letter-spacing:0.03em;transition:background 0.2s}
+  .hero .btn:hover{background:#a93226}
+
+  /* --- photo placeholders --- */
+  .photo-row{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:1120px;margin:0 auto;padding:0 20px 80px}
+  .img-placeholder{background:var(--bg-soft);border:1px dashed rgba(239,231,218,0.15);border-radius:8px;aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:13px;letter-spacing:0.04em}
+  @media(max-width:600px){.photo-row{grid-template-columns:1fr}}
+
+  /* --- about --- */
+  .about{padding:80px 20px;background:var(--bg-soft)}
+  .about .inner{max-width:800px;margin:0 auto}
+  .about h2{font-family:var(--stack-heading);font-size:32px;margin-bottom:20px;color:var(--accent)}
+  .about p{font-size:16px;line-height:1.8;color:var(--muted);margin-bottom:16px}
+
+  /* --- menu --- */
+  .menu{padding:80px 20px;background:var(--bg)}
+  .menu h2{font-family:var(--stack-heading);font-size:32px;margin-bottom:40px;color:var(--accent);text-align:center}
+  .menu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:40px;max-width:900px;margin:0 auto}
+  .menu-category h3{font-size:18px;margin-bottom:18px;color:var(--primary);font-weight:600;border-bottom:2px solid rgba(239,231,218,0.1);padding-bottom:10px;text-transform:uppercase;letter-spacing:0.06em}
+  .menu-item{margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid rgba(239,231,218,0.06)}
+  .menu-item:last-child{border-bottom:none}
+  .menu-item-name{font-weight:600;font-size:15px}
+  .menu-item-desc{font-size:13px;color:var(--muted);margin-top:3px;font-style:italic}
+  .menu-note{text-align:center;margin-top:36px;font-size:14px;color:var(--muted);font-style:italic}
+
+  /* --- reviews --- */
+  .reviews{padding:80px 20px;background:var(--bg-soft)}
+  .reviews h2{font-family:var(--stack-heading);font-size:32px;margin-bottom:12px;color:var(--accent);text-align:center}
+  .reviews .subtitle{text-align:center;font-size:15px;color:var(--muted);margin-bottom:40px}
+  .reviews-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;max-width:960px;margin:0 auto}
+  .review-card{background:var(--bg);padding:28px;border-radius:8px;border-left:4px solid var(--primary)}
+  .review-stars{color:var(--accent);margin-bottom:10px;font-size:14px}
+  .review-text{font-size:15px;line-height:1.7;color:var(--muted);margin-bottom:12px;font-style:italic}
+  .review-author{font-size:12px;color:var(--primary);font-weight:600;text-transform:uppercase;letter-spacing:0.06em}
+
+  /* --- hours & location --- */
+  .hours-location{padding:80px 20px;background:var(--bg)}
+  .hours-location h2{font-family:var(--stack-heading);font-size:32px;margin-bottom:40px;color:var(--accent);text-align:center}
+  .hl-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;max-width:900px;margin:0 auto}
+  @media(max-width:700px){.hl-grid{grid-template-columns:1fr}}
+  .hours-table{width:100%;border-collapse:collapse}
+  .hours-table td{padding:10px 0;border-bottom:1px solid rgba(239,231,218,0.08);font-size:15px}
+  .hours-table td:first-child{font-weight:600;width:120px}
+  .hours-table td:last-child{color:var(--muted);text-align:right}
+  .location-box{background:var(--bg-soft);padding:28px;border-radius:8px}
+  .location-box h3{color:var(--accent);margin-bottom:16px;font-size:18px;font-family:var(--stack-heading)}
+  .location-box p{font-size:15px;line-height:1.8;color:var(--muted);margin-bottom:12px}
+  .location-box a{color:var(--accent);font-weight:600}
+  .location-box a:hover{text-decoration:underline}
+
+  /* --- booking --- */
+  .booking-section{padding:80px 20px;background:var(--bg-soft);text-align:center}
+  .booking-card{max-width:460px;margin:0 auto;background:var(--bg);border:1px solid rgba(239,231,218,0.08);border-radius:12px;padding:40px 30px}
+  .booking-card h3{font-family:var(--stack-heading);font-size:28px;margin-bottom:8px}
+  .booking-card .sub{font-size:14px;color:var(--muted);margin-bottom:24px}
+  .booking-inputs{display:grid;gap:12px;margin-bottom:20px}
+  .booking-inputs input,.booking-inputs select{width:100%;padding:11px;border:1px solid rgba(239,231,218,0.15);border-radius:6px;font-size:14px;background:var(--bg-soft);color:var(--text)}
+  .booking-submit{display:block;width:100%;background:var(--primary);color:#fff;padding:16px;border-radius:8px;font-size:16px;font-weight:700;border:none;cursor:pointer;transition:background 0.2s}
+  .booking-submit:hover{background:#a93226}
+  .booking-caption{font-size:12px;color:var(--muted);margin-top:20px;font-style:italic}
+
+  /* --- contact --- */
+  .contact{padding:60px 20px;background:var(--bg)}
+  .contact h2{font-family:var(--stack-heading);font-size:28px;margin-bottom:30px;color:var(--accent);text-align:center}
+  .contact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:24px;max-width:600px;margin:0 auto;text-align:center}
+  .contact-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px}
+  .contact-item a{color:var(--accent);font-weight:600;font-size:15px}
+  .contact-item a:hover{text-decoration:underline}
+
+  /* --- footer --- */
+  footer{background:#0f161d;padding:40px 20px;text-align:center;font-size:13px;color:var(--muted)}
+  footer .brand{font-family:var(--stack-heading);font-size:16px;color:var(--text);margin-bottom:8px}
+  footer .powered{margin-top:16px;font-size:11px;letter-spacing:0.04em}
+  footer .powered a{color:var(--accent)}
+</style>
+</head>
+<body>
+
+<div class="demo-banner">
+  <div class="inner">
+    <span><strong>Demo preview</strong> — This is a demo of what your restaurant website could look like</span>
+    <a class="cta" href="https://preview.klarsystems.com/caballo-bayo-lohja/proposal/">See full proposal</a>
+  </div>
+</div>
+
+<nav class="nav">
+  <div class="inner">
+    <div class="wordmark">Caballo Bayo</div>
+    <div class="nav-links">
+      <a href="#menu">Menu</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#hours">Hours</a>
+      <a href="#book">Book</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="container">
+    <div class="eyebrow">Tex-Mex in Lohja since 1995</div>
+    <h1>Caballo Bayo</h1>
+    <p class="tagline">Authentic Tex-Mex flavors in the heart of Lohja. Generous portions, warm hospitality, and a rooftop terrace for summer evenings.</p>
+    <a class="btn" href="#book">Book a Table</a>
+  </div>
+</section>
+
+<div class="photo-row">
+  <div class="img-placeholder">Photo coming soon</div>
+  <div class="img-placeholder">Photo coming soon</div>
+  <div class="img-placeholder">Photo coming soon</div>
+</div>
+
+<section class="about">
+  <div class="inner">
+    <h2>About Us</h2>
+    <p>Caballo Bayo has been serving Tex-Mex favorites in central Lohja since 1995. Located on the second floor of Kauppakatu 8, our kitchen prepares fajitas, burritos, chili con carne, and grilled dishes with care and generous portions.</p>
+    <p>In the summer months, enjoy your meal on our rooftop terrace overlooking the city. Whether it is a weeknight dinner or a weekend gathering, Caballo Bayo is the place for relaxed dining with friends and family.</p>
+  </div>
+</section>
+
+<section class="menu" id="menu">
+  <div class="container">
+    <h2>Menu</h2>
+    <div class="menu-grid">
+      <div class="menu-category">
+        <h3>Starters &amp; Salads</h3>
+        <div class="menu-item">
+          <div class="menu-item-name">Chicken Salad</div>
+          <div class="menu-item-desc">Fresh salad with grilled chicken</div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-name">Shrimp Salad</div>
+          <div class="menu-item-desc">Mixed greens with seasoned shrimp</div>
+        </div>
+      </div>
+      <div class="menu-category">
+        <h3>Tex-Mex Favorites</h3>
+        <div class="menu-item">
+          <div class="menu-item-name">Fajitas</div>
+          <div class="menu-item-desc">Sizzling fajitas with your choice of filling</div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-name">Burritos</div>
+          <div class="menu-item-desc">Filled tortilla wraps with rice and beans</div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-name">Chili con Carne</div>
+          <div class="menu-item-desc">Slow-cooked chili with ground beef</div>
+        </div>
+      </div>
+      <div class="menu-category">
+        <h3>Main Courses</h3>
+        <div class="menu-item">
+          <div class="menu-item-name">Grilled Fish</div>
+          <div class="menu-item-desc">Catch of the day, grilled to order</div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-name">Beef Tenderloin</div>
+          <div class="menu-item-desc">Tender cut served with sides</div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-name">Pasta Dishes</div>
+          <div class="menu-item-desc">Selection of pasta options</div>
+        </div>
+      </div>
+    </div>
+    <p class="menu-note">This is a sample menu. The full menu will be finalized together with the restaurant.</p>
+  </div>
+</section>
+
+<section class="reviews" id="reviews">
+  <div class="container">
+    <h2>What Our Guests Say</h2>
+    <p class="subtitle">4.4 on Google &middot; 308 reviews</p>
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="review-stars">4.4 / 5</div>
+        <div class="review-text">"Extremely good food and the price-to-quality ratio is really on point. Large portions!"</div>
+        <div class="review-author">Guest review</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">4.4 / 5</div>
+        <div class="review-text">"Always friendly and pleasant staff. The food is really good."</div>
+        <div class="review-author">Guest review</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">4.4 / 5</div>
+        <div class="review-text">"We have visited Caballo several times and the food is always excellent."</div>
+        <div class="review-author">Guest review</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hours-location" id="hours">
+  <div class="container">
+    <h2>Hours &amp; Location</h2>
+    <div class="hl-grid">
+      <div>
+        <table class="hours-table">
+          <tr><td>Monday</td><td>Closed</td></tr>
+          <tr><td>Tuesday</td><td>Closed</td></tr>
+          <tr><td>Wednesday</td><td>16:00 - 23:00</td></tr>
+          <tr><td>Thursday</td><td>16:00 - 23:00</td></tr>
+          <tr><td>Friday</td><td>16:00 - 00:00</td></tr>
+          <tr><td>Saturday</td><td>16:00 - 00:00</td></tr>
+          <tr><td>Sunday</td><td>13:00 - 18:00</td></tr>
+        </table>
+      </div>
+      <div class="location-box">
+        <h3>Visit Us</h3>
+        <p><strong>Kauppakatu 8, 2nd floor</strong><br>08100 Lohja</p>
+        <p><a href="tel:+358193128899">+358 19 312899</a></p>
+        <p><a href="https://www.google.com/maps/search/Kauppakatu+8+08100+Lohja" target="_blank">View on Google Maps</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="booking-section" id="book">
+  <div class="booking-card">
+    <h3>Book a Table</h3>
+    <p class="sub">Reserve in seconds — no fees, no account needed.</p>
+    <form onsubmit="event.preventDefault(); return false;">
+      <div class="booking-inputs">
+        <input type="date" name="date" required>
+        <select name="time" required>
+          <option value="">Select time</option>
+          <option value="16:00">16:00</option>
+          <option value="16:30">16:30</option>
+          <option value="17:00">17:00</option>
+          <option value="17:30">17:30</option>
+          <option value="18:00">18:00</option>
+          <option value="18:30">18:30</option>
+          <option value="19:00">19:00</option>
+          <option value="19:30">19:30</option>
+          <option value="20:00">20:00</option>
+          <option value="20:30">20:30</option>
+          <option value="21:00">21:00</option>
+        </select>
+        <select name="guests" required>
+          <option value="">Party size</option>
+          <option value="1">1 guest</option>
+          <option value="2" selected>2 guests</option>
+          <option value="3">3 guests</option>
+          <option value="4">4 guests</option>
+          <option value="5">5 guests</option>
+          <option value="6">6 guests</option>
+          <option value="7">7 guests</option>
+          <option value="8">8 guests</option>
+        </select>
+      </div>
+      <button type="button" class="booking-submit">Reserve Now</button>
+    </form>
+    <div class="booking-caption">Powered by Klar Bookings — no fees, no commissions.</div>
+  </div>
+</section>
+
+<section class="contact">
+  <div class="container">
+    <h2>Get in Touch</h2>
+    <div class="contact-grid">
+      <div class="contact-item">
+        <div class="contact-label">Phone</div>
+        <a href="tel:+358193128899">+358 19 312899</a>
+      </div>
+      <div class="contact-item">
+        <div class="contact-label">Facebook</div>
+        <a href="https://www.facebook.com/RavintolaCaballoBayo/" target="_blank">Facebook</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="brand">Caballo Bayo</div>
+  <p>&copy; 2026 Caballo Bayo &mdash; Lohja</p>
+  <p class="powered">Powered by <a href="https://klarsystems.com" target="_blank">Klar</a></p>
+</footer>
+
+</body>
+</html>

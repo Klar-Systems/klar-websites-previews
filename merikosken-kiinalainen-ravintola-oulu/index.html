@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Merikosken Kiinalainen ravintola &mdash; Oulu</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* palette: teal + amber on warm cream — bright Nordic-Chinese aesthetic */
+    :root {
+      --bg: #FAF7F2;
+      --bg-raised: #FFFFFF;
+      --bg-card: #F0ECE4;
+      --fg: #1C2B2D;
+      --fg-dim: #5E6D6F;
+      --primary: #1A5C5E;
+      --primary-light: #247678;
+      --accent: #C8872E;
+      --accent-light: #E8A84C;
+      --rule: rgba(26,92,94,0.15);
+      --heading: 'Playfair Display', Georgia, 'Times New Roman', serif;
+      --body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      --mono: 'JetBrains Mono', 'Consolas', monospace;
+      --max-w: 1060px;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      font-family: var(--body);
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ---- DEMO BANNER ---- */
+    .demo-banner {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: var(--primary);
+      color: #fff;
+      text-align: center;
+      padding: 10px 16px;
+      font-size: 0.82rem;
+      letter-spacing: 0.02em;
+      font-family: var(--body);
+      font-weight: 500;
+    }
+    .demo-banner a {
+      color: var(--accent-light);
+      font-weight: 600;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      margin-left: 8px;
+    }
+
+    /* ---- HERO ---- */
+    .hero {
+      margin-top: 44px;
+      padding: 80px 24px 60px;
+      text-align: center;
+      border-bottom: 1px solid var(--rule);
+      background: linear-gradient(180deg, #EDE8DF 0%, var(--bg) 100%);
+    }
+    .hero-badge {
+      display: inline-block;
+      font-family: var(--body);
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--primary);
+      border: 1.5px solid var(--primary);
+      padding: 5px 16px;
+      border-radius: 2px;
+      margin-bottom: 24px;
+    }
+    .hero h1 {
+      font-family: var(--heading);
+      font-size: clamp(2.2rem, 5.5vw, 3.6rem);
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      line-height: 1.12;
+      margin-bottom: 14px;
+      color: var(--fg);
+    }
+    .hero-sub {
+      font-size: 1.05rem;
+      color: var(--fg-dim);
+      margin-bottom: 24px;
+      font-weight: 300;
+    }
+    .hero-rating {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--body);
+      font-size: 1rem;
+      color: var(--accent);
+    }
+    .hero-rating .score {
+      font-weight: 700;
+      font-size: 1.3rem;
+    }
+    .hero-rating .count {
+      color: var(--fg-dim);
+      font-size: 0.85rem;
+    }
+
+    /* ---- HERO IMAGE PLACEHOLDER ---- */
+    .hero-img {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    .img-placeholder {
+      background: var(--bg-card);
+      border: 1px solid var(--rule);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--fg-dim);
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .img-placeholder-hero {
+      aspect-ratio: 16/9;
+      width: 100%;
+      border-radius: 6px;
+      margin-top: -20px;
+    }
+    .img-placeholder-food {
+      aspect-ratio: 1/1;
+      width: 100%;
+      border-radius: 6px;
+    }
+    .img-placeholder-interior {
+      aspect-ratio: 3/2;
+      width: 100%;
+      border-radius: 6px;
+    }
+
+    /* ---- SECTIONS ---- */
+    section {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 64px 24px;
+    }
+    .section-label {
+      font-family: var(--body);
+      font-size: 0.7rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+    section h2 {
+      font-family: var(--heading);
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      font-weight: 600;
+      margin-bottom: 24px;
+      line-height: 1.2;
+      color: var(--fg);
+    }
+
+    /* ---- BUFFET HIGHLIGHT ---- */
+    .buffet-highlight {
+      background: var(--bg-raised);
+      border: 1.5px solid var(--rule);
+      border-radius: 8px;
+      padding: 32px;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .buffet-price {
+      font-family: var(--heading);
+      font-size: 2.4rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 4px;
+    }
+    .buffet-price-note {
+      font-size: 0.85rem;
+      color: var(--fg-dim);
+      margin-bottom: 16px;
+    }
+    .buffet-features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+    }
+    .buffet-tag {
+      background: var(--bg-card);
+      border: 1px solid var(--rule);
+      padding: 6px 14px;
+      border-radius: 3px;
+      font-size: 0.82rem;
+      color: var(--fg);
+      font-weight: 500;
+    }
+
+    /* ---- MENU ---- */
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .menu-card {
+      background: var(--bg-raised);
+      border: 1px solid var(--rule);
+      border-radius: 6px;
+      padding: 24px;
+      transition: border-color 0.2s;
+    }
+    .menu-card:hover {
+      border-color: var(--accent);
+    }
+    .menu-card h3 {
+      font-family: var(--heading);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 12px;
+    }
+    .menu-card ul {
+      list-style: none;
+    }
+    .menu-card li {
+      font-size: 0.88rem;
+      color: var(--fg-dim);
+      padding: 4px 0;
+      border-bottom: 1px solid rgba(0,0,0,0.04);
+    }
+    .menu-card li:last-child { border-bottom: none; }
+    .menu-note {
+      text-align: center;
+      color: var(--fg-dim);
+      font-size: 0.82rem;
+      font-style: italic;
+      margin-top: 16px;
+    }
+
+    /* ---- ABOUT ---- */
+    .about-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      align-items: start;
+    }
+    .about-text p {
+      color: var(--fg-dim);
+      font-size: 0.95rem;
+      margin-bottom: 16px;
+      line-height: 1.7;
+    }
+    .about-text .highlight {
+      color: var(--fg);
+      font-weight: 600;
+    }
+
+    /* ---- REVIEWS ---- */
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .review-card {
+      background: var(--bg-raised);
+      border: 1px solid var(--rule);
+      border-radius: 6px;
+      padding: 24px;
+    }
+    .review-card blockquote {
+      font-size: 0.92rem;
+      color: var(--fg);
+      font-style: italic;
+      line-height: 1.6;
+      margin-bottom: 12px;
+      border-left: 3px solid var(--accent);
+      padding-left: 14px;
+    }
+    .review-author {
+      font-size: 0.78rem;
+      color: var(--fg-dim);
+      font-family: var(--body);
+      font-weight: 500;
+    }
+    .review-stars {
+      color: var(--accent);
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    /* ---- HOURS & LOCATION ---- */
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+    .hours-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .hours-table td {
+      padding: 10px 0;
+      font-size: 0.92rem;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+    .hours-table td:first-child {
+      color: var(--fg-dim);
+      font-size: 0.85rem;
+    }
+    .hours-table td:last-child {
+      text-align: right;
+      font-family: var(--body);
+      font-weight: 600;
+    }
+    .map-frame {
+      width: 100%;
+      aspect-ratio: 4/3;
+      border: 1px solid var(--rule);
+      border-radius: 6px;
+    }
+    .address-block {
+      margin-top: 16px;
+    }
+    .address-block a {
+      color: var(--fg);
+      text-decoration: none;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    .address-block a:hover { color: var(--accent); }
+    .address-block svg {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      stroke: var(--primary);
+    }
+
+    /* ---- BOOKING ---- */
+    .booking-section {
+      background: var(--primary);
+      border-radius: 8px;
+      padding: 40px;
+      text-align: center;
+      max-width: 560px;
+      margin: 0 auto;
+      color: #fff;
+    }
+    .booking-section .section-label {
+      color: var(--accent-light);
+    }
+    .booking-section h2 {
+      color: #fff;
+      margin-bottom: 8px;
+    }
+    .booking-section p {
+      color: rgba(255,255,255,0.7);
+      font-size: 0.9rem;
+      margin-bottom: 24px;
+    }
+    .booking-form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .booking-form input,
+    .booking-form select {
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.25);
+      color: #fff;
+      padding: 12px 14px;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      font-family: var(--body);
+    }
+    .booking-form .full-width {
+      grid-column: 1 / -1;
+    }
+    .btn-book {
+      grid-column: 1 / -1;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 14px;
+      border-radius: 4px;
+      font-family: var(--body);
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-book:hover { background: var(--accent-light); }
+    .booking-note {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.5);
+      margin-top: 8px;
+    }
+
+    /* ---- FOOTER ---- */
+    footer {
+      border-top: 1px solid var(--rule);
+      padding: 40px 24px;
+      text-align: center;
+      background: var(--bg-card);
+    }
+    .footer-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+    .footer-name {
+      font-family: var(--heading);
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--fg);
+    }
+    .footer-info {
+      font-size: 0.82rem;
+      color: var(--fg-dim);
+      line-height: 1.8;
+    }
+    .footer-info a {
+      color: var(--fg-dim);
+      text-decoration: none;
+    }
+    .footer-info a:hover { color: var(--accent); }
+    .footer-powered {
+      margin-top: 20px;
+      font-size: 0.72rem;
+      color: var(--fg-dim);
+      letter-spacing: 0.06em;
+    }
+
+    /* ---- SCROLL REVEAL ---- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ---- RESPONSIVE ---- */
+    @media (max-width: 680px) {
+      .about-content { grid-template-columns: 1fr; }
+      .info-grid { grid-template-columns: 1fr; }
+      .booking-form { grid-template-columns: 1fr; }
+      .hero { padding: 70px 20px 40px; }
+      section { padding: 48px 20px; }
+      .booking-section { padding: 28px 20px; }
+      .buffet-highlight { padding: 24px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- DEMO BANNER -->
+  <div class="demo-banner">
+    This is a demo &mdash; the final website will be built together with you.
+    <a href="https://preview.klarsystems.com/merikosken-kiinalainen-ravintola-oulu/proposal/">See our offer</a>
+  </div>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-badge">Chinese Restaurant &middot; Tuira, Oulu</div>
+    <h1>Merikosken Kiinalainen ravintola</h1>
+    <p class="hero-sub">Merikoskenkatu 2, 90500 Oulu</p>
+    <div class="hero-rating">
+      <span class="score">4.2 / 5</span>
+      <span class="count">441 Google reviews</span>
+    </div>
+  </header>
+
+  <!-- HERO IMAGE PLACEHOLDER -->
+  <div class="hero-img">
+    <div class="img-placeholder img-placeholder-hero">Your photo here</div>
+  </div>
+
+  <!-- BUFFET & MENU -->
+  <section class="reveal">
+    <div class="section-label">The Buffet</div>
+    <h2>Quality Chinese lunch in the heart of Tuira</h2>
+
+    <div class="buffet-highlight">
+      <div class="buffet-price">10.40</div>
+      <div class="buffet-price-note">Lunch buffet &mdash; beverage included</div>
+      <div class="buffet-features">
+        <span class="buffet-tag">Fresh salad bar</span>
+        <span class="buffet-tag">Hot wok dishes</span>
+        <span class="buffet-tag">Spring rolls</span>
+        <span class="buffet-tag">Sushi station</span>
+        <span class="buffet-tag">Desserts</span>
+        <span class="buffet-tag">Coffee &amp; tea</span>
+      </div>
+    </div>
+
+    <div class="menu-grid">
+      <div class="menu-card">
+        <h3>Hot Dishes</h3>
+        <ul>
+          <li>Wok selections</li>
+          <li>Fried chicken</li>
+          <li>Special dishes</li>
+          <li>Rice dishes</li>
+        </ul>
+      </div>
+      <div class="menu-card">
+        <h3>Salad Bar</h3>
+        <ul>
+          <li>Cabbage salads</li>
+          <li>Kimchi-style salad</li>
+          <li>Homemade selections</li>
+          <li>Sushi</li>
+        </ul>
+      </div>
+      <div class="menu-card">
+        <h3>Starters</h3>
+        <ul>
+          <li>Spring rolls</li>
+          <li>Soup selections</li>
+          <li>Fish dishes</li>
+        </ul>
+      </div>
+      <div class="menu-card">
+        <h3>Desserts</h3>
+        <ul>
+          <li>Cheesecake portions</li>
+          <li>Chocolate</li>
+          <li>Ice cream</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="img-placeholder img-placeholder-food" style="max-width:320px;margin:0 auto;">Menu photos coming soon</div>
+
+    <p class="menu-note">This is a demo menu &mdash; the full menu will be updated together with you.</p>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="reveal" style="border-top:1px solid var(--rule);">
+    <div class="section-label">About</div>
+    <h2>The Chinese buffet Oulu keeps coming back to</h2>
+    <div class="about-content">
+      <div class="about-text">
+        <p>With <span class="highlight">441 Google reviews</span> and a 4.2-star rating, Merikosken Kiinalainen ravintola has earned its reputation as one of the best Chinese restaurants in Oulu.</p>
+        <p>Located in the Tuira district at the corner of Merikoskenkatu and Koskitie, the restaurant serves a generous lunch buffet with fresh salad bar, hot wok dishes, spring rolls, sushi, and desserts &mdash; all at a price that keeps regulars coming back.</p>
+        <p>The recently renovated interior is <span class="highlight">bright and welcoming</span>, with cozy booths and windows on multiple sides. Customers consistently praise the <span class="highlight">friendly, multilingual staff</span> and the excellent value for money.</p>
+      </div>
+      <div>
+        <div class="img-placeholder img-placeholder-interior">Restaurant interior</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section class="reveal" style="border-top:1px solid var(--rule);">
+    <div class="section-label">What Customers Say</div>
+    <h2>4.2 / 5 from 441 reviews</h2>
+    <div class="reviews-grid">
+      <div class="review-card">
+        <blockquote>"Awesome Chinese buffet, great staff. The best Chinese in Oulu."</blockquote>
+        <div class="review-author">Honza I. <span class="review-stars">5/5</span></div>
+      </div>
+      <div class="review-card">
+        <blockquote>"Really friendly service and tasty food. It was first time I visited this place and I'm sure going to visit another time."</blockquote>
+        <div class="review-author">Juha M. <span class="review-stars">5/5</span></div>
+      </div>
+      <div class="review-card">
+        <blockquote>"The host is very welcoming. The most surprising is price to quality ratio."</blockquote>
+        <div class="review-author">Rendijs K. <span class="review-stars">5/5</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOURS & LOCATION -->
+  <section class="reveal" style="border-top:1px solid var(--rule);">
+    <div class="section-label">Visit Us</div>
+    <h2>Hours &amp; Location</h2>
+    <div class="info-grid">
+      <div>
+        <table class="hours-table">
+          <tr><td>Monday - Friday</td><td>10:30 - 15:00</td></tr>
+          <tr><td>Saturday - Sunday</td><td>12:00 - 17:00</td></tr>
+        </table>
+        <div class="address-block">
+          <a href="tel:+35883431144">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+            08 343114
+          </a>
+          <a href="https://maps.google.com/?cid=1352270989780483149" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+            Merikoskenkatu 2, 90500 Oulu
+          </a>
+        </div>
+        <p style="font-size:0.82rem;color:var(--fg-dim);margin-top:12px;">Convenient parking behind the restaurant (approx. 30 spaces)</p>
+      </div>
+      <div>
+        <iframe class="map-frame" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1700!2d25.4717!3d65.0148!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x468204b5174b77e5%3A0x12c43b4cf4ee7c4d!2sMerikosken%20Kiinalainen%20ravintola!5e0!3m2!1sfi!2sfi!4v1" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOOKING WIDGET -->
+  <section class="reveal">
+    <div class="booking-section">
+      <div class="section-label">Reservations</div>
+      <h2>Book a Table</h2>
+      <p>Book in seconds &mdash; no account needed, no fees.</p>
+      <div class="booking-form">
+        <input type="date" aria-label="Date">
+        <input type="time" value="12:00" aria-label="Time">
+        <select aria-label="Party size">
+          <option>2 guests</option>
+          <option>3 guests</option>
+          <option>4 guests</option>
+          <option>5 guests</option>
+          <option>6+ guests</option>
+        </select>
+        <input type="text" class="full-width" aria-label="Name">
+        <button class="btn-book full-width">Book Now</button>
+      </div>
+      <p class="booking-note">Powered by Klar Bookings &mdash; no fees, no commissions</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-name">Merikosken Kiinalainen ravintola</div>
+      <div class="footer-info">
+        Merikoskenkatu 2, 90500 Oulu<br>
+        <a href="tel:+35883431144">08 343114</a><br>
+        &copy; 2026 Merikosken Kiinalainen ravintola
+      </div>
+      <div class="footer-powered">Powered by Klar</div>
+    </div>
+  </footer>
+
+  <!-- SCROLL REVEAL -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var els = document.querySelectorAll('.reveal');
+      if ('IntersectionObserver' in window) {
+        var observer = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.1 });
+        els.forEach(function(el) { observer.observe(el); });
+      } else {
+        els.forEach(function(el) { el.classList.add('visible'); });
+      }
+    });
+  </script>
+</body>
+</html>

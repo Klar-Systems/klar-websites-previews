@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lucky Dragon — Chinese Restaurant in Kempele</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #F5F0E8;
+            background: #1A1A1A;
+        }
+
+        /* Demo Banner */
+        .demo-banner {
+            background: #B22222;
+            color: #fff;
+            text-align: center;
+            padding: 12px 20px;
+            font-size: 13px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .demo-banner a {
+            color: #FFD700;
+            text-decoration: underline;
+            font-weight: 600;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(160deg, #1A1A1A 0%, #2A1515 50%, #1A1A1A 100%);
+            color: #F5F0E8;
+            padding: 120px 20px;
+            text-align: center;
+            min-height: 55vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero h1 {
+            font-size: 56px;
+            font-weight: 300;
+            margin-bottom: 12px;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            color: #FFD700;
+        }
+
+        .hero-divider {
+            width: 60px;
+            height: 2px;
+            background: #B22222;
+            margin: 20px auto;
+        }
+
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            color: #F5F0E8;
+            letter-spacing: 2px;
+            font-weight: 300;
+        }
+
+        .hero-rating {
+            font-size: 15px;
+            color: #D4C8B0;
+            margin-bottom: 30px;
+            letter-spacing: 1px;
+        }
+
+        .hero a {
+            display: inline-block;
+            background: transparent;
+            color: #FFD700;
+            padding: 14px 40px;
+            border: 1px solid #FFD700;
+            text-decoration: none;
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-size: 13px;
+            transition: all 0.3s;
+        }
+
+        .hero a:hover {
+            background: #FFD700;
+            color: #1A1A1A;
+        }
+
+        /* About */
+        .about {
+            padding: 80px 20px;
+            background: #222222;
+        }
+
+        .about .container {
+            max-width: 800px;
+        }
+
+        .section-label {
+            font-size: 12px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #B22222;
+            margin-bottom: 16px;
+            font-weight: 500;
+        }
+
+        .about h2 {
+            font-size: 32px;
+            margin-bottom: 24px;
+            font-weight: 400;
+            color: #FFD700;
+        }
+
+        .about p {
+            font-size: 16px;
+            margin-bottom: 16px;
+            line-height: 1.8;
+            color: #C0B8A8;
+        }
+
+        /* Photo placeholders */
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 4px;
+            padding: 0;
+        }
+
+        .photo-placeholder {
+            aspect-ratio: 1;
+            background: #2A2A2A;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #555;
+            font-size: 13px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* Buffet */
+        .buffet {
+            padding: 80px 20px;
+            background: #1A1A1A;
+        }
+
+        .buffet h2 {
+            font-size: 32px;
+            margin-bottom: 12px;
+            font-weight: 400;
+            color: #FFD700;
+        }
+
+        .buffet-intro {
+            font-size: 16px;
+            color: #999;
+            margin-bottom: 40px;
+            max-width: 600px;
+        }
+
+        .buffet-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .buffet-card {
+            background: #222222;
+            padding: 32px;
+            border-radius: 2px;
+            border-top: 2px solid #B22222;
+        }
+
+        .buffet-card h3 {
+            font-size: 18px;
+            margin-bottom: 16px;
+            color: #FFD700;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+
+        .buffet-card p {
+            font-size: 14px;
+            color: #999;
+            line-height: 1.7;
+        }
+
+        .pricing-bar {
+            margin-top: 40px;
+            display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .price-item {
+            text-align: center;
+        }
+
+        .price-amount {
+            font-size: 28px;
+            font-weight: 300;
+            color: #FFD700;
+        }
+
+        .price-label {
+            font-size: 12px;
+            color: #777;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 4px;
+        }
+
+        /* Reviews */
+        .reviews {
+            padding: 80px 20px;
+            background: #222222;
+            color: #F5F0E8;
+        }
+
+        .reviews .section-label {
+            color: #B22222;
+        }
+
+        .reviews h2 {
+            font-size: 32px;
+            margin-bottom: 40px;
+            font-weight: 400;
+            color: #FFD700;
+        }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        .review {
+            padding: 28px;
+            border: 1px solid rgba(178, 34, 34, 0.3);
+            border-radius: 2px;
+        }
+
+        .review-text {
+            font-size: 15px;
+            line-height: 1.7;
+            margin-bottom: 16px;
+            color: #C0B8A8;
+            font-style: italic;
+        }
+
+        .review-author {
+            font-size: 13px;
+            color: #B22222;
+            letter-spacing: 1px;
+        }
+
+        /* Hours & Location */
+        .hours {
+            padding: 80px 20px;
+            background: #1A1A1A;
+        }
+
+        .hours h2 {
+            font-size: 32px;
+            margin-bottom: 40px;
+            font-weight: 400;
+            color: #FFD700;
+        }
+
+        .hours-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .hours-table {
+            background: #222222;
+            padding: 32px;
+            border-radius: 2px;
+            border-top: 2px solid #B22222;
+        }
+
+        .hours-row {
+            display: grid;
+            grid-template-columns: 140px 1fr;
+            padding: 10px 0;
+            border-bottom: 1px solid #333;
+        }
+
+        .hours-row:last-child {
+            border-bottom: none;
+        }
+
+        .day {
+            font-weight: 500;
+            color: #F5F0E8;
+            font-size: 14px;
+        }
+
+        .time {
+            color: #999;
+            font-size: 14px;
+        }
+
+        .location-card {
+            background: #222222;
+            padding: 32px;
+            border-radius: 2px;
+            border-top: 2px solid #B22222;
+        }
+
+        .location-card h3 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: #FFD700;
+            font-weight: 500;
+        }
+
+        .location-card p {
+            margin-bottom: 12px;
+            font-size: 15px;
+            color: #C0B8A8;
+            line-height: 1.7;
+        }
+
+        .location-link {
+            color: #B22222;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            letter-spacing: 1px;
+        }
+
+        .location-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Contact */
+        .contact {
+            padding: 80px 20px;
+            background: #222222;
+        }
+
+        .contact h2 {
+            font-size: 32px;
+            margin-bottom: 40px;
+            font-weight: 400;
+            color: #FFD700;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .contact-item {
+            background: #1A1A1A;
+            padding: 24px;
+            border-radius: 2px;
+        }
+
+        .contact-label {
+            font-size: 11px;
+            color: #777;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        .contact-value {
+            font-size: 16px;
+            color: #F5F0E8;
+            font-weight: 500;
+        }
+
+        .contact-value a {
+            color: #F5F0E8;
+            text-decoration: none;
+        }
+
+        .contact-value a:hover {
+            color: #FFD700;
+        }
+
+        /* Booking Widget */
+        .booking {
+            padding: 80px 20px;
+            background: #1A1A1A;
+        }
+
+        .booking-card {
+            max-width: 440px;
+            margin: 0 auto;
+            background: #222222;
+            border: 1px solid rgba(178, 34, 34, 0.3);
+            border-radius: 2px;
+            padding: 40px;
+        }
+
+        .booking-card h3 {
+            font-size: 24px;
+            margin-bottom: 8px;
+            font-weight: 400;
+            color: #FFD700;
+            letter-spacing: 1px;
+        }
+
+        .booking-subtitle {
+            font-size: 13px;
+            color: #777;
+            margin-bottom: 28px;
+            letter-spacing: 0.5px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 11px;
+            color: #777;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid rgba(178, 34, 34, 0.4);
+            border-radius: 2px;
+            font-size: 14px;
+            font-family: inherit;
+            color: #F5F0E8;
+            background: #1A1A1A;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #FFD700;
+        }
+
+        .booking-button {
+            width: 100%;
+            padding: 14px;
+            background: #B22222;
+            color: #F5F0E8;
+            border: none;
+            border-radius: 2px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: background 0.3s;
+            margin-top: 8px;
+        }
+
+        .booking-button:hover {
+            background: #CC3333;
+        }
+
+        .booking-caption {
+            text-align: center;
+            font-size: 11px;
+            color: #666;
+            margin-top: 16px;
+            letter-spacing: 0.5px;
+        }
+
+        /* Footer */
+        footer {
+            padding: 40px 20px;
+            text-align: center;
+            background: #111111;
+            color: #666;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 13px;
+            letter-spacing: 0.5px;
+        }
+
+        footer a {
+            color: #B22222;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                padding: 0 40px;
+            }
+
+            .hero {
+                padding: 160px 40px;
+            }
+
+            .about, .buffet, .reviews, .hours, .contact, .booking {
+                padding: 100px 40px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 36px;
+                letter-spacing: 4px;
+            }
+
+            .hours-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .photo-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .pricing-bar {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Demo Banner -->
+    <div class="demo-banner">
+        This is a demo preview — <a href="https://preview.klarsystems.com/lucky-dragon-kempele/proposal/">see the full proposal</a>
+    </div>
+
+    <!-- Hero -->
+    <section class="hero">
+        <h1>Lucky Dragon</h1>
+        <div class="hero-divider"></div>
+        <p>Chinese Restaurant in Kempele</p>
+        <div class="hero-rating">3.9 / 5 — 315 reviews on Google</div>
+        <a href="#booking">Book a Table</a>
+    </section>
+
+    <!-- About -->
+    <section class="about">
+        <div class="container">
+            <div class="section-label">About</div>
+            <h2>Authentic Chinese Buffet in Zeppelin</h2>
+            <p>Lucky Dragon has been serving authentic Chinese cuisine in Kempele's Zeppelin shopping centre since 2011. Located conveniently at Zeppeliinintie 1, the restaurant offers a generous all-day buffet with a wide selection of traditional Chinese dishes.</p>
+            <p>Known for large portions, friendly service, and good value for money, Lucky Dragon has built a loyal following among Kempele locals and shoppers alike. The buffet features everything from spring rolls and fried rice to specialty meatballs and stir-fried dishes.</p>
+        </div>
+    </section>
+
+    <!-- Photo Placeholders -->
+    <section class="photo-grid">
+        <div class="photo-placeholder">Photo 1</div>
+        <div class="photo-placeholder">Photo 2</div>
+        <div class="photo-placeholder">Photo 3</div>
+    </section>
+
+    <!-- Buffet -->
+    <section class="buffet">
+        <div class="container">
+            <div class="section-label">The Buffet</div>
+            <h2>Chinese Buffet</h2>
+            <p class="buffet-intro">A generous spread of traditional Chinese dishes, freshly prepared every day. Salad bar, warm dishes, and a variety of meat and vegetable preparations.</p>
+
+            <div class="buffet-grid">
+                <div class="buffet-card">
+                    <h3>Starters</h3>
+                    <p>Spring rolls, fried chicken wings, and Chinese-style meatballs — a spicy specialty rarely found elsewhere.</p>
+                </div>
+                <div class="buffet-card">
+                    <h3>Main Dishes</h3>
+                    <p>Sour pork with mushrooms, spicy chicken, beef and vegetable stir-fries, and more. Generous meat-to-vegetable ratios.</p>
+                </div>
+                <div class="buffet-card">
+                    <h3>Rice & Noodles</h3>
+                    <p>Fried rice, fried noodles, and steamed rice. Classic Chinese staples prepared fresh for the buffet.</p>
+                </div>
+                <div class="buffet-card">
+                    <h3>Salad Bar</h3>
+                    <p>Fresh salad bar where you assemble your own combinations. A variety of vegetables and dressings to complement the warm dishes.</p>
+                </div>
+            </div>
+
+            <div class="pricing-bar">
+                <div class="price-item">
+                    <div class="price-amount">Lunch</div>
+                    <div class="price-label">Mon-Fri 10:30-14:30</div>
+                </div>
+                <div class="price-item">
+                    <div class="price-amount">Buffet</div>
+                    <div class="price-label">All day</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews -->
+    <section class="reviews">
+        <div class="container">
+            <div class="section-label">Guest Reviews</div>
+            <h2>What People Are Saying</h2>
+            <div class="reviews-grid">
+                <div class="review">
+                    <div class="review-text">"Annokset ovat yleensä olleet todella herkullisia ja hyviä. Isoja annoksia, mistä syö toisenkin päivän."</div>
+                    <div class="review-author">Tulppaani12</div>
+                </div>
+                <div class="review">
+                    <div class="review-text">"Lounasbuffet hyvä ja voin suositella."</div>
+                    <div class="review-author">Chilifani</div>
+                </div>
+                <div class="review">
+                    <div class="review-text">"Ruoka oli perushyvää ja palvelu ystävällistä, hintakin suht kohtuullinen."</div>
+                    <div class="review-author">Guest</div>
+                </div>
+                <div class="review">
+                    <div class="review-text">"Mahtava kinkkilä, joka kestää vertailun Oulun vastaaviin ruokapaikkoihin."</div>
+                    <div class="review-author">Sari K.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hours & Location -->
+    <section class="hours">
+        <div class="container">
+            <div class="section-label">Visit Us</div>
+            <h2>Hours & Location</h2>
+            <div class="hours-grid">
+                <div class="hours-table">
+                    <div class="hours-row">
+                        <div class="day">Monday</div>
+                        <div class="time">10:30 - 20:00</div>
+                    </div>
+                    <div class="hours-row">
+                        <div class="day">Tuesday</div>
+                        <div class="time">10:30 - 20:00</div>
+                    </div>
+                    <div class="hours-row">
+                        <div class="day">Wednesday</div>
+                        <div class="time">10:30 - 20:00</div>
+                    </div>
+                    <div class="hours-row">
+                        <div class="day">Thursday</div>
+                        <div class="time">10:30 - 20:00</div>
+                    </div>
+                    <div class="hours-row">
+                        <div class="day">Friday</div>
+                        <div class="time">10:30 - 20:00</div>
+                    </div>
+                    <div class="hours-row">
+                        <div class="day">Saturday</div>
+                        <div class="time">10:30 - 18:00</div>
+                    </div>
+                    <div class="hours-row">
+                        <div class="day">Sunday</div>
+                        <div class="time">12:00 - 18:00</div>
+                    </div>
+                </div>
+
+                <div class="location-card">
+                    <h3>Find Us</h3>
+                    <p>Zeppeliinintie 1, 90450 Kempele</p>
+                    <p>Inside the Zeppelin Shopping Centre — easy to find when you visit the mall.</p>
+                    <a href="https://www.google.com/maps/search/Zeppeliinintie+1,+90450+Kempele" class="location-link" target="_blank">View on Google Maps</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="contact">
+        <div class="container">
+            <div class="section-label">Contact</div>
+            <h2>Get in Touch</h2>
+            <div class="contact-grid">
+                <div class="contact-item">
+                    <div class="contact-label">Phone</div>
+                    <div class="contact-value"><a href="tel:+35885204180">+358 8 5204180</a></div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-label">Facebook</div>
+                    <div class="contact-value"><a href="https://www.facebook.com/luckydragonravintola/" target="_blank">Lucky Dragon Ravintola</a></div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-label">Order on Wolt</div>
+                    <div class="contact-value"><a href="https://wolt.com/en/fin/kempele/restaurant/kiinalainen-ravintola-lucky-dragon" target="_blank">Wolt Delivery</a></div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-label">Order on Foodora</div>
+                    <div class="contact-value"><a href="https://www.foodora.fi/en/restaurant/d5x5/lucky-dragon" target="_blank">Foodora Delivery</a></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Widget -->
+    <section class="booking" id="booking">
+        <div class="booking-card">
+            <h3>Book a Table</h3>
+            <p class="booking-subtitle">Reserve your spot — no fees, no account needed.</p>
+            <form onsubmit="event.preventDefault();return false;">
+                <div class="form-group">
+                    <label for="date">Date</label>
+                    <input type="date" id="date" min="">
+                </div>
+                <div class="form-group">
+                    <label for="time">Time</label>
+                    <select id="time">
+                        <option value="">Select a time</option>
+                        <option value="11:00">11:00</option>
+                        <option value="11:30">11:30</option>
+                        <option value="12:00">12:00</option>
+                        <option value="12:30">12:30</option>
+                        <option value="13:00">13:00</option>
+                        <option value="13:30">13:30</option>
+                        <option value="14:00">14:00</option>
+                        <option value="15:00">15:00</option>
+                        <option value="16:00">16:00</option>
+                        <option value="17:00">17:00</option>
+                        <option value="17:30">17:30</option>
+                        <option value="18:00">18:00</option>
+                        <option value="18:30">18:30</option>
+                        <option value="19:00">19:00</option>
+                        <option value="19:30">19:30</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="guests">Party Size</label>
+                    <select id="guests">
+                        <option value="2">2 guests</option>
+                        <option value="1">1 guest</option>
+                        <option value="3">3 guests</option>
+                        <option value="4">4 guests</option>
+                        <option value="5">5 guests</option>
+                        <option value="6">6 guests</option>
+                        <option value="7">7 guests</option>
+                        <option value="8">8 guests</option>
+                    </select>
+                </div>
+                <button type="button" class="booking-button">Reserve Now</button>
+            </form>
+            <div class="booking-caption">Powered by Klar Bookings — no fees, no commissions.</div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>Lucky Dragon — Zeppeliinintie 1, 90450 Kempele</p>
+        <p style="margin-top: 8px;">Powered by <a href="https://klarsystems.com" target="_blank">Klar</a></p>
+    </footer>
+
+    <script>
+        const dateInput = document.getElementById('date');
+        const today = new Date();
+        const minDate = today.toISOString().split('T')[0];
+        dateInput.setAttribute('min', minDate);
+    </script>
+</body>
+</html>

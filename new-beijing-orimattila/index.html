@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Beijing Chinese Restaurant - Orimattila</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #2B2B2B;
+            background: #FFFAF5;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Demo Banner */
+        .demo-banner {
+            background: #1a1a2e;
+            color: #fff;
+            text-align: center;
+            padding: 12px 20px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .demo-banner a {
+            color: #FFD700;
+            text-decoration: underline;
+            font-weight: 600;
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, #C41E3A 0%, #8B0000 60%, #2B2B2B 100%);
+            color: white;
+            padding: 120px 20px;
+            text-align: center;
+            min-height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+
+        .hero a {
+            display: inline-block;
+            background: white;
+            color: #C41E3A;
+            padding: 14px 32px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+        }
+
+        .hero a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+        }
+
+        /* About */
+        .about {
+            padding: 80px 20px;
+            background: #f9f9f9;
+        }
+
+        .about h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            font-weight: 700;
+            color: #C41E3A;
+        }
+
+        .about p {
+            font-size: 16px;
+            margin-bottom: 15px;
+            line-height: 1.8;
+            color: #555;
+        }
+
+        /* Menu */
+        .menu {
+            padding: 80px 20px;
+        }
+
+        .menu h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            font-weight: 700;
+            color: #C41E3A;
+        }
+
+        .menu p.menu-note {
+            font-size: 16px;
+            color: #777;
+            margin-bottom: 40px;
+            font-style: italic;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .menu-category h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #2B2B2B;
+        }
+
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 12px 0;
+            border-bottom: 1px solid #EEE;
+        }
+
+        .menu-item-name {
+            font-weight: 600;
+            color: #2B2B2B;
+            flex: 1;
+        }
+
+        .menu-item-desc {
+            font-size: 14px;
+            color: #777;
+            margin-top: 4px;
+        }
+
+        /* Lunch Section */
+        .lunch {
+            padding: 80px 20px;
+            background: #f9f9f9;
+        }
+
+        .lunch h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            font-weight: 700;
+            color: #C41E3A;
+        }
+
+        .lunch p {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        .lunch-info {
+            background: white;
+            border: 1px solid #EEE;
+            border-radius: 12px;
+            padding: 30px;
+            max-width: 500px;
+        }
+
+        .lunch-info .label {
+            font-weight: 700;
+            color: #2B2B2B;
+            margin-bottom: 4px;
+        }
+
+        .lunch-info .value {
+            color: #555;
+            margin-bottom: 16px;
+        }
+
+        /* Hours & Location */
+        .hours-location {
+            padding: 80px 20px;
+        }
+
+        .hours-location h2 {
+            font-size: 36px;
+            margin-bottom: 40px;
+            font-weight: 700;
+            color: #C41E3A;
+        }
+
+        .hours-table {
+            max-width: 500px;
+            margin-bottom: 40px;
+        }
+
+        .hours-row {
+            display: grid;
+            grid-template-columns: 150px 1fr;
+            gap: 20px;
+            padding: 12px 0;
+            border-bottom: 1px solid #DDD;
+        }
+
+        .hours-day {
+            font-weight: 600;
+            color: #2B2B2B;
+        }
+
+        .hours-time {
+            color: #555;
+        }
+
+        .location {
+            margin-top: 40px;
+        }
+
+        .location h3 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #2B2B2B;
+        }
+
+        .address {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        .maps-link {
+            display: inline-block;
+            color: #C41E3A;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .maps-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Contact */
+        .contact {
+            padding: 80px 20px;
+            background: #f9f9f9;
+        }
+
+        .contact h2 {
+            font-size: 36px;
+            margin-bottom: 40px;
+            font-weight: 700;
+            color: #C41E3A;
+        }
+
+        .contact-item {
+            margin-bottom: 20px;
+            font-size: 16px;
+            color: #555;
+        }
+
+        .contact-item a {
+            color: #C41E3A;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .contact-item a:hover {
+            text-decoration: underline;
+        }
+
+        /* Demo Card (Booking Widget) */
+        .demo-card {
+            padding: 80px 20px;
+        }
+
+        .demo-card-wrapper {
+            max-width: 480px;
+            margin: 0 auto;
+        }
+
+        .booking-card {
+            background: white;
+            border: 1px solid #DDD;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .booking-card h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #2B2B2B;
+        }
+
+        .booking-card-subtitle {
+            font-size: 14px;
+            color: #777;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        .booking-inputs {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .booking-input {
+            padding: 12px 14px;
+            border: 1px solid #DDD;
+            border-radius: 6px;
+            font-size: 14px;
+            font-family: inherit;
+            color: #2B2B2B;
+        }
+
+        .booking-input:focus {
+            outline: none;
+            border-color: #C41E3A;
+            box-shadow: 0 0 0 2px rgba(196, 30, 58, 0.1);
+        }
+
+        .booking-btn {
+            background: #C41E3A;
+            color: white;
+            padding: 14px 20px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.2s;
+        }
+
+        .booking-btn:hover {
+            background: #A31830;
+        }
+
+        .booking-caption {
+            font-size: 12px;
+            color: #999;
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        /* Footer */
+        footer {
+            padding: 40px 20px;
+            background: #2B2B2B;
+            color: white;
+            text-align: center;
+        }
+
+        footer p {
+            font-size: 14px;
+            margin: 5px 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .menu-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .hours-row {
+                grid-template-columns: 1fr;
+                gap: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Demo Banner -->
+    <div class="demo-banner">
+        This is a demo website built for New Beijing by <strong>Klar Bookings</strong>.
+        <a href="https://preview.klarsystems.com/new-beijing-orimattila/proposal/">See the proposal</a>
+    </div>
+
+    <!-- Hero -->
+    <section class="hero">
+        <h1>New Beijing</h1>
+        <p>Chinese Restaurant in the Heart of Orimattila</p>
+        <a href="#booking">Book a Table</a>
+    </section>
+
+    <!-- About -->
+    <section class="about">
+        <div class="container">
+            <h2>About</h2>
+            <p>New Beijing is a Chinese restaurant located in the centre of Orimattila, serving traditional Chinese cuisine since 2019. Known for friendly service and generous portions, we welcome families, workers, and anyone looking for a satisfying meal at honest prices.</p>
+            <p>Whether you are stopping by for our popular lunch buffet or enjoying an evening dinner, our kitchen prepares each dish with care using traditional recipes.</p>
+        </div>
+    </section>
+
+    <!-- Lunch -->
+    <section class="lunch">
+        <div class="container">
+            <h2>Lunch Buffet</h2>
+            <p>Our daily lunch buffet features a rotating selection of Chinese dishes, freshly prepared each morning. A Finnish alternative is always included alongside our Chinese specialties.</p>
+            <div class="lunch-info">
+                <div class="label">Lunch Hours</div>
+                <div class="value">Monday - Friday, 10:30 AM - 3:00 PM</div>
+                <div class="label">Buffet Style</div>
+                <div class="value">All-you-can-eat with daily changing selection</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu -->
+    <section class="menu" id="menu">
+        <div class="container">
+            <h2>Menu</h2>
+            <p class="menu-note">Full menu available in the restaurant. Contact us for details.</p>
+            <div class="menu-grid">
+                <div class="menu-category">
+                    <h3>What We Serve</h3>
+                    <div class="menu-item">
+                        <div>
+                            <span class="menu-item-name">Daily Lunch Buffet</span>
+                            <div class="menu-item-desc">Rotating selection of Chinese dishes with a Finnish option</div>
+                        </div>
+                    </div>
+                    <div class="menu-item">
+                        <div>
+                            <span class="menu-item-name">Takeaway Available</span>
+                            <div class="menu-item-desc">All dishes available for takeaway</div>
+                        </div>
+                    </div>
+                    <div class="menu-item">
+                        <div>
+                            <span class="menu-item-name">Vegetarian Options</span>
+                            <div class="menu-item-desc">Vegetarian dishes available on request</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-category">
+                    <h3>Features</h3>
+                    <div class="menu-item">
+                        <div>
+                            <span class="menu-item-name">Child-Friendly</span>
+                            <div class="menu-item-desc">Families with children are always welcome</div>
+                        </div>
+                    </div>
+                    <div class="menu-item">
+                        <div>
+                            <span class="menu-item-name">Dine In or Take Away</span>
+                            <div class="menu-item-desc">Enjoy your meal in the restaurant or take it home</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hours & Location -->
+    <section class="hours-location">
+        <div class="container">
+            <h2>Hours & Location</h2>
+
+            <div class="hours-table">
+                <div class="hours-row">
+                    <div class="hours-day">Monday - Friday</div>
+                    <div class="hours-time">10:30 AM - 10:00 PM</div>
+                </div>
+                <div class="hours-row">
+                    <div class="hours-day">Saturday</div>
+                    <div class="hours-time">11:00 AM - 10:00 PM</div>
+                </div>
+                <div class="hours-row">
+                    <div class="hours-day">Sunday</div>
+                    <div class="hours-time">11:00 AM - 9:00 PM</div>
+                </div>
+            </div>
+
+            <div class="location">
+                <h3>Location</h3>
+                <div class="address">Erkontie 2, 16300 Orimattila</div>
+                <a href="https://maps.google.com/?q=New+Beijing+Erkontie+2+Orimattila" target="_blank" rel="noopener" class="maps-link">View on Google Maps</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="contact">
+        <div class="container">
+            <h2>Contact</h2>
+            <div class="contact-item">
+                <strong>Phone:</strong> <a href="tel:+35837822686">+358 3 782 2686</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Card -->
+    <section class="demo-card" id="booking">
+        <div class="demo-card-wrapper">
+            <div class="booking-card">
+                <h3>Book a Table</h3>
+                <p class="booking-card-subtitle">Reserve in seconds — no fees, no account needed.</p>
+
+                <div class="booking-inputs">
+                    <input type="date" class="booking-input" placeholder="Select Date">
+                    <select class="booking-input">
+                        <option>Select Time</option>
+                        <option>11:00</option>
+                        <option>11:30</option>
+                        <option>12:00</option>
+                        <option>12:30</option>
+                        <option>13:00</option>
+                        <option>13:30</option>
+                        <option>14:00</option>
+                        <option>17:00</option>
+                        <option>17:30</option>
+                        <option>18:00</option>
+                        <option>18:30</option>
+                        <option>19:00</option>
+                        <option>19:30</option>
+                        <option>20:00</option>
+                        <option>20:30</option>
+                        <option>21:00</option>
+                    </select>
+                    <select class="booking-input">
+                        <option>2 guests</option>
+                        <option>1 guest</option>
+                        <option>3 guests</option>
+                        <option>4 guests</option>
+                        <option>5 guests</option>
+                        <option>6 guests</option>
+                        <option>7 guests</option>
+                        <option>8 guests</option>
+                    </select>
+                </div>
+
+                <button class="booking-btn" type="button" onclick="event.preventDefault();">Reserve Now</button>
+                <div class="booking-caption">Powered by Klar Bookings — no fees, no commissions.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p><strong>New Beijing</strong></p>
+        <p>Erkontie 2, 16300 Orimattila</p>
+        <p>© 2026</p>
+    </footer>
+</body>
+</html>

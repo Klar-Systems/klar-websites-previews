@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sushi Royal — Lahti</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* palette: research-derived — Chinese-Japanese red+gold on dark */
+    :root {
+      --bg: #1A1110;
+      --bg-raised: #241C1A;
+      --bg-card: #2A2220;
+      --fg: #F5EFE6;
+      --fg-dim: #A09890;
+      --primary: #C93838;
+      --accent: #D4A04A;
+      --rule: rgba(201,56,56,0.18);
+      --heading: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      --mono: 'JetBrains Mono', 'Consolas', monospace;
+      --max-w: 1060px;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      font-family: var(--body);
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ---- DEMO BANNER ---- */
+    .demo-banner {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: var(--primary);
+      color: #fff;
+      text-align: center;
+      padding: 10px 16px;
+      font-size: 0.82rem;
+      letter-spacing: 0.02em;
+      font-family: var(--heading);
+    }
+    .demo-banner a {
+      color: #fff;
+      font-weight: 600;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      margin-left: 8px;
+    }
+
+    /* ---- HERO ---- */
+    .hero {
+      margin-top: 44px;
+      padding: 80px 24px 60px;
+      text-align: center;
+      border-bottom: 1px solid var(--rule);
+    }
+    .hero-badge {
+      display: inline-block;
+      font-family: var(--heading);
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      padding: 4px 14px;
+      border-radius: 2px;
+      margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-family: var(--heading);
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin-bottom: 14px;
+    }
+    .hero-sub {
+      font-size: 1.05rem;
+      color: var(--fg-dim);
+      margin-bottom: 24px;
+    }
+    .hero-rating {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--heading);
+      font-size: 1rem;
+      color: var(--accent);
+    }
+    .hero-rating .score {
+      font-weight: 700;
+      font-size: 1.3rem;
+    }
+    .hero-rating .count {
+      color: var(--fg-dim);
+      font-size: 0.85rem;
+    }
+
+    /* ---- HERO IMAGE PLACEHOLDER ---- */
+    .hero-img {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    .img-placeholder {
+      background: var(--bg-raised);
+      border: 1px solid var(--rule);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--fg-dim);
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .img-placeholder-hero {
+      aspect-ratio: 16/9;
+      width: 100%;
+      border-radius: 4px;
+      margin-top: -20px;
+    }
+    .img-placeholder-food {
+      aspect-ratio: 1/1;
+      width: 100%;
+      border-radius: 4px;
+    }
+    .img-placeholder-interior {
+      aspect-ratio: 3/2;
+      width: 100%;
+      border-radius: 4px;
+    }
+
+    /* ---- SECTIONS ---- */
+    section {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 64px 24px;
+    }
+    .section-label {
+      font-family: var(--heading);
+      font-size: 0.7rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+    section h2 {
+      font-family: var(--heading);
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      font-weight: 600;
+      margin-bottom: 24px;
+      line-height: 1.2;
+    }
+
+    /* ---- MENU ---- */
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 20px;
+      margin-bottom: 32px;
+    }
+    .menu-card {
+      background: var(--bg-card);
+      border: 1px solid var(--rule);
+      border-radius: 6px;
+      padding: 24px;
+      transition: border-color 0.2s;
+    }
+    .menu-card:hover {
+      border-color: var(--accent);
+    }
+    .menu-card h3 {
+      font-family: var(--heading);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 12px;
+      letter-spacing: 0.02em;
+    }
+    .menu-card ul {
+      list-style: none;
+    }
+    .menu-card li {
+      font-size: 0.88rem;
+      color: var(--fg-dim);
+      padding: 3px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .menu-card li:last-child { border-bottom: none; }
+    .menu-note {
+      text-align: center;
+      color: var(--fg-dim);
+      font-size: 0.82rem;
+      font-style: italic;
+      margin-top: 16px;
+    }
+
+    /* ---- SIGNATURE DISHES ---- */
+    .signature-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .sig-dish {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--rule);
+    }
+    .sig-dish .name {
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+    .sig-dish .price {
+      color: var(--accent);
+      font-family: var(--heading);
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    /* ---- ABOUT ---- */
+    .about-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      align-items: start;
+    }
+    .about-text p {
+      color: var(--fg-dim);
+      font-size: 0.95rem;
+      margin-bottom: 16px;
+    }
+    .about-text .highlight {
+      color: var(--fg);
+      font-weight: 600;
+    }
+
+    /* ---- REVIEWS ---- */
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .review-card {
+      background: var(--bg-card);
+      border: 1px solid var(--rule);
+      border-radius: 6px;
+      padding: 24px;
+    }
+    .review-card blockquote {
+      font-size: 0.92rem;
+      color: var(--fg);
+      font-style: italic;
+      line-height: 1.6;
+      margin-bottom: 12px;
+    }
+    .review-author {
+      font-size: 0.78rem;
+      color: var(--fg-dim);
+      font-family: var(--heading);
+    }
+    .review-stars {
+      color: var(--accent);
+      font-size: 0.85rem;
+    }
+
+    /* ---- HOURS & LOCATION ---- */
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+    .hours-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .hours-table td {
+      padding: 10px 0;
+      font-size: 0.92rem;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .hours-table td:first-child {
+      color: var(--fg-dim);
+      font-size: 0.85rem;
+    }
+    .hours-table td:last-child {
+      text-align: right;
+      font-family: var(--heading);
+      font-weight: 600;
+    }
+    .map-frame {
+      width: 100%;
+      aspect-ratio: 4/3;
+      border: 1px solid var(--rule);
+      border-radius: 6px;
+    }
+    .address-block {
+      margin-top: 16px;
+    }
+    .address-block a {
+      color: var(--fg);
+      text-decoration: none;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    .address-block a:hover { color: var(--accent); }
+    .address-block svg {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      stroke: var(--primary);
+    }
+
+    /* ---- BOOKING ---- */
+    .booking-section {
+      background: var(--bg-raised);
+      border: 1px solid var(--rule);
+      border-radius: 8px;
+      padding: 40px;
+      text-align: center;
+      max-width: 560px;
+      margin: 0 auto;
+    }
+    .booking-section h2 {
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+    .booking-section p {
+      color: var(--fg-dim);
+      font-size: 0.9rem;
+      margin-bottom: 24px;
+    }
+    .booking-form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .booking-form input,
+    .booking-form select {
+      background: var(--bg);
+      border: 1px solid var(--rule);
+      color: var(--fg);
+      padding: 12px 14px;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      font-family: var(--body);
+    }
+    .booking-form .full-width {
+      grid-column: 1 / -1;
+    }
+    .btn-book {
+      grid-column: 1 / -1;
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      padding: 14px;
+      border-radius: 4px;
+      font-family: var(--heading);
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-book:hover { background: #B03030; }
+    .booking-note {
+      font-size: 0.75rem;
+      color: var(--fg-dim);
+      margin-top: 8px;
+    }
+
+    /* ---- FOOTER ---- */
+    footer {
+      border-top: 1px solid var(--rule);
+      padding: 40px 24px;
+      text-align: center;
+    }
+    .footer-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+    .footer-name {
+      font-family: var(--heading);
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .footer-info {
+      font-size: 0.82rem;
+      color: var(--fg-dim);
+      line-height: 1.8;
+    }
+    .footer-info a {
+      color: var(--fg-dim);
+      text-decoration: none;
+    }
+    .footer-info a:hover { color: var(--accent); }
+    .footer-powered {
+      margin-top: 20px;
+      font-size: 0.72rem;
+      color: var(--fg-dim);
+      letter-spacing: 0.06em;
+    }
+
+    /* ---- SCROLL REVEAL ---- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ---- RESPONSIVE ---- */
+    @media (max-width: 680px) {
+      .about-content { grid-template-columns: 1fr; }
+      .info-grid { grid-template-columns: 1fr; }
+      .booking-form { grid-template-columns: 1fr; }
+      .hero { padding: 70px 20px 40px; }
+      section { padding: 48px 20px; }
+      .booking-section { padding: 28px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- DEMO BANNER -->
+  <div class="demo-banner">
+    This is a demo — the final website will be built together with you.
+    <a href="https://preview.klarsystems.com/sushi-royal-lahti/proposal/">See our offer</a>
+  </div>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-badge">Chinese &middot; Japanese &middot; Sushi Buffet</div>
+    <h1>Sushi Royal</h1>
+    <p class="hero-sub">Vapaudenkatu 12, Lahti</p>
+    <div class="hero-rating">
+      <span class="score">4.3 / 5</span>
+      <span class="count">1,059 Google reviews</span>
+    </div>
+  </header>
+
+  <!-- HERO IMAGE PLACEHOLDER -->
+  <div class="hero-img">
+    <div class="img-placeholder img-placeholder-hero">Your photo here</div>
+  </div>
+
+  <!-- MENU -->
+  <section class="reveal">
+    <div class="section-label">The Menu</div>
+    <h2>Over 100 dishes. One buffet.</h2>
+
+    <div class="signature-row">
+      <div class="sig-dish"><span class="name">Beijing Duck</span><span class="price">18.00</span></div>
+      <div class="sig-dish"><span class="name">Crisp Duck</span><span class="price">20.00</span></div>
+      <div class="sig-dish"><span class="name">Pad Thai</span><span class="price">13.80</span></div>
+      <div class="sig-dish"><span class="name">Tiger Prawn Tempura</span><span class="price">6.50</span></div>
+      <div class="sig-dish"><span class="name">Chicken Kung Po</span><span class="price">11.20</span></div>
+      <div class="sig-dish"><span class="name">Set C Sushi (16 pcs)</span><span class="price">18.00</span></div>
+      <div class="sig-dish"><span class="name">Spring Rolls (6 pcs)</span><span class="price">3.50</span></div>
+      <div class="sig-dish"><span class="name">Sushi Buffet Lunch</span><span class="price">13.90</span></div>
+    </div>
+
+    <div class="menu-grid">
+      <div class="menu-card">
+        <h3>Sushi</h3>
+        <ul>
+          <li>Salmon Nigiri</li>
+          <li>Tuna Mayonnaise Nigiri</li>
+          <li>Ebi Nigiri</li>
+          <li>California Roll</li>
+          <li>Salmon Hosomaki</li>
+          <li>Futomaki Roll</li>
+        </ul>
+      </div>
+      <div class="menu-card">
+        <h3>Chinese Mains</h3>
+        <ul>
+          <li>Beef with Oyster Sauce</li>
+          <li>Pork with Sweet & Sour</li>
+          <li>Chicken Chop Suey</li>
+          <li>Prawns with Black Bean</li>
+          <li>Tofu Szechen Style</li>
+        </ul>
+      </div>
+      <div class="menu-card">
+        <h3>Soups & Starters</h3>
+        <ul>
+          <li>Won Ton Soup</li>
+          <li>Hot & Sour Soup</li>
+          <li>Seafood Soup</li>
+          <li>Chicken Gyoza (10 pcs)</li>
+          <li>Wakame Seaweed Salad</li>
+        </ul>
+      </div>
+      <div class="menu-card">
+        <h3>Rice & Noodles</h3>
+        <ul>
+          <li>Fried Rice Cantonese</li>
+          <li>Fried Noodles with Chicken</li>
+          <li>Fried Rice with Mixed Meats</li>
+          <li>Rice Vermicelli Sing Chow</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="img-placeholder img-placeholder-food" style="max-width:320px;margin:0 auto;">Menu photos coming soon</div>
+
+    <p class="menu-note">This is a demo menu — the full menu will be updated together with you.</p>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="reveal" style="border-top:1px solid var(--rule);">
+    <div class="section-label">About</div>
+    <h2>The buffet Lahti keeps coming back to</h2>
+    <div class="about-content">
+      <div class="about-text">
+        <p>With <span class="highlight">over 1,000 Google reviews</span> and a 4.3-star rating, Sushi Royal has earned its place as one of the most popular Asian restaurants in Lahti.</p>
+        <p>The concept is simple: an all-you-can-eat buffet that spans Chinese, Japanese, and Thai cuisine. Sushi, stir-fry, noodles, soups, spring rolls, curries — all under one roof, all at a price that keeps regulars coming back for lunch and dinner.</p>
+        <p>Customers praise the <span class="highlight">variety and value</span>. The staff is consistently described as friendly and fast.</p>
+      </div>
+      <div>
+        <div class="img-placeholder img-placeholder-interior">Restaurant interior</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section class="reveal" style="border-top:1px solid var(--rule);">
+    <div class="section-label">What Customers Say</div>
+    <h2>4.3 / 5 from 1,059 reviews</h2>
+    <div class="reviews-grid">
+      <div class="review-card">
+        <blockquote>"Clean and welcoming atmosphere. Friendly staff. Quite large and tasty sushi selection, warm foods were ok."</blockquote>
+        <div class="review-author">Annika K <span class="review-stars">4/5</span></div>
+      </div>
+      <div class="review-card">
+        <blockquote>"We were impressed by the level of the food: lots of different sushi varieties with great taste. The staff was very friendly and pricing reasonable."</blockquote>
+        <div class="review-author">HL65 <span class="review-stars">4/5</span></div>
+      </div>
+      <div class="review-card">
+        <blockquote>"The sushi was actually good. I like salmon and there was lots of that. Overall a good value if you like sushi."</blockquote>
+        <div class="review-author">J W <span class="review-stars">4/5</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOURS & LOCATION -->
+  <section class="reveal" style="border-top:1px solid var(--rule);">
+    <div class="section-label">Visit Us</div>
+    <h2>Hours & Location</h2>
+    <div class="info-grid">
+      <div>
+        <table class="hours-table">
+          <tr><td>Monday - Friday</td><td>10:30 - 21:00</td></tr>
+          <tr><td>Saturday</td><td>11:30 - 21:00</td></tr>
+          <tr><td>Sunday</td><td>11:30 - 21:00</td></tr>
+        </table>
+        <div class="address-block">
+          <a href="tel:+358408383888">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+            +358 40 8383888
+          </a>
+          <a href="https://maps.google.com/?cid=4068957939588170266" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+            Vapaudenkatu 12, 15110 Lahti
+          </a>
+        </div>
+      </div>
+      <div>
+        <iframe class="map-frame" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1920!2d25.6553!3d60.9827!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x468e285397326545%3A0x182a8213b0b4f2ed!2sSushi%20Royal!5e0!3m2!1sfi!2sfi!4v1" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOOKING WIDGET -->
+  <section class="reveal">
+    <div class="booking-section">
+      <div class="section-label">Reservations</div>
+      <h2>Book a Table</h2>
+      <p>Book in seconds — no account needed, no fees.</p>
+      <div class="booking-form">
+        <input type="date" aria-label="Date">
+        <input type="time" value="18:00" aria-label="Time">
+        <select aria-label="Party size">
+          <option>2 guests</option>
+          <option>3 guests</option>
+          <option>4 guests</option>
+          <option>5 guests</option>
+          <option>6+ guests</option>
+        </select>
+        <input type="text" placeholder="Your name" class="full-width" aria-label="Name">
+        <button class="btn-book full-width">Book Now</button>
+      </div>
+      <p class="booking-note">Powered by Klar Bookings — no fees, no commissions</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-name">Sushi Royal</div>
+      <div class="footer-info">
+        Vapaudenkatu 12, 15110 Lahti<br>
+        <a href="tel:+358408383888">+358 40 8383888</a><br>
+        &copy; 2026 Sushi Royal
+      </div>
+      <div class="footer-powered">Powered by Klar</div>
+    </div>
+  </footer>
+
+  <!-- SCROLL REVEAL -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var els = document.querySelectorAll('.reveal');
+      if ('IntersectionObserver' in window) {
+        var observer = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.1 });
+        els.forEach(function(el) { observer.observe(el); });
+      } else {
+        els.forEach(function(el) { el.classList.add('visible'); });
+      }
+    });
+  </script>
+</body>
+</html>
