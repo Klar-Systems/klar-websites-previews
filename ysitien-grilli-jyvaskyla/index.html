@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ysitien Grilli — Roadside Grill on Highway 9</title>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* palette: segment 2 default (research palette empty) */
+        :root {
+            --bg:        #141414;
+            --text:      #F5F1EA;
+            --primary:   #E04B1E;
+            --accent:    #F2C75C;
+            --mid:       #1E1E1E;
+            --border:    rgba(245,241,234,0.10);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.65;
+            padding-top: 46px;
+        }
+
+        /* ---- DEMO BANNER ---- */
+        .demo-banner {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            background: linear-gradient(135deg, var(--primary) 0%, #c03a10 100%);
+            color: #fff;
+            padding: 12px 20px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 13px;
+            z-index: 1000;
+            letter-spacing: 0.02em;
+        }
+
+        .demo-banner a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 700;
+            margin-left: 8px;
+            border-bottom: 1px solid rgba(255,255,255,0.5);
+        }
+
+        .demo-banner a:hover { border-bottom-color: #fff; }
+
+        /* ---- TYPOGRAPHY ---- */
+        h1, h2, h3 {
+            font-family: 'Archivo Black', 'Helvetica Neue', Arial, sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        h2 {
+            font-size: clamp(32px, 5vw, 48px);
+            color: var(--text);
+            margin-bottom: 40px;
+            position: relative;
+            padding-bottom: 16px;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 64px; height: 4px;
+            background: var(--primary);
+        }
+
+        /* ---- NAV ---- */
+        nav {
+            position: fixed;
+            top: 46px; left: 0; right: 0;
+            background: rgba(20,20,20,0.95);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--border);
+            z-index: 900;
+        }
+
+        .nav-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 56px;
+        }
+
+        .nav-logo {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 17px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--text);
+            text-decoration: none;
+        }
+
+        .nav-logo span { color: var(--primary); }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: rgba(245,241,234,0.75);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover { color: var(--accent); }
+
+        /* ---- HERO ---- */
+        .hero {
+            min-height: 100vh;
+            padding-top: 56px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding-left: 24px;
+            padding-right: 24px;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(160deg, #141414 0%, #1c1005 55%, #141414 100%);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute; inset: 0;
+            background: radial-gradient(ellipse at center top, rgba(224,75,30,0.10) 0%, transparent 65%);
+            pointer-events: none;
+        }
+
+        .photo-placeholder {
+            position: absolute; inset: 0;
+            background: linear-gradient(135deg, #1E1E1E 0%, #2a1a0a 100%);
+            opacity: 0.35;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .photo-placeholder span {
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: rgba(245,241,234,0.35);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 720px;
+        }
+
+        .hero-eyebrow {
+            display: inline-block;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: clamp(48px, 10vw, 96px);
+            line-height: 0.95;
+            color: var(--text);
+            margin-bottom: 24px;
+        }
+
+        .hero h1 em {
+            font-style: normal;
+            color: var(--primary);
+        }
+
+        .hero-tagline {
+            font-size: clamp(16px, 2.5vw, 20px);
+            color: rgba(245,241,234,0.75);
+            max-width: 480px;
+            margin: 0 auto 40px;
+            line-height: 1.5;
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--primary);
+            color: #fff;
+            padding: 18px 36px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 18px;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            transition: background 0.2s, transform 0.2s;
+            box-shadow: 0 4px 24px rgba(224,75,30,0.35);
+        }
+
+        .hero-cta:hover {
+            background: #c03a10;
+            transform: translateY(-2px);
+        }
+
+        .hero-sub {
+            margin-top: 16px;
+            font-size: 13px;
+            color: rgba(245,241,234,0.45);
+            letter-spacing: 0.05em;
+        }
+
+        .rating-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 20px;
+            background: rgba(242,199,92,0.12);
+            border: 1px solid rgba(242,199,92,0.30);
+            border-radius: 4px;
+            padding: 6px 14px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--accent);
+            letter-spacing: 0.05em;
+        }
+
+        /* ---- SECTION WRAPPER ---- */
+        section {
+            padding: 96px 24px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* ---- MENU ---- */
+        #menu {
+            background: var(--mid);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .menu-intro {
+            font-size: 17px;
+            color: rgba(245,241,234,0.65);
+            margin-bottom: 56px;
+            max-width: 540px;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 2px;
+            background: var(--border);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 48px;
+        }
+
+        .menu-item {
+            background: var(--mid);
+            padding: 32px 28px;
+            transition: background 0.2s;
+        }
+
+        .menu-item:hover { background: #252525; }
+
+        .menu-item-label {
+            display: inline-block;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--primary);
+            margin-bottom: 10px;
+            border-left: 3px solid var(--primary);
+            padding-left: 8px;
+        }
+
+        .menu-item h3 {
+            font-size: 20px;
+            color: var(--text);
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+        }
+
+        .menu-item p {
+            font-size: 14px;
+            color: rgba(245,241,234,0.55);
+            line-height: 1.5;
+        }
+
+        .menu-categories {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 32px;
+        }
+
+        .menu-tag {
+            background: rgba(224,75,30,0.12);
+            border: 1px solid rgba(224,75,30,0.30);
+            color: var(--accent);
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 6px 14px;
+            border-radius: 4px;
+        }
+
+        .menu-food-photo {
+            aspect-ratio: 16/7;
+            background: linear-gradient(135deg, #2a1a0a 0%, #1c1005 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--border);
+        }
+
+        .menu-food-photo span {
+            font-size: 13px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: rgba(245,241,234,0.30);
+        }
+
+        /* ---- ORDER CTA ---- */
+        #order {
+            background: var(--primary);
+            text-align: center;
+        }
+
+        #order h2 {
+            color: #fff;
+        }
+
+        #order h2::after {
+            background: rgba(255,255,255,0.45);
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .order-tagline {
+            font-size: 18px;
+            color: rgba(255,255,255,0.85);
+            margin-bottom: 48px;
+            max-width: 480px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .order-phone-block {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .order-phone-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 14px;
+            background: #fff;
+            color: var(--primary);
+            padding: 20px 48px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-family: 'Archivo Black', sans-serif;
+            font-size: clamp(24px, 4vw, 36px);
+            letter-spacing: 0.04em;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.20);
+        }
+
+        .order-phone-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.25);
+        }
+
+        .order-sub {
+            font-size: 14px;
+            color: rgba(255,255,255,0.65);
+            letter-spacing: 0.05em;
+        }
+
+        /* ---- LOCATION & HOURS ---- */
+        #location {
+            background: var(--bg);
+        }
+
+        .location-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: start;
+        }
+
+        @media (max-width: 700px) {
+            .location-grid { grid-template-columns: 1fr; }
+        }
+
+        .location-map-placeholder {
+            aspect-ratio: 4/3;
+            background: linear-gradient(135deg, #1E1E1E 0%, #252525 100%);
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .location-map-placeholder span {
+            font-size: 13px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: rgba(245,241,234,0.30);
+        }
+
+        .location-map-placeholder a {
+            font-size: 13px;
+            color: var(--accent);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(242,199,92,0.4);
+        }
+
+        .location-map-placeholder a:hover {
+            border-bottom-color: var(--accent);
+        }
+
+        .location-details h3 {
+            font-size: 22px;
+            font-family: 'Archivo Black', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text);
+            margin-bottom: 24px;
+        }
+
+        .location-address {
+            font-size: 16px;
+            color: rgba(245,241,234,0.75);
+            margin-bottom: 32px;
+            line-height: 1.7;
+        }
+
+        .hours-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 28px;
+        }
+
+        .hours-table tr {
+            border-bottom: 1px solid var(--border);
+        }
+
+        .hours-table td {
+            padding: 10px 0;
+            font-size: 15px;
+            color: rgba(245,241,234,0.75);
+        }
+
+        .hours-table td:first-child {
+            font-weight: 600;
+            color: var(--text);
+            width: 50%;
+        }
+
+        .hours-note {
+            font-size: 13px;
+            color: rgba(245,241,234,0.45);
+            font-style: italic;
+            margin-top: 8px;
+        }
+
+        .location-phone {
+            margin-top: 28px;
+        }
+
+        .location-phone a {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .location-phone a:hover { color: var(--text); }
+
+        /* ---- ABOUT ---- */
+        #about {
+            background: var(--mid);
+            border-top: 1px solid var(--border);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 64px;
+            align-items: center;
+        }
+
+        @media (max-width: 700px) {
+            .about-grid { grid-template-columns: 1fr; gap: 40px; }
+        }
+
+        .interior-photo-placeholder {
+            aspect-ratio: 4/3;
+            background: linear-gradient(135deg, #1a1208 0%, #2a1a0a 100%);
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .interior-photo-placeholder span {
+            font-size: 13px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: rgba(245,241,234,0.25);
+        }
+
+        .about-text p {
+            font-size: 16px;
+            color: rgba(245,241,234,0.72);
+            margin-bottom: 20px;
+            line-height: 1.75;
+        }
+
+        .about-detail {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            color: rgba(245,241,234,0.55);
+            margin-top: 28px;
+        }
+
+        .about-detail strong { color: var(--text); }
+
+        /* ---- FOOTER ---- */
+        footer {
+            background: #0a0a0a;
+            border-top: 1px solid var(--border);
+            padding: 48px 24px;
+        }
+
+        .footer-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 32px;
+        }
+
+        .footer-brand {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+
+        .footer-brand span { color: var(--primary); }
+
+        .footer-sub {
+            font-size: 13px;
+            color: rgba(245,241,234,0.40);
+        }
+
+        .footer-contact {
+            text-align: right;
+        }
+
+        .footer-contact a {
+            display: block;
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            margin-bottom: 6px;
+        }
+
+        .footer-contact a:hover { color: var(--text); }
+
+        .footer-contact p {
+            font-size: 13px;
+            color: rgba(245,241,234,0.40);
+        }
+
+        .footer-bottom {
+            max-width: 1100px;
+            margin: 32px auto 0;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: rgba(245,241,234,0.30);
+        }
+
+        .footer-klar a {
+            color: rgba(245,241,234,0.30);
+            text-decoration: none;
+        }
+
+        .footer-klar a:hover { color: rgba(245,241,234,0.60); }
+
+        /* ---- RESPONSIVE ---- */
+        @media (max-width: 900px) {
+            .nav-links { display: none; }
+        }
+
+        @media (max-width: 600px) {
+            section { padding: 72px 20px; }
+            .order-phone-link { padding: 16px 28px; font-size: 22px; }
+            .footer-contact { text-align: left; }
+            .footer-bottom { flex-direction: column; gap: 6px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Demo Banner -->
+<div class="demo-banner">
+    This is a demo site &mdash; built by Klar Systems to show what your restaurant could look like online.
+    <a href="mailto:Guidance@klarsystems.com">Get in touch &rarr;</a>
+</div>
+
+<!-- Nav -->
+<nav>
+    <div class="nav-inner">
+        <a class="nav-logo" href="#top">Ysitien <span>Grilli</span></a>
+        <ul class="nav-links">
+            <li><a href="#menu">Menu</a></li>
+            <li><a href="#order">Order</a></li>
+            <li><a href="#location">Find Us</a></li>
+            <li><a href="#about">About</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero" id="top">
+    <div class="photo-placeholder" aria-hidden="true">
+        <span>Your photo here</span>
+    </div>
+    <div class="hero-content">
+        <span class="hero-eyebrow">Highway 9 &middot; Lievestuore</span>
+        <h1>Ysitien<br><em>Grilli</em></h1>
+        <p class="hero-tagline">Classic roadside grill on Highway 9 &mdash; hamburgers, sausage plates, meat pies, and coffee, every day of the week.</p>
+        <a class="hero-cta" href="tel:+358148619410">
+            Call to Order
+        </a>
+        <p class="hero-sub">014 861 941 &nbsp;&middot;&nbsp; Open daily 11:00&ndash;22:00</p>
+        <div class="rating-badge">4.2 / 5 &nbsp;&mdash;&nbsp; 600+ reviews</div>
+    </div>
+</section>
+
+<!-- Menu -->
+<section id="menu">
+    <div class="container">
+        <h2>What We Serve</h2>
+        <p class="menu-intro">Straightforward grill food &mdash; no fuss, good portions. Call ahead or stop in on your way through.</p>
+
+        <div class="menu-grid">
+            <div class="menu-item">
+                <span class="menu-item-label">Grilli</span>
+                <h3>Hampurilainen</h3>
+                <p>Classic hamburger, made to order at the grill.</p>
+            </div>
+            <div class="menu-item">
+                <span class="menu-item-label">Grilli</span>
+                <h3>Ranskalaiset</h3>
+                <p>Generous portion of fries &mdash; a roadside essential.</p>
+            </div>
+            <div class="menu-item">
+                <span class="menu-item-label">Grilli</span>
+                <h3>Lihapiirakka</h3>
+                <p>Traditional Finnish meat pie, straight from the grill.</p>
+            </div>
+            <div class="menu-item">
+                <span class="menu-item-label">Kahvila</span>
+                <h3>Kahvi &amp; Leivokset</h3>
+                <p>Coffee and pastries &mdash; the perfect break on a long drive.</p>
+            </div>
+        </div>
+
+        <div class="menu-categories">
+            <span class="menu-tag">Hampurilaiset</span>
+            <span class="menu-tag">Grilliruoka</span>
+            <span class="menu-tag">Kahvi ja leivokset</span>
+        </div>
+
+        <div class="menu-food-photo" aria-label="Food photos coming soon">
+            <span>Food photos coming soon</span>
+        </div>
+    </div>
+</section>
+
+<!-- Order CTA -->
+<section id="order">
+    <div class="container">
+        <h2>Call &amp; Order</h2>
+        <p class="order-tagline">Pick up the phone &mdash; your order will be ready when you arrive.</p>
+        <div class="order-phone-block">
+            <a class="order-phone-link" href="tel:+358148619410">
+                014 861 941
+            </a>
+            <p class="order-sub">Open every day &middot; 11:00&ndash;22:00</p>
+        </div>
+    </div>
+</section>
+
+<!-- Location & Hours -->
+<section id="location">
+    <div class="container">
+        <h2>Find Us</h2>
+        <div class="location-grid">
+            <div class="location-map-placeholder" aria-label="Map coming soon">
+                <span>Map coming soon</span>
+                <a href="https://maps.google.com/?q=Kuopiontie+1897,+41400+Lievestuore" target="_blank" rel="noopener">Open in Google Maps &rarr;</a>
+            </div>
+            <div class="location-details">
+                <h3>Location &amp; Hours</h3>
+                <p class="location-address">
+                    Kuopiontie 1897<br>
+                    41400 Lievestuore<br>
+                    (Laukaa &mdash; Jyv&auml;skyl&auml; Region)
+                </p>
+                <table class="hours-table">
+                    <tr><td>Monday</td><td>11:00&ndash;22:00</td></tr>
+                    <tr><td>Tuesday</td><td>11:00&ndash;22:00</td></tr>
+                    <tr><td>Wednesday</td><td>11:00&ndash;22:00</td></tr>
+                    <tr><td>Thursday</td><td>11:00&ndash;22:00</td></tr>
+                    <tr><td>Friday</td><td>11:00&ndash;22:00</td></tr>
+                    <tr><td>Saturday</td><td>11:00&ndash;22:00</td></tr>
+                    <tr><td>Sunday</td><td>11:00&ndash;22:00</td></tr>
+                </table>
+                <p class="hours-note">Hours may be shorter during winter months.</p>
+                <div class="location-phone">
+                    <a href="tel:+358148619410">014 861 941</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- About -->
+<section id="about">
+    <div class="container">
+        <h2>The Grill</h2>
+        <div class="about-grid">
+            <div class="interior-photo-placeholder" aria-label="Interior photo coming soon">
+                <span>Interior photo coming soon</span>
+            </div>
+            <div class="about-text">
+                <p>Ysitien Grilli has been serving travellers and locals on Highway 9 east of Jyv&auml;skyl&auml; since 2005. A straightforward roadside stop &mdash; good food, honest prices, no frills.</p>
+                <p>Whether you are heading toward Kuopio or just passing through Lievestuore, it is a reliable place to stop when hunger strikes.</p>
+                <div class="about-detail">
+                    <strong>Est. 2005</strong> &nbsp;&middot;&nbsp; Lievestuore, Laukaa
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <div class="footer-inner">
+        <div>
+            <div class="footer-brand">Ysitien <span>Grilli</span></div>
+            <p class="footer-sub">Kuopiontie 1897, 41400 Lievestuore</p>
+        </div>
+        <div class="footer-contact">
+            <a href="tel:+358148619410">014 861 941</a>
+            <p>Open daily 11:00&ndash;22:00</p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <span>&copy; Ysitien Grilli</span>
+        <span class="footer-klar">Powered by Klar &mdash; <a href="https://klarsystems.com" target="_blank" rel="noopener">klarsystems.com</a></span>
+    </div>
+</footer>
+
+</body>
+</html>

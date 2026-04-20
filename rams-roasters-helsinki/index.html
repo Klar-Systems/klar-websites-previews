@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="RAMS Roasters — Specialty coffee and artisan bakery in Ullanlinna, Helsinki. Open Mon & Wed–Sun 10–17. Neitsytpolku 10.">
+  <title>RAMS Roasters — Helsinki</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* palette: segment 3 default (research palette empty) */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:      #F7F1E8;
+      --text:    #2A2725;
+      --primary: #8C6A4F;
+      --accent:  #C9A77C;
+      --surface: #EDE6D8;
+      --muted:   #9A8878;
+      --border:  rgba(42,39,37,0.12);
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.6;
+    }
+
+    /* ── DEMO BANNER ── */
+    .demo-bar {
+      background: var(--text);
+      color: var(--bg);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 16px;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 9px 20px;
+      font-weight: 500;
+    }
+    .demo-bar a { color: var(--accent); text-decoration: underline; font-weight: 700; white-space: nowrap; }
+    @media (max-width: 560px) { .demo-bar { flex-direction: column; gap: 4px; text-align: center; } }
+
+    /* ── NAV ── */
+    nav {
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      height: 64px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .nav-logo {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 1.25rem;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+    }
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--primary); }
+    @media (max-width: 640px) {
+      nav { padding: 0 20px; }
+      .nav-links { gap: 20px; }
+      .nav-links a { font-size: 0.75rem; }
+    }
+    @media (max-width: 460px) { .nav-links { display: none; } }
+
+    /* ── HERO ── */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 560px;
+    }
+    .hero-text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 80px 64px;
+      background: var(--surface);
+    }
+    .hero-eyebrow {
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--primary);
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+    .hero-title {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: clamp(2.6rem, 4vw, 3.8rem);
+      line-height: 1.05;
+      color: var(--text);
+      margin-bottom: 24px;
+    }
+    .hero-desc {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 380px;
+      line-height: 1.7;
+      margin-bottom: 36px;
+    }
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--primary);
+      color: var(--bg);
+      padding: 14px 28px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-decoration: none;
+      border-radius: 2px;
+      width: fit-content;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .hero-cta:hover { background: #7a5a41; transform: translateY(-1px); }
+    .hero-photo {
+      aspect-ratio: unset;
+      background: linear-gradient(145deg, var(--primary) 0%, var(--accent) 100%);
+      opacity: 0.55;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--bg);
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-family: 'DM Sans', sans-serif;
+    }
+    @media (max-width: 768px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero-photo { height: 240px; order: -1; }
+      .hero-text { padding: 48px 32px; }
+    }
+    @media (max-width: 480px) {
+      .hero-text { padding: 40px 20px; }
+    }
+
+    /* ── PILL TAGS ── */
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    .pill {
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 5px 14px;
+      font-size: 0.75rem;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+
+    /* ── SECTIONS ── */
+    section { padding: 88px 40px; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+    .section-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--primary);
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      line-height: 1.15;
+      color: var(--text);
+      margin-bottom: 32px;
+    }
+    @media (max-width: 640px) { section { padding: 60px 20px; } }
+
+    /* ── ABOUT ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+    .about-text p {
+      color: var(--muted);
+      font-size: 1.02rem;
+      line-height: 1.75;
+      margin-bottom: 20px;
+    }
+    .about-text p:last-child { margin-bottom: 0; }
+    .about-photo-placeholder {
+      aspect-ratio: 4/5;
+      background: linear-gradient(160deg, var(--accent) 0%, var(--primary) 100%);
+      opacity: 0.45;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--bg);
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border-radius: 2px;
+    }
+    @media (max-width: 768px) {
+      .about-grid { grid-template-columns: 1fr; gap: 40px; }
+      .about-photo-placeholder { aspect-ratio: 16/9; }
+    }
+
+    /* ── MENU SECTION ── */
+    .menu-section { background: var(--surface); }
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin-top: 16px;
+    }
+    .menu-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 28px;
+    }
+    .menu-card-category {
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--primary);
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .menu-card-name {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 1.3rem;
+      color: var(--text);
+      margin-bottom: 10px;
+    }
+    .menu-card-desc {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .menu-card-price {
+      display: inline-block;
+      margin-top: 14px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--primary);
+    }
+    .menu-note {
+      margin-top: 32px;
+      padding: 20px 24px;
+      background: var(--bg);
+      border-left: 3px solid var(--accent);
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* ── REVIEWS ── */
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+    }
+    .review-card {
+      background: var(--surface);
+      border-radius: 4px;
+      padding: 28px;
+    }
+    .review-rating {
+      display: inline-block;
+      color: var(--primary);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+      border: 1px solid var(--accent);
+      padding: 3px 10px;
+      border-radius: 2px;
+    }
+    .review-quote {
+      font-size: 0.97rem;
+      color: var(--text);
+      line-height: 1.7;
+      font-style: italic;
+      margin-bottom: 18px;
+    }
+    .review-author {
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .review-source {
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-top: 4px;
+      opacity: 0.7;
+    }
+
+    /* ── CONTACT / EVENTS ── */
+    .contact-section { background: var(--text); color: var(--bg); }
+    .contact-section .section-label { color: var(--accent); }
+    .contact-section .section-title { color: var(--bg); }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      margin-top: 16px;
+    }
+    .contact-block h3 {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 1.25rem;
+      color: var(--bg);
+      margin-bottom: 18px;
+    }
+    .contact-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-bottom: 18px;
+    }
+    .contact-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 600;
+    }
+    .contact-value {
+      font-size: 1rem;
+      color: rgba(247,241,232,0.85);
+    }
+    .contact-value a {
+      color: rgba(247,241,232,0.85);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(201,167,124,0.4);
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .contact-value a:hover { color: var(--accent); border-color: var(--accent); }
+    .hours-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .hours-table td {
+      padding: 6px 0;
+      font-size: 0.92rem;
+      color: rgba(247,241,232,0.8);
+      border-bottom: 1px solid rgba(247,241,232,0.08);
+    }
+    .hours-table td:first-child { font-weight: 500; width: 48%; }
+    .hours-table tr.today td { color: var(--accent); }
+    .social-links {
+      display: flex;
+      gap: 14px;
+      margin-top: 8px;
+      flex-wrap: wrap;
+    }
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 9px 18px;
+      border: 1px solid rgba(247,241,232,0.2);
+      border-radius: 2px;
+      font-size: 0.8rem;
+      color: rgba(247,241,232,0.85);
+      text-decoration: none;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .social-link:hover { border-color: var(--accent); color: var(--accent); }
+    .events-note {
+      margin-top: 24px;
+      padding: 20px 24px;
+      border: 1px solid rgba(201,167,124,0.3);
+      border-radius: 4px;
+    }
+    .events-note p {
+      font-size: 0.92rem;
+      color: rgba(247,241,232,0.75);
+      line-height: 1.65;
+    }
+    .events-note p strong { color: var(--accent); }
+    @media (max-width: 768px) {
+      .contact-grid { grid-template-columns: 1fr; gap: 48px; }
+    }
+
+    /* ── LAPTOP-FREE BADGE ── */
+    .laptop-free-bar {
+      background: var(--primary);
+      color: var(--bg);
+      text-align: center;
+      padding: 18px 20px;
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      font-weight: 500;
+    }
+
+    /* ── MAP PLACEHOLDER ── */
+    .map-placeholder {
+      width: 100%;
+      height: 220px;
+      background: linear-gradient(135deg, #3d3430 0%, #5a4a40 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(247,241,232,0.4);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-top: 28px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--text);
+      border-top: 1px solid rgba(247,241,232,0.08);
+      color: rgba(247,241,232,0.4);
+      text-align: center;
+      padding: 24px 20px;
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
+    }
+
+    /* ── DIVIDER ── */
+    .section-divider {
+      width: 48px;
+      height: 2px;
+      background: var(--accent);
+      margin-bottom: 32px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- DEMO BANNER -->
+  <div class="demo-bar">
+    <span>This is a demo site built by Klar</span>
+    <a href="https://preview.klarsystems.com/rams-roasters-helsinki/proposal/">Get your own</a>
+  </div>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="#top">RAMS Roasters</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#reviews">Reviews</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero" id="top">
+    <div class="hero-text">
+      <p class="hero-eyebrow">Ullanlinna, Helsinki</p>
+      <h1 class="hero-title">Quietly<br>consistent.</h1>
+      <p class="hero-desc">Specialty coffee from rotating European roasters. House-made pastries baked fresh daily. No laptops. Real conversations.</p>
+      <a class="hero-cta" href="#contact">Find us</a>
+      <div class="pill-row">
+        <span class="pill">Specialty coffee</span>
+        <span class="pill">Artisan bakery</span>
+        <span class="pill">Laptop free</span>
+        <span class="pill">Family friendly</span>
+      </div>
+    </div>
+    <div class="hero-photo" aria-label="Your photo here">
+      <span>Your photo here</span>
+    </div>
+  </div>
+
+  <!-- LAPTOP-FREE BAR -->
+  <div class="laptop-free-bar">
+    Laptop FREE zone — come for the coffee, stay for the company
+  </div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-inner">
+      <div class="about-grid">
+        <div class="about-text">
+          <p class="section-label">Our story</p>
+          <h2 class="section-title">A real artisan bakery. Dope coffee beans.</h2>
+          <div class="section-divider"></div>
+          <p>RAMS Roasters is a small neighbourhood café in Ullanlinna run by Cosmin and Cristina Tatosian. Everything on the counter — the cinnamon buns, the quiches, the cakes — is baked in-house each morning.</p>
+          <p>On the coffee side, the machine is loaded with beans from carefully chosen European specialty roasters that rotate regularly: The Barn, KAWA, Friedhats, Frukt, and more. Each batch brings something new.</p>
+          <p>The café sits next to Kaivopuisto park with a terrace out front. Locals come back. Visitors come back. Laptop-free by choice — because some places should stay places.</p>
+        </div>
+        <div class="about-photo-placeholder" aria-label="Interior photo coming soon">
+          <span>Interior photo coming soon</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MENU -->
+  <section id="menu" class="menu-section">
+    <div class="section-inner">
+      <p class="section-label">What we serve</p>
+      <h2 class="section-title">Coffee &amp; Bakery</h2>
+      <div class="section-divider"></div>
+      <div class="menu-grid">
+
+        <div class="menu-card">
+          <p class="menu-card-category">Espresso drinks</p>
+          <h3 class="menu-card-name">Cappuccino</h3>
+          <p class="menu-card-desc">Pulled from rotating European roasters. No bitterness — hints of caramel, chocolate, and spice.</p>
+        </div>
+
+        <div class="menu-card">
+          <p class="menu-card-category">Espresso drinks</p>
+          <h3 class="menu-card-name">Flat White</h3>
+          <p class="menu-card-desc">Double shot, silky microfoam. A house staple.</p>
+          <span class="menu-card-price">€5.20</span>
+        </div>
+
+        <div class="menu-card">
+          <p class="menu-card-category">Filter</p>
+          <h3 class="menu-card-name">Filter Coffee</h3>
+          <p class="menu-card-desc">Brewed fresh from the current rotating single origin.</p>
+          <span class="menu-card-price">from €3.40</span>
+        </div>
+
+        <div class="menu-card">
+          <p class="menu-card-category">Hot drinks</p>
+          <h3 class="menu-card-name">Masala Chai</h3>
+          <p class="menu-card-desc">Sweet and spicy — a perfect match for a rainy Helsinki afternoon.</p>
+        </div>
+
+        <div class="menu-card">
+          <p class="menu-card-category">Bakery</p>
+          <h3 class="menu-card-name">Cinnamon Bun</h3>
+          <p class="menu-card-desc">House-made, baked fresh daily. Regulars call them the best in Helsinki — and come back to test that theory.</p>
+        </div>
+
+        <div class="menu-card">
+          <p class="menu-card-category">Savoury</p>
+          <h3 class="menu-card-name">Quiche</h3>
+          <p class="menu-card-desc">Seasonal varieties — zucchini, salmon, romanesco broccoli. Hearty and fresh.</p>
+        </div>
+
+        <div class="menu-card">
+          <p class="menu-card-category">Savoury</p>
+          <h3 class="menu-card-name">Avocado on Rye Toast</h3>
+          <p class="menu-card-desc">On dark Finnish rye. Clean and simple.</p>
+        </div>
+
+      </div>
+
+      <div class="menu-note">
+        <strong>Rotating roasters:</strong> The coffee menu changes with each new delivery from European specialty roasters — The Barn, KAWA, Friedhats, Frukt, and others. Ask at the counter what's on today.<br>
+        <span style="margin-top:8px;display:block;">Vegan and vegetarian options available.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section id="reviews">
+    <div class="section-inner">
+      <p class="section-label">What people say</p>
+      <h2 class="section-title">4.8 — 197 Google reviews</h2>
+      <div class="section-divider"></div>
+      <div class="reviews-grid">
+
+        <div class="review-card">
+          <div class="review-rating">5 / 5</div>
+          <p class="review-quote">"Absolutely the best cinnamon buns in Helsinki! Friendly service &amp; cool people! I love it that there are laptop free tables! Welcoming to kids &amp; families!"</p>
+          <p class="review-author">Hanna T</p>
+          <p class="review-source">TripAdvisor</p>
+        </div>
+
+        <div class="review-card">
+          <div class="review-rating">5 / 5</div>
+          <p class="review-quote">"Excellent pastries and quiche. The cinnamon roll is to die for and we returned 3 times during our stay in Helsinki. Nice place to relax and super friendly owners who make you feel very welcome."</p>
+          <p class="review-author">Nelly S</p>
+          <p class="review-source">TripAdvisor</p>
+        </div>
+
+        <div class="review-card">
+          <div class="review-rating">5 / 5</div>
+          <p class="review-quote">"Coffee taste is fantastic. Cappuccino had no bitterness, instead hints of caramel, chocolate, and spices. Very pleasant and lasting aftertaste. Wow — highly recommend!"</p>
+          <p class="review-author">Wolf_W</p>
+          <p class="review-source">TripAdvisor</p>
+        </div>
+
+        <div class="review-card">
+          <div class="review-rating">4 / 5</div>
+          <p class="review-quote">"Lovely rustic cafe serving great coffee and delicious quiches, exquisite avocado on rye toast and beautiful cinnamon buns. International, ambient atmosphere. Really nice!"</p>
+          <p class="review-author">Eline B</p>
+          <p class="review-source">TripAdvisor</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT & EVENTS -->
+  <section id="contact" class="contact-section">
+    <div class="section-inner">
+      <p class="section-label">Find us &amp; follow along</p>
+      <h2 class="section-title">Contact &amp; Events</h2>
+      <div class="contact-grid">
+
+        <div class="contact-block">
+          <h3>Visit</h3>
+
+          <div class="contact-item">
+            <span class="contact-label">Address</span>
+            <span class="contact-value">Neitsytpolku 10, 00140 Helsinki<br>Ullanlinna — next to Kaivopuisto park</span>
+          </div>
+
+          <div class="contact-item">
+            <span class="contact-label">Phone</span>
+            <span class="contact-value"><a href="tel:+358406764577">+358 40 676 4577</a></span>
+          </div>
+
+          <div class="contact-item">
+            <span class="contact-label">Hours</span>
+            <table class="hours-table">
+              <tr>
+                <td>Monday</td>
+                <td>10:00 — 17:00</td>
+              </tr>
+              <tr>
+                <td>Tuesday</td>
+                <td>Closed</td>
+              </tr>
+              <tr>
+                <td>Wednesday</td>
+                <td>10:00 — 17:00</td>
+              </tr>
+              <tr>
+                <td>Thursday</td>
+                <td>10:00 — 17:00</td>
+              </tr>
+              <tr>
+                <td>Friday</td>
+                <td>10:00 — 17:00</td>
+              </tr>
+              <tr>
+                <td>Saturday</td>
+                <td>10:00 — 17:00</td>
+              </tr>
+              <tr>
+                <td>Sunday</td>
+                <td>10:00 — 17:00</td>
+              </tr>
+            </table>
+          </div>
+
+          <div class="map-placeholder" aria-label="Map coming soon">
+            <span>Map coming soon</span>
+          </div>
+        </div>
+
+        <div class="contact-block">
+          <h3>Stay in touch</h3>
+
+          <div class="contact-item">
+            <span class="contact-label">Follow us</span>
+            <div class="social-links">
+              <a class="social-link" href="https://www.instagram.com/ramsroasters/" target="_blank" rel="noopener">
+                Instagram @ramsroasters
+              </a>
+              <a class="social-link" href="https://www.facebook.com/ramsroasters/" target="_blank" rel="noopener">
+                Facebook
+              </a>
+            </div>
+          </div>
+
+          <div class="contact-item" style="margin-top: 28px;">
+            <span class="contact-label">Events &amp; specials</span>
+          </div>
+
+          <div class="events-note">
+            <p>RAMS Roasters announces special roaster releases, seasonal pastry drops, and any pop-up events through their Instagram. Follow <strong>@ramsroasters</strong> to be the first to know what's on the counter this week.</p>
+            <p style="margin-top: 12px;">For private enquiries or group visits, call us directly at <a href="tel:+358406764577" style="color: var(--accent); text-decoration:none; border-bottom: 1px solid rgba(201,167,124,0.4);">+358 40 676 4577</a>.</p>
+          </div>
+
+          <div class="contact-item" style="margin-top: 32px;">
+            <span class="contact-label">Good to know</span>
+            <span class="contact-value" style="margin-top: 8px; line-height: 1.7;">
+              Outdoor terrace seating available in season.<br>
+              Small space — popular times can fill up. Takeaway always available.<br>
+              Vegan and vegetarian options on the menu.<br>
+              LGBTQ+ friendly. Family friendly.
+            </span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© RAMS Roasters — Neitsytpolku 10, 00140 Helsinki</p>
+    <p style="margin-top:8px;">Powered by Klar</p>
+  </footer>
+
+</body>
+</html>

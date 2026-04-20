@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <!-- palette: segment 3 default (research palette empty) -->
+  <title>Jack-Up — Hamina's Pub Since 1993</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #F7F1E8;
+      --bg-alt:   #EFE7D8;
+      --bg-dark:  #2A2725;
+      --text:     #2A2725;
+      --text-dim: #6B5E52;
+      --primary:  #8C6A4F;
+      --accent:   #C9A77C;
+      --border:   rgba(42,39,37,0.12);
+      --border-lt: rgba(42,39,37,0.07);
+      --radius:   6px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
+    }
+
+    /* ── Demo banner ── */
+    .demo-banner {
+      background: var(--bg-dark);
+      border-bottom: 2px solid var(--accent);
+      padding: 10px 20px;
+      text-align: center;
+      font-size: 13px;
+      color: #C9A77C;
+    }
+    .demo-banner strong { color: #F7F1E8; }
+    .demo-banner a {
+      color: var(--accent);
+      font-weight: 600;
+      text-decoration: underline;
+    }
+
+    /* ── Nav ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(247,241,232,0.96);
+      backdrop-filter: blur(6px);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      height: 64px;
+    }
+    .nav-logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 20px;
+      font-weight: 400;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+    }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a {
+      color: var(--text-dim);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--primary); }
+    .nav-cta {
+      background: var(--primary);
+      color: #F7F1E8 !important;
+      padding: 8px 20px;
+      border-radius: var(--radius);
+      font-weight: 600 !important;
+    }
+    .nav-cta:hover { background: #7A5A41 !important; color: #F7F1E8 !important; }
+
+    /* ── Hero ── */
+    .hero {
+      position: relative;
+      min-height: 88vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+    }
+    .hero-photo-placeholder {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #3D2E22 0%, #5A3F2C 50%, #4A3425 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hero-photo-label {
+      color: rgba(247,241,232,0.18);
+      font-size: 17px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border: 1px dashed rgba(247,241,232,0.15);
+      padding: 14px 28px;
+      border-radius: 4px;
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(42,39,37,0.45) 0%, rgba(42,39,37,0.72) 100%);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 760px;
+      padding: 40px 24px;
+    }
+    .hero-eyebrow {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20px;
+      background: rgba(42,39,37,0.4);
+      padding: 6px 16px;
+      border-radius: 100px;
+    }
+    .hero h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(40px, 6vw, 72px);
+      font-weight: 400;
+      line-height: 1.1;
+      color: #F7F1E8;
+      margin-bottom: 18px;
+    }
+    .hero p {
+      font-size: 18px;
+      color: rgba(247,241,232,0.85);
+      max-width: 540px;
+      margin: 0 auto 36px;
+    }
+    .hero-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--primary);
+      color: #F7F1E8;
+      padding: 14px 32px;
+      border-radius: var(--radius);
+      font-weight: 600;
+      font-size: 16px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-primary:hover { background: #7A5A41; }
+    .btn-outline {
+      background: transparent;
+      color: #F7F1E8;
+      padding: 13px 32px;
+      border-radius: var(--radius);
+      font-weight: 600;
+      font-size: 16px;
+      text-decoration: none;
+      border: 1px solid rgba(247,241,232,0.5);
+      transition: border-color 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+    .hero-rating {
+      margin-top: 36px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(42,39,37,0.45);
+      padding: 10px 20px;
+      border-radius: 100px;
+    }
+    .stars-row { display: flex; gap: 3px; }
+    .hero-rating-text { font-size: 13px; color: rgba(247,241,232,0.8); }
+    .hero-rating-num { font-weight: 700; color: var(--accent); font-size: 15px; }
+
+    /* ── Sections ── */
+    section { padding: 96px 40px; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(28px, 4vw, 48px);
+      font-weight: 400;
+      color: var(--text);
+      margin-bottom: 16px;
+      line-height: 1.15;
+    }
+    .section-sub {
+      font-size: 17px;
+      color: var(--text-dim);
+      max-width: 600px;
+      margin-bottom: 56px;
+    }
+    .divider {
+      width: 44px;
+      height: 3px;
+      background: var(--primary);
+      margin: 16px 0 36px;
+      border-radius: 2px;
+    }
+
+    /* ── About ── */
+    #about { background: var(--bg); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+    .about-text p { color: var(--text-dim); margin-bottom: 16px; font-size: 16px; }
+    .heritage-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(140,106,79,0.1);
+      border: 1px solid rgba(140,106,79,0.2);
+      color: var(--primary);
+      font-size: 13px;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 100px;
+      margin-bottom: 24px;
+    }
+    .about-facts { display: flex; flex-direction: column; gap: 16px; margin-top: 28px; }
+    .about-fact {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 18px;
+      background: var(--bg-alt);
+      border: 1px solid var(--border-lt);
+      border-radius: var(--radius);
+    }
+    .fact-icon {
+      flex-shrink: 0;
+      width: 38px;
+      height: 38px;
+      background: rgba(140,106,79,0.12);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .fact-icon svg { width: 18px; height: 18px; stroke: var(--primary); fill: none; stroke-width: 1.8; }
+    .fact-title { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 2px; }
+    .fact-text { font-size: 13px; color: var(--text-dim); }
+    .about-image-placeholder {
+      background: var(--bg-alt);
+      border: 1px dashed var(--border);
+      border-radius: 8px;
+      min-height: 420px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-dim);
+      font-size: 13px;
+      letter-spacing: 0.08em;
+    }
+
+    /* ── Drinks / Menu ── */
+    #menu { background: var(--bg-alt); }
+    .menu-intro { max-width: 620px; }
+    .menu-food-placeholder {
+      background: var(--bg);
+      border: 1px dashed var(--border);
+      border-radius: 8px;
+      min-height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-dim);
+      font-size: 13px;
+      letter-spacing: 0.06em;
+      margin-bottom: 48px;
+    }
+    .menu-categories {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+    .menu-cat {
+      background: var(--bg);
+      border: 1px solid var(--border-lt);
+      border-radius: 8px;
+      padding: 24px;
+    }
+    .menu-cat-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 18px;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+    .menu-cat ul { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+    .menu-cat ul li { font-size: 14px; color: var(--text-dim); padding-left: 14px; position: relative; }
+    .menu-cat ul li::before { content: '—'; position: absolute; left: 0; color: var(--accent); }
+    .menu-note {
+      background: rgba(140,106,79,0.08);
+      border: 1px solid rgba(140,106,79,0.18);
+      border-radius: 8px;
+      padding: 20px 24px;
+      font-size: 14px;
+      color: var(--text-dim);
+      margin-top: 8px;
+    }
+    .menu-note strong { color: var(--primary); }
+
+    /* ── Reviews ── */
+    #reviews { background: var(--bg); }
+    .reviews-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 32px;
+      flex-wrap: wrap;
+      margin-bottom: 48px;
+    }
+    .rating-badge {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px 28px;
+      flex-shrink: 0;
+    }
+    .rating-num {
+      font-family: 'DM Serif Display', serif;
+      font-size: 48px;
+      font-weight: 400;
+      color: var(--primary);
+      line-height: 1;
+    }
+    .rating-meta { display: flex; flex-direction: column; gap: 4px; }
+    .rating-stars { display: flex; gap: 3px; }
+    .rating-count { font-size: 13px; color: var(--text-dim); }
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 24px;
+    }
+    .review-card {
+      background: var(--bg-alt);
+      border: 1px solid var(--border-lt);
+      border-radius: 8px;
+      padding: 28px;
+    }
+    .review-quote {
+      font-style: italic;
+      font-size: 15px;
+      color: var(--text-dim);
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+    .review-quote::before { content: '\201C'; color: var(--primary); font-size: 22px; font-style: normal; }
+    .review-quote::after { content: '\201D'; color: var(--primary); font-size: 22px; font-style: normal; }
+    .review-source {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--primary);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    /* ── Events / Contact ── */
+    #events { background: var(--bg-alt); }
+    .events-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+    .events-cards { display: flex; flex-direction: column; gap: 20px; }
+    .event-card {
+      background: var(--bg);
+      border: 1px solid var(--border-lt);
+      border-radius: 8px;
+      padding: 28px;
+    }
+    .event-card-icon {
+      width: 44px;
+      height: 44px;
+      background: rgba(140,106,79,0.1);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+    .event-card-icon svg { width: 22px; height: 22px; stroke: var(--primary); fill: none; stroke-width: 1.8; }
+    .event-card-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 20px;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+    .event-card-text { font-size: 14px; color: var(--text-dim); line-height: 1.6; }
+
+    /* Contact form side */
+    .contact-form-box {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 36px;
+    }
+    .form-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 22px;
+      color: var(--text);
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border-lt);
+    }
+    .form-field { margin-bottom: 18px; }
+    .form-label {
+      display: block;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 7px;
+    }
+    .form-input {
+      width: 100%;
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 11px 15px;
+      color: var(--text);
+      font-size: 15px;
+      font-family: 'Inter', sans-serif;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .form-input:focus { border-color: var(--primary); }
+    .form-textarea {
+      width: 100%;
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 11px 15px;
+      color: var(--text);
+      font-size: 15px;
+      font-family: 'Inter', sans-serif;
+      outline: none;
+      resize: vertical;
+      min-height: 100px;
+      transition: border-color 0.2s;
+    }
+    .form-textarea:focus { border-color: var(--primary); }
+    .form-btn {
+      width: 100%;
+      background: var(--primary);
+      color: #F7F1E8;
+      padding: 13px 24px;
+      border-radius: var(--radius);
+      font-weight: 700;
+      font-size: 15px;
+      border: none;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      letter-spacing: 0.04em;
+      margin-top: 6px;
+      transition: background 0.2s;
+    }
+    .form-btn:hover { background: #7A5A41; }
+    .form-note {
+      text-align: center;
+      font-size: 11px;
+      color: var(--text-dim);
+      margin-top: 12px;
+    }
+
+    /* ── Contact Info ── */
+    #contact { background: var(--bg); }
+    .contact-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+    .contact-items { display: flex; flex-direction: column; gap: 24px; }
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+    .contact-icon {
+      width: 44px;
+      height: 44px;
+      background: rgba(140,106,79,0.1);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .contact-icon svg { width: 20px; height: 20px; stroke: var(--primary); fill: none; stroke-width: 1.8; }
+    .contact-item-label { font-size: 11px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--primary); margin-bottom: 4px; }
+    .contact-item-val { font-size: 15px; color: var(--text); }
+    .contact-item-val a { color: var(--text); text-decoration: none; }
+    .contact-item-val a:hover { color: var(--primary); }
+    .hours-table { display: flex; flex-direction: column; gap: 0; }
+    .hours-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 9px 0;
+      border-bottom: 1px solid var(--border-lt);
+      font-size: 14px;
+    }
+    .hours-row:last-child { border-bottom: none; }
+    .hours-day { color: var(--text-dim); }
+    .hours-time { color: var(--text); font-weight: 500; }
+    .hours-time.closed { color: var(--text-dim); font-style: italic; }
+    .interior-placeholder {
+      background: var(--bg-alt);
+      border: 1px dashed var(--border);
+      border-radius: 8px;
+      min-height: 320px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-dim);
+      font-size: 13px;
+      letter-spacing: 0.06em;
+    }
+
+    /* ── Star SVG ── */
+    .star { width: 15px; height: 15px; }
+    .star-filled { fill: #C9913A; }
+    .star-half { fill: url(#halfGradH); }
+    .star-empty { fill: #D4C4AA; }
+
+    /* ── Footer ── */
+    footer {
+      background: var(--bg-dark);
+      padding: 48px 40px;
+      border-top: 1px solid rgba(247,241,232,0.08);
+    }
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .footer-brand {
+      font-family: 'DM Serif Display', serif;
+      font-size: 20px;
+      font-weight: 400;
+      color: #F7F1E8;
+    }
+    .footer-center { color: rgba(247,241,232,0.5); font-size: 13px; text-align: center; }
+    .footer-center a { color: var(--accent); text-decoration: none; }
+    .footer-klar { font-size: 13px; color: rgba(247,241,232,0.5); }
+    .footer-klar a { color: var(--accent); text-decoration: none; }
+    .footer-klar a:hover { text-decoration: underline; }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      section { padding: 64px 20px; }
+      .about-grid,
+      .events-grid,
+      .contact-wrap { grid-template-columns: 1fr; gap: 40px; }
+      footer { padding: 40px 20px; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Demo banner -->
+<div class="demo-banner">
+  <strong>This is a demo</strong> — a free preview built for Jack-Up.
+  <a href="https://preview.klarsystems.com/jack-up-kotka/proposal/" target="_blank" rel="noopener">View the full proposal</a>
+</div>
+
+<!-- Nav -->
+<nav>
+  <a href="#hero" class="nav-logo">Jack-Up</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#menu">Drinks</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#events">Events</a></li>
+    <li><a href="#contact" class="nav-cta">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- Hero -->
+<section id="hero" style="padding:0;">
+  <div class="hero">
+    <div class="hero-photo-placeholder">
+      <span class="hero-photo-label">Your photo here</span>
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <svg width="0" height="0" style="position:absolute">
+        <defs>
+          <linearGradient id="halfGradH" x1="0" x2="1" y1="0" y2="0">
+            <stop offset="50%" stop-color="#C9913A"/>
+            <stop offset="50%" stop-color="#D4C4AA"/>
+          </linearGradient>
+        </defs>
+      </svg>
+      <span class="hero-eyebrow">Public House &mdash; Hamina, Since 1993</span>
+      <h1>Jack-Up</h1>
+      <p>Hamina's beloved local pub &mdash; a relaxed atmosphere, a wide selection of beers, live music events, and a summer terrace. Known to the locals simply as Jaska.</p>
+      <div class="hero-actions">
+        <a href="#events" class="btn-primary">Live Music &amp; Events</a>
+        <a href="#contact" class="btn-outline">Find Us</a>
+      </div>
+      <div class="hero-rating">
+        <div class="stars-row">
+          <svg class="star" viewBox="0 0 20 20"><polygon class="star-filled" points="10,1 12.9,7 19.5,7.6 14.8,11.9 16.4,18.5 10,15 3.6,18.5 5.2,11.9 0.5,7.6 7.1,7"/></svg>
+          <svg class="star" viewBox="0 0 20 20"><polygon class="star-filled" points="10,1 12.9,7 19.5,7.6 14.8,11.9 16.4,18.5 10,15 3.6,18.5 5.2,11.9 0.5,7.6 7.1,7"/></svg>
+          <svg class="star" viewBox="0 0 20 20"><polygon class="star-filled" points="10,1 12.9,7 19.5,7.6 14.8,11.9 16.4,18.5 10,15 3.6,18.5 5.2,11.9 0.5,7.6 7.1,7"/></svg>
+          <svg class="star" viewBox="0 0 20 20"><polygon class="star-filled" points="10,1 12.9,7 19.5,7.6 14.8,11.9 16.4,18.5 10,15 3.6,18.5 5.2,11.9 0.5,7.6 7.1,7"/></svg>
+          <svg class="star" viewBox="0 0 20 20"><polygon class="star-half" points="10,1 12.9,7 19.5,7.6 14.8,11.9 16.4,18.5 10,15 3.6,18.5 5.2,11.9 0.5,7.6 7.1,7"/></svg>
+        </div>
+        <span class="hero-rating-num">4.5</span>
+        <span class="hero-rating-text">Google rating (429 reviews)</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- About -->
+<section id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="about-text">
+        <div class="section-label">Our Story</div>
+        <div class="heritage-tag">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          Est. 1993 &mdash; Hamina's Own Pub
+        </div>
+        <h2 class="section-title">Everything You Want from a Pub</h2>
+        <div class="divider"></div>
+        <p>Jack-Up &mdash; or simply Jaska, as locals call it &mdash; has been at the heart of Hamina since 1993. Over thirty years, it has become the go-to gathering place for the people of this coastal city: a proper pub with a full licence, a wide selection of beers, free Wi-Fi, and something to eat.</p>
+        <p>In summer, the terrace opens up and the city comes outside. Throughout the year, regular live music nights and themed events keep the calendar full. Whether it's a quiet drink on a Tuesday or a Friday night out, Jack-Up is ready.</p>
+        <div class="about-facts">
+          <div class="about-fact">
+            <div class="fact-icon">
+              <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div>
+              <div class="fact-title">Sibeliuskatu 32, 49400 Hamina</div>
+              <div class="fact-text">Right in the centre of Hamina</div>
+            </div>
+          </div>
+          <div class="about-fact">
+            <div class="fact-icon">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div>
+              <div class="fact-title">Open daily from 11:00 &mdash; until 02:00 on weekends</div>
+              <div class="fact-text">Mon–Thu &amp; Sun: 11:00–00:00 &nbsp;|&nbsp; Fri–Sat: 11:00–02:00</div>
+            </div>
+          </div>
+          <div class="about-fact">
+            <div class="fact-icon">
+              <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <div>
+              <div class="fact-title">Full licence &mdash; free Wi-Fi &mdash; summer terrace</div>
+              <div class="fact-text">Live music and events throughout the year</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="about-image-placeholder">Interior photo coming soon</div>
+    </div>
+  </div>
+</section>
+
+<!-- Drinks -->
+<section id="menu">
+  <div class="section-inner">
+    <div class="menu-intro">
+      <div class="section-label">Drinks &amp; Snacks</div>
+      <h2 class="section-title">A Wide Selection, Every Day</h2>
+      <div class="divider"></div>
+      <p class="section-sub">From a cold draught after work to a weekend night out &mdash; Jack-Up has what you need. Draught beers, bottles, spirits and light snacks.</p>
+    </div>
+    <div class="menu-food-placeholder">Food photos coming soon</div>
+    <div class="menu-categories">
+      <div class="menu-cat">
+        <div class="menu-cat-title">Draught Beers</div>
+        <ul>
+          <li>Miller Genuine Draft</li>
+          <li>Sandels 5.3%</li>
+          <li>Nastro Azzurro</li>
+          <li>Rotating seasonal taps</li>
+        </ul>
+      </div>
+      <div class="menu-cat">
+        <div class="menu-cat-title">Drinks &amp; Spirits</div>
+        <ul>
+          <li>Bottles and cans</li>
+          <li>Spirits and cocktails</li>
+          <li>Soft drinks</li>
+        </ul>
+      </div>
+      <div class="menu-cat">
+        <div class="menu-cat-title">Food</div>
+        <ul>
+          <li>Pub snacks and light bites</li>
+          <li>Pizza available</li>
+          <li>Nuts and bar snacks</li>
+        </ul>
+      </div>
+    </div>
+    <div class="menu-note">
+      <strong>Full licence:</strong> Jack-Up holds a full A-licence for the service of alcohol. The terrace is open in summer &mdash; perfect for a drink in the fresh air.
+    </div>
+  </div>
+</section>
+
+<!-- Reviews -->
+<section id="reviews">
+  <div class="section-inner">
+    <div class="reviews-header">
+      <div>
+        <div class="section-label">Guest Reviews</div>
+        <h2 class="section-title">What People Are Saying</h2>
+        <div class="divider"></div>
+      </div>
+      <div class="rating-badge">
+        <div class="rating-num">4.5</div>
+        <div class="rating-meta">
+          <div class="rating-stars">
+            <svg class="star" viewBox="0 0 20 20"><polygon class="star-filled" points="10,1 12.9,7 19.5,7.6 14.8,11.9 16.4,18.5 10,15 3.6,18.5 5.2,11.9 0.5,7.6 7.1,7"/></svg>
+            <svg class="star" viewBox="0 0 20 20"><polygon class="star-filled" points="10,1 12.9,7 19.5,7.6 14.8,11.9 16.4,18.5 10,15 3.6,18.5 5.2,11.9 0.5,7.6 7.1,7"/></svg>
+            <svg class="star" viewBox="0 0 20 20"><polygon class="star-filled" points="10,1 12.9,7 19.5,7.6 14.8,11.9 16.4,18.5 10,15 3.6,18.5 5.2,11.9 0.5,7.6 7.1,7"/></svg>
+            <svg class="star" viewBox="0 0 20 20"><polygon class="star-filled" points="10,1 12.9,7 19.5,7.6 14.8,11.9 16.4,18.5 10,15 3.6,18.5 5.2,11.9 0.5,7.6 7.1,7"/></svg>
+            <svg class="star" viewBox="0 0 20 20"><polygon class="star-half" points="10,1 12.9,7 19.5,7.6 14.8,11.9 16.4,18.5 10,15 3.6,18.5 5.2,11.9 0.5,7.6 7.1,7"/></svg>
+          </div>
+          <div class="rating-count">429 Google reviews</div>
+        </div>
+      </div>
+    </div>
+    <div class="reviews-grid">
+      <div class="review-card">
+        <p class="review-quote">Hamina's best pub, with a welcoming atmosphere and a great selection of beers.</p>
+        <div class="review-source">Evendo</div>
+      </div>
+      <div class="review-card">
+        <p class="review-quote">Live music and special events are often hosted, providing an excellent opportunity to experience the local culture and meet new friends.</p>
+        <div class="review-source">Evendo</div>
+      </div>
+      <div class="review-card">
+        <p class="review-quote">Jack-Up (or 'Jaska' among the locals) is all you can ask for from a pub: a relaxed atmosphere, fully licensed, free WLAN, good selection of beers, and snacks are also served.</p>
+        <div class="review-source">Visit Kotka-Hamina</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Events / Contact section -->
+<section id="events">
+  <div class="section-inner">
+    <div class="section-label">Events &amp; Live Music</div>
+    <h2 class="section-title">More Than Just a Drink</h2>
+    <div class="divider"></div>
+    <p class="section-sub">Live music nights, themed parties, game evenings and more &mdash; Jack-Up keeps the calendar full. Get in touch to find out what's on or to arrange a private event.</p>
+    <div class="events-grid">
+      <div class="events-cards">
+        <div class="event-card">
+          <div class="event-card-icon">
+            <svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+          </div>
+          <div class="event-card-title">Live Music Nights</div>
+          <p class="event-card-text">Regular live performances throughout the year &mdash; local bands and artists in a warm, unpretentious pub setting. Follow Jack-Up on Facebook for the schedule.</p>
+        </div>
+        <div class="event-card">
+          <div class="event-card-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </div>
+          <div class="event-card-title">Themed Parties &amp; Game Nights</div>
+          <p class="event-card-text">Halloween, SMART10 game nights, sports screenings and special themed evenings &mdash; there's always something happening at Jaska. Check Facebook for upcoming events.</p>
+        </div>
+        <div class="event-card">
+          <div class="event-card-icon">
+            <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <div class="event-card-title">Private Events</div>
+          <p class="event-card-text">Planning a gathering with your group? Get in touch to discuss availability and arrangements for private bookings at Jack-Up.</p>
+        </div>
+      </div>
+
+      <!-- Contact form -->
+      <div class="contact-form-box">
+        <div class="form-title">Get in Touch</div>
+        <div class="form-field">
+          <label class="form-label" for="cf-name">Your Name</label>
+          <input class="form-input" type="text" id="cf-name" placeholder="First and last name">
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="cf-email">Email Address</label>
+          <input class="form-input" type="email" id="cf-email" placeholder="your@email.com">
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="cf-phone">Phone (optional)</label>
+          <input class="form-input" type="tel" id="cf-phone" placeholder="+358 ...">
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="cf-occasion">Reason for Contact</label>
+          <select class="form-input" id="cf-occasion">
+            <option value="">Select reason</option>
+            <option>Event enquiry</option>
+            <option>Private booking</option>
+            <option>General question</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="cf-msg">Message</label>
+          <textarea class="form-textarea" id="cf-msg" placeholder="Tell us about your enquiry, preferred dates, group size..."></textarea>
+        </div>
+        <button class="form-btn" type="button">Send Message</button>
+        <p class="form-note">This is a demo form &mdash; messages are not sent. The live form goes active with your Klar site.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact info -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="section-label">Find Us</div>
+    <h2 class="section-title">Opening Hours &amp; Location</h2>
+    <div class="divider"></div>
+    <div class="contact-wrap">
+      <div class="contact-items">
+        <div class="contact-item">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div>
+            <div class="contact-item-label">Address</div>
+            <div class="contact-item-val">Sibeliuskatu 32<br>49400 Hamina, Finland</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.85a16 16 0 0 0 6.29 6.29l1.21-1.21a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <div>
+            <div class="contact-item-label">Phone</div>
+            <div class="contact-item-val"><a href="tel:+35852311110">+358 5 2311110</a></div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div>
+            <div class="contact-item-label">Email</div>
+            <div class="contact-item-val"><a href="mailto:jackuphamina@gmail.com">jackuphamina@gmail.com</a></div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div>
+            <div class="contact-item-label">Opening Hours</div>
+            <div class="contact-item-val">
+              <div class="hours-table">
+                <div class="hours-row"><span class="hours-day">Monday</span><span class="hours-time">11:00 – 00:00</span></div>
+                <div class="hours-row"><span class="hours-day">Tuesday</span><span class="hours-time">11:00 – 00:00</span></div>
+                <div class="hours-row"><span class="hours-day">Wednesday</span><span class="hours-time">11:00 – 00:00</span></div>
+                <div class="hours-row"><span class="hours-day">Thursday</span><span class="hours-time">11:00 – 00:00</span></div>
+                <div class="hours-row"><span class="hours-day">Friday</span><span class="hours-time">11:00 – 02:00</span></div>
+                <div class="hours-row"><span class="hours-day">Saturday</span><span class="hours-time">11:00 – 02:00</span></div>
+                <div class="hours-row"><span class="hours-day">Sunday</span><span class="hours-time">11:00 – 00:00</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="interior-placeholder">Interior photo coming soon</div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">Jack-Up</div>
+    <div class="footer-center">
+      Sibeliuskatu 32, 49400 Hamina &mdash; <a href="tel:+35852311110">+358 5 2311110</a>
+    </div>
+    <div class="footer-klar">Powered by Klar</div>
+  </div>
+</footer>
+
+</body>
+</html>

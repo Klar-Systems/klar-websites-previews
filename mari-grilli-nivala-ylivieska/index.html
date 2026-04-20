@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Marin Grilli — Grill food in Nivala</title>
+<style>
+  /* palette: segment 2 default (research palette empty) */
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  :root{
+    --bg:#141414;
+    --bg-soft:#1c1c1c;
+    --bg-card:#222222;
+    --text:#F5F1EA;
+    --muted:rgba(245,241,234,0.60);
+    --mute-strong:rgba(245,241,234,0.85);
+    --primary:#E04B1E;
+    --primary-hi:#f05a2b;
+    --accent:#F2C75C;
+    --rule:#2e2e2e;
+    --heading:'Archivo Black','Helvetica Neue',Arial,sans-serif;
+    --body:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  }
+  html,body{background:var(--bg);color:var(--text);font-family:var(--body);line-height:1.6;-webkit-font-smoothing:antialiased}
+  body{min-height:100vh}
+  a{color:inherit;text-decoration:none}
+
+  /* Demo banner */
+  .demo-banner{background:#0a0a0a;border-bottom:1px solid var(--rule);font-size:13px}
+  .demo-banner .inner{max-width:1100px;margin:0 auto;padding:10px 24px;display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center;justify-content:space-between;color:var(--mute-strong)}
+  .demo-banner strong{color:var(--accent);font-weight:700;letter-spacing:0.08em;text-transform:uppercase;font-size:11px;margin-right:6px}
+  .demo-banner a.cta{color:var(--bg);background:var(--accent);padding:7px 14px;font-weight:700;font-size:11px;letter-spacing:0.1em;text-transform:uppercase}
+  .demo-banner a.cta:hover{background:#fff}
+
+  .container{max-width:1100px;margin:0 auto;padding:0 24px}
+
+  /* Nav */
+  .nav{border-bottom:1px solid var(--rule)}
+  .nav .inner{max-width:1100px;margin:0 auto;padding:20px 24px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+  .wordmark{font-family:var(--heading);font-size:20px;letter-spacing:-0.01em;color:var(--text)}
+  .wordmark span{color:var(--primary)}
+  .nav-links{display:flex;gap:26px;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted)}
+  .nav-links a:hover{color:var(--accent)}
+  .nav-phone-btn{display:inline-flex;align-items:center;gap:8px;background:var(--primary);color:#fff;font-family:var(--heading);font-size:14px;font-weight:700;padding:10px 18px;letter-spacing:0.02em}
+  .nav-phone-btn:hover{background:var(--primary-hi)}
+  @media(max-width:860px){.nav-links{display:none}}
+
+  /* Hero */
+  .hero{padding:80px 0 100px;position:relative;overflow:hidden}
+  .hero::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 70% 50%, rgba(224,75,30,0.12) 0%, transparent 65%);pointer-events:none}
+  .hero .grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+  @media(max-width:900px){.hero .grid{grid-template-columns:1fr;gap:40px}.hero{padding:56px 0 72px}}
+  .eyebrow{font-size:11px;letter-spacing:0.3em;text-transform:uppercase;color:var(--primary);font-weight:700;margin-bottom:20px;display:flex;align-items:center;gap:12px}
+  .eyebrow::before{content:"";flex:0 0 28px;height:2px;background:var(--primary)}
+  .hero h1{font-family:var(--heading);font-size:clamp(44px,7.5vw,88px);line-height:0.96;letter-spacing:-0.02em;color:var(--text)}
+  .hero h1 em{color:var(--primary);font-style:normal}
+  .hero .tagline{margin-top:22px;font-size:18px;line-height:1.5;color:var(--mute-strong);max-width:460px}
+  .hero .meta-row{margin-top:28px;display:flex;flex-wrap:wrap;gap:12px 24px;font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted)}
+  .hero .meta-row span{display:flex;align-items:center;gap:8px}
+  .hero .cta-group{margin-top:36px;display:flex;flex-wrap:wrap;gap:12px}
+  .btn-primary{display:inline-flex;align-items:center;gap:10px;background:var(--primary);color:#fff;font-family:var(--heading);font-size:16px;font-weight:700;padding:16px 28px;letter-spacing:0.01em;transition:background 0.15s}
+  .btn-primary:hover{background:var(--primary-hi)}
+  .btn-secondary{display:inline-flex;align-items:center;gap:10px;border:1px solid var(--rule);color:var(--muted);font-family:var(--body);font-size:14px;padding:16px 24px;letter-spacing:0.04em;text-transform:uppercase;transition:border-color 0.15s,color 0.15s}
+  .btn-secondary:hover{border-color:var(--text);color:var(--text)}
+  .hero .photo-col{position:relative}
+
+  /* Photo placeholders */
+  .photo-placeholder{background:linear-gradient(135deg,var(--bg-card),var(--bg-soft));border:1px solid var(--rule);display:flex;align-items:center;justify-content:center;color:var(--muted);font-family:var(--body);font-size:12px;letter-spacing:0.1em;text-transform:uppercase;text-align:center;position:relative;overflow:hidden}
+  .photo-placeholder::after{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(224,75,30,0.07),rgba(242,199,92,0.05));pointer-events:none}
+  .photo-hero{aspect-ratio:4/3;width:100%}
+  .photo-food{aspect-ratio:1/1}
+  .photo-interior{aspect-ratio:16/9;width:100%}
+
+  /* Divider */
+  .divider{height:1px;background:linear-gradient(90deg,transparent,var(--rule) 20%,var(--rule) 80%,transparent);margin:0}
+
+  /* Menu section */
+  .section{padding:72px 0}
+  .section-header{margin-bottom:48px}
+  .section-label{font-size:11px;letter-spacing:0.3em;text-transform:uppercase;color:var(--primary);font-weight:700;display:flex;align-items:center;gap:12px;margin-bottom:14px}
+  .section-label::before{content:"";flex:0 0 24px;height:2px;background:var(--primary)}
+  .section-title{font-family:var(--heading);font-size:clamp(28px,4vw,44px);line-height:1.05;letter-spacing:-0.015em;color:var(--text)}
+
+  /* Menu grid */
+  .menu-note{font-size:16px;color:var(--mute-strong);line-height:1.6;max-width:600px;margin-bottom:36px}
+  .menu-call-block{display:inline-flex;align-items:center;gap:16px;background:var(--bg-card);border:1px solid var(--rule);padding:22px 28px;margin-top:8px}
+  .menu-call-block .label{font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+  .menu-call-block .phone{font-family:var(--heading);font-size:24px;color:var(--accent);letter-spacing:0.01em}
+  .menu-call-block .phone a{color:inherit}
+  .menu-call-block .phone a:hover{color:#fff}
+
+  /* Big CTA / order block */
+  .order-section{padding:72px 0;background:var(--bg-soft);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+  .order-inner{display:flex;flex-direction:column;align-items:center;text-align:center;gap:20px}
+  .order-label{font-size:11px;letter-spacing:0.3em;text-transform:uppercase;color:var(--primary);font-weight:700}
+  .order-heading{font-family:var(--heading);font-size:clamp(32px,5vw,60px);line-height:1;letter-spacing:-0.02em;color:var(--text)}
+  .order-sub{font-size:17px;color:var(--muted);max-width:500px;line-height:1.55}
+  .order-phone{font-family:var(--heading);font-size:clamp(36px,6vw,68px);color:var(--accent);letter-spacing:0.02em;margin:8px 0}
+  .order-phone a{color:inherit}
+  .order-phone a:hover{color:#fff;transition:color 0.15s}
+  .order-cta-btn{margin-top:4px}
+
+  /* Hours & Location */
+  .loc-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+  @media(max-width:760px){.loc-grid{grid-template-columns:1fr;gap:32px}}
+  .hours-table{width:100%;border-collapse:collapse;margin-top:16px}
+  .hours-table tr{border-bottom:1px solid var(--rule)}
+  .hours-table td{padding:10px 0;font-size:15px;color:var(--mute-strong)}
+  .hours-table td:first-child{color:var(--text);font-weight:500;width:55%}
+  .hours-table tr:last-child{border-bottom:none}
+  .map-placeholder{aspect-ratio:4/3;background:var(--bg-card);border:1px solid var(--rule);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:12px;letter-spacing:0.12em;text-transform:uppercase;flex-direction:column;gap:12px}
+  .map-placeholder .map-icon{font-size:32px;opacity:0.4}
+  .address-block{margin-top:24px}
+  .address-block p{font-size:15px;color:var(--mute-strong);line-height:1.8}
+  .address-block .addr{color:var(--text);font-size:16px;font-weight:500}
+
+  /* Contact / footer */
+  .contact-section{padding:56px 0 40px}
+  .contact-inner{display:flex;flex-wrap:wrap;gap:32px 64px;align-items:flex-start;justify-content:space-between}
+  .contact-col .col-label{font-size:11px;letter-spacing:0.25em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:12px}
+  .contact-col p{font-size:15px;color:var(--mute-strong);line-height:1.9}
+  .contact-col a{color:var(--accent)}
+  .contact-col a:hover{color:#fff}
+  .fb-link{display:inline-flex;align-items:center;gap:8px;color:var(--accent);font-size:15px}
+  .fb-link:hover{color:#fff}
+  .footer-bar{border-top:1px solid var(--rule);padding:20px 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+  .footer-bar p{font-size:12px;color:var(--muted);letter-spacing:0.04em}
+  .klar-badge{font-size:12px;color:var(--muted);letter-spacing:0.06em}
+  .klar-badge span{color:var(--accent)}
+
+  /* Responsive tweaks */
+  @media(max-width:600px){
+    .hero{padding:44px 0 60px}
+    .section{padding:52px 0}
+    .order-section{padding:52px 0}
+    .contact-section{padding:44px 0 32px}
+    .cta-group{flex-direction:column}
+    .btn-primary,.btn-secondary{width:100%;justify-content:center}
+    .menu-call-block{flex-direction:column;align-items:flex-start;gap:8px}
+  }
+</style>
+</head>
+<body>
+
+<!-- DEMO BANNER -->
+<div class="demo-banner">
+  <div class="inner">
+    <div><strong>Demo site</strong> — This is a demo preview built by Klar for Marin Grilli. No obligation. Your business, your content.</div>
+    <a href="mailto:Guidance@klarsystems.com" class="cta">Get your site live</a>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="inner">
+    <div class="wordmark">Marin <span>Grilli</span></div>
+    <div class="nav-links">
+      <a href="#menu">Menu</a>
+      <a href="#order">Order</a>
+      <a href="#hours">Hours</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a class="nav-phone-btn" href="tel:+35884422010">&#9742; +358 8 442210</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="grid">
+      <div>
+        <div class="eyebrow">Nivala</div>
+        <h1>Marin<br><em>Grilli</em></h1>
+        <p class="tagline">Grill food without the fuss. Hot food, fast service, open late — right in the centre of Nivala since 1991.</p>
+        <div class="meta-row">
+          <span>&#9679; Keskustie 4, Nivala</span>
+          <span>&#9679; 4.2 &#9733; Google (609 reviews)</span>
+          <span>&#9679; Open late weekends</span>
+        </div>
+        <div class="cta-group">
+          <a class="btn-primary" href="tel:+35884422010">&#9742;&nbsp; Call to order &nbsp;+358 8 442210</a>
+          <a class="btn-secondary" href="#hours">Opening hours</a>
+        </div>
+      </div>
+      <div class="photo-col">
+        <div class="photo-placeholder photo-hero" aria-label="Your photo here">
+          <span>Your photo here</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- MENU -->
+<section class="section" id="menu">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">What we serve</div>
+      <h2 class="section-title">Classic grill food,<br>done right</h2>
+    </div>
+    <p class="menu-note">We serve the Finnish grill classics — hot dogs, burgers, fries, and more. For the full menu and today's specials, give us a call.</p>
+    <div>
+      <div class="photo-placeholder photo-food" style="max-width:480px;aspect-ratio:4/3" aria-label="Food photos coming soon">
+        <span>Food photos coming soon</span>
+      </div>
+    </div>
+    <div class="menu-call-block">
+      <div>
+        <div class="label">Call for full menu</div>
+        <div class="phone"><a href="tel:+35884422010">+358 8 442210</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ORDER / CALL CTA -->
+<section class="order-section" id="order">
+  <div class="container">
+    <div class="order-inner">
+      <div class="order-label">Ready to order?</div>
+      <h2 class="order-heading">Pick up the phone</h2>
+      <p class="order-sub">Call ahead and your order will be ready when you arrive. Fast, simple, no app needed.</p>
+      <div class="order-phone"><a href="tel:+35884422010">+358 8 442210</a></div>
+      <a class="btn-primary order-cta-btn" href="tel:+35884422010">&#9742;&nbsp; Call now</a>
+    </div>
+  </div>
+</section>
+
+<!-- HOURS & LOCATION -->
+<section class="section" id="hours">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">Find us</div>
+      <h2 class="section-title">Hours &amp; location</h2>
+    </div>
+    <div class="loc-grid">
+      <div>
+        <table class="hours-table">
+          <tr><td>Monday — Thursday</td><td>10:00 — 23:00</td></tr>
+          <tr><td>Friday</td><td>10:00 — 04:30</td></tr>
+          <tr><td>Saturday</td><td>11:00 — 04:30</td></tr>
+          <tr><td>Sunday</td><td>11:00 — 23:00</td></tr>
+        </table>
+        <div class="address-block">
+          <p class="addr">Marin Grilli</p>
+          <p>Keskustie 4<br>85500 Nivala<br>Finland</p>
+          <p style="margin-top:12px"><a href="tel:+35884422010" style="color:var(--accent)">+358 8 442210</a></p>
+        </div>
+      </div>
+      <div>
+        <div class="map-placeholder" aria-label="Interior photo coming soon">
+          <div class="map-icon">&#128205;</div>
+          <span>Interior photo coming soon</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="container">
+    <div class="contact-inner">
+      <div class="contact-col">
+        <div class="col-label">Phone</div>
+        <p><a href="tel:+35884422010">+358 8 442210</a></p>
+      </div>
+      <div class="contact-col">
+        <div class="col-label">Address</div>
+        <p>Keskustie 4, 85500 Nivala</p>
+      </div>
+      <div class="contact-col">
+        <div class="col-label">Follow us</div>
+        <a class="fb-link" href="https://www.facebook.com/maringrillinivala/" target="_blank" rel="noopener">
+          Facebook — Marin Grilli Nivala
+        </a>
+      </div>
+    </div>
+    <div class="footer-bar">
+      <p>&copy; 2026 Marin Grilli Nivala</p>
+      <div class="klar-badge">Demo by <span>Klar</span> — klarsystems.com</div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

@@ -1,0 +1,1321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yi Sushi Kiinalainen Ravintola — Loimaa</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* palette: segment 1 default (research palette empty) */
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg:       #1F2933;
+      --text:     #EFE7DA;
+      --primary:  #B56B4A;
+      --accent:   #D4A574;
+      --bg-light: #28343f;
+      --bg-card:  #243039;
+      --border:   rgba(239,231,218,0.12);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Playfair Display', Georgia, serif;
+      line-height: 1.2;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* ─── NAV ─────────────────────────────────────────────── */
+
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(31, 41, 51, 0.94);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-brand {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: 0.02em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.75rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text);
+      opacity: 0.8;
+      font-size: 0.875rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      transition: opacity 0.2s;
+    }
+
+    .nav-links a:hover {
+      opacity: 1;
+      text-decoration: none;
+    }
+
+    .nav-cta {
+      background: var(--primary);
+      color: var(--text) !important;
+      opacity: 1 !important;
+      padding: 0.45rem 1.1rem;
+      border-radius: 4px;
+      font-weight: 600;
+      transition: background 0.2s !important;
+    }
+
+    .nav-cta:hover {
+      background: var(--accent) !important;
+    }
+
+    /* ─── HERO ────────────────────────────────────────────── */
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      padding: 100px 2rem 4rem;
+    }
+
+    .hero-photo-placeholder {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #1a2830 0%, #2d3e4a 40%, #1F2933 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-photo-placeholder::after {
+      content: "Your photo here";
+      position: absolute;
+      bottom: 2rem;
+      right: 2rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(239,231,218,0.3);
+      border: 1px dashed rgba(239,231,218,0.2);
+      padding: 0.35rem 0.75rem;
+      border-radius: 3px;
+    }
+
+    /* Decorative Asian-inspired geometric motif */
+    .hero-photo-placeholder::before {
+      content: "";
+      width: 320px;
+      height: 320px;
+      border: 2px solid rgba(181,107,74,0.18);
+      border-radius: 50%;
+      box-shadow:
+        0 0 0 40px rgba(181,107,74,0.06),
+        0 0 0 80px rgba(181,107,74,0.04),
+        0 0 0 130px rgba(181,107,74,0.02);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      max-width: 680px;
+    }
+
+    .hero-eyebrow {
+      display: inline-block;
+      font-size: 0.8rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.25rem;
+      opacity: 0.9;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 1.25rem;
+      text-shadow: 0 2px 24px rgba(0,0,0,0.4);
+    }
+
+    .hero-tagline {
+      font-size: clamp(1rem, 2.4vw, 1.2rem);
+      color: var(--text);
+      opacity: 0.82;
+      margin-bottom: 0.5rem;
+      line-height: 1.55;
+    }
+
+    .hero-sub {
+      font-size: 0.9rem;
+      color: var(--accent);
+      margin-bottom: 2.5rem;
+      opacity: 0.85;
+    }
+
+    .rating-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(181,107,74,0.15);
+      border: 1px solid rgba(181,107,74,0.3);
+      border-radius: 100px;
+      padding: 0.4rem 1rem;
+      font-size: 0.875rem;
+      color: var(--accent);
+      margin-bottom: 2.5rem;
+    }
+
+    .rating-stars {
+      color: #f5c842;
+      letter-spacing: 1px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      background: var(--primary);
+      color: var(--text);
+      padding: 0.85rem 2rem;
+      border-radius: 5px;
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.03em;
+      transition: background 0.2s, transform 0.1s;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent);
+      text-decoration: none;
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      display: inline-block;
+      background: transparent;
+      color: var(--text);
+      padding: 0.85rem 2rem;
+      border-radius: 5px;
+      font-weight: 600;
+      font-size: 1rem;
+      border: 1.5px solid rgba(239,231,218,0.35);
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    /* ─── SECTIONS ────────────────────────────────────────── */
+
+    section {
+      padding: 5rem 2rem;
+    }
+
+    .container {
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      display: block;
+      font-size: 0.75rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      color: var(--text);
+      margin-bottom: 1rem;
+    }
+
+    .section-intro {
+      font-size: 1.05rem;
+      color: var(--text);
+      opacity: 0.75;
+      max-width: 580px;
+      line-height: 1.7;
+    }
+
+    .divider {
+      width: 48px;
+      height: 3px;
+      background: var(--primary);
+      border-radius: 2px;
+      margin: 1.25rem 0 2.5rem;
+    }
+
+    /* ─── MENU SECTION ────────────────────────────────────── */
+
+    #menu {
+      background: var(--bg-light);
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+
+    .menu-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .menu-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(181,107,74,0.35);
+    }
+
+    .menu-card-photo {
+      height: 160px;
+      background: linear-gradient(145deg, #2a3a45 0%, #1e2d38 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(239,231,218,0.3);
+      border-bottom: 1px dashed rgba(239,231,218,0.12);
+    }
+
+    .menu-card-body {
+      padding: 1.25rem;
+    }
+
+    .menu-card-name {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.1rem;
+      color: var(--text);
+      margin-bottom: 0.35rem;
+    }
+
+    .menu-card-desc {
+      font-size: 0.875rem;
+      color: var(--text);
+      opacity: 0.65;
+      line-height: 1.55;
+      margin-bottom: 0.75rem;
+    }
+
+    .menu-card-price {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .menu-categories {
+      margin-top: 3rem;
+    }
+
+    .menu-categories h3 {
+      font-size: 1.1rem;
+      color: var(--text);
+      opacity: 0.7;
+      margin-bottom: 1rem;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+    }
+
+    .category-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+
+    .category-tag {
+      background: rgba(181,107,74,0.12);
+      border: 1px solid rgba(181,107,74,0.25);
+      color: var(--accent);
+      font-size: 0.825rem;
+      padding: 0.35rem 0.85rem;
+      border-radius: 100px;
+    }
+
+    .menu-note {
+      margin-top: 2rem;
+      padding: 1.1rem 1.4rem;
+      background: rgba(181,107,74,0.08);
+      border-left: 3px solid var(--primary);
+      border-radius: 0 6px 6px 0;
+      font-size: 0.875rem;
+      color: var(--text);
+      opacity: 0.8;
+      line-height: 1.6;
+    }
+
+    /* ─── ABOUT SECTION ───────────────────────────────────── */
+
+    #about .container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .about-photo-placeholder {
+      height: 420px;
+      background: linear-gradient(160deg, #243040 0%, #1b2830 100%);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(239,231,218,0.3);
+      border: 1px dashed rgba(239,231,218,0.12);
+    }
+
+    .about-text h2 {
+      margin-bottom: 0;
+    }
+
+    .highlights {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .highlight-item {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+
+    .highlight-icon {
+      flex-shrink: 0;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(181,107,74,0.15);
+      border: 1px solid rgba(181,107,74,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      margin-top: 2px;
+    }
+
+    .highlight-text h4 {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.2rem;
+    }
+
+    .highlight-text p {
+      font-size: 0.875rem;
+      color: var(--text);
+      opacity: 0.7;
+      line-height: 1.55;
+    }
+
+    /* ─── REVIEWS ─────────────────────────────────────────── */
+
+    #reviews {
+      background: var(--bg-light);
+    }
+
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+
+    .review-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.5rem;
+    }
+
+    .review-stars {
+      color: #f5c842;
+      font-size: 0.9rem;
+      letter-spacing: 2px;
+      margin-bottom: 0.85rem;
+    }
+
+    .review-quote {
+      font-size: 0.925rem;
+      color: var(--text);
+      opacity: 0.82;
+      line-height: 1.65;
+      font-style: italic;
+      margin-bottom: 1rem;
+    }
+
+    .review-author {
+      font-size: 0.8rem;
+      color: var(--accent);
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+
+    .reviews-summary {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      margin-bottom: 2.5rem;
+      padding: 1.5rem 2rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      flex-wrap: wrap;
+    }
+
+    .reviews-score {
+      text-align: center;
+    }
+
+    .reviews-score .score-number {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 3.5rem;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1;
+    }
+
+    .reviews-score .score-label {
+      font-size: 0.8rem;
+      color: var(--text);
+      opacity: 0.6;
+      margin-top: 0.25rem;
+    }
+
+    .reviews-score .score-stars {
+      color: #f5c842;
+      font-size: 1.1rem;
+      letter-spacing: 2px;
+      margin-top: 0.25rem;
+    }
+
+    .reviews-divider {
+      width: 1px;
+      height: 60px;
+      background: var(--border);
+    }
+
+    .reviews-meta p {
+      font-size: 1rem;
+      color: var(--text);
+      opacity: 0.8;
+      margin-bottom: 0.25rem;
+    }
+
+    .reviews-meta p strong {
+      color: var(--text);
+      opacity: 1;
+    }
+
+    /* ─── BOOKINGS ────────────────────────────────────────── */
+
+    #bookings {
+      background: var(--bg);
+    }
+
+    .klar-bookings {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 2.5rem;
+      max-width: 640px;
+      margin: 2.5rem auto 0;
+    }
+
+    .klar-bookings h3 {
+      font-size: 1.5rem;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+
+    .klar-bookings .booking-sub {
+      font-size: 0.9rem;
+      color: var(--text);
+      opacity: 0.65;
+      margin-bottom: 2rem;
+    }
+
+    .booking-form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .form-group.full {
+      grid-column: 1 / -1;
+    }
+
+    .form-group label {
+      font-size: 0.8rem;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--text);
+      opacity: 0.65;
+      font-weight: 600;
+    }
+
+    .form-group input,
+    .form-group select {
+      background: rgba(239,231,218,0.06);
+      border: 1.5px solid rgba(239,231,218,0.15);
+      border-radius: 5px;
+      color: var(--text);
+      padding: 0.7rem 0.9rem;
+      font-size: 0.95rem;
+      font-family: inherit;
+      width: 100%;
+      transition: border-color 0.2s;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+
+    .form-group select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23EFE7DA' stroke-opacity='.5' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 0.9rem center;
+      padding-right: 2.2rem;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    .form-group input::placeholder {
+      color: rgba(239,231,218,0.35);
+    }
+
+    .form-group select option {
+      background: #1F2933;
+      color: var(--text);
+    }
+
+    .btn-book {
+      grid-column: 1 / -1;
+      background: var(--primary);
+      color: var(--text);
+      border: none;
+      border-radius: 5px;
+      padding: 0.9rem 1.5rem;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background 0.2s, transform 0.1s;
+      margin-top: 0.5rem;
+    }
+
+    .btn-book:hover {
+      background: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    .booking-note {
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--text);
+      opacity: 0.45;
+      margin-top: 1rem;
+    }
+
+    /* ─── HOURS & LOCATION ────────────────────────────────── */
+
+    #location {
+      background: var(--bg-light);
+    }
+
+    #location .container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .hours-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1.25rem;
+    }
+
+    .hours-table tr {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hours-table tr:last-child {
+      border-bottom: none;
+    }
+
+    .hours-table td {
+      padding: 0.7rem 0;
+      font-size: 0.925rem;
+      color: var(--text);
+      opacity: 0.8;
+    }
+
+    .hours-table td:first-child {
+      font-weight: 600;
+      opacity: 0.65;
+      width: 50%;
+    }
+
+    .hours-closed {
+      color: rgba(239,231,218,0.4) !important;
+      font-style: italic;
+    }
+
+    .map-placeholder {
+      height: 320px;
+      background: linear-gradient(145deg, #243040 0%, #1e2d38 100%);
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .map-placeholder-icon {
+      font-size: 2rem;
+      opacity: 0.4;
+    }
+
+    .map-placeholder-text {
+      font-size: 0.85rem;
+      color: var(--text);
+      opacity: 0.4;
+      text-align: center;
+    }
+
+    .map-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: var(--primary);
+      color: var(--text);
+      padding: 0.55rem 1.2rem;
+      border-radius: 5px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      transition: background 0.2s;
+    }
+
+    .map-link:hover {
+      background: var(--accent);
+      text-decoration: none;
+    }
+
+    .address-block {
+      margin-top: 1.5rem;
+    }
+
+    .address-block p {
+      font-size: 0.95rem;
+      color: var(--text);
+      opacity: 0.75;
+      margin-bottom: 0.4rem;
+    }
+
+    .address-block strong {
+      opacity: 1;
+      color: var(--text);
+    }
+
+    /* ─── CONTACT ─────────────────────────────────────────── */
+
+    #contact {
+      background: var(--bg);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+
+    .contact-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    .contact-card-icon {
+      font-size: 1.75rem;
+      margin-bottom: 0.75rem;
+      opacity: 0.7;
+    }
+
+    .contact-card-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text);
+      opacity: 0.5;
+      margin-bottom: 0.4rem;
+    }
+
+    .contact-card-value {
+      font-size: 0.975rem;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .contact-card-value a {
+      color: inherit;
+    }
+
+    /* ─── FOOTER ──────────────────────────────────────────── */
+
+    footer {
+      background: rgba(0,0,0,0.3);
+      border-top: 1px solid var(--border);
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .footer-name {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.15rem;
+      color: var(--text);
+      margin-bottom: 0.4rem;
+    }
+
+    .footer-address {
+      font-size: 0.85rem;
+      color: var(--text);
+      opacity: 0.5;
+    }
+
+    /* ─── RESPONSIVE ──────────────────────────────────────── */
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+
+      #about .container,
+      #location .container {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+
+      .about-photo-placeholder {
+        height: 260px;
+      }
+
+      .booking-form {
+        grid-template-columns: 1fr;
+      }
+
+      .reviews-divider {
+        display: none;
+      }
+
+      .reviews-summary {
+        gap: 1.25rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      section {
+        padding: 3.5rem 1.25rem;
+      }
+
+      .klar-bookings {
+        padding: 1.75rem 1.25rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div style="background:#222;color:#fff;text-align:center;padding:8px;font-size:13px;">This is a demo — <a href="#" style="color:#D4A574;">View proposal</a></div>
+
+  <!-- klar-bookings -->
+
+  <!-- ─── NAV ─────────────────────────────────────────────── -->
+  <nav>
+    <span class="nav-brand">Yi Sushi</span>
+    <ul class="nav-links">
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#reviews">Reviews</a></li>
+      <li><a href="#location">Hours</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="#bookings" class="nav-cta">Book a Table</a></li>
+    </ul>
+  </nav>
+
+  <!-- ─── HERO ─────────────────────────────────────────────── -->
+  <section class="hero" id="home">
+    <div class="hero-photo-placeholder"></div>
+    <div class="hero-content">
+      <span class="hero-eyebrow">Chinese &amp; Sushi · Loimaa</span>
+      <h1>Yi Sushi Kiinalainen Ravintola</h1>
+      <p class="hero-tagline">Loimaa's favourite Asian restaurant — sushi, wok, and lunch buffet all under one roof.</p>
+      <p class="hero-sub">Dine in · Takeaway · Lunch buffet Mon–Fri</p>
+      <div class="rating-badge">
+        <span class="rating-stars">4.4 / 5</span>
+        <strong>4.4 / 5</strong>
+        <span style="opacity:0.7">· 380 Google reviews</span>
+      </div>
+      <div class="hero-actions">
+        <a href="#bookings" class="btn-primary">Book a Table</a>
+        <a href="#menu" class="btn-secondary">View Menu</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── MENU HIGHLIGHTS ───────────────────────────────────── -->
+  <section id="menu">
+    <div class="container">
+      <span class="section-label">What we serve</span>
+      <h2 class="section-title">Menu Highlights</h2>
+      <div class="divider"></div>
+      <p class="section-intro">From hand-rolled sushi to classic Chinese wok dishes — there is something for everyone, including dedicated gluten-free options.</p>
+
+      <div class="menu-grid">
+
+        <div class="menu-card">
+          <div class="menu-card-photo">Food photos coming soon</div>
+          <div class="menu-card-body">
+            <h3 class="menu-card-name">Peking kanaa</h3>
+            <p class="menu-card-desc">Crispy Peking-style chicken — a house favourite straight from the wok.</p>
+            <span class="menu-card-price">€12.80</span>
+          </div>
+        </div>
+
+        <div class="menu-card">
+          <div class="menu-card-photo">Food photos coming soon</div>
+          <div class="menu-card-body">
+            <h3 class="menu-card-name">Jättikatkarapuja chilikastikkeessa</h3>
+            <p class="menu-card-desc">King prawns tossed in a bold chilli sauce — rich, warming, and generous.</p>
+            <span class="menu-card-price">€17.80</span>
+          </div>
+        </div>
+
+        <div class="menu-card">
+          <div class="menu-card-photo">Food photos coming soon</div>
+          <div class="menu-card-body">
+            <h3 class="menu-card-name">Friteerattu ankka Hoi Sin kastikkeessa</h3>
+            <p class="menu-card-desc">Crispy fried duck finished with a sweet-savoury hoisin glaze.</p>
+            <span class="menu-card-price">€17.80</span>
+          </div>
+        </div>
+
+        <div class="menu-card">
+          <div class="menu-card-photo">Food photos coming soon</div>
+          <div class="menu-card-body">
+            <h3 class="menu-card-name">Iso annos sushia 62 kpl</h3>
+            <p class="menu-card-desc">Large sushi platter — 62 pieces, perfect for sharing.</p>
+            <span class="menu-card-price">€50.00</span>
+          </div>
+        </div>
+
+        <div class="menu-card">
+          <div class="menu-card-photo">Food photos coming soon</div>
+          <div class="menu-card-body">
+            <h3 class="menu-card-name">Kevätrulla (2 kpl)</h3>
+            <p class="menu-card-desc">Classic crispy spring rolls — great as a starter or a snack.</p>
+            <span class="menu-card-price">€6.00</span>
+          </div>
+        </div>
+
+        <div class="menu-card">
+          <div class="menu-card-photo">Food photos coming soon</div>
+          <div class="menu-card-body">
+            <h3 class="menu-card-name">Sushi takeaway — 14 kpl</h3>
+            <p class="menu-card-desc">Fresh sushi to go — 14 pieces packed and ready.</p>
+            <span class="menu-card-price">€9.50</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="menu-categories">
+        <h3>Full menu covers</h3>
+        <div class="category-tags">
+          <span class="category-tag">Starters &amp; Soups</span>
+          <span class="category-tag">Sushi</span>
+          <span class="category-tag">Chicken</span>
+          <span class="category-tag">Beef</span>
+          <span class="category-tag">Pork</span>
+          <span class="category-tag">King Prawns</span>
+          <span class="category-tag">Squid &amp; Shrimp</span>
+          <span class="category-tag">Fish</span>
+          <span class="category-tag">Duck</span>
+          <span class="category-tag">Vegetables &amp; Tofu</span>
+          <span class="category-tag">Rice &amp; Noodles</span>
+          <span class="category-tag">Kids Dishes</span>
+          <span class="category-tag">Drinks</span>
+        </div>
+      </div>
+
+      <div class="menu-note">
+        <strong>Meat origins declared:</strong> Chicken — Thailand · Beef — Poland · Pork — Finland · Duck — Netherlands. Gluten-free soy sauce available on request.
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── ABOUT ─────────────────────────────────────────────── -->
+  <section id="about">
+    <div class="container">
+      <div>
+        <div class="about-photo-placeholder">Interior photo coming soon</div>
+      </div>
+      <div class="about-text">
+        <span class="section-label">About us</span>
+        <h2 class="section-title">Loimaa's Best Asian Table</h2>
+        <div class="divider"></div>
+        <p style="font-size:1.02rem; opacity:0.8; line-height:1.75; margin-bottom:1.5rem;">
+          Since 2018, Yi Sushi has been serving the people of Loimaa a broad selection of Chinese cuisine and fresh sushi in a relaxed, compact setting. Whether you are stopping in for the weekday lunch buffet, sitting down for a family dinner, or ordering takeaway, the kitchen keeps things straightforward, friendly, and full of flavour.
+        </p>
+        <p style="font-size:0.95rem; opacity:0.7; line-height:1.7; margin-bottom:2rem;">
+          With over 380 Google reviews and a 4.4-star rating, we are proud to be the most-reviewed Asian restaurant in the area — and we are still the same small, welcoming place we have always been.
+        </p>
+        <div class="highlights">
+          <div class="highlight-item">
+            <div class="highlight-icon">4.4</div>
+            <div class="highlight-text">
+              <h4>Great value</h4>
+              <p>Generous portions at everyday prices — the lunch buffet is especially popular on Fridays.</p>
+            </div>
+          </div>
+          <div class="highlight-item">
+            <div class="highlight-icon">GF</div>
+            <div class="highlight-text">
+              <h4>Gluten-free friendly</h4>
+              <p>Plenty of naturally gluten-free options and gluten-free soy sauce available on request.</p>
+            </div>
+          </div>
+          <div class="highlight-item">
+            <div class="highlight-icon" style="font-size:0.75rem;font-weight:700;">Fam</div>
+            <div class="highlight-text">
+              <h4>Family welcome</h4>
+              <p>A relaxed atmosphere with a dedicated kids' menu — comfortable for all ages.</p>
+            </div>
+          </div>
+          <div class="highlight-item">
+            <div class="highlight-icon" style="font-size:0.75rem;font-weight:700;">Pin</div>
+            <div class="highlight-text">
+              <h4>Easy to find</h4>
+              <p>Right in the heart of Loimaa at Heimolinnankatu 6 — with space and friendly service waiting for you.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── REVIEWS ───────────────────────────────────────────── -->
+  <section id="reviews">
+    <div class="container">
+      <span class="section-label">What guests say</span>
+      <h2 class="section-title">Guest Reviews</h2>
+      <div class="divider"></div>
+
+      <div class="reviews-summary">
+        <div class="reviews-score">
+          <div class="score-number">4.4</div>
+          <div class="score-stars">4.4 / 5</div>
+          <div class="score-label">380 Google reviews</div>
+        </div>
+        <div class="reviews-divider"></div>
+        <div class="reviews-meta">
+          <p><strong>Consistently praised for:</strong></p>
+          <p>Value for money · Friendly staff · Gluten-free options</p>
+          <p>Popular lunch buffet · Family-friendly atmosphere</p>
+        </div>
+      </div>
+
+      <div class="reviews-grid">
+
+        <div class="review-card">
+          <div class="review-stars">4.4 / 5</div>
+          <p class="review-quote">"Great place for sushi — packed on Friday lunchtimes. You can also take away 14 pieces for €9.50. Eat as much as you like at the buffet."</p>
+          <div class="review-author">tipeko68 · Google</div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-stars">4.4 / 5</div>
+          <p class="review-quote">"A neat little place — good food, fresh ingredients and friendly service."</p>
+          <div class="review-author">Heikki Sulkanen · Google</div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-stars">4.4 / 5</div>
+          <p class="review-quote">"Price and quality really do meet here. The food is good. Compact and excellent lunch buffet — my favourite is the fried chicken fillet, juicier than most."</p>
+          <div class="review-author">Mirva v-p &amp; Jukka Vuorio · Google</div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-stars">4.4 / 5</div>
+          <p class="review-quote">"I love it — gives a lot of gluten-free options, nice and kind workers, plenty of space to eat."</p>
+          <div class="review-author">Verified guest · Atly</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── RESERVATIONS ──────────────────────────────────────── -->
+  <section id="bookings">
+    <div class="container" style="text-align:center;">
+      <span class="section-label">Reserve your spot</span>
+      <h2 class="section-title">Book a Table</h2>
+      <div class="divider" style="margin:1.25rem auto 0;"></div>
+      <p class="section-intro" style="margin:1rem auto 0;">
+        Choose your date, time, and party size below and we will confirm your reservation.
+      </p>
+
+      <div class="klar-bookings">
+        <h3>Make a reservation</h3>
+        <p class="booking-sub">We look forward to welcoming you — bookings confirmed by phone or email.</p>
+
+        <form class="booking-form" onsubmit="return false;">
+
+          <div class="form-group">
+            <label for="booking-date">Date</label>
+            <input type="date" id="booking-date" name="date" required />
+          </div>
+
+          <div class="form-group">
+            <label for="booking-time">Time</label>
+            <select id="booking-time" name="time" required>
+              <option value="" disabled selected>Select time</option>
+              <option value="11:00">11:00</option>
+              <option value="11:30">11:30</option>
+              <option value="12:00">12:00</option>
+              <option value="12:30">12:30</option>
+              <option value="13:00">13:00</option>
+              <option value="13:30">13:30</option>
+              <option value="14:00">14:00</option>
+              <option value="14:30">14:30</option>
+              <option value="15:00">15:00</option>
+              <option value="15:30">15:30</option>
+              <option value="16:00">16:00</option>
+              <option value="16:30">16:30</option>
+              <option value="17:00">17:00</option>
+              <option value="17:30">17:30</option>
+              <option value="18:00">18:00</option>
+              <option value="18:30">18:30</option>
+              <option value="19:00">19:00</option>
+              <option value="19:30">19:30</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="booking-party">Party size</label>
+            <select id="booking-party" name="party_size" required>
+              <option value="" disabled selected>Guests</option>
+              <option value="1">1 person</option>
+              <option value="2">2 people</option>
+              <option value="3">3 people</option>
+              <option value="4">4 people</option>
+              <option value="5">5 people</option>
+              <option value="6">6 people</option>
+              <option value="7">7 people</option>
+              <option value="8">8 people</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="booking-name">Your name</label>
+            <input type="text" id="booking-name" name="name" placeholder="Full name" required />
+          </div>
+
+          <button type="submit" class="btn-book">Reserve →</button>
+
+        </form>
+
+        <p class="booking-note">Or call us directly: <a href="tel:+358449819446" style="color:var(--accent); opacity:0.8;">044 9819446</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── HOURS & LOCATION ──────────────────────────────────── -->
+  <section id="location">
+    <div class="container">
+      <div>
+        <span class="section-label">Find us</span>
+        <h2 class="section-title">Hours &amp; Location</h2>
+        <div class="divider"></div>
+
+        <table class="hours-table">
+          <tbody>
+            <tr>
+              <td>Monday – Friday</td>
+              <td>10:30 – 20:00</td>
+            </tr>
+            <tr>
+              <td>Saturday</td>
+              <td class="hours-closed">Closed</td>
+            </tr>
+            <tr>
+              <td>Sunday</td>
+              <td class="hours-closed">Closed</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="address-block">
+          <p><strong>Address</strong></p>
+          <p>Heimolinnankatu 6</p>
+          <p>32200 Loimaa, Finland</p>
+        </div>
+      </div>
+
+      <div>
+        <div class="map-placeholder">
+          <div class="map-placeholder-icon" style="font-size:1rem;opacity:0.4;">Location</div>
+          <div class="map-placeholder-text">Heimolinnankatu 6, Loimaa</div>
+          <a
+            href="https://www.google.com/maps/place/?q=place_id:ChIJwfpNSUinjkYRlyf10l-n9dc"
+            target="_blank"
+            rel="noopener"
+            class="map-link"
+          >
+            Open in Google Maps ↗
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── CONTACT ───────────────────────────────────────────── -->
+  <section id="contact">
+    <div class="container">
+      <span class="section-label">Get in touch</span>
+      <h2 class="section-title">Contact</h2>
+      <div class="divider"></div>
+
+      <div class="contact-grid">
+
+        <div class="contact-card">
+          <div class="contact-card-icon" style="font-size:1rem;">Call:</div>
+          <div class="contact-card-label">Phone</div>
+          <div class="contact-card-value">
+            <a href="tel:+358449819446">044 9819446</a>
+          </div>
+        </div>
+
+        <div class="contact-card">
+          <div class="contact-card-icon" style="font-size:1rem;">Email:</div>
+          <div class="contact-card-label">Email</div>
+          <div class="contact-card-value">
+            <a href="mailto:ravintolayisushi18@gmail.com">ravintolayisushi18@gmail.com</a>
+          </div>
+        </div>
+
+        <div class="contact-card">
+          <div class="contact-card-icon" style="font-size:1rem;">Addr:</div>
+          <div class="contact-card-label">Address</div>
+          <div class="contact-card-value">Heimolinnankatu 6, 32200 Loimaa</div>
+        </div>
+
+        <div class="contact-card">
+          <div class="contact-card-icon" style="font-size:1rem;">FB:</div>
+          <div class="contact-card-label">Facebook</div>
+          <div class="contact-card-value">
+            <a href="https://www.facebook.com/p/Ravintola-Yi-sushi-100057275166746/" target="_blank" rel="noopener">Ravintola Yi Sushi</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── FOOTER ────────────────────────────────────────────── -->
+  <footer>
+    <p class="footer-name">Yi Sushi Kiinalainen Ravintola</p>
+    <p class="footer-address">Heimolinnankatu 6, 32200 Loimaa · 044 9819446</p>
+    <p style="font-size:0.75rem; color:var(--text); opacity:0.3; margin-top:0.75rem;">© 2024 Yi Sushi Kiinalainen Ravintola · Jiang Ravintola Oy</p>
+    <p style="text-align:center;font-size:12px;opacity:0.5;margin-top:0.5rem;">Powered by Klar</p>
+  </footer>
+
+</body>
+</html>

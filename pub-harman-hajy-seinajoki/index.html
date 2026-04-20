@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pub Härmän Häjy — Seinäjoki</title>
+  <!-- palette: segment 3 default (research palette empty) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    /* === RESET & BASE === */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #F7F1E8;
+      --text:     #2A2725;
+      --primary:  #8C6A4F;
+      --accent:   #C9A77C;
+      --dark:     #1C1612;
+      --mid:      #5A3E2B;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', system-ui, sans-serif;
+      font-size: 1rem;
+      line-height: 1.65;
+    }
+
+    h1, h2, h3 {
+      font-family: 'DM Serif Display', Georgia, serif;
+      line-height: 1.2;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* === DEMO BANNER === */
+    .demo-banner {
+      background: var(--dark);
+      color: var(--accent);
+      text-align: center;
+      padding: 0.55rem 1rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    /* === NAV === */
+    nav {
+      background: var(--dark);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+      height: 64px;
+    }
+
+    .nav-logo {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 1.4rem;
+      color: var(--accent);
+      letter-spacing: 0.02em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: #d4c4b0;
+      font-size: 0.875rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--accent); }
+
+    /* === HERO === */
+    .hero {
+      position: relative;
+      background: var(--dark);
+      min-height: 540px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .hero-photo-placeholder {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #2a1a0f 0%, #3d2510 40%, #1a1008 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-photo-placeholder span {
+      color: rgba(201,167,124,0.35);
+      font-size: 1rem;
+      font-style: italic;
+      letter-spacing: 0.04em;
+      border: 1px dashed rgba(201,167,124,0.3);
+      padding: 0.6rem 1.4rem;
+      border-radius: 4px;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, rgba(28,22,18,0.92) 45%, rgba(28,22,18,0.4) 100%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 4rem 2rem 4rem 6vw;
+      max-width: 640px;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      background: var(--primary);
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.85rem;
+      border-radius: 2px;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.4rem, 5vw, 3.6rem);
+      color: #fff;
+      margin-bottom: 0.6rem;
+    }
+
+    .hero-tagline {
+      font-size: 1.15rem;
+      color: var(--accent);
+      font-style: italic;
+      margin-bottom: 1.4rem;
+    }
+
+    .hero-desc {
+      color: #c8bdb3;
+      font-size: 1rem;
+      max-width: 460px;
+      margin-bottom: 2rem;
+    }
+
+    .hero-cta {
+      display: inline-block;
+      background: var(--primary);
+      color: #fff;
+      padding: 0.85rem 2rem;
+      border-radius: 3px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      letter-spacing: 0.04em;
+      transition: background 0.2s;
+    }
+
+    .hero-cta:hover { background: var(--mid); }
+
+    /* === BADGES STRIP === */
+    .badges {
+      background: var(--primary);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0;
+    }
+
+    .badge-item {
+      padding: 1rem 2.5rem;
+      text-align: center;
+      border-right: 1px solid rgba(255,255,255,0.15);
+    }
+
+    .badge-item:last-child { border-right: none; }
+
+    .badge-num {
+      display: block;
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 1.8rem;
+      color: #fff;
+      line-height: 1;
+    }
+
+    .badge-label {
+      display: block;
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.8);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-top: 0.25rem;
+    }
+
+    /* === SECTIONS SHARED === */
+    .section { padding: 5rem 6vw; }
+    .section-alt { background: #EDE5D8; }
+    .section-dark { background: var(--dark); color: #d4c4b0; }
+
+    .section-header {
+      max-width: 680px;
+      margin-bottom: 3rem;
+    }
+
+    .section-header h2 {
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      margin-bottom: 0.6rem;
+    }
+
+    .section-header p {
+      font-size: 1.05rem;
+      opacity: 0.8;
+    }
+
+    .section-dark .section-header h2 { color: var(--accent); }
+
+    /* === ABOUT === */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .about-text p {
+      margin-bottom: 1.1rem;
+      font-size: 1.02rem;
+    }
+
+    .about-interior {
+      background: #c8b89a;
+      border-radius: 4px;
+      min-height: 320px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px dashed rgba(140,106,79,0.4);
+    }
+
+    .about-interior span {
+      color: rgba(90,62,43,0.6);
+      font-size: 0.95rem;
+      font-style: italic;
+    }
+
+    /* === DRINKS === */
+    .drinks-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+
+    .drink-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(201,167,124,0.2);
+      border-radius: 4px;
+      padding: 1.6rem;
+    }
+
+    .drink-card h3 {
+      font-size: 1.15rem;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .drink-card p {
+      font-size: 0.9rem;
+      opacity: 0.75;
+    }
+
+    .drink-photo-placeholder {
+      background: rgba(255,255,255,0.04);
+      border: 1px dashed rgba(201,167,124,0.25);
+      border-radius: 3px;
+      height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+      font-size: 0.8rem;
+      color: rgba(201,167,124,0.4);
+      font-style: italic;
+    }
+
+    /* === EVENTS === */
+    .events-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .event-card {
+      background: #fff;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 2px 16px rgba(42,39,37,0.07);
+    }
+
+    .event-card-top {
+      background: var(--primary);
+      padding: 1.2rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .event-day {
+      background: var(--accent);
+      color: var(--dark);
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.7rem;
+      border-radius: 2px;
+      white-space: nowrap;
+    }
+
+    .event-card-top h3 {
+      color: #fff;
+      font-size: 1.15rem;
+    }
+
+    .event-card-body {
+      padding: 1.2rem 1.5rem;
+    }
+
+    .event-card-body p {
+      font-size: 0.95rem;
+      color: #4a3f37;
+    }
+
+    .event-time {
+      display: inline-block;
+      margin-top: 0.75rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--primary);
+    }
+
+    .events-note {
+      margin-top: 2rem;
+      font-size: 0.9rem;
+      color: #6a5a50;
+      font-style: italic;
+    }
+
+    /* === RATING === */
+    .rating-section {
+      text-align: center;
+      padding: 4rem 6vw;
+      background: var(--mid);
+      color: #fff;
+    }
+
+    .rating-number {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 5rem;
+      line-height: 1;
+      color: var(--accent);
+    }
+
+    .rating-scale {
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 0.5rem;
+    }
+
+    .rating-count {
+      font-size: 0.9rem;
+      opacity: 0.6;
+      margin-top: 0.3rem;
+    }
+
+    .rating-label {
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 1rem;
+    }
+
+    /* === HOURS === */
+    .hours-table {
+      width: 100%;
+      max-width: 420px;
+      border-collapse: collapse;
+      margin-top: 1.5rem;
+    }
+
+    .hours-table tr + tr td { border-top: 1px solid rgba(201,167,124,0.15); }
+
+    .hours-table td {
+      padding: 0.7rem 0;
+      font-size: 0.95rem;
+    }
+
+    .hours-table td:last-child {
+      text-align: right;
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    /* === CONTACT === */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .contact-details h3 {
+      font-size: 1.5rem;
+      color: var(--accent);
+      margin-bottom: 1.2rem;
+    }
+
+    .contact-item {
+      display: flex;
+      gap: 0.85rem;
+      align-items: flex-start;
+      margin-bottom: 1.1rem;
+    }
+
+    .contact-icon {
+      width: 20px;
+      flex-shrink: 0;
+      margin-top: 3px;
+      opacity: 0.7;
+    }
+
+    .contact-item a { color: var(--accent); }
+    .contact-item a:hover { text-decoration: underline; }
+
+    .social-links {
+      margin-top: 1.5rem;
+      display: flex;
+      gap: 1rem;
+    }
+
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(201,167,124,0.15);
+      color: var(--accent);
+      padding: 0.5rem 1.1rem;
+      border-radius: 3px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: background 0.2s;
+    }
+
+    .social-link:hover { background: rgba(201,167,124,0.3); }
+
+    .map-placeholder {
+      background: rgba(255,255,255,0.04);
+      border: 1px dashed rgba(201,167,124,0.25);
+      border-radius: 4px;
+      min-height: 280px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      color: rgba(201,167,124,0.5);
+    }
+
+    .map-placeholder p { font-size: 0.9rem; font-style: italic; }
+
+    .map-directions {
+      display: inline-block;
+      margin-top: 1rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      padding: 0.4rem 1rem;
+      border-radius: 3px;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .map-directions:hover { background: var(--accent); color: var(--dark); }
+
+    /* === FOOTER === */
+    footer {
+      background: #111009;
+      color: rgba(212,196,176,0.55);
+      text-align: center;
+      padding: 2rem 1rem;
+      font-size: 0.82rem;
+    }
+
+    footer .footer-name {
+      color: var(--accent);
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 1.1rem;
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+
+    footer .footer-divider {
+      margin: 0.8rem auto;
+      width: 40px;
+      height: 1px;
+      background: rgba(201,167,124,0.25);
+    }
+
+    /* === RESPONSIVE === */
+    @media (max-width: 768px) {
+      nav { padding: 0 1.2rem; }
+      .nav-links { gap: 1.2rem; }
+      .nav-links li:nth-child(n+4) { display: none; }
+      .hero-content { padding: 3rem 1.5rem; }
+      .section { padding: 3.5rem 1.5rem; }
+      .about-grid { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .badge-item { padding: 0.9rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- DEMO BANNER -->
+  <div class="demo-banner">This is a demo — preview site for Pub Härmän Häjy</div>
+
+  <!-- NAV -->
+  <nav>
+    <span class="nav-logo">Härmän Häjy</span>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#drinks">Drinks</a></li>
+      <li><a href="#events">Events</a></li>
+      <li><a href="#hours">Hours</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-photo-placeholder">
+      <span>Your photo here</span>
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <span class="hero-tag">Seinäjoki's Local Pub</span>
+      <h1>Pub Härmän Häjy</h1>
+      <p class="hero-tagline">The real South Ostrobothnian local</p>
+      <p class="hero-desc">
+        Open from morning coffee to late-night karaoke — every single day.
+        Honest prices, lively crowd, and the best sing-along atmosphere in town.
+      </p>
+      <a href="#events" class="hero-cta">See Tonight's Events</a>
+    </div>
+  </section>
+
+  <!-- BADGES STRIP -->
+  <div class="badges">
+    <div class="badge-item">
+      <span class="badge-num">4.2 / 5</span>
+      <span class="badge-label">Google Rating</span>
+    </div>
+    <div class="badge-item">
+      <span class="badge-num">785</span>
+      <span class="badge-label">Reviews</span>
+    </div>
+    <div class="badge-item">
+      <span class="badge-num">09:00 – 03:00</span>
+      <span class="badge-label">Open Daily</span>
+    </div>
+    <div class="badge-item">
+      <span class="badge-num">Lowest</span>
+      <span class="badge-label">Beer Prices in Town</span>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section class="section" id="about">
+    <div class="about-grid">
+      <div class="about-text">
+        <div class="section-header">
+          <h2>A genuine Ostrobothnian pub</h2>
+          <p>No frills, no pretense — just good company and cold beer since day one.</p>
+        </div>
+        <p>
+          Tucked right beside Seinäjoki's bus and train station, Härmän Häjy has been the
+          neighbourhood's living room for as long as locals can remember. The kind of place
+          where regulars know each other by name and new faces are welcomed like old friends.
+        </p>
+        <p>
+          On weekdays the crowd comes in for a morning coffee and the day's papers.
+          By evening the karaoke stage lights up and the bar fills to the brim.
+          Weekends bring live performers and a buzz that's hard to find anywhere else in the city.
+        </p>
+        <p>
+          Affordable pints, a massive karaoke songbook, weekly pub quiz, and a warmth that
+          no polished venue can manufacture. This is what a real local looks like.
+        </p>
+      </div>
+      <div class="about-interior">
+        <span>Interior photo coming soon</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- DRINKS -->
+  <section class="section section-dark" id="drinks">
+    <div class="section-header">
+      <h2>What We Pour</h2>
+      <p>The most affordable drinks in Seinäjoki — draught beer, lonkero, and more.</p>
+    </div>
+    <div class="drinks-grid">
+      <div class="drink-card">
+        <div class="drink-photo-placeholder">Food photos coming soon</div>
+        <h3>Draught Beer</h3>
+        <p>
+          Karhu 4.6 and III on tap. A large 0.6 l pour — priced well below what you'll pay
+          anywhere else in town, day or evening.
+        </p>
+      </div>
+      <div class="drink-card">
+        <h3>Lonkero Selection</h3>
+        <p>
+          A rotating range of canned lonkero including Koff's popular Juiced Orange.
+          New arrivals posted on our Facebook page.
+        </p>
+      </div>
+      <div class="drink-card">
+        <h3>Coffee &amp; Soft Drinks</h3>
+        <p>
+          Not just a late-night spot — join the weekday regulars for a morning coffee
+          and a read of the day's newspaper.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- EVENTS -->
+  <section class="section section-alt" id="events">
+    <div class="section-header">
+      <h2>Regular Events</h2>
+      <p>Something happening every single evening. Check our Facebook for special guests and live acts.</p>
+    </div>
+    <div class="events-grid">
+
+      <div class="event-card">
+        <div class="event-card-top">
+          <span class="event-day">Every Evening</span>
+          <h3>Karaoke Night</h3>
+        </div>
+        <div class="event-card-body">
+          <p>
+            Grab the mic and take the stage. Härmän Häjy runs karaoke every single evening
+            with an enormous songbook — Finnish classics, pop hits, and everything in between.
+            A hosted karaoke session kicks off Saturdays already at 14:00.
+          </p>
+          <span class="event-time">From 14:00 Sat / evenings rest of week</span>
+        </div>
+      </div>
+
+      <div class="event-card">
+        <div class="event-card-top">
+          <span class="event-day">Every Thursday</span>
+          <h3>Pub Quiz</h3>
+        </div>
+        <div class="event-card-body">
+          <p>
+            Test your knowledge at Häjy's own pub quiz. Teams of all sizes welcome.
+            Questions cover current events, pop culture, music, and local trivia.
+            Prizes for the winners — and bragging rights that last all week.
+          </p>
+          <span class="event-time">Thursdays from 18:00</span>
+        </div>
+      </div>
+
+      <div class="event-card">
+        <div class="event-card-top">
+          <span class="event-day">Weekends</span>
+          <h3>Live Performers</h3>
+        </div>
+        <div class="event-card-body">
+          <p>
+            Friday and Saturday evenings regularly feature live artists and performers
+            on stage. Past acts include Isoo Juha and others from the local music scene.
+            Follow us on Facebook for the current schedule.
+          </p>
+          <span class="event-time">Fridays &amp; Saturdays from 20:00</span>
+        </div>
+      </div>
+
+    </div>
+    <p class="events-note">
+      Event schedule may vary — follow Pub Härmän Häjy on
+      <a href="https://www.facebook.com/pubharmanhajy/" target="_blank" rel="noopener" style="color: var(--primary); font-weight: 600;">Facebook</a>
+      for the latest announcements.
+    </p>
+  </section>
+
+  <!-- RATING BAND -->
+  <div class="rating-section">
+    <p class="rating-label">Google Reviews</p>
+    <p class="rating-number">4.2 / 5</p>
+    <p class="rating-scale">based on 785 reviews</p>
+    <p style="margin-top:1.2rem; max-width:540px; margin-left:auto; margin-right:auto; font-size:0.95rem; opacity:0.75;">
+      "The best bar in Seinäjoki, by a long way." — local regular<br />
+      "Cheapest beer in Seinäjoki and the staff in here is just gorgeous." — Google review<br />
+      "Always full of people — this little bar by the station pulls them in every time." — Suomi24
+    </p>
+  </div>
+
+  <!-- HOURS & CONTACT -->
+  <section class="section section-dark" id="hours">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start;">
+      <div>
+        <h2 style="color: var(--accent); font-size: 2rem; margin-bottom: 1rem;">Opening Hours</h2>
+        <p style="opacity: 0.7; margin-bottom: 0.5rem;">We're open every day of the week.</p>
+        <table class="hours-table">
+          <tbody>
+            <tr>
+              <td>Monday – Friday</td>
+              <td>09:00 – 03:00</td>
+            </tr>
+            <tr>
+              <td>Saturday</td>
+              <td>09:00 – 03:00</td>
+            </tr>
+            <tr>
+              <td>Sunday</td>
+              <td>09:00 – 03:00</td>
+            </tr>
+          </tbody>
+        </table>
+        <p style="margin-top: 1.5rem; font-size: 0.85rem; opacity: 0.5;">
+          Hours may vary on public holidays. Check Facebook for any changes.
+        </p>
+      </div>
+      <div>
+        <h2 style="color: var(--accent); font-size: 2rem; margin-bottom: 1rem;">Location</h2>
+        <p style="opacity: 0.75; margin-bottom: 1rem;">
+          Right beside Seinäjoki's central bus and railway station — easy to find,
+          easy to get to.
+        </p>
+        <p style="opacity: 0.85; font-weight: 500;">Valtionkatu 2, 60100 Seinäjoki</p>
+        <a
+          href="https://www.google.com/maps/search/?api=1&query=Valtionkatu+2+Seinäjoki"
+          target="_blank"
+          rel="noopener"
+          class="map-directions"
+        >Get Directions</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section section-dark" id="contact" style="padding-top: 1rem; border-top: 1px solid rgba(201,167,124,0.12);">
+    <div class="contact-grid">
+      <div class="contact-details">
+        <h3>Get in Touch</h3>
+        <div class="contact-item">
+          <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.07 12 19.79 19.79 0 0 1 1 3.18 2 2 0 0 1 2.96 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+          </svg>
+          <span><a href="tel:+358400644411">040 0644 411</a></span>
+        </div>
+        <div class="contact-item">
+          <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+            <circle cx="12" cy="10" r="3"/>
+          </svg>
+          <span>Valtionkatu 2, 60100 Seinäjoki</span>
+        </div>
+        <div class="contact-item">
+          <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <polyline points="12 6 12 12 16 14"/>
+          </svg>
+          <span>Open daily 09:00 – 03:00</span>
+        </div>
+        <div class="social-links">
+          <a
+            href="https://www.facebook.com/pubharmanhajy/"
+            target="_blank"
+            rel="noopener"
+            class="social-link"
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+            </svg>
+            Facebook
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <h3 style="color: var(--accent); font-size: 1.4rem; margin-bottom: 1rem;">Events &amp; Announcements</h3>
+        <p style="opacity: 0.75; font-size: 0.95rem; margin-bottom: 1rem;">
+          For the latest event schedule, special guests, and any changes to opening hours,
+          follow Pub Härmän Häjy on Facebook. That's where all the announcements go up first.
+        </p>
+        <p style="opacity: 0.75; font-size: 0.95rem;">
+          Walk-ins are always welcome — no need to call ahead. Just show up, grab a seat,
+          and enjoy the atmosphere.
+        </p>
+        <div class="map-placeholder" style="margin-top: 1.5rem;">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.4">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+            <circle cx="12" cy="10" r="3"/>
+          </svg>
+          <p>Map placeholder — Valtionkatu 2, Seinäjoki</p>
+          <a
+            href="https://www.google.com/maps/search/?api=1&query=Valtionkatu+2+Seinäjoki"
+            target="_blank"
+            rel="noopener"
+            class="map-directions"
+          >Open in Google Maps</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-name">Pub Härmän Häjy</span>
+    <div>Valtionkatu 2, 60100 Seinäjoki &nbsp;|&nbsp; <a href="tel:+358400644411">040 0644 411</a></div>
+    <div class="footer-divider"></div>
+    <div>Powered by Klar</div>
+  </footer>
+
+</body>
+</html>

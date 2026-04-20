@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Haralanharjun näkötorni ja kesäkahvila — Kangasala</title>
+  <style>
+    /* palette: segment 3 default (research palette empty) */
+    :root {
+      --bg:       #F7F1E8;
+      --text:     #2A2725;
+      --primary:  #8C6A4F;
+      --accent:   #C9A77C;
+      --light:    #EDE6D8;
+      --heading-family: 'DM Serif Display', Georgia, serif;
+      --body-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--body-family);
+      font-size: 17px;
+      line-height: 1.65;
+    }
+
+    /* ── Typography ── */
+    h1, h2, h3 {
+      font-family: var(--heading-family);
+      line-height: 1.2;
+      color: var(--text);
+    }
+    h1 { font-size: clamp(2.2rem, 6vw, 3.8rem); }
+    h2 { font-size: clamp(1.6rem, 4vw, 2.4rem); }
+    h3 { font-size: 1.2rem; }
+
+    p { max-width: 62ch; }
+
+    a { color: var(--primary); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ── Layout helpers ── */
+    .container {
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    section { padding: 5rem 0; }
+
+    .divider {
+      width: 56px;
+      height: 3px;
+      background: var(--accent);
+      margin: 1.2rem 0 2rem;
+    }
+
+    /* ── Photo placeholder ── */
+    .photo-placeholder {
+      width: 100%;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      opacity: 0.55;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--bg);
+      font-family: var(--body-family);
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .photo-placeholder--hero   { aspect-ratio: 16 / 7; min-height: 340px; }
+    .photo-placeholder--square { aspect-ratio: 1 / 1; }
+    .photo-placeholder--wide   { aspect-ratio: 16 / 9; }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--bg);
+      border-bottom: 1px solid var(--light);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+    }
+    .nav-brand {
+      font-family: var(--heading-family);
+      font-size: 1.05rem;
+      color: var(--text);
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.9rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--text);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--primary); text-decoration: none; }
+
+    /* ── HERO ── */
+    #hero {
+      padding: 0;
+      position: relative;
+    }
+    .hero-photo { position: relative; }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(42,39,37,0.18) 0%, rgba(42,39,37,0.62) 100%);
+      display: flex;
+      align-items: flex-end;
+    }
+    .hero-copy {
+      padding: 3rem 1.5rem;
+      max-width: 700px;
+      margin: 0 auto 0 0;
+    }
+    .hero-eyebrow {
+      font-size: 0.82rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.6rem;
+    }
+    .hero-copy h1 { color: #F7F1E8; }
+    .hero-tagline {
+      margin-top: 1rem;
+      font-size: 1.05rem;
+      color: rgba(247,241,232,0.88);
+      max-width: 54ch;
+    }
+
+    /* ── ABOUT ── */
+    #about { background: var(--bg); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .about-text { }
+    .about-text p + p { margin-top: 1rem; }
+    .fact-row {
+      margin-top: 2rem;
+      display: flex;
+      gap: 2.5rem;
+      flex-wrap: wrap;
+    }
+    .fact {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+    .fact-label {
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--primary);
+    }
+    .fact-value {
+      font-family: var(--heading-family);
+      font-size: 1.3rem;
+    }
+
+    /* ── MENU ── */
+    #menu { background: var(--light); }
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+    .menu-card {
+      background: var(--bg);
+      border-radius: 4px;
+      padding: 1.6rem 1.4rem;
+      border-top: 3px solid var(--accent);
+    }
+    .menu-card h3 {
+      font-family: var(--heading-family);
+      font-size: 1.1rem;
+      margin-bottom: 0.4rem;
+    }
+    .menu-card p {
+      font-size: 0.92rem;
+      color: #5a544f;
+      max-width: unset;
+    }
+    .menu-note {
+      margin-top: 2rem;
+      font-size: 0.9rem;
+      color: #6b6460;
+      font-style: italic;
+    }
+
+    /* ── REVIEWS ── */
+    #reviews { background: var(--bg); }
+    .review-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+    .review-card {
+      background: var(--light);
+      border-radius: 4px;
+      padding: 1.8rem;
+    }
+    .review-stars {
+      color: var(--primary);
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.8rem;
+    }
+    .review-quote {
+      font-size: 0.96rem;
+      line-height: 1.6;
+      max-width: unset;
+    }
+    .review-quote::before { content: "\201C"; }
+    .review-quote::after  { content: "\201D"; }
+    .review-author {
+      margin-top: 1rem;
+      font-size: 0.82rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--primary);
+    }
+    .rating-summary {
+      margin-top: 2.5rem;
+      font-size: 0.9rem;
+      color: #6b6460;
+    }
+
+    /* ── EVENTS ── */
+    #events { background: var(--light); }
+    .events-intro { max-width: 60ch; }
+    .events-list {
+      margin-top: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+    .event-item {
+      background: var(--bg);
+      border-radius: 4px;
+      padding: 1.4rem 1.6rem;
+      border-left: 4px solid var(--primary);
+    }
+    .event-item h3 {
+      font-family: var(--heading-family);
+      margin-bottom: 0.3rem;
+    }
+    .event-item p {
+      font-size: 0.94rem;
+      color: #5a544f;
+    }
+
+    /* ── HOURS & LOCATION ── */
+    #location { background: var(--bg); }
+    .location-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .hours-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1.5rem;
+    }
+    .hours-table td {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--light);
+      font-size: 0.96rem;
+    }
+    .hours-table td:first-child {
+      color: #6b6460;
+      width: 120px;
+    }
+    .hours-table td:last-child { font-weight: 500; }
+    .season-note {
+      margin-top: 1.2rem;
+      font-size: 0.88rem;
+      color: var(--primary);
+      font-style: italic;
+    }
+    .map-placeholder {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      background: linear-gradient(135deg, var(--light), var(--accent));
+      opacity: 0.6;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text);
+    }
+    .address-block {
+      margin-top: 1.5rem;
+      font-size: 0.96rem;
+      line-height: 1.8;
+    }
+    .address-block strong { display: block; margin-bottom: 0.4rem; font-family: var(--heading-family); font-size: 1rem; }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--light); }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      margin-top: 2.5rem;
+    }
+    .contact-block h3 {
+      font-size: 0.82rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 0.6rem;
+    }
+    .contact-block p, .contact-block a {
+      font-size: 1rem;
+      color: var(--text);
+    }
+    .contact-block a:hover { color: var(--primary); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--text);
+      color: rgba(247,241,232,0.7);
+      padding: 2.5rem 0;
+      font-size: 0.85rem;
+    }
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .footer-brand {
+      font-family: var(--heading-family);
+      font-size: 1rem;
+      color: var(--bg);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 700px) {
+      .about-grid,
+      .location-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .nav-links { display: none; }
+      .hero-copy { padding: 2rem 1.5rem; }
+    }
+  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- DEMO BANNER -->
+  <div style="background:#2A2725;color:#F7F1E8;text-align:center;padding:0.65rem 1rem;font-size:0.82rem;letter-spacing:0.06em;">
+    This is a demo website — not yet live. <a href="https://calendly.com/lomberg-klarsystems" style="color:#C9A77C;text-decoration:underline;">Book a call</a> to get your site live.
+  </div>
+
+  <!-- NAV -->
+  <nav>
+    <div class="container nav-inner">
+      <span class="nav-brand">Haralanharjun kesäkahvila</span>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#menu">Café</a></li>
+        <li><a href="#events">Events</a></li>
+        <li><a href="#location">Visit</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-photo">
+      <div class="photo-placeholder photo-placeholder--hero" aria-label="Your photo here">
+        <span>Your photo here</span>
+      </div>
+      <div class="hero-overlay">
+        <div class="container">
+          <div class="hero-copy">
+            <p class="hero-eyebrow">Suinula, Kangasala</p>
+            <h1>Haralanharjun<br>näkötorni ja kesäkahvila</h1>
+            <p class="hero-tagline">Views that inspired a national poem — and a café at the foot of the tower.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-text">
+          <h2>Where the landscape<br>meets a summer café</h2>
+          <div class="divider"></div>
+          <p>Haralanharjun näkötorni stands on a ridge in Suinula, Kangasala — a vantage point so remarkable that it moved Zachris Topelius to write the poem <em>Kesäpäivä Kangasalla</em>, later set to music as the regional anthem of Pirkanmaa.</p>
+          <p>At the base of the tower, the summer café run by Suinulan Nuorisoseura serves homemade pastries, refreshments, and local ice cream. A performance stage on the grounds hosts live music and theatre throughout the season.</p>
+          <div class="fact-row">
+            <div class="fact">
+              <span class="fact-label">Tower built</span>
+              <span class="fact-value">2009</span>
+            </div>
+            <div class="fact">
+              <span class="fact-label">Distance from Kangasala</span>
+              <span class="fact-value">11 km</span>
+            </div>
+            <div class="fact">
+              <span class="fact-label">Rating</span>
+              <span class="fact-value">4.4 / 5</span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="photo-placeholder photo-placeholder--square" aria-label="Photo coming soon">
+            <span>Photo coming soon</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MENU -->
+  <section id="menu">
+    <div class="container">
+      <h2>At the café</h2>
+      <div class="divider"></div>
+      <p>Simple, seasonal, made with care by the local youth association.</p>
+      <div class="menu-grid">
+        <div class="menu-card">
+          <h3>Berry pie</h3>
+          <p>A summer favourite at the tower — fresh and homemade.</p>
+        </div>
+        <div class="menu-card">
+          <h3>Liquorice cheesecake</h3>
+          <p>A distinctive house pastry, noted by guests as a must-try.</p>
+        </div>
+        <div class="menu-card">
+          <h3>Kangasala ice cream</h3>
+          <p>Local ice cream served on the terrace in summer.</p>
+        </div>
+        <div class="menu-card">
+          <h3>Refreshments &amp; savoury treats</h3>
+          <p>Cold drinks, coffee, and light savoury bites to enjoy with the view.</p>
+        </div>
+      </div>
+      <p class="menu-note">Full selection available at the café. Reasonable prices — entry to the tower is €2 via MobilePay.</p>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section id="reviews">
+    <div class="container">
+      <h2>What visitors say</h2>
+      <div class="divider"></div>
+      <div class="review-grid">
+        <div class="review-card">
+          <div class="review-stars"><span aria-label="4 out of 5">4/5</span></div>
+          <p class="review-quote">The view is great and the surroundings can be explored by foot. There is a small café with reasonable prices and I would like to recommend both the berry pie and the liquorice cheese cake.</p>
+          <p class="review-author">— Carola T., TripAdvisor</p>
+        </div>
+        <div class="review-card">
+          <div class="review-stars"><span aria-label="5 out of 5">5/5</span></div>
+          <p class="review-quote">Haralanharju Tower in Kangasala offers really beautiful vistas over the area filled with forests and lakes. Take your time and relax.</p>
+          <p class="review-author">— Jan O., TripAdvisor</p>
+        </div>
+        <div class="review-card">
+          <div class="review-stars"><span aria-label="5 out of 5">5/5</span></div>
+          <p class="review-quote">From here you can look at many lakes in Finland, Kangasala. The national poet of Finland Zacharias Topelius found this view extraordinaringly inspiring.</p>
+          <p class="review-author">— Veronica V., TripAdvisor</p>
+        </div>
+      </div>
+      <p class="rating-summary">4.4 of 5 — 25 reviews on TripAdvisor</p>
+    </div>
+  </section>
+
+  <!-- EVENTS -->
+  <section id="events">
+    <div class="container">
+      <h2>Events &amp; summer programme</h2>
+      <div class="divider"></div>
+      <p class="events-intro">The grounds around the tower come alive each summer with cultural performances. The stage area hosts live music, theatre, and community events throughout the season.</p>
+      <div class="events-list">
+        <div class="event-item">
+          <h3>Live music</h3>
+          <p>Seasonal performances on the outdoor stage. Programme announced on the Facebook page each summer.</p>
+        </div>
+        <div class="event-item">
+          <h3>Summer theatre</h3>
+          <p>Theatre performances are staged in the natural setting of Haralanharju during the summer season.</p>
+        </div>
+        <div class="event-item">
+          <h3>Midsummer celebration</h3>
+          <p>The café and stage are open for special midsummer programming with live performances.</p>
+        </div>
+      </div>
+      <p style="margin-top: 2rem; font-size: 0.9rem; color: #6b6460;">Follow us on Facebook for the current summer programme and event dates.</p>
+    </div>
+  </section>
+
+  <!-- HOURS & LOCATION -->
+  <section id="location">
+    <div class="container">
+      <div class="location-grid">
+        <div>
+          <h2>Opening hours</h2>
+          <div class="divider"></div>
+          <table class="hours-table">
+            <tr><td>Monday</td><td>Closed</td></tr>
+            <tr><td>Tuesday</td><td>12:00 — 18:00</td></tr>
+            <tr><td>Wednesday</td><td>12:00 — 18:00</td></tr>
+            <tr><td>Thursday</td><td>12:00 — 18:00</td></tr>
+            <tr><td>Friday</td><td>12:00 — 18:00</td></tr>
+            <tr><td>Saturday</td><td>12:00 — 18:00</td></tr>
+            <tr><td>Sunday</td><td>12:00 — 18:00</td></tr>
+          </table>
+          <p class="season-note">The café is open in July. The observation tower is accessible year-round (€2 entry).</p>
+        </div>
+        <div>
+          <div class="map-placeholder" aria-label="Map coming soon">
+            <span>Map coming soon</span>
+          </div>
+          <div class="address-block">
+            <strong>Haralanharjun näkötorni ja kesäkahvila</strong>
+            Haralanharjuntie 142<br>
+            36120 Kangasala<br><br>
+            Approximately 11 km from Kangasala centre<br>and 30 km from Tampere.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container">
+      <h2>Get in touch</h2>
+      <div class="divider"></div>
+      <div class="contact-grid">
+        <div class="contact-block">
+          <h3>Phone</h3>
+          <p><a href="tel:+358413147221">+358 41 314 7221</a></p>
+        </div>
+        <div class="contact-block">
+          <h3>Facebook</h3>
+          <p><a href="https://www.facebook.com/haralanharjunnakotorni/" target="_blank" rel="noopener">Haralanharjun Näkötorni</a></p>
+        </div>
+        <div class="contact-block">
+          <h3>Managed by</h3>
+          <p>Suinulan Nuorisoseura<br><span style="font-size:0.9rem;color:#6b6460;">Suinula Youth Association</span></p>
+        </div>
+        <div class="contact-block">
+          <h3>Tower entry</h3>
+          <p>€2 via MobilePay<br><span style="font-size:0.9rem;color:#6b6460;">QR code at the door</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container footer-inner">
+      <span class="footer-brand">Haralanharjun kesäkahvila</span>
+      <span>Haralanharjuntie 142, 36120 Kangasala</span>
+      <a href="https://klarsystems.com" style="color:var(--accent);">Powered by Klar</a>
+    </div>
+  </footer>
+
+</body>
+</html>

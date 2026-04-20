@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Black Sheep Pub &amp; Terrace — Live Music Pub, Pietarsaari</title>
+  <!-- palette: segment 3 default (research palette empty) -->
+  <style>
+    /* ── Reset & Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:      #1c1712;
+      --panel:   #27211a;
+      --mid:     #332c22;
+      --gold:    #c09a50;
+      --gold-lt: #dbb870;
+      --accent:  #7b3f1c;
+      --cream:   #f3e8d2;
+      --text:    #d9cbb4;
+      --muted:   #8a7a60;
+      --border:  #3e3428;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: Georgia, 'Times New Roman', serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    a { color: var(--gold); text-decoration: none; }
+    a:hover { color: var(--gold-lt); text-decoration: underline; }
+
+    /* ── Nav ── */
+    nav {
+      background: var(--panel);
+      border-bottom: 2px solid var(--gold);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+    }
+    .nav-logo {
+      font-size: 1.05rem;
+      font-weight: bold;
+      color: var(--gold);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--cream);
+      font-size: 0.88rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: 600;
+    }
+    .nav-links a:hover { color: var(--gold); text-decoration: none; }
+
+    /* ── Hero ── */
+    .hero {
+      position: relative;
+      min-height: 90vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+    }
+    .hero-photo {
+      position: absolute;
+      inset: 0;
+      background: var(--mid);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 0;
+    }
+    .photo-label {
+      color: var(--muted);
+      font-size: 0.88rem;
+      font-family: Arial, sans-serif;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border: 1px dashed var(--border);
+      padding: 14px 28px;
+      border-radius: 4px;
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(28,23,18,0.5) 0%, rgba(28,23,18,0.88) 100%);
+      z-index: 1;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+      padding: 60px 24px;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: var(--accent);
+      color: var(--cream);
+      font-size: 0.76rem;
+      font-family: Arial, sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 6px 18px;
+      border-radius: 2px;
+      margin-bottom: 24px;
+    }
+    .hero h1 {
+      font-size: clamp(2.8rem, 7vw, 5rem);
+      color: var(--cream);
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+      margin-bottom: 16px;
+    }
+    .hero h1 span { color: var(--gold); }
+    .hero-tagline {
+      font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+      color: var(--muted);
+      font-style: italic;
+      margin-bottom: 36px;
+    }
+    .hero-stats {
+      display: flex;
+      gap: 40px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+    }
+    .stat { text-align: center; }
+    .stat-num {
+      display: block;
+      font-size: 2rem;
+      font-weight: bold;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .stat-label {
+      display: block;
+      font-size: 0.74rem;
+      font-family: Arial, sans-serif;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+    .hero-divider {
+      width: 48px;
+      height: 2px;
+      background: var(--gold);
+      margin: 0 auto 40px;
+    }
+    .btn-primary {
+      display: inline-block;
+      background: var(--gold);
+      color: #111;
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: 700;
+      font-size: 0.88rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 14px 36px;
+      border-radius: 2px;
+    }
+    .btn-primary:hover { background: var(--gold-lt); text-decoration: none; color: #111; }
+
+    /* ── Sections ── */
+    section { padding: 80px 24px; }
+
+    .section-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      display: inline-block;
+      font-family: Arial, sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 14px;
+    }
+
+    h2 {
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      color: var(--cream);
+      margin-bottom: 20px;
+      line-height: 1.15;
+    }
+
+    .ruled-line {
+      width: 48px;
+      height: 2px;
+      background: var(--gold);
+      margin-bottom: 32px;
+    }
+
+    p { color: var(--text); max-width: 680px; }
+
+    /* ── About ── */
+    .about-bg { background: var(--panel); }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: start;
+    }
+    .about-photo-box {
+      background: var(--mid);
+      border: 1px dashed var(--border);
+      aspect-ratio: 4/3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 4px;
+    }
+    .about-text p { max-width: 100%; margin-bottom: 20px; }
+    .about-text p:last-child { margin-bottom: 0; }
+
+    .highlight-box {
+      background: var(--mid);
+      border-left: 3px solid var(--gold);
+      padding: 20px 24px;
+      margin-top: 28px;
+      border-radius: 0 4px 4px 0;
+      font-style: italic;
+      color: var(--cream);
+    }
+
+    /* ── Events ── */
+    .events-bg { background: var(--bg); }
+
+    .events-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 24px;
+      margin-top: 40px;
+    }
+    .event-card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-top: 3px solid var(--gold);
+      padding: 28px 24px;
+      border-radius: 0 0 4px 4px;
+    }
+    .event-card h3 {
+      font-size: 1.1rem;
+      color: var(--cream);
+      margin-bottom: 10px;
+    }
+    .event-card p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      max-width: 100%;
+      line-height: 1.6;
+    }
+    .event-icon {
+      width: 36px;
+      height: 36px;
+      margin-bottom: 16px;
+      fill: var(--gold);
+      stroke: none;
+    }
+
+    /* ── Drinks ── */
+    .drinks-bg { background: var(--panel); }
+
+    .drinks-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+    .drinks-photo-box {
+      background: var(--mid);
+      border: 1px dashed var(--border);
+      aspect-ratio: 3/4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 4px;
+    }
+    .drinks-note {
+      margin-top: 24px;
+      font-size: 0.88rem;
+      color: var(--muted);
+      font-style: italic;
+      max-width: 100%;
+    }
+
+    /* ── Hours ── */
+    .hours-bg { background: var(--bg); }
+
+    .hours-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: start;
+    }
+    .hours-table { width: 100%; border-collapse: collapse; }
+    .hours-table tr { border-bottom: 1px solid var(--border); }
+    .hours-table tr:last-child { border-bottom: none; }
+    .hours-table td {
+      padding: 13px 0;
+      font-size: 0.98rem;
+      color: var(--text);
+    }
+    .hours-table td:first-child {
+      font-family: Arial, sans-serif;
+      font-weight: 700;
+      color: var(--cream);
+      width: 130px;
+    }
+    .hours-callout {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      padding: 28px;
+      border-radius: 4px;
+    }
+    .hours-callout h3 {
+      font-size: 1.1rem;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+    .hours-callout p {
+      font-size: 0.92rem;
+      color: var(--muted);
+      max-width: 100%;
+      margin-bottom: 16px;
+    }
+
+    /* ── Contact ── */
+    .contact-bg { background: var(--accent); }
+
+    .contact-bg h2 { color: var(--cream); }
+    .contact-bg .section-label { color: var(--gold-lt); }
+    .contact-bg p { color: rgba(243,232,210,0.85); }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: start;
+    }
+    .contact-block h3 {
+      font-size: 1rem;
+      font-family: Arial, sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gold-lt);
+      margin-bottom: 12px;
+    }
+    .contact-block p, .contact-block address {
+      font-style: normal;
+      color: rgba(243,232,210,0.9);
+      max-width: 100%;
+      line-height: 1.8;
+    }
+    .contact-block a { color: var(--gold-lt); }
+    .contact-block a:hover { color: #fff; }
+
+    .social-links {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 8px;
+    }
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: rgba(243,232,210,0.9);
+      font-family: Arial, sans-serif;
+      font-size: 0.92rem;
+    }
+    .social-link:hover { color: #fff; text-decoration: none; }
+    .social-link svg {
+      width: 18px;
+      height: 18px;
+      fill: var(--gold-lt);
+      flex-shrink: 0;
+    }
+
+    .events-enquiry {
+      background: rgba(0,0,0,0.2);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 4px;
+      padding: 28px;
+      margin-top: 4px;
+    }
+    .events-enquiry h3 {
+      font-size: 1rem;
+      font-family: Arial, sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gold-lt);
+      margin-bottom: 10px;
+    }
+    .events-enquiry p {
+      color: rgba(243,232,210,0.85);
+      font-size: 0.92rem;
+      max-width: 100%;
+      margin-bottom: 18px;
+    }
+    .events-enquiry .btn-call {
+      display: inline-block;
+      background: var(--gold);
+      color: #111;
+      font-family: Arial, sans-serif;
+      font-weight: 700;
+      font-size: 0.88rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 12px 28px;
+      border-radius: 2px;
+    }
+    .events-enquiry .btn-call:hover { background: var(--gold-lt); text-decoration: none; color: #111; }
+
+    /* ── Location ── */
+    .location-bg { background: var(--bg); }
+
+    .location-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: start;
+    }
+    .map-placeholder {
+      background: var(--mid);
+      border: 1px dashed var(--border);
+      aspect-ratio: 16/10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      border-radius: 4px;
+    }
+    .map-placeholder svg {
+      width: 40px;
+      height: 40px;
+      fill: var(--gold);
+      opacity: 0.6;
+    }
+    .map-placeholder p {
+      font-size: 0.82rem;
+      color: var(--muted);
+      max-width: 100%;
+      text-align: center;
+    }
+    .map-placeholder a {
+      font-size: 0.82rem;
+      color: var(--gold);
+      font-family: Arial, sans-serif;
+    }
+    .location-info p {
+      max-width: 100%;
+      margin-bottom: 16px;
+    }
+    .location-detail {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      margin-bottom: 18px;
+    }
+    .location-detail svg {
+      width: 20px;
+      height: 20px;
+      fill: var(--gold);
+      flex-shrink: 0;
+      margin-top: 3px;
+    }
+    .location-detail span { color: var(--text); line-height: 1.6; }
+
+    /* ── Footer ── */
+    footer {
+      background: var(--panel);
+      border-top: 2px solid var(--gold);
+      padding: 40px 24px;
+      text-align: center;
+    }
+    .footer-inner { max-width: 1100px; margin: 0 auto; }
+    .footer-name {
+      font-size: 1.3rem;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+    .footer-address {
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin-bottom: 24px;
+      font-style: normal;
+    }
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+    .footer-links a {
+      color: var(--muted);
+      font-size: 0.85rem;
+      font-family: Arial, sans-serif;
+    }
+    .footer-links a:hover { color: var(--gold); }
+    .footer-klar {
+      font-size: 0.78rem;
+      color: var(--muted);
+      font-family: Arial, sans-serif;
+      border-top: 1px solid var(--border);
+      padding-top: 20px;
+      margin-top: 4px;
+    }
+    .footer-klar a { color: var(--muted); }
+    .footer-klar a:hover { color: var(--gold); }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      nav { display: none; }
+      .about-grid,
+      .drinks-grid,
+      .hours-layout,
+      .contact-grid,
+      .location-grid { grid-template-columns: 1fr; }
+      .hero h1 { font-size: 2.6rem; }
+      .hero-stats { gap: 24px; }
+      section { padding: 56px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Demo Banner -->
+  <div style="background:#c09a50;color:#111;text-align:center;padding:10px 16px;font-size:13px;font-weight:600;font-family:Arial,sans-serif">
+    This is a demo preview built by Klar Systems for Black Sheep Pub &amp; Terrace. See our proposal:
+    <a href="https://preview.klarsystems.com/black-sheep-pub-terrace-pietarsaari/proposal/" style="color:#111;font-weight:700">preview.klarsystems.com/black-sheep-pub-terrace-pietarsaari/proposal/</a>
+  </div>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-inner">
+      <span class="nav-logo">Black Sheep Pub</span>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#events">Events</a></li>
+        <li><a href="#drinks">Drinks</a></li>
+        <li><a href="#hours">Hours</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="#location">Find Us</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-photo">
+      <span class="photo-label">Your photo here</span>
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-badge">Pietarsaari's live music pub — open every day</div>
+      <h1>Black <span>Sheep</span> Pub</h1>
+      <p class="hero-tagline">Beer, music, terrace — the best of Pietarsaari's nightlife in one place.</p>
+      <div class="hero-divider"></div>
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-num">4.2</span>
+          <span class="stat-label">Google Rating</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">440</span>
+          <span class="stat-label">Reviews</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">15+</span>
+          <span class="stat-label">Concerts on record</span>
+        </div>
+      </div>
+      <a href="#contact" class="btn-primary">Get In Touch</a>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="about-bg">
+    <div class="section-inner">
+      <div class="about-grid">
+        <div>
+          <div class="about-photo-box">
+            <span class="photo-label">Interior photo coming soon</span>
+          </div>
+        </div>
+        <div class="about-text">
+          <span class="section-label">Our Story</span>
+          <h2>Pietarsaari's rock pub, since 2014</h2>
+          <div class="ruled-line"></div>
+          <p>Black Sheep Pub &amp; Terrace has been Pietarsaari's go-to spot for live music, cold beer, and a genuinely friendly atmosphere since opening on Isokatu in 2014. We sit right in the centre of the city, with a cosy pub interior and one of the town's best-kept secrets: an inner-yard summer terrace.</p>
+          <p>We keep things simple — good music, good company, a full bar and a pool table. Whether you stop in for a quiet pint or stay for the band, you are welcome here.</p>
+          <div class="highlight-box">
+            "A great place to have a beer — good music, good atmosphere and a full bar. All you can ask for is right there." — Google review
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Events -->
+  <section id="events" class="events-bg">
+    <div class="section-inner">
+      <span class="section-label">What's On</span>
+      <h2>Live music and more, all year round</h2>
+      <div class="ruled-line"></div>
+      <p style="max-width:640px;margin-bottom:0">From rock bands and jazz nights to private gatherings, something is always on at Black Sheep. Here is what makes us Pietarsaari's most full-spirited local.</p>
+
+      <div class="events-grid">
+
+        <!-- Live Music -->
+        <div class="event-card">
+          <svg class="event-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9 18V6l12-2v12M9 18a2 2 0 1 1-4 0 2 2 0 0 1 4 0ZM21 16a2 2 0 1 1-4 0 2 2 0 0 1 4 0Z"/>
+          </svg>
+          <h3>Live Music</h3>
+          <p>Rock, jazz and everything in between — we host live performances year-round. Past acts include Bob Malmström, Marco Luponero &amp; The Loud Ones, and Erik Sjøholm. Follow us on Facebook for upcoming gig dates.</p>
+        </div>
+
+        <!-- Summer Terrace -->
+        <div class="event-card">
+          <svg class="event-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="12" cy="12" r="5"/>
+            <line x1="12" y1="2" x2="12" y2="4" stroke="currentColor" stroke-width="2"/>
+            <line x1="12" y1="20" x2="12" y2="22" stroke="currentColor" stroke-width="2"/>
+            <line x1="2" y1="12" x2="4" y2="12" stroke="currentColor" stroke-width="2"/>
+            <line x1="20" y1="12" x2="22" y2="12" stroke="currentColor" stroke-width="2"/>
+            <line x1="4.93" y1="4.93" x2="6.34" y2="6.34" stroke="currentColor" stroke-width="2"/>
+            <line x1="17.66" y1="17.66" x2="19.07" y2="19.07" stroke="currentColor" stroke-width="2"/>
+            <line x1="4.93" y1="19.07" x2="6.34" y2="17.66" stroke="currentColor" stroke-width="2"/>
+            <line x1="17.66" y1="6.34" x2="19.07" y2="4.93" stroke="currentColor" stroke-width="2"/>
+          </svg>
+          <h3>Summer Terrace</h3>
+          <p>Our inner-yard terrace is Pietarsaari's favourite warm-weather spot. Sheltered, relaxed and right in the heart of the city — the perfect place to enjoy a beer when the Finnish summer arrives.</p>
+        </div>
+
+        <!-- Pool Table -->
+        <div class="event-card">
+          <svg class="event-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="12" cy="12" r="10"/>
+            <circle cx="12" cy="12" r="4" fill="var(--panel)"/>
+          </svg>
+          <h3>Pool Table</h3>
+          <p>Challenge your mates to a game of pool any time we are open. The table is ready — all you need to bring is your best shot.</p>
+        </div>
+
+        <!-- Private Events -->
+        <div class="event-card">
+          <svg class="event-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+          <h3>Private Events &amp; Groups</h3>
+          <p>Planning a work night out, birthday, or other group event? Black Sheep is a natural setting. Get in touch to discuss arrangements — we are happy to accommodate your group.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Drinks -->
+  <section id="drinks" class="drinks-bg">
+    <div class="section-inner">
+      <div class="drinks-grid">
+        <div>
+          <span class="section-label">Drinks</span>
+          <h2>A full bar, done right</h2>
+          <div class="ruled-line"></div>
+          <p style="max-width:100%;margin-bottom:28px">We keep a well-stocked bar — beer on tap, spirits, cocktails and non-alcoholic options. Student discount on beer applies. Ask the bar staff what's pouring tonight.</p>
+          <p class="drinks-note">Full drinks menu available at the bar. Prices and selection may vary.</p>
+        </div>
+        <div>
+          <div class="drinks-photo-box">
+            <span class="photo-label">Food photos coming soon</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Hours -->
+  <section id="hours" class="hours-bg">
+    <div class="section-inner">
+      <div class="hours-layout">
+        <div>
+          <span class="section-label">Opening Hours</span>
+          <h2>Open every day</h2>
+          <div class="ruled-line"></div>
+          <table class="hours-table">
+            <tbody>
+              <tr>
+                <td>Monday</td>
+                <td>16:00 – 02:00</td>
+              </tr>
+              <tr>
+                <td>Tuesday</td>
+                <td>16:00 – 02:00</td>
+              </tr>
+              <tr>
+                <td>Wednesday</td>
+                <td>16:00 – 02:00</td>
+              </tr>
+              <tr>
+                <td>Thursday</td>
+                <td>16:00 – 02:00</td>
+              </tr>
+              <tr>
+                <td>Friday</td>
+                <td>16:00 – 02:00</td>
+              </tr>
+              <tr>
+                <td>Saturday</td>
+                <td>16:00 – 03:00</td>
+              </tr>
+              <tr>
+                <td>Sunday</td>
+                <td>19:00 – 02:00</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div>
+          <div class="hours-callout">
+            <h3>No reservation needed</h3>
+            <p>Walk in any day of the week from the afternoon. We are open late on weekends and always happy to have you.</p>
+            <p>For live music nights, private event bookings, or any questions, give us a call.</p>
+            <a href="tel:+358405291721" class="btn-primary" style="display:inline-block;margin-top:8px;">
+              Call 040 529 1721
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact & Events -->
+  <section id="contact" class="contact-bg">
+    <div class="section-inner">
+      <span class="section-label">Contact &amp; Events</span>
+      <h2>Get in touch</h2>
+      <div class="ruled-line" style="background:rgba(255,255,255,0.3);"></div>
+
+      <div class="contact-grid">
+        <div>
+          <div class="contact-block" style="margin-bottom:36px;">
+            <h3>Call Us</h3>
+            <address>
+              <a href="tel:+358405291721">040 529 1721</a><br>
+              Isokatu 20, 68600 Pietarsaari
+            </address>
+          </div>
+
+          <div class="contact-block">
+            <h3>Follow Us</h3>
+            <div class="social-links">
+              <a href="https://www.facebook.com/pubblacksheep" class="social-link" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+                </svg>
+                Black Sheep Pub &amp; Terrace on Facebook
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="events-enquiry">
+            <h3>Enquire About Events</h3>
+            <p>Interested in hosting a private event or group evening at Black Sheep? Want to know when the next live music night is on?</p>
+            <p>Call us directly — we are happy to discuss upcoming events and private bookings.</p>
+            <a href="tel:+358405291721" class="btn-call">Call 040 529 1721</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Location -->
+  <section id="location" class="location-bg">
+    <div class="section-inner">
+      <div class="location-grid">
+        <div class="location-info">
+          <span class="section-label">Find Us</span>
+          <h2>Right in the heart of Pietarsaari</h2>
+          <div class="ruled-line"></div>
+
+          <div class="location-detail">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7Zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5Z"/>
+            </svg>
+            <span>Isokatu 20, 68600 Pietarsaari, Finland</span>
+          </div>
+
+          <div class="location-detail">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.5 11.93a19.79 19.79 0 0 1-3-8.5 2 2 0 0 1 1.99-2.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 5.86 5.86l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92Z"/>
+            </svg>
+            <span><a href="tel:+358405291721">040 529 1721</a></span>
+          </div>
+
+          <p style="margin-top:24px;font-size:0.92rem;color:var(--muted);">Black Sheep Pub &amp; Terrace is located on Isokatu in the centre of Pietarsaari. Street parking is available nearby.</p>
+
+          <a href="https://maps.google.com/?cid=18199969141730361202" target="_blank" rel="noopener" class="btn-primary" style="display:inline-block;margin-top:24px;">Open in Google Maps</a>
+        </div>
+
+        <div>
+          <div class="map-placeholder">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7Zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5Z"/>
+            </svg>
+            <p>Isokatu 20, 68600 Pietarsaari</p>
+            <a href="https://maps.google.com/?cid=18199969141730361202" target="_blank" rel="noopener">View on Google Maps</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-inner">
+      <p class="footer-name">Black Sheep Pub &amp; Terrace</p>
+      <address class="footer-address">Isokatu 20, 68600 Pietarsaari, Finland &nbsp;|&nbsp; <a href="tel:+358405291721" style="color:var(--muted);">040 529 1721</a></address>
+      <div class="footer-links">
+        <a href="#about">About</a>
+        <a href="#events">Events</a>
+        <a href="#drinks">Drinks</a>
+        <a href="#hours">Hours</a>
+        <a href="#contact">Contact</a>
+        <a href="https://www.facebook.com/pubblacksheep" target="_blank" rel="noopener">Facebook</a>
+      </div>
+      <p class="footer-klar">
+        Powered by Klar Systems — this is a demo preview for Black Sheep Pub &amp; Terrace.<br>
+        <a href="https://preview.klarsystems.com/black-sheep-pub-terrace-pietarsaari/proposal/">preview.klarsystems.com/black-sheep-pub-terrace-pietarsaari/proposal/</a>
+      </p>
+    </div>
+  </footer>
+
+</body>
+</html>

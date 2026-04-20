@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<!-- Palette sourced from research.json visual_identity.palette (inferred): bg #1A1A1A, text #E8DCC8, primary #5C3D1E, accent #B8860B -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pub Virasto — Lahti's Two-Floor Pub in a Former City Office</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #1A1A1A;
+      --surface:  #222018;
+      --text:     #E8DCC8;
+      --muted:    #8C7D6A;
+      --primary:  #5C3D1E;
+      --accent:   #B8860B;
+      --border:   rgba(184,134,11,0.2);
+      --stamp:    rgba(92,61,30,0.15);
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', system-ui, sans-serif;
+      font-size: 1rem;
+      line-height: 1.65;
+    }
+
+    /* --- DEMO BANNER --- */
+    .demo-banner {
+      background: var(--accent);
+      color: #1A1A1A;
+      text-align: center;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.55rem 1rem;
+    }
+
+    /* --- NAV --- */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(26,26,26,0.94);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.9rem 2rem;
+    }
+    .nav-logo {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 1.3rem;
+      color: var(--accent);
+      letter-spacing: 0.04em;
+    }
+    .nav-stamp {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      padding: 0.15rem 0.5rem;
+      margin-left: 0.6rem;
+      vertical-align: middle;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    /* --- HERO --- */
+    .hero {
+      position: relative;
+      min-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 4rem 1.5rem;
+      overflow: hidden;
+    }
+    .hero-photo-placeholder {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(160deg, #2A2015 0%, #1A1A1A 55%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.1);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 70%, rgba(184,134,11,0.07) 0%, rgba(26,26,26,0.6) 65%);
+    }
+    /* Decorative rule/stamp behind hero text */
+    .hero-rule {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 600px;
+      height: 600px;
+      border: 2px solid var(--stamp);
+      border-radius: 4px;
+      pointer-events: none;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 760px;
+    }
+    .hero-eyebrow {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.25rem;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      display: inline-block;
+      padding: 0.3rem 1.2rem;
+    }
+    h1 {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: clamp(3rem, 8vw, 6rem);
+      line-height: 1.0;
+      color: var(--text);
+      margin: 1rem 0 0.6rem;
+    }
+    .hero-tagline {
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+    }
+    .hero-sub {
+      font-size: 1.1rem;
+      color: var(--muted);
+      max-width: 500px;
+      margin: 0 auto 2.5rem;
+    }
+    .hero-cta-row {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #1A1A1A;
+      border: none;
+      border-radius: 3px;
+      padding: 0.85rem 2rem;
+      font-size: 0.9rem;
+      font-weight: 700;
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .btn-primary:hover { opacity: 0.86; }
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 1.5px solid var(--border);
+      border-radius: 3px;
+      padding: 0.85rem 2rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      transition: border-color 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* --- STATS STRIP --- */
+    .stats-strip {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      flex-wrap: wrap;
+    }
+    .stat-block {
+      flex: 1;
+      min-width: 160px;
+      text-align: center;
+      padding: 1.5rem 1rem;
+      border-right: 1px solid var(--border);
+    }
+    .stat-block:last-child { border-right: none; }
+    .stat-num {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 2rem;
+      color: var(--accent);
+      display: block;
+    }
+    .stat-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* --- SECTIONS --- */
+    section { padding: 5rem 1.5rem; }
+    .container { max-width: 1040px; margin: 0 auto; }
+    h2 {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: clamp(1.9rem, 4vw, 2.8rem);
+      margin-bottom: 1rem;
+      color: var(--text);
+    }
+    .section-sub {
+      color: var(--muted);
+      max-width: 560px;
+      margin-bottom: 3rem;
+    }
+
+    /* --- ABOUT GRID --- */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+    @media (max-width: 680px) {
+      .about-grid { grid-template-columns: 1fr; }
+    }
+    .about-text p { color: var(--muted); margin-bottom: 1rem; }
+    .about-text p:last-child { margin-bottom: 0; }
+    .interior-photo-placeholder {
+      background: var(--surface);
+      border: 1px dashed var(--border);
+      border-radius: 6px;
+      height: 340px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-size: 0.85rem;
+      letter-spacing: 0.06em;
+    }
+
+    /* --- FEATURES --- */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 1.25rem;
+    }
+    .feature-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1.6rem 1.4rem;
+    }
+    .feature-icon {
+      width: 36px;
+      height: 36px;
+      color: var(--accent);
+      margin-bottom: 0.85rem;
+    }
+    .feature-card h3 {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 1.15rem;
+      color: var(--text);
+      margin-bottom: 0.4rem;
+    }
+    .feature-card p { font-size: 0.875rem; color: var(--muted); }
+
+    /* --- EVENTS SECTION --- */
+    .events-section { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .events-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+    .event-card {
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1.75rem 1.5rem;
+      background: var(--bg);
+      position: relative;
+      overflow: hidden;
+    }
+    .event-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 3px;
+      height: 100%;
+      background: var(--accent);
+      border-radius: 3px 0 0 3px;
+    }
+    .event-day {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+    .event-card h3 {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 1.3rem;
+      color: var(--text);
+      margin-bottom: 0.45rem;
+    }
+    .event-card p { font-size: 0.875rem; color: var(--muted); }
+
+    /* --- DRINKS SECTION --- */
+    .menu-photo-placeholder {
+      background: var(--surface);
+      border: 1px dashed var(--border);
+      border-radius: 6px;
+      height: 220px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-size: 0.85rem;
+      letter-spacing: 0.06em;
+      margin-bottom: 2rem;
+    }
+    .drinks-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+    .drink-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1rem 1.25rem;
+    }
+    .drink-item strong { color: var(--text); font-size: 0.95rem; }
+    .drink-item span { display: block; font-size: 0.8rem; color: var(--muted); margin-top: 0.15rem; }
+
+    /* --- HOURS --- */
+    .hours-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+    @media (max-width: 640px) { .hours-wrap { grid-template-columns: 1fr; } }
+    .hours-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .hours-table tr { border-bottom: 1px solid var(--border); }
+    .hours-table td {
+      padding: 0.7rem 0;
+      font-size: 0.925rem;
+      color: var(--text);
+    }
+    .hours-table td:last-child {
+      text-align: right;
+      color: var(--accent);
+      font-weight: 500;
+    }
+    .hours-table tr.closed td { color: var(--muted); }
+    .hours-table tr.closed td:last-child { color: var(--muted); }
+    .hours-note {
+      margin-top: 1.5rem;
+      font-size: 0.85rem;
+      color: var(--muted);
+      border-left: 2px solid var(--border);
+      padding-left: 1rem;
+    }
+
+    /* --- TESTIMONIALS --- */
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+    .testimonial {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1.75rem;
+    }
+    .testimonial blockquote {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: var(--text);
+      font-style: italic;
+      margin-bottom: 1rem;
+    }
+    .testimonial cite {
+      font-size: 0.78rem;
+      color: var(--muted);
+      font-style: normal;
+    }
+
+    /* --- CONTACT --- */
+    .contact-section {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+    }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    @media (max-width: 680px) { .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; } }
+    .contact-info h3 {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 1.6rem;
+      color: var(--text);
+      margin-bottom: 1.5rem;
+    }
+    .contact-detail { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2rem; }
+    .contact-row { display: flex; flex-direction: column; gap: 0.15rem; }
+    .contact-row .label {
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+    }
+    .contact-row a, .contact-row .value {
+      color: var(--text);
+      text-decoration: none;
+      font-size: 1rem;
+    }
+    .contact-row a:hover { color: var(--accent); }
+    .social-links { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+    .social-link {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      padding: 0.5rem 1rem;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.83rem;
+      font-weight: 500;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .social-link:hover { color: var(--accent); border-color: var(--accent); }
+    .map-embed {
+      width: 100%;
+      height: 300px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      filter: grayscale(0.3) sepia(0.1);
+    }
+
+    /* --- FOOTER --- */
+    footer {
+      background: #111;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 2rem 1.5rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+    footer .powered { margin-top: 0.4rem; }
+
+    @media (max-width: 640px) {
+      nav { padding: 0.85rem 1.25rem; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- DEMO BANNER -->
+  <div class="demo-banner">Demo preview — not the live site</div>
+
+  <!-- NAV -->
+  <nav>
+    <div>
+      <span class="nav-logo">Pub Virasto</span>
+      <span class="nav-stamp">Est. Lahti</span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#events">Events</a></li>
+      <li><a href="#drinks">Drinks</a></li>
+      <li><a href="#hours">Hours</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" aria-label="Hero">
+    <div class="hero-photo-placeholder" aria-hidden="true">Your photo here</div>
+    <div class="hero-overlay" aria-hidden="true"></div>
+    <div class="hero-rule" aria-hidden="true"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">Lahti &mdash; Vesijärvenkatu 11</div>
+      <h1>Pub Virasto</h1>
+      <p class="hero-tagline">350 m&sup2; &mdash; Two Floors &mdash; 200 Seats &mdash; Former City Office</p>
+      <p class="hero-sub">Lahti's best-kept pub secret: a converted Victorian-furnished city office building turned into the neighbourhood's favourite gathering spot.</p>
+      <div class="hero-cta-row">
+        <a href="#events" class="btn-primary">See Events</a>
+        <a href="#contact" class="btn-outline">Find Us</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS STRIP -->
+  <div class="stats-strip">
+    <div class="stat-block">
+      <span class="stat-num">4.2 / 5</span>
+      <span class="stat-label">Google Rating</span>
+    </div>
+    <div class="stat-block">
+      <span class="stat-num">715</span>
+      <span class="stat-label">Google Reviews</span>
+    </div>
+    <div class="stat-block">
+      <span class="stat-num">350 m&sup2;</span>
+      <span class="stat-label">Two-Floor Venue</span>
+    </div>
+    <div class="stat-block">
+      <span class="stat-num">200</span>
+      <span class="stat-label">Seats</span>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section aria-labelledby="about-heading">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-text">
+          <h2 id="about-heading">The Building Has a Story</h2>
+          <p>Pub Virasto occupies what used to be the City of Lahti's technical office — 350 square metres spread across two floors, with high ceilings, original architectural details, and Victorian furnishings that were kept deliberately intact.</p>
+          <p>The name says it all: this was a government bureau once. Now it's the most characterful pub in Lahti, with full A-licence, a proper beer selection, a sunny street-level terrace, darts boards, a live music stage, and a weekly pub quiz that draws regulars every Wednesday.</p>
+          <p>Central location, no pretension, exactly the kind of place you can drop into after work or make a full evening of it.</p>
+        </div>
+        <div class="interior-photo-placeholder" aria-label="Interior photo placeholder">Interior photo coming soon</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section style="background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);" aria-labelledby="features-heading">
+    <div class="container">
+      <h2 id="features-heading">What You'll Find Inside</h2>
+      <p class="section-sub">Two floors, lots of character, and enough going on that no two visits feel the same.</p>
+      <div class="features-grid">
+        <div class="feature-card">
+          <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <path d="M3 3h7v7H3zM14 3h7v7h-7zM14 14h7v7h-7zM3 14h7v7H3z"/>
+          </svg>
+          <h3>Two Floors</h3>
+          <p>350 square metres of former office space reimagined as a pub. Plenty of room to find your corner.</p>
+        </div>
+        <div class="feature-card">
+          <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 3"/>
+          </svg>
+          <h3>Pub Quiz — Wednesdays 19:00</h3>
+          <p>Baaripähkinä pub quiz every Wednesday at 7 pm. Regulars know this slot — join them.</p>
+        </div>
+        <div class="feature-card">
+          <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <path d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"/>
+          </svg>
+          <h3>Live Music</h3>
+          <p>Regular live acts on the stage. Previous artists include Jussi Syren and the Groundbreakers.</p>
+        </div>
+        <div class="feature-card">
+          <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <circle cx="9" cy="12" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="18" r="1"/><path d="M10 12h4.5M10 12l4.5-6M10 12l4.5 6"/>
+          </svg>
+          <h3>Darts</h3>
+          <p>Dartboard on site. Good for filling the time between rounds or making a proper game of the evening.</p>
+        </div>
+        <div class="feature-card">
+          <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <path d="M12 3C7 3 3 7 3 12s4 9 9 9 9-4 9-9"/><path d="M3 12h18"/>
+          </svg>
+          <h3>Sunny Terrace</h3>
+          <p>Street-level terrace that catches the sun. A local favourite through the warmer months.</p>
+        </div>
+        <div class="feature-card">
+          <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <path d="M8 6h8M8 10h8M8 14h4"/><rect x="3" y="3" width="18" height="18" rx="2"/>
+          </svg>
+          <h3>Victorian Furnishings</h3>
+          <p>The original office character was kept — high ceilings, warm materials, a properly atmospheric interior.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EVENTS -->
+  <section id="events" class="events-section" aria-labelledby="events-heading">
+    <div class="container">
+      <h2 id="events-heading">Regular Events</h2>
+      <p class="section-sub">Something on most nights of the week. Call or follow us on Facebook for the live programme.</p>
+      <div class="events-grid">
+        <div class="event-card">
+          <div class="event-day">Every Wednesday at 19:00</div>
+          <h3>Pub Quiz</h3>
+          <p>Baaripähkinä pub quiz — teams of any size, broad topic range, and a proper pub atmosphere. One of Lahti's most consistent weekly events.</p>
+        </div>
+        <div class="event-card">
+          <div class="event-day">Regular — check programme</div>
+          <h3>Live Music</h3>
+          <p>Bands and artists on the stage on select evenings. Previous acts have included local and touring Finnish live acts.</p>
+        </div>
+        <div class="event-card">
+          <div class="event-day">Fri–Sat until 02:00</div>
+          <h3>Weekend Late</h3>
+          <p>Open until 2 am on weekends. The terrace, the bar, the full house — all running until it's properly late.</p>
+        </div>
+        <div class="event-card">
+          <div class="event-day">Mon–Fri from 14:00</div>
+          <h3>After-Work</h3>
+          <p>Opening at 2 pm makes Virasto the natural stop after the working day. Relaxed, no rush, no fuss.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DRINKS -->
+  <section id="drinks" aria-labelledby="drinks-heading">
+    <div class="container">
+      <h2 id="drinks-heading">Drinks</h2>
+      <p class="section-sub">A full A-licence selection with a beer list that covers the room — gluten-free options included.</p>
+      <div class="menu-photo-placeholder" aria-label="Drinks photo placeholder">Food photos coming soon</div>
+      <div class="drinks-list">
+        <div class="drink-item">
+          <strong>Beers on Tap</strong>
+          <span>Broad selection including gluten-free options</span>
+        </div>
+        <div class="drink-item">
+          <strong>Bottled Beers</strong>
+          <span>Finnish and international range</span>
+        </div>
+        <div class="drink-item">
+          <strong>Spirits &amp; Cocktails</strong>
+          <span>Full bar, A-licence</span>
+        </div>
+        <div class="drink-item">
+          <strong>Snacks</strong>
+          <span>Light bites to accompany your drink</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOURS -->
+  <section id="hours" style="background: var(--surface); border-top: 1px solid var(--border);" aria-labelledby="hours-heading">
+    <div class="container">
+      <h2 id="hours-heading">Opening Hours</h2>
+      <div class="hours-wrap">
+        <div>
+          <table class="hours-table" aria-label="Opening hours">
+            <tbody>
+              <tr class="closed"><td>Sunday</td><td>Closed</td></tr>
+              <tr><td>Monday</td><td>14:00 – 22:00</td></tr>
+              <tr><td>Tuesday</td><td>14:00 – 22:00</td></tr>
+              <tr><td>Wednesday</td><td>14:00 – 00:00</td></tr>
+              <tr><td>Thursday</td><td>14:00 – 00:00</td></tr>
+              <tr><td>Friday</td><td>14:00 – 02:00</td></tr>
+              <tr><td>Saturday</td><td>14:00 – 02:00</td></tr>
+            </tbody>
+          </table>
+          <p class="hours-note">Pub quiz every Wednesday from 19:00. Live music on select evenings — check Facebook for the current programme.</p>
+        </div>
+        <div>
+          <h3 style="font-family:'DM Serif Display',Georgia,serif; color:var(--text); margin-bottom:1rem;">Find Us</h3>
+          <p style="color:var(--muted); margin-bottom:0.5rem;">Vesijärvenkatu 11, 15140 Lahti</p>
+          <p style="color:var(--muted); margin-bottom:1.5rem;">Central Lahti — close to Vapaudenkatu</p>
+          <a href="tel:+358413260288" style="color:var(--text); text-decoration:none; font-size:1.1rem; font-weight:600;">+358 41 326 0288</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section aria-labelledby="reviews-heading">
+    <div class="container">
+      <h2 id="reviews-heading">What People Say</h2>
+      <p class="section-sub">4.2 / 5 across 715 Google reviews.</p>
+      <div class="testimonials-grid">
+        <div class="testimonial">
+          <blockquote>"Great central location in one of the main streets in Lahti."</blockquote>
+          <cite>TripAdvisor review</cite>
+        </div>
+        <div class="testimonial">
+          <blockquote>"A nice place to have a quick after-work pint."</blockquote>
+          <cite>TripAdvisor review</cite>
+        </div>
+        <div class="testimonial">
+          <blockquote>"Pleasant, spacious and tidy. Excellent service. Good selection of drinks."</blockquote>
+          <cite>Google review via Sluurpy</cite>
+        </div>
+        <div class="testimonial">
+          <blockquote>"Great atmosphere! Could also play darts!"</blockquote>
+          <cite>Google review via Sluurpy</cite>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="contact-section" aria-labelledby="contact-heading">
+    <div class="container">
+      <h2 id="contact-heading">Contact &amp; Location</h2>
+      <div class="contact-grid">
+        <div class="contact-info">
+          <h3>Pub Virasto</h3>
+          <div class="contact-detail">
+            <div class="contact-row">
+              <span class="label">Address</span>
+              <span class="value">Vesijärvenkatu 11, 15140 Lahti</span>
+            </div>
+            <div class="contact-row">
+              <span class="label">Phone</span>
+              <a href="tel:+358413260288">+358 41 326 0288</a>
+            </div>
+          </div>
+          <p style="font-size:0.85rem; color:var(--muted); margin-bottom:1.25rem;">Follow us for the current events programme and live music schedule:</p>
+          <div class="social-links">
+            <a href="https://www.facebook.com/pubvirasto/" class="social-link" target="_blank" rel="noopener">Facebook</a>
+            <a href="https://www.instagram.com/pub.virasto/" class="social-link" target="_blank" rel="noopener">Instagram</a>
+          </div>
+        </div>
+        <div>
+          <iframe
+            class="map-embed"
+            title="Pub Virasto location map"
+            src="https://maps.google.com/maps?q=Vesij%C3%A4rvenkatu+11+Lahti&z=16&output=embed"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div>Pub Virasto &mdash; Vesijärvenkatu 11, 15140 Lahti</div>
+    <div class="powered">Powered by Klar</div>
+  </footer>
+
+</body>
+</html>

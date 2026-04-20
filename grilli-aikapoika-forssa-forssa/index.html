@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Grilli Aikapoika — Forssa</title>
+  <style>
+    /* Demo banner */
+    .demo-banner{background:#2a1a00;border-bottom:2px solid #E04B1E;padding:10px 20px;text-align:center;font-size:13px;color:#F2C75C;letter-spacing:.04em}
+    .demo-banner a{color:#F2C75C;font-weight:700;text-decoration:underline}
+    /* palette: segment 2 default (research palette empty) */
+    :root {
+      --bg:       #141414;
+      --text:     #F5F1EA;
+      --primary:  #E04B1E;
+      --accent:   #F2C75C;
+      --surface:  #1E1E1E;
+      --muted:    #9A9189;
+      --heading:  'Archivo Black', 'Helvetica Neue', Arial, sans-serif;
+      --body:     'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+    *{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{font-family:var(--body);background:var(--bg);color:var(--text);line-height:1.6}
+    a{color:inherit;text-decoration:none}
+    .container{max-width:1100px;margin:0 auto;padding:0 24px}
+
+    /* ── NAV ── */
+    nav{background:var(--bg);border-bottom:1px solid #2a2a2a;padding:16px 24px;position:sticky;top:0;z-index:100;display:flex;justify-content:space-between;align-items:center}
+    .nav-brand{font-family:var(--heading);font-size:18px;letter-spacing:.02em;color:var(--accent)}
+    .nav-cta{background:var(--primary);color:#fff;padding:10px 22px;border-radius:6px;font-weight:700;font-size:14px;letter-spacing:.04em;transition:opacity .2s}
+    .nav-cta:hover{opacity:.85}
+
+    /* ── HERO ── */
+    .hero{min-height:72vh;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:80px 24px;position:relative;overflow:hidden}
+    .hero-bg{position:absolute;inset:0;background:linear-gradient(135deg,#141414 0%,#2a1a0a 60%,#3d1d08 100%);z-index:0}
+    .hero-accent-bar{position:absolute;top:0;left:0;width:6px;height:100%;background:var(--primary);z-index:1}
+    .hero-content{position:relative;z-index:2;max-width:680px}
+    .hero-label{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:16px;font-weight:600}
+    .hero h1{font-family:var(--heading);font-size:clamp(42px,8vw,80px);line-height:1.0;color:var(--text);margin-bottom:20px}
+    .hero h1 span{color:var(--primary)}
+    .hero-tagline{font-size:18px;color:var(--muted);margin-bottom:36px;max-width:480px;line-height:1.7}
+    .hero-actions{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+    .btn-primary{display:inline-flex;align-items:center;gap:10px;background:var(--primary);color:#fff;padding:18px 32px;border-radius:8px;font-family:var(--heading);font-size:16px;font-weight:700;letter-spacing:.04em;transition:transform .15s,opacity .15s}
+    .btn-primary:hover{transform:translateY(-2px);opacity:.92}
+    .btn-ghost{display:inline-flex;align-items:center;gap:8px;border:1px solid #3a3a3a;color:var(--muted);padding:16px 24px;border-radius:8px;font-size:14px;transition:border-color .2s,color .2s}
+    .btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+    .hero-photo-placeholder{position:absolute;right:0;top:0;bottom:0;width:42%;z-index:1;display:flex;align-items:center;justify-content:center}
+    .hero-photo-placeholder .ph{width:100%;height:100%;background:linear-gradient(160deg,#2d1a08 0%,#1E1E1E 100%);opacity:.6;display:flex;align-items:center;justify-content:center;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+    @media(max-width:768px){.hero-photo-placeholder{display:none}.hero{padding:60px 20px;min-height:60vh}}
+
+    /* ── RATING STRIP ── */
+    .rating-strip{background:var(--surface);border-top:1px solid #2a2a2a;border-bottom:1px solid #2a2a2a;padding:20px 24px}
+    .rating-inner{display:flex;gap:40px;align-items:center;flex-wrap:wrap}
+    .rating-stat{display:flex;align-items:baseline;gap:8px}
+    .rating-number{font-family:var(--heading);font-size:28px;color:var(--accent)}
+    .rating-label{font-size:13px;color:var(--muted)}
+    .rating-stars{color:var(--accent);font-size:18px;letter-spacing:2px}
+
+    /* ── SECTION HEADERS ── */
+    .section-header{margin-bottom:48px}
+    .section-label{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--primary);margin-bottom:10px;font-weight:600}
+    .section-title{font-family:var(--heading);font-size:clamp(28px,4vw,40px);color:var(--text);line-height:1.1}
+
+    /* ── MENU ── */
+    .menu-section{padding:96px 24px;background:var(--bg)}
+    .menu-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;margin-top:0}
+    .menu-card{background:var(--surface);border:1px solid #2a2a2a;border-radius:10px;padding:22px;transition:border-color .2s}
+    .menu-card:hover{border-color:#3a3a3a}
+    .menu-card h3{font-family:var(--heading);font-size:16px;color:var(--text);margin-bottom:6px;letter-spacing:.02em}
+    .menu-card p{font-size:13px;color:var(--muted);line-height:1.5;margin-bottom:12px}
+    .menu-card .price{font-family:var(--heading);font-size:18px;color:var(--accent)}
+    .gluten-badge{display:inline-block;font-size:10px;letter-spacing:.08em;text-transform:uppercase;background:#1a2a1a;color:#6dbd6d;border:1px solid #2a4a2a;border-radius:4px;padding:2px 7px;margin-left:8px;vertical-align:middle}
+    .menu-note{margin-top:32px;font-size:13px;color:var(--muted);border-top:1px solid #2a2a2a;padding-top:20px}
+
+    /* ── PHOTO ROW ── */
+    .photo-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;padding:0 24px 80px;max-width:1100px;margin:0 auto}
+    .photo-placeholder{aspect-ratio:4/3;background:linear-gradient(135deg,#2a1a08 0%,#1E1E1E 100%);border-radius:10px;border:1px solid #2a2a2a;display:flex;align-items:center;justify-content:center;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+    @media(max-width:600px){.photo-row{grid-template-columns:1fr;padding:0 20px 60px}}
+
+    /* ── ORDER CTA ── */
+    .order-section{padding:96px 24px;background:var(--surface);text-align:center}
+    .order-card{max-width:500px;margin:0 auto;background:var(--bg);border:1px solid #2a2a2a;border-radius:16px;padding:48px 40px}
+    .order-card .icon{font-size:36px;margin-bottom:16px}
+    .order-card h2{font-family:var(--heading);font-size:28px;color:var(--text);margin-bottom:8px}
+    .order-card .sub{font-size:15px;color:var(--muted);margin-bottom:32px}
+    .call-btn{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;background:var(--primary);color:#fff;padding:22px;border-radius:10px;font-family:var(--heading);font-size:20px;font-weight:700;letter-spacing:.03em;transition:opacity .2s,transform .15s;margin-bottom:16px}
+    .call-btn:hover{opacity:.9;transform:translateY(-2px)}
+    .call-btn-phone{font-size:15px;font-weight:400;opacity:.8}
+    .order-hours{font-size:13px;color:var(--muted);line-height:1.8}
+    .order-hours strong{color:var(--text)}
+    @media(max-width:480px){.order-card{padding:32px 24px}.call-btn{font-size:17px}}
+
+    /* ── REVIEWS ── */
+    .reviews-section{padding:96px 24px;background:var(--bg)}
+    .reviews-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px}
+    .review-card{background:var(--surface);border:1px solid #2a2a2a;border-radius:10px;padding:24px}
+    .review-stars{color:var(--accent);font-size:14px;letter-spacing:2px;margin-bottom:12px}
+    .review-quote{font-size:14px;color:var(--muted);line-height:1.7;font-style:italic;margin-bottom:16px}
+    .review-author{font-size:12px;color:#6a6058;letter-spacing:.06em;text-transform:uppercase}
+
+    /* ── LOCATION & HOURS ── */
+    .location-section{padding:96px 24px;background:var(--surface)}
+    .location-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
+    .info-block h3{font-family:var(--heading);font-size:20px;color:var(--accent);margin-bottom:20px;letter-spacing:.04em}
+    .info-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #2a2a2a;font-size:14px}
+    .info-row:last-child{border-bottom:none}
+    .info-row .day{color:var(--muted)}
+    .info-row .time{color:var(--text);font-weight:600}
+    .map-placeholder{aspect-ratio:4/3;background:linear-gradient(135deg,#1a1a1a 0%,#2a2a2a 100%);border-radius:10px;border:1px solid #2a2a2a;display:flex;align-items:center;justify-content:center;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+    @media(max-width:640px){.location-grid{grid-template-columns:1fr;gap:40px}}
+
+    /* ── FOOTER ── */
+    footer{background:#0a0a0a;border-top:1px solid #1e1e1e;padding:40px 24px;text-align:center}
+    .footer-name{font-family:var(--heading);font-size:16px;color:var(--accent);margin-bottom:8px}
+    .footer-address{font-size:13px;color:var(--muted)}
+    .footer-copy{font-size:11px;color:#4a4a4a;margin-top:20px}
+  </style>
+</head>
+<body>
+
+  <!-- DEMO BANNER -->
+  <div class="demo-banner">
+    This is a demo website — <a href="https://preview.klarsystems.com/grilli-aikapoika-forssa-forssa/proposal/">view the full proposal here</a>
+  </div>
+
+  <!-- NAV -->
+  <nav>
+    <span class="nav-brand">Grilli Aikapoika</span>
+    <a href="tel:+358401468689" class="nav-cta">Call to order</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-accent-bar"></div>
+    <div class="hero-content">
+      <p class="hero-label">Forssa — Kauppakatu 23</p>
+      <h1>Grilli<br><span>Aikapoika</span></h1>
+      <p class="hero-tagline">Real grill food — no fuss, no frills. Sausages, burgers, meatball plates and more, ready fast.</p>
+      <div class="hero-actions">
+        <a href="tel:+358401468689" class="btn-primary">
+          Call &amp; order
+        </a>
+        <a href="#menu" class="btn-ghost">See the menu ↓</a>
+      </div>
+    </div>
+    <div class="hero-photo-placeholder">
+      <div class="ph" aria-label="Your photo here">Your photo here</div>
+    </div>
+  </section>
+
+  <!-- RATING STRIP -->
+  <div class="rating-strip">
+    <div class="container rating-inner">
+      <div class="rating-stat">
+        <span class="rating-number">4.2 / 5</span>
+        <span class="rating-label">Google rating</span>
+      </div>
+      <div class="rating-stat">
+        <span class="rating-number">581</span>
+        <span class="rating-label">Google reviews</span>
+      </div>
+      <div class="rating-stat">
+        <span class="rating-number">#6</span>
+        <span class="rating-label">of 18 restaurants in Forssa (TripAdvisor)</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- MENU -->
+  <section class="menu-section" id="menu">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">What we serve</p>
+        <h2 class="section-title">The Menu</h2>
+      </div>
+      <div class="menu-grid">
+
+        <div class="menu-card">
+          <h3>Isot makkaraperunat <span class="gluten-badge">GF</span></h3>
+          <p>Makkarakuutiot, perunat — gluteeniton</p>
+          <span class="price">€9.00</span>
+        </div>
+
+        <div class="menu-card">
+          <h3>Bonuslautanen</h3>
+          <p>Makkarakuutiot, Lihapullat, Kebabliha, Perunat</p>
+          <span class="price">€10.50</span>
+        </div>
+
+        <div class="menu-card">
+          <h3>Herkkulautanen</h3>
+          <p>Makkarakuutio, Lihapullat, Kananmuna, Perunat</p>
+          <span class="price">€8.50</span>
+        </div>
+
+        <div class="menu-card">
+          <h3>Aikapoika special XL</h3>
+          <p>2&#215;100&thinsp;g kokolihapihvi, pekoni, kaksi juustoa, sämpylä</p>
+          <span class="price">€8.00</span>
+        </div>
+
+        <div class="menu-card">
+          <h3>Aikapoika XXL spessu</h3>
+          <p>180&thinsp;g kokolihapihvi, juusto, pekoni, paistettu sipuli</p>
+          <span class="price">€10.00</span>
+        </div>
+
+        <div class="menu-card">
+          <h3>Kebabmakkarapannu <span class="gluten-badge">GF</span></h3>
+          <p>Makkarakuutiot, kebabliha, perunat</p>
+          <span class="price">€9.50</span>
+        </div>
+
+        <div class="menu-card">
+          <h3>Finger mix</h3>
+          <p>3 sipulirengasta, 3 kananugettia, 3 mozzarella ja majoneesi</p>
+          <span class="price">€7.00</span>
+        </div>
+
+        <div class="menu-card">
+          <h3>Hampurilainen</h3>
+          <p>Jauhelihapihvi ja sämpylä</p>
+          <span class="price">€3.00</span>
+        </div>
+
+      </div>
+      <p class="menu-note">Full menu also includes: Burgerit &mdash; Lihapiirakat ja porilaiset &mdash; Salaatit ja leikkeet &mdash; Juomat. Call us for today's specials.</p>
+    </div>
+  </section>
+
+  <!-- PHOTO ROW -->
+  <div class="photo-row">
+    <div class="photo-placeholder" aria-label="Food photos coming soon">Food photos coming soon</div>
+    <div class="photo-placeholder" aria-label="Interior photo coming soon">Interior photo coming soon</div>
+    <div class="photo-placeholder" aria-label="Your photo here">Your photo here</div>
+  </div>
+
+  <!-- ORDER CTA -->
+  <section class="order-section" id="order">
+    <div class="order-card">
+      <h2>Order by phone</h2>
+      <p class="sub">Call ahead — your food will be ready when you arrive.</p>
+      <a href="tel:+358401468689" class="call-btn">
+        Call &amp; order now &mdash; +358 40 146 8689
+      </a>
+      <div class="order-hours">
+        <strong>Mon–Thu</strong> 10:30–19:30 &nbsp;|&nbsp;
+        <strong>Fri</strong> 10:30–20:00<br>
+        <strong>Sat–Sun</strong> 12:00–19:30
+      </div>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section class="reviews-section">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">What customers say</p>
+        <h2 class="section-title">4.2 on Google &mdash; 581 reviews</h2>
+      </div>
+      <div class="reviews-grid">
+
+        <div class="review-card">
+          <div class="review-stars">5 / 5</div>
+          <p class="review-quote">"Highly recommend this grill. It had so many good things like fast very experienced service that was capable of preparing ten portions at a time when several these days do only 1&ndash;3 at a time."</p>
+          <span class="review-author">Veijo F — TripAdvisor</span>
+        </div>
+
+        <div class="review-card">
+          <div class="review-stars">4 / 5</div>
+          <p class="review-quote">"If you want to have good friendly service and eat fast food which is not just fast food but has thoughts behind it, Aikapoika is your place."</p>
+          <span class="review-author">Kirsi P — TripAdvisor</span>
+        </div>
+
+        <div class="review-card">
+          <div class="review-stars">4 / 5</div>
+          <p class="review-quote">"Service is friendly and you have multiple choices to tune your meal with different kinds of potatoes, salts, salads, mayos and so on. When you leave you are not hungry."</p>
+          <span class="review-author">Kirsi P — TripAdvisor</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- LOCATION & HOURS -->
+  <section class="location-section" id="hours">
+    <div class="container">
+      <div class="location-grid">
+
+        <div class="info-block">
+          <div class="section-header" style="margin-bottom:28px">
+            <p class="section-label">Find us</p>
+            <h2 class="section-title">Hours &amp; Location</h2>
+          </div>
+          <h3>Opening hours</h3>
+          <div class="info-row"><span class="day">Monday–Thursday</span><span class="time">10:30–19:30</span></div>
+          <div class="info-row"><span class="day">Friday</span><span class="time">10:30–20:00</span></div>
+          <div class="info-row"><span class="day">Saturday–Sunday</span><span class="time">12:00–19:30</span></div>
+          <div style="margin-top:32px">
+            <h3>Address</h3>
+            <p style="font-size:15px;color:var(--text);margin-top:12px;line-height:1.7">
+              Kauppakatu 23<br>30100 Forssa
+            </p>
+            <a href="tel:+358401468689" style="display:inline-block;margin-top:16px;color:var(--accent);font-size:15px;font-weight:600">+358 40 146 8689</a>
+          </div>
+        </div>
+
+        <div>
+          <div class="map-placeholder" aria-label="Map coming soon">Map coming soon</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p class="footer-name">Grilli Aikapoika</p>
+    <p class="footer-address">Kauppakatu 23, 30100 Forssa &nbsp;&mdash;&nbsp; +358 40 146 8689</p>
+    <p class="footer-copy">&copy; 2026 Grilli Aikapoika &mdash; <a href="https://klarsystems.com" style="color:#6a6058">Powered by Klar</a>.</p>
+  </footer>
+
+</body>
+</html>

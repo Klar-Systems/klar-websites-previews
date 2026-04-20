@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Littlepub — Craft Beer Pub, Vaasa Market Square</title>
+  <!-- palette: research palette used (#5C3A1E primary, #F5E6C8 background, #1A1A1A text) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', system-ui, sans-serif;
+      background-color: #F5E6C8;
+      color: #1A1A1A;
+      line-height: 1.65;
+    }
+    h1, h2, h3, h4 {
+      font-family: 'DM Serif Display', Georgia, serif;
+      line-height: 1.2;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    /* ===== DEMO BANNER ===== */
+    .demo-banner {
+      background: #5C3A1E;
+      color: #F5E6C8;
+      text-align: center;
+      padding: 10px 16px;
+      font-size: 0.8rem;
+      font-family: 'DM Sans', system-ui, sans-serif;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    /* ===== NAV ===== */
+    nav {
+      background: #2A1506;
+      padding: 0 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .nav-logo {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 1.4rem;
+      color: #F5E6C8;
+      letter-spacing: 0.02em;
+    }
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: #d4b88a;
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: #F5E6C8; }
+
+    /* ===== HERO ===== */
+    .hero {
+      position: relative;
+      min-height: 540px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      background: #2A1506;
+    }
+    .hero-photo-placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #3a1e0a 0%, #5C3A1E 60%, #7a4e28 100%);
+      font-family: 'DM Sans', system-ui, sans-serif;
+      font-size: 1rem;
+      color: rgba(245,230,200,0.35);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .hero-photo-placeholder::after {
+      content: "Your photo here";
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 720px;
+      padding: 80px 6%;
+    }
+    .hero-eyebrow {
+      font-size: 0.75rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #C8902A;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+    .hero h1 {
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      color: #F5E6C8;
+      margin-bottom: 20px;
+    }
+    .hero-sub {
+      font-size: 1.1rem;
+      color: #d4b88a;
+      max-width: 520px;
+      margin-bottom: 32px;
+    }
+    .hero-stats {
+      display: flex;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+    .hero-stat {
+      text-align: center;
+    }
+    .hero-stat-num {
+      display: block;
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 2rem;
+      color: #C8902A;
+      line-height: 1;
+    }
+    .hero-stat-label {
+      font-size: 0.72rem;
+      color: #d4b88a;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    /* ===== SECTION SHARED ===== */
+    section { padding: 72px 6%; }
+    .section-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #5C3A1E;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    .section-title {
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      color: #2A1506;
+      margin-bottom: 16px;
+    }
+    .section-intro {
+      max-width: 560px;
+      color: #3a2010;
+      font-size: 1.05rem;
+      margin-bottom: 48px;
+    }
+
+    /* ===== BEER / MENU ===== */
+    .beers { background: #2A1506; }
+    .beers .section-label { color: #C8902A; }
+    .beers .section-title { color: #F5E6C8; }
+    .beers .section-intro { color: #d4b88a; }
+
+    .beer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2px;
+      margin-bottom: 40px;
+    }
+    .beer-card {
+      background: #3a1e0a;
+      padding: 28px 24px;
+      border-top: 3px solid #5C3A1E;
+      transition: border-color 0.2s;
+    }
+    .beer-card:hover { border-color: #C8902A; }
+    .beer-card-icon {
+      width: 36px;
+      height: 36px;
+      margin-bottom: 14px;
+      color: #C8902A;
+    }
+    .beer-card h3 {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 1.1rem;
+      color: #F5E6C8;
+      margin-bottom: 8px;
+    }
+    .beer-card p {
+      font-size: 0.88rem;
+      color: #d4b88a;
+      line-height: 1.55;
+    }
+
+    .menu-photo-placeholder {
+      background: #3a1e0a;
+      border: 2px dashed #5C3A1E;
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(245,230,200,0.3);
+      font-size: 0.88rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-top: 40px;
+    }
+
+    .menu-note {
+      margin-top: 16px;
+      font-size: 0.85rem;
+      color: #a07040;
+      font-style: italic;
+    }
+
+    /* ===== ATMOSPHERE ===== */
+    .atmosphere {
+      background: #F5E6C8;
+    }
+    .atm-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+    @media (max-width: 700px) {
+      .atm-grid { grid-template-columns: 1fr; }
+    }
+    .atm-text p {
+      color: #3a2010;
+      margin-bottom: 16px;
+      font-size: 1rem;
+    }
+    .atm-features {
+      list-style: none;
+      margin-top: 24px;
+    }
+    .atm-features li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(92,58,30,0.15);
+      font-size: 0.95rem;
+      color: #3a2010;
+    }
+    .atm-features li:last-child { border-bottom: none; }
+    .atm-features li svg {
+      flex-shrink: 0;
+      width: 18px;
+      height: 18px;
+      color: #5C3A1E;
+      margin-top: 2px;
+    }
+    .interior-photo-placeholder {
+      background: #e0cba0;
+      border: 2px dashed #5C3A1E;
+      height: 320px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(92,58,30,0.35);
+      font-size: 0.88rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    /* ===== REVIEWS ===== */
+    .reviews { background: #3a1e0a; }
+    .reviews .section-label { color: #C8902A; }
+    .reviews .section-title { color: #F5E6C8; }
+    .reviews .section-intro { color: #d4b88a; }
+
+    .rating-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: #2A1506;
+      border: 1px solid #5C3A1E;
+      padding: 14px 22px;
+      margin-bottom: 40px;
+    }
+    .rating-badge-num {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 2.4rem;
+      color: #C8902A;
+      line-height: 1;
+    }
+    .rating-badge-meta {
+      font-size: 0.85rem;
+      color: #d4b88a;
+      line-height: 1.5;
+    }
+    .rating-badge-meta strong {
+      display: block;
+      font-size: 0.95rem;
+      color: #F5E6C8;
+    }
+
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+    }
+    .review-card {
+      background: #2A1506;
+      padding: 24px;
+      border-left: 3px solid #5C3A1E;
+    }
+    .review-card blockquote {
+      font-size: 0.95rem;
+      color: #d4b88a;
+      font-style: italic;
+      margin-bottom: 14px;
+      line-height: 1.6;
+    }
+    .review-author {
+      font-size: 0.8rem;
+      color: #C8902A;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+
+    /* ===== EVENTS & CONTACT ===== */
+    .events-contact {
+      background: #F5E6C8;
+    }
+    .events-contact-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 56px;
+      align-items: start;
+    }
+    @media (max-width: 760px) {
+      .events-contact-grid { grid-template-columns: 1fr; }
+    }
+    .events-block h3 {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 1.6rem;
+      color: #2A1506;
+      margin-bottom: 12px;
+    }
+    .events-block p {
+      color: #3a2010;
+      font-size: 0.98rem;
+      margin-bottom: 20px;
+    }
+    .event-types {
+      list-style: none;
+      margin-bottom: 24px;
+    }
+    .event-types li {
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(92,58,30,0.15);
+      font-size: 0.93rem;
+      color: #3a2010;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .event-types li:last-child { border-bottom: none; }
+    .event-types li svg {
+      width: 16px; height: 16px;
+      color: #5C3A1E;
+      flex-shrink: 0;
+    }
+    .event-cta {
+      display: inline-block;
+      background: #5C3A1E;
+      color: #F5E6C8;
+      padding: 12px 28px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: background 0.2s;
+    }
+    .event-cta:hover { background: #2A1506; }
+
+    .contact-block h3 {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 1.6rem;
+      color: #2A1506;
+      margin-bottom: 20px;
+    }
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+    .contact-item svg {
+      width: 20px; height: 20px;
+      color: #5C3A1E;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .contact-item-text {
+      font-size: 0.95rem;
+      color: #3a2010;
+      line-height: 1.55;
+    }
+    .contact-item-text strong {
+      display: block;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #5C3A1E;
+      margin-bottom: 2px;
+    }
+    .contact-item-text a {
+      color: #5C3A1E;
+      font-weight: 600;
+    }
+    .contact-item-text a:hover { text-decoration: underline; }
+
+    .hours-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+      margin-top: 8px;
+    }
+    .hours-table td {
+      padding: 5px 0;
+      color: #3a2010;
+    }
+    .hours-table td:first-child {
+      font-weight: 600;
+      width: 120px;
+    }
+    .hours-closed {
+      color: #a07060;
+    }
+
+    /* ===== UNTAPPD STRIP ===== */
+    .untappd-strip {
+      background: #5C3A1E;
+      padding: 32px 6%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .untappd-text {
+      font-size: 0.95rem;
+      color: #F5E6C8;
+    }
+    .untappd-text strong {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 1.5rem;
+      color: #C8902A;
+      display: block;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .untappd-link {
+      display: inline-block;
+      border: 1px solid #F5E6C8;
+      color: #F5E6C8;
+      padding: 9px 20px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: background 0.2s, color 0.2s;
+    }
+    .untappd-link:hover { background: #F5E6C8; color: #5C3A1E; }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: #1a0e04;
+      padding: 40px 6%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .footer-logo {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 1.2rem;
+      color: #F5E6C8;
+    }
+    .footer-meta {
+      font-size: 0.8rem;
+      color: #7a5a3a;
+      line-height: 1.7;
+      text-align: right;
+    }
+    .footer-meta a { color: #a07040; }
+    .footer-meta a:hover { color: #F5E6C8; }
+    .powered {
+      font-size: 0.78rem;
+      color: #5a3a1a;
+      margin-top: 4px;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      section { padding: 52px 5%; }
+      .hero-stats { gap: 20px; }
+      .untappd-strip { flex-direction: column; text-align: center; }
+      .footer-meta { text-align: left; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- DEMO BANNER -->
+  <div class="demo-banner">This is a demo — preview only, not the live site</div>
+
+  <!-- NAV -->
+  <nav>
+    <span class="nav-logo">Littlepub</span>
+    <ul class="nav-links">
+      <li><a href="#beers">Beers</a></li>
+      <li><a href="#atmosphere">The Pub</a></li>
+      <li><a href="#reviews">Reviews</a></li>
+      <li><a href="#events-contact">Events &amp; Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" aria-label="Hero">
+    <div class="hero-photo-placeholder" aria-hidden="true"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Craft Beer Pub — Vaasa Market Square</p>
+      <h1>Vaasa's Home for Craft Beer</h1>
+      <p class="hero-sub">68 beers, 14 rotating taps, and a summer terrace right on the market square. Open since 2015.</p>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <span class="hero-stat-num">68</span>
+          <span class="hero-stat-label">Beers on menu</span>
+        </div>
+        <div class="hero-stat">
+          <span class="hero-stat-num">14</span>
+          <span class="hero-stat-label">Taps rotating</span>
+        </div>
+        <div class="hero-stat">
+          <span class="hero-stat-num">4.3 / 5</span>
+          <span class="hero-stat-label">Google rating</span>
+        </div>
+        <div class="hero-stat">
+          <span class="hero-stat-num">2015</span>
+          <span class="hero-stat-label">Founded</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BEERS -->
+  <section class="beers" id="beers">
+    <p class="section-label">What We Pour</p>
+    <h2 class="section-title">A Proper Beer List</h2>
+    <p class="section-intro">68 beers spanning Finnish and international microbreweries. The draught selection rotates regularly — something new is always on.</p>
+
+    <div class="beer-grid">
+      <div class="beer-card">
+        <svg class="beer-card-icon" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 3.75H14.25M9 3.75V6M15 3.75V6M6.75 6h10.5L18.75 19.5a1.5 1.5 0 01-1.5 1.5h-9.5a1.5 1.5 0 01-1.5-1.5L6.75 6z" />
+        </svg>
+        <h3>14 Rotating Taps</h3>
+        <p>The draught line-up changes with the seasons and new microbrewery releases. Regulars include BrewDog Punk IPA and Veltins Pilsener alongside Finnish craft picks.</p>
+      </div>
+      <div class="beer-card">
+        <svg class="beer-card-icon" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 9h16.5M3.75 15h16.5M5.25 3.75h13.5a1.5 1.5 0 011.5 1.5v13.5a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5V5.25a1.5 1.5 0 011.5-1.5z" />
+        </svg>
+        <h3>Bottled &amp; Canned</h3>
+        <p>An extensive fridge of bottled and canned beers from Finnish and international microbreweries — from sours and IPAs to dark ales and seasonal specials.</p>
+      </div>
+      <div class="beer-card">
+        <svg class="beer-card-icon" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1.5M6.22 5.72l1.06 1.06M3.75 12H5.25M5.72 17.78l1.06-1.06M12 19.5V21M17.78 17.78l-1.06-1.06M18.75 12H20.25M17.78 6.22l-1.06 1.06" />
+          <circle cx="12" cy="12" r="3.75" />
+        </svg>
+        <h3>Cider &amp; More</h3>
+        <p>Cider, wine, cocktails, and non-alcoholic options for everyone at the table. Off-menu mocktails available on request.</p>
+      </div>
+      <div class="beer-card">
+        <svg class="beer-card-icon" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z" />
+          <rect x="3.75" y="3.75" width="16.5" height="16.5" rx="1.5" />
+        </svg>
+        <h3>Pub Food</h3>
+        <p>Burgers and pub snacks to keep you going. Nothing fussy — just good food to go with a cold pint.</p>
+      </div>
+    </div>
+
+    <div class="menu-photo-placeholder" aria-label="Photo placeholder">Food photos coming soon</div>
+    <p class="menu-note">Student discounts available on tap beers. Ask at the bar.</p>
+  </section>
+
+  <!-- ATMOSPHERE -->
+  <section class="atmosphere" id="atmosphere">
+    <p class="section-label">The Pub</p>
+    <h2 class="section-title">A Local in the Heart of Vaasa</h2>
+    <div class="atm-grid">
+      <div class="atm-text">
+        <p>Littlepub sits right on Vaasa's market square — one of the best spots in the city to watch life go by, whether you're inside with warm wooden walls around you or out on the terrace on a summer evening.</p>
+        <p>Founded in 2015 by Janne Knuutti and Aleksi Laine, the pub has grown into one of Vaasa's most-reviewed spots: 886 Google reviews and over 12,700 Untappd check-ins from regulars and visitors alike.</p>
+        <p>The bar staff know their beers and are happy to guide you through the selection. Board games are on the tables. There's a TV for sport. The terrace fills up fast on sunny days — for good reason.</p>
+        <ul class="atm-features">
+          <li>
+            <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 3c-4.97 0-9 3.582-9 8 0 2.46 1.13 4.676 2.942 6.23.367.32.558.8.458 1.273l-.431 2.063a.75.75 0 00.897.899l2.29-.5a1.5 1.5 0 011.015.103A8.96 8.96 0 0012 21.25c4.97 0 9-3.582 9-8s-4.03-8-9-8z" />
+            </svg>
+            Summer terrace on the market square
+          </li>
+          <li>
+            <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 5.25h16.5m-16.5 7.5h16.5m-16.5 7.5h16.5" />
+            </svg>
+            Board games and card games available
+          </li>
+          <li>
+            <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 20.25h12m-7.5-3.75v3.75m-4.5-3.75v3.75M3.375 16.5h17.25a1.125 1.125 0 000-2.25H3.375a1.125 1.125 0 000 2.25zM3.75 9.75h16.5V6a2.25 2.25 0 00-2.25-2.25H6A2.25 2.25 0 003.75 6v3.75z" />
+            </svg>
+            TV screen for live sport events
+          </li>
+          <li>
+            <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 9l10.5-3m0 6.553v3.75a2.25 2.25 0 01-1.632 2.163l-1.32.377a1.803 1.803 0 11-.99-3.467l2.31-.66a2.25 2.25 0 001.632-2.163zm0 0V2.25L9 5.25v10.303m0 0v3.75a2.25 2.25 0 01-1.632 2.163l-1.32.377a1.803 1.803 0 01-.99-3.467l2.31-.66A2.25 2.25 0 009 15.553z" />
+            </svg>
+            Live music on occasion
+          </li>
+          <li>
+            <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z" />
+            </svg>
+            Pet-friendly and smoke-friendly outdoor area
+          </li>
+        </ul>
+      </div>
+      <div class="interior-photo-placeholder" aria-label="Photo placeholder">Interior photo coming soon</div>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section class="reviews" id="reviews">
+    <p class="section-label">What People Say</p>
+    <h2 class="section-title">886 Google Reviews</h2>
+    <p class="section-intro">A decade of regulars, tourists, and craft-beer travellers have left their verdict.</p>
+
+    <div class="rating-badge">
+      <span class="rating-badge-num">4.3 / 5</span>
+      <div class="rating-badge-meta">
+        <strong>Google Rating</strong>
+        886 reviews &nbsp;·&nbsp; 12,700+ Untappd check-ins
+      </div>
+    </div>
+
+    <div class="reviews-grid">
+      <div class="review-card">
+        <blockquote>"Central, cozy place with the best beer selection in Vaasa!"</blockquote>
+        <span class="review-author">via top-rated.online</span>
+      </div>
+      <div class="review-card">
+        <blockquote>"Gotta love the atmosphere at Littlepub! Laidback feelgood feeling of the staff reflects on customers."</blockquote>
+        <span class="review-author">Jani B — TripAdvisor, 5 / 5</span>
+      </div>
+      <div class="review-card">
+        <blockquote>"Location couldn't be any better, right in the middle of the city, in the Market Place."</blockquote>
+        <span class="review-author">Halkidis — TripAdvisor, 4 / 5</span>
+      </div>
+      <div class="review-card">
+        <blockquote>"Friendly service and a lot of alternatives from small breweries. They also have a nice terrace outside and sometimes live music."</blockquote>
+        <span class="review-author">Uffe38 — TripAdvisor</span>
+      </div>
+      <div class="review-card">
+        <blockquote>"Awesome range of beer and most of them are in reasonable prices."</blockquote>
+        <span class="review-author">AngryViking17 — TripAdvisor, 5 / 5</span>
+      </div>
+      <div class="review-card">
+        <blockquote>"Staff was extremely helpful and knowledgeable about their products."</blockquote>
+        <span class="review-author">via wanderlog.com</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- UNTAPPD STRIP -->
+  <div class="untappd-strip">
+    <div class="untappd-text">
+      <strong>12,700+ check-ins</strong>
+      on Untappd — one of the most-checked-in craft beer bars in Finland
+    </div>
+    <a class="untappd-link" href="https://untappd.com/v/littlepub/3166619" target="_blank" rel="noopener">View on Untappd</a>
+  </div>
+
+  <!-- EVENTS & CONTACT -->
+  <section class="events-contact" id="events-contact">
+    <p class="section-label">Events &amp; Contact</p>
+    <h2 class="section-title">Find Us — or Bring Your Group</h2>
+
+    <div class="events-contact-grid">
+      <div class="events-block">
+        <h3>Events at Littlepub</h3>
+        <p>The pub is a regular spot for casual evenings, sports screenings, and live music nights. If you want to bring a group or enquire about an event, get in touch directly.</p>
+        <ul class="event-types">
+          <li>
+            <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 9l10.5-3m0 6.553v3.75a2.25 2.25 0 01-1.632 2.163l-1.32.377a1.803 1.803 0 11-.99-3.467l2.31-.66a2.25 2.25 0 001.632-2.163zm0 0V2.25L9 5.25v10.303m0 0v3.75a2.25 2.25 0 01-1.632 2.163l-1.32.377a1.803 1.803 0 01-.99-3.467l2.31-.66A2.25 2.25 0 009 15.553z" />
+            </svg>
+            Live music nights
+          </li>
+          <li>
+            <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 9.776c.112-.017.227-.026.344-.026h15.812c.117 0 .232.009.344.026m-16.5 0a2.25 2.25 0 00-1.883 2.542l.857 6a2.25 2.25 0 002.227 1.932H19.05a2.25 2.25 0 002.227-1.932l.857-6a2.25 2.25 0 00-1.883-2.542m-16.5 0V6A2.25 2.25 0 016 3.75h3.879a1.5 1.5 0 011.06.44l2.122 2.12a1.5 1.5 0 001.06.44H18A2.25 2.25 0 0120.25 9v.776" />
+            </svg>
+            Sports screenings on the big screen
+          </li>
+          <li>
+            <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />
+            </svg>
+            Group visits and private gatherings
+          </li>
+          <li>
+            <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 3c-4.97 0-9 3.582-9 8 0 2.46 1.13 4.676 2.942 6.23.367.32.558.8.458 1.273l-.431 2.063a.75.75 0 00.897.899l2.29-.5a1.5 1.5 0 011.015.103A8.96 8.96 0 0012 21.25c4.97 0 9-3.582 9-8s-4.03-8-9-8z" />
+            </svg>
+            Summer terrace season events
+          </li>
+        </ul>
+        <a class="event-cta" href="tel:+358504650080">Call to enquire</a>
+      </div>
+
+      <div class="contact-block">
+        <h3>Contact &amp; Hours</h3>
+
+        <div class="contact-item">
+          <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+          </svg>
+          <div class="contact-item-text">
+            <strong>Address</strong>
+            Hovioikeudenpuistikko 17 A<br />65100 Vaasa, Finland<br />
+            <a href="https://maps.google.com/?q=Hovioikeudenpuistikko+17+A,+65100+Vaasa" target="_blank" rel="noopener">Open in Google Maps</a>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
+          </svg>
+          <div class="contact-item-text">
+            <strong>Phone</strong>
+            <a href="tel:+358504650080">+358 50 465 0080</a>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <div class="contact-item-text">
+            <strong>Opening Hours</strong>
+            <table class="hours-table">
+              <tr><td>Mon</td><td class="hours-closed">Closed</td></tr>
+              <tr><td>Tue</td><td>15:00 – 00:00</td></tr>
+              <tr><td>Wed</td><td>15:00 – 00:00</td></tr>
+              <tr><td>Thu</td><td>15:00 – 00:00</td></tr>
+              <tr><td>Fri</td><td>12:00 – 02:00</td></tr>
+              <tr><td>Sat</td><td>12:00 – 02:00</td></tr>
+              <tr><td>Sun</td><td class="hours-closed">Closed</td></tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-logo">Littlepub</span>
+    <div class="footer-meta">
+      Hovioikeudenpuistikko 17 A, 65100 Vaasa &nbsp;·&nbsp; <a href="tel:+358504650080">+358 50 465 0080</a><br />
+      &copy; 2025 Littlepub Oy
+      <div class="powered">Powered by Klar</div>
+    </div>
+  </footer>
+
+</body>
+</html>

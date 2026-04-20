@@ -1,0 +1,1396 @@
+<!DOCTYPE html>
+<!-- DEMO — internal Klar preview only, not published -->
+<!-- Segment 3 — website MUST include a contact/events section and MUST NOT include a reservation widget. -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bagdad Cafe — Malmi, Helsinki</title>
+  <style>
+    /* palette: segment 3 default (research palette empty) */
+
+    /* ── Reset & base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #F7F1E8;
+      --text:     #2A2725;
+      --primary:  #8C6A4F;
+      --accent:   #C9A77C;
+      --dark:     #1E1A17;
+      --sand:     #EDE4D5;
+      --terracotta: #A0522D;
+      --cream:    #FBF8F3;
+      --font-head: 'DM Serif Display', Georgia, serif;
+      --font-body: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── Google Fonts import (inline @import, no external CDN link tag) ── */
+    @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+    /* ── Navigation ── */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+      background: rgba(30, 26, 23, 0.93);
+      backdrop-filter: blur(6px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2.5rem;
+      height: 64px;
+    }
+
+    .nav-logo {
+      font-family: var(--font-head);
+      font-size: 1.25rem;
+      color: var(--accent);
+      letter-spacing: 0.03em;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: #D9CFC4;
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ── Hero ── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 9rem 2.5rem 5rem;
+      background: var(--dark);
+      overflow: hidden;
+    }
+
+    /* Decorative geometric pattern — CSS only, no images */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        repeating-linear-gradient(
+          60deg,
+          transparent,
+          transparent 38px,
+          rgba(201, 167, 124, 0.06) 38px,
+          rgba(201, 167, 124, 0.06) 40px
+        ),
+        repeating-linear-gradient(
+          -60deg,
+          transparent,
+          transparent 38px,
+          rgba(201, 167, 124, 0.06) 38px,
+          rgba(201, 167, 124, 0.06) 40px
+        );
+      pointer-events: none;
+    }
+
+    /* Warm ambient glow */
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -10%;
+      right: -5%;
+      width: 55%;
+      height: 70%;
+      background: radial-gradient(ellipse at center, rgba(160, 82, 45, 0.22) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      max-width: 760px;
+    }
+
+    .hero-eyebrow {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid rgba(201, 167, 124, 0.4);
+      padding: 0.35rem 0.85rem;
+      border-radius: 2px;
+      margin-bottom: 1.75rem;
+    }
+
+    .hero h1 {
+      font-family: var(--font-head);
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      color: #F5EFE6;
+      line-height: 1.05;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.01em;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .hero-tagline {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: #B8A898;
+      max-width: 500px;
+      margin-bottom: 2.5rem;
+      font-weight: 300;
+      line-height: 1.65;
+    }
+
+    .hero-cta-group {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: var(--terracotta);
+      color: #fff;
+      padding: 0.8rem 2rem;
+      border-radius: 3px;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: background 0.2s, transform 0.15s;
+      display: inline-block;
+    }
+
+    .btn-primary:hover { background: #8B4520; transform: translateY(-1px); }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--accent);
+      padding: 0.8rem 2rem;
+      border: 1px solid rgba(201, 167, 124, 0.5);
+      border-radius: 3px;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: border-color 0.2s, color 0.2s;
+      display: inline-block;
+    }
+
+    .btn-outline:hover { border-color: var(--accent); color: #F5EFE6; }
+
+    /* Photo placeholder */
+    .photo-placeholder {
+      background: #2E2925;
+      border: 1px dashed rgba(201, 167, 124, 0.25);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #6B5F55;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .hero-photo-strip {
+      position: absolute;
+      right: 2.5rem;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 2;
+      width: clamp(220px, 28vw, 360px);
+      height: clamp(300px, 45vh, 500px);
+      border-radius: 6px;
+    }
+
+    /* ── Section base ── */
+    section { padding: 5.5rem 2.5rem; }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 0.75rem;
+      display: block;
+    }
+
+    .section-title {
+      font-family: var(--font-head);
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.15;
+      margin-bottom: 1.5rem;
+      color: var(--text);
+    }
+
+    .section-title em {
+      font-style: italic;
+      color: var(--primary);
+    }
+
+    /* ── About ── */
+    #about {
+      background: var(--cream);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .about-text p {
+      color: #4A413A;
+      font-size: 1.05rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .about-text p:last-child { margin-bottom: 0; }
+
+    .about-photo {
+      height: 420px;
+      border-radius: 6px;
+    }
+
+    .about-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: 2rem;
+    }
+
+    .badge {
+      background: var(--sand);
+      color: var(--primary);
+      font-size: 0.8rem;
+      font-weight: 500;
+      padding: 0.35rem 0.9rem;
+      border-radius: 2px;
+      letter-spacing: 0.04em;
+    }
+
+    /* ── Stats strip ── */
+    .stats-strip {
+      background: var(--dark);
+      padding: 3rem 2.5rem;
+    }
+
+    .stats-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      gap: 2rem;
+      text-align: center;
+    }
+
+    .stat-item {}
+
+    .stat-number {
+      font-family: var(--font-head);
+      font-size: 2.8rem;
+      color: var(--accent);
+      display: block;
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      color: #8A7B6E;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-top: 0.4rem;
+    }
+
+    /* ── Menu ── */
+    #menu {
+      background: var(--bg);
+    }
+
+    .menu-intro {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 4rem;
+      margin-bottom: 4rem;
+      align-items: start;
+    }
+
+    .menu-sticky {
+      position: sticky;
+      top: 90px;
+    }
+
+    .menu-description {
+      color: #5A4F47;
+      font-size: 1rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .price-note {
+      display: inline-block;
+      background: var(--sand);
+      border-left: 3px solid var(--accent);
+      padding: 0.6rem 1rem;
+      font-size: 0.88rem;
+      color: #5A4F47;
+      border-radius: 0 2px 2px 0;
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .menu-card {
+      background: var(--cream);
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid rgba(140, 106, 79, 0.12);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .menu-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 28px rgba(30, 26, 23, 0.1);
+    }
+
+    .menu-card-photo {
+      height: 160px;
+    }
+
+    .menu-card-body {
+      padding: 1.25rem 1.4rem;
+    }
+
+    .menu-card-name {
+      font-family: var(--font-head);
+      font-size: 1.15rem;
+      color: var(--text);
+      margin-bottom: 0.3rem;
+    }
+
+    .menu-card-name small {
+      display: block;
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      font-weight: 400;
+      color: #8A7B6E;
+      font-style: normal;
+      margin-top: 0.15rem;
+    }
+
+    .menu-card-desc {
+      font-size: 0.9rem;
+      color: #6A5C53;
+      margin-bottom: 0.75rem;
+      line-height: 1.5;
+    }
+
+    .menu-card-price {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .menu-categories {
+      margin-top: 3.5rem;
+    }
+
+    .menu-categories h3 {
+      font-family: var(--font-head);
+      font-size: 1.4rem;
+      margin-bottom: 1.2rem;
+      color: var(--text);
+    }
+
+    .category-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .category-tag {
+      background: transparent;
+      border: 1px solid rgba(140, 106, 79, 0.35);
+      color: var(--primary);
+      font-size: 0.82rem;
+      padding: 0.3rem 0.75rem;
+      border-radius: 2px;
+    }
+
+    /* ── Hours ── */
+    #hours {
+      background: var(--dark);
+      color: #D9CFC4;
+    }
+
+    #hours .section-title { color: #F5EFE6; }
+    #hours .section-label { color: var(--accent); }
+
+    .hours-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    .hours-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .hours-table tr {
+      border-bottom: 1px solid rgba(201, 167, 124, 0.1);
+    }
+
+    .hours-table tr:last-child { border-bottom: none; }
+
+    .hours-table td {
+      padding: 0.75rem 0;
+      font-size: 0.95rem;
+    }
+
+    .hours-table td:first-child {
+      color: #9A8B7E;
+      font-weight: 400;
+      width: 45%;
+    }
+
+    .hours-table td:last-child {
+      color: #F0E8DE;
+      font-weight: 500;
+      text-align: right;
+    }
+
+    .highlight-row td {
+      color: var(--accent) !important;
+    }
+
+    .hours-note {
+      margin-top: 2.5rem;
+      background: rgba(201, 167, 124, 0.07);
+      border: 1px solid rgba(201, 167, 124, 0.15);
+      border-radius: 4px;
+      padding: 1.25rem 1.5rem;
+    }
+
+    .hours-note p {
+      font-size: 0.88rem;
+      color: #9A8B7E;
+      line-height: 1.6;
+    }
+
+    .hours-photo-col {}
+
+    .hours-photo {
+      height: 380px;
+      border-radius: 6px;
+      margin-bottom: 1.5rem;
+    }
+
+    /* ── Contact / Events ── */
+    #contact {
+      background: var(--bg);
+    }
+
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    .contact-block h3 {
+      font-family: var(--font-head);
+      font-size: 1.5rem;
+      color: var(--text);
+      margin-bottom: 1.5rem;
+    }
+
+    .contact-list {
+      list-style: none;
+      margin-bottom: 2rem;
+    }
+
+    .contact-list li {
+      display: flex;
+      gap: 1rem;
+      padding: 0.9rem 0;
+      border-bottom: 1px solid rgba(140, 106, 79, 0.12);
+      align-items: flex-start;
+    }
+
+    .contact-list li:last-child { border-bottom: none; }
+
+    .contact-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      background: var(--sand);
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-size: 1rem;
+      color: var(--primary);
+    }
+
+    .contact-detail {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .contact-detail-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #9A8070;
+      margin-bottom: 0.15rem;
+    }
+
+    .contact-detail-value {
+      font-size: 0.97rem;
+      color: var(--text);
+    }
+
+    .contact-detail-value a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    .contact-detail-value a:hover { text-decoration: underline; }
+
+    .social-row {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-top: 0.5rem;
+    }
+
+    .social-link {
+      background: var(--sand);
+      color: var(--primary);
+      padding: 0.45rem 1rem;
+      border-radius: 2px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      border: 1px solid rgba(140, 106, 79, 0.2);
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .social-link:hover {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    /* Events / atmosphere column */
+    .events-block {
+      background: var(--cream);
+      border-radius: 8px;
+      padding: 2.5rem;
+      border: 1px solid rgba(140, 106, 79, 0.12);
+    }
+
+    .events-block h3 {
+      font-family: var(--font-head);
+      font-size: 1.5rem;
+      margin-bottom: 0.75rem;
+      color: var(--text);
+    }
+
+    .events-block .events-sub {
+      font-size: 0.9rem;
+      color: #7A6B61;
+      margin-bottom: 2rem;
+    }
+
+    .event-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .event-item {
+      display: flex;
+      gap: 1.1rem;
+      align-items: flex-start;
+    }
+
+    .event-dot {
+      width: 10px;
+      height: 10px;
+      background: var(--accent);
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: 0.55rem;
+    }
+
+    .event-item-text strong {
+      display: block;
+      font-size: 0.97rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.2rem;
+    }
+
+    .event-item-text span {
+      font-size: 0.875rem;
+      color: #7A6B61;
+    }
+
+    .event-enquiry {
+      margin-top: 2rem;
+      padding-top: 1.75rem;
+      border-top: 1px solid rgba(140, 106, 79, 0.14);
+    }
+
+    .event-enquiry p {
+      font-size: 0.9rem;
+      color: #6A5C53;
+      margin-bottom: 1rem;
+    }
+
+    /* ── Map / Location ── */
+    #location {
+      background: var(--sand);
+      padding: 5.5rem 2.5rem 0;
+    }
+
+    .location-header {
+      max-width: 1100px;
+      margin: 0 auto 3rem;
+    }
+
+    .map-embed-wrapper {
+      position: relative;
+      width: 100%;
+      height: 400px;
+      background: #D9CFC4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .map-embed-wrapper iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+    }
+
+    .location-strip {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 3rem 0;
+      display: flex;
+      gap: 4rem;
+      flex-wrap: wrap;
+    }
+
+    .location-item {
+      flex: 1;
+      min-width: 220px;
+    }
+
+    .location-item-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 0.4rem;
+    }
+
+    .location-item-value {
+      font-size: 0.97rem;
+      color: var(--text);
+      line-height: 1.55;
+    }
+
+    .location-item-value a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    /* ── Delivery banner ── */
+    .delivery-banner {
+      background: var(--terracotta);
+      padding: 2.25rem 2.5rem;
+    }
+
+    .delivery-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+
+    .delivery-inner p {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.9);
+      max-width: 560px;
+    }
+
+    .delivery-inner strong {
+      color: #fff;
+    }
+
+    .delivery-links {
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .delivery-link {
+      background: rgba(255,255,255,0.18);
+      color: #fff;
+      padding: 0.55rem 1.2rem;
+      border-radius: 3px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      text-decoration: none;
+      border: 1px solid rgba(255,255,255,0.3);
+      transition: background 0.2s;
+    }
+
+    .delivery-link:hover { background: rgba(255,255,255,0.28); }
+
+    /* ── Footer ── */
+    footer {
+      background: var(--dark);
+      padding: 3rem 2.5rem;
+      color: #6B5F55;
+      font-size: 0.85rem;
+    }
+
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+
+    .footer-logo {
+      font-family: var(--font-head);
+      font-size: 1.1rem;
+      color: var(--accent);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: #6B5F55;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--accent); }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .about-grid,
+      .menu-intro,
+      .hours-layout,
+      .contact-layout { grid-template-columns: 1fr; gap: 2.5rem; }
+
+      .hero { padding: 8rem 1.5rem 5rem; }
+      .hero-photo-strip { display: none; }
+      section { padding: 4rem 1.5rem; }
+      nav { padding: 0 1.5rem; }
+      .delivery-inner { flex-direction: column; align-items: flex-start; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+    }
+
+    @media (max-width: 560px) {
+      .nav-links { display: none; }
+      .stats-inner { flex-direction: column; gap: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Demo banner -->
+  <div style="background:#C9A77C;color:#1E1A17;text-align:center;padding:10px 16px;font-size:13px;font-weight:600">
+    This is a demo preview built by Klar Systems for Bagdad Cafe. See our proposal:
+    <a href="https://preview.klarsystems.com/bagdad-cafe-malmi-helsinki/proposal/" style="color:#1E1A17">preview.klarsystems.com/bagdad-cafe-malmi-helsinki/proposal/</a>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       NAVIGATION
+  ══════════════════════════════════════════ -->
+  <nav>
+    <a href="#" class="nav-logo">Bagdad Cafe</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#hours">Hours</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="#location">Find Us</a></li>
+    </ul>
+  </nav>
+
+  <!-- ══════════════════════════════════════════
+       HERO
+  ══════════════════════════════════════════ -->
+  <section class="hero" id="top">
+    <div class="hero-inner">
+      <span class="hero-eyebrow">Middle Eastern Café-Bar &mdash; Malmi, Helsinki</span>
+      <h1>Where Malmi<br>comes to <em>unwind</em></h1>
+      <p class="hero-tagline">
+        Shawarma, falafel, shisha and late-night warmth — all under one roof on Kirkonkyläntie.
+        Open daily until the early hours.
+      </p>
+      <div class="hero-cta-group">
+        <a href="#menu" class="btn-primary">Explore the Menu</a>
+        <a href="#contact" class="btn-outline">Events &amp; Contact</a>
+      </div>
+    </div>
+
+    <!-- Hero photo placeholder -->
+    <div class="photo-placeholder hero-photo-strip">Your photo here</div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       STATS STRIP
+  ══════════════════════════════════════════ -->
+  <div class="stats-strip">
+    <div class="stats-inner">
+      <div class="stat-item">
+        <span class="stat-number">678</span>
+        <span class="stat-label">Google Reviews</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number">4.0</span>
+        <span class="stat-label">Google Rating</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number">€9.90</span>
+        <span class="stat-label">Daily Lunch Special</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number">02:00</span>
+        <span class="stat-label">Weekend Closing</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       ABOUT
+  ══════════════════════════════════════════ -->
+  <section id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-text">
+          <span class="section-label">Our story</span>
+          <h2 class="section-title">A warm corner of the <em>Middle East</em> in Malmi</h2>
+          <p>
+            Bagdad Cafe sits at the heart of Malmi on Kirkonkyläntie 10 — a neighbourhood
+            café-bar that has made itself a genuine local institution. Step inside and the
+            everyday hustle fades: warm colours, the gentle haze of the shisha lounge and the
+            scent of spiced grills do the rest.
+          </p>
+          <p>
+            The kitchen draws on the full breadth of Middle Eastern cooking — wraps,
+            falafels, shawarma, specialty pizzas and handmade sweets — alongside a daily
+            lunch offer at a price that keeps regulars coming back every week. Come evening,
+            the café shifts into late-night mode, welcoming guests all the way to 01:00 on
+            weekdays and 02:00 on weekends.
+          </p>
+          <p>
+            Whether you are dropping in for a quick falafel at noon, sharing a shisha with
+            friends in the evening, or lingering over baklava long after the rest of the city
+            has gone to sleep, Bagdad Cafe is ready.
+          </p>
+          <div class="about-badges">
+            <span class="badge">Shisha Lounge</span>
+            <span class="badge">Middle Eastern Kitchen</span>
+            <span class="badge">Summer Terrace</span>
+            <span class="badge">Late-Night</span>
+            <span class="badge">Vegetarian Options</span>
+            <span class="badge">Daily Lunch</span>
+          </div>
+        </div>
+        <div>
+          <!-- Interior photo placeholder -->
+          <div class="photo-placeholder about-photo">Interior photo coming soon</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       MENU HIGHLIGHTS
+  ══════════════════════════════════════════ -->
+  <section id="menu">
+    <div class="container">
+      <div class="menu-intro">
+        <div class="menu-sticky">
+          <span class="section-label">What we serve</span>
+          <h2 class="section-title">Menu<br><em>highlights</em></h2>
+          <p class="menu-description">
+            From a quick lunchtime wrap to a full evening feast, the Bagdad Cafe kitchen
+            covers a wide range of Middle Eastern and international favourites.
+          </p>
+          <span class="price-note">Daily lunch 11:00&ndash;15:00 &mdash; only <strong>€9.90</strong></span>
+        </div>
+
+        <div>
+          <div class="menu-grid">
+
+            <!-- Maustettu naudanliharulla -->
+            <div class="menu-card">
+              <div class="photo-placeholder menu-card-photo">Food photos coming soon</div>
+              <div class="menu-card-body">
+                <div class="menu-card-name">
+                  Maustettu naudanliharulla
+                  <small>Spiced beef wrap</small>
+                </div>
+                <p class="menu-card-desc">
+                  Tender spiced beef rolled with fresh vegetables and house sauces —
+                  a Bagdad Cafe staple.
+                </p>
+                <span class="menu-card-price">€16.60</span>
+              </div>
+            </div>
+
+            <!-- Smash Burger -->
+            <div class="menu-card">
+              <div class="photo-placeholder menu-card-photo">Food photos coming soon</div>
+              <div class="menu-card-body">
+                <div class="menu-card-name">Smash Burger</div>
+                <p class="menu-card-desc">
+                  Double-smashed patties with caramelised edges, house burger sauce and
+                  your choice of toppings.
+                </p>
+                <span class="menu-card-price">€19.90</span>
+              </div>
+            </div>
+
+            <!-- Falafel lautanen -->
+            <div class="menu-card">
+              <div class="photo-placeholder menu-card-photo">Food photos coming soon</div>
+              <div class="menu-card-body">
+                <div class="menu-card-name">
+                  Falafel lautanen
+                  <small>Falafel plate</small>
+                </div>
+                <p class="menu-card-desc">
+                  Crispy chickpea falafels served on a plate with salad, dips and freshly
+                  baked flatbread.
+                </p>
+                <span class="menu-card-price">€15.00</span>
+              </div>
+            </div>
+
+            <!-- Bagdad special salaatti -->
+            <div class="menu-card">
+              <div class="photo-placeholder menu-card-photo">Food photos coming soon</div>
+              <div class="menu-card-body">
+                <div class="menu-card-name">
+                  Bagdad special salaatti
+                  <small>Bagdad special salad</small>
+                </div>
+                <p class="menu-card-desc">
+                  A generous house salad loaded with fresh ingredients and the cafe's
+                  signature dressing.
+                </p>
+                <span class="menu-card-price">&mdash;</span>
+              </div>
+            </div>
+
+            <!-- Baklava -->
+            <div class="menu-card">
+              <div class="photo-placeholder menu-card-photo">Food photos coming soon</div>
+              <div class="menu-card-body">
+                <div class="menu-card-name">Baklava</div>
+                <p class="menu-card-desc">
+                  Flaky layers of pastry filled with chopped nuts and soaked in fragrant
+                  rose-water syrup.
+                </p>
+                <span class="menu-card-price">&mdash;</span>
+              </div>
+            </div>
+
+            <!-- Itämaiset makeiset -->
+            <div class="menu-card">
+              <div class="photo-placeholder menu-card-photo">Food photos coming soon</div>
+              <div class="menu-card-body">
+                <div class="menu-card-name">
+                  Itämaiset makeiset
+                  <small>Middle Eastern sweets platter</small>
+                </div>
+                <p class="menu-card-desc">
+                  A selection of traditional confections — the perfect finish to a meal or
+                  a sweet reason to stay a little longer.
+                </p>
+                <span class="menu-card-price">&mdash;</span>
+              </div>
+            </div>
+
+          </div><!-- /menu-grid -->
+
+          <div class="menu-categories">
+            <h3>Full menu categories</h3>
+            <div class="category-tags">
+              <span class="category-tag">Bagdad specials</span>
+              <span class="category-tag">Wraps</span>
+              <span class="category-tag">Hot Wings</span>
+              <span class="category-tag">Burgers</span>
+              <span class="category-tag">Falafel</span>
+              <span class="category-tag">Salads</span>
+              <span class="category-tag">Fruit salads</span>
+              <span class="category-tag">Desserts</span>
+              <span class="category-tag">Pizzas</span>
+              <span class="category-tag">Special pizzas</span>
+              <span class="category-tag">Middle Eastern sweets</span>
+              <span class="category-tag">Dips</span>
+              <span class="category-tag">Beverages</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       OPENING HOURS
+  ══════════════════════════════════════════ -->
+  <section id="hours">
+    <div class="container">
+      <div class="hours-layout">
+        <div>
+          <span class="section-label">When we are open</span>
+          <h2 class="section-title">Opening <em>hours</em></h2>
+
+          <table class="hours-table">
+            <tbody>
+              <tr>
+                <td>Monday</td>
+                <td>10:00 &ndash; 01:00</td>
+              </tr>
+              <tr>
+                <td>Tuesday</td>
+                <td>10:00 &ndash; 01:00</td>
+              </tr>
+              <tr>
+                <td>Wednesday</td>
+                <td>10:00 &ndash; 01:00</td>
+              </tr>
+              <tr>
+                <td>Thursday</td>
+                <td>10:00 &ndash; 01:00</td>
+              </tr>
+              <tr>
+                <td>Friday</td>
+                <td>11:00 &ndash; 01:00</td>
+              </tr>
+              <tr class="highlight-row">
+                <td>Saturday</td>
+                <td>11:00 &ndash; 02:00</td>
+              </tr>
+              <tr class="highlight-row">
+                <td>Sunday</td>
+                <td>10:00 &ndash; 02:00</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="hours-note">
+            <p>
+              <strong style="color:#C9A77C;">Lunch special</strong> &mdash; served daily
+              11:00&ndash;15:00 for just €9.90. Hours may vary on public holidays;
+              check our Facebook page for updates.
+            </p>
+          </div>
+        </div>
+
+        <div class="hours-photo-col">
+          <!-- Interior photo placeholder -->
+          <div class="photo-placeholder hours-photo">Interior photo coming soon</div>
+          <p style="font-size:0.85rem; color:#8A7B6E; margin-top:0.75rem;">
+            Covered summer terrace available seasonally. Shisha lounge open evenings.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       CONTACT / EVENTS  (Segment 3 — mandatory)
+  ══════════════════════════════════════════ -->
+  <section id="contact">
+    <div class="container">
+      <span class="section-label">Get in touch</span>
+      <h2 class="section-title" style="margin-bottom:3rem;">Contact &amp; <em>Events</em></h2>
+
+      <div class="contact-layout">
+
+        <!-- LEFT: Contact information -->
+        <div class="contact-block">
+          <h3>Reach us directly</h3>
+          <ul class="contact-list">
+
+            <li>
+              <span class="contact-icon">&#9990;</span>
+              <div class="contact-detail">
+                <span class="contact-detail-label">Phone</span>
+                <span class="contact-detail-value">
+                  <a href="tel:+358449825750">+358 44 982 5750</a>
+                </span>
+              </div>
+            </li>
+
+            <li>
+              <span class="contact-icon">&#9993;</span>
+              <div class="contact-detail">
+                <span class="contact-detail-label">Email</span>
+                <span class="contact-detail-value">
+                  <a href="mailto:saifahmed964@yahoo.com">saifahmed964@yahoo.com</a>
+                </span>
+              </div>
+            </li>
+
+            <li>
+              <span class="contact-icon">&#128205;</span>
+              <div class="contact-detail">
+                <span class="contact-detail-label">Address</span>
+                <span class="contact-detail-value">
+                  Kirkonkyläntie 10<br>00700 Helsinki
+                </span>
+              </div>
+            </li>
+
+            <li>
+              <span class="contact-icon">&#128241;</span>
+              <div class="contact-detail">
+                <span class="contact-detail-label">WhatsApp</span>
+                <span class="contact-detail-value">
+                  <a href="https://wa.me/358449825750" target="_blank" rel="noopener">
+                    Message us on WhatsApp
+                  </a>
+                </span>
+              </div>
+            </li>
+
+          </ul>
+
+          <h3 style="margin-top:1rem;">Follow us</h3>
+          <div class="social-row">
+            <a href="https://www.instagram.com/caffebagdad/" target="_blank" rel="noopener" class="social-link">
+              Instagram
+            </a>
+            <a href="https://www.facebook.com/www.Bagdad.Cafe.fi/" target="_blank" rel="noopener" class="social-link">
+              Facebook
+            </a>
+          </div>
+        </div>
+
+        <!-- RIGHT: Events & atmosphere -->
+        <div class="events-block">
+          <h3>Private events &amp; group visits</h3>
+          <p class="events-sub">
+            Bagdad Cafe is a popular spot for informal gatherings, community events and
+            late-night celebrations. We welcome groups of all sizes and can accommodate
+            private arrangements on request.
+          </p>
+
+          <ul class="event-list">
+            <li class="event-item">
+              <span class="event-dot"></span>
+              <div class="event-item-text">
+                <strong>Birthday &amp; celebration dinners</strong>
+                <span>
+                  Gather your friends around a table piled with shawarma, wraps and
+                  sweets. The kitchen can prepare large-group orders on advance notice.
+                </span>
+              </div>
+            </li>
+            <li class="event-item">
+              <span class="event-dot"></span>
+              <div class="event-item-text">
+                <strong>Shisha evenings</strong>
+                <span>
+                  The shisha lounge is a relaxed setting for an evening with friends
+                  — open most evenings, ideal for groups wanting a long, unhurried visit.
+                </span>
+              </div>
+            </li>
+            <li class="event-item">
+              <span class="event-dot"></span>
+              <div class="event-item-text">
+                <strong>Community &amp; neighbourhood gatherings</strong>
+                <span>
+                  Bagdad Cafe has long been a meeting point for the Malmi community.
+                  Speak to us about hosting your next neighbourhood event.
+                </span>
+              </div>
+            </li>
+            <li class="event-item">
+              <span class="event-dot"></span>
+              <div class="event-item-text">
+                <strong>Late-night group visits</strong>
+                <span>
+                  Open until 02:00 on Saturdays and Sundays — one of the few places
+                  in Malmi welcoming guests deep into the night.
+                </span>
+              </div>
+            </li>
+          </ul>
+
+          <div class="event-enquiry">
+            <p>
+              For group bookings, private event enquiries or catering questions,
+              call or message us directly — we will do our best to accommodate you.
+            </p>
+            <a href="tel:+358449825750" class="btn-primary">Call us now</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       DELIVERY BANNER
+  ══════════════════════════════════════════ -->
+  <div class="delivery-banner">
+    <div class="delivery-inner">
+      <p>
+        <strong>Can't make it in person?</strong> Order Bagdad Cafe to your door via
+        Wolt or Foodora — the same kitchen, delivered straight to you.
+      </p>
+      <div class="delivery-links">
+        <a href="https://wolt.com/fi/fin/helsinki/restaurant/bagdad-cafe1" target="_blank" rel="noopener" class="delivery-link">
+          Order on Wolt
+        </a>
+        <a href="https://www.foodora.fi/restaurant/s7kw/bagdad-cafe" target="_blank" rel="noopener" class="delivery-link">
+          Order on Foodora
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       LOCATION
+  ══════════════════════════════════════════ -->
+  <section id="location">
+    <div class="location-header">
+      <span class="section-label">Find us</span>
+      <h2 class="section-title">Getting <em>here</em></h2>
+    </div>
+
+    <!-- Google Maps embed area -->
+    <div class="map-embed-wrapper">
+      <iframe
+        src="https://maps.google.com/maps?q=Kirkonkyl%C3%A4ntie+10+00700+Helsinki&z=16&output=embed"
+        title="Bagdad Cafe location map"
+        allowfullscreen
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+
+    <div class="location-strip container">
+      <div class="location-item">
+        <div class="location-item-label">Address</div>
+        <div class="location-item-value">
+          Kirkonkyläntie 10<br>
+          00700 Helsinki
+        </div>
+      </div>
+      <div class="location-item">
+        <div class="location-item-label">Neighbourhood</div>
+        <div class="location-item-value">Malmi, Helsinki</div>
+      </div>
+      <div class="location-item">
+        <div class="location-item-label">Phone</div>
+        <div class="location-item-value">
+          <a href="tel:+358449825750">+358 44 982 5750</a>
+        </div>
+      </div>
+      <div class="location-item">
+        <div class="location-item-label">Email</div>
+        <div class="location-item-value">
+          <a href="mailto:saifahmed964@yahoo.com">saifahmed964@yahoo.com</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       FOOTER
+  ══════════════════════════════════════════ -->
+  <footer>
+    <div class="footer-inner">
+      <span class="footer-logo">Bagdad Cafe</span>
+      <nav class="footer-links">
+        <a href="#about">About</a>
+        <a href="#menu">Menu</a>
+        <a href="#hours">Hours</a>
+        <a href="#contact">Contact</a>
+        <a href="#location">Find Us</a>
+      </nav>
+      <span>&copy; 2026 Bagdad Cafe &mdash; Kirkonkyläntie 10, 00700 Helsinki</span>
+      <span style="display:block;margin-top:8px;font-size:11px;opacity:0.7">Powered by Klar Systems — this is a demo preview for Bagdad Cafe.
+        <a href="https://preview.klarsystems.com/bagdad-cafe-malmi-helsinki/proposal/" style="color:var(--accent)">See the proposal →</a></span>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kiinalainen Ravintola Li Xiang — Kotka</title>
+<meta name="description" content="Authentic Cantonese cuisine in Kotka. Book your table at Kiinalainen Ravintola Li Xiang.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  /* palette: segment 1 default (research palette empty) */
+  :root {
+    --bg:       #1F2933;
+    --text:     #EFE7DA;
+    --primary:  #B56B4A;
+    --accent:   #D4A574;
+    --surface:  #283545;
+    --border:   rgba(212,165,116,0.18);
+    --heading-family: 'Playfair Display', Georgia, serif;
+    --body-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--body-family);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ─── DEMO BANNER ─── */
+  .demo-banner {
+    background: #2a3a2a;
+    border-bottom: 1px solid rgba(212,165,116,0.25);
+    padding: 10px 24px;
+    text-align: center;
+    font-size: 13px;
+    color: rgba(239,231,218,0.75);
+  }
+  .demo-banner a {
+    color: var(--accent);
+    text-decoration: underline;
+  }
+  .demo-banner strong {
+    color: var(--accent);
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(31,41,51,0.96);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .nav-brand {
+    font-family: var(--heading-family);
+    font-size: 17px;
+    color: var(--accent);
+    letter-spacing: 0.02em;
+  }
+  .nav-links {
+    display: flex;
+    gap: 28px;
+    list-style: none;
+  }
+  .nav-links a {
+    color: var(--text);
+    text-decoration: none;
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    opacity: 0.75;
+    transition: opacity 0.2s;
+  }
+  .nav-links a:hover { opacity: 1; }
+  .nav-cta {
+    background: var(--primary);
+    color: var(--text) !important;
+    opacity: 1 !important;
+    padding: 8px 18px;
+    border-radius: 6px;
+    font-weight: 600;
+    transition: background 0.2s !important;
+  }
+  .nav-cta:hover { background: var(--accent) !important; color: var(--bg) !important; }
+
+  /* ─── HERO ─── */
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 88vh;
+    align-items: center;
+  }
+  .hero-content {
+    padding: 80px 56px 80px 64px;
+  }
+  .hero-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 20px;
+  }
+  .hero-title {
+    font-family: var(--heading-family);
+    font-size: clamp(36px, 4.5vw, 58px);
+    line-height: 1.1;
+    color: var(--text);
+    margin-bottom: 20px;
+  }
+  .hero-title em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .hero-sub {
+    font-size: 17px;
+    color: rgba(239,231,218,0.7);
+    line-height: 1.7;
+    max-width: 420px;
+    margin-bottom: 36px;
+  }
+  .hero-rating {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 36px;
+    padding: 14px 18px;
+    background: rgba(212,165,116,0.08);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    display: inline-flex;
+  }
+  .rating-score {
+    font-family: var(--heading-family);
+    font-size: 28px;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .rating-divider {
+    width: 1px;
+    height: 32px;
+    background: var(--border);
+  }
+  .rating-detail {
+    font-size: 13px;
+    color: rgba(239,231,218,0.6);
+    line-height: 1.4;
+  }
+  .rating-detail strong {
+    display: block;
+    color: var(--text);
+    font-size: 14px;
+    margin-bottom: 2px;
+  }
+  .hero-actions {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  .btn-primary {
+    display: inline-block;
+    background: var(--primary);
+    color: var(--text);
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 14px 28px;
+    border-radius: 8px;
+    transition: background 0.2s, transform 0.15s;
+    border: none;
+    cursor: pointer;
+    letter-spacing: 0.02em;
+  }
+  .btn-primary:hover { background: var(--accent); color: var(--bg); transform: translateY(-1px); }
+  .btn-secondary {
+    display: inline-block;
+    border: 1.5px solid var(--border);
+    color: var(--text);
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    padding: 14px 28px;
+    border-radius: 8px;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .btn-secondary:hover { border-color: var(--accent); background: rgba(212,165,116,0.08); }
+
+  .hero-photo {
+    height: 88vh;
+    background: linear-gradient(135deg, #2c3e2f 0%, #1F2933 60%, #352619 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 12px;
+    color: rgba(239,231,218,0.28);
+    font-family: var(--body-family);
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border-left: 1px solid var(--border);
+  }
+  .photo-placeholder-icon {
+    width: 48px;
+    height: 48px;
+    border: 1.5px solid rgba(212,165,116,0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 8px;
+  }
+  .photo-placeholder-icon svg {
+    width: 24px;
+    height: 24px;
+    fill: none;
+    stroke: rgba(212,165,116,0.4);
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  /* ─── SECTION WRAPPER ─── */
+  section { padding: 96px 0; }
+  .container {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+  .section-eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin-bottom: 12px;
+    display: block;
+  }
+  .section-title {
+    font-family: var(--heading-family);
+    font-size: clamp(28px, 3.5vw, 42px);
+    color: var(--text);
+    margin-bottom: 18px;
+    line-height: 1.15;
+  }
+  .section-lead {
+    font-size: 17px;
+    color: rgba(239,231,218,0.65);
+    max-width: 560px;
+    line-height: 1.7;
+  }
+
+  /* ─── MENU ─── */
+  .menu-section { background: var(--surface); }
+  .menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    margin-top: 48px;
+  }
+  .menu-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .menu-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+  .menu-card-photo {
+    aspect-ratio: 4/3;
+    background: linear-gradient(135deg, #2c3e2f, #283545);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+    color: rgba(239,231,218,0.28);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .menu-card-body { padding: 20px 22px 22px; }
+  .menu-card-name {
+    font-family: var(--heading-family);
+    font-size: 19px;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+  .menu-card-desc {
+    font-size: 13px;
+    color: rgba(239,231,218,0.55);
+    line-height: 1.6;
+    margin-bottom: 12px;
+  }
+  .menu-card-price {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--accent);
+  }
+
+  /* ─── ABOUT ─── */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .about-photo {
+    aspect-ratio: 4/5;
+    background: linear-gradient(160deg, #283545 0%, #352619 100%);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+    color: rgba(239,231,218,0.28);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border: 1px solid var(--border);
+  }
+  .about-content p {
+    font-size: 16px;
+    color: rgba(239,231,218,0.72);
+    line-height: 1.75;
+    margin-bottom: 20px;
+  }
+  .about-stats {
+    display: flex;
+    gap: 40px;
+    margin-top: 36px;
+    padding-top: 28px;
+    border-top: 1px solid var(--border);
+  }
+  .about-stat-num {
+    font-family: var(--heading-family);
+    font-size: 36px;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .about-stat-label {
+    font-size: 12px;
+    color: rgba(239,231,218,0.5);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* ─── BOOKING WIDGET ─── */
+  .booking-section {
+    background: linear-gradient(135deg, #283545 0%, #1F2933 100%);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .booking-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .booking-copy .section-lead {
+    max-width: 420px;
+    margin-bottom: 28px;
+  }
+  .booking-note {
+    font-size: 13px;
+    color: rgba(239,231,218,0.4);
+    margin-top: 16px;
+    line-height: 1.5;
+  }
+
+  /* klar-bookings widget */
+  .klar-bookings {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 36px 32px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+  }
+  .klar-bookings-head {
+    font-family: var(--heading-family);
+    font-size: 22px;
+    color: var(--text);
+    margin-bottom: 28px;
+    text-align: center;
+  }
+  .booking-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .form-group label {
+    display: block;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(239,231,218,0.5);
+    margin-bottom: 7px;
+  }
+  .form-group select,
+  .form-group input[type="date"] {
+    width: 100%;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    font-family: var(--body-family);
+    font-size: 15px;
+    padding: 11px 14px;
+    appearance: none;
+    cursor: pointer;
+    transition: border-color 0.2s;
+    outline: none;
+  }
+  .form-group select:focus,
+  .form-group input[type="date"]:focus {
+    border-color: var(--accent);
+  }
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  .booking-submit {
+    width: 100%;
+    background: var(--primary);
+    color: var(--text);
+    border: none;
+    border-radius: 8px;
+    font-family: var(--body-family);
+    font-size: 16px;
+    font-weight: 700;
+    padding: 15px;
+    cursor: pointer;
+    margin-top: 6px;
+    letter-spacing: 0.04em;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .booking-submit:hover { background: var(--accent); color: var(--bg); transform: translateY(-1px); }
+  .booking-disclaimer {
+    font-size: 12px;
+    color: rgba(239,231,218,0.35);
+    text-align: center;
+    margin-top: 12px;
+  }
+
+  /* ─── LOCATION & HOURS ─── */
+  .location-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+    margin-top: 56px;
+  }
+  .location-map {
+    aspect-ratio: 4/3;
+    background: linear-gradient(135deg, #283545, #1F2933);
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 12px;
+    color: rgba(239,231,218,0.28);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .location-details h3 {
+    font-family: var(--heading-family);
+    font-size: 22px;
+    color: var(--text);
+    margin-bottom: 20px;
+  }
+  .location-item {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .location-item:last-child { border-bottom: none; }
+  .location-icon {
+    width: 20px;
+    flex-shrink: 0;
+    margin-top: 2px;
+    color: var(--accent);
+    font-size: 14px;
+    text-align: center;
+  }
+  .location-text strong {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 3px;
+  }
+  .location-text span {
+    font-size: 14px;
+    color: rgba(239,231,218,0.6);
+    line-height: 1.5;
+  }
+  .hours-grid {
+    margin-top: 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .hours-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: rgba(239,231,218,0.6);
+    padding: 2px 0;
+  }
+  .hours-row .day { color: rgba(239,231,218,0.45); }
+
+  /* ─── CONTACT ─── */
+  .contact-section { background: var(--surface); }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 24px;
+    margin-top: 48px;
+  }
+  .contact-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px 24px;
+    text-align: center;
+    transition: border-color 0.2s;
+  }
+  .contact-card:hover { border-color: var(--accent); }
+  .contact-card a { text-decoration: none; color: inherit; display: block; }
+  .contact-card-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    background: rgba(181,107,74,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 14px;
+  }
+  .contact-card-icon svg {
+    width: 20px;
+    height: 20px;
+    stroke: var(--accent);
+    fill: none;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .contact-card-label {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(239,231,218,0.4);
+    margin-bottom: 8px;
+  }
+  .contact-card-value {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--bg);
+    border-top: 1px solid var(--border);
+    padding: 40px 0;
+    text-align: center;
+  }
+  .footer-brand {
+    font-family: var(--heading-family);
+    font-size: 18px;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .footer-address {
+    font-size: 13px;
+    color: rgba(239,231,218,0.45);
+    margin-bottom: 24px;
+  }
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    list-style: none;
+    margin-bottom: 24px;
+  }
+  .footer-links a {
+    font-size: 12px;
+    color: rgba(239,231,218,0.4);
+    text-decoration: none;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--accent); }
+  .footer-copy {
+    font-size: 11px;
+    color: rgba(239,231,218,0.25);
+  }
+  .footer-powered {
+    font-size: 12px;
+    color: rgba(239,231,218,0.3);
+    margin-top: 10px;
+  }
+  .footer-powered a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 768px) {
+    nav { padding: 12px 16px; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-content { padding: 60px 24px 40px; }
+    .hero-photo { height: 260px; border-left: none; border-top: 1px solid var(--border); }
+    .container { padding: 0 20px; }
+    section { padding: 64px 0; }
+    .about-grid { grid-template-columns: 1fr; gap: 40px; }
+    .booking-inner { grid-template-columns: 1fr; gap: 48px; }
+    .location-grid { grid-template-columns: 1fr; gap: 40px; }
+    .form-row { grid-template-columns: 1fr; }
+    .about-stats { gap: 24px; flex-wrap: wrap; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Demo banner — this is a demo preview site -->
+<div class="demo-banner">
+  <strong>This is a demo</strong> &mdash; a preview website built for Kiinalainen Ravintola Li Xiang.
+  <a href="https://preview.klarsystems.com/kiinalainen-ravintola-li-xiang-kotka/proposal/" target="_blank" rel="noopener">View the full proposal &rarr;</a>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">Li Xiang</div>
+  <ul class="nav-links">
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#reservations">Reservations</a></li>
+    <li><a href="#location">Location</a></li>
+    <li><a href="#reservations" class="nav-cta">Book a Table</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="top" style="padding:0;">
+  <div class="hero-content">
+    <div class="hero-eyebrow">Authentic Cantonese Cuisine &mdash; Kotka</div>
+    <h1 class="hero-title">
+      Where <em>Cantonese</em><br>flavours find<br>a home.
+    </h1>
+    <p class="hero-sub">
+      Kiinalainen Ravintola Li Xiang brings honest, flavourful Cantonese cooking to Kotka &mdash; known for great value and dishes that keep regulars coming back.
+    </p>
+    <div class="hero-rating">
+      <div class="rating-score">4.7</div>
+      <div class="rating-divider"></div>
+      <div class="rating-detail">
+        <strong>Google rating</strong>
+        315 reviews
+      </div>
+    </div>
+    <div class="hero-actions">
+      <a href="#reservations" class="btn-primary">Book a Table</a>
+      <a href="#menu" class="btn-secondary">View Menu</a>
+    </div>
+  </div>
+  <div class="hero-photo" aria-label="Your photo here">
+    <div class="photo-placeholder-icon">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <rect x="3" y="3" width="18" height="18" rx="2"/>
+        <circle cx="8.5" cy="8.5" r="1.5"/>
+        <polyline points="21 15 16 10 5 21"/>
+      </svg>
+    </div>
+    <span>Your photo here</span>
+  </div>
+</section>
+
+<!-- MENU HIGHLIGHTS -->
+<section class="menu-section" id="menu">
+  <div class="container">
+    <span class="section-eyebrow">Menu highlights</span>
+    <h2 class="section-title">Cantonese favourites</h2>
+    <p class="section-lead">
+      Classic dishes from the Cantonese kitchen &mdash; fresh ingredients, generous portions, and honest pricing.
+    </p>
+
+    <div class="menu-grid">
+
+      <div class="menu-card">
+        <div class="menu-card-photo" aria-label="Food photos coming soon">
+          <div class="photo-placeholder-icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <rect x="3" y="3" width="18" height="18" rx="2"/>
+              <circle cx="8.5" cy="8.5" r="1.5"/>
+              <polyline points="21 15 16 10 5 21"/>
+            </svg>
+          </div>
+          <span>Food photos coming soon</span>
+        </div>
+        <div class="menu-card-body">
+          <div class="menu-card-name">Katkarapu-riisi</div>
+          <div class="menu-card-desc">Prawn fried rice &mdash; a house staple praised for value and flavour.</div>
+          <div class="menu-card-price">5,50 &euro;</div>
+        </div>
+      </div>
+
+      <div class="menu-card">
+        <div class="menu-card-photo" aria-label="Food photos coming soon">
+          <div class="photo-placeholder-icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <rect x="3" y="3" width="18" height="18" rx="2"/>
+              <circle cx="8.5" cy="8.5" r="1.5"/>
+              <polyline points="21 15 16 10 5 21"/>
+            </svg>
+          </div>
+          <span>Food photos coming soon</span>
+        </div>
+        <div class="menu-card-body">
+          <div class="menu-card-name">Kana curry</div>
+          <div class="menu-card-desc">Chicken curry &mdash; a customer favourite, consistently recommended.</div>
+          <div class="menu-card-price">&mdash;</div>
+        </div>
+      </div>
+
+      <div class="menu-card">
+        <div class="menu-card-photo" aria-label="Food photos coming soon">
+          <div class="photo-placeholder-icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <rect x="3" y="3" width="18" height="18" rx="2"/>
+              <circle cx="8.5" cy="8.5" r="1.5"/>
+              <polyline points="21 15 16 10 5 21"/>
+            </svg>
+          </div>
+          <span>Food photos coming soon</span>
+        </div>
+        <div class="menu-card-body">
+          <div class="menu-card-name">Kevätkääryleet</div>
+          <div class="menu-card-desc">Spring rolls &mdash; crisp and light, a classic Cantonese bite guests love.</div>
+          <div class="menu-card-price">&mdash;</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-photo" aria-label="Interior photo coming soon">
+        <div class="photo-placeholder-icon">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <rect x="3" y="3" width="18" height="18" rx="2"/>
+            <circle cx="8.5" cy="8.5" r="1.5"/>
+            <polyline points="21 15 16 10 5 21"/>
+          </svg>
+        </div>
+        <span>Interior photo coming soon</span>
+      </div>
+      <div class="about-content">
+        <span class="section-eyebrow">About us</span>
+        <h2 class="section-title">Good food, good value.</h2>
+        <p>
+          Li Xiang is Kotka&rsquo;s go-to for Cantonese cooking. Built on a simple promise &mdash; fresh ingredients, generous portions, and prices that make sense &mdash; the restaurant has earned a loyal following of regulars who return week after week.
+        </p>
+        <p>
+          The kitchen follows Cantonese tradition: clean flavours, quality produce, and dishes that speak for themselves. Whether you are here for a relaxed sit-down meal or picking up on the way home, you leave satisfied.
+        </p>
+        <div class="about-stats">
+          <div>
+            <div class="about-stat-num">4.7</div>
+            <div class="about-stat-label">Google rating</div>
+          </div>
+          <div>
+            <div class="about-stat-num">315</div>
+            <div class="about-stat-label">Reviews</div>
+          </div>
+          <div>
+            <div class="about-stat-num">&euro;</div>
+            <div class="about-stat-label">Affordable</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESERVATIONS — klar-bookings widget -->
+<section class="booking-section" id="reservations">
+  <div class="container">
+    <div class="booking-inner">
+      <div class="booking-copy">
+        <span class="section-eyebrow">Reservations</span>
+        <h2 class="section-title">Reserve your table</h2>
+        <p class="section-lead">
+          Secure your spot at Li Xiang in seconds. Choose your date, time, and party size &mdash; no third-party fees, no friction.
+        </p>
+        <p class="booking-note">
+          Powered by Klar Bookings. Instant confirmation, no per-cover charges.
+        </p>
+      </div>
+
+      <!-- klar-bookings -->
+      <div class="klar-bookings">
+        <div class="klar-bookings-head">Book a Table</div>
+        <form class="booking-form" onsubmit="return false;">
+          <div class="form-group">
+            <label for="book-date">Date</label>
+            <input type="date" id="book-date" name="date" required>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="book-time">Time</label>
+              <select id="book-time" name="time" required>
+                <option value="" disabled selected>Select time</option>
+                <option>12:00</option>
+                <option>12:30</option>
+                <option>13:00</option>
+                <option>13:30</option>
+                <option>14:00</option>
+                <option>14:30</option>
+                <option>15:00</option>
+                <option>15:30</option>
+                <option>16:00</option>
+                <option>16:30</option>
+                <option>17:00</option>
+                <option>17:30</option>
+                <option>18:00</option>
+                <option>18:30</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="book-guests">Guests</label>
+              <select id="book-guests" name="guests" required>
+                <option value="" disabled selected>Party size</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>8+</option>
+              </select>
+            </div>
+          </div>
+          <button type="submit" class="booking-submit">Reserve &rarr;</button>
+          <p class="booking-disclaimer">This is a preview. Booking goes live when you sign up with Klar.</p>
+        </form>
+      </div>
+      <!-- /klar-bookings -->
+
+    </div>
+  </div>
+</section>
+
+<!-- LOCATION & HOURS -->
+<section id="location">
+  <div class="container">
+    <span class="section-eyebrow">Find us</span>
+    <h2 class="section-title">Hours &amp; location</h2>
+    <div class="location-grid">
+      <div class="location-map" aria-label="Map coming soon">
+        <div class="photo-placeholder-icon">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+            <circle cx="12" cy="9" r="2.5"/>
+          </svg>
+        </div>
+        <span>Map coming soon</span>
+      </div>
+      <div class="location-details">
+        <h3>Kiinalainen Ravintola Li Xiang</h3>
+        <div class="location-item">
+          <div class="location-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+          </div>
+          <div class="location-text">
+            <strong>Address</strong>
+            <span>Tikankatu 1<br>48600 Kotka, Finland</span>
+          </div>
+        </div>
+        <div class="location-item">
+          <div class="location-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.07 1.18 2 2 0 012.07 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z"/></svg>
+          </div>
+          <div class="location-text">
+            <strong>Phone</strong>
+            <span><a href="tel:+358408343918" style="color:var(--accent);text-decoration:none;">+358 40 8343918</a></span>
+          </div>
+        </div>
+        <div class="location-item">
+          <div class="location-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div class="location-text">
+            <strong>Opening hours</strong>
+            <div class="hours-grid">
+              <div class="hours-row">
+                <span class="day">Tuesday&ndash;Sunday</span>
+                <span>12:00&ndash;19:00</span>
+              </div>
+              <div class="hours-row">
+                <span class="day">Monday</span>
+                <span>Closed</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="container">
+    <span class="section-eyebrow">Get in touch</span>
+    <h2 class="section-title">Contact us</h2>
+    <div class="contact-grid">
+
+      <div class="contact-card">
+        <a href="tel:+358408343918">
+          <div class="contact-card-icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.07 1.18 2 2 0 012.07 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z"/></svg>
+          </div>
+          <div class="contact-card-label">Phone</div>
+          <div class="contact-card-value">+358 40 8343918</div>
+        </a>
+      </div>
+
+      <div class="contact-card">
+        <a href="https://www.facebook.com/p/Kiinalainen-Ravintola-Li-Xiang-100063591939535/" target="_blank" rel="noopener">
+          <div class="contact-card-icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+          </div>
+          <div class="contact-card-label">Facebook</div>
+          <div class="contact-card-value">Li Xiang</div>
+        </a>
+      </div>
+
+      <div class="contact-card">
+        <a href="#reservations">
+          <div class="contact-card-icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </div>
+          <div class="contact-card-label">Reservations</div>
+          <div class="contact-card-value">Book online</div>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-brand">Kiinalainen Ravintola Li Xiang</div>
+    <div class="footer-address">Tikankatu 1, 48600 Kotka &nbsp;&middot;&nbsp; <a href="tel:+358408343918" style="color:rgba(239,231,218,0.45);text-decoration:none;">+358 40 8343918</a></div>
+    <ul class="footer-links">
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#reservations">Reservations</a></li>
+      <li><a href="#location">Location</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="footer-copy">&copy; 2026 Kiinalainen Ravintola Li Xiang</div>
+    <div class="footer-powered">Powered by <a href="https://klarsystems.com" target="_blank" rel="noopener">Klar Systems</a></div>
+  </div>
+</footer>
+
+</body>
+</html>

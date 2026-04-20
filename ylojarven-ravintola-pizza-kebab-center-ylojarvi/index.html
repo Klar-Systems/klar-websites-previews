@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Pizza-Kebab Center — Ylöjärvi</title>
+<style>
+  /* palette: segment 2 default (research palette empty) */
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  :root{
+    --bg:#141414;
+    --bg-soft:#1c1c1c;
+    --bg-card:#242424;
+    --text:#F5F1EA;
+    --muted:rgba(245,241,234,0.58);
+    --muted-strong:rgba(245,241,234,0.82);
+    --primary:#E04B1E;
+    --primary-hi:#f55f31;
+    --accent:#F2C75C;
+    --rule:#2e2e2e;
+    --heading-family:'Archivo Black','Helvetica Neue',Arial,sans-serif;
+    --body-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  }
+  html,body{background:var(--bg);color:var(--text);font-family:var(--body-family);line-height:1.6;-webkit-font-smoothing:antialiased}
+  body{min-height:100vh}
+  a{color:inherit;text-decoration:none}
+
+  /* ── Demo banner ── */
+  .demo-banner{background:#0a0a0a;border-bottom:1px solid var(--rule);font-size:13px}
+  .demo-banner .inner{max-width:1120px;margin:0 auto;padding:11px 24px;display:flex;flex-wrap:wrap;gap:10px 20px;align-items:center;justify-content:space-between;color:var(--muted-strong)}
+  .demo-banner strong{color:var(--accent);font-weight:700;letter-spacing:0.08em;text-transform:uppercase;font-size:11px;margin-right:6px}
+  .demo-banner a.cta-demo{color:var(--bg);background:var(--accent);padding:7px 14px;font-weight:700;font-size:11px;letter-spacing:0.1em;text-transform:uppercase}
+  .demo-banner a.cta-demo:hover{background:#fff}
+
+  /* ── Nav ── */
+  .nav{border-bottom:1px solid var(--rule)}
+  .nav .inner{max-width:1120px;margin:0 auto;padding:20px 24px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+  .wordmark{font-family:var(--heading-family);font-size:20px;letter-spacing:-0.01em;color:var(--text)}
+  .wordmark span{color:var(--primary)}
+  .nav-links{display:flex;gap:28px;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted)}
+  .nav-links a:hover{color:var(--accent)}
+  .nav-phone{font-family:var(--heading-family);font-size:16px;color:var(--accent);letter-spacing:0.02em}
+  .nav-phone:hover{color:#fff}
+  @media(max-width:860px){.nav-links{display:none}}
+  @media(max-width:560px){.nav .inner{padding:16px}}
+
+  /* ── Shared ── */
+  .container{max-width:1120px;margin:0 auto;padding:0 24px}
+  .section{padding:80px 0}
+  .section-sm{padding:56px 0}
+  .eyebrow{font-size:11px;letter-spacing:0.28em;text-transform:uppercase;color:var(--primary);font-weight:700;margin-bottom:18px;display:flex;align-items:center;gap:12px}
+  .eyebrow::before{content:"";flex:0 0 28px;height:2px;background:var(--primary)}
+  h2{font-family:var(--heading-family);font-size:clamp(30px,4.5vw,52px);line-height:1.05;letter-spacing:-0.01em;color:var(--text)}
+  h3{font-family:var(--heading-family);font-size:20px;letter-spacing:-0.005em;color:var(--text)}
+  .divider{height:1px;background:var(--rule);margin:0}
+
+  /* Buttons */
+  .btn{display:inline-flex;align-items:center;gap:10px;padding:16px 28px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;font-size:12px;border:2px solid transparent;transition:all 0.16s ease;cursor:pointer;font-family:var(--body-family)}
+  .btn-call{background:var(--primary);color:var(--text);border-color:var(--primary)}
+  .btn-call:hover{background:var(--primary-hi);border-color:var(--primary-hi);transform:translateY(-2px)}
+  .btn-outline{border-color:var(--text);color:var(--text);background:transparent}
+  .btn-outline:hover{border-color:var(--accent);color:var(--accent)}
+
+  /* Photo placeholders */
+  .photo-placeholder{background:linear-gradient(135deg,#2a1a10 0%,#1c1c1c 60%,#1e1008 100%);display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
+  .photo-placeholder::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(-45deg,transparent 0 20px,rgba(224,75,30,0.04) 20px 40px)}
+  .photo-placeholder .ph-label{position:relative;z-index:2;text-align:center;color:var(--muted);font-size:10px;letter-spacing:0.28em;text-transform:uppercase;padding:20px;line-height:1.9}
+  .photo-placeholder .ph-label strong{display:block;color:var(--accent);margin-bottom:8px;font-size:11px;letter-spacing:0.22em}
+
+  /* ── Hero ── */
+  .hero{padding:88px 0 100px;position:relative;overflow:hidden}
+  .hero::before{content:"";position:absolute;left:0;right:0;top:0;height:2px;background:linear-gradient(90deg,transparent,var(--primary) 35%,var(--accent) 65%,transparent)}
+  .hero-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:64px;align-items:center}
+  @media(max-width:900px){.hero{padding:60px 0 72px}.hero-grid{grid-template-columns:1fr;gap:44px}}
+  .hero-sub{color:var(--muted-strong);font-size:12px;letter-spacing:0.28em;text-transform:uppercase;margin-bottom:20px}
+  .hero h1{font-family:var(--heading-family);font-size:clamp(48px,8vw,96px);line-height:1.0;letter-spacing:-0.02em;color:var(--text)}
+  .hero h1 em{font-style:normal;color:var(--primary)}
+  .hero .tagline{margin-top:22px;font-size:18px;color:var(--muted-strong);max-width:480px;line-height:1.6}
+  .hero-meta{margin-top:28px;display:flex;flex-wrap:wrap;gap:10px 24px;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted)}
+  .hero-meta span::before{content:"▪";color:var(--primary);margin-right:8px;font-size:10px}
+  .hero-cta{margin-top:40px;display:flex;flex-wrap:wrap;gap:14px}
+
+  /* Hero image card */
+  .hero-card{background:var(--bg-card);border:1px solid var(--rule);overflow:hidden}
+  .hero-card::before{content:"";display:block;height:3px;background:linear-gradient(90deg,var(--primary),var(--accent))}
+  .hero-card .photo-placeholder{aspect-ratio:4/5}
+  .hero-card .card-footer{padding:20px 22px;border-top:1px solid var(--rule);display:flex;align-items:center;gap:14px}
+  .hero-card .rating{font-family:var(--heading-family);font-size:22px;color:var(--accent)}
+  .hero-card .rating-sub{font-size:11px;color:var(--muted);letter-spacing:0.1em}
+
+  /* ── Call CTA strip ── */
+  .call-strip{background:var(--primary);padding:0}
+  .call-strip .inner{max-width:1120px;margin:0 auto;padding:40px 24px;display:flex;flex-wrap:wrap;gap:20px 40px;align-items:center;justify-content:space-between}
+  .call-strip h2{font-family:var(--heading-family);font-size:clamp(24px,4vw,40px);color:#fff;letter-spacing:-0.01em}
+  .call-strip .phone-big{font-family:var(--heading-family);font-size:clamp(28px,5vw,52px);color:var(--accent);letter-spacing:0.02em;font-weight:900}
+  .call-strip .phone-big:hover{color:#fff}
+  .call-strip .cta-group{display:flex;flex-direction:column;align-items:flex-end;gap:10px}
+  @media(max-width:680px){.call-strip .cta-group{align-items:flex-start}}
+
+  /* ── Menu ── */
+  .menu-intro{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:48px}
+  .menu-intro p{color:var(--muted-strong);max-width:480px;font-size:16px;line-height:1.65}
+  .menu-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:2px}
+  .menu-card{background:var(--bg-card);padding:28px 26px;border:1px solid var(--rule);position:relative}
+  .menu-card::before{content:"";position:absolute;top:0;left:0;width:3px;height:100%;background:var(--primary)}
+  .menu-card h3{font-size:18px;margin-bottom:6px}
+  .menu-card .cat-label{font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);margin-bottom:12px}
+  .menu-card p{font-size:14px;color:var(--muted);line-height:1.55}
+  .menu-card .photo-placeholder{aspect-ratio:16/9;margin-bottom:20px}
+  .menu-full-note{margin-top:28px;padding:20px 24px;border:1px solid var(--rule);text-align:center;color:var(--muted);font-size:14px}
+  .menu-full-note strong{color:var(--accent)}
+
+  /* ── Reviews strip ── */
+  .reviews-strip{background:var(--bg-soft)}
+  .reviews-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:2px;margin-top:44px}
+  .review-card{background:var(--bg-card);padding:28px 26px;border:1px solid var(--rule)}
+  .review-card .stars{color:var(--accent);font-size:15px;margin-bottom:12px;letter-spacing:2px}
+  .review-card blockquote{font-size:15px;line-height:1.65;color:var(--muted-strong);font-style:italic}
+  .review-card .reviewer{margin-top:14px;font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted)}
+
+  /* ── Hours & Location ── */
+  .location-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+  @media(max-width:760px){.location-grid{grid-template-columns:1fr}}
+  .hours-table{width:100%;border-collapse:collapse;margin-top:24px}
+  .hours-table td{padding:10px 0;font-size:14px;border-bottom:1px solid var(--rule)}
+  .hours-table td:first-child{color:var(--muted);width:50%}
+  .hours-table td:last-child{color:var(--text);text-align:right}
+  .map-placeholder{aspect-ratio:4/3;background:var(--bg-card);border:1px solid var(--rule);display:flex;align-items:center;justify-content:center;margin-top:24px}
+  .map-placeholder span{font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted)}
+  .addr-block{margin-top:28px}
+  .addr-block p{font-size:15px;color:var(--muted-strong);margin-bottom:6px}
+  .addr-block a{color:var(--accent);font-size:14px;letter-spacing:0.06em}
+  .addr-block a:hover{color:#fff}
+
+  /* ── Contact footer ── */
+  .footer{background:#0a0a0a;border-top:1px solid var(--rule);padding:48px 0 32px}
+  .footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:40px}
+  @media(max-width:760px){.footer-grid{grid-template-columns:1fr 1fr}}
+  @media(max-width:480px){.footer-grid{grid-template-columns:1fr}}
+  .footer-brand{font-family:var(--heading-family);font-size:18px;margin-bottom:12px}
+  .footer-brand span{color:var(--primary)}
+  .footer p,.footer address{font-size:13px;color:var(--muted);line-height:1.7;font-style:normal}
+  .footer h4{font-size:10px;letter-spacing:0.28em;text-transform:uppercase;color:var(--accent);margin-bottom:14px;font-weight:700}
+  .footer a:hover{color:var(--accent)}
+  .footer-bottom{margin-top:40px;padding-top:20px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+  .footer-bottom p{font-size:11px;color:var(--muted);letter-spacing:0.08em}
+  .klar-badge{font-size:11px;color:var(--muted);letter-spacing:0.08em}
+  .klar-badge strong{color:var(--accent)}
+</style>
+</head>
+<body>
+
+<!-- Demo banner -->
+<div class="demo-banner" role="banner">
+  <div class="inner">
+    <p><strong>Demo preview</strong> — This is a demo site created by Klar Systems for Pizza-Kebab Center. Your real site, your real customers.</p>
+    <a href="mailto:Guidance@klarsystems.com" class="cta-demo">Get this site →</a>
+  </div>
+</div>
+
+<!-- Navigation -->
+<nav class="nav" aria-label="Main navigation">
+  <div class="inner">
+    <div class="wordmark">Pizza-<span>Kebab</span> Center</div>
+    <div class="nav-links">
+      <a href="#menu">Menu</a>
+      <a href="#hours">Hours</a>
+      <a href="#location">Location</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a href="tel:+358505700031" class="nav-phone">+358 50 570 0031</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero" id="home">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-sub">Ylöjärvi · Mikkolantie 6</div>
+        <h1>Pizza &amp;<br><em>Kebab</em><br>Center</h1>
+        <p class="tagline">Ylöjärvi's go-to for generous pizzas and kebabs. Call ahead — pick up hot.</p>
+        <div class="hero-meta">
+          <span>Pizza</span>
+          <span>Kebab</span>
+          <span>Hot wings</span>
+          <span>Dine-in &amp; takeaway</span>
+        </div>
+        <div class="hero-cta">
+          <a href="tel:+358505700031" class="btn btn-call">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg>
+            Call to Order
+          </a>
+          <a href="#menu" class="btn btn-outline">See the Menu</a>
+        </div>
+      </div>
+      <div class="hero-card" aria-label="Restaurant photo">
+        <div class="photo-placeholder" style="aspect-ratio:4/5">
+          <div class="ph-label">
+            <strong>Your photo here</strong>
+            Restaurant interior or signature dish
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="rating">4.2 / 5</div>
+          <div class="rating-sub">634 reviews<br>Google · Top-rated.online</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- Call-to-order CTA strip -->
+<div class="call-strip" id="order">
+  <div class="inner">
+    <div>
+      <h2>Ready to order?</h2>
+      <p style="color:rgba(255,255,255,0.75);margin-top:6px;font-size:15px">Call us — your food will be ready for pickup.</p>
+    </div>
+    <div class="cta-group">
+      <a href="tel:+358505700031" class="phone-big">+358 50 570 0031</a>
+      <span style="font-size:12px;color:rgba(255,255,255,0.6);letter-spacing:0.14em;text-transform:uppercase">Mon–Thu 10–22 · Fri 10–23 · Sat 11–23 · Sun 12–22</span>
+    </div>
+  </div>
+</div>
+
+<!-- Menu -->
+<section class="section" id="menu">
+  <div class="container">
+    <div class="menu-intro">
+      <div>
+        <div class="eyebrow">What we serve</div>
+        <h2>The Menu</h2>
+      </div>
+      <p>Pizzas, kebabs, hot wings, broiler fillets, and salads — made in-house and ready for takeaway or dine-in.</p>
+    </div>
+
+    <div class="menu-grid">
+      <!-- Pizza -->
+      <div class="menu-card">
+        <div class="photo-placeholder" style="aspect-ratio:16/9">
+          <div class="ph-label">
+            <strong>Food photos coming soon</strong>
+            Pizza selection
+          </div>
+        </div>
+        <div class="cat-label">Pizzeria</div>
+        <h3>Pizza</h3>
+        <p>Thin-crust pizzas praised by customers for size and flavour. Full selection available by phone.</p>
+      </div>
+
+      <!-- Kebab -->
+      <div class="menu-card">
+        <div class="photo-placeholder" style="aspect-ratio:16/9">
+          <div class="ph-label">
+            <strong>Food photos coming soon</strong>
+            Kebab plates
+          </div>
+        </div>
+        <div class="cat-label">Kebab</div>
+        <h3>Kebab</h3>
+        <p>The kebab that keeps locals coming back — generous portions at honest prices.</p>
+      </div>
+
+      <!-- Sides -->
+      <div class="menu-card">
+        <div class="photo-placeholder" style="aspect-ratio:16/9">
+          <div class="ph-label">
+            <strong>Food photos coming soon</strong>
+            Sides &amp; extras
+          </div>
+        </div>
+        <div class="cat-label">Sides</div>
+        <h3>Hot Wings · Broiler · Salads</h3>
+        <p>Hot wings, broiler fillets, and fresh salads to round out your meal.</p>
+      </div>
+    </div>
+
+    <div class="menu-full-note">
+      <strong>Full menu available by phone or in-store.</strong>
+      <span style="margin-left:8px;color:var(--muted)">Call <a href="tel:+358505700031" style="color:var(--accent)">+358 50 570 0031</a> to hear today's options.</span>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- Reviews -->
+<section class="section reviews-strip" id="reviews">
+  <div class="container">
+    <div class="eyebrow">What customers say</div>
+    <h2>4.2 / 5 — 634 Reviews</h2>
+
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="stars">5/5</div>
+        <blockquote>"Ihan törkeen hyvä kebsu, ja hintakin on kohdillaan."</blockquote>
+        <p class="reviewer">LoomisPC · top-rated.online</p>
+      </div>
+      <div class="review-card">
+        <div class="stars">5/5</div>
+        <blockquote>"Aivan loistavat pitsat ja kebabit. Isot ja maukkaat annokset."</blockquote>
+        <p class="reviewer">Markku L. · top-rated.online</p>
+      </div>
+      <div class="review-card">
+        <div class="stars">5/5</div>
+        <blockquote>"PARASTA KEBABBIA SAA TÄÄLTÄ — saa paljon kebabbia ja vielä aika halvalla."</blockquote>
+        <p class="reviewer">Nelli K. · top-rated.online</p>
+      </div>
+      <div class="review-card">
+        <div class="stars">5/5</div>
+        <blockquote>"I never ate such thin and delicious pizza, just love it."</blockquote>
+        <p class="reviewer">Fahrad S. · top-rated.online</p>
+      </div>
+      <div class="review-card">
+        <div class="stars">4/5</div>
+        <blockquote>"Hyvää kebab ja erittäin ystävällinen palvelu."</blockquote>
+        <p class="reviewer">Hermanni N. · top-rated.online</p>
+      </div>
+      <div class="review-card">
+        <div class="stars">4/5</div>
+        <blockquote>"Center offers huge pizzas and good kebab in the center of Ylöjärvi."</blockquote>
+        <p class="reviewer">Roope M. · top-rated.online</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- Hours & Location -->
+<section class="section" id="hours">
+  <div class="container">
+    <div class="location-grid">
+      <div>
+        <div class="eyebrow">Opening hours</div>
+        <h2>When We're Open</h2>
+        <table class="hours-table" aria-label="Opening hours">
+          <tbody>
+            <tr><td>Monday – Thursday</td><td>10:00 – 22:00</td></tr>
+            <tr><td>Friday</td><td>10:00 – 23:00</td></tr>
+            <tr><td>Saturday</td><td>11:00 – 23:00</td></tr>
+            <tr><td>Sunday</td><td>12:00 – 22:00</td></tr>
+          </tbody>
+        </table>
+        <div class="addr-block">
+          <p><strong>Mikkolantie 6, 33470 Ylöjärvi</strong></p>
+          <p style="margin-top:4px;font-size:14px;color:var(--muted)">Next to the Ylöjärvi health centre</p>
+          <a href="tel:+358505700031" style="display:inline-block;margin-top:12px;color:var(--accent);font-size:15px;font-weight:700">+358 50 570 0031</a>
+        </div>
+      </div>
+      <div id="location">
+        <div class="eyebrow">Find us</div>
+        <h2>Location</h2>
+        <div class="map-placeholder" role="img" aria-label="Map placeholder — Mikkolantie 6, Ylöjärvi">
+          <span>Map coming soon</span>
+        </div>
+        <p style="margin-top:16px;font-size:13px;color:var(--muted)">
+          <a href="https://maps.google.com/?q=Mikkolantie+6,+33470+Yl%C3%B6j%C3%A4rvi" target="_blank" rel="noopener" style="color:var(--accent)">Open in Google Maps →</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- Footer / Contact -->
+<footer class="footer" id="contact">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">Pizza-<span>Kebab</span> Center</div>
+        <address>
+          <p>Mikkolantie 6<br>33470 Ylöjärvi<br>Finland</p>
+        </address>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <p>
+          <a href="tel:+358505700031">+358 50 570 0031</a><br>
+          <a href="https://www.facebook.com/pizzakebabcenter/" target="_blank" rel="noopener" style="margin-top:6px;display:inline-block">Facebook page →</a>
+        </p>
+      </div>
+      <div>
+        <h4>Order</h4>
+        <p>Call ahead and pick up<br>your order hot.</p>
+        <a href="tel:+358505700031" class="btn btn-call" style="margin-top:16px;padding:12px 20px;font-size:11px">Call to Order</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© Pizza-Kebab Center, Ylöjärvi</p>
+      <p class="klar-badge">Powered by Klar — demo site by Klar Systems</p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

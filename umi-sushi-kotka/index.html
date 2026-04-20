@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Umi Sushi — Made-to-Order Sushi in Kotka</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+  <!-- palette: inferred boutique sushi — deep navy ground, red primary, gold accent -->
+  <style>
+    :root {
+      --bg: #1A1A2E;
+      --bg-warm: #1F1F38;
+      --bg-card: #252540;
+      --fg: #F5F0E8;
+      --fg-dim: #9A92A0;
+      --primary: #C9393E;
+      --accent: #D4A04A;
+      --rule: rgba(212,160,74,0.20);
+      --heading: 'Outfit', -apple-system, sans-serif;
+      --body: 'DM Sans', -apple-system, sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--body);
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; }
+
+    .demo-banner {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      background: var(--primary); color: #fff; text-align: center;
+      padding: 10px 16px; font-size: 0.82rem;
+    }
+    .demo-banner a { color: #fff; font-weight: 700; text-decoration: underline; margin-left: 8px; }
+
+    .container { max-width: 1060px; margin: 0 auto; padding: 0 24px; }
+    section { padding: 80px 0; }
+    .label {
+      font-family: var(--heading); font-size: 0.7rem; font-weight: 700;
+      letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px;
+    }
+    h2 {
+      font-family: var(--heading); font-size: clamp(1.8rem, 4vw, 2.5rem);
+      font-weight: 700; line-height: 1.15; margin-bottom: 20px;
+    }
+    p.sub { color: var(--fg-dim); max-width: 560px; font-size: 0.95rem; }
+
+    /* Hero */
+    .hero { padding-top: 130px; padding-bottom: 40px; }
+    .hero-inner { display: grid; grid-template-columns: 1.25fr 1fr; gap: 48px; align-items: center; }
+    .hero h1 {
+      font-family: var(--heading); font-size: clamp(2.4rem, 5.8vw, 3.6rem);
+      font-weight: 800; line-height: 1.04; margin-bottom: 16px; letter-spacing: -0.01em;
+    }
+    .hero h1 .hl { color: var(--primary); }
+    .hero-desc { color: var(--fg-dim); font-size: 1rem; margin-bottom: 24px; max-width: 480px; }
+    .badge-row { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+    .badge { display: inline-flex; align-items: center; gap: 8px;
+      background: var(--bg-card); padding: 9px 16px; border-radius: 40px;
+      font-size: 0.82rem; border: 1px solid var(--rule); }
+    .badge .num { font-weight: 700; color: var(--accent); font-size: 1.05rem; }
+    .tag-badge { background: transparent; color: var(--fg-dim); }
+
+    .img-placeholder {
+      background: var(--bg-warm); border: 1px solid var(--rule);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--fg-dim); font-size: 0.72rem; letter-spacing: 0.12em;
+      text-transform: uppercase; border-radius: 10px;
+    }
+    .img-hero { aspect-ratio: 4/3; width: 100%; }
+    .img-food { aspect-ratio: 1/1; width: 100%; }
+    .img-interior { aspect-ratio: 3/2; width: 100%; }
+
+    /* Features */
+    .features { background: var(--bg-warm); }
+    .feat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 32px; }
+    .feat-card {
+      background: var(--bg-card); border-radius: 10px; padding: 26px;
+      border-top: 3px solid var(--primary);
+    }
+    .feat-card h3 { font-family: var(--heading); font-size: 1.05rem; margin-bottom: 8px; }
+    .feat-card p { font-size: 0.88rem; color: var(--fg-dim); }
+
+    /* Menu */
+    .menu-head { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    .menu-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 36px; }
+    .menu-block h3 {
+      font-family: var(--heading); font-size: 1.15rem; margin-bottom: 14px;
+      padding-bottom: 8px; border-bottom: 1px solid var(--rule); color: var(--accent);
+    }
+    .menu-block li { list-style: none; padding: 9px 0; font-size: 0.92rem; color: var(--fg);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      display: flex; justify-content: space-between; gap: 16px; }
+    .menu-block li .price { color: var(--fg-dim); font-size: 0.82rem; }
+    .menu-note { margin-top: 28px; font-size: 0.82rem; color: var(--fg-dim); font-style: italic; text-align: center; }
+
+    /* Reviews */
+    .rev-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 22px; margin-top: 32px; }
+    .rev-card { background: var(--bg-card); border-radius: 10px; padding: 26px; border-left: 3px solid var(--accent); }
+    .rev-card blockquote { font-size: 0.95rem; font-style: italic; line-height: 1.7; margin-bottom: 10px; }
+    .rev-card cite { font-size: 0.76rem; color: var(--fg-dim); font-style: normal; }
+
+    /* Booking */
+    .booking { background: linear-gradient(160deg, #120D1E 0%, var(--bg) 100%);
+      border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+    .book-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+    .book-card {
+      background: var(--bg-card); border-radius: 12px; padding: 32px;
+      border: 1px solid var(--rule);
+    }
+    .book-card h3 { font-family: var(--heading); font-size: 1.3rem; margin-bottom: 6px; }
+    .book-card .book-sub { font-size: 0.84rem; color: var(--fg-dim); margin-bottom: 20px; }
+    .book-form { display: grid; gap: 12px; }
+    .book-form label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--fg-dim); }
+    .book-form input, .book-form select {
+      width: 100%; padding: 11px 14px; background: var(--bg); border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 6px; color: var(--fg); font-family: var(--body); font-size: 0.9rem;
+    }
+    .book-form button {
+      padding: 13px; background: var(--primary); color: #fff; border: none; border-radius: 6px;
+      font-family: var(--heading); font-size: 1rem; font-weight: 700; cursor: pointer; margin-top: 6px;
+      letter-spacing: 0.02em;
+    }
+    .book-form button:hover { background: #a82e33; }
+    .book-powered { font-size: 0.7rem; color: var(--fg-dim); margin-top: 10px; text-align: center; }
+
+    /* Hours + Map */
+    .info-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-top: 36px; }
+    .hours-tbl { width: 100%; }
+    .hours-tbl td { padding: 9px 0; font-size: 0.9rem; }
+    .hours-tbl td:first-child { color: var(--fg-dim); width: 130px; }
+    .hours-tbl td:last-child { text-align: right; }
+    .map-frame { width: 100%; aspect-ratio: 16/9; border: 0; border-radius: 8px;
+      filter: grayscale(0.65) invert(0.88) contrast(0.88); }
+
+    /* Contact */
+    .contact { background: var(--bg-warm); }
+    .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 28px; margin-top: 28px; }
+    .contact-item h4 { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.14em; color: var(--accent); margin-bottom: 6px; }
+    .contact-item a { color: var(--fg); text-decoration: none; font-size: 1.05rem; font-weight: 500; }
+    .contact-item a:hover { color: var(--accent); }
+
+    footer { padding: 36px 0; text-align: center; font-size: 0.76rem; color: var(--fg-dim);
+      border-top: 1px solid rgba(255,255,255,0.05); }
+    footer a { color: var(--fg-dim); }
+
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    @media (max-width: 768px) {
+      .hero-inner, .book-grid, .info-cols, .menu-cols { grid-template-columns: 1fr; }
+      .feat-grid { grid-template-columns: 1fr; }
+      section { padding: 56px 0; }
+      .hero { padding-top: 110px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="demo-banner">
+    This is a demo — the final website will be built together based on your preferences.
+    <a href="https://preview.klarsystems.com/umi-sushi-kotka/proposal/">See the offer</a>
+  </div>
+
+  <section class="hero">
+    <div class="container">
+      <div class="hero-inner">
+        <div>
+          <div class="label">Kotka &mdash; Kymenlaaksonkatu</div>
+          <h1><span class="hl">Umi</span> Sushi</h1>
+          <p class="hero-desc">Made to order. Every piece. One chef, three tables, and the freshest sushi in Kotka.</p>
+          <div class="badge-row">
+            <div class="badge"><span class="num">4.9</span> / 5 &nbsp;|&nbsp; 252 reviews</div>
+            <div class="badge tag-badge">Nigiri &middot; Sets &middot; Poke Bowls</div>
+          </div>
+        </div>
+        <div class="img-placeholder img-hero" aria-label="Your photo here"><span>Your photo here</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="features reveal">
+    <div class="container">
+      <div class="label">Why Umi Sushi</div>
+      <h2>Every piece made to order</h2>
+      <div class="feat-grid">
+        <div class="feat-card">
+          <h3>Made to order</h3>
+          <p>Nothing is pre-made. Your nigiri, bowls and sets are prepared fresh from the moment you order.</p>
+        </div>
+        <div class="feat-card">
+          <h3>One chef, full focus</h3>
+          <p>A single sushi chef handles every plate — the quality reviewers call "the best in Finland" comes from that focus.</p>
+        </div>
+        <div class="feat-card">
+          <h3>Kotka's Meritorni building</h3>
+          <p>Street-level entrance on Kymenlaaksonkatu 20d. Intimate space — book ahead for Friday and Saturday evenings.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="reveal">
+    <div class="container">
+      <div class="menu-head">
+        <div>
+          <div class="label">Menu</div>
+          <h2>Nigiri, sets &amp; bowls</h2>
+        </div>
+      </div>
+      <div class="menu-cols">
+        <div class="menu-block">
+          <h3>Lajitelmat (Sets)</h3>
+          <ul>
+            <li><span>L5 — 2 lohi, 2 grillattu lohi, 8 philadelphia</span><span class="price">€23.90</span></li>
+            <li><span>L13 — lohi, grillattu lohi, ebi, avokado, maki 14 pcs</span><span class="price">€22.90</span></li>
+            <li><span>L8 — lohi, grillattu lohi, ebi, surimi, pieni lohi maki 14 pcs</span><span class="price">€23.90</span></li>
+            <li><span>L15 — lohi, grillattu lohi, ebi, avokado, maki 24 pcs</span><span class="price">€45.90</span></li>
+          </ul>
+        </div>
+        <div class="menu-block">
+          <h3>Bowlit</h3>
+          <ul>
+            <li><span>P5 Grillattu Lohi Bowl</span><span class="price">€22.90</span></li>
+            <li><span>P2 Raaka Lohi Bowl</span><span class="price">€22.50</span></li>
+            <li><span>P3 Katkarapu Bowl</span><span class="price">€22.50</span></li>
+            <li><span>P6 Tofu Bowl</span><span class="price">€19.50</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="img-placeholder img-food" style="max-width: 300px; margin: 36px auto 0;" aria-label="Food photos coming soon"><span>Food photos coming soon</span></div>
+      <p class="menu-note">This is a demo — the menu will be updated together with you.</p>
+    </div>
+  </section>
+
+  <section class="reveal" style="background: var(--bg-warm);">
+    <div class="container">
+      <div class="label">Reviews</div>
+      <h2>What guests say</h2>
+      <div class="rev-grid">
+        <div class="rev-card">
+          <blockquote>"Without a doubt the best sushi in Finland! Carefully prepared dishes with first class ingredients. We were genuinely surprised to find such quality here. Warmly recommend!"</blockquote>
+          <cite>Rellander, via TripAdvisor &mdash; December 2023</cite>
+        </div>
+        <div class="rev-card">
+          <blockquote>"Wonderful sushi and pokeball. Fresh products cooked by an artist. The chef is very kind, and the assortments of sushi and makis are varied and the cuisine is refined."</blockquote>
+          <cite>ericfos, via TripAdvisor &mdash; January 2025</cite>
+        </div>
+        <div class="rev-card">
+          <blockquote>"Best Sushi I've ever had! Went with a friend for lunch and keep going back almost biweekly."</blockquote>
+          <cite>Ariane B, via TripAdvisor &mdash; April 2024</cite>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="booking reveal" id="booking">
+    <div class="container">
+      <div class="book-grid">
+        <div>
+          <div class="label">Reserve</div>
+          <h2>Book a table at Umi Sushi</h2>
+          <p class="sub">Three tables, one chef — seats fill quickly on evenings and weekends. Reserve ahead and your nigiri will be ready the moment you arrive.</p>
+          <div class="img-placeholder img-interior" style="margin-top: 28px;" aria-label="Interior photo coming soon"><span>Interior photo coming soon</span></div>
+        </div>
+        <div class="book-card klar-bookings" id="klar-bookings-widget">
+          <h3>Klar Bookings</h3>
+          <p class="book-sub">Reserve in seconds &mdash; no account needed, no fees.</p>
+          <form class="book-form" onsubmit="return false;">
+            <div>
+              <label for="b-date">Date</label>
+              <input type="date" id="b-date" name="date" required>
+            </div>
+            <div>
+              <label for="b-time">Time</label>
+              <select id="b-time" name="time">
+                <option value="11:00">11:00</option>
+                <option value="11:30">11:30</option>
+                <option value="12:00">12:00</option>
+                <option value="12:30">12:30</option>
+                <option value="13:00">13:00</option>
+                <option value="17:00">17:00</option>
+                <option value="18:00" selected>18:00</option>
+                <option value="18:30">18:30</option>
+                <option value="19:00">19:00</option>
+                <option value="19:30">19:30</option>
+                <option value="20:00">20:00</option>
+                <option value="21:00">21:00</option>
+              </select>
+            </div>
+            <div>
+              <label for="b-guests">Guests</label>
+              <select id="b-guests" name="guests">
+                <option value="1">1 guest</option>
+                <option value="2" selected>2 guests</option>
+                <option value="3">3 guests</option>
+                <option value="4">4 guests</option>
+                <option value="5">5 guests</option>
+                <option value="6">6+ guests</option>
+              </select>
+            </div>
+            <button type="submit">Reserve</button>
+          </form>
+          <div class="book-powered">Powered by Klar Bookings &mdash; no fees, no commissions</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="reveal">
+    <div class="container">
+      <div class="label">Visit</div>
+      <h2>Find us on Kymenlaaksonkatu</h2>
+      <div class="info-cols">
+        <div>
+          <table class="hours-tbl">
+            <tr><td>Monday</td><td>10:30 &ndash; 21:00</td></tr>
+            <tr><td>Tuesday</td><td>10:30 &ndash; 21:00</td></tr>
+            <tr><td>Wednesday</td><td>10:30 &ndash; 21:00</td></tr>
+            <tr><td>Thursday</td><td>10:30 &ndash; 21:00</td></tr>
+            <tr><td>Friday</td><td>10:30 &ndash; 21:45</td></tr>
+            <tr><td>Saturday</td><td>11:00 &ndash; 21:45</td></tr>
+            <tr><td>Sunday</td><td>11:00 &ndash; 19:30</td></tr>
+          </table>
+          <p style="font-size: 0.82rem; color: var(--fg-dim); margin-top: 12px;">
+            All sushi made to order during opening hours
+          </p>
+        </div>
+        <div>
+          <iframe class="map-frame" src="https://maps.google.com/maps?q=Kymenlaaksonkatu+20d+Kotka&output=embed" allowfullscreen loading="lazy" title="Umi Sushi location map"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact reveal">
+    <div class="container">
+      <div class="label">Contact</div>
+      <h2>Get in touch</h2>
+      <div class="contact-grid">
+        <div class="contact-item">
+          <h4>Phone</h4>
+          <a href="tel:041 4988400">041 4988400</a>
+        </div>
+        <div class="contact-item">
+          <h4>Address</h4>
+          <span>Kymenlaaksonkatu 20d, 48100 Kotka</span>
+        </div>
+        <div class="contact-item">
+          <h4>Order online</h4>
+          <a href="https://wolt.com/en/fin/kotka/restaurant/umi-sushi-new" target="_blank" rel="noopener">Wolt</a>
+        </div>
+        <div class="contact-item">
+          <h4>Instagram</h4>
+          <a href="https://instagram.com/umisushi_suomi" target="_blank" rel="noopener">@umisushi_suomi</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>Umi Sushi &mdash; Kymenlaaksonkatu 20d, 48100 Kotka &mdash; <a href="tel:041 4988400">041 4988400</a></p>
+      <p style="margin-top: 6px;">&copy; 2026 Umi Sushi. Powered by Klar.</p>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var obs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('visible'); });
+      }, { threshold: 0.12 });
+      document.querySelectorAll('.reveal').forEach(function(el) { obs.observe(el); });
+    });
+  </script>
+</body>
+</html>

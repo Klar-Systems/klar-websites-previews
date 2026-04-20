@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ravintola Newroz — Charcoal-Grilled Skewers &amp; Pizza in Jyväskylä</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <!-- palette: segment 1 default (research palette empty) -->
+  <style>
+    :root {
+      --bg: #1F2933;
+      --bg-warm: #263240;
+      --bg-card: #2C3A47;
+      --fg: #EFE7DA;
+      --fg-dim: #9FA9B3;
+      --primary: #B56B4A;
+      --accent: #D4A574;
+      --rule: rgba(212,165,116,0.18);
+      --heading: 'Playfair Display', Georgia, serif;
+      --body: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--body);
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; }
+
+    .demo-banner {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      background: var(--primary); color: #fff; text-align: center;
+      padding: 10px 16px; font-size: 0.82rem; font-family: var(--body);
+    }
+    .demo-banner a { color: #fff; font-weight: 700; text-decoration: underline; margin-left: 8px; }
+
+    .container { max-width: 1060px; margin: 0 auto; padding: 0 24px; }
+    section { padding: 80px 0; }
+    .label {
+      font-family: var(--body); font-size: 0.7rem; font-weight: 700;
+      letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px;
+    }
+    h2 {
+      font-family: var(--heading); font-size: clamp(1.8rem, 4vw, 2.5rem);
+      font-weight: 700; line-height: 1.15; margin-bottom: 20px;
+    }
+    p.sub { color: var(--fg-dim); max-width: 560px; font-size: 0.95rem; }
+
+    /* Hero */
+    .hero { padding-top: 130px; padding-bottom: 40px; }
+    .hero-inner { display: grid; grid-template-columns: 1.25fr 1fr; gap: 48px; align-items: center; }
+    .hero h1 {
+      font-family: var(--heading); font-size: clamp(2.4rem, 5.8vw, 3.6rem);
+      font-weight: 800; line-height: 1.04; margin-bottom: 16px; letter-spacing: -0.01em;
+    }
+    .hero h1 .hl { color: var(--accent); }
+    .hero-desc { color: var(--fg-dim); font-size: 1rem; margin-bottom: 24px; max-width: 480px; }
+    .badge-row { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+    .badge { display: inline-flex; align-items: center; gap: 8px;
+      background: var(--bg-card); padding: 9px 16px; border-radius: 40px;
+      font-size: 0.82rem; border: 1px solid var(--rule); }
+    .badge .num { font-weight: 700; color: var(--accent); font-size: 1.05rem; }
+    .tag-badge { background: transparent; color: var(--fg-dim); }
+
+    .img-placeholder {
+      background: var(--bg-warm); border: 1px solid var(--rule);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--fg-dim); font-size: 0.72rem; letter-spacing: 0.12em;
+      text-transform: uppercase; border-radius: 10px;
+    }
+    .img-hero { aspect-ratio: 4/3; width: 100%; }
+    .img-food { aspect-ratio: 1/1; width: 100%; }
+    .img-interior { aspect-ratio: 3/2; width: 100%; }
+
+    /* Features */
+    .features { background: var(--bg-warm); }
+    .feat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 32px; }
+    .feat-card {
+      background: var(--bg-card); border-radius: 10px; padding: 26px;
+      border-top: 3px solid var(--primary);
+    }
+    .feat-card h3 { font-family: var(--heading); font-size: 1.05rem; margin-bottom: 8px; }
+    .feat-card p { font-size: 0.88rem; color: var(--fg-dim); }
+
+    /* Menu */
+    .menu-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 36px; }
+    .menu-block h3 {
+      font-family: var(--heading); font-size: 1.15rem; margin-bottom: 14px;
+      padding-bottom: 8px; border-bottom: 1px solid var(--rule); color: var(--accent);
+    }
+    .menu-block li { list-style: none; padding: 9px 0; font-size: 0.92rem; color: var(--fg);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      display: flex; justify-content: space-between; gap: 16px; }
+    .menu-block li .price { color: var(--fg-dim); font-size: 0.82rem; white-space: nowrap; }
+    .menu-note { margin-top: 28px; font-size: 0.82rem; color: var(--fg-dim); font-style: italic; text-align: center; }
+    .menu-photo-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-top: 32px; }
+
+    /* Reviews */
+    .rev-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 22px; margin-top: 32px; }
+    .rev-card { background: var(--bg-card); border-radius: 10px; padding: 26px; border-left: 3px solid var(--accent); }
+    .rev-card blockquote { font-size: 0.95rem; font-style: italic; line-height: 1.7; margin-bottom: 10px; }
+    .rev-card cite { font-size: 0.76rem; color: var(--fg-dim); font-style: normal; }
+    .rating-row { display: flex; align-items: center; gap: 10px; margin-top: 32px; }
+    .rating-num { font-family: var(--heading); font-size: 3rem; font-weight: 700; color: var(--accent); }
+    .rating-meta { font-size: 0.82rem; color: var(--fg-dim); }
+
+    /* Booking */
+    .booking { background: linear-gradient(160deg, var(--bg-warm) 0%, var(--bg) 100%);
+      border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+    .book-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+    .book-card {
+      background: var(--bg-card); border-radius: 12px; padding: 32px;
+      border: 1px solid var(--rule);
+    }
+    .book-card h3 { font-family: var(--heading); font-size: 1.3rem; margin-bottom: 6px; }
+    .book-card .book-sub { font-size: 0.84rem; color: var(--fg-dim); margin-bottom: 20px; }
+    .book-form { display: grid; gap: 12px; }
+    .book-form label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--fg-dim); display: block; margin-bottom: 4px; }
+    .book-form input, .book-form select {
+      width: 100%; padding: 11px 14px; background: var(--bg); border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 6px; color: var(--fg); font-family: var(--body); font-size: 0.9rem;
+    }
+    .book-form select option { background: var(--bg); }
+    .book-form .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .book-form button {
+      padding: 13px; background: var(--primary); color: #fff; border: none; border-radius: 6px;
+      font-family: var(--body); font-size: 1rem; font-weight: 600; cursor: pointer; margin-top: 6px;
+      letter-spacing: 0.02em; transition: background 0.2s;
+    }
+    .book-form button:hover { background: #9a5a3c; }
+    .book-powered { font-size: 0.7rem; color: var(--fg-dim); margin-top: 10px; text-align: center; }
+
+    .book-info h3 { font-family: var(--heading); font-size: 1.6rem; margin-bottom: 12px; }
+    .book-info p { color: var(--fg-dim); font-size: 0.95rem; margin-bottom: 20px; }
+    .book-info .contact-link { display: inline-flex; align-items: center; gap: 8px;
+      background: var(--bg-card); border: 1px solid var(--rule); border-radius: 8px;
+      padding: 10px 18px; font-size: 0.9rem; font-weight: 600; text-decoration: none;
+      color: var(--fg); margin-right: 10px; margin-bottom: 10px; transition: border-color 0.2s; }
+    .book-info .contact-link:hover { border-color: var(--accent); }
+
+    /* Hours + Map */
+    .info-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-top: 36px; }
+    .hours-tbl { width: 100%; }
+    .hours-tbl td { padding: 9px 0; font-size: 0.9rem; }
+    .hours-tbl td:first-child { color: var(--fg-dim); width: 130px; }
+    .hours-tbl td:last-child { text-align: right; }
+    .hours-tbl tr.today td { color: var(--accent); font-weight: 600; }
+    .map-frame { width: 100%; aspect-ratio: 16/9; border: 0; border-radius: 8px;
+      filter: grayscale(0.5) invert(0.85) contrast(0.9); }
+
+    /* Contact */
+    .contact { background: var(--bg-warm); }
+    .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 28px; margin-top: 28px; }
+    .contact-item h4 { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.14em; color: var(--accent); margin-bottom: 6px; }
+    .contact-item a { color: var(--fg); text-decoration: none; font-size: 1.05rem; font-weight: 500; }
+    .contact-item a:hover { color: var(--accent); }
+
+    footer { padding: 36px 0; text-align: center; font-size: 0.76rem; color: var(--fg-dim);
+      border-top: 1px solid rgba(255,255,255,0.05); }
+    footer a { color: var(--fg-dim); }
+
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    @media (max-width: 768px) {
+      .hero-inner, .book-grid, .info-cols, .menu-cols { grid-template-columns: 1fr; }
+      .feat-grid { grid-template-columns: 1fr; }
+      .menu-photo-row { grid-template-columns: 1fr 1fr; }
+      section { padding: 56px 0; }
+      .hero { padding-top: 110px; }
+    }
+    @media (max-width: 480px) {
+      .menu-photo-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="demo-banner">
+    This is a demo — the final website will be built together based on your preferences.
+    <a href="https://preview.klarsystems.com/ravintola-newroz-jyvaskyla/proposal/">See the offer</a>
+  </div>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-inner">
+        <div>
+          <div class="label">Jyväskylä &mdash; Nevakatu</div>
+          <h1>Ravintola <span class="hl">Newroz</span></h1>
+          <p class="hero-desc">Charcoal-grilled shish skewers and stone-baked pizza in a family-run kitchen on Nevakatu. Real coal fire, real flavour.</p>
+          <div class="badge-row">
+            <div class="badge"><span class="num">4.6</span> / 5 &nbsp;|&nbsp; 240 reviews</div>
+            <div class="badge tag-badge">Shish Kebab &middot; Pizza &middot; Grilled Skewers</div>
+          </div>
+        </div>
+        <div class="img-placeholder img-hero" aria-label="Your photo here"><span>Your photo here</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="features reveal">
+    <div class="container">
+      <div class="label">Why Newroz</div>
+      <h2>Coal-fired, family-made, worth the trip</h2>
+      <div class="feat-grid">
+        <div class="feat-card">
+          <h3>Real charcoal grill</h3>
+          <p>The skewers are grilled over a live coal fire inside the kitchen. That smoky depth is the reason regulars keep coming back.</p>
+        </div>
+        <div class="feat-card">
+          <h3>Family-owned since 2018</h3>
+          <p>The whole family works here. Generous portions, warm hospitality, and handmade nun bread baked fresh every day.</p>
+        </div>
+        <div class="feat-card">
+          <h3>Jyväskylä favourite</h3>
+          <p>4.6 stars from 240 reviews. Ranked among the top restaurants in the city for meat quality and value.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Menu -->
+  <section class="reveal">
+    <div class="container">
+      <div class="label">Menu</div>
+      <h2>From the grill to your table</h2>
+      <p class="sub">Charcoal skewers, hand-rolled kebab wraps, and wood-fired pizzas. Everything made to order.</p>
+
+      <div class="menu-cols">
+        <div class="menu-block">
+          <h3>Grilled Skewers</h3>
+          <ul>
+            <li><span>Shishkebab <small style="color:var(--fg-dim);font-size:0.78rem;">(2 skewers)</small></span><span class="price">17.50</span></li>
+            <li><span>Shishkana <small style="color:var(--fg-dim);font-size:0.78rem;">(chicken skewer)</small></span><span class="price">17.50</span></li>
+          </ul>
+          <h3 style="margin-top:24px;">Kebab Wraps</h3>
+          <ul>
+            <li><span>Kebab Wrap</span><span class="price">15.50</span></li>
+            <li><span>Wrap with Aura / Feta</span><span class="price">16.50</span></li>
+            <li><span>Pita Kebab</span><span class="price">15.50</span></li>
+          </ul>
+        </div>
+        <div class="menu-block">
+          <h3>Pizza</h3>
+          <ul>
+            <li><span>Margaretta <small style="color:var(--fg-dim);font-size:0.78rem;">(cherry tomato, mozzarella, pesto)</small></span><span class="price">15.00</span></li>
+            <li><span>Fantasia <small style="color:var(--fg-dim);font-size:0.78rem;">(4 toppings of your choice)</small></span><span class="price">15.00</span></li>
+          </ul>
+          <h3 style="margin-top:24px;">Salads</h3>
+          <ul>
+            <li><span>Kebab salad</span><span class="price">15.50</span></li>
+            <li><span>Chicken breast salad</span><span class="price">15.50</span></li>
+            <li><span>Falafel salad</span><span class="price">15.50</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="menu-photo-row" style="margin-top:32px;">
+        <div class="img-placeholder img-food" aria-label="Food photos coming soon"><span>Food photos coming soon</span></div>
+        <div class="img-placeholder img-food" aria-label="Food photos coming soon"><span>Food photos coming soon</span></div>
+        <div class="img-placeholder img-food" aria-label="Food photos coming soon"><span>Food photos coming soon</span></div>
+      </div>
+
+      <p class="menu-note">Prices in euros &mdash; dine in or takeaway. Delivery via Wolt and Foodora.</p>
+    </div>
+  </section>
+
+  <!-- Interior -->
+  <section class="features reveal" style="padding-top:0;">
+    <div class="container">
+      <div class="label">The Space</div>
+      <h2>Where the grill is always on</h2>
+      <p class="sub">A neighbourhood kitchen with a real wood-heated charcoal grill visible from the dining room. Simple, warm, and genuine.</p>
+      <div style="margin-top:28px;">
+        <div class="img-placeholder img-interior" aria-label="Interior photo coming soon"><span>Interior photo coming soon</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reviews -->
+  <section class="reveal">
+    <div class="container">
+      <div class="label">What guests say</div>
+      <h2>The best charcoal grill in Jyväskylä</h2>
+      <div class="rating-row">
+        <div class="rating-num">4.6</div>
+        <div class="rating-meta">out of 5<br><span style="font-size:0.9rem;">240 Google reviews</span></div>
+      </div>
+      <div class="rev-grid" style="margin-top:32px;">
+        <div class="rev-card">
+          <blockquote>"The food was amazing, very fresh and tasty, one of the best meat I've eaten in Finland. Family-owned restaurant and the whole family works hard to put a smile on every customers face."</blockquote>
+          <cite>&mdash; Suubi Lubaale</cite>
+        </div>
+        <div class="rev-card">
+          <blockquote>"They use real coal grill to prepare the meat and that's what makes this place special."</blockquote>
+          <cite>&mdash; Harri R.</cite>
+        </div>
+        <div class="rev-card">
+          <blockquote>"Honestly, best food I have tried in Finland. Family owned business!"</blockquote>
+          <cite>&mdash; Abdulrahman A.</cite>
+        </div>
+        <div class="rev-card">
+          <blockquote>"They roast the skewers in an oven above a real fire and you can taste that back in the meat."</blockquote>
+          <cite>&mdash; Jacco B.</cite>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Booking -->
+  <section class="booking reveal">
+    <div class="container">
+      <div class="book-grid">
+        <div class="book-info">
+          <div class="label">Reserve a table</div>
+          <h3>Book your seat at the grill</h3>
+          <p>Groups, families, and regulars welcome. Reserve your table in seconds — no third-party platform, no booking fees.</p>
+          <a class="contact-link" href="tel:+358504717490">Call: 050 4717490</a>
+        </div>
+        <div class="book-card">
+          <h3>Reservation</h3>
+          <p class="book-sub">Select your date, time, and party size</p>
+          <form class="book-form" onsubmit="return false;">
+            <div>
+              <label for="book-date">Date</label>
+              <input type="date" id="book-date" name="date">
+            </div>
+            <div class="form-row">
+              <div>
+                <label for="book-time">Time</label>
+                <select id="book-time" name="time">
+                  <option value="">Select time</option>
+                  <option>10:00</option>
+                  <option>10:30</option>
+                  <option>11:00</option>
+                  <option>11:30</option>
+                  <option>12:00</option>
+                  <option>12:30</option>
+                  <option>13:00</option>
+                  <option>13:30</option>
+                  <option>14:00</option>
+                  <option>14:30</option>
+                  <option>15:00</option>
+                  <option>15:30</option>
+                  <option>16:00</option>
+                  <option>16:30</option>
+                  <option>17:00</option>
+                  <option>17:30</option>
+                  <option>18:00</option>
+                  <option>18:30</option>
+                  <option>19:00</option>
+                </select>
+              </div>
+              <div>
+                <label for="book-party">Party size</label>
+                <select id="book-party" name="party">
+                  <option value="">Guests</option>
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                  <option>6</option>
+                  <option>7</option>
+                  <option>8</option>
+                  <option>9</option>
+                  <option>10+</option>
+                </select>
+              </div>
+            </div>
+            <div>
+              <label for="book-name">Your name</label>
+              <input type="text" id="book-name" name="name" placeholder="Name">
+            </div>
+            <div>
+              <label for="book-phone">Phone number</label>
+              <input type="tel" id="book-phone" name="phone" placeholder="+358...">
+            </div>
+            <button type="submit">Reserve now</button>
+          </form>
+          <p class="book-powered">Powered by Klar Bookings</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Hours + Map -->
+  <section class="reveal">
+    <div class="container">
+      <div class="label">Find us</div>
+      <h2>Opening hours &amp; location</h2>
+      <div class="info-cols">
+        <div>
+          <table class="hours-tbl">
+            <tbody>
+              <tr><td>Monday</td><td>Closed</td></tr>
+              <tr><td>Tuesday</td><td>10:00&ndash;19:30</td></tr>
+              <tr><td>Wednesday</td><td>10:00&ndash;19:30</td></tr>
+              <tr><td>Thursday</td><td>10:00&ndash;19:30</td></tr>
+              <tr><td>Friday</td><td>10:00&ndash;19:30</td></tr>
+              <tr><td>Saturday</td><td>11:00&ndash;20:30</td></tr>
+              <tr><td>Sunday</td><td>11:00&ndash;20:30</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div>
+          <iframe
+            class="map-frame"
+            src="https://maps.google.com/maps?q=Nevakatu+1+Jyv%C3%A4skyl%C3%A4&output=embed"
+            loading="lazy"
+            title="Ravintola Newroz location"
+            allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="contact reveal">
+    <div class="container">
+      <div class="label">Contact</div>
+      <h2>Get in touch</h2>
+      <div class="contact-grid">
+        <div class="contact-item">
+          <h4>Phone</h4>
+          <a href="tel:+358504717490">050 4717490</a>
+        </div>
+        <div class="contact-item">
+          <h4>Address</h4>
+          <span style="font-size:1.05rem;font-weight:500;">Nevakatu 1 e 12<br>40340 Jyväskylä</span>
+        </div>
+        <div class="contact-item">
+          <h4>Order online</h4>
+          <a href="https://wolt.com/en/fin/jyvaskyla/restaurant/ravintola-newroz" target="_blank" rel="noopener">Wolt</a>
+          &nbsp;&middot;&nbsp;
+          <a href="https://www.foodora.fi/en/restaurant/s5ex/ravintola-newroz" target="_blank" rel="noopener">Foodora</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>Ravintola Newroz &mdash; Nevakatu 1 e 12, 40340 Jyväskylä &mdash; <a href="tel:+358504717490">050 4717490</a></p>
+      <p style="margin-top:8px;">Powered by Klar &mdash; <a href="https://klarsystems.com" target="_blank" rel="noopener">klarsystems.com</a></p>
+    </div>
+  </footer>
+
+  <script>
+    // Reveal-on-scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>

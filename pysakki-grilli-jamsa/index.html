@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Pysäkki-grilli — Grill kiosk in Jämsä, call to order</title>
+<meta name="description" content="Pysäkki-grilli, Seppolantie 8, Jämsä — burgers, pizza, makkaraperunat, taksarit. Rated 4.2 from 405 reviews. Call to order.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* Pysäkki-grilli Jämsä — Segment 2 grill kiosk */
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --bg:#141414;
+    --bg-soft:#1c1c1c;
+    --text:#F5F1EA;
+    --muted:#bdb6aa;
+    --primary:#D94F00;
+    --accent:#F2B800;
+    --rule:#2a2a2a;
+  }
+  html{scroll-behavior:smooth;background:var(--bg)}
+  body{background:var(--bg);color:var(--text);font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  h1,h2,h3{font-family:'Archivo Black','Helvetica Neue',Arial,sans-serif;letter-spacing:-.01em;text-transform:uppercase}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 22px}
+
+  /* Demo banner */
+  .demo-banner{background:var(--accent);color:#141414;text-align:center;padding:10px 16px;font-size:13px;font-weight:600;line-height:1.5}
+  .demo-banner a{text-decoration:underline;color:#141414}
+
+  /* Nav */
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:20px 0;border-bottom:1px solid var(--rule)}
+  .nav .mark{font-family:'Archivo Black',sans-serif;font-size:20px;letter-spacing:.04em}
+  .nav .cta-mini{background:var(--primary);color:#fff;padding:10px 16px;border-radius:4px;font-weight:700;font-size:13px;letter-spacing:.04em;text-transform:uppercase}
+  .nav .cta-mini:hover{background:#f05a00}
+
+  /* Hero */
+  .hero{padding:72px 0 40px}
+  .eyebrow{color:var(--accent);font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;margin-bottom:16px}
+  .hero h1{font-size:clamp(44px,8vw,84px);line-height:.95;margin-bottom:22px}
+  .hero h1 .slash{color:var(--primary)}
+  .hero-sub{font-size:18px;color:var(--muted);max-width:640px;margin-bottom:30px}
+
+  /* Rating badge */
+  .hero-rating{display:inline-flex;align-items:center;gap:10px;margin-bottom:30px;padding:8px 14px;border:1px solid var(--rule);border-radius:4px;background:var(--bg-soft)}
+  .hero-rating .num{font-weight:700;font-size:15px}
+  .hero-rating .count{color:var(--muted);font-size:13px}
+
+  /* Hero image placeholder */
+  .hero-img{margin-bottom:36px;aspect-ratio:16/6;background:linear-gradient(135deg,#2a1a10,#3a2010);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--rule)}
+
+  /* CTAs */
+  .cta-bar{display:flex;flex-wrap:wrap;gap:14px;margin-top:8px}
+  .cta-primary{display:inline-flex;align-items:center;gap:12px;background:var(--primary);color:#fff;padding:18px 28px;border-radius:6px;font-weight:700;font-size:17px;letter-spacing:.03em;text-transform:uppercase;transition:transform .15s}
+  .cta-primary:hover{transform:translateY(-1px);background:#f05a00}
+  .cta-primary .dot{width:10px;height:10px;background:var(--accent);border-radius:50%;display:inline-block;flex-shrink:0}
+
+  /* Section */
+  .section{padding:64px 0;border-top:1px solid var(--rule)}
+  .section h2{font-size:clamp(28px,4.5vw,46px);line-height:1;margin-bottom:22px}
+  .section .lead{font-size:17px;color:var(--muted);max-width:640px;margin-bottom:38px}
+
+  /* Menu grid */
+  .menu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
+  .dish{background:var(--bg-soft);border:1px solid var(--rule);border-radius:8px;overflow:hidden;display:flex;flex-direction:column}
+  .dish-art{aspect-ratio:4/3;background:linear-gradient(135deg,#2a1a10,var(--primary));opacity:.65;display:flex;align-items:flex-end;justify-content:flex-start;padding:14px;color:#f5f1ea;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+  .dish-body{padding:18px 18px 22px}
+  .dish h3{font-family:'Inter',sans-serif;font-weight:700;font-size:17px;margin-bottom:8px;text-transform:none;letter-spacing:0}
+  .dish p{color:var(--muted);font-size:14px;margin-bottom:10px}
+  .dish .price{font-family:'Archivo Black',sans-serif;color:var(--accent);font-size:17px;letter-spacing:.02em}
+  .dish .price.tbc{color:var(--muted);font-family:'Inter',sans-serif;font-weight:600;font-size:13px;letter-spacing:0}
+
+  /* Split layout */
+  .split{display:grid;grid-template-columns:1.1fr .9fr;gap:36px;align-items:start}
+  @media (max-width:780px){.split{grid-template-columns:1fr}}
+  .story p{font-size:16px;color:var(--text);margin-bottom:14px}
+  .story .tag-row{margin-top:18px;display:flex;flex-wrap:wrap;gap:8px}
+  .tag{font-size:12px;letter-spacing:.08em;text-transform:uppercase;padding:6px 10px;border:1px solid var(--rule);border-radius:999px;color:var(--muted)}
+
+  .hours-card{background:var(--bg-soft);border:1px solid var(--rule);border-radius:10px;padding:22px}
+  .hours-card h3{font-size:14px;margin-bottom:14px;color:var(--accent);letter-spacing:.08em;font-family:'Archivo Black',sans-serif}
+  .hours-card table{width:100%;border-collapse:collapse}
+  .hours-card td{padding:8px 0;font-size:14px;border-bottom:1px solid var(--rule)}
+  .hours-card td:first-child{color:var(--muted);width:46%}
+  .hours-card td:last-child{text-align:right;font-variant-numeric:tabular-nums}
+  .hours-card tr:last-child td{border-bottom:none}
+  .hours-card .fri{color:var(--accent);font-weight:700}
+
+  /* Interior placeholder */
+  .interior-img{aspect-ratio:16/5;background:linear-gradient(135deg,#1a1a1a,#2d1a0a);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--rule);margin-bottom:28px}
+
+  /* Call strip */
+  .call-strip{background:var(--primary);color:#fff;padding:46px 0;text-align:center}
+  .call-strip h2{font-size:clamp(26px,4vw,42px);margin-bottom:14px;color:#fff}
+  .call-strip p{font-size:16px;max-width:540px;margin:0 auto 22px;color:#ffd8ba}
+  .call-strip .big-phone{display:inline-block;background:#141414;color:var(--accent);padding:22px 36px;border-radius:8px;font-family:'Archivo Black',sans-serif;font-size:clamp(20px,4vw,32px);letter-spacing:.02em}
+  .call-strip .big-phone:hover{background:#000}
+  .call-strip .note{margin-top:16px;font-size:13px;color:#ffd8ba;letter-spacing:.08em;text-transform:uppercase;font-weight:600}
+  .call-strip .eyebrow{color:#ffd8ba}
+
+  /* Location */
+  .location{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:stretch}
+  @media (max-width:780px){.location{grid-template-columns:1fr}}
+  .map-frame{aspect-ratio:4/3;background:linear-gradient(135deg,#2a1a10,var(--primary));opacity:.45;border-radius:10px;display:flex;align-items:flex-end;justify-content:center;padding:18px;color:#f5f1ea;font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:12px}
+  .addr-card{background:var(--bg-soft);border:1px solid var(--rule);border-radius:10px;padding:26px}
+  .addr-card h3{font-size:20px;margin-bottom:12px}
+  .addr-card p{font-size:15px;color:var(--muted);margin-bottom:8px}
+  .addr-card .addr-line{color:var(--text);font-weight:600}
+  .addr-cta{display:inline-flex;align-items:center;gap:10px;border:1px solid var(--rule);color:var(--text);padding:14px 20px;border-radius:6px;font-weight:600;font-size:14px;background:var(--bg);margin-top:16px}
+  .addr-cta:hover{border-color:var(--accent);color:var(--accent)}
+
+  /* Footer */
+  .foot{border-top:1px solid var(--rule);padding:40px 0 50px;margin-top:40px}
+  .foot-row{display:flex;justify-content:space-between;align-items:flex-start;gap:24px;flex-wrap:wrap}
+  .foot-brand{font-family:'Archivo Black',sans-serif;font-size:18px;letter-spacing:.04em}
+  .foot-meta{font-size:13px;color:var(--muted);line-height:1.7}
+  .foot-meta a{color:var(--accent)}
+  .foot-klar{margin-top:28px;padding-top:22px;border-top:1px solid var(--rule);font-size:12px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+
+  @media (max-width:600px){
+    .hero{padding:48px 0 32px}
+    .cta-primary{font-size:15px;padding:16px 22px}
+    .section{padding:48px 0}
+  }
+</style>
+</head>
+<body>
+
+<div class="demo-banner">
+  This is a demo preview built by Klar Systems for Pysäkki-grilli Jämsä. &nbsp;
+  <a href="https://preview.klarsystems.com/pysakki-grilli-jamsa/proposal/">View our proposal &rarr;</a>
+</div>
+
+<div class="wrap">
+  <nav class="nav">
+    <div class="mark">PYSÄKKI-GRILLI</div>
+    <a class="cta-mini" href="tel:+358449854731">Call +358 44 985 4731</a>
+  </nav>
+</div>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Grill kiosk &middot; Seppolantie 8 &middot; Jämsä</div>
+    <h1>Classic grill<span class="slash">.</span><br>No table needed<span class="slash">.</span></h1>
+    <p class="hero-sub">Burgers, pizza, makkaraperunat and taksarit at Seppolantie 8. One of Jämsä's most-reviewed grill kiosks — call ahead and we'll have your order ready.</p>
+    <div class="hero-rating">
+      <span class="num">Rated 4.2/5</span>
+      <span class="count">&middot; 405 Google reviews</span>
+    </div>
+    <div class="hero-img" role="img" aria-label="Your photo here">
+      Your photo here
+    </div>
+    <div class="cta-bar">
+      <a class="cta-primary" href="tel:+358449854731"><span class="dot"></span>Call to order &mdash; +358 44 985 4731</a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="menu">
+  <div class="wrap">
+    <div class="eyebrow">Menu highlights</div>
+    <h2>Grill classics. Call for the full list.</h2>
+    <p class="lead">The dishes Jämsä keeps coming back for. Phone us for the full menu and daily specials.</p>
+    <div class="menu-grid">
+
+      <article class="dish">
+        <div class="dish-art" aria-label="Food photos coming soon">Food photos coming soon</div>
+        <div class="dish-body">
+          <h3>Burgerit</h3>
+          <p>Classic grilled burgers made to order — fresh, generous and satisfying.</p>
+          <div class="price tbc">Call for price</div>
+        </div>
+      </article>
+
+      <article class="dish">
+        <div class="dish-art" aria-label="Food photos coming soon">Food photos coming soon</div>
+        <div class="dish-body">
+          <h3>Pizzat</h3>
+          <p>Traditional grill-kiosk pizzas — crisp base, generous toppings.</p>
+          <div class="price tbc">Call for price</div>
+        </div>
+      </article>
+
+      <article class="dish">
+        <div class="dish-art" aria-label="Food photos coming soon">Food photos coming soon</div>
+        <div class="dish-body">
+          <h3>Makkaraperunat</h3>
+          <p>Fries and sausage — the Finnish grill kiosk classic. Always a crowd favourite.</p>
+          <div class="price tbc">Call for price</div>
+        </div>
+      </article>
+
+      <article class="dish">
+        <div class="dish-art" aria-label="Food photos coming soon">Food photos coming soon</div>
+        <div class="dish-body">
+          <h3>Taksarit</h3>
+          <p>Traditional Finnish meat pasties — baked, warm and filling.</p>
+          <div class="price tbc">Call for price</div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section class="section" id="about">
+  <div class="wrap">
+    <div class="split">
+      <div class="story">
+        <div class="eyebrow">About</div>
+        <h2>Jämsä's local grill. 405 regulars agree.</h2>
+        <div class="interior-img" role="img" aria-label="Interior photo coming soon">Interior photo coming soon</div>
+        <p>Pysäkki-grilli has been serving Jämsä from Seppolantie 8 — burgers, pizza, makkaraperunat, taksarit and all the Finnish grill-kiosk classics locals keep coming back for.</p>
+        <p>Rated 4.2 out of 5 from 405 Google reviews and ranked #4 of 17 fast food spots in Jämsä. Customers praise the good food, fair portions and friendly, welcoming staff.</p>
+        <p>Walk up or call ahead — outdoor seating available, wheelchair accessible and parking right on site.</p>
+        <div class="tag-row">
+          <span class="tag">Grill</span>
+          <span class="tag">Pizza</span>
+          <span class="tag">Takeaway</span>
+          <span class="tag">Outdoor seating</span>
+          <span class="tag">Parking</span>
+          <span class="tag">Accessible</span>
+        </div>
+      </div>
+
+      <div class="hours-card">
+        <h3>Opening hours</h3>
+        <table>
+          <tr><td>Monday</td><td>10:30 &ndash; 20:00</td></tr>
+          <tr><td>Tuesday</td><td>10:30 &ndash; 20:00</td></tr>
+          <tr><td>Wednesday</td><td>10:30 &ndash; 20:00</td></tr>
+          <tr><td>Thursday</td><td>10:30 &ndash; 20:00</td></tr>
+          <tr><td>Friday</td><td class="fri">10:30 &ndash; 21:00</td></tr>
+          <tr><td>Saturday</td><td>12:00 &ndash; 21:00</td></tr>
+          <tr><td>Sunday</td><td>Closed</td></tr>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="call-strip">
+  <div class="wrap">
+    <div class="eyebrow">Hungry now?</div>
+    <h2>Call. We'll have it ready.</h2>
+    <p>One call, phone-side pickup. Skip the queue — the fastest way from grill to you.</p>
+    <a class="big-phone" href="tel:+358449854731">+358 44 985 4731</a>
+    <div class="note">Open Mon&ndash;Sat &middot; Check hours above</div>
+  </div>
+</section>
+
+<section class="section" id="find-us">
+  <div class="wrap">
+    <div class="eyebrow">Find us</div>
+    <h2>Seppolantie 8, Jämsä.</h2>
+    <div class="location">
+      <div class="map-frame" aria-label="Map placeholder — Seppolantie 8, 42100 Jämsä">Map placeholder &middot; Seppolantie 8, 42100 Jämsä</div>
+      <div class="addr-card">
+        <h3>Visit us</h3>
+        <p class="addr-line">Seppolantie 8</p>
+        <p class="addr-line">42100 Jämsä</p>
+        <p style="margin-top:12px">Parking on site. Wheelchair accessible. Walk-ups welcome — or call ahead and we'll have your order ready.</p>
+        <a class="addr-cta" href="tel:+358449854731">Tel &middot; +358 44 985 4731</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-row">
+      <div>
+        <div class="foot-brand">PYSÄKKI-GRILLI</div>
+        <div class="foot-meta" style="margin-top:10px">
+          Seppolantie 8, 42100 Jämsä<br>
+          <a href="tel:+358449854731">+358 44 985 4731</a>
+        </div>
+      </div>
+      <div class="foot-meta" style="text-align:right">
+        Rated 4.2/5 on Google<br>
+        405 reviews and counting<br>
+        Grill kiosk &middot; Takeaway &middot; Jämsä
+      </div>
+    </div>
+    <div class="foot-klar">
+      Powered by Klar Systems — this is a demo preview for Pysäkki-grilli Jämsä.
+      <a href="https://preview.klarsystems.com/pysakki-grilli-jamsa/proposal/" style="color:var(--accent)">See the proposal &rarr;</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

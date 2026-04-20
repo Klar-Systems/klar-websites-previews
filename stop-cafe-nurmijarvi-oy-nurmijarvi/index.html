@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stop Cafe Nurmijärvi — Peltibaari, Karhunkorpi</title>
+  <style>
+    /* ── Reset & base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #1a1a1a;
+      color: #f0ece4;
+      line-height: 1.6;
+    }
+
+    /* ── Palette ──
+       amber-gold   #d4891a
+       dark-amber   #a8640f
+       charcoal     #1a1a1a
+       dark-grey    #252525
+       warm-grey    #3a3632
+       off-white    #f0ece4
+       muted-cream  #c9bfae
+    */
+
+    /* ── Demo banner ── */
+    .demo-banner {
+      background: #a8640f;
+      color: #fff;
+      text-align: center;
+      padding: 10px 16px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+    }
+    .demo-banner a {
+      color: #ffe0a0;
+      text-decoration: underline;
+    }
+
+    /* ── Navigation ── */
+    nav {
+      background: #252525;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 2px solid #d4891a;
+    }
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 24px;
+    }
+    .nav-logo {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: #d4891a;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+    }
+    .nav-logo span {
+      color: #f0ece4;
+      font-weight: 400;
+    }
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 28px;
+    }
+    .nav-links a {
+      color: #c9bfae;
+      text-decoration: none;
+      font-size: 0.9rem;
+      letter-spacing: 0.03em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: #d4891a; }
+
+    /* ── Hero ── */
+    .hero {
+      position: relative;
+      min-height: 540px;
+      display: flex;
+      align-items: center;
+      background: #252525;
+      overflow: hidden;
+    }
+    .hero-photo-placeholder {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #2e2820 0%, #3a3220 50%, #1a1a1a 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hero-photo-placeholder .placeholder-label {
+      color: #5a5040;
+      font-size: 1rem;
+      font-style: italic;
+      letter-spacing: 0.05em;
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, rgba(26,26,26,0.88) 40%, rgba(26,26,26,0.3) 100%);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 60px 24px;
+    }
+    .hero-eyebrow {
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #d4891a;
+      margin-bottom: 14px;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 800;
+      line-height: 1.15;
+      color: #f0ece4;
+      margin-bottom: 20px;
+      max-width: 560px;
+    }
+    .hero h1 em {
+      color: #d4891a;
+      font-style: normal;
+    }
+    .hero-sub {
+      font-size: 1.05rem;
+      color: #c9bfae;
+      max-width: 460px;
+      margin-bottom: 32px;
+    }
+    .hero-cta-group {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      display: inline-block;
+      background: #d4891a;
+      color: #fff;
+      font-weight: 700;
+      padding: 13px 28px;
+      border-radius: 4px;
+      text-decoration: none;
+      letter-spacing: 0.03em;
+      transition: background 0.2s;
+    }
+    .btn-primary:hover { background: #a8640f; }
+    .btn-outline {
+      display: inline-block;
+      border: 2px solid #d4891a;
+      color: #d4891a;
+      font-weight: 700;
+      padding: 11px 26px;
+      border-radius: 4px;
+      text-decoration: none;
+      letter-spacing: 0.03em;
+      transition: background 0.2s, color 0.2s;
+    }
+    .btn-outline:hover { background: #d4891a; color: #fff; }
+
+    /* ── Rating badge ── */
+    .rating-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #3a3632;
+      border: 1px solid #5a5040;
+      border-radius: 6px;
+      padding: 10px 18px;
+      margin-top: 28px;
+    }
+    .rating-score {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: #d4891a;
+    }
+    .rating-meta {
+      font-size: 0.8rem;
+      color: #c9bfae;
+      line-height: 1.3;
+    }
+    .rating-stars {
+      display: flex;
+      gap: 2px;
+    }
+    .star-svg { width: 14px; height: 14px; }
+    .star-filled { fill: #d4891a; }
+    .star-partial { fill: url(#partialFill); }
+    .star-empty { fill: #5a5040; }
+
+    /* ── Section base ── */
+    section { padding: 70px 24px; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #d4891a;
+      margin-bottom: 10px;
+    }
+    .section-title {
+      font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+      font-weight: 800;
+      color: #f0ece4;
+      margin-bottom: 18px;
+    }
+    .section-intro {
+      font-size: 1rem;
+      color: #c9bfae;
+      max-width: 620px;
+      margin-bottom: 44px;
+    }
+
+    /* ── About ── */
+    #about { background: #1a1a1a; }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+    .about-photo {
+      background: #2e2820;
+      border-radius: 6px;
+      min-height: 320px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid #3a3632;
+      color: #5a5040;
+      font-size: 0.9rem;
+      font-style: italic;
+    }
+    .about-text p {
+      color: #c9bfae;
+      margin-bottom: 18px;
+      font-size: 1rem;
+    }
+    .about-highlights {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-top: 28px;
+    }
+    .highlight-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+    .highlight-icon {
+      width: 36px;
+      height: 36px;
+      background: #3a3632;
+      border-radius: 50%;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .highlight-icon svg { width: 18px; height: 18px; }
+    .highlight-text strong {
+      display: block;
+      color: #f0ece4;
+      font-size: 0.9rem;
+      margin-bottom: 2px;
+    }
+    .highlight-text span {
+      color: #c9bfae;
+      font-size: 0.85rem;
+    }
+
+    /* ── Menu ── */
+    #menu { background: #252525; }
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .menu-card {
+      background: #1a1a1a;
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid #3a3632;
+    }
+    .menu-card-photo {
+      height: 160px;
+      background: #2e2820;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #5a5040;
+      font-size: 0.85rem;
+      font-style: italic;
+      border-bottom: 1px solid #3a3632;
+    }
+    .menu-card-body { padding: 20px; }
+    .menu-card-body h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #d4891a;
+      margin-bottom: 8px;
+    }
+    .menu-card-body p {
+      font-size: 0.85rem;
+      color: #c9bfae;
+      line-height: 1.5;
+    }
+
+    /* ── Hours ── */
+    #hours { background: #1a1a1a; }
+    .hours-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+    .hours-table { width: 100%; border-collapse: collapse; }
+    .hours-table tr { border-bottom: 1px solid #3a3632; }
+    .hours-table tr:last-child { border-bottom: none; }
+    .hours-table td {
+      padding: 12px 4px;
+      font-size: 0.95rem;
+    }
+    .hours-table td:first-child { color: #c9bfae; }
+    .hours-table td:last-child {
+      color: #f0ece4;
+      text-align: right;
+      font-weight: 600;
+    }
+    .hours-table .today td:first-child { color: #d4891a; font-weight: 700; }
+    .hours-note {
+      font-size: 0.85rem;
+      color: #5a5040;
+      margin-top: 16px;
+      font-style: italic;
+    }
+    .location-card {
+      background: #252525;
+      border-radius: 6px;
+      padding: 28px;
+      border: 1px solid #3a3632;
+    }
+    .location-card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #d4891a;
+      margin-bottom: 16px;
+    }
+    .location-card p {
+      color: #c9bfae;
+      font-size: 0.9rem;
+      margin-bottom: 10px;
+      line-height: 1.5;
+    }
+    .location-card a {
+      color: #d4891a;
+      font-weight: 600;
+      font-size: 1.05rem;
+      text-decoration: none;
+    }
+    .location-card a:hover { text-decoration: underline; }
+    .map-placeholder {
+      margin-top: 18px;
+      height: 160px;
+      background: #2e2820;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #5a5040;
+      font-size: 0.85rem;
+      font-style: italic;
+      border: 1px solid #3a3632;
+    }
+
+    /* ── Events / Contact (Segment 3 required section) ── */
+    #events { background: #252525; }
+    .events-contact-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+    .announcements-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .announcement-card {
+      background: #1a1a1a;
+      border-radius: 6px;
+      padding: 22px 24px;
+      border-left: 4px solid #d4891a;
+      border-right: 1px solid #3a3632;
+      border-top: 1px solid #3a3632;
+      border-bottom: 1px solid #3a3632;
+    }
+    .announcement-tag {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #d4891a;
+      margin-bottom: 6px;
+    }
+    .announcement-card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #f0ece4;
+      margin-bottom: 6px;
+    }
+    .announcement-card p {
+      font-size: 0.85rem;
+      color: #c9bfae;
+      line-height: 1.5;
+    }
+    .contact-panel {
+      background: #1a1a1a;
+      border-radius: 6px;
+      padding: 28px;
+      border: 1px solid #3a3632;
+    }
+    .contact-panel h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #d4891a;
+      margin-bottom: 18px;
+    }
+    .contact-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+    .contact-row-icon {
+      width: 32px;
+      height: 32px;
+      background: #3a3632;
+      border-radius: 50%;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .contact-row-icon svg { width: 16px; height: 16px; fill: #d4891a; }
+    .contact-row-text { font-size: 0.9rem; }
+    .contact-row-text strong {
+      display: block;
+      color: #f0ece4;
+      margin-bottom: 2px;
+    }
+    .contact-row-text a {
+      color: #d4891a;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .contact-row-text a:hover { text-decoration: underline; }
+    .contact-row-text span { color: #c9bfae; }
+
+    /* ── Footer ── */
+    footer {
+      background: #111;
+      border-top: 2px solid #d4891a;
+      padding: 36px 24px;
+      text-align: center;
+    }
+    .footer-inner { max-width: 1100px; margin: 0 auto; }
+    .footer-name {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: #d4891a;
+      margin-bottom: 6px;
+    }
+    .footer-address {
+      font-size: 0.85rem;
+      color: #5a5040;
+      margin-bottom: 18px;
+    }
+    .footer-meta {
+      font-size: 0.75rem;
+      color: #3a3632;
+      margin-top: 16px;
+    }
+    .footer-meta a { color: #5a5040; text-decoration: none; }
+    .footer-meta a:hover { color: #d4891a; }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .about-grid,
+      .hours-layout,
+      .events-contact-grid { grid-template-columns: 1fr; }
+      .menu-grid { grid-template-columns: 1fr; }
+      .hero { min-height: 420px; }
+    }
+    @media (max-width: 500px) {
+      .menu-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Demo banner ── -->
+  <div class="demo-banner">
+    This is a demo website prepared for Stop Cafe Nurmijärvi Oy by Klar Systems.
+    Want your own? <a href="https://calendly.com/lomberg-klarsystems">Book a free 15-min call</a>
+  </div>
+
+  <!-- ── SVG defs for partial star ── -->
+  <svg width="0" height="0" style="position:absolute">
+    <defs>
+      <linearGradient id="partialFill" x1="0" x2="1" y1="0" y2="0">
+        <stop offset="10%" stop-color="#d4891a"/>
+        <stop offset="10%" stop-color="#5a5040"/>
+      </linearGradient>
+    </defs>
+  </svg>
+
+  <!-- ── Navigation ── -->
+  <nav>
+    <div class="nav-inner">
+      <a class="nav-logo" href="#top">Stop Cafe <span>Nurmijärvi</span></a>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#hours">Hours &amp; Location</a></li>
+        <li><a href="#events">Events &amp; Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ── Hero ── -->
+  <section id="top" style="padding:0; position:relative;">
+    <div class="hero">
+      <div class="hero-photo-placeholder">
+        <span class="placeholder-label">Your photo here</span>
+      </div>
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <p class="hero-eyebrow">Karhunkorpi Rest Area — Valtatie 3</p>
+        <h1>Your roadside stop on <em>Hämeenlinnanväylä</em></h1>
+        <p class="hero-sub">
+          Fresh pastries baked on-site every morning. Hot coffee, hearty lunches,
+          steaks and pasta — all at Peltibaari, Karhunkorpi.
+        </p>
+        <div class="hero-cta-group">
+          <a href="#menu" class="btn-primary">See the Menu</a>
+          <a href="tel:0925060022" class="btn-outline">Call Us: 09 2506022</a>
+        </div>
+        <div class="rating-badge">
+          <span class="rating-score">4.1</span>
+          <div>
+            <div class="rating-stars" aria-label="4.1 out of 5 stars">
+              <!-- 4 full stars -->
+              <svg class="star-svg" viewBox="0 0 24 24" aria-hidden="true"><polygon class="star-filled" points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+              <svg class="star-svg" viewBox="0 0 24 24" aria-hidden="true"><polygon class="star-filled" points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+              <svg class="star-svg" viewBox="0 0 24 24" aria-hidden="true"><polygon class="star-filled" points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+              <svg class="star-svg" viewBox="0 0 24 24" aria-hidden="true"><polygon class="star-filled" points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+              <!-- partial star (10%) -->
+              <svg class="star-svg" viewBox="0 0 24 24" aria-hidden="true"><polygon class="star-partial" points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+            </div>
+            <div class="rating-meta">4.1 / 5 &nbsp;&middot;&nbsp; 637 Google reviews</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── About ── -->
+  <section id="about">
+    <div class="section-inner">
+      <p class="section-label">About us</p>
+      <div class="about-grid">
+        <div class="about-photo">Interior photo coming soon</div>
+        <div class="about-text">
+          <h2 class="section-title">A proper rest stop. No shortcuts.</h2>
+          <p>
+            Stop Cafe Nurmijärvi — known locally as <strong>Peltibaari</strong> — sits right on
+            Hämeenlinnanväylä (Valtatie 3) at the Karhunkorpi rest area, halfway between
+            Helsinki and Hämeenlinna. Founded in 2021, it quickly became the go-to stop
+            for drivers, commuters and anyone who needs a real break.
+          </p>
+          <p>
+            Every pastry, roll and bun is baked from scratch on-site, fresh every day.
+            No factory lines, no reheated goods — just honest food made with care.
+          </p>
+          <div class="about-highlights">
+            <div class="highlight-item">
+              <div class="highlight-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#d4891a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/>
+                </svg>
+              </div>
+              <div class="highlight-text">
+                <strong>Pastries baked on-site daily</strong>
+                <span>Everything baked fresh from scratch — no pre-made goods</span>
+              </div>
+            </div>
+            <div class="highlight-item">
+              <div class="highlight-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#d4891a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/>
+                </svg>
+              </div>
+              <div class="highlight-text">
+                <strong>Full lunch menu</strong>
+                <span>Steaks, pasta, and hot meals — not just snacks</span>
+              </div>
+            </div>
+            <div class="highlight-item">
+              <div class="highlight-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#d4891a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+                </svg>
+              </div>
+              <div class="highlight-text">
+                <strong>Open until 23:00 on weekdays</strong>
+                <span>Serving drivers and late-night travellers Mon–Fri</span>
+              </div>
+            </div>
+            <div class="highlight-item">
+              <div class="highlight-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#d4891a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                </svg>
+              </div>
+              <div class="highlight-text">
+                <strong>Right on Valtatie 3</strong>
+                <span>Karhunkorpi rest area — easy access from both directions</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Menu ── -->
+  <section id="menu">
+    <div class="section-inner">
+      <p class="section-label">What we serve</p>
+      <h2 class="section-title">Simple, honest food</h2>
+      <p class="section-intro">
+        From the first coffee of the morning to a steak lunch in the afternoon — we have
+        what you need to get back on the road satisfied.
+      </p>
+      <div class="menu-grid">
+        <div class="menu-card">
+          <div class="menu-card-photo">Food photos coming soon</div>
+          <div class="menu-card-body">
+            <h3>Pastries &amp; Baked Goods</h3>
+            <p>
+              All baked fresh on-site from scratch — cinnamon rolls, pulla, savoury buns
+              and seasonal pastries. Ready from opening time.
+            </p>
+          </div>
+        </div>
+        <div class="menu-card">
+          <div class="menu-card-photo">Food photos coming soon</div>
+          <div class="menu-card-body">
+            <h3>Lunch — Steaks &amp; Pasta</h3>
+            <p>
+              Hot lunch served daily. Steaks, pasta dishes and hearty meat plates that
+              keep you going on a long drive. Affordable prices.
+            </p>
+          </div>
+        </div>
+        <div class="menu-card">
+          <div class="menu-card-photo">Food photos coming soon</div>
+          <div class="menu-card-body">
+            <h3>Coffee, Drinks &amp; Treats</h3>
+            <p>
+              Fresh coffee, soft drinks, a wide selection of sweets and ice cream.
+              Perfect for a quick pick-me-up at any hour.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Hours & Location ── -->
+  <section id="hours">
+    <div class="section-inner">
+      <p class="section-label">Hours &amp; Location</p>
+      <h2 class="section-title">Find us on Valtatie 3</h2>
+      <div class="hours-layout">
+        <div>
+          <table class="hours-table">
+            <tbody>
+              <tr>
+                <td>Monday</td>
+                <td>07:00 – 23:00</td>
+              </tr>
+              <tr>
+                <td>Tuesday</td>
+                <td>07:00 – 23:00</td>
+              </tr>
+              <tr>
+                <td>Wednesday</td>
+                <td>07:00 – 23:00</td>
+              </tr>
+              <tr>
+                <td>Thursday</td>
+                <td>07:00 – 23:00</td>
+              </tr>
+              <tr>
+                <td>Friday</td>
+                <td>07:00 – 23:00</td>
+              </tr>
+              <tr>
+                <td>Saturday</td>
+                <td>09:00 – 15:00</td>
+              </tr>
+              <tr>
+                <td>Sunday</td>
+                <td>Closed</td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="hours-note">Hours may vary on public holidays. Check our announcements below or call ahead.</p>
+        </div>
+        <div>
+          <div class="location-card">
+            <h3>Get here</h3>
+            <p>
+              <strong>Stop Cafe Nurmijärvi Oy</strong><br>
+              Hämeenlinnanväylä<br>
+              01900 Karhunkorpi, Nurmijärvi
+            </p>
+            <p>Karhunkorpi rest area, right off Valtatie 3.</p>
+            <p>Phone: <a href="tel:0925060022">09 2506022</a></p>
+            <div class="map-placeholder">Map placeholder — embed Google Maps here</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Events & Contact (Segment 3 required section) ── -->
+  <section id="events">
+    <div class="section-inner">
+      <p class="section-label">News &amp; Events</p>
+      <h2 class="section-title">Announcements &amp; Specials</h2>
+      <p class="section-intro">
+        Road works, holiday hours, daily specials — we post updates here so you always know
+        what to expect before you pull in.
+      </p>
+      <div class="events-contact-grid">
+        <div class="announcements-list">
+          <div class="announcement-card">
+            <p class="announcement-tag">Current Special</p>
+            <h3>Weekend lunch deal — Sat 09–15</h3>
+            <p>
+              Saturday mornings we bake a fresh batch of pastries from 09:00.
+              Come in for coffee and a cinnamon roll before we close at 15:00 — the perfect
+              mid-morning stop on your weekend drive.
+            </p>
+          </div>
+          <div class="announcement-card">
+            <p class="announcement-tag">Notice</p>
+            <h3>We don't do delivery</h3>
+            <p>
+              Stop Cafe is a dine-in and take-away stop only. We are not on Wolt or Foodora.
+              Swing by on the road — that is what we are here for.
+            </p>
+          </div>
+          <div class="announcement-card">
+            <p class="announcement-tag">Group &amp; Events</p>
+            <h3>Group stops &amp; transport company accounts</h3>
+            <p>
+              Bringing a coach group or looking for a regular stop for your drivers?
+              Give us a call at <a href="tel:0925060022" style="color:#d4891a;font-weight:600;">09 2506022</a> and
+              we will sort it out. We are used to busy stops.
+            </p>
+          </div>
+        </div>
+        <div>
+          <div class="contact-panel">
+            <h3>Contact</h3>
+            <div class="contact-row">
+              <div class="contact-row-icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" fill="none" stroke="#d4891a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <div class="contact-row-text">
+                <strong>Phone</strong>
+                <a href="tel:0925060022">09 2506022</a>
+              </div>
+            </div>
+            <div class="contact-row">
+              <div class="contact-row-icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" fill="none" stroke="#d4891a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="10" r="3" fill="none" stroke="#d4891a" stroke-width="2"/></svg>
+              </div>
+              <div class="contact-row-text">
+                <strong>Address</strong>
+                <span>Hämeenlinnanväylä, 01900 Karhunkorpi, Nurmijärvi</span>
+              </div>
+            </div>
+            <div class="contact-row">
+              <div class="contact-row-icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="none" stroke="#d4891a" stroke-width="2"/><polyline points="12 6 12 12 16 14" fill="none" stroke="#d4891a" stroke-width="2" stroke-linecap="round"/></svg>
+              </div>
+              <div class="contact-row-text">
+                <strong>Hours</strong>
+                <span>Mon–Fri 07:00–23:00 &nbsp;/&nbsp; Sat 09:00–15:00</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Footer ── -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-name">Stop Cafe Nurmijärvi Oy — Peltibaari</div>
+      <div class="footer-address">Hämeenlinnanväylä, 01900 Karhunkorpi, Nurmijärvi &nbsp;&middot;&nbsp; <a href="tel:0925060022" style="color:#5a5040;">09 2506022</a></div>
+      <div class="footer-meta">
+        Powered by Klar &nbsp;&middot;&nbsp;
+        <a href="https://calendly.com/lomberg-klarsystems">Book a free call with Klar</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,109 @@
+{
+  "basic": {
+    "name": "Kaisan Grilli Oy",
+    "restaurant_name": "Kaisan Grilli Oy",
+    "slug": "kaisan-grilli-oy-espoo",
+    "address": "Turunväylä, 02820 Espoo",
+    "phone": "040 5476200",
+    "city": "Espoo",
+    "cuisine_type": {
+      "value": "Finnish grilli — burgers, sausages, makkaraperunat, grilled meats, lunch",
+      "source_url": "https://wanderlog.com/place/details/8455753/kaisan-grilli-ky",
+      "source_quote": "+358 40 5476200",
+      "confidence": "high",
+      "source_type": "website"
+    },
+    "opening_hours": {
+      "value": "Mon-Fri 05:00-20:00, Sat 09:00-16:00, Sun closed",
+      "source_url": "https://www.fonecta.fi/profiili/kaisan-grilli/720659",
+      "source_quote": "05:00 - 20:00",
+      "confidence": "high",
+      "source_type": "website"
+    },
+    "segment": {
+      "value": 2,
+      "source_url": "https://wanderlog.com/place/details/8455753/kaisan-grilli-ky",
+      "source_quote": "+358 40 5476200",
+      "confidence": "high",
+      "source_type": "website"
+    },
+    "is_chain": {
+      "value": false,
+      "source_url": "https://wanderlog.com/place/details/8455753/kaisan-grilli-ky",
+      "source_quote": "+358 40 5476200",
+      "confidence": "high",
+      "source_type": "website"
+    },
+    "is_closed": {
+      "value": false,
+      "source_url": "https://www.fonecta.fi/profiili/kaisan-grilli/720659",
+      "source_quote": "05:00 - 20:00",
+      "confidence": "high",
+      "source_type": "website"
+    },
+    "has_existing_website": {
+      "value": false,
+      "source_url": "https://wanderlog.com/place/details/8455753/kaisan-grilli-ky",
+      "source_quote": "+358 40 5476200",
+      "confidence": "high",
+      "source_type": "website"
+    },
+    "google_rating": 4.1,
+    "review_count": 984,
+    "restaurant_name_gen": "Kaisan Grillin"
+  },
+  "menu": {
+    "cuisine_style": {
+      "value": "Finnish grilli — burgers, sausages, makkaraperunat, grilled meats, lunch",
+      "source_url": "https://wanderlog.com/place/details/8455753/kaisan-grilli-ky",
+      "source_quote": "+358 40 5476200",
+      "confidence": "high",
+      "source_type": "website"
+    },
+    "signature_dishes": [
+      "Makkaraperunat",
+      "Juustohampurilainen"
+    ],
+    "categories": [
+      "Grill food",
+      "Burgers",
+      "Lunch"
+    ],
+    "price_range": {
+      "value": "EUR",
+      "source_url": "",
+      "confidence": "inferred",
+      "source_type": "inferred"
+    },
+    "notes": []
+  },
+  "reviews": [
+    {
+      "text": "I had the best burger I had in ages. Reasonable prices!",
+      "rating": 5,
+      "source_url": "https://wanderlog.com/place/details/8455753/kaisan-grilli-ky",
+      "source_quote": "+358 40 5476200",
+      "confidence": "high"
+    },
+    {
+      "text": "Tilasin 27.7 perus juustohampurilaisen ja jos tallaista ei osata niin pitaisi ehdottomasti siirtya muihin tehtaviin.",
+      "rating": 1,
+      "source_url": "https://www.sluurpy.com/en/espoo/restaurant/6059045/kaisan-grilli",
+      "source_quote": "tilasin 27.7 perus juustohampurilaisen",
+      "confidence": "high"
+    }
+  ],
+  "links": {
+    "preview_link": "https://preview.klarsystems.com/kaisan-grilli-oy-espoo/",
+    "calendly_link": "https://calendly.com/lomberg-klarsystems"
+  },
+  "personality": {
+    "design_brief": "Classic Finnish roadside grilli on Turunvayla motorway — bold reds and yellows, highway-stop energy, blue-collar Finnish charm with a no-nonsense layout. Emphasize phone-to-order CTA prominently, highlight early opening hours for road travellers.",
+    "research_depth": "tier_2",
+    "vibe_summary": "Early-opening roadside grilli on Turunvayla, favourite of road travellers.",
+    "review_themes": [
+      "best burger in Finland",
+      "reasonable prices"
+    ]
+  }
+}

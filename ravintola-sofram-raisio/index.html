@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ravintola Sofram — Raisio</title>
+  <!-- Palette: visual_identity.palette was empty; using Seg 1 defaults: bg #1F2933, text #EFE7DA, primary #B56B4A, accent #D4A574 -->
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:      #1F2933;
+      --text:    #EFE7DA;
+      --primary: #B56B4A;
+      --accent:  #D4A574;
+      --surface: #273240;
+      --muted:   #9a8f84;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: Georgia, 'Times New Roman', serif;
+      line-height: 1.65;
+    }
+
+    /* ── Demo banner ── */
+    .demo-banner {
+      background: var(--primary);
+      color: #fff;
+      text-align: center;
+      padding: 10px 16px;
+      font-family: Arial, sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.04em;
+      font-weight: 700;
+    }
+
+    /* ── Nav ── */
+    nav {
+      background: var(--surface);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 32px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid #333f4e;
+    }
+    .nav-brand {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.03em;
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 24px; list-style: none; }
+    .nav-links a {
+      color: var(--text);
+      text-decoration: none;
+      font-family: Arial, sans-serif;
+      font-size: 0.9rem;
+      opacity: 0.85;
+      transition: opacity 0.2s;
+    }
+    .nav-links a:hover { opacity: 1; color: var(--accent); }
+
+    /* ── Hero ── */
+    .hero {
+      position: relative;
+      min-height: 520px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 60px 24px;
+      overflow: hidden;
+    }
+    .hero-photo-placeholder {
+      position: absolute;
+      inset: 0;
+      background: #2a333d;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-family: Arial, sans-serif;
+      font-size: 1rem;
+      letter-spacing: 0.05em;
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(31,41,51,0.55) 0%, rgba(31,41,51,0.82) 100%);
+    }
+    .hero-content { position: relative; z-index: 2; max-width: 700px; }
+    .hero-content h1 {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      color: var(--text);
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+    .hero-content p {
+      font-size: 1.15rem;
+      color: var(--accent);
+      margin-bottom: 28px;
+      font-family: Arial, sans-serif;
+    }
+    .btn {
+      display: inline-block;
+      background: var(--primary);
+      color: #fff;
+      padding: 13px 32px;
+      border-radius: 4px;
+      text-decoration: none;
+      font-family: Arial, sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn:hover { background: #9d5c3d; }
+
+    /* ── Sections ── */
+    section { padding: 64px 24px; }
+    .container { max-width: 900px; margin: 0 auto; }
+    h2 {
+      font-size: 1.9rem;
+      color: var(--accent);
+      margin-bottom: 28px;
+      position: relative;
+      padding-bottom: 10px;
+    }
+    h2::after {
+      content: '';
+      display: block;
+      width: 48px;
+      height: 2px;
+      background: var(--primary);
+      margin-top: 10px;
+    }
+
+    /* ── About ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+    .about-text p { margin-bottom: 14px; font-size: 1rem; }
+    .interior-placeholder {
+      background: #2a333d;
+      border-radius: 6px;
+      min-height: 260px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-family: Arial, sans-serif;
+      font-size: 0.9rem;
+      letter-spacing: 0.04em;
+    }
+
+    /* ── Highlights ── */
+    .highlights { background: var(--surface); }
+    .highlights-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 8px;
+    }
+    .highlight-card {
+      background: var(--bg);
+      border-radius: 6px;
+      padding: 28px 22px;
+      border-top: 3px solid var(--primary);
+    }
+    .highlight-card h3 {
+      font-size: 1.1rem;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+    .highlight-card p {
+      font-size: 0.95rem;
+      font-family: Arial, sans-serif;
+      color: var(--text);
+      opacity: 0.85;
+    }
+
+    /* ── Menu ── */
+    .menu-photo-placeholder {
+      background: #2a333d;
+      border-radius: 6px;
+      min-height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-family: Arial, sans-serif;
+      font-size: 0.9rem;
+      letter-spacing: 0.04em;
+      margin-bottom: 36px;
+    }
+    .menu-categories {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 12px;
+      margin-bottom: 36px;
+    }
+    .menu-cat {
+      background: var(--surface);
+      border-radius: 4px;
+      padding: 12px 16px;
+      font-family: Arial, sans-serif;
+      font-size: 0.9rem;
+      border-left: 3px solid var(--primary);
+    }
+    .signature-dishes { margin-top: 32px; }
+    .dish-list { list-style: none; }
+    .dish-list li {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 14px 0;
+      border-bottom: 1px solid #273240;
+      font-family: Arial, sans-serif;
+    }
+    .dish-list li:last-child { border-bottom: none; }
+    .dish-name { font-weight: 700; color: var(--text); }
+    .dish-desc { font-size: 0.85rem; color: var(--muted); margin-top: 2px; }
+    .dish-price { color: var(--accent); font-size: 0.9rem; white-space: nowrap; margin-left: 16px; }
+
+    /* ── Reviews ── */
+    .reviews { background: var(--surface); }
+    .rating-summary {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .rating-number {
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+    }
+    .rating-meta {
+      font-family: Arial, sans-serif;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+    .rating-meta strong { color: var(--text); display: block; font-size: 1rem; }
+    .review-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .review-card {
+      background: var(--bg);
+      border-radius: 6px;
+      padding: 22px;
+    }
+    .review-card blockquote {
+      font-style: italic;
+      font-size: 0.95rem;
+      margin-bottom: 12px;
+      color: var(--text);
+    }
+    .review-author {
+      font-family: Arial, sans-serif;
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    /* ── Booking ── */
+    .klar-bookings {
+      background: var(--surface);
+      border-radius: 8px;
+      padding: 36px;
+      max-width: 560px;
+      margin: 0 auto;
+    }
+    .klar-bookings h3 {
+      font-size: 1.4rem;
+      color: var(--accent);
+      margin-bottom: 24px;
+      font-family: Arial, sans-serif;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group label {
+      font-family: Arial, sans-serif;
+      font-size: 0.82rem;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .form-group input,
+    .form-group select {
+      background: var(--bg);
+      border: 1px solid #3a4555;
+      border-radius: 4px;
+      color: var(--text);
+      padding: 10px 12px;
+      font-family: Arial, sans-serif;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .form-group input:focus,
+    .form-group select:focus { border-color: var(--primary); }
+    .form-group select option { background: var(--bg); }
+    .btn-reserve {
+      width: 100%;
+      margin-top: 8px;
+      padding: 14px;
+      font-size: 1.05rem;
+      letter-spacing: 0.04em;
+    }
+    .booking-note {
+      text-align: center;
+      font-family: Arial, sans-serif;
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 12px;
+    }
+
+    /* ── Hours + Contact ── */
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+    .hours-table { width: 100%; border-collapse: collapse; font-family: Arial, sans-serif; }
+    .hours-table td { padding: 8px 0; font-size: 0.95rem; }
+    .hours-table td:last-child { text-align: right; color: var(--accent); }
+    .hours-table tr { border-bottom: 1px solid #273240; }
+    .contact-list { list-style: none; font-family: Arial, sans-serif; }
+    .contact-list li { padding: 8px 0; border-bottom: 1px solid #273240; font-size: 0.95rem; }
+    .contact-list li:last-child { border-bottom: none; }
+    .contact-label { color: var(--muted); font-size: 0.82rem; display: block; margin-bottom: 2px; text-transform: uppercase; letter-spacing: 0.05em; }
+
+    /* ── Footer ── */
+    footer {
+      background: #151c23;
+      text-align: center;
+      padding: 28px 24px;
+      font-family: Arial, sans-serif;
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+    footer a { color: var(--accent); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    /* ── Responsive ── */
+    @media (max-width: 700px) {
+      .about-grid,
+      .highlights-grid,
+      .review-grid,
+      .info-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      nav { flex-direction: column; gap: 12px; }
+      .nav-links { flex-wrap: wrap; justify-content: center; gap: 14px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- DEMO BANNER — this is a demo preview -->
+  <div class="demo-banner">This is a demo — not the live website of Ravintola Sofram</div>
+
+  <!-- Navigation -->
+  <nav>
+    <a class="nav-brand" href="#">Ravintola Sofram</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#reviews">Reviews</a></li>
+      <li><a href="#book">Reserve a Table</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero" id="home">
+    <div class="hero-photo-placeholder">Your photo here</div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1>Ravintola Sofram</h1>
+      <p>Pizza, kebab, burgers, pasta &amp; more — big portions at honest prices in Raisio</p>
+      <a href="#book" class="btn">Reserve a Table</a>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-text">
+          <h2>A local favourite</h2>
+          <p>Don't let the modest exterior fool you. Step inside Sofram and you'll find a clean, spacious dining room with an open kitchen — one that customers consistently single out for its exceptional cleanliness.</p>
+          <p>With over 366 Google reviews and a steady 4.0 / 5 rating, Sofram has earned its place as Raisio's go-to neighbourhood restaurant for families, lunch crowds, and anyone who wants a proper, filling meal without overpaying.</p>
+          <p>Free parking nearby makes it easy to visit for a quick lunch or a relaxed dinner.</p>
+        </div>
+        <div class="interior-placeholder">Interior photo coming soon</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Highlights -->
+  <section class="highlights" id="highlights">
+    <div class="container">
+      <h2>Why guests keep coming back</h2>
+      <div class="highlights-grid">
+        <div class="highlight-card">
+          <h3>Big portions</h3>
+          <p>"Great place, big portions for very reasonable prices" — what regulars say, and the numbers back it up.</p>
+        </div>
+        <div class="highlight-card">
+          <h3>Open kitchen</h3>
+          <p>The kitchen is visible from the dining room. Guests have praised its exceptional cleanliness — a sign of care that carries through to the food.</p>
+        </div>
+        <div class="highlight-card">
+          <h3>Something for everyone</h3>
+          <p>Pizza, kebab, burgers, pasta, falafel, hot wings, salads, and a dedicated children's menu. Good options for families and groups with different tastes.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Menu -->
+  <section id="menu">
+    <div class="container">
+      <h2>Our menu</h2>
+      <div class="menu-photo-placeholder">Food photos coming soon</div>
+
+      <p style="font-family:Arial,sans-serif;margin-bottom:24px;font-size:0.95rem;color:var(--muted);">A wide selection built for every appetite — from stone-baked pizza to grilled kebab and everything in between.</p>
+
+      <div class="menu-categories">
+        <div class="menu-cat">Pizzas</div>
+        <div class="menu-cat">Family Pizzas</div>
+        <div class="menu-cat">Wraps &amp; Rolls</div>
+        <div class="menu-cat">Kebab</div>
+        <div class="menu-cat">Burgers</div>
+        <div class="menu-cat">Grills</div>
+        <div class="menu-cat">Falafel</div>
+        <div class="menu-cat">Chicken</div>
+        <div class="menu-cat">Hot Wings</div>
+        <div class="menu-cat">Salads</div>
+        <div class="menu-cat">Children's Menu</div>
+        <div class="menu-cat">Drinks</div>
+      </div>
+
+      <div class="signature-dishes">
+        <h3 style="color:var(--accent);margin-bottom:16px;font-size:1.1rem;font-family:Arial,sans-serif;text-transform:uppercase;letter-spacing:0.06em;">Selected dishes</h3>
+        <ul class="dish-list">
+          <li>
+            <div>
+              <div class="dish-name">Iskender Kebab</div>
+              <div class="dish-desc">Classic Iskender-style kebab</div>
+            </div>
+            <span class="dish-price">13.00 – 17.90 EUR</span>
+          </li>
+          <li>
+            <div>
+              <div class="dish-name">Tasalan Pizza</div>
+              <div class="dish-desc">The house pizza named after the local area</div>
+            </div>
+            <span class="dish-price">12.50 – 20.00 EUR</span>
+          </li>
+          <li>
+            <div>
+              <div class="dish-name">Sofram Special Burger</div>
+              <div class="dish-desc">House special burger</div>
+            </div>
+            <span class="dish-price">12.00 EUR</span>
+          </li>
+          <li>
+            <div>
+              <div class="dish-name">Special Roll</div>
+              <div class="dish-desc">Signature kebab roll</div>
+            </div>
+            <span class="dish-price">19.90 EUR</span>
+          </li>
+          <li>
+            <div>
+              <div class="dish-name">Hot Wings (25 pcs)</div>
+              <div class="dish-desc">Crispy hot wings — good for sharing</div>
+            </div>
+            <span class="dish-price">23.00 EUR</span>
+          </li>
+          <li>
+            <div>
+              <div class="dish-name">Children's Meals</div>
+              <div class="dish-desc">Smaller portions for younger guests</div>
+            </div>
+            <span class="dish-price">6.50 – 11.50 EUR</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reviews -->
+  <section class="reviews" id="reviews">
+    <div class="container">
+      <h2>What guests say</h2>
+      <div class="rating-summary">
+        <div class="rating-number">4.0 / 5</div>
+        <div class="rating-meta">
+          <strong>Google rating</strong>
+          Based on 366 reviews
+        </div>
+      </div>
+      <div class="review-grid">
+        <div class="review-card">
+          <blockquote>"Great place, big portions for very reasonable prices."</blockquote>
+          <span class="review-author">Mark N.</span>
+        </div>
+        <div class="review-card">
+          <blockquote>"Very good and large portions. Really clean place — the kitchen looked exceptionally tidy."</blockquote>
+          <span class="review-author">Virpi P.</span>
+        </div>
+        <div class="review-card">
+          <blockquote>"The grey and ordinary facade conceals a clean, spacious and pleasantly decorated restaurant hall."</blockquote>
+          <span class="review-author">Via pizzeriadarius.fi</span>
+        </div>
+        <div class="review-card">
+          <blockquote>"Good pizza and affordable price."</blockquote>
+          <span class="review-author">Marina M.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Booking -->
+  <section id="book">
+    <div class="container">
+      <h2 style="text-align:center;">Reserve a Table</h2>
+      <div class="klar-bookings">
+        <h3>Book your visit</h3>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="booking-name">Your name</label>
+            <input type="text" id="booking-name" placeholder="Full name" />
+          </div>
+          <div class="form-group">
+            <label for="booking-phone">Phone</label>
+            <input type="tel" id="booking-phone" placeholder="+358 ..." />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="booking-date">Date</label>
+            <input type="date" id="booking-date" />
+          </div>
+          <div class="form-group">
+            <label for="booking-time">Time</label>
+            <select id="booking-time">
+              <option value="">Select time</option>
+              <option value="11:00">11:00</option>
+              <option value="11:30">11:30</option>
+              <option value="12:00">12:00</option>
+              <option value="12:30">12:30</option>
+              <option value="13:00">13:00</option>
+              <option value="13:30">13:30</option>
+              <option value="14:00">14:00</option>
+              <option value="15:00">15:00</option>
+              <option value="16:00">16:00</option>
+              <option value="17:00">17:00</option>
+              <option value="17:30">17:30</option>
+              <option value="18:00">18:00</option>
+              <option value="18:30">18:30</option>
+              <option value="19:00">19:00</option>
+              <option value="19:30">19:30</option>
+              <option value="20:00">20:00</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group" style="margin-bottom:16px;">
+          <label for="booking-party">Party size</label>
+          <select id="booking-party">
+            <option value="">Select party size</option>
+            <option value="1">1 person</option>
+            <option value="2">2 people</option>
+            <option value="3">3 people</option>
+            <option value="4">4 people</option>
+            <option value="5">5 people</option>
+            <option value="6">6 people</option>
+            <option value="7">7 people</option>
+            <option value="8">8 people</option>
+          </select>
+        </div>
+        <button class="btn btn-reserve">Reserve</button>
+        <p class="booking-note">No account needed. We will confirm your reservation by phone.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Hours + Contact -->
+  <section id="contact" style="background:var(--surface);">
+    <div class="container">
+      <div class="info-grid">
+        <div>
+          <h2>Opening hours</h2>
+          <table class="hours-table">
+            <tbody>
+              <tr><td>Monday – Thursday</td><td>10:00 – 21:00</td></tr>
+              <tr><td>Friday</td><td>10:00 – 22:00</td></tr>
+              <tr><td>Saturday</td><td>11:00 – 22:00</td></tr>
+              <tr><td>Sunday</td><td>12:00 – 21:00</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div>
+          <h2>Find us</h2>
+          <ul class="contact-list">
+            <li>
+              <span class="contact-label">Address</span>
+              Tasalanaukio 12, 21200 Raisio, Finland
+            </li>
+            <li>
+              <span class="contact-label">Phone</span>
+              <a href="tel:+358243733850" style="color:inherit;text-decoration:none;">02 4373385</a>
+            </li>
+            <li>
+              <span class="contact-label">Parking</span>
+              Free parking available nearby
+            </li>
+            <li>
+              <span class="contact-label">Order online</span>
+              Available on Wolt and Foodora
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p style="margin-bottom:6px;">Ravintola Sofram &mdash; Tasalanaukio 12, 21200 Raisio</p>
+    <p>Powered by <a href="https://klarsystems.com" target="_blank" rel="noopener">Klar</a></p>
+  <p style="text-align:center;font-size:12px;opacity:0.5;margin-top:1rem;">Powered by Klar</p>
+</footer>
+
+</body>
+</html>

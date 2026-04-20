@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tan Binh Restaurang — Vietnamese Food in Pietarsaari</title>
+    <!-- palette: segment 1 default (research palette empty — visual_identity inferred) -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #2B2B2B;
+            background: #EFE7DA;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Demo Banner */
+        .demo-banner {
+            background: #1F2933;
+            color: #EFE7DA;
+            text-align: center;
+            padding: 12px 20px;
+            font-size: 13px;
+        }
+
+        .demo-banner a {
+            color: #D4A574;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .demo-banner a:hover {
+            text-decoration: underline;
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, #1F2933 0%, #2C3A45 60%, #3A4E5A 100%);
+            color: #EFE7DA;
+            padding: 110px 20px 90px;
+            text-align: center;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: #B56B4A;
+            color: #EFE7DA;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            padding: 6px 16px;
+            border-radius: 20px;
+            margin-bottom: 22px;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
+            font-size: 52px;
+            font-weight: 800;
+            margin-bottom: 14px;
+            line-height: 1.15;
+        }
+
+        .hero-subtitle {
+            font-size: 20px;
+            opacity: 0.88;
+            margin-bottom: 14px;
+        }
+
+        .hero-rating {
+            font-size: 15px;
+            opacity: 0.78;
+            margin-bottom: 36px;
+        }
+
+        .hero-rating strong {
+            color: #D4A574;
+            font-size: 18px;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            background: #B56B4A;
+            color: #EFE7DA;
+            padding: 15px 34px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 16px;
+            transition: background 0.2s, transform 0.2s;
+        }
+
+        .btn-primary:hover {
+            background: #934f33;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            display: inline-block;
+            border: 2px solid rgba(239,231,218,0.6);
+            color: #EFE7DA;
+            padding: 13px 28px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: border-color 0.2s, background 0.2s;
+        }
+
+        .btn-outline:hover {
+            border-color: #EFE7DA;
+            background: rgba(239,231,218,0.1);
+        }
+
+        /* Hero photo placeholder */
+        .hero-photo {
+            margin-top: 50px;
+            height: 320px;
+            background: rgba(255,255,255,0.07);
+            border-radius: 12px;
+            border: 2px dashed rgba(212,165,116,0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(239,231,218,0.5);
+            font-size: 15px;
+            letter-spacing: 0.5px;
+        }
+
+        /* About */
+        .about {
+            padding: 80px 20px;
+            background: #EFE7DA;
+        }
+
+        .section-label {
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #B56B4A;
+            margin-bottom: 10px;
+        }
+
+        .about h2 {
+            font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
+            font-size: 38px;
+            font-weight: 800;
+            color: #1F2933;
+            margin-bottom: 20px;
+        }
+
+        .about p {
+            font-size: 16px;
+            line-height: 1.85;
+            color: #444;
+            margin-bottom: 16px;
+            max-width: 700px;
+        }
+
+        .about-highlight {
+            display: inline-block;
+            background: #1F2933;
+            color: #EFE7DA;
+            font-size: 14px;
+            font-weight: 600;
+            padding: 8px 18px;
+            border-radius: 6px;
+            margin-top: 8px;
+        }
+
+        .about-photos {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-top: 40px;
+        }
+
+        .photo-placeholder {
+            height: 240px;
+            background: #E0D8CC;
+            border-radius: 10px;
+            border: 2px dashed #B56B4A;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #888;
+            font-size: 14px;
+        }
+
+        /* Menu */
+        .menu-section {
+            padding: 80px 20px;
+            background: #1F2933;
+            color: #EFE7DA;
+        }
+
+        .menu-section .section-label {
+            color: #D4A574;
+        }
+
+        .menu-section h2 {
+            font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
+            font-size: 38px;
+            font-weight: 800;
+            color: #EFE7DA;
+            margin-bottom: 40px;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 28px;
+        }
+
+        .menu-category {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(212,165,116,0.3);
+            border-radius: 10px;
+            padding: 24px;
+        }
+
+        .menu-category h3 {
+            font-size: 16px;
+            font-weight: 700;
+            color: #D4A574;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 18px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(212,165,116,0.3);
+        }
+
+        .menu-item {
+            margin-bottom: 14px;
+        }
+
+        .menu-item-name {
+            font-weight: 600;
+            font-size: 15px;
+            color: #EFE7DA;
+        }
+
+        .menu-item-price {
+            font-size: 13px;
+            color: #D4A574;
+            margin-top: 1px;
+        }
+
+        .menu-item-desc {
+            font-size: 13px;
+            color: rgba(239,231,218,0.6);
+            margin-top: 2px;
+        }
+
+        .menu-photo-placeholder {
+            margin-top: 28px;
+            height: 180px;
+            background: rgba(255,255,255,0.04);
+            border-radius: 8px;
+            border: 2px dashed rgba(212,165,116,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(239,231,218,0.4);
+            font-size: 13px;
+        }
+
+        .menu-note {
+            margin-top: 28px;
+            padding: 16px;
+            background: rgba(212,165,116,0.1);
+            border-left: 3px solid #D4A574;
+            border-radius: 0 6px 6px 0;
+            font-size: 13px;
+            color: rgba(239,231,218,0.75);
+        }
+
+        /* Booking Widget */
+        .booking-section {
+            padding: 80px 20px;
+            background: #EFE7DA;
+            text-align: center;
+        }
+
+        .booking-section .section-label {
+            color: #B56B4A;
+        }
+
+        .booking-section h2 {
+            font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
+            font-size: 38px;
+            font-weight: 800;
+            color: #1F2933;
+            margin-bottom: 10px;
+        }
+
+        .booking-section > .container > p {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 36px;
+        }
+
+        .booking-card {
+            max-width: 480px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px 32px;
+            border-radius: 14px;
+            border: 1px solid #D8CFC4;
+            box-shadow: 0 4px 20px rgba(31,41,51,0.10);
+        }
+
+        .booking-form-row {
+            margin-bottom: 16px;
+            text-align: left;
+        }
+
+        .booking-form-row label {
+            display: block;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: #666;
+            margin-bottom: 6px;
+        }
+
+        .booking-form-row input,
+        .booking-form-row select {
+            width: 100%;
+            padding: 13px 15px;
+            border: 1px solid #D8CFC4;
+            border-radius: 8px;
+            font-size: 15px;
+            font-family: inherit;
+            background: #EFE7DA;
+            color: #2B2B2B;
+            appearance: none;
+            -webkit-appearance: none;
+        }
+
+        .booking-form-row input:focus,
+        .booking-form-row select:focus {
+            outline: none;
+            border-color: #B56B4A;
+            background: white;
+        }
+
+        .booking-btn {
+            width: 100%;
+            padding: 16px 20px;
+            background: #1F2933;
+            color: #EFE7DA;
+            border: none;
+            border-radius: 8px;
+            font-size: 17px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 8px;
+            transition: background 0.2s, transform 0.2s;
+            letter-spacing: 0.3px;
+        }
+
+        .booking-btn:hover {
+            background: #2C3A45;
+            transform: translateY(-1px);
+        }
+
+        .booking-caption {
+            font-size: 12px;
+            color: #999;
+            margin-top: 14px;
+            text-align: center;
+        }
+
+        /* Reviews */
+        .reviews-section {
+            padding: 80px 20px;
+            background: #E5DDD2;
+        }
+
+        .reviews-section .section-label {
+            color: #B56B4A;
+        }
+
+        .reviews-section h2 {
+            font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
+            font-size: 38px;
+            font-weight: 800;
+            color: #1F2933;
+            margin-bottom: 12px;
+        }
+
+        .rating-summary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: #1F2933;
+            color: #EFE7DA;
+            padding: 10px 20px;
+            border-radius: 8px;
+            margin-bottom: 36px;
+            font-size: 15px;
+        }
+
+        .rating-number {
+            font-size: 28px;
+            font-weight: 800;
+            color: #D4A574;
+        }
+
+        .review-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .review-card {
+            background: white;
+            padding: 28px;
+            border-radius: 10px;
+            border: 1px solid #D8CFC4;
+        }
+
+        .review-text {
+            font-size: 15px;
+            color: #444;
+            line-height: 1.7;
+            margin-bottom: 14px;
+            font-style: italic;
+        }
+
+        .review-author {
+            font-weight: 700;
+            color: #1F2933;
+            font-size: 14px;
+        }
+
+        .review-source {
+            font-size: 12px;
+            color: #999;
+            margin-top: 2px;
+        }
+
+        /* Hours & Location */
+        .info-section {
+            padding: 80px 20px;
+            background: #EFE7DA;
+        }
+
+        .info-section .section-label {
+            color: #B56B4A;
+        }
+
+        .info-section h2 {
+            font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
+            font-size: 38px;
+            font-weight: 800;
+            color: #1F2933;
+            margin-bottom: 40px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .info-card {
+            background: white;
+            padding: 28px;
+            border-radius: 10px;
+            border: 1px solid #D8CFC4;
+        }
+
+        .info-card h3 {
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #B56B4A;
+            margin-bottom: 18px;
+        }
+
+        .hours-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .hours-table td {
+            padding: 9px 0;
+            font-size: 15px;
+            border-bottom: 1px solid #EFE7DA;
+            color: #333;
+        }
+
+        .hours-table td:first-child {
+            font-weight: 600;
+            color: #1F2933;
+            width: 55%;
+        }
+
+        .info-card address {
+            font-style: normal;
+            font-size: 15px;
+            color: #444;
+            line-height: 1.8;
+            margin-bottom: 16px;
+        }
+
+        .info-card a {
+            color: #1F2933;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        .info-card a:hover {
+            color: #B56B4A;
+        }
+
+        .map-link {
+            display: inline-block;
+            font-size: 14px;
+            color: #B56B4A;
+            font-weight: 600;
+            text-decoration: none;
+            margin-top: 12px;
+        }
+
+        .map-link:hover {
+            text-decoration: underline;
+        }
+
+        .interior-placeholder {
+            margin-top: 32px;
+            height: 280px;
+            background: #E0D8CC;
+            border-radius: 10px;
+            border: 2px dashed #B56B4A;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #888;
+            font-size: 14px;
+        }
+
+        /* Footer */
+        .footer {
+            background: #141C24;
+            color: rgba(239,231,218,0.75);
+            padding: 44px 20px;
+            text-align: center;
+        }
+
+        .footer-name {
+            font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
+            font-size: 20px;
+            font-weight: 800;
+            color: #EFE7DA;
+            margin-bottom: 6px;
+        }
+
+        .footer p {
+            font-size: 13px;
+            margin-bottom: 4px;
+            line-height: 1.6;
+        }
+
+        .footer a {
+            color: #D4A574;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-divider {
+            border: none;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            margin: 20px auto;
+            max-width: 300px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero-subtitle {
+                font-size: 17px;
+            }
+
+            .about h2,
+            .menu-section h2,
+            .booking-section h2,
+            .reviews-section h2,
+            .info-section h2 {
+                font-size: 30px;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-photos {
+                grid-template-columns: 1fr;
+            }
+
+            .about, .menu-section, .booking-section, .reviews-section, .info-section {
+                padding: 60px 20px;
+            }
+
+            .hero {
+                padding: 80px 20px 60px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Demo Banner -->
+    <div class="demo-banner">
+        This is a demo preview built by Klar Systems for Tan Binh Restaurang.
+        <a href="https://preview.klarsystems.com/tan-binh-restaurang-pietarsaari/proposal/">See the full proposal</a>
+    </div>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-badge">Vietnamese Restaurant — Pietarsaari</div>
+            <h1>Tan Binh Restaurang</h1>
+            <p class="hero-subtitle">Authentic Vietnamese Cuisine in Pietarsaari</p>
+            <p class="hero-rating"><strong>4.2</strong> / 5 &nbsp;&middot;&nbsp; 249 Google reviews &nbsp;&middot;&nbsp; Choraeuksenkatu 11</p>
+            <div class="hero-actions">
+                <a href="#book" class="btn-primary">Reserve a Table</a>
+                <a href="#menu" class="btn-outline">View Menu</a>
+            </div>
+            <div class="hero-photo">Your photo here — Vietnamese dishes, spring rolls, or the kitchen</div>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section class="about">
+        <div class="container">
+            <p class="section-label">About Us</p>
+            <h2>Vietnam Comes to Pietarsaari</h2>
+            <p>
+                Tan Binh Restaurang brings authentic Vietnamese flavours to Pietarsaari. From fresh Goi Cuon summer rolls and classic Banh Mi to hearty chicken, beef and shrimp rice dishes, every plate is crafted for genuine taste and great value.
+            </p>
+            <p>
+                Operating since 2012, Tan Binh is one of Pietarsaari's most established Vietnamese kitchens — known for kind, welcoming service and consistently honest food at accessible prices. With 249 Google reviews and a 4.2-star rating, the restaurant has earned its place as a local favourite.
+            </p>
+            <span class="about-highlight">4.2 stars &middot; 249 reviews &middot; Choraeuksenkatu 11</span>
+
+            <div class="about-photos">
+                <div class="photo-placeholder">Food photos coming soon</div>
+                <div class="photo-placeholder">Interior photo coming soon</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu -->
+    <section class="menu-section" id="menu">
+        <div class="container">
+            <p class="section-label">Our Menu</p>
+            <h2>Vietnamese Favourites</h2>
+            <div class="menu-grid">
+
+                <div class="menu-category">
+                    <h3>Starters</h3>
+                    <div class="menu-item">
+                        <div class="menu-item-name">Goi Cuon — Summer Rolls</div>
+                        <div class="menu-item-price">9.00</div>
+                        <div class="menu-item-desc">Fresh Vietnamese summer rolls</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-name">Kevatrulla — Spring Roll</div>
+                        <div class="menu-item-price">1.90 / pc</div>
+                        <div class="menu-item-desc">Crispy fried spring roll</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-name">Friteeratut katkaravut — Fried Shrimp</div>
+                        <div class="menu-item-price">8.50 (6 pcs)</div>
+                        <div class="menu-item-desc">Golden fried shrimp</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-name">Banh Mi — Vietnamese Sandwich</div>
+                        <div class="menu-item-price">11.50</div>
+                        <div class="menu-item-desc">Classic Vietnamese baguette sandwich</div>
+                    </div>
+                    <div class="menu-photo-placeholder">Food photos coming soon</div>
+                </div>
+
+                <div class="menu-category">
+                    <h3>Chicken Dishes</h3>
+                    <div class="menu-item">
+                        <div class="menu-item-name">Kanapallot riisilla</div>
+                        <div class="menu-item-price">9.50</div>
+                        <div class="menu-item-desc">Chicken balls with rice</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-name">Kanaa ja cashewpahkinoita riisilla</div>
+                        <div class="menu-item-price">12.00</div>
+                        <div class="menu-item-desc">Chicken with cashew nuts and rice</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-name">Kanaa currykastikkeessa riisilla</div>
+                        <div class="menu-item-price">12.00</div>
+                        <div class="menu-item-desc">Chicken in curry sauce with rice</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-name">Kanaa ja paistetut nuudelit</div>
+                        <div class="menu-item-price">12.00</div>
+                        <div class="menu-item-desc">Chicken with stir-fried noodles</div>
+                    </div>
+                </div>
+
+                <div class="menu-category">
+                    <h3>Beef &amp; Shrimp</h3>
+                    <div class="menu-item">
+                        <div class="menu-item-name">Peking-naudanlihaa riisilla</div>
+                        <div class="menu-item-price">12.50</div>
+                        <div class="menu-item-desc">Peking-style beef with rice</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-name">Naudanlihaa ja vihanneksia riisilla</div>
+                        <div class="menu-item-price">12.50</div>
+                        <div class="menu-item-desc">Beef and vegetables with rice</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-name">Katkarapuja ja vihanneksia riisilla</div>
+                        <div class="menu-item-price">13.00</div>
+                        <div class="menu-item-desc">Shrimp and vegetables with rice</div>
+                    </div>
+                </div>
+
+                <div class="menu-category">
+                    <h3>Vegetarian</h3>
+                    <div class="menu-item">
+                        <div class="menu-item-name">Tofua ja vihanneksia riisilla</div>
+                        <div class="menu-item-price">12.00</div>
+                        <div class="menu-item-desc">Tofu and vegetables with rice — vegetarian</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-name">Tofu ja ananasta riisilla</div>
+                        <div class="menu-item-price">12.00</div>
+                        <div class="menu-item-desc">Tofu and pineapple with rice — vegetarian</div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="menu-note">
+                Menu and prices sourced from Wolt. Full menu available at the restaurant. Prices may vary — confirm with the restaurant.
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Widget -->
+    <section class="booking-section" id="book">
+        <div class="container">
+            <p class="section-label">Reservations</p>
+            <h2>Book a Table</h2>
+            <p>Reserve your table in seconds — no account needed, no fees.</p>
+            <div class="booking-card">
+                <form onsubmit="return false;">
+                    <div class="booking-form-row">
+                        <label for="res-date">Date</label>
+                        <input type="date" id="res-date" name="date">
+                    </div>
+                    <div class="booking-form-row">
+                        <label for="res-time">Time</label>
+                        <select id="res-time" name="time">
+                            <option value="">Select time</option>
+                            <option value="12:00">12:00</option>
+                            <option value="12:30">12:30</option>
+                            <option value="13:00">13:00</option>
+                            <option value="13:30">13:30</option>
+                            <option value="14:00">14:00</option>
+                            <option value="14:30">14:30</option>
+                            <option value="15:00">15:00</option>
+                            <option value="16:00">16:00</option>
+                            <option value="16:30">16:30</option>
+                            <option value="17:00">17:00</option>
+                            <option value="17:30">17:30</option>
+                            <option value="18:00">18:00</option>
+                            <option value="18:30">18:30</option>
+                            <option value="19:00">19:00</option>
+                            <option value="19:30">19:30</option>
+                            <option value="20:00">20:00</option>
+                        </select>
+                    </div>
+                    <div class="booking-form-row">
+                        <label for="res-guests">Party Size</label>
+                        <select id="res-guests" name="guests">
+                            <option value="1">1 guest</option>
+                            <option value="2" selected>2 guests</option>
+                            <option value="3">3 guests</option>
+                            <option value="4">4 guests</option>
+                            <option value="5">5 guests</option>
+                            <option value="6">6 guests</option>
+                            <option value="7">7 guests</option>
+                            <option value="8">8 guests</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="booking-btn">Reserve Now</button>
+                </form>
+                <p class="booking-caption">Powered by Klar Bookings — no commissions, no per-cover fees.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews -->
+    <section class="reviews-section" id="reviews">
+        <div class="container">
+            <p class="section-label">Guest Reviews</p>
+            <h2>What Our Guests Say</h2>
+            <div class="rating-summary">
+                <span class="rating-number">4.2</span>
+                <span>/ 5 &nbsp;&middot;&nbsp; 249 Google reviews</span>
+            </div>
+            <div class="review-grid">
+                <div class="review-card">
+                    <p class="review-text">"Kind customer service and delicious food with good price. Highly recommended :)."</p>
+                    <p class="review-author">Lina</p>
+                    <p class="review-source">via Google / RestaurantGuru</p>
+                </div>
+                <div class="review-card">
+                    <p class="review-text">"Affordable Vietnamese food done well — one of the best value spots in Pietarsaari."</p>
+                    <p class="review-author">Local regular</p>
+                    <p class="review-source">Google review summary</p>
+                </div>
+                <div class="review-card">
+                    <p class="review-text">"Welcoming staff and genuine Vietnamese flavours. A reliable neighbourhood favourite since 2012."</p>
+                    <p class="review-author">Pietarsaari visitor</p>
+                    <p class="review-source">Google review summary</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hours & Location -->
+    <section class="info-section" id="contact">
+        <div class="container">
+            <p class="section-label">Find Us</p>
+            <h2>Hours &amp; Location</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>Opening Hours</h3>
+                    <table class="hours-table">
+                        <tr>
+                            <td>Monday — Thursday</td>
+                            <td>12:00 — 20:00</td>
+                        </tr>
+                        <tr>
+                            <td>Friday — Saturday</td>
+                            <td>12:00 — 21:00</td>
+                        </tr>
+                        <tr>
+                            <td>Sunday</td>
+                            <td>12:00 — 20:00</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="info-card">
+                    <h3>Address &amp; Phone</h3>
+                    <address>
+                        Choraeuksenkatu 11<br>
+                        68600 Pietarsaari, Finland
+                    </address>
+                    <a href="tel:0503069786">050 3069786</a><br>
+                    <a class="map-link" href="https://maps.google.com/?cid=13937510371687183531" target="_blank" rel="noopener">View on Google Maps</a>
+                </div>
+            </div>
+            <div class="interior-placeholder">Interior photo coming soon</div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p class="footer-name">Tan Binh Restaurang</p>
+            <p>Choraeuksenkatu 11, 68600 Pietarsaari</p>
+            <p><a href="tel:0503069786">050 3069786</a></p>
+            <hr class="footer-divider">
+            <p>Powered by Klar Systems — this is a demo preview for Tan Binh Restaurang.</p>
+            <p style="margin-top:6px;">
+                <a href="https://preview.klarsystems.com/tan-binh-restaurang-pietarsaari/proposal/">View full proposal</a>
+            </p>
+        </div>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cafe Eliel — Art Nouveau Café-Bar at Helsinki Central Station</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- palette: segment 3 default (research palette inferred from interior materials) -->
+  <style>
+    :root {
+      --bg: #F7F1E8;
+      --bg-dark: #2A2725;
+      --bg-card: #FFFFFF;
+      --fg: #2A2725;
+      --fg-dim: #6B6358;
+      --primary: #8C6A4F;
+      --accent: #C9A77C;
+      --rule: rgba(140,106,79,0.15);
+      --heading: 'DM Serif Display', Georgia, serif;
+      --body: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--body);
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+    .demo-banner {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      background: var(--primary); color: #fff; text-align: center;
+      padding: 10px 16px; font-size: 0.82rem;
+    }
+    .demo-banner a { color: #fff; font-weight: 700; text-decoration: underline; margin-left: 8px; }
+    .container { max-width: 1060px; margin: 0 auto; padding: 0 24px; }
+    section { padding: 80px 0; }
+    .label {
+      font-family: var(--body); font-size: 0.7rem; font-weight: 700;
+      letter-spacing: 0.18em; text-transform: uppercase; color: var(--primary); margin-bottom: 12px;
+    }
+    h2 {
+      font-family: var(--heading); font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 400; line-height: 1.15; margin-bottom: 20px;
+    }
+    p.sub { color: var(--fg-dim); max-width: 560px; font-size: 0.95rem; }
+
+    /* Hero */
+    .hero { padding-top: 130px; padding-bottom: 40px; background: var(--bg); }
+    .hero-inner { display: grid; grid-template-columns: 1.2fr 1fr; gap: 48px; align-items: center; }
+    .hero h1 {
+      font-family: var(--heading); font-size: clamp(2.4rem, 5vw, 3.4rem);
+      font-weight: 400; line-height: 1.08; margin-bottom: 16px; color: var(--fg);
+    }
+    .hero h1 .hl { color: var(--primary); }
+    .hero-desc { color: var(--fg-dim); font-size: 1rem; margin-bottom: 24px; max-width: 460px; }
+    .badge-row { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+    .badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--bg-card); border: 1px solid var(--rule);
+      padding: 8px 16px; border-radius: 40px; font-size: 0.82rem; color: var(--fg);
+    }
+    .badge .num { font-weight: 700; color: var(--primary); font-size: 1.1rem; }
+    .img-placeholder {
+      background: #E8E0D4; border: 1px solid var(--rule);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--fg-dim); font-size: 0.72rem; letter-spacing: 0.1em;
+      text-transform: uppercase; border-radius: 10px;
+    }
+    .img-hero { aspect-ratio: 4/3; width: 100%; }
+    .img-food { aspect-ratio: 1/1; width: 100%; }
+    .img-interior { aspect-ratio: 3/2; width: 100%; }
+
+    /* Features */
+    .features { background: var(--bg-dark); }
+    .features .label { color: var(--accent); }
+    .features h2 { color: #F2EDE6; }
+    .feat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-top: 36px; }
+    .feat-card {
+      background: rgba(255,255,255,0.05); border-radius: 10px; padding: 28px;
+      border-top: 3px solid var(--accent);
+    }
+    .feat-card h3 { font-family: var(--heading); font-size: 1.15rem; margin-bottom: 8px; color: #F2EDE6; font-weight: 400; }
+    .feat-card p { font-size: 0.88rem; color: rgba(242,237,230,0.65); }
+
+    /* Menu */
+    .menu-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 36px; }
+    .menu-block h3 {
+      font-family: var(--heading); font-size: 1.2rem; margin-bottom: 14px; font-weight: 400;
+      padding-bottom: 8px; border-bottom: 1px solid var(--rule);
+    }
+    .menu-block li { list-style: none; padding: 7px 0; font-size: 0.9rem; color: var(--fg-dim);
+      border-bottom: 1px solid rgba(140,106,79,0.08); }
+    .menu-note { margin-top: 28px; font-size: 0.82rem; color: var(--fg-dim); font-style: italic; text-align: center; }
+
+    /* Reviews */
+    .reviews { background: #EDE7DD; }
+    .rev-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-top: 36px; }
+    .rev-card { background: var(--bg-card); border-radius: 10px; padding: 28px; border-left: 3px solid var(--accent); }
+    .rev-card blockquote { font-size: 0.94rem; font-style: italic; line-height: 1.7; margin-bottom: 10px; color: var(--fg); }
+    .rev-card cite { font-size: 0.76rem; color: var(--fg-dim); font-style: normal; }
+
+    /* Contact & Events */
+    .contact-events { background: var(--bg); }
+    .contact-events-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; margin-top: 36px; }
+    .events-card {
+      background: var(--bg-card); border-radius: 12px; padding: 32px;
+      border: 1px solid var(--rule); border-top: 3px solid var(--primary);
+    }
+    .events-card h3 { font-family: var(--heading); font-size: 1.3rem; margin-bottom: 6px; font-weight: 400; }
+    .events-card .events-sub { font-size: 0.84rem; color: var(--fg-dim); margin-bottom: 20px; }
+    .events-form { display: grid; gap: 12px; }
+    .events-form label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--fg-dim); display: block; margin-bottom: 4px; }
+    .events-form input,
+    .events-form select,
+    .events-form textarea {
+      width: 100%; padding: 11px 14px; background: var(--bg); border: 1px solid rgba(140,106,79,0.25);
+      border-radius: 6px; color: var(--fg); font-family: var(--body); font-size: 0.9rem;
+    }
+    .events-form textarea { resize: vertical; min-height: 80px; }
+    .events-form button {
+      padding: 13px; background: var(--primary); color: #fff; border: none; border-radius: 6px;
+      font-family: var(--body); font-size: 1rem; font-weight: 700; cursor: pointer; margin-top: 6px;
+    }
+    .events-form button:hover { background: #7A5C42; }
+    .events-note { font-size: 0.72rem; color: var(--fg-dim); margin-top: 8px; text-align: center; }
+
+    /* Hours + Map */
+    .visit { background: #EDE7DD; }
+    .info-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-top: 36px; }
+    .hours-tbl { width: 100%; }
+    .hours-tbl td { padding: 9px 0; font-size: 0.9rem; border-bottom: 1px solid var(--rule); }
+    .hours-tbl td:first-child { color: var(--fg-dim); width: 130px; }
+    .hours-tbl td:last-child { text-align: right; font-weight: 500; }
+    .map-frame { width: 100%; aspect-ratio: 16/9; border: 0; border-radius: 8px; }
+
+    /* Contact info */
+    .contact-info { background: var(--bg-dark); }
+    .contact-info .label { color: var(--accent); }
+    .contact-info h2 { color: #F2EDE6; }
+    .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 28px; margin-top: 28px; }
+    .contact-item h4 { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--accent); margin-bottom: 6px; }
+    .contact-item a { color: #F2EDE6; text-decoration: none; font-size: 1.05rem; font-weight: 500; }
+    .contact-item a:hover { color: var(--accent); }
+    .contact-item span { color: rgba(242,237,230,0.8); font-size: 1rem; }
+
+    footer { padding: 36px 0; text-align: center; font-size: 0.76rem; color: var(--fg-dim);
+      border-top: 1px solid var(--rule); background: var(--bg); }
+
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    @media (max-width: 768px) {
+      .hero-inner, .contact-events-grid, .info-cols { grid-template-columns: 1fr; }
+      .feat-grid { grid-template-columns: 1fr; }
+      .menu-cols { grid-template-columns: 1fr; }
+      section { padding: 56px 0; }
+      .hero { padding-top: 100px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="demo-banner">
+    This is a demo — the final website will be built together based on your preferences.
+    <a href="https://preview.klarsystems.com/cafe-eliel-helsinki/proposal/">See the offer</a>
+  </div>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-inner">
+        <div>
+          <div class="label">Helsinki Central Station</div>
+          <h1><span class="hl">Cafe Eliel</span><br>A landmark café in the heart of Helsinki</h1>
+          <p class="hero-desc">Named after architect Eliel Saarinen, this Art Nouveau café-bar brings together coffee, craft cocktails, and Finnish traditions — all steps from the city's pulse.</p>
+          <div class="badge-row">
+            <div class="badge"><span class="num">4.3</span> / 5 &nbsp;|&nbsp; 467 Google reviews</div>
+            <div class="badge">Open daily from 07:00</div>
+          </div>
+        </div>
+        <div class="img-placeholder img-hero" aria-label="Your photo here"><span>Your photo here</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="features reveal">
+    <div class="container">
+      <div class="label">Why Cafe Eliel</div>
+      <h2>More than a café — a place to stay a while</h2>
+      <div class="feat-grid">
+        <div class="feat-card">
+          <h3>Art Nouveau Setting</h3>
+          <p>Stone tables, oak panelling, and leather details inside a Museoviraston-protected space with original Saarinen-era tall windows.</p>
+        </div>
+        <div class="feat-card">
+          <h3>Coffee by Löfberg</h3>
+          <p>Three filtered coffees, espresso-based drinks, and Cold Brew — all roasted by Löfberg for a responsible and full-bodied cup.</p>
+        </div>
+        <div class="feat-card">
+          <h3>Helsinki Cocktails</h3>
+          <p>Bar menu with cocktails and drinks emphasising local Helsinki producers — from morning coffee to after-work drinks.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Menu -->
+  <section class="reveal">
+    <div class="container">
+      <div class="label">Menu</div>
+      <h2>From morning to evening</h2>
+      <div class="menu-cols">
+        <div class="menu-block">
+          <h3>Café &amp; Breakfast</h3>
+          <ul>
+            <li>Filtered coffee — three varieties by Löfberg</li>
+            <li>Espresso-based drinks</li>
+            <li>Cold Brew ice coffee</li>
+            <li>Pastries and cakes — vegan options available</li>
+            <li>Voileipäkakku — Finnish sandwich cake</li>
+            <li>Gluten-free options on request</li>
+          </ul>
+        </div>
+        <div class="menu-block">
+          <h3>Lunch &amp; Bar</h3>
+          <ul>
+            <li>Salad buffet during lunch hours</li>
+            <li>Two warm daily options</li>
+            <li>Eromangan lihapiiras — traditional Helsinki meat pie</li>
+            <li>Sandwiches</li>
+            <li>Cocktails and local Helsinki beverages</li>
+            <li>Dinner dishes in the evening</li>
+          </ul>
+        </div>
+      </div>
+      <div class="img-placeholder img-food" style="max-width: 300px; margin: 36px auto 0;" aria-label="Food photos coming soon"><span>Food photos coming soon</span></div>
+      <p class="menu-note">This is a demo — the menu will be updated together with you.</p>
+    </div>
+  </section>
+
+  <!-- Reviews -->
+  <section class="reviews reveal">
+    <div class="container">
+      <div class="label">What guests say</div>
+      <h2>Praised by travellers and Helsinki locals</h2>
+      <div class="rev-grid">
+        <div class="rev-card">
+          <blockquote>"Café Eliel at Helsinki Central Station turned out to be a surprisingly beautiful and cosy spot"</blockquote>
+          <cite>— Suvi V, TripAdvisor</cite>
+        </div>
+        <div class="rev-card">
+          <blockquote>"It's like Paris in Helsinki"</blockquote>
+          <cite>— Hugh, TripAdvisor</cite>
+        </div>
+        <div class="rev-card">
+          <blockquote>"Although it is in the train station, it is peacefully secluded."</blockquote>
+          <cite>— MariBMic, TripAdvisor</cite>
+        </div>
+        <div class="rev-card">
+          <blockquote>"This new cafeteria is very stylish: stone tables and details with leather and oak."</blockquote>
+          <cite>— JariJK, TripAdvisor</cite>
+        </div>
+        <div class="rev-card">
+          <blockquote>"their vegan sandwich cake is a specialty to be recommended!"</blockquote>
+          <cite>— Ville, TripAdvisor</cite>
+        </div>
+        <div class="rev-card">
+          <blockquote>"I am gluten and dairy free and there was so much choice for all! Delicious cakes"</blockquote>
+          <cite>— RGL, TripAdvisor</cite>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact & Events -->
+  <section class="contact-events reveal" id="contact">
+    <div class="container">
+      <div class="label">Events &amp; Contact</div>
+      <h2>Host your event at Cafe Eliel</h2>
+      <div class="contact-events-grid">
+        <div>
+          <p class="sub" style="margin-bottom: 24px;">Cafe Eliel's Art Nouveau space is available for private events, corporate lunches, and celebrations. Get in touch and we will find the right setup for you.</p>
+          <div class="img-placeholder img-interior" aria-label="Interior photo coming soon"><span>Interior photo coming soon</span></div>
+        </div>
+        <div class="events-card">
+          <h3>Enquire about events</h3>
+          <p class="events-sub">Tell us about your event and we will get back to you within one business day.</p>
+          <form class="events-form" onsubmit="return false;">
+            <div>
+              <label for="e-name">Your name</label>
+              <input type="text" id="e-name" name="name" placeholder="Name" required>
+            </div>
+            <div>
+              <label for="e-email">Email</label>
+              <input type="email" id="e-email" name="email" placeholder="your@email.com" required>
+            </div>
+            <div>
+              <label for="e-type">Event type</label>
+              <select id="e-type" name="event_type">
+                <option value="">Select…</option>
+                <option value="private">Private celebration</option>
+                <option value="corporate">Corporate lunch / meeting</option>
+                <option value="birthday">Birthday</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <div>
+              <label for="e-message">Message</label>
+              <textarea id="e-message" name="message" placeholder="Describe your event, preferred date, and number of guests…"></textarea>
+            </div>
+            <button type="submit">Send enquiry</button>
+          </form>
+          <p class="events-note">Or email us at cafe.eliel@outlook.com</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Visit / Hours -->
+  <section class="visit reveal">
+    <div class="container">
+      <div class="label">Visit</div>
+      <h2>Find us at Helsinki Central Station</h2>
+      <div class="info-cols">
+        <div>
+          <table class="hours-tbl">
+            <tr><td>Monday</td><td>07:00–20:00</td></tr>
+            <tr><td>Tuesday</td><td>07:00–20:00</td></tr>
+            <tr><td>Wednesday</td><td>07:00–20:00</td></tr>
+            <tr><td>Thursday</td><td>07:00–21:00</td></tr>
+            <tr><td>Friday</td><td>07:00–21:00</td></tr>
+            <tr><td>Saturday</td><td>07:00–21:00</td></tr>
+            <tr><td>Sunday</td><td>08:00–18:30</td></tr>
+          </table>
+          <p style="font-size: 0.82rem; color: var(--fg-dim); margin-top: 14px;">
+            Kaivokatu 1, 00100 Helsinki<br>West corner of Helsinki Central Railway Station
+          </p>
+        </div>
+        <div>
+          <iframe class="map-frame"
+            src="https://maps.google.com/maps?q=Kaivokatu+1+Helsinki&output=embed"
+            allowfullscreen loading="lazy" title="Map to Cafe Eliel"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Info -->
+  <section class="contact-info reveal">
+    <div class="container">
+      <div class="label">Contact</div>
+      <h2>Get in touch</h2>
+      <div class="contact-grid">
+        <div class="contact-item">
+          <h4>Phone</h4>
+          <a href="tel:+358505566278">050 5566278</a>
+        </div>
+        <div class="contact-item">
+          <h4>Email</h4>
+          <a href="mailto:cafe.eliel@outlook.com">cafe.eliel@outlook.com</a>
+        </div>
+        <div class="contact-item">
+          <h4>Address</h4>
+          <span>Kaivokatu 1, 00100 Helsinki</span>
+        </div>
+        <div class="contact-item">
+          <h4>Facebook</h4>
+          <a href="https://www.facebook.com/cafeeliel/" target="_blank" rel="noopener">@cafeeliel</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>Cafe Eliel — Kaivokatu 1, 00100 Helsinki — <a href="tel:+358505566278" style="color:var(--fg-dim);">050 5566278</a></p>
+      <p style="margin-top: 6px;">&copy; 2026 Cafe Eliel. Powered by Klar.</p>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var obs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('visible'); });
+      }, { threshold: 0.12 });
+      document.querySelectorAll('.reveal').forEach(function(el) { obs.observe(el); });
+    });
+  </script>
+</body>
+</html>

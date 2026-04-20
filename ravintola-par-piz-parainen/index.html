@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ravintola Par Piz — Pizza &amp; Kebab in Parainen</title>
+  <style>
+    /* palette: segment 1 default (research palette empty) */
+
+    /* ── Reset & Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      background: #EFE7DA;
+      color: #1F2933;
+      line-height: 1.7;
+    }
+
+    /* ── Typography ── */
+    h1, h2, h3 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+    }
+
+    /* ── Colours ── */
+    :root {
+      --primary:     #B56B4A;
+      --accent:      #D4A574;
+      --background:  #1F2933;
+      --text:        #EFE7DA;
+      --cream:       #EFE7DA;
+      --parchment:   #E4D9C8;
+      --dark:        #1F2933;
+      --mid:         #4A3728;
+    }
+
+    /* ── Demo Banner ── */
+    .demo-banner {
+      background: #1a1a2e;
+      color: #fff;
+      text-align: center;
+      padding: 10px 16px;
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 0.82rem;
+      letter-spacing: 0.04em;
+    }
+    .demo-banner a {
+      color: #D4A574;
+      font-weight: 700;
+      text-decoration: none;
+      margin-left: 8px;
+    }
+    .demo-banner a:hover { text-decoration: underline; }
+
+    /* ── Nav ── */
+    nav {
+      background: var(--background);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.35);
+    }
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      height: 60px;
+    }
+    .nav-logo {
+      color: #fff;
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.2rem;
+      font-style: italic;
+      text-decoration: none;
+    }
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: rgba(255,255,255,0.85);
+      text-decoration: none;
+      font-size: 0.88rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ── Hero ── */
+    .hero {
+      position: relative;
+      min-height: 540px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+    .hero-photo-placeholder {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #1F2933 0%, #2e3d4a 40%, #3a4f5c 70%, #1F2933 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hero-photo-placeholder::after {
+      content: 'Your photo here';
+      color: rgba(255,255,255,0.15);
+      font-size: 0.9rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .hero-photo-placeholder::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 30% 60%, rgba(181,107,74,0.35) 0%, transparent 60%),
+        radial-gradient(ellipse at 70% 30%, rgba(212,165,116,0.15) 0%, transparent 50%);
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, rgba(20,24,28,0.80) 0%, rgba(20,24,28,0.50) 60%, rgba(20,24,28,0.15) 100%);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 60px 24px;
+      width: 100%;
+    }
+    .hero-eyebrow {
+      display: inline-block;
+      color: var(--accent);
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+      border-bottom: 1px solid var(--accent);
+      padding-bottom: 6px;
+    }
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      color: #fff;
+      line-height: 1.15;
+      max-width: 580px;
+      margin-bottom: 20px;
+    }
+    .hero h1 em {
+      color: var(--accent);
+      font-style: italic;
+    }
+    .hero-subtitle {
+      color: rgba(255,255,255,0.82);
+      font-size: 1.05rem;
+      max-width: 440px;
+      margin-bottom: 32px;
+    }
+    .hero-rating {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 40px;
+      padding: 8px 18px;
+      color: #fff;
+      font-size: 0.88rem;
+      margin-bottom: 28px;
+    }
+    .hero-rating .stars { color: var(--accent); font-size: 1rem; letter-spacing: 2px; }
+    .hero-cta {
+      display: inline-block;
+      background: var(--primary);
+      color: #fff;
+      text-decoration: none;
+      padding: 14px 34px;
+      border-radius: 3px;
+      font-size: 0.95rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      border: 2px solid var(--primary);
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .hero-cta:hover { background: #9a5a3c; border-color: #9a5a3c; }
+
+    /* ── Section layouts ── */
+    section { padding: 72px 24px; }
+    .container { max-width: 1100px; margin: 0 auto; }
+    .section-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: clamp(1.7rem, 3.5vw, 2.4rem);
+      color: var(--primary);
+      margin-bottom: 28px;
+    }
+    hr.ornament {
+      width: 60px;
+      border: none;
+      border-top: 2px solid var(--accent);
+      margin: 0 0 32px 0;
+    }
+
+    /* ── About ── */
+    #about { background: var(--parchment); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+    .about-text p { color: var(--mid); margin-bottom: 18px; }
+    .about-text blockquote {
+      border-left: 3px solid var(--accent);
+      margin: 28px 0;
+      padding: 14px 20px;
+      background: rgba(212,165,116,0.1);
+      border-radius: 0 4px 4px 0;
+    }
+    .about-text blockquote p {
+      font-style: italic;
+      color: var(--dark);
+      margin: 0;
+    }
+    .about-text blockquote cite {
+      display: block;
+      font-style: normal;
+      font-size: 0.82rem;
+      color: var(--primary);
+      margin-top: 8px;
+    }
+    .about-visual {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .img-placeholder {
+      background: #d4c5b0;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #8a7560;
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .img-placeholder.tall { height: 260px; }
+    .img-placeholder.short { height: 130px; }
+
+    .about-stats {
+      display: flex;
+      gap: 32px;
+      margin-top: 28px;
+    }
+    .stat-item { text-align: center; }
+    .stat-num {
+      font-size: 2.4rem;
+      color: var(--primary);
+      font-family: 'Playfair Display', Georgia, serif;
+      display: block;
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 0.75rem;
+      color: var(--mid);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    /* ── Menu ── */
+    #menu { background: var(--cream); }
+    .menu-intro { max-width: 560px; margin-bottom: 48px; }
+    .menu-intro p { color: var(--mid); }
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 28px;
+      margin-bottom: 40px;
+    }
+    .menu-card {
+      background: #fff;
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid #e0d4c0;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .menu-card:hover {
+      box-shadow: 0 8px 28px rgba(181,107,74,0.12);
+      transform: translateY(-3px);
+    }
+    .menu-card-img {
+      height: 150px;
+      background: #d4c5b0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .menu-card-img span {
+      font-size: 0.75rem;
+      color: #8a7560;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .menu-card-body { padding: 20px 22px 24px; }
+    .menu-card-cat {
+      font-size: 0.68rem;
+      color: var(--accent);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .menu-card-name {
+      font-size: 1.2rem;
+      color: var(--primary);
+      margin-bottom: 8px;
+      font-family: 'Playfair Display', Georgia, serif;
+    }
+    .menu-card-desc {
+      font-size: 0.88rem;
+      color: var(--mid);
+      line-height: 1.55;
+    }
+    .menu-card-price {
+      display: inline-block;
+      margin-top: 10px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+    .menu-note {
+      background: var(--parchment);
+      border-left: 3px solid var(--accent);
+      padding: 14px 20px;
+      border-radius: 0 4px 4px 0;
+      font-size: 0.9rem;
+      color: var(--mid);
+    }
+
+    /* ── Klar Bookings Widget ── */
+    #klar-bookings-section { background: var(--background); }
+    .booking-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 64px;
+      align-items: center;
+    }
+    .booking-intro .section-label { color: var(--accent); }
+    .booking-intro .section-title { color: #fff; }
+    .booking-intro p {
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 20px;
+    }
+    .booking-review {
+      background: rgba(255,255,255,0.08);
+      border-radius: 6px;
+      padding: 18px 22px;
+      border-left: 3px solid var(--accent);
+    }
+    .booking-review p {
+      font-style: italic;
+      color: rgba(255,255,255,0.9);
+      margin: 0 0 8px;
+    }
+    .booking-review cite {
+      font-style: normal;
+      font-size: 0.78rem;
+      color: var(--accent);
+      letter-spacing: 0.06em;
+    }
+    .klar-bookings {
+      background: #fff;
+      border-radius: 8px;
+      padding: 36px 32px;
+      box-shadow: 0 16px 48px rgba(0,0,0,0.3);
+    }
+    .klar-bookings h3 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.4rem;
+      color: var(--primary);
+      margin-bottom: 6px;
+    }
+    .klar-bookings .widget-sub {
+      font-size: 0.85rem;
+      color: var(--mid);
+      margin-bottom: 28px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #e0d4c0;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .form-group { display: flex; flex-direction: column; }
+    .form-group label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 6px;
+    }
+    .form-group input,
+    .form-group select {
+      border: 1.5px solid #d4c5b0;
+      border-radius: 4px;
+      padding: 10px 14px;
+      font-size: 0.95rem;
+      color: var(--dark);
+      background: #faf7f2;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+    .form-group input:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(181,107,74,0.12);
+    }
+    .form-group select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%234A3728' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 36px;
+    }
+    .btn-reserve {
+      width: 100%;
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      padding: 14px 24px;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      cursor: pointer;
+      margin-top: 8px;
+      transition: background 0.2s;
+    }
+    .btn-reserve:hover { background: #9a5a3c; }
+    .widget-policy {
+      font-size: 0.75rem;
+      color: #8a7560;
+      text-align: center;
+      margin-top: 14px;
+    }
+
+    /* ── Reviews ── */
+    #reviews { background: var(--dark); padding: 52px 24px; }
+    .reviews-inner { max-width: 1100px; margin: 0 auto; text-align: center; }
+    .reviews-inner .section-label { color: var(--accent); }
+    .reviews-inner h2 { color: #fff; font-size: 1.6rem; margin-bottom: 8px; }
+    .reviews-inner .rating-display {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      margin: 20px 0 36px;
+    }
+    .rating-num {
+      font-size: 3rem;
+      color: var(--accent);
+      font-family: 'Playfair Display', Georgia, serif;
+      line-height: 1;
+    }
+    .rating-detail { text-align: left; }
+    .stars-row { display: flex; gap: 3px; }
+    .star-full, .star-half { width: 18px; height: 18px; }
+    .rating-detail .review-count {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.6);
+      margin-top: 4px;
+    }
+    .reviews-quotes {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+      text-align: left;
+    }
+    .review-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 6px;
+      padding: 22px 24px;
+    }
+    .review-card p {
+      font-style: italic;
+      color: rgba(255,255,255,0.82);
+      margin-bottom: 14px;
+      font-size: 0.92rem;
+      line-height: 1.6;
+    }
+    .review-card .review-meta {
+      font-size: 0.72rem;
+      color: var(--accent);
+      letter-spacing: 0.06em;
+    }
+
+    /* ── Hours ── */
+    #hours { background: var(--parchment); }
+    .hours-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+    .hours-table { width: 100%; border-collapse: collapse; }
+    .hours-table tr { border-bottom: 1px solid #e0d4c0; }
+    .hours-table tr:last-child { border-bottom: none; }
+    .hours-table td {
+      padding: 10px 0;
+      font-size: 0.93rem;
+      color: var(--mid);
+    }
+    .hours-table td:first-child { color: var(--dark); font-weight: 600; width: 120px; }
+    .hours-interior { display: flex; flex-direction: column; gap: 16px; }
+    .hours-interior-img {
+      height: 200px;
+      background: #d4c5b0;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hours-interior-img span {
+      font-size: 0.78rem;
+      color: #8a7560;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .hours-callout {
+      background: #fff;
+      border: 1px solid #e0d4c0;
+      border-left: 3px solid var(--accent);
+      border-radius: 0 6px 6px 0;
+      padding: 18px 22px;
+    }
+    .hours-callout p { font-size: 0.88rem; color: var(--mid); margin: 0; }
+    .hours-callout strong { color: var(--primary); }
+
+    /* ── Location ── */
+    #location { background: var(--cream); }
+    .location-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+    .contact-list { list-style: none; margin: 24px 0 0; }
+    .contact-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 14px 0;
+      border-bottom: 1px solid #e0d4c0;
+      font-size: 0.93rem;
+      color: var(--mid);
+    }
+    .contact-list li:last-child { border-bottom: none; }
+    .contact-icon {
+      width: 32px;
+      height: 32px;
+      background: var(--primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .contact-icon svg { width: 16px; height: 16px; fill: #fff; }
+    .contact-list a { color: var(--primary); text-decoration: none; font-weight: 600; }
+    .contact-list a:hover { text-decoration: underline; }
+    .map-embed {
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid #e0d4c0;
+      height: 300px;
+      background: #d4c5b0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .map-embed iframe { width: 100%; height: 100%; border: none; display: block; }
+    .social-row { display: flex; gap: 14px; margin-top: 24px; }
+    .social-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 18px;
+      border-radius: 4px;
+      font-size: 0.83rem;
+      text-decoration: none;
+      font-weight: 600;
+      border: 1.5px solid;
+      transition: background 0.2s, color 0.2s;
+    }
+    .social-btn.fb { color: #1877f2; border-color: #1877f2; }
+    .social-btn.fb:hover { background: #1877f2; color: #fff; }
+    .social-btn.wolt { color: #009de0; border-color: #009de0; }
+    .social-btn.wolt:hover { background: #009de0; color: #fff; }
+
+    /* ── Footer ── */
+    footer {
+      background: #141c22;
+      color: rgba(255,255,255,0.6);
+      padding: 40px 24px;
+    }
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .footer-brand {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.1rem;
+      font-style: italic;
+      color: #fff;
+    }
+    .footer-info { font-size: 0.8rem; line-height: 1.8; }
+    .footer-klar { font-size: 0.75rem; letter-spacing: 0.06em; text-align: right; }
+    .footer-klar a { color: var(--accent); text-decoration: none; }
+    .footer-klar a:hover { text-decoration: underline; }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .about-grid,
+      .booking-wrapper,
+      .hours-grid,
+      .location-grid { grid-template-columns: 1fr; gap: 36px; }
+      .form-row { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .klar-bookings { padding: 26px 20px; }
+      .about-stats { flex-wrap: wrap; gap: 20px; }
+      .footer-inner { flex-direction: column; text-align: center; }
+      .footer-klar { text-align: center; }
+    }
+
+    /* ── Scroll anchor offset ── */
+    [id] { scroll-margin-top: 70px; }
+  </style>
+</head>
+<body>
+
+  <!-- Demo Banner -->
+  <div class="demo-banner">
+    This is a demo website for Ravintola Par Piz &mdash; Parainen.
+    <a href="https://preview.klarsystems.com/ravintola-par-piz-parainen/proposal/" target="_blank" rel="noopener">
+      View the full proposal &rarr;
+    </a>
+  </div>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">Ravintola Par Piz</a>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#klar-bookings-section">Reserve</a></li>
+        <li><a href="#hours">Hours</a></li>
+        <li><a href="#location">Find Us</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-photo-placeholder"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <span class="hero-eyebrow">Parainen, Finland &mdash; Keskuskäytävä 1</span>
+      <h1>Parainen's Favourite <em>Pizza &amp; Kebab</em></h1>
+      <p class="hero-subtitle">Generous portions, great flavours, and a warm welcome — right in the heart of Parainen.</p>
+      <div class="hero-rating">
+        <span class="stars">&#9733;&#9733;&#9733;&#9733;</span>
+        <span><strong>4.2</strong> on Google &mdash; 246 reviews</span>
+      </div>
+      <br>
+      <a href="#klar-bookings-section" class="hero-cta">Reserve a Table</a>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-text">
+          <p class="section-label">About Us</p>
+          <h2 class="section-title">Big Portions, Great Value — That's Par Piz</h2>
+          <hr class="ornament">
+          <p>Ravintola Par Piz is Parainen's go-to spot for honest, satisfying pizza and kebab. Located at Keskuskäytävä 1 in the town centre, we have built a loyal following of locals who come back for our generous portions and good prices.</p>
+          <p>From classic pizzas to kebab dishes, wings, falafel, and chicken döner — our menu has something for everyone. Whether you are eating in, ordering delivery on Wolt, or grabbing a take-away, we make sure every plate leaves the kitchen the way it should: full and flavourful.</p>
+
+          <blockquote>
+            <p>"Excellent food, good service even though we got there just before closing time. Good value for money."</p>
+            <cite>TripAdvisor guest &mdash; 4 stars</cite>
+          </blockquote>
+
+          <div class="about-stats">
+            <div class="stat-item">
+              <span class="stat-num">4.2</span>
+              <span class="stat-label">Star rating</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-num">246</span>
+              <span class="stat-label">Reviews</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-num">€10+</span>
+              <span class="stat-label">Starting price</span>
+            </div>
+          </div>
+        </div>
+        <div class="about-visual">
+          <div class="img-placeholder tall">Interior photo coming soon</div>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+            <div class="img-placeholder short">Food photos coming soon</div>
+            <div class="img-placeholder short">Food photos coming soon</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Menu Highlights -->
+  <section id="menu">
+    <div class="container">
+      <div class="menu-intro">
+        <p class="section-label">What We Serve</p>
+        <h2 class="section-title">Menu Highlights</h2>
+        <hr class="ornament">
+        <p>A varied menu of pizzas, kebabs, wings, falafel, and more — all prepared with care and served in the kind of portions that actually fill you up.</p>
+      </div>
+      <div class="menu-grid">
+        <!-- Pizza -->
+        <div class="menu-card">
+          <div class="menu-card-img"><span>Food photos coming soon</span></div>
+          <div class="menu-card-body">
+            <p class="menu-card-cat">Pizza</p>
+            <h3 class="menu-card-name">Pizzas</h3>
+            <p class="menu-card-desc">From the simple Cheesepizza to the popular Hawai and our hearty Fantasia with four toppings — each pizza is made to order with a generous base and proper toppings.</p>
+            <span class="menu-card-price">from €10.00</span>
+          </div>
+        </div>
+        <!-- Kebab -->
+        <div class="menu-card">
+          <div class="menu-card-img"><span>Food photos coming soon</span></div>
+          <div class="menu-card-body">
+            <p class="menu-card-cat">Kebab</p>
+            <h3 class="menu-card-name">Kebab Dishes &amp; Rolls</h3>
+            <p class="menu-card-desc">Our Rullakebab and Kebab ranskalaisilla are local favourites — big, satisfying, and full of flavour. For serious appetites, the Jumbo Rullakebab is a meal and a half.</p>
+            <span class="menu-card-price">from €11.50</span>
+          </div>
+        </div>
+        <!-- Wings -->
+        <div class="menu-card">
+          <div class="menu-card-img"><span>Food photos coming soon</span></div>
+          <div class="menu-card-body">
+            <p class="menu-card-cat">Siivet</p>
+            <h3 class="menu-card-name">Wings</h3>
+            <p class="menu-card-desc">Crispy chicken wings served in portions of 6 or 12 — a perfect starter or side. Great spice, great crunch.</p>
+            <span class="menu-card-price">6 kpl €10.50 &mdash; 12 kpl €16.50</span>
+          </div>
+        </div>
+        <!-- Falafel & Vegetarian -->
+        <div class="menu-card">
+          <div class="menu-card-img"><span>Food photos coming soon</span></div>
+          <div class="menu-card-body">
+            <p class="menu-card-cat">Falafel &amp; Chicken</p>
+            <h3 class="menu-card-name">Falafel &amp; Kana Döner</h3>
+            <p class="menu-card-desc">Vegetarian falafel options and chicken döner served in pitta or as a dish. Satisfying, flavourful, and available to eat in or take away.</p>
+            <span class="menu-card-price">from €12.00</span>
+          </div>
+        </div>
+      </div>
+      <div class="menu-note">
+        <strong>Order online</strong> — Ravintola Par Piz is available on <strong>Wolt</strong> and <strong>Foodora</strong> for home delivery across Parainen. Walk-ins always welcome.
+      </div>
+    </div>
+  </section>
+
+  <!-- Reviews Banner -->
+  <section id="reviews">
+    <div class="reviews-inner">
+      <p class="section-label">What Guests Say</p>
+      <h2>Parainen's Most Reviewed Pizza &amp; Kebab</h2>
+      <div class="rating-display">
+        <span class="rating-num">4.2</span>
+        <div class="rating-detail">
+          <div class="stars-row">
+            <svg class="star-full" viewBox="0 0 20 20" fill="#D4A574" xmlns="http://www.w3.org/2000/svg"><path d="M10 1l2.4 7H19l-5.7 4.1 2.2 6.9L10 15l-5.5 4 2.2-6.9L1 9h6.6z"/></svg>
+            <svg class="star-full" viewBox="0 0 20 20" fill="#D4A574" xmlns="http://www.w3.org/2000/svg"><path d="M10 1l2.4 7H19l-5.7 4.1 2.2 6.9L10 15l-5.5 4 2.2-6.9L1 9h6.6z"/></svg>
+            <svg class="star-full" viewBox="0 0 20 20" fill="#D4A574" xmlns="http://www.w3.org/2000/svg"><path d="M10 1l2.4 7H19l-5.7 4.1 2.2 6.9L10 15l-5.5 4 2.2-6.9L1 9h6.6z"/></svg>
+            <svg class="star-full" viewBox="0 0 20 20" fill="#D4A574" xmlns="http://www.w3.org/2000/svg"><path d="M10 1l2.4 7H19l-5.7 4.1 2.2 6.9L10 15l-5.5 4 2.2-6.9L1 9h6.6z"/></svg>
+            <svg class="star-half" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <defs><clipPath id="half"><rect x="0" y="0" width="10" height="20"/></clipPath></defs>
+              <path d="M10 1l2.4 7H19l-5.7 4.1 2.2 6.9L10 15l-5.5 4 2.2-6.9L1 9h6.6z" fill="rgba(255,255,255,0.2)"/>
+              <path d="M10 1l2.4 7H19l-5.7 4.1 2.2 6.9L10 15l-5.5 4 2.2-6.9L1 9h6.6z" fill="#D4A574" clip-path="url(#half)"/>
+            </svg>
+          </div>
+          <p class="review-count">246 reviews on Google</p>
+        </div>
+      </div>
+      <div class="reviews-quotes">
+        <div class="review-card">
+          <p>"Excellent food, good service even though we got there just before closing time. Nice extra spice for my kebab. Good value for money."</p>
+          <p class="review-meta">TripAdvisor &mdash; 4 stars &mdash; Veikko K</p>
+        </div>
+        <div class="review-card">
+          <p>"Big portions to good price with great taste."</p>
+          <p class="review-meta">Google review &mdash; 5 stars</p>
+        </div>
+        <div class="review-card">
+          <p>"Massive pizzas and welcoming owner."</p>
+          <p class="review-meta">Google review &mdash; 5 stars</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Klar Bookings Widget -->
+  <section id="klar-bookings-section">
+    <div class="container">
+      <div class="booking-wrapper">
+        <div class="booking-intro">
+          <p class="section-label">Table Reservations</p>
+          <h2 class="section-title">Reserve Your Table</h2>
+          <hr class="ornament" style="border-color:rgba(255,255,255,0.35); margin-bottom:24px;">
+          <p>Book your table at Ravintola Par Piz in seconds. Choose your date, time, and party size — we will have everything ready for you when you arrive.</p>
+          <p>For large groups or same-day bookings, feel free to call us directly on <strong style="color:#fff;">041 4875927</strong>.</p>
+          <div class="booking-review">
+            <p>"Excellent food, good service even though we got there just before closing time."</p>
+            <cite>TripAdvisor &mdash; Veikko K</cite>
+          </div>
+        </div>
+
+        <!-- Klar Bookings widget -->
+        <div id="klar-bookings" class="klar-bookings">
+          <h3>Book a Table</h3>
+          <p class="widget-sub">Ravintola Par Piz &mdash; Parainen</p>
+          <form onsubmit="return false;" aria-label="Table reservation form">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="booking-date">Date</label>
+                <input type="date" id="booking-date" name="date" required>
+              </div>
+              <div class="form-group">
+                <label for="booking-time">Time</label>
+                <input type="time" id="booking-time" name="time" min="10:00" max="20:30" required>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="booking-guests">Party Size</label>
+                <select id="booking-guests" name="party_size" required>
+                  <option value="" disabled selected>Guests</option>
+                  <option value="1">1 guest</option>
+                  <option value="2">2 guests</option>
+                  <option value="3">3 guests</option>
+                  <option value="4">4 guests</option>
+                  <option value="5">5 guests</option>
+                  <option value="6">6 guests</option>
+                  <option value="7">7 guests</option>
+                  <option value="8">8 guests</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="booking-phone">Phone (optional)</label>
+                <input type="tel" id="booking-phone" name="phone" placeholder="+358...">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="booking-name">Your Name</label>
+                <input type="text" id="booking-name" name="name" required>
+              </div>
+              <div class="form-group">
+                <label for="booking-email">Email</label>
+                <input type="email" id="booking-email" name="email" required>
+              </div>
+            </div>
+            <button type="submit" class="btn-reserve">Reserve Now</button>
+          </form>
+          <p class="widget-policy">Free cancellation up to 24 hours before your reservation.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Hours -->
+  <section id="hours">
+    <div class="container">
+      <div class="hours-grid">
+        <div>
+          <p class="section-label">When We're Open</p>
+          <h2 class="section-title">Opening Hours</h2>
+          <hr class="ornament">
+          <table class="hours-table">
+            <tr>
+              <td>Monday</td>
+              <td>10:00 – 21:00</td>
+            </tr>
+            <tr>
+              <td>Tuesday</td>
+              <td>10:00 – 21:00</td>
+            </tr>
+            <tr>
+              <td>Wednesday</td>
+              <td>10:00 – 21:00</td>
+            </tr>
+            <tr>
+              <td>Thursday</td>
+              <td>10:00 – 21:00</td>
+            </tr>
+            <tr>
+              <td>Friday</td>
+              <td>10:00 – 21:00</td>
+            </tr>
+            <tr>
+              <td>Saturday</td>
+              <td>11:00 – 21:00</td>
+            </tr>
+            <tr>
+              <td>Sunday</td>
+              <td>11:00 – 21:00</td>
+            </tr>
+          </table>
+        </div>
+        <div class="hours-interior">
+          <div class="hours-interior-img"><span>Interior photo coming soon</span></div>
+          <div class="hours-callout">
+            <p><strong>Walk-ins welcome</strong> all day, every day. <strong>Reservations recommended</strong> for groups of four or more, especially on weekend evenings. Also available on <strong>Wolt</strong> and <strong>Foodora</strong> for home delivery.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Location & Contact -->
+  <section id="location">
+    <div class="container">
+      <p class="section-label">Find Us</p>
+      <h2 class="section-title">Location &amp; Contact</h2>
+      <hr class="ornament">
+      <div class="location-grid">
+        <div>
+          <ul class="contact-list">
+            <li>
+              <div class="contact-icon">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"/></svg>
+              </div>
+              <div>
+                <strong>Address</strong><br>
+                Keskuskäytävä 1, 21600 Parainen<br>
+                <small style="color:#8a7560;">Town centre — easy to find</small>
+              </div>
+            </li>
+            <li>
+              <div class="contact-icon">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.01L6.6 10.8z"/></svg>
+              </div>
+              <div>
+                <strong>Phone</strong><br>
+                <a href="tel:+358414875927">041 4875927</a>
+              </div>
+            </li>
+            <li>
+              <div class="contact-icon">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+              </div>
+              <div>
+                <strong>Email</strong><br>
+                <a href="mailto:ravintola-parpiz@hotmail.com">ravintola-parpiz@hotmail.com</a>
+              </div>
+            </li>
+            <li>
+              <div class="contact-icon">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
+              </div>
+              <div>
+                <strong>Order Online</strong><br>
+                <div class="social-row" style="margin-top:8px;">
+                  <a href="https://wolt.com/en/fin/parainen/restaurant/ravintola-par-piz" class="social-btn wolt" target="_blank" rel="noopener">
+                    Wolt
+                  </a>
+                  <a href="https://www.facebook.com/p/Ravintola-ParPiz-100054479109635/" class="social-btn fb" target="_blank" rel="noopener">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                    Facebook
+                  </a>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="map-embed">
+          <iframe
+            src="https://maps.google.com/maps?q=Keskuskäytävä+1,+21600+Parainen&output=embed"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Ravintola Par Piz map">
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">Ravintola Par Piz</div>
+      <div class="footer-info">
+        Keskuskäytävä 1, 21600 Parainen<br>
+        <a href="tel:+358414875927" style="color:rgba(255,255,255,0.6); text-decoration:none;">041 4875927</a>
+      </div>
+      <div class="footer-klar">
+        <a href="https://klarsystems.com" target="_blank" rel="noopener">Powered by Klar</a><br>
+        <span style="font-size:0.7rem; color:rgba(255,255,255,0.35);">&copy; 2026 Ravintola Par Piz</span>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

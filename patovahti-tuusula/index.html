@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Patovahti — Kellokoski, Tuusula</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet" />
+  <!-- Palette fallback: visual_identity.palette was empty/not_found; using Seg 1 defaults:
+       bg #1F2933, text #EFE7DA, primary #B56B4A, accent #D4A574 -->
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:      #1F2933;
+      --text:    #EFE7DA;
+      --primary: #B56B4A;
+      --accent:  #D4A574;
+      --card:    #28333F;
+      --muted:   #8A9BA8;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Playfair Display', Georgia, serif;
+      line-height: 1.2;
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ── Demo Banner ─────────────────────────────────────────── */
+    .demo-banner {
+      background: var(--primary);
+      color: #fff;
+      text-align: center;
+      padding: 10px 16px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    /* ── Nav ─────────────────────────────────────────────────── */
+    nav {
+      background: rgba(31, 41, 51, 0.96);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid rgba(212, 165, 116, 0.2);
+    }
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.25rem;
+      color: var(--accent);
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--text);
+      font-size: 0.9rem;
+      opacity: 0.85;
+      transition: opacity 0.2s;
+    }
+    .nav-links a:hover { opacity: 1; text-decoration: none; color: var(--accent); }
+
+    /* ── Hero ────────────────────────────────────────────────── */
+    .hero {
+      position: relative;
+      min-height: 520px;
+      display: flex;
+      align-items: flex-end;
+      overflow: hidden;
+    }
+    .hero-photo-placeholder {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #2a3a47 0%, #1a2730 60%, #141d24 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .hero-photo-placeholder span {
+      border: 1px dashed var(--muted);
+      padding: 10px 20px;
+      border-radius: 4px;
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(20,28,35,0.92) 0%, rgba(20,28,35,0.3) 60%, transparent 100%);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 1100px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 48px 24px;
+    }
+    .hero-eyebrow {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+    .hero-title {
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      color: var(--text);
+      margin-bottom: 16px;
+    }
+    .hero-sub {
+      font-size: 1.1rem;
+      color: rgba(239,231,218,0.82);
+      max-width: 560px;
+      margin-bottom: 28px;
+    }
+    .hero-cta {
+      display: inline-block;
+      background: var(--primary);
+      color: #fff;
+      padding: 13px 32px;
+      border-radius: 4px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: background 0.2s;
+    }
+    .hero-cta:hover { background: #c87a57; text-decoration: none; }
+
+    .rating-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(40,51,63,0.85);
+      border: 1px solid rgba(212,165,116,0.3);
+      padding: 7px 16px;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      margin-left: 16px;
+      vertical-align: middle;
+    }
+    .rating-badge .rating-num {
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 1rem;
+    }
+
+    /* ── Section base ────────────────────────────────────────── */
+    section { padding: 72px 24px; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+    .section-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+    .section-title {
+      font-size: clamp(1.7rem, 3vw, 2.4rem);
+      margin-bottom: 20px;
+    }
+    .section-divider {
+      width: 48px;
+      height: 2px;
+      background: var(--primary);
+      margin-bottom: 32px;
+    }
+
+    /* ── About ───────────────────────────────────────────────── */
+    #about { background: var(--bg); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+    .about-text p { color: rgba(239,231,218,0.85); margin-bottom: 16px; }
+    .about-photo-placeholder {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: var(--card);
+      border: 1px dashed rgba(138,155,168,0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-size: 0.8rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      border-radius: 4px;
+    }
+    .highlights {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 28px;
+    }
+    .highlight-item {
+      background: var(--card);
+      padding: 16px 18px;
+      border-radius: 4px;
+      border-left: 3px solid var(--primary);
+    }
+    .highlight-item strong { display: block; font-size: 0.95rem; color: var(--accent); margin-bottom: 4px; }
+    .highlight-item span { font-size: 0.85rem; color: rgba(239,231,218,0.75); }
+
+    /* ── Menu ────────────────────────────────────────────────── */
+    #menu { background: var(--card); }
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+    .menu-card {
+      background: var(--bg);
+      padding: 24px;
+      border-radius: 4px;
+      border-top: 3px solid var(--primary);
+    }
+    .menu-card h3 { font-size: 1.15rem; margin-bottom: 10px; color: var(--accent); }
+    .menu-card p { font-size: 0.88rem; color: rgba(239,231,218,0.78); line-height: 1.5; }
+    .menu-card .price { margin-top: 12px; font-size: 0.95rem; font-weight: 700; color: var(--accent); }
+    .menu-photo-placeholder {
+      width: 100%;
+      aspect-ratio: 16/7;
+      background: rgba(31,41,51,0.6);
+      border: 1px dashed rgba(138,155,168,0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-size: 0.8rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      border-radius: 4px;
+      margin-top: 8px;
+    }
+
+    /* ── Events ──────────────────────────────────────────────── */
+    #events { background: var(--bg); }
+    .events-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+    .event-card {
+      background: var(--card);
+      padding: 28px;
+      border-radius: 4px;
+      border-bottom: 3px solid var(--accent);
+    }
+    .event-card h3 { font-size: 1.2rem; margin-bottom: 10px; }
+    .event-card p { font-size: 0.9rem; color: rgba(239,231,218,0.78); }
+
+    /* ── Reviews ─────────────────────────────────────────────── */
+    #reviews { background: var(--card); }
+    .reviews-header {
+      display: flex;
+      align-items: baseline;
+      gap: 24px;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+    }
+    .rating-summary {
+      font-size: 2rem;
+      font-family: 'Playfair Display', Georgia, serif;
+      color: var(--accent);
+    }
+    .rating-summary span { font-size: 1rem; color: var(--muted); }
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .review-card {
+      background: var(--bg);
+      padding: 24px;
+      border-radius: 4px;
+      border-left: 3px solid var(--accent);
+    }
+    .review-card blockquote {
+      font-size: 0.95rem;
+      color: rgba(239,231,218,0.88);
+      font-style: italic;
+      margin-bottom: 14px;
+    }
+    .review-card .reviewer { font-size: 0.8rem; color: var(--muted); }
+
+    /* ── Booking ─────────────────────────────────────────────── */
+    #booking { background: var(--bg); }
+    .booking-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 64px;
+      align-items: start;
+    }
+    .booking-info h3 { font-size: 1.3rem; margin-bottom: 16px; }
+    .booking-info p { font-size: 0.92rem; color: rgba(239,231,218,0.8); margin-bottom: 12px; }
+    .hours-table { width: 100%; margin-top: 20px; border-collapse: collapse; font-size: 0.9rem; }
+    .hours-table td { padding: 7px 4px; border-bottom: 1px solid rgba(138,155,168,0.2); }
+    .hours-table td:last-child { text-align: right; color: var(--accent); }
+
+    .klar-bookings {
+      background: var(--card);
+      padding: 36px;
+      border-radius: 6px;
+      border: 1px solid rgba(181,107,74,0.25);
+    }
+    .klar-bookings h3 {
+      font-size: 1.4rem;
+      margin-bottom: 6px;
+    }
+    .klar-bookings .booking-sub {
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin-bottom: 28px;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .form-group label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+    }
+    .form-group input,
+    .form-group select {
+      background: var(--bg);
+      border: 1px solid rgba(138,155,168,0.3);
+      color: var(--text);
+      padding: 11px 14px;
+      border-radius: 4px;
+      font-size: 0.95rem;
+      font-family: inherit;
+      width: 100%;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .form-group input:focus,
+    .form-group select:focus {
+      border-color: var(--primary);
+    }
+    .form-group select option { background: #1F2933; }
+    .form-group-full { grid-column: 1 / -1; }
+    .btn-reserve {
+      width: 100%;
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      padding: 14px;
+      border-radius: 4px;
+      font-size: 1rem;
+      font-weight: 700;
+      font-family: inherit;
+      cursor: pointer;
+      margin-top: 8px;
+      transition: background 0.2s;
+      letter-spacing: 0.03em;
+    }
+    .btn-reserve:hover { background: #c87a57; }
+    .booking-note {
+      font-size: 0.8rem;
+      color: var(--muted);
+      text-align: center;
+      margin-top: 12px;
+    }
+
+    /* ── Location ────────────────────────────────────────────── */
+    #location { background: var(--card); }
+    .location-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+    .location-detail { margin-bottom: 18px; }
+    .location-detail strong { display: block; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--primary); margin-bottom: 4px; }
+    .location-detail span { font-size: 0.95rem; color: rgba(239,231,218,0.85); }
+    .map-placeholder {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: var(--bg);
+      border: 1px dashed rgba(138,155,168,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-size: 0.82rem;
+      border-radius: 4px;
+    }
+
+    /* ── Footer ──────────────────────────────────────────────── */
+    footer {
+      background: #141d24;
+      padding: 40px 24px;
+      text-align: center;
+      border-top: 1px solid rgba(181,107,74,0.15);
+    }
+    .footer-inner { max-width: 1100px; margin: 0 auto; }
+    .footer-name {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.3rem;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+    .footer-meta {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+    .powered-by {
+      font-size: 0.78rem;
+      color: rgba(138,155,168,0.6);
+      margin-top: 20px;
+    }
+    .powered-by a { color: rgba(212,165,116,0.6); }
+
+    /* ── Responsive ──────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .about-grid,
+      .booking-grid,
+      .location-grid { grid-template-columns: 1fr; gap: 32px; }
+      .highlights { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .rating-badge { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 1. Demo banner -->
+  <div class="demo-banner">
+    This is a demo website — not the official Patovahti site. Demo preview only.
+  </div>
+
+  <!-- Nav -->
+  <nav>
+    <div class="nav-inner">
+      <div class="nav-logo">Patovahti</div>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#events">Events</a></li>
+        <li><a href="#reviews">Reviews</a></li>
+        <li><a href="#booking">Reserve a Table</a></li>
+        <li><a href="#location">Find Us</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-photo-placeholder">
+      <span>Your photo here</span>
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Kellokoski, Tuusula — by the dam</p>
+      <h1 class="hero-title">The Legendary<br>Waterfall Pub</h1>
+      <p class="hero-sub">
+        Grilled food, cold drinks, live music and karaoke — right beside the historic Kellokoski ironworks dam.
+      </p>
+      <a href="#booking" class="hero-cta">Reserve a Table</a>
+      <span class="rating-badge">
+        <span class="rating-num">4.3 / 5</span>
+        <span style="color:var(--muted); font-size:0.83rem;">348 Google reviews</span>
+      </span>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about">
+    <div class="section-inner">
+      <div class="about-grid">
+        <div class="about-text">
+          <p class="section-label">Our story</p>
+          <h2 class="section-title">A Pub Worth the Drive</h2>
+          <div class="section-divider"></div>
+          <p>
+            Patovahti sits at the edge of the Kellokoski dam, in one of Uusimaa's most atmospheric settings — a 19th-century ironworks district where the river still runs strong.
+          </p>
+          <p>
+            We open evenings only, from 16:00. Come for a burger that reviewers call the best in Uusimaa, stay for the company, the live music, or a late-night karaoke session on the weekend.
+          </p>
+          <p>
+            No pretence. No lunch rush. Just good food, honest drinks, and a proper local atmosphere.
+          </p>
+
+          <div class="highlights">
+            <div class="highlight-item">
+              <strong>Scenic dam location</strong>
+              <span>Right beside the historic Kellokoski waterfall</span>
+            </div>
+            <div class="highlight-item">
+              <strong>Evenings only</strong>
+              <span>Open from 16:00 — Mon through Sat</span>
+            </div>
+            <div class="highlight-item">
+              <strong>Live music</strong>
+              <span>Live bands and entertainment on weekends</span>
+            </div>
+            <div class="highlight-item">
+              <strong>Weekend karaoke</strong>
+              <span>Grab the mic on Friday and Saturday nights</span>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="about-photo-placeholder">Interior photo coming soon</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Menu -->
+  <section id="menu">
+    <div class="section-inner">
+      <p class="section-label">What we serve</p>
+      <h2 class="section-title">Food &amp; Drinks</h2>
+      <div class="section-divider"></div>
+
+      <div class="menu-grid">
+        <div class="menu-card">
+          <h3>Burgers</h3>
+          <p>Handmade patties with all the fixings. One reviewer called it the best burger in all of Uusimaa — we'll let you decide.</p>
+          <p class="price">from 7 €</p>
+        </div>
+        <div class="menu-card">
+          <h3>Grilled Food</h3>
+          <p>Classic grill plates, finger food, and hearty bites to go with your drink. Casual, filling, satisfying.</p>
+        </div>
+        <div class="menu-card">
+          <h3>Hot &amp; Cold Drinks</h3>
+          <p>A full bar with cold beers on tap and bottled drinks. Hot drinks available too for the quieter evenings.</p>
+        </div>
+        <div class="menu-card">
+          <h3>Finger Food</h3>
+          <p>Shareable snacks perfect for groups catching a live set or settling in for a longer evening.</p>
+        </div>
+      </div>
+
+      <div class="menu-photo-placeholder">Food photos coming soon</div>
+    </div>
+  </section>
+
+  <!-- Events -->
+  <section id="events">
+    <div class="section-inner">
+      <p class="section-label">Weekends at Patovahti</p>
+      <h2 class="section-title">Live Music &amp; Karaoke</h2>
+      <div class="section-divider"></div>
+
+      <div class="events-grid">
+        <div class="event-card">
+          <h3>Live Music</h3>
+          <p>
+            Local and visiting acts perform at Patovahti on weekend evenings. Check our Facebook page for the current lineup and upcoming dates.
+          </p>
+        </div>
+        <div class="event-card">
+          <h3>Karaoke Nights</h3>
+          <p>
+            Weekend karaoke sessions in a relaxed, friendly setting. All levels welcome — the crowd is supportive, not judgmental.
+          </p>
+        </div>
+        <div class="event-card">
+          <h3>Kellokoski Ironworks Area</h3>
+          <p>
+            We're part of the historic Kellokoski Ruukki heritage district. Combine a walk along the river trail with an evening at Patovahti.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reviews -->
+  <section id="reviews">
+    <div class="section-inner">
+      <p class="section-label">What guests say</p>
+      <h2 class="section-title">Guest Reviews</h2>
+      <div class="section-divider"></div>
+
+      <div class="reviews-header">
+        <div class="rating-summary">4.3 / 5 <span>on Google &mdash; 348 reviews</span></div>
+      </div>
+
+      <div class="reviews-grid">
+        <div class="review-card">
+          <blockquote>"Good beer, great hamburger and friendly service, what more could you want? Right beside the waterfall that used to power the old iron works."</blockquote>
+          <p class="reviewer">— hardfatharry, TripAdvisor</p>
+        </div>
+        <div class="review-card">
+          <blockquote>"The best burger I've had anywhere in the Uusimaa region."</blockquote>
+          <p class="reviewer">— Ibroc, eat.fi (translated from Finnish)</p>
+        </div>
+        <div class="review-card">
+          <blockquote>"A place you can sit and relax properly — the owner keeps the troublemakers out."</blockquote>
+          <p class="reviewer">— Anonymous, eat.fi (translated from Finnish)</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Booking -->
+  <section id="booking">
+    <div class="section-inner">
+      <div class="booking-grid">
+        <div class="booking-info">
+          <p class="section-label">Plan your visit</p>
+          <h2 class="section-title">Reserve a Table</h2>
+          <div class="section-divider"></div>
+          <p>
+            We open evenings only. Walk-ins are welcome, but a reservation means your spot is secured — especially on live music nights.
+          </p>
+
+          <h3>Opening Hours</h3>
+          <table class="hours-table">
+            <tbody>
+              <tr><td>Monday</td><td>16:00 &ndash; midnight</td></tr>
+              <tr><td>Tuesday</td><td>16:00 &ndash; midnight</td></tr>
+              <tr><td>Wednesday</td><td>16:00 &ndash; midnight</td></tr>
+              <tr><td>Thursday</td><td>16:00 &ndash; midnight</td></tr>
+              <tr><td>Friday</td><td>16:00 &ndash; late</td></tr>
+              <tr><td>Saturday</td><td>16:00 &ndash; late</td></tr>
+              <tr><td>Sunday</td><td>Closed</td></tr>
+            </tbody>
+          </table>
+
+          <p style="margin-top:20px; font-size:0.87rem; color:var(--muted);">
+            Phone: <a href="tel:+358503809900">050 380 9900</a>
+          </p>
+        </div>
+
+        <!-- 2. Booking widget — klar-bookings required -->
+        <div class="klar-bookings">
+          <h3>Book a Table</h3>
+          <p class="booking-sub">Select your preferred evening and we'll hold your spot.</p>
+
+          <form>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="bk-name">Full Name</label>
+                <input type="text" id="bk-name" name="name" placeholder="Your name" autocomplete="name" />
+              </div>
+              <div class="form-group">
+                <label for="bk-phone">Phone (optional)</label>
+                <input type="tel" id="bk-phone" name="phone" placeholder="050 123 4567" autocomplete="tel" />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="bk-date">Date</label>
+                <input type="date" id="bk-date" name="date" />
+              </div>
+              <div class="form-group">
+                <label for="bk-time">Time</label>
+                <select id="bk-time" name="time">
+                  <option value="">Select time</option>
+                  <option value="16:00">16:00</option>
+                  <option value="17:00">17:00</option>
+                  <option value="18:00">18:00</option>
+                  <option value="19:00">19:00</option>
+                  <option value="20:00">20:00</option>
+                  <option value="21:00">21:00</option>
+                  <option value="22:00">22:00</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="bk-party">Party Size</label>
+                <select id="bk-party" name="party_size">
+                  <option value="">Guests</option>
+                  <option value="1">1 guest</option>
+                  <option value="2">2 guests</option>
+                  <option value="3">3 guests</option>
+                  <option value="4">4 guests</option>
+                  <option value="5">5 guests</option>
+                  <option value="6">6 guests</option>
+                  <option value="7">7 guests</option>
+                  <option value="8">8 guests</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="bk-email">Email</label>
+                <input type="email" id="bk-email" name="email" placeholder="your@email.com" autocomplete="email" />
+              </div>
+            </div>
+
+            <button type="submit" class="btn-reserve">Reserve Now</button>
+          </form>
+          <p class="booking-note">You will receive a confirmation by email. No payment required to reserve.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Location -->
+  <section id="location">
+    <div class="section-inner">
+      <p class="section-label">Find us</p>
+      <h2 class="section-title">Getting Here</h2>
+      <div class="section-divider"></div>
+
+      <div class="location-grid">
+        <div>
+          <div class="location-detail">
+            <strong>Address</strong>
+            <span>Ruukinpolku 4, 04500 Kellokoski, Tuusula</span>
+          </div>
+          <div class="location-detail">
+            <strong>Area</strong>
+            <span>Kellokoski Ironworks Heritage District — look for the dam and the waterfall</span>
+          </div>
+          <div class="location-detail">
+            <strong>Phone</strong>
+            <span><a href="tel:+358503809900">050 380 9900</a></span>
+          </div>
+          <div class="location-detail">
+            <strong>Opening Hours</strong>
+            <span>Mon–Sat from 16:00. Evenings only.</span>
+          </div>
+          <div class="location-detail">
+            <strong>By car</strong>
+            <span>Kellokoski is 45 km north of Helsinki via Road 45. Parking available in the Ruukki area.</span>
+          </div>
+          <div class="location-detail">
+            <strong>On foot</strong>
+            <span>We are on the far side of the dam from the car park. Follow the river path south.</span>
+          </div>
+        </div>
+
+        <div class="map-placeholder">
+          Map coming soon — Ruukinpolku 4, Kellokoski
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-name">Patovahti</div>
+      <p class="footer-meta">Ruukinpolku 4, 04500 Kellokoski, Tuusula &mdash; Tel: 050 380 9900</p>
+      <p class="footer-meta">Open Mon&ndash;Sat from 16:00</p>
+      <p class="powered-by">Powered by <a href="https://klarsystems.com">Klar</a></p>
+    </div>
+  <p style="text-align:center;font-size:12px;opacity:0.5;">Powered by Klar</p>
+</footer>
+
+</body>
+</html>

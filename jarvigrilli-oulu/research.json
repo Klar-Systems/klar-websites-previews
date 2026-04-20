@@ -1,0 +1,110 @@
+{
+  "basic": {
+    "name": "Järvigrilli",
+    "restaurant_name": "Järvigrilli",
+    "slug": "jarvigrilli-oulu",
+    "address": "Järvitie 16, 90550 Oulu",
+    "phone": "050 4479589",
+    "city": "Oulu",
+    "cuisine_type": {
+      "value": "Finnish grilli — burgers, grilled sausages, makkaraperunat, fast food",
+      "source_url": "https://karahtaneet.com/hampurilainen-kahdeksalle-grillikierros-oulussa/",
+      "source_quote": "kokolihahampurilainen",
+      "confidence": "high",
+      "source_type": "website"
+    },
+    "opening_hours": {
+      "value": "Mon-Thu 10:00-01:00, Fri-Sat 10:00-04:00, Sun 11:00-01:00",
+      "source_url": "https://fi.polomap.com/oulu/6975",
+      "source_quote": "050 4479589",
+      "confidence": "high",
+      "source_type": "website"
+    },
+    "segment": {
+      "value": 2,
+      "source_url": "https://karahtaneet.com/hampurilainen-kahdeksalle-grillikierros-oulussa/",
+      "source_quote": "kokolihahampurilainen",
+      "confidence": "high",
+      "source_type": "website"
+    },
+    "is_chain": {
+      "value": false,
+      "source_url": "https://karahtaneet.com/hampurilainen-kahdeksalle-grillikierros-oulussa/",
+      "source_quote": "kokolihahampurilainen",
+      "confidence": "high",
+      "source_type": "website"
+    },
+    "is_closed": {
+      "value": false,
+      "source_url": "https://fi.polomap.com/oulu/6975",
+      "source_quote": "050 4479589",
+      "confidence": "high",
+      "source_type": "website"
+    },
+    "has_existing_website": {
+      "value": false,
+      "source_url": "https://karahtaneet.com/hampurilainen-kahdeksalle-grillikierros-oulussa/",
+      "source_quote": "kokolihahampurilainen",
+      "confidence": "high",
+      "source_type": "website"
+    },
+    "google_rating": 4.1,
+    "review_count": 1146,
+    "restaurant_name_gen": "Järvigrillin"
+  },
+  "menu": {
+    "cuisine_style": {
+      "value": "Finnish grilli — burgers, grilled sausages, makkaraperunat, fast food",
+      "source_url": "https://karahtaneet.com/hampurilainen-kahdeksalle-grillikierros-oulussa/",
+      "source_quote": "kokolihahampurilainen",
+      "confidence": "high",
+      "source_type": "website"
+    },
+    "signature_dishes": [
+      "Puokkari Special",
+      "Kokolihahampurilainen",
+      "Makkaraperunat"
+    ],
+    "categories": [
+      "Grill food",
+      "Burgers",
+      "Sausages"
+    ],
+    "price_range": {
+      "value": "EUR",
+      "source_url": "",
+      "confidence": "inferred",
+      "source_type": "inferred"
+    },
+    "notes": []
+  },
+  "reviews": [
+    {
+      "text": "Good finnish grill, traditional stuff with nice price vs. quality. When hungry, take Puokkari Special, its huge.",
+      "rating": 5,
+      "source_url": "https://www.top-rated.online/cities/Oulu/place/p/2260084/J%C3%A4rvigrilli",
+      "source_quote": "take Puokkari Special, its huge",
+      "confidence": "high"
+    },
+    {
+      "text": "Traditional finnish grilli with a big menu for choosing. Taste hamburgers and sausages. I liked a lot. They are fast preparing the food!!",
+      "rating": 4,
+      "source_url": "https://www.top-rated.online/cities/Oulu/place/p/2260084/J%C3%A4rvigrilli",
+      "source_quote": "Traditional finnish grilli with a big menu for choosing",
+      "confidence": "high"
+    }
+  ],
+  "links": {
+    "preview_link": "https://preview.klarsystems.com/jarvigrilli-oulu/",
+    "calendly_link": "https://calendly.com/lomberg-klarsystems"
+  },
+  "personality": {
+    "design_brief": "Nostalgic Finnish roadside kiosk established 1973, lakeside location, bold retro grilli signage, warm yellows and reds, greasy-good honest fast food energy. Legendary local heritage and late-night crowd appeal.",
+    "research_depth": "tier_2",
+    "vibe_summary": "Legendary lakeside grilli established 1973, famous for the Puokkari Special.",
+    "review_themes": [
+      "legendary Puokkari Special",
+      "classic Finnish grilli"
+    ]
+  }
+}

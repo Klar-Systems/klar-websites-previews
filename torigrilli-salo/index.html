@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Torigrilli — Salo grill kiosk, call to order</title>
+<meta name="description" content="Torigrilli on Horninkatu, Salo — grill food, burgers, makkaraperunat. Call to order.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* palette: segment 2 default (research palette empty) */
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --bg:#141414;
+    --bg-soft:#1c1c1c;
+    --text:#F5F1EA;
+    --muted:#bdb6aa;
+    --primary:#E04B1E;
+    --accent:#F2C75C;
+    --rule:#2a2a2a;
+  }
+  html{scroll-behavior:smooth;background:var(--bg)}
+  body{background:var(--bg);color:var(--text);font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  h1,h2,h3{font-family:'Archivo Black','Helvetica Neue',Arial,sans-serif;letter-spacing:-.01em;text-transform:uppercase}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 22px}
+
+  /* Demo banner */
+  .demo-banner{background:var(--accent);color:#141414;text-align:center;padding:10px 16px;font-size:13px;font-weight:600}
+  .demo-banner a{text-decoration:underline}
+
+  /* Nav */
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:20px 0;border-bottom:1px solid var(--rule)}
+  .nav .mark{font-family:'Archivo Black',sans-serif;font-size:22px;letter-spacing:.04em}
+  .nav .cta-mini{background:var(--primary);color:#fff;padding:10px 16px;border-radius:4px;font-weight:700;font-size:13px;letter-spacing:.04em;text-transform:uppercase}
+  .nav .cta-mini:hover{background:#ff5a28}
+
+  /* Hero */
+  .hero{padding:72px 0 40px}
+  .eyebrow{color:var(--accent);font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;margin-bottom:16px}
+  .hero h1{font-size:clamp(44px,8vw,88px);line-height:.95;margin-bottom:22px}
+  .hero h1 .slash{color:var(--primary)}
+  .hero-sub{font-size:18px;color:var(--muted);max-width:640px;margin-bottom:30px}
+  .hero-rating{display:inline-flex;align-items:center;gap:10px;margin-bottom:30px;padding:8px 14px;border:1px solid var(--rule);border-radius:4px;background:var(--bg-soft)}
+  .hero-rating .star{color:var(--accent);font-weight:700}
+  .hero-rating .num{font-weight:700}
+  .hero-rating .count{color:var(--muted);font-size:13px}
+
+  /* Big CTA */
+  .cta-bar{display:flex;flex-wrap:wrap;gap:14px;margin-top:20px}
+  .cta-primary{display:inline-flex;align-items:center;gap:12px;background:var(--primary);color:#fff;padding:18px 28px;border-radius:6px;font-weight:700;font-size:17px;letter-spacing:.03em;text-transform:uppercase;transition:transform .15s}
+  .cta-primary:hover{transform:translateY(-1px);background:#ff5a28}
+  .cta-primary .dot{width:10px;height:10px;background:var(--accent);border-radius:50%;display:inline-block}
+  .cta-secondary{display:inline-flex;align-items:center;gap:10px;border:1px solid var(--rule);color:var(--text);padding:18px 24px;border-radius:6px;font-weight:600;font-size:15px;background:var(--bg-soft)}
+  .cta-secondary:hover{border-color:var(--accent);color:var(--accent)}
+
+  /* Section heading */
+  .section{padding:64px 0;border-top:1px solid var(--rule)}
+  .section h2{font-size:clamp(30px,4.5vw,48px);line-height:1;margin-bottom:22px}
+  .section .lead{font-size:17px;color:var(--muted);max-width:640px;margin-bottom:38px}
+
+  /* Menu grid */
+  .menu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
+  .dish{background:var(--bg-soft);border:1px solid var(--rule);border-radius:8px;overflow:hidden;display:flex;flex-direction:column}
+  .dish-art{aspect-ratio:4/3;background:linear-gradient(135deg,var(--primary),var(--accent));opacity:.55;display:flex;align-items:flex-end;justify-content:flex-start;padding:14px;color:#141414;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+  .dish-body{padding:18px 18px 22px}
+  .dish h3{font-family:'Inter',sans-serif;font-weight:700;font-size:18px;margin-bottom:8px;text-transform:none;letter-spacing:0}
+  .dish p{color:var(--muted);font-size:14px;margin-bottom:10px}
+  .dish .price{font-family:'Archivo Black',sans-serif;color:var(--accent);font-size:18px;letter-spacing:.02em}
+  .dish .price.tbc{color:var(--muted);font-family:'Inter',sans-serif;font-weight:600;font-size:13px;letter-spacing:0}
+
+  /* Split: story + hours */
+  .split{display:grid;grid-template-columns:1.1fr .9fr;gap:36px;align-items:start}
+  @media (max-width:780px){.split{grid-template-columns:1fr}}
+  .story p{font-size:16px;color:var(--text);margin-bottom:14px}
+  .story .tag-row{margin-top:18px;display:flex;flex-wrap:wrap;gap:8px}
+  .tag{font-size:12px;letter-spacing:.08em;text-transform:uppercase;padding:6px 10px;border:1px solid var(--rule);border-radius:999px;color:var(--muted)}
+
+  .hours-card{background:var(--bg-soft);border:1px solid var(--rule);border-radius:10px;padding:22px}
+  .hours-card h3{font-size:15px;margin-bottom:14px;color:var(--accent);letter-spacing:.08em}
+  .hours-card table{width:100%;border-collapse:collapse}
+  .hours-card td{padding:8px 0;font-size:14px;border-bottom:1px solid var(--rule)}
+  .hours-card td:first-child{color:var(--muted);width:46%}
+  .hours-card td:last-child{text-align:right;font-variant-numeric:tabular-nums}
+  .hours-card tr:last-child td{border-bottom:none}
+  .hours-card .late{color:var(--accent);font-weight:700}
+
+  /* Call strip */
+  .call-strip{background:var(--primary);color:#fff;padding:46px 0;margin-top:0;text-align:center}
+  .call-strip h2{font-size:clamp(26px,4vw,42px);margin-bottom:14px;color:#fff}
+  .call-strip p{font-size:16px;max-width:540px;margin:0 auto 22px;color:#ffe7d8}
+  .call-strip .big-phone{display:inline-block;background:#141414;color:var(--accent);padding:22px 36px;border-radius:8px;font-family:'Archivo Black',sans-serif;font-size:clamp(22px,4vw,34px);letter-spacing:.02em}
+  .call-strip .big-phone:hover{background:#000}
+  .call-strip .note{margin-top:16px;font-size:13px;color:#ffd9bd;letter-spacing:.08em;text-transform:uppercase;font-weight:600}
+
+  /* Location */
+  .location{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:stretch}
+  @media (max-width:780px){.location{grid-template-columns:1fr}}
+  .map-frame{aspect-ratio:4/3;background:linear-gradient(135deg,var(--primary),var(--accent));opacity:.45;border-radius:10px;position:relative;display:flex;align-items:flex-end;justify-content:center;padding:18px;color:#141414;font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:12px}
+  .addr-card{background:var(--bg-soft);border:1px solid var(--rule);border-radius:10px;padding:26px}
+  .addr-card h3{font-size:22px;margin-bottom:12px}
+  .addr-card p{font-size:15px;color:var(--muted);margin-bottom:8px}
+  .addr-card .addr-line{color:var(--text);font-weight:600}
+
+  /* Footer */
+  .foot{border-top:1px solid var(--rule);padding:40px 0 50px;margin-top:40px}
+  .foot-row{display:flex;justify-content:space-between;align-items:flex-start;gap:24px;flex-wrap:wrap}
+  .foot-brand{font-family:'Archivo Black',sans-serif;font-size:20px;letter-spacing:.04em}
+  .foot-meta{font-size:13px;color:var(--muted);line-height:1.7}
+  .foot-meta a{color:var(--accent)}
+  .foot-klar{margin-top:28px;padding-top:22px;border-top:1px solid var(--rule);font-size:12px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+</style>
+</head>
+<body>
+
+<div class="demo-banner">
+  This is a demo preview built by Klar Systems for Torigrilli. See our proposal:
+  <a href="https://preview.klarsystems.com/torigrilli-salo/proposal/">preview.klarsystems.com/torigrilli-salo/proposal/</a>
+</div>
+
+<div class="wrap">
+  <nav class="nav">
+    <div class="mark">TORIGRILLI</div>
+    <a class="cta-mini" href="tel:+358465948090">Call +358 46 594 8090</a>
+  </nav>
+</div>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Grill kiosk · Horninkatu · Salo</div>
+    <h1>Late-night grill<span class="slash">.</span><br>No table needed<span class="slash">.</span></h1>
+    <p class="hero-sub">Burgers, makkaraperunat, juustopallot and classic grill plates on Horninkatu. Open past midnight Monday to Thursday, until 5 AM Friday and Saturday. Phone in your order — we'll have it ready.</p>
+    <div class="hero-rating">
+      <span class="star">★</span>
+      <span class="num">3.7</span>
+      <span class="count">· 113 Google reviews</span>
+    </div>
+    <div class="cta-bar">
+      <a class="cta-primary" href="tel:+358465948090"><span class="dot"></span>Call to order — +358 46 594 8090</a>
+      <a class="cta-secondary" href="https://wolt.com/fi/fin/salo/restaurant/torigrilli" target="_blank" rel="noopener">Order via Wolt →</a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="menu">
+  <div class="wrap">
+    <div class="eyebrow">Menu highlights</div>
+    <h2>Grill classics. Nothing fancy.</h2>
+    <p class="lead">A short list of the dishes customers come back for. Full menu over the phone or on Wolt.</p>
+    <div class="menu-grid">
+
+      <article class="dish">
+        <div class="dish-art" aria-label="Your photo here">Photo · Special Burger</div>
+        <div class="dish-body">
+          <h3>Special Burger</h3>
+          <p>Breaded pork cutlet, pineapple ring and a meetwurst slice in a soft bun. A Salo grill-kiosk classic.</p>
+          <div class="price">6,50&nbsp;€</div>
+        </div>
+      </article>
+
+      <article class="dish">
+        <div class="dish-art" aria-label="Your photo here">Photo · Makkaraperunat</div>
+        <div class="dish-body">
+          <h3>Makkaraperunat auralla</h3>
+          <p>French fries, sausage, and Aura blue-cheese sauce. The house sausage-fries combo.</p>
+          <div class="price tbc">Ask over the phone</div>
+        </div>
+      </article>
+
+      <article class="dish">
+        <div class="dish-art" aria-label="Your photo here">Photo · Salona</div>
+        <div class="dish-body">
+          <h3>Salona</h3>
+          <p>Grilled pork plate — a Finnish grilli staple, served with fries and salad.</p>
+          <div class="price tbc">Ask over the phone</div>
+        </div>
+      </article>
+
+      <article class="dish">
+        <div class="dish-art" aria-label="Your photo here">Photo · Juustopallot</div>
+        <div class="dish-body">
+          <h3>Juustopallot</h3>
+          <p>Breaded cheese balls, deep-fried. Classic late-night side.</p>
+          <div class="price tbc">Ask over the phone</div>
+        </div>
+      </article>
+
+      <article class="dish">
+        <div class="dish-art" aria-label="Your photo here">Photo · Ranskalaiset</div>
+        <div class="dish-body">
+          <h3>Ranskalaiset</h3>
+          <p>Hand-cut fries — on the side or on their own.</p>
+          <div class="price tbc">Ask over the phone</div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="split">
+      <div class="story">
+        <div class="eyebrow">About</div>
+        <h2>A Salo grill kiosk, run by people who show up.</h2>
+        <p>Torigrilli sits on Horninkatu in central Salo, a few steps from Salon VPK:n Talo. A Vietnamese-Finnish family runs the counter, and the crowd is mostly locals — lunch regulars, late-night finishers, and the Friday–Saturday stretch that closes at 5 AM.</p>
+        <p>Customers keep mentioning one thing: the staff actually cares. One regular wrote in publicly to thank the crew for carrying orders to their car in winter cold and labelling each bag by name so nobody got the wrong order. That's the energy.</p>
+        <p>Pricing sits in the €5–€10 range per person. You can call, walk up to the counter, or order through Wolt.</p>
+        <div class="tag-row">
+          <span class="tag">Grill</span>
+          <span class="tag">Takeaway</span>
+          <span class="tag">Late-night</span>
+          <span class="tag">Wolt delivery</span>
+          <span class="tag">Family-run</span>
+        </div>
+      </div>
+
+      <div class="hours-card">
+        <h3>Hours</h3>
+        <table>
+          <tr><td>Monday</td><td>11:00 – 00:00</td></tr>
+          <tr><td>Tuesday</td><td>11:00 – 00:00</td></tr>
+          <tr><td>Wednesday</td><td>11:00 – 00:00</td></tr>
+          <tr><td>Thursday</td><td>11:00 – 00:00</td></tr>
+          <tr><td>Friday</td><td class="late">12:00 – 05:00</td></tr>
+          <tr><td>Saturday</td><td class="late">15:00 – 05:00</td></tr>
+          <tr><td>Sunday</td><td>Closed</td></tr>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="call-strip">
+  <div class="wrap">
+    <div class="eyebrow" style="color:#ffe7d8">Hungry now?</div>
+    <h2>Call. We'll have it ready.</h2>
+    <p>Skip the app queue. One call, one phone-side pickup. The fastest route from kitchen to you.</p>
+    <a class="big-phone" href="tel:+358465948090">+358 46 594 8090</a>
+    <div class="note">Open tonight · Check hours above</div>
+  </div>
+</section>
+
+<section class="section" id="find-us">
+  <div class="wrap">
+    <div class="eyebrow">Find us</div>
+    <h2>Horninkatu, central Salo.</h2>
+    <div class="location">
+      <div class="map-frame" aria-label="Map placeholder — your map embed will go here">Map placeholder · Horninkatu, 24100 Salo</div>
+      <div class="addr-card">
+        <h3>Visit</h3>
+        <p class="addr-line">Horninkatu</p>
+        <p class="addr-line">24100 Salo</p>
+        <p>Parking outside. Walk-ups welcome — but if it's busy, call ahead and we'll set your order aside.</p>
+        <p style="margin-top:16px">
+          <a class="cta-secondary" style="padding:14px 20px;font-size:14px" href="tel:+358465948090">Tel · +358 46 594 8090</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-row">
+      <div>
+        <div class="foot-brand">TORIGRILLI</div>
+        <div class="foot-meta" style="margin-top:10px">
+          Horninkatu, 24100 Salo<br>
+          <a href="tel:+358465948090">+358 46 594 8090</a><br>
+          <a href="https://wolt.com/fi/fin/salo/restaurant/torigrilli" target="_blank" rel="noopener">Order on Wolt</a>
+        </div>
+      </div>
+      <div class="foot-meta" style="text-align:right">
+        Rated 3.7 ★ on Google<br>
+        113 reviews and counting<br>
+        Grill kiosk · Takeaway · Open late
+      </div>
+    </div>
+    <div class="foot-klar">
+      Powered by Klar Systems — this is a demo preview for Torigrilli.
+      <a href="https://preview.klarsystems.com/torigrilli-salo/proposal/" style="color:var(--accent)">See the proposal →</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

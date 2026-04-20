@@ -23,6 +23,10 @@
     .mc h3{font-family:var(--head);font-size:1.05rem;margin-bottom:8px;padding-bottom:5px;border-bottom:2px solid var(--pri);text-transform:uppercase}
     .mc li{list-style:none;padding:5px 0;font-size:.88rem;color:var(--fg-d)}
     .mn{margin-top:20px;font-size:.82rem;color:var(--fg-d);font-style:italic;text-align:center}
+    .rg{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;margin-top:28px}
+    .rc{background:var(--bg-r);border-left:3px solid var(--pri);padding:28px;border-radius:8px}
+    .rc blockquote{font-style:italic;font-size:.94rem;line-height:1.7;color:var(--fg)}
+    .rc cite{display:block;margin-top:12px;font-size:.76rem;color:var(--fg-d);font-style:normal}
     .bk{background:linear-gradient(155deg,#1E0E08 0%,var(--bg) 100%);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
     .bg{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
     .bc{background:var(--bg-c);border-radius:12px;padding:28px;border:1px solid var(--rule)}
@@ -66,6 +70,21 @@
     </div>
     <div class="ph ph-f" style="max-width:240px;margin:24px auto 0" aria-label="Food photos coming soon"><span>Food photos coming soon</span></div>
     <p class="mn">This is a demo — the menu will be updated together with you.</p>
+  </div></section>
+
+  <section class="reveal"><div class="w">
+    <div class="l">Reviews</div>
+    <h2>What Ylöjärvi says</h2>
+    <div class="rg">
+      <div class="rc">
+        <blockquote>"Great pizzas, falafels, mega-burgers, vegetarian food, kids meals, hot wings. Lots to choose from!"</blockquote>
+        <cite>Santero, via TripAdvisor</cite>
+      </div>
+      <div class="rc">
+        <blockquote>"Extremely delicious kebab with very good fries. Fresh salad and fresh salad bar was also available. The service was friendly and quick."</blockquote>
+        <cite>Cheeriop, via TripAdvisor</cite>
+      </div>
+    </div>
   </div></section>
 
   <section class="bk reveal" id="booking"><div class="w"><div class="bg">

@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hakametsän Katukeittiö — Uusikaupunki</title>
+    <!-- palette: segment 1 default (research palette empty) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #EFE7DA;
+            background: #1F2933;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Demo banner */
+        .demo-banner {
+            background: #B56B4A;
+            color: #fff;
+            text-align: center;
+            padding: 12px 20px;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+        }
+        .demo-banner a {
+            color: #fff;
+            text-decoration: underline;
+            margin-left: 8px;
+        }
+        .demo-banner a:hover {
+            opacity: 0.85;
+        }
+
+        /* Nav */
+        nav {
+            background: #1F2933;
+            border-bottom: 1px solid rgba(239, 231, 218, 0.12);
+            padding: 18px 24px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        nav .nav-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        nav .logo {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: #EFE7DA;
+            text-decoration: none;
+        }
+        nav .nav-links {
+            display: flex;
+            gap: 28px;
+            list-style: none;
+        }
+        nav .nav-links a {
+            color: rgba(239, 231, 218, 0.75);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        nav .nav-links a:hover {
+            color: #EFE7DA;
+        }
+        nav .nav-cta {
+            background: #B56B4A;
+            color: #fff;
+            padding: 9px 20px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+        nav .nav-cta:hover {
+            opacity: 0.88;
+        }
+
+        /* Hero */
+        .hero {
+            background: #1F2933;
+            padding: 96px 24px 80px;
+            text-align: center;
+        }
+        .hero-photo-placeholder {
+            width: 100%;
+            max-width: 860px;
+            margin: 0 auto 48px;
+            aspect-ratio: 16 / 7;
+            background: rgba(239, 231, 218, 0.07);
+            border: 1.5px dashed rgba(239, 231, 218, 0.2);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(239, 231, 218, 0.35);
+            font-size: 14px;
+            letter-spacing: 0.5px;
+        }
+        .hero h1 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: clamp(38px, 6vw, 62px);
+            font-weight: 800;
+            color: #EFE7DA;
+            line-height: 1.15;
+            margin-bottom: 20px;
+        }
+        .hero p {
+            font-size: 19px;
+            color: rgba(239, 231, 218, 0.75);
+            max-width: 540px;
+            margin: 0 auto 36px;
+            line-height: 1.65;
+        }
+        .hero-cta-group {
+            display: flex;
+            gap: 14px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .btn-primary {
+            background: #B56B4A;
+            color: #fff;
+            padding: 14px 32px;
+            border-radius: 7px;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: opacity 0.2s;
+            display: inline-block;
+        }
+        .btn-primary:hover { opacity: 0.88; }
+        .btn-secondary {
+            background: rgba(239, 231, 218, 0.1);
+            color: #EFE7DA;
+            padding: 14px 32px;
+            border-radius: 7px;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            border: 1px solid rgba(239, 231, 218, 0.2);
+            transition: background 0.2s;
+            display: inline-block;
+        }
+        .btn-secondary:hover { background: rgba(239, 231, 218, 0.16); }
+
+        .hero-rating {
+            margin-top: 32px;
+            font-size: 14px;
+            color: rgba(239, 231, 218, 0.5);
+        }
+        .hero-rating strong {
+            color: #D4A574;
+        }
+
+        /* About */
+        .about {
+            background: rgba(239, 231, 218, 0.04);
+            padding: 80px 24px;
+            border-top: 1px solid rgba(239, 231, 218, 0.08);
+        }
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 56px;
+            align-items: center;
+        }
+        .about-text .section-label {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #D4A574;
+            margin-bottom: 14px;
+        }
+        .about-text h2 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: clamp(28px, 4vw, 40px);
+            font-weight: 700;
+            color: #EFE7DA;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+        .about-text p {
+            font-size: 16px;
+            color: rgba(239, 231, 218, 0.72);
+            line-height: 1.8;
+            margin-bottom: 14px;
+        }
+        .about-photo-placeholder {
+            aspect-ratio: 4 / 3;
+            background: rgba(239, 231, 218, 0.06);
+            border: 1.5px dashed rgba(239, 231, 218, 0.18);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(239, 231, 218, 0.3);
+            font-size: 13px;
+            letter-spacing: 0.4px;
+        }
+
+        /* Menu */
+        .menu-section {
+            padding: 80px 24px;
+            border-top: 1px solid rgba(239, 231, 218, 0.08);
+        }
+        .menu-section .section-label {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #D4A574;
+            margin-bottom: 14px;
+            text-align: center;
+        }
+        .menu-section h2 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: clamp(28px, 4vw, 40px);
+            font-weight: 700;
+            color: #EFE7DA;
+            text-align: center;
+            margin-bottom: 48px;
+        }
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        .menu-card {
+            background: rgba(239, 231, 218, 0.06);
+            border: 1px solid rgba(239, 231, 218, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .menu-card-photo {
+            aspect-ratio: 4 / 3;
+            background: rgba(239, 231, 218, 0.05);
+            border-bottom: 1px solid rgba(239, 231, 218, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(239, 231, 218, 0.25);
+            font-size: 12px;
+        }
+        .menu-card-body {
+            padding: 18px 18px 20px;
+        }
+        .menu-card-body h4 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: #EFE7DA;
+            margin-bottom: 6px;
+        }
+        .menu-card-body p {
+            font-size: 14px;
+            color: rgba(239, 231, 218, 0.6);
+            line-height: 1.5;
+        }
+        .menu-card-body .price {
+            margin-top: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #D4A574;
+        }
+
+        /* Highlights */
+        .highlights {
+            padding: 72px 24px;
+            background: rgba(239, 231, 218, 0.03);
+            border-top: 1px solid rgba(239, 231, 218, 0.08);
+        }
+        .highlights-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+        }
+        .highlight-card {
+            padding: 28px 24px;
+            background: rgba(239, 231, 218, 0.06);
+            border: 1px solid rgba(239, 231, 218, 0.1);
+            border-radius: 10px;
+            text-align: center;
+        }
+        .highlight-card .icon {
+            font-size: 28px;
+            margin-bottom: 14px;
+            display: block;
+        }
+        .highlight-card h3 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: #EFE7DA;
+            margin-bottom: 8px;
+        }
+        .highlight-card p {
+            font-size: 14px;
+            color: rgba(239, 231, 218, 0.6);
+            line-height: 1.6;
+        }
+
+        /* Booking Widget */
+        .booking-section {
+            padding: 80px 24px;
+            border-top: 1px solid rgba(239, 231, 218, 0.08);
+        }
+        .booking-inner {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 56px;
+            align-items: start;
+        }
+        .booking-copy .section-label {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #D4A574;
+            margin-bottom: 14px;
+        }
+        .booking-copy h2 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: clamp(28px, 4vw, 38px);
+            font-weight: 700;
+            color: #EFE7DA;
+            line-height: 1.2;
+            margin-bottom: 18px;
+        }
+        .booking-copy p {
+            font-size: 16px;
+            color: rgba(239, 231, 218, 0.7);
+            line-height: 1.75;
+            margin-bottom: 12px;
+        }
+        .booking-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 36px 32px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+        }
+        .booking-card h3 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 22px;
+            font-weight: 700;
+            color: #1F2933;
+            margin-bottom: 6px;
+        }
+        .booking-card .subtitle {
+            font-size: 13px;
+            color: #888;
+            margin-bottom: 24px;
+        }
+        .booking-card label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            color: #555;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 6px;
+        }
+        .booking-card input,
+        .booking-card select {
+            width: 100%;
+            padding: 11px 13px;
+            margin-bottom: 16px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 14px;
+            color: #2a2a2a;
+            background: #fff;
+        }
+        .booking-card input:focus,
+        .booking-card select:focus {
+            outline: none;
+            border-color: #B56B4A;
+            box-shadow: 0 0 0 3px rgba(181, 107, 74, 0.12);
+        }
+        .booking-card button {
+            width: 100%;
+            padding: 14px;
+            background: #B56B4A;
+            color: #fff;
+            border: none;
+            border-radius: 7px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: opacity 0.2s;
+            font-family: inherit;
+        }
+        .booking-card button:hover {
+            opacity: 0.88;
+        }
+        .booking-card .powered {
+            text-align: center;
+            font-size: 11px;
+            color: #bbb;
+            margin-top: 14px;
+        }
+
+        /* Hours & Location */
+        .hours-section {
+            padding: 80px 24px;
+            background: rgba(239, 231, 218, 0.04);
+            border-top: 1px solid rgba(239, 231, 218, 0.08);
+        }
+        .hours-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+        }
+        .hours-col .section-label {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #D4A574;
+            margin-bottom: 14px;
+        }
+        .hours-col h2 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 30px;
+            font-weight: 700;
+            color: #EFE7DA;
+            margin-bottom: 24px;
+        }
+        .hours-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .hours-table tr td {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(239, 231, 218, 0.08);
+            font-size: 15px;
+            color: rgba(239, 231, 218, 0.8);
+        }
+        .hours-table tr td:first-child {
+            font-weight: 600;
+            color: #EFE7DA;
+            width: 110px;
+        }
+        .hours-table tr.closed td {
+            color: rgba(239, 231, 218, 0.35);
+        }
+        .location-info h2 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 30px;
+            font-weight: 700;
+            color: #EFE7DA;
+            margin-bottom: 24px;
+        }
+        .location-detail {
+            font-size: 15px;
+            color: rgba(239, 231, 218, 0.75);
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+        .location-detail strong {
+            color: #EFE7DA;
+        }
+        .location-detail a {
+            color: #D4A574;
+            text-decoration: none;
+        }
+        .location-detail a:hover {
+            text-decoration: underline;
+        }
+        .map-placeholder {
+            margin-top: 24px;
+            aspect-ratio: 4 / 3;
+            background: rgba(239, 231, 218, 0.05);
+            border: 1.5px dashed rgba(239, 231, 218, 0.16);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(239, 231, 218, 0.3);
+            font-size: 13px;
+        }
+
+        /* Footer */
+        footer {
+            background: #161D24;
+            border-top: 1px solid rgba(239, 231, 218, 0.1);
+            padding: 40px 24px;
+            text-align: center;
+        }
+        footer p {
+            font-size: 13px;
+            color: rgba(239, 231, 218, 0.4);
+            margin-bottom: 6px;
+        }
+        footer a {
+            color: rgba(239, 231, 218, 0.5);
+            text-decoration: none;
+        }
+        footer a:hover {
+            color: rgba(239, 231, 218, 0.75);
+        }
+        .footer-klar {
+            margin-top: 16px;
+            font-size: 12px;
+            color: rgba(239, 231, 218, 0.25);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav .nav-links { display: none; }
+            .about-grid { grid-template-columns: 1fr; }
+            .highlights-grid { grid-template-columns: 1fr; }
+            .booking-inner { grid-template-columns: 1fr; }
+            .hours-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 480px) {
+            .hero { padding: 64px 16px 56px; }
+            .menu-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Demo banner -->
+    <div class="demo-banner">
+        This is a demo preview for Hakametsän Katukeittiö.
+        <a href="https://preview.klarsystems.com/hakametsan-katukeittio-uusikaupunki/proposal/">See the full proposal →</a>
+    </div>
+
+    <!-- Nav -->
+    <nav>
+        <div class="nav-inner">
+            <a href="#" class="logo">Hakametsän Katukeittiö</a>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#book">Reservations</a></li>
+                <li><a href="#hours">Hours</a></li>
+            </ul>
+            <a href="#book" class="nav-cta">Book a Table</a>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-photo-placeholder">Your photo here</div>
+            <h1>Hakametsän Katukeittiö</h1>
+            <p>Uusikaupunki's neighborhood grill — generous portions, honest food, and a warm welcome since day one.</p>
+            <div class="hero-cta-group">
+                <a href="#book" class="btn-primary">Reserve a Table</a>
+                <a href="#menu" class="btn-secondary">View the Menu</a>
+            </div>
+            <p class="hero-rating">Rated <strong>4.1</strong> on Google &middot; 250+ reviews</p>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-text">
+                    <p class="section-label">Our Story</p>
+                    <h2>A place where body and soul are nourished</h2>
+                    <p>Hakametsän Katukeittiö — known locally as Hakitsun Grilli — is a fixture in Uusikaupunki's Hakametsä neighborhood. Founded by Tarja Elamo-Lindberg, the grill has been welcoming locals with filling plates and a genuine smile.</p>
+                    <p>We serve traditional Finnish grill classics: kebab plates, the legendary Mersu annos, house specials, and sausage dishes. Large portions, fair prices, and no-nonsense good food.</p>
+                    <p>Over 250 Google reviews and a loyal local crowd tell the story better than we ever could.</p>
+                </div>
+                <div class="about-photo-placeholder">Interior photo coming soon</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu -->
+    <section class="menu-section" id="menu">
+        <div class="container">
+            <p class="section-label">What We Serve</p>
+            <h2>Our Menu</h2>
+            <div class="menu-grid">
+                <div class="menu-card">
+                    <div class="menu-card-photo">Food photos coming soon</div>
+                    <div class="menu-card-body">
+                        <h4>Mersu Annos</h4>
+                        <p>Our signature plate — filling, classic, and exactly what a proper grill meal should be.</p>
+                    </div>
+                </div>
+                <div class="menu-card">
+                    <div class="menu-card-photo">Food photos coming soon</div>
+                    <div class="menu-card-body">
+                        <h4>Kebablautanen</h4>
+                        <p>A generous kebab plate, praised by regulars as one of the best in town.</p>
+                    </div>
+                </div>
+                <div class="menu-card">
+                    <div class="menu-card-photo">Food photos coming soon</div>
+                    <div class="menu-card-body">
+                        <h4>Grillin Erikoinen</h4>
+                        <p>The house special — very filling and priced for everyone.</p>
+                        <p class="price">9 €</p>
+                    </div>
+                </div>
+                <div class="menu-card">
+                    <div class="menu-card-photo">Food photos coming soon</div>
+                    <div class="menu-card-body">
+                        <h4>Makkaraperunat</h4>
+                        <p>Sausage and potatoes — a Finnish grill classic done right.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Highlights -->
+    <section class="highlights">
+        <div class="container">
+            <div class="highlights-grid">
+                <div class="highlight-card">
+                    <h3>Generous Portions</h3>
+                    <p>"Large portions, good basic grill food." — Google reviewer</p>
+                </div>
+                <div class="highlight-card">
+                    <h3>Great Value</h3>
+                    <p>Excellent price-to-quality ratio. Specials from 9 €.</p>
+                </div>
+                <div class="highlight-card">
+                    <h3>Local Favourite</h3>
+                    <p>Over 250 Google reviews and a loyal following in Uusikaupunki.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Widget (Klar Bookings) -->
+    <section class="booking-section" id="book">
+        <div class="container">
+            <div class="booking-inner">
+                <div class="booking-copy">
+                    <p class="section-label">Reservations</p>
+                    <h2>Book a Table</h2>
+                    <p>Reserve your table in seconds — no account needed, no fees, no middlemen. Your booking goes straight to us.</p>
+                    <p>Phone reservations also welcome: <a href="tel:0442434791" style="color:#D4A574; font-weight:600;">044 2434791</a></p>
+                </div>
+                <div class="booking-card">
+                    <h3>Book a Table</h3>
+                    <p class="subtitle">Reserve in seconds — no fees, no account needed.</p>
+                    <form onsubmit="event.preventDefault(); return false;">
+                        <label for="bk-date">Date</label>
+                        <input type="date" id="bk-date" name="date" required>
+
+                        <label for="bk-time">Time</label>
+                        <select id="bk-time" name="time" required>
+                            <option value="">Select time</option>
+                            <option value="11:00">11:00</option>
+                            <option value="11:30">11:30</option>
+                            <option value="12:00">12:00</option>
+                            <option value="12:30">12:30</option>
+                            <option value="13:00">13:00</option>
+                            <option value="13:30">13:30</option>
+                            <option value="14:00">14:00</option>
+                            <option value="14:30">14:30</option>
+                            <option value="15:00">15:00</option>
+                            <option value="15:30">15:30</option>
+                            <option value="16:00">16:00</option>
+                            <option value="16:30">16:30</option>
+                            <option value="17:00">17:00</option>
+                            <option value="17:30">17:30</option>
+                            <option value="18:00">18:00</option>
+                            <option value="18:30">18:30</option>
+                            <option value="19:00">19:00</option>
+                            <option value="19:30">19:30</option>
+                            <option value="20:00">20:00</option>
+                        </select>
+
+                        <label for="bk-guests">Guests</label>
+                        <select id="bk-guests" name="guests" required>
+                            <option value="2">2 guests</option>
+                            <option value="1">1 guest</option>
+                            <option value="3">3 guests</option>
+                            <option value="4">4 guests</option>
+                            <option value="5">5 guests</option>
+                            <option value="6">6 guests</option>
+                            <option value="7">7 guests</option>
+                            <option value="8">8 guests</option>
+                        </select>
+
+                        <button type="button">Reserve Now</button>
+                    </form>
+                    <p class="powered">Powered by Klar Bookings — no fees, no commissions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hours & Location -->
+    <section class="hours-section" id="hours">
+        <div class="container">
+            <div class="hours-grid">
+                <div class="hours-col">
+                    <p class="section-label">When We're Open</p>
+                    <h2>Opening Hours</h2>
+                    <table class="hours-table">
+                        <tr class="closed"><td>Monday</td><td>Closed</td></tr>
+                        <tr><td>Tuesday</td><td>10:30 – 21:00</td></tr>
+                        <tr><td>Wednesday</td><td>10:30 – 21:00</td></tr>
+                        <tr><td>Thursday</td><td>10:30 – 21:00</td></tr>
+                        <tr><td>Friday</td><td>10:30 – 22:00</td></tr>
+                        <tr><td>Saturday</td><td>12:00 – 22:00</td></tr>
+                        <tr><td>Sunday</td><td>12:00 – 21:00</td></tr>
+                    </table>
+                </div>
+                <div class="location-info">
+                    <h2>Find Us</h2>
+                    <p class="location-detail"><strong>Address</strong><br>Tammitie 8, 23500 Uusikaupunki</p>
+                    <p class="location-detail"><strong>Phone</strong><br><a href="tel:0442434791">044 2434791</a></p>
+                    <p class="location-detail"><strong>Facebook</strong><br><a href="https://www.facebook.com/Hakitsungrilli/" target="_blank" rel="noopener">Hakametsän katukeittiö</a></p>
+                    <p class="location-detail"><a href="https://maps.google.com/maps?q=Tammitie+8,+23500+Uusikaupunki" target="_blank" rel="noopener">View on Google Maps →</a></p>
+                    <div class="map-placeholder">Interior photo coming soon</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Hakametsän Katukeittiö &mdash; Tammitie 8, 23500 Uusikaupunki</p>
+        <p><a href="tel:0442434791">044 2434791</a></p>
+        <p class="footer-klar">Powered by Klar — <a href="https://klarsystems.com">klarsystems.com</a></p>
+    </footer>
+
+</body>
+</html>

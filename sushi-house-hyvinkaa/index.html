@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sushi House — Hyvinkää · Daily sushi & Asian buffet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Fraunces:opsz,wght@9..144,500;9..144,700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FAF6EE;
+    --ink:#1B1B1B;
+    --ink-mute:#5a534a;
+    --line:#e7ddc9;
+    --primary:#B8322C;
+    --accent:#D4A24C;
+    --raised:#fffdf7;
+    --radius:6px;
+    --mono:'JetBrains Mono',ui-monospace,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font-family:'DM Sans',system-ui,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+
+  /* Demo banner */
+  .demo-banner{position:sticky;top:0;z-index:30;background:var(--ink);color:#faf6ee;font-size:13px;letter-spacing:.01em}
+  .demo-banner .inner{max-width:1100px;margin:0 auto;padding:10px 22px;display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+  .demo-banner b{color:var(--accent);font-weight:500;letter-spacing:.08em;text-transform:uppercase;font-size:11px}
+  .demo-banner a.cta{color:#faf6ee;border-bottom:1px solid var(--accent);padding-bottom:1px}
+  .demo-banner a.cta:hover{color:var(--accent)}
+
+  /* Layout */
+  main{max-width:1100px;margin:0 auto;padding:0 22px}
+  section{padding:88px 0;border-top:1px solid var(--line)}
+  section:first-of-type{border-top:none}
+  h1,h2,h3{font-family:'Fraunces',Georgia,serif;font-weight:500;letter-spacing:-.01em}
+  h1{font-size:clamp(40px,7vw,76px);line-height:1.05}
+  h2{font-size:clamp(28px,4vw,42px);margin-bottom:28px}
+  h3{font-size:20px;font-weight:700}
+  p{color:var(--ink-mute);max-width:640px}
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--primary);margin-bottom:18px}
+
+  /* Hero */
+  .hero{padding-top:56px;padding-bottom:64px;display:grid;grid-template-columns:1.2fr .9fr;gap:56px;align-items:end}
+  @media(max-width:780px){.hero{grid-template-columns:1fr;gap:32px}}
+  .hero .meta{font-family:var(--mono);font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:24px}
+  .hero h1 em{font-style:italic;color:var(--primary)}
+  .hero-sub{margin-top:22px;font-size:18px;max-width:520px}
+  .hero-stats{margin-top:34px;display:flex;gap:32px;flex-wrap:wrap}
+  .hero-stats .stat{border-left:2px solid var(--accent);padding-left:14px}
+  .hero-stats .num{font-family:'Fraunces',serif;font-size:28px;color:var(--ink);display:block;line-height:1}
+  .hero-stats .lbl{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-mute);margin-top:6px;display:block}
+
+  /* Placeholder */
+  .img-placeholder{background:var(--raised);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;color:var(--ink-mute);font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;border-radius:var(--radius);position:relative;overflow:hidden}
+  .img-placeholder::after{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(184,50,44,.06),rgba(212,162,76,.08));pointer-events:none}
+  .img-hero-box{aspect-ratio:4/5;width:100%}
+  .img-square{aspect-ratio:1/1;width:100%}
+  .img-wide{aspect-ratio:3/2;width:100%}
+
+  /* Buffet highlight */
+  .buffet{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+  @media(max-width:780px){.buffet{grid-template-columns:1fr}}
+  .buffet .price-card{background:var(--raised);border:1px solid var(--line);border-radius:var(--radius);padding:34px}
+  .buffet .price-row{display:flex;justify-content:space-between;align-items:baseline;padding:14px 0;border-bottom:1px dashed var(--line)}
+  .buffet .price-row:last-child{border-bottom:none}
+  .buffet .price-row .lbl{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-mute)}
+  .buffet .price-row .val{font-family:'Fraunces',serif;font-size:24px;color:var(--primary)}
+  .buffet small{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--ink-mute);margin-top:14px}
+
+  /* Menu */
+  .menu-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:42px;margin-top:18px}
+  @media(max-width:780px){.menu-grid{grid-template-columns:1fr}}
+  .menu-group h3{font-family:'Fraunces',serif;font-size:22px;font-weight:500;color:var(--primary);margin-bottom:18px;border-bottom:1px solid var(--line);padding-bottom:10px}
+  .menu-item{display:flex;justify-content:space-between;gap:24px;padding:10px 0;border-bottom:1px dashed var(--line)}
+  .menu-item .name{font-weight:500}
+  .menu-item .desc{display:block;font-size:13px;color:var(--ink-mute);margin-top:2px}
+  .menu-item .price{font-family:var(--mono);color:var(--primary);white-space:nowrap}
+  .menu-note{margin-top:26px;font-size:13px;color:var(--ink-mute);font-family:var(--mono);letter-spacing:.02em}
+
+  /* About */
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+  @media(max-width:780px){.about-grid{grid-template-columns:1fr}}
+  .quote{border-left:3px solid var(--primary);padding:8px 0 8px 20px;margin-top:20px;font-family:'Fraunces',serif;font-size:20px;line-height:1.4}
+  .quote cite{display:block;margin-top:8px;font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--ink-mute);font-style:normal;text-transform:uppercase}
+
+  /* Booking widget */
+  .booking{background:linear-gradient(135deg,#1B1B1B 0%,#2a2420 100%);color:#faf6ee;border-radius:var(--radius);padding:56px 48px;position:relative;overflow:hidden}
+  @media(max-width:780px){.booking{padding:36px 24px}}
+  .booking::before{content:"";position:absolute;inset:0;background:radial-gradient(600px 260px at 85% 10%,rgba(212,162,76,.12),transparent);pointer-events:none}
+  .booking h2{color:#faf6ee;margin-bottom:12px}
+  .booking p{color:#d7cfc0}
+  .booking form{margin-top:28px;display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:10px;position:relative}
+  @media(max-width:780px){.booking form{grid-template-columns:1fr 1fr;gap:8px}}
+  .booking input,.booking select{background:rgba(255,253,247,.08);border:1px solid rgba(212,162,76,.35);color:#faf6ee;padding:13px 14px;font-family:inherit;font-size:14px;border-radius:4px}
+  .booking input:focus,.booking select:focus{outline:none;border-color:var(--accent)}
+  .booking select option{color:#1B1B1B}
+  .booking button{background:var(--accent);color:#1B1B1B;border:none;padding:13px 28px;font-family:inherit;font-weight:700;font-size:14px;letter-spacing:.03em;cursor:pointer;border-radius:4px;text-transform:uppercase}
+  @media(max-width:780px){.booking button{grid-column:1/-1}}
+  .booking small{display:block;margin-top:18px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:rgba(212,162,76,.8);text-transform:uppercase}
+
+  /* Hours + location */
+  .info-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px}
+  @media(max-width:780px){.info-grid{grid-template-columns:1fr}}
+  .hours-list{font-family:var(--mono);font-size:14px;margin-top:14px}
+  .hours-list div{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px dashed var(--line)}
+  .hours-list .day{color:var(--ink-mute);letter-spacing:.08em;text-transform:uppercase;font-size:12px}
+  .hours-list .time{color:var(--ink)}
+  .address-block{margin-top:14px;font-size:15px;line-height:1.7}
+  .address-block a{color:var(--primary);border-bottom:1px solid var(--accent)}
+  .map-embed{margin-top:22px;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;aspect-ratio:16/10}
+  .map-embed iframe{width:100%;height:100%;border:none}
+
+  /* Footer */
+  footer{border-top:1px solid var(--line);padding:40px 22px 26px;text-align:center;font-size:13px;color:var(--ink-mute)}
+  footer p{margin:0 auto;max-width:none}
+  footer a{color:var(--primary)}
+  footer .klar{margin-top:10px;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+
+  /* Reveal */
+  .reveal{opacity:0;transform:translateY(16px);transition:opacity .7s ease,transform .7s ease}
+  .reveal.is-in{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<div class="demo-banner">
+  <div class="inner">
+    <span><b>This is a demo</b> — the final site will be built together with you.</span>
+    <a class="cta" href="https://preview.klarsystems.com/sushi-house-hyvinkaa/proposal/">See the proposal →</a>
+  </div>
+</div>
+
+<main>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div>
+      <div class="meta">Sushi &amp; Asian buffet · Hyvinkää · Kauppakeskus Willa</div>
+      <h1>Sushi House<br><em>daily buffet, one stop.</em></h1>
+      <p class="hero-sub">A full sushi and Asian buffet on the second floor of Kauppakeskus Willa — classic nigiri, California rolls, tempura, miso, and a fresh noodle soup bar, every day.</p>
+      <div class="hero-stats">
+        <div class="stat"><span class="num">4.2 / 5</span><span class="lbl">Google · 828 reviews</span></div>
+        <div class="stat"><span class="num">13,50&nbsp;€</span><span class="lbl">Weekday buffet</span></div>
+        <div class="stat"><span class="num">Willa · 2F</span><span class="lbl">Hämeenkatu 9</span></div>
+      </div>
+    </div>
+    <div class="img-placeholder img-hero-box"><span>Your photo here</span></div>
+  </section>
+
+  <!-- Buffet highlight -->
+  <section class="reveal">
+    <div class="eyebrow">The daily buffet</div>
+    <div class="buffet">
+      <div>
+        <h2>One price. All of it.</h2>
+        <p>Sushi masters build a fresh buffet every day — classic nigiri, California, futomaki, plus warm Asian dishes: miso soup, udon, tempura. The new noodle soup bar lets you pick noodle and topping (beef, chicken or vegetables) in seasoned broth.</p>
+      </div>
+      <div class="price-card">
+        <div class="price-row"><span class="lbl">Mon–Fri</span><span class="val">13,50 €</span></div>
+        <div class="price-row"><span class="lbl">Sat, Sun &amp; holidays</span><span class="val">16,80 €</span></div>
+        <small>Stand-up buffet · dine-in pricing · refills included</small>
+      </div>
+    </div>
+  </section>
+
+  <!-- Menu highlights -->
+  <section class="reveal">
+    <div class="eyebrow">À la carte</div>
+    <h2>A few of the à la carte favourites</h2>
+    <p>Prefer a set over the buffet? The Wolt menu has more — here's a sample of what regulars come back for.</p>
+
+    <div class="menu-grid">
+      <div class="menu-group">
+        <h3>Sushi</h3>
+        <div class="menu-item">
+          <span><span class="name">BBQ lohi ja tonnikala</span><span class="desc">BBQ salmon and tuna · 12 pcs</span></span>
+          <span class="price">14,90 €</span>
+        </div>
+        <div class="menu-item">
+          <span><span class="name">BBQ lohi ja raaka lohi</span><span class="desc">BBQ and raw salmon · 12 pcs</span></span>
+          <span class="price">15,50 €</span>
+        </div>
+        <div class="menu-item">
+          <span><span class="name">Lajitelma</span><span class="desc">Mixed sushi assortment · 16 pcs</span></span>
+          <span class="price">18,60 €</span>
+        </div>
+        <div class="menu-item">
+          <span><span class="name">Sushisetti</span><span class="desc">Large sushi set · 60 pcs · for sharing</span></span>
+          <span class="price">60,00 €</span>
+        </div>
+      </div>
+
+      <div class="menu-group">
+        <h3>Warm dishes</h3>
+        <div class="menu-item">
+          <span><span class="name">Friteeratut kevätrullat</span><span class="desc">Fried spring rolls with sweet &amp; sour sauce</span></span>
+          <span class="price">7,30 €</span>
+        </div>
+        <div class="menu-item">
+          <span><span class="name">Kana kung pao</span><span class="desc">Kung Pao chicken</span></span>
+          <span class="price">14,50 €</span>
+        </div>
+        <div class="menu-item">
+          <span><span class="name">Noodle soup bar</span><span class="desc">Choose noodle + topping (beef · chicken · vegetables)</span></span>
+          <span class="price">New</span>
+        </div>
+      </div>
+    </div>
+
+    <p class="menu-note">This is a demo — the full à la carte menu will be added to the final site together with you.</p>
+  </section>
+
+  <!-- About + review -->
+  <section class="reveal">
+    <div class="eyebrow">Willa regulars</div>
+    <div class="about-grid">
+      <div>
+        <h2>A stop on the Willa circuit.</h2>
+        <p>Sushi House sits on the second floor of Kauppakeskus Willa — a buffet made for how families actually use a shopping-centre visit: variety, fair price, room for kids, and fresh sushi you can eat at the counter or take to a table.</p>
+        <p style="margin-top:14px">Open seven days a week.</p>
+        <div class="quote">
+          "Nice buffet with variety of dishes. Best bang for the buck."
+          <cite>— Asmo S · TripAdvisor · Aug 2021</cite>
+        </div>
+      </div>
+      <div class="img-placeholder img-wide"><span>Photo of the buffet line</span></div>
+    </div>
+  </section>
+
+  <!-- Booking -->
+  <section class="reveal">
+    <div class="booking">
+      <h2>Book a table</h2>
+      <p>Reserve in seconds — no account, no fees.</p>
+      <form onsubmit="event.preventDefault();alert('Demo — booking will be live on the final site.');">
+        <input type="date" aria-label="Date">
+        <input type="time" value="18:00" aria-label="Time">
+        <select aria-label="Party size">
+          <option>2 guests</option><option>3 guests</option><option>4 guests</option>
+          <option>5 guests</option><option>6 guests</option><option>7+ guests</option>
+        </select>
+        <button type="submit">Reserve</button>
+      </form>
+      <small>Powered by Klar Bookings — no commissions, no per-cover fees</small>
+    </div>
+  </section>
+
+  <!-- Hours + location -->
+  <section class="reveal">
+    <div class="eyebrow">Visit</div>
+    <div class="info-grid">
+      <div>
+        <h2>Hours</h2>
+        <div class="hours-list">
+          <div><span class="day">Mon–Fri</span><span class="time">10:30 – 21:00</span></div>
+          <div><span class="day">Sat</span><span class="time">11:30 – 21:00</span></div>
+          <div><span class="day">Sun</span><span class="time">11:30 – 20:30</span></div>
+        </div>
+      </div>
+      <div>
+        <h2>Find us</h2>
+        <div class="address-block">
+          Kauppakeskus Willa, 2F · unit 252<br>
+          Hämeenkatu 9, 05800 Hyvinkää<br>
+          <a href="tel:+358442453828">044 245 3828</a> · <a href="mailto:sushihouse.hyvinkaa@gmail.com">sushihouse.hyvinkaa@gmail.com</a>
+        </div>
+        <div class="map-embed">
+          <iframe loading="lazy" src="https://maps.google.com/maps?q=H%C3%A4meenkatu+9+Hyvink%C3%A4%C3%A4&z=16&output=embed" title="Sushi House on the map"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>Sushi House · Hämeenkatu 9, 05800 Hyvinkää · <a href="tel:+358442453828">044 245 3828</a></p>
+  <p>© 2026 Sushi House</p>
+  <p class="klar">Powered by Klar</p>
+</footer>
+
+<script>
+(function(){
+  var els=document.querySelectorAll('.reveal');
+  if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('is-in');});return;}
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(ent){if(ent.isIntersecting){ent.target.classList.add('is-in');io.unobserve(ent.target);}});
+  },{threshold:0.12});
+  els.forEach(function(e){io.observe(e);});
+})();
+</script>
+
+</body>
+</html>

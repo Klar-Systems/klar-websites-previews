@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sheng Long &mdash; Chinese Restaurant, Oulu</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* palette: deep crimson + gold on warm cream */
+    :root {
+      --bg: #FAF7F2;
+      --bg-raised: #FFFFFF;
+      --bg-card: #F2EDE4;
+      --fg: #1C1C1C;
+      --fg-dim: #5C5C5C;
+      --primary: #8B0000;
+      --primary-light: #A52020;
+      --accent: #B8860B;
+      --accent-light: #DAA520;
+      --rule: rgba(139,0,0,0.12);
+      --heading: 'Playfair Display', Georgia, 'Times New Roman', serif;
+      --body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      --mono: 'JetBrains Mono', 'Consolas', monospace;
+      --max-w: 1060px;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      font-family: var(--body);
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ---- DEMO BANNER ---- */
+    .demo-banner {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: var(--primary);
+      color: #fff;
+      text-align: center;
+      padding: 10px 16px;
+      font-size: 0.82rem;
+      letter-spacing: 0.02em;
+      font-family: var(--body);
+      font-weight: 500;
+    }
+    .demo-banner a {
+      color: var(--accent-light);
+      font-weight: 600;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      margin-left: 8px;
+    }
+
+    /* ---- HERO ---- */
+    .hero {
+      margin-top: 44px;
+      padding: 80px 24px 60px;
+      text-align: center;
+      border-bottom: 1px solid var(--rule);
+      background: linear-gradient(180deg, #EDE5D8 0%, var(--bg) 100%);
+    }
+    .hero-badge {
+      display: inline-block;
+      font-family: var(--body);
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--primary);
+      border: 1.5px solid var(--primary);
+      padding: 5px 16px;
+      border-radius: 2px;
+      margin-bottom: 24px;
+    }
+    .hero h1 {
+      font-family: var(--heading);
+      font-size: clamp(2.4rem, 5.5vw, 3.8rem);
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      line-height: 1.1;
+      margin-bottom: 14px;
+      color: var(--fg);
+    }
+    .hero-sub {
+      font-size: 1.05rem;
+      color: var(--fg-dim);
+      margin-bottom: 24px;
+      font-weight: 300;
+    }
+    .hero-rating {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--body);
+      font-size: 1rem;
+      color: var(--accent);
+    }
+    .hero-rating .score {
+      font-weight: 700;
+      font-size: 1.4rem;
+    }
+    .hero-rating .count {
+      color: var(--fg-dim);
+      font-size: 0.85rem;
+    }
+
+    /* ---- IMAGE PLACEHOLDERS ---- */
+    .hero-img {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    .img-placeholder {
+      background: var(--bg-card);
+      border: 1px solid var(--rule);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--fg-dim);
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .img-placeholder-hero {
+      aspect-ratio: 16/9;
+      width: 100%;
+      border-radius: 6px;
+      margin-top: -20px;
+    }
+    .img-placeholder-food {
+      aspect-ratio: 1/1;
+      width: 100%;
+      border-radius: 6px;
+    }
+    .img-placeholder-interior {
+      aspect-ratio: 3/2;
+      width: 100%;
+      border-radius: 6px;
+    }
+
+    /* ---- SECTIONS ---- */
+    section {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 64px 24px;
+    }
+    .section-label {
+      font-family: var(--body);
+      font-size: 0.7rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+    section h2 {
+      font-family: var(--heading);
+      font-size: clamp(1.6rem, 4vw, 2.3rem);
+      font-weight: 600;
+      margin-bottom: 24px;
+      line-height: 1.2;
+      color: var(--fg);
+    }
+
+    /* ---- MENU CARDS ---- */
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .menu-card {
+      background: var(--bg-raised);
+      border: 1px solid var(--rule);
+      border-radius: 6px;
+      padding: 24px;
+      transition: border-color 0.2s;
+    }
+    .menu-card:hover { border-color: var(--accent); }
+    .menu-card h3 {
+      font-family: var(--heading);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 12px;
+    }
+    .menu-card ul { list-style: none; }
+    .menu-card li {
+      font-size: 0.88rem;
+      color: var(--fg-dim);
+      padding: 4px 0;
+      border-bottom: 1px solid rgba(0,0,0,0.04);
+    }
+    .menu-card li:last-child { border-bottom: none; }
+
+    .menu-note {
+      text-align: center;
+      color: var(--fg-dim);
+      font-size: 0.82rem;
+      font-style: italic;
+      margin-top: 16px;
+    }
+
+    /* ---- HIGHLIGHT BOX ---- */
+    .highlight-box {
+      background: var(--bg-raised);
+      border: 1.5px solid var(--rule);
+      border-left: 4px solid var(--primary);
+      border-radius: 6px;
+      padding: 24px 28px;
+      margin-bottom: 32px;
+    }
+    .highlight-box .price {
+      font-family: var(--heading);
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 4px;
+    }
+    .highlight-box .price-note {
+      font-size: 0.88rem;
+      color: var(--fg-dim);
+      margin-bottom: 14px;
+    }
+    .highlight-box .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .highlight-tag {
+      background: var(--bg-card);
+      border: 1px solid var(--rule);
+      padding: 5px 12px;
+      border-radius: 3px;
+      font-size: 0.82rem;
+      color: var(--fg);
+      font-weight: 500;
+    }
+
+    /* ---- ABOUT ---- */
+    .about-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 36px;
+      align-items: start;
+    }
+    .about-text p {
+      color: var(--fg-dim);
+      font-size: 0.95rem;
+      margin-bottom: 16px;
+      line-height: 1.75;
+    }
+    .about-text .highlight { color: var(--fg); font-weight: 600; }
+
+    /* ---- REVIEWS ---- */
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .review-card {
+      background: var(--bg-raised);
+      border: 1px solid var(--rule);
+      border-radius: 6px;
+      padding: 24px;
+    }
+    .review-card blockquote {
+      font-size: 0.92rem;
+      color: var(--fg);
+      font-style: italic;
+      line-height: 1.65;
+      margin-bottom: 12px;
+      border-left: 3px solid var(--primary);
+      padding-left: 14px;
+    }
+    .review-author {
+      font-size: 0.78rem;
+      color: var(--fg-dim);
+      font-weight: 500;
+    }
+    .review-score {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    /* ---- HOURS & LOCATION ---- */
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+    .hours-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .hours-table td {
+      padding: 10px 0;
+      font-size: 0.92rem;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+    .hours-table td:first-child {
+      color: var(--fg-dim);
+      font-size: 0.85rem;
+    }
+    .hours-table td:last-child {
+      text-align: right;
+      font-weight: 600;
+    }
+    .map-frame {
+      width: 100%;
+      aspect-ratio: 4/3;
+      border: 1px solid var(--rule);
+      border-radius: 6px;
+    }
+    .address-block {
+      margin-top: 16px;
+    }
+    .address-block a {
+      color: var(--fg);
+      text-decoration: none;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    .address-block a:hover { color: var(--primary); }
+    .address-block svg {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      stroke: var(--primary);
+    }
+
+    /* ---- BOOKING WIDGET ---- */
+    .booking-wrapper {
+      background: var(--primary);
+      padding: 64px 24px;
+    }
+    .booking-section {
+      max-width: 560px;
+      margin: 0 auto;
+      text-align: center;
+      color: #fff;
+    }
+    .booking-section .section-label { color: var(--accent-light); }
+    .booking-section h2 { color: #fff; margin-bottom: 8px; }
+    .booking-section > p {
+      color: rgba(255,255,255,0.75);
+      font-size: 0.9rem;
+      margin-bottom: 28px;
+    }
+    .booking-form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+    .booking-form input[type="date"],
+    .booking-form select {
+      background: rgba(255,255,255,0.13);
+      border: 1px solid rgba(255,255,255,0.28);
+      color: #fff;
+      padding: 12px 14px;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      font-family: var(--body);
+      width: 100%;
+    }
+    .booking-form input[type="date"]::-webkit-calendar-picker-indicator {
+      filter: invert(1);
+    }
+    .booking-form select option { color: #1C1C1C; background: #fff; }
+    .full-width { grid-column: 1 / -1; }
+    .btn-reserve {
+      grid-column: 1 / -1;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 14px;
+      border-radius: 4px;
+      font-family: var(--body);
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      transition: background 0.2s;
+      width: 100%;
+    }
+    .btn-reserve:hover { background: var(--accent-light); }
+    .booking-note {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.5);
+      margin-top: 10px;
+    }
+
+    /* ---- FOOTER ---- */
+    footer {
+      border-top: 1px solid var(--rule);
+      padding: 40px 24px;
+      text-align: center;
+      background: var(--bg-card);
+    }
+    .footer-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+    .footer-name {
+      font-family: var(--heading);
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--fg);
+    }
+    .footer-info {
+      font-size: 0.82rem;
+      color: var(--fg-dim);
+      line-height: 1.9;
+    }
+    .footer-info a {
+      color: var(--fg-dim);
+      text-decoration: none;
+    }
+    .footer-info a:hover { color: var(--primary); }
+    .footer-powered {
+      margin-top: 20px;
+      font-size: 0.72rem;
+      color: var(--fg-dim);
+      letter-spacing: 0.06em;
+    }
+
+    /* ---- SCROLL REVEAL ---- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ---- RESPONSIVE ---- */
+    @media (max-width: 680px) {
+      .about-content { grid-template-columns: 1fr; }
+      .info-grid { grid-template-columns: 1fr; }
+      .booking-form { grid-template-columns: 1fr; }
+      .hero { padding: 70px 20px 40px; }
+      section { padding: 48px 20px; }
+      .booking-wrapper { padding: 48px 20px; }
+      .highlight-box { padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- DEMO BANNER -->
+  <div class="demo-banner">
+    This is a demo preview built by Klar Systems for Sheng Long &mdash;
+    <a href="https://preview.klarsystems.com/sheng-long-oulu/proposal/">See our offer</a>
+  </div>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-badge">Chinese Restaurant &middot; Central Oulu</div>
+    <h1>Sheng Long</h1>
+    <p class="hero-sub">Hallituskatu 31, 90100 Oulu &mdash; <a href="tel:+35883121688" style="color:var(--fg-dim);text-decoration:none;">08 3121688</a></p>
+    <div class="hero-rating">
+      <span class="score">4.2 / 5</span>
+      <span class="count">270 Google reviews</span>
+    </div>
+  </header>
+
+  <!-- HERO IMAGE PLACEHOLDER -->
+  <div class="hero-img">
+    <div class="img-placeholder img-placeholder-hero">Your photo here</div>
+  </div>
+
+  <!-- MENU -->
+  <section class="reveal">
+    <div class="section-label">The Menu</div>
+    <h2>Authentic Chinese cuisine in the heart of Oulu</h2>
+
+    <div class="highlight-box">
+      <div class="price">11.50</div>
+      <div class="price-note">Lunch special &mdash; salad, main course, dessert &amp; drink</div>
+      <div class="tags">
+        <span class="highlight-tag">Chicken dishes</span>
+        <span class="highlight-tag">Beef dishes</span>
+        <span class="highlight-tag">Noodle dishes</span>
+        <span class="highlight-tag">Fried banana &amp; ice cream</span>
+        <span class="highlight-tag">Mon&ndash;Fri lunch</span>
+      </div>
+    </div>
+
+    <div class="menu-grid">
+      <div class="menu-card">
+        <h3>Chicken Dishes</h3>
+        <ul>
+          <li>Fried noodles with chicken</li>
+          <li>Stir-fried chicken</li>
+          <li>Spicy chicken selections</li>
+        </ul>
+      </div>
+      <div class="menu-card">
+        <h3>Beef Dishes</h3>
+        <ul>
+          <li>Stir-fried beef</li>
+          <li>Beef with seasonal vegetables</li>
+          <li>Chef's beef specials</li>
+        </ul>
+      </div>
+      <div class="menu-card">
+        <h3>Noodles &amp; Rice</h3>
+        <ul>
+          <li>Fried noodles</li>
+          <li>Fried rice selections</li>
+          <li>Noodle soups</li>
+        </ul>
+      </div>
+      <div class="menu-card">
+        <h3>Desserts</h3>
+        <ul>
+          <li>Fried banana with vanilla ice cream</li>
+          <li>Seasonal dessert specials</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="img-placeholder img-placeholder-food" style="max-width:320px;margin:0 auto;">Food photos coming soon</div>
+    <p class="menu-note">This is a demo menu &mdash; the full menu will be updated together with you.</p>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="reveal" style="border-top:1px solid var(--rule);">
+    <div class="section-label">About</div>
+    <h2>Oulu's trusted Chinese restaurant since day one</h2>
+    <div class="about-content">
+      <div class="about-text">
+        <p>With <span class="highlight">270 Google reviews</span> and a 4.2-star rating, Sheng Long has built a reputation as one of the best Chinese restaurants in Oulu. Located on Hallituskatu 31 in central Oulu, the restaurant is an easy choice for lunch or dinner.</p>
+        <p>The kitchen is known for its <span class="highlight">consistently excellent chicken and beef dishes</span> — regulars who have visited for years say the quality never wavers. Portions are generous, prices are reasonable, and the lunch special at 11.50 EUR including salad, main course, dessert, and a drink is one of the best value meals in central Oulu.</p>
+        <p>Service is <span class="highlight">kind and fast</span>. The interior has a warm Chinese atmosphere with comfortable seating. Whether you are coming for a weekday lunch or a casual dinner, Sheng Long delivers.</p>
+      </div>
+      <div>
+        <div class="img-placeholder img-placeholder-interior">Interior photo coming soon</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section class="reveal" style="border-top:1px solid var(--rule);">
+    <div class="section-label">What Customers Say</div>
+    <h2>4.2 / 5 from 270 reviews</h2>
+    <div class="reviews-grid">
+      <div class="review-card">
+        <blockquote>"Very good chinese food. Staff is kind. Portion is big enough for a hungry one."</blockquote>
+        <div class="review-author">timofei &mdash; <span class="review-score">5/5</span></div>
+      </div>
+      <div class="review-card">
+        <blockquote>"Sheng Longin kana- ja härkäannokset mitä olen syönyt useita vuosien aikana ovat olleet aina todella herkullisia."</blockquote>
+        <div class="review-author">Anonymous &mdash; <span class="review-score">5/5</span></div>
+      </div>
+      <div class="review-card">
+        <blockquote>"Ruoan laatu on poikkeuksetta ollut erinomainen. Hinnat ovat hyvin kohtuullisia etenkin lounasaikaan."</blockquote>
+        <div class="review-author">Anonymous &mdash; <span class="review-score">5/5</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOURS & LOCATION -->
+  <section class="reveal" style="border-top:1px solid var(--rule);">
+    <div class="section-label">Visit Us</div>
+    <h2>Hours &amp; Location</h2>
+    <div class="info-grid">
+      <div>
+        <table class="hours-table">
+          <tr><td>Monday &mdash; Friday</td><td>10:30 &mdash; 22:00</td></tr>
+          <tr><td>Saturday &mdash; Sunday</td><td>12:00 &mdash; 22:00</td></tr>
+        </table>
+        <div class="address-block">
+          <a href="tel:+35883121688">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.21 12 19.79 19.79 0 0 1 1.14 3.38 2 2 0 0 1 3.11 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"></path>
+            </svg>
+            08 3121688
+          </a>
+          <a href="https://maps.google.com/?cid=18230471476078688180" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+            Hallituskatu 31, 90100 Oulu
+          </a>
+        </div>
+      </div>
+      <div>
+        <iframe
+          class="map-frame"
+          src="https://maps.google.com/maps?q=Hallituskatu+31+90100+Oulu&z=16&output=embed"
+          allowfullscreen
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Sheng Long location map">
+        </iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOOKING WIDGET -->
+  <div class="booking-wrapper reveal">
+    <div class="booking-section">
+      <div class="section-label">Reservations</div>
+      <h2>Reserve a Table</h2>
+      <p>Book your table in seconds &mdash; no account needed, no fees.</p>
+      <form class="booking-form" onsubmit="return false;">
+        <input type="date" aria-label="Select date" class="full-width">
+        <select aria-label="Select time">
+          <option value="">Select time</option>
+          <option>11:00</option>
+          <option>11:30</option>
+          <option>12:00</option>
+          <option>12:30</option>
+          <option>13:00</option>
+          <option>13:30</option>
+          <option>14:00</option>
+          <option>17:00</option>
+          <option>17:30</option>
+          <option>18:00</option>
+          <option>18:30</option>
+          <option>19:00</option>
+          <option>19:30</option>
+          <option>20:00</option>
+        </select>
+        <select aria-label="Party size">
+          <option value="">Party size</option>
+          <option>1 guest</option>
+          <option>2 guests</option>
+          <option>3 guests</option>
+          <option>4 guests</option>
+          <option>5 guests</option>
+          <option>6 guests</option>
+          <option>7+ guests</option>
+        </select>
+        <button type="submit" class="btn-reserve">Reserve</button>
+      </form>
+      <p class="booking-note">Powered by Klar Bookings &mdash; no commission, no third parties</p>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-name">Sheng Long</div>
+      <div class="footer-info">
+        Hallituskatu 31, 90100 Oulu<br>
+        <a href="tel:+35883121688">08 3121688</a><br>
+        Mon&ndash;Fri 10:30&ndash;22:00 &nbsp;|&nbsp; Sat&ndash;Sun 12:00&ndash;22:00<br>
+        &copy; 2026 Sheng Long
+      </div>
+      <div class="footer-powered">Powered by Klar Systems &mdash; this is a demo preview for Sheng Long.</div>
+    </div>
+  </footer>
+
+  <!-- SCROLL REVEAL -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var els = document.querySelectorAll('.reveal');
+      if ('IntersectionObserver' in window) {
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.08 });
+        els.forEach(function (el) { observer.observe(el); });
+      } else {
+        els.forEach(function (el) { el.classList.add('visible'); });
+      }
+    });
+  </script>
+</body>
+</html>

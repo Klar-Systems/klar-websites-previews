@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nattarin Pizza Kebab — Kangasala</title>
+  <style>
+    :root {
+      --primary: #b22222;
+      --accent: #f5b301;
+      --bg: #f7f3ea;
+      --text: #1a1a1a;
+      --muted: #6b5d4f;
+      --line: rgba(26,26,26,0.12);
+      --head-family: "Georgia", "Times New Roman", serif;
+      --body-family: "Helvetica Neue", Arial, sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { background: var(--bg); color: var(--text); font-family: var(--body-family); line-height: 1.6; }
+
+    .demo-banner {
+      background: var(--text); color: var(--bg);
+      font-size: 13px; letter-spacing: 0.04em;
+      padding: 10px 20px; text-align: center;
+    }
+    .demo-banner a { color: var(--accent); text-decoration: underline; }
+
+    header.nav {
+      max-width: 1120px; margin: 0 auto; padding: 22px 24px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    header.nav .brand {
+      font-family: var(--head-family); font-size: 22px; letter-spacing: 0.02em;
+      color: var(--primary); font-weight: 700;
+    }
+    header.nav nav a {
+      color: var(--text); text-decoration: none; margin-left: 24px;
+      font-size: 14px; letter-spacing: 0.06em; text-transform: uppercase;
+    }
+    header.nav nav a:hover { color: var(--primary); }
+
+    section.hero {
+      max-width: 1120px; margin: 0 auto; padding: 40px 24px 60px;
+      display: grid; grid-template-columns: 1.1fr 1fr; gap: 48px; align-items: center;
+    }
+    .hero-copy h1 {
+      font-family: var(--head-family); font-size: 54px; line-height: 1.05;
+      color: var(--primary); margin-bottom: 18px;
+    }
+    .hero-copy .sub {
+      font-size: 18px; color: var(--muted); margin-bottom: 12px;
+    }
+    .hero-copy .rating {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(245,179,1,0.15); padding: 6px 12px; border-radius: 4px;
+      font-size: 14px; margin-bottom: 28px;
+    }
+    .cta-primary {
+      display: inline-block; background: var(--primary); color: var(--bg);
+      padding: 16px 32px; text-decoration: none; font-weight: 700;
+      font-size: 18px; border-radius: 3px; letter-spacing: 0.03em;
+    }
+    .cta-primary:hover { background: var(--text); }
+
+    .photo-placeholder {
+      aspect-ratio: 16 / 10;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      opacity: 0.55;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--bg); font-size: 13px; letter-spacing: 0.08em;
+      text-transform: uppercase; font-family: var(--body-family);
+    }
+
+    section.menu {
+      background: var(--text); color: var(--bg); padding: 60px 24px;
+    }
+    section.menu .inner { max-width: 1120px; margin: 0 auto; }
+    section.menu h2 {
+      font-family: var(--head-family); font-size: 38px; color: var(--accent);
+      margin-bottom: 28px;
+    }
+    .menu-intro { color: rgba(247,243,234,0.75); margin-bottom: 40px; max-width: 620px; }
+    .menu-categories {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px 28px;
+      margin-bottom: 40px;
+    }
+    .menu-categories span {
+      padding: 10px 14px; background: rgba(247,243,234,0.06);
+      border-left: 3px solid var(--accent); font-size: 15px;
+    }
+    .signature-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px;
+    }
+    .signature-item {
+      background: rgba(247,243,234,0.06); padding: 20px 24px; border-radius: 3px;
+    }
+    .signature-item .name {
+      font-family: var(--head-family); font-size: 22px; color: var(--accent);
+      margin-bottom: 4px;
+    }
+    .signature-item .desc { color: rgba(247,243,234,0.72); font-size: 14px; margin-bottom: 10px; }
+    .signature-item .price { font-weight: 700; font-size: 18px; }
+    .menu-photo {
+      grid-column: span 2;
+      aspect-ratio: 21 / 9;
+      background: linear-gradient(135deg, #4a1010, var(--primary));
+      opacity: 0.65;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--bg); font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase;
+      margin-top: 16px;
+    }
+
+    section.call-cta {
+      max-width: 1120px; margin: 80px auto; padding: 50px 24px;
+      background: var(--primary); color: var(--bg); text-align: center;
+      border-radius: 4px;
+    }
+    section.call-cta h2 {
+      font-family: var(--head-family); font-size: 42px; margin-bottom: 12px;
+    }
+    section.call-cta p { margin-bottom: 28px; font-size: 18px; opacity: 0.92; }
+    section.call-cta a.phone-big {
+      display: inline-block; color: var(--accent); font-family: var(--head-family);
+      font-size: 44px; text-decoration: none; letter-spacing: 0.02em;
+    }
+    section.call-cta a.phone-big:hover { color: var(--bg); }
+
+    section.reviews {
+      max-width: 1120px; margin: 60px auto; padding: 0 24px;
+    }
+    section.reviews h2 {
+      font-family: var(--head-family); font-size: 36px; color: var(--primary);
+      margin-bottom: 32px; text-align: center;
+    }
+    .review-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px;
+    }
+    .review-card {
+      background: #fff; padding: 28px; border-left: 4px solid var(--accent);
+      border-radius: 2px;
+    }
+    .review-card .stars { color: var(--primary); margin-bottom: 10px; font-size: 14px; letter-spacing: 0.1em; }
+    .review-card blockquote { font-style: italic; font-size: 17px; color: var(--text); }
+    .review-card cite { display: block; margin-top: 14px; font-size: 13px; color: var(--muted); font-style: normal; letter-spacing: 0.05em; }
+
+    section.location {
+      background: #fff; padding: 60px 24px; border-top: 1px solid var(--line);
+    }
+    section.location .inner {
+      max-width: 1120px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 48px;
+    }
+    section.location h2 {
+      font-family: var(--head-family); font-size: 36px; color: var(--primary);
+      margin-bottom: 20px;
+    }
+    .hours-list { list-style: none; }
+    .hours-list li {
+      padding: 8px 0; border-bottom: 1px solid var(--line);
+      display: flex; justify-content: space-between; font-size: 15px;
+    }
+    .hours-list li span:first-child { font-weight: 600; }
+    .map-embed iframe {
+      width: 100%; height: 340px; border: 0; border-radius: 3px;
+    }
+    .address-block { margin-top: 24px; font-size: 16px; line-height: 1.7; }
+    .address-block a { color: var(--primary); text-decoration: none; }
+
+    footer {
+      background: var(--text); color: rgba(247,243,234,0.7);
+      padding: 40px 24px; text-align: center; font-size: 13px; letter-spacing: 0.04em;
+    }
+    footer .klar { margin-top: 12px; font-size: 12px; color: rgba(247,243,234,0.45); }
+
+    @media (max-width: 780px) {
+      section.hero { grid-template-columns: 1fr; padding: 24px 20px 40px; gap: 28px; }
+      .hero-copy h1 { font-size: 38px; }
+      section.location .inner { grid-template-columns: 1fr; }
+      .menu-categories { grid-template-columns: 1fr; }
+      .signature-grid { grid-template-columns: 1fr; }
+      .review-grid { grid-template-columns: 1fr; }
+      section.call-cta a.phone-big { font-size: 32px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="demo-banner">
+    This is a demo preview prepared for Nattarin Pizza Kebab — see the full proposal at
+    <a href="https://preview.klarsystems.com/nattarin-pizza-kebab-kangasala/proposal/">preview.klarsystems.com/nattarin-pizza-kebab-kangasala/proposal/</a>
+  </div>
+
+  <header class="nav">
+    <div class="brand">Nattarin Pizza Kebab</div>
+    <nav>
+      <a href="#menu">Menu</a>
+      <a href="#call">Order</a>
+      <a href="#location">Find us</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-copy">
+      <h1>Pizza, kebab and late nights on Holvastintie.</h1>
+      <p class="sub">Fresh, generous portions. Counter-straight, no fuss — the kitchen picks up the phone and the order is ready when you are.</p>
+      <div class="rating">
+        <strong>4.5</strong>
+        <span>— 487 Google reviews</span>
+      </div>
+      <br>
+      <a class="cta-primary" href="tel:+358400488699">Call to order — +358 40 048 8699</a>
+    </div>
+    <div class="photo-placeholder" aria-label="Your photo here">
+      <span>Your photo here</span>
+    </div>
+  </section>
+
+  <section class="menu" id="menu">
+    <div class="inner">
+      <h2>The menu</h2>
+      <p class="menu-intro">Pizza, kebab, burgers, wings, falafel and chicken fillets — the full list is on Wolt and Foodora; four picks to get you started below.</p>
+
+      <div class="menu-categories">
+        <span>Pizzat</span>
+        <span>Perhepizzat</span>
+        <span>Burgerit</span>
+        <span>Kebabit</span>
+        <span>Kanadöner</span>
+        <span>Kanafileet</span>
+        <span>Falafelit</span>
+        <span>Salaatit</span>
+        <span>Wingsit</span>
+        <span>Juomat</span>
+      </div>
+
+      <div class="signature-grid">
+        <div class="signature-item">
+          <div class="name">Kebab ranskalaisilla</div>
+          <div class="desc">Kebab with french fries — the classic.</div>
+          <div class="price">€14.90</div>
+        </div>
+        <div class="signature-item">
+          <div class="name">Iskender kebab</div>
+          <div class="desc">Yogurt, tomato sauce, butter over kebab meat.</div>
+          <div class="price">€14.90</div>
+        </div>
+        <div class="signature-item">
+          <div class="name">Hot Wings</div>
+          <div class="desc">Ten wings, crisp and hot.</div>
+          <div class="price">€14.00</div>
+        </div>
+        <div class="signature-item">
+          <div class="name">Dillinger</div>
+          <div class="desc">House burger, built for size.</div>
+          <div class="price">€16.00</div>
+        </div>
+        <div class="menu-photo" aria-label="Food photos coming soon">
+          <span>Food photos coming soon</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="call-cta" id="call">
+    <h2>Call the counter directly.</h2>
+    <p>One ring, one order, no commission in the middle.</p>
+    <a class="phone-big" href="tel:+358400488699">+358 40 048 8699</a>
+  </section>
+
+  <section class="reviews">
+    <h2>What locals say</h2>
+    <div class="review-grid">
+      <div class="review-card">
+        <div class="stars">Rated 4/5</div>
+        <blockquote>Nice decoration and good food with good pricing.</blockquote>
+        <cite>— Google review</cite>
+      </div>
+      <div class="review-card">
+        <div class="stars">Rated 5/5</div>
+        <blockquote>Really good pizza, and pretty nice place!</blockquote>
+        <cite>— Google review</cite>
+      </div>
+    </div>
+  </section>
+
+  <section class="location" id="location">
+    <div class="inner">
+      <div>
+        <h2>Hours</h2>
+        <ul class="hours-list">
+          <li><span>Monday</span><span>10:30 – 22:00</span></li>
+          <li><span>Tuesday</span><span>10:30 – 22:00</span></li>
+          <li><span>Wednesday</span><span>10:30 – 22:00</span></li>
+          <li><span>Thursday</span><span>10:30 – 22:00</span></li>
+          <li><span>Friday</span><span>10:30 – 01:00</span></li>
+          <li><span>Saturday</span><span>12:00 – 01:00</span></li>
+          <li><span>Sunday</span><span>12:00 – 22:00</span></li>
+        </ul>
+        <div class="address-block">
+          Holvastintie 6, 36240 Kangasala<br>
+          <a href="tel:+358400488699">+358 40 048 8699</a>
+        </div>
+      </div>
+      <div>
+        <h2>Find us</h2>
+        <div class="map-embed">
+          <iframe src="https://maps.google.com/maps?q=Holvastintie+6+Kangasala&z=16&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+        <div class="photo-placeholder" aria-label="Interior photo coming soon" style="margin-top:20px;">
+          <span>Interior photo coming soon</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div>Nattarin Pizza Kebab · Holvastintie 6, 36240 Kangasala · +358 40 048 8699</div>
+    <div class="klar">Powered by Klar Sites — preview.klarsystems.com/nattarin-pizza-kebab-kangasala/</div>
+  </footer>
+
+</body>
+</html>

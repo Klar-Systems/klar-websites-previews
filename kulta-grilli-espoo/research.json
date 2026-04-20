@@ -1,0 +1,103 @@
+{
+  "basic": {
+    "name": "Kulta-Grilli",
+    "restaurant_name": "Kulta-Grilli",
+    "slug": "kulta-grilli-espoo",
+    "address": "E18, Nupuri, 02820 Espoo",
+    "phone": "050 4720771",
+    "city": "Espoo",
+    "cuisine_type": {
+      "value": "Finnish grilli — hamburgers, meat pies, hot dogs, sausage fries, coffee, pastries",
+      "source_url": "https://way.fi/kulta-grilli",
+      "source_quote": "perus grilliruokaa ja kavia",
+      "confidence": "high",
+      "source_type": "website"
+    },
+    "opening_hours": {
+      "value": "Mon-Fri 07:30-21:00, Sat 10:00-18:00, Sun closed",
+      "source_url": "https://finland-places.com/espoo/kulta-grilli/",
+      "source_quote": "Maanantai: 7.30-21",
+      "confidence": "high",
+      "source_type": "website"
+    },
+    "segment": {
+      "value": 2,
+      "source_url": "https://way.fi/kulta-grilli",
+      "source_quote": "perus grilliruokaa ja kavia",
+      "confidence": "high",
+      "source_type": "website"
+    },
+    "is_chain": {
+      "value": false,
+      "source_url": "https://finland-places.com/espoo/kulta-grilli/",
+      "source_quote": "Maanantai: 7.30-21",
+      "confidence": "high",
+      "source_type": "website"
+    },
+    "is_closed": {
+      "value": false,
+      "source_url": "https://finland-places.com/espoo/kulta-grilli/",
+      "source_quote": "Maanantai: 7.30-21",
+      "confidence": "high",
+      "source_type": "website"
+    },
+    "has_existing_website": {
+      "value": false,
+      "source_url": "https://way.fi/kulta-grilli",
+      "source_quote": "perus grilliruokaa ja kavia",
+      "confidence": "high",
+      "source_type": "website"
+    },
+    "google_rating": 4.0,
+    "review_count": 1152,
+    "restaurant_name_gen": "Kulta-Grillin"
+  },
+  "menu": {
+    "cuisine_style": {
+      "value": "Finnish grilli — hamburgers, meat pies, hot dogs, sausage fries, coffee, pastries",
+      "source_url": "https://way.fi/kulta-grilli",
+      "source_quote": "perus grilliruokaa ja kavia",
+      "confidence": "high",
+      "source_type": "website"
+    },
+    "signature_dishes": [
+      "Hampurilainen",
+      "Lihapiiras",
+      "Makkaraperunat"
+    ],
+    "categories": [
+      "Grill food",
+      "Burgers",
+      "Hot drinks"
+    ],
+    "price_range": {
+      "value": "EUR",
+      "source_url": "",
+      "confidence": "inferred",
+      "source_type": "inferred"
+    },
+    "notes": []
+  },
+  "reviews": [
+    {
+      "text": "Popular rest stop on the Helsinki-Turku motorway, serving travellers for over 40 years.",
+      "rating": 4,
+      "source_url": "https://way.fi/kulta-grilli",
+      "source_quote": "perus grilliruokaa ja kavia",
+      "confidence": "high"
+    }
+  ],
+  "links": {
+    "preview_link": "https://preview.klarsystems.com/kulta-grilli-espoo/",
+    "calendly_link": "https://calendly.com/lomberg-klarsystems"
+  },
+  "personality": {
+    "design_brief": "Classic Finnish roadside grilli kiosk on the E18 motorway — warm yellows and reds, bold retro signage, unpretentious fast-food energy. Design should feel like a trusted pit-stop: quick, honest, no frills. Emphasise call-to-order phone number prominently.",
+    "research_depth": "tier_2",
+    "vibe_summary": "Classic E18 motorway pit-stop grilli serving travellers for decades.",
+    "review_themes": [
+      "fast service",
+      "classic grilli food"
+    ]
+  }
+}

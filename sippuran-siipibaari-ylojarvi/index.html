@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sippuran Siipibaari — Authentic Hot Wings in Ylöjärvi</title>
+  <style>
+    /* ─── RESET & BASE ─── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Georgia', serif;
+      background: #1A1A1A;
+      color: #F5F0EB;
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* ─── DEMO BANNER ─── */
+    .demo-banner {
+      background: #D4230A;
+      color: #fff;
+      text-align: center;
+      padding: 10px 20px;
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      font-weight: bold;
+      letter-spacing: 0.03em;
+      position: relative;
+      z-index: 999;
+    }
+    .demo-banner a {
+      color: #F2A500;
+      text-decoration: underline;
+      font-weight: bold;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      background: rgba(26, 26, 26, 0.97);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 2px solid #D4230A;
+    }
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+    }
+    .nav-logo {
+      font-family: Arial Black, Impact, sans-serif;
+      font-size: 20px;
+      font-weight: 900;
+      color: #F2A500;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .nav-logo span { color: #D4230A; }
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .nav-links a {
+      color: #F5F0EB;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: #F2A500; }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 90vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      background: #1A1A1A;
+    }
+    .hero-photo-placeholder {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #2a0a00 0%, #1A1A1A 60%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .photo-label {
+      position: absolute;
+      bottom: 20px;
+      right: 24px;
+      color: rgba(245,240,235,0.25);
+      font-family: Arial, sans-serif;
+      font-size: 11px;
+      font-style: italic;
+      letter-spacing: 0.04em;
+    }
+    /* Decorative fire-like shapes */
+    .hero-photo-placeholder::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 80% at 15% 60%, rgba(212,35,10,0.18) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 70% at 85% 40%, rgba(242,165,0,0.12) 0%, transparent 60%);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      max-width: 800px;
+      padding: 48px 24px;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: #D4230A;
+      color: #fff;
+      font-family: Arial Black, Impact, sans-serif;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 6px 18px;
+      border-radius: 2px;
+      margin-bottom: 24px;
+    }
+    .hero-title {
+      font-family: Arial Black, Impact, sans-serif;
+      font-size: clamp(42px, 8vw, 80px);
+      font-weight: 900;
+      line-height: 1.0;
+      color: #F5F0EB;
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+      margin-bottom: 16px;
+    }
+    .hero-title .fire { color: #D4230A; }
+    .hero-tagline {
+      font-family: Arial, sans-serif;
+      font-size: clamp(16px, 2.5vw, 22px);
+      color: #F2A500;
+      font-style: italic;
+      margin-bottom: 32px;
+      letter-spacing: 0.02em;
+    }
+    .hero-rating {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(242,165,0,0.3);
+      border-radius: 4px;
+      padding: 10px 20px;
+      margin-bottom: 36px;
+      font-family: Arial, sans-serif;
+      font-size: 15px;
+    }
+    .stars-display {
+      color: #F2A500;
+      font-size: 18px;
+      letter-spacing: 2px;
+    }
+    .hero-cta-row {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      background: #D4230A;
+      color: #fff;
+      font-family: Arial Black, Impact, sans-serif;
+      font-size: 15px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 16px 36px;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+      display: inline-block;
+    }
+    .btn-primary:hover { background: #b81e08; transform: translateY(-1px); }
+    .btn-secondary {
+      background: transparent;
+      color: #F2A500;
+      font-family: Arial Black, Impact, sans-serif;
+      font-size: 15px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 15px 36px;
+      border: 2px solid #F2A500;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      display: inline-block;
+    }
+    .btn-secondary:hover { background: #F2A500; color: #1A1A1A; }
+
+    /* ─── SECTIONS ─── */
+    section { padding: 80px 24px; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+    .section-label {
+      font-family: Arial, sans-serif;
+      font-size: 11px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: #D4230A;
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: Arial Black, Impact, sans-serif;
+      font-size: clamp(28px, 5vw, 48px);
+      font-weight: 900;
+      text-transform: uppercase;
+      line-height: 1.1;
+      margin-bottom: 24px;
+      color: #F5F0EB;
+    }
+    .section-title .accent { color: #F2A500; }
+    .divider {
+      width: 56px;
+      height: 4px;
+      background: #D4230A;
+      margin-bottom: 32px;
+    }
+
+    /* ─── ABOUT ─── */
+    #about { background: #1A1A1A; }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+    .about-text p {
+      font-size: 16px;
+      line-height: 1.75;
+      color: rgba(245,240,235,0.85);
+      margin-bottom: 16px;
+    }
+    .about-text strong { color: #F2A500; }
+    .about-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 32px;
+    }
+    .stat-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(212,35,10,0.2);
+      border-radius: 4px;
+      padding: 20px;
+      text-align: center;
+    }
+    .stat-num {
+      font-family: Arial Black, Impact, sans-serif;
+      font-size: 32px;
+      font-weight: 900;
+      color: #D4230A;
+      display: block;
+    }
+    .stat-lbl {
+      font-family: Arial, sans-serif;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: rgba(245,240,235,0.6);
+      margin-top: 4px;
+    }
+    .interior-placeholder {
+      background: rgba(255,255,255,0.04);
+      border: 2px dashed rgba(212,35,10,0.3);
+      border-radius: 6px;
+      aspect-ratio: 4/3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 8px;
+      color: rgba(245,240,235,0.3);
+      font-family: Arial, sans-serif;
+      font-size: 13px;
+      font-style: italic;
+    }
+    .interior-placeholder .ph-icon {
+      width: 40px;
+      height: 40px;
+      border: 2px solid rgba(245,240,235,0.2);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+    }
+
+    /* ─── MENU ─── */
+    #menu { background: #111; }
+    .menu-intro {
+      font-size: 16px;
+      line-height: 1.7;
+      color: rgba(245,240,235,0.75);
+      max-width: 620px;
+      margin-bottom: 48px;
+    }
+    .menu-columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 48px;
+    }
+    .menu-group-title {
+      font-family: Arial Black, Impact, sans-serif;
+      font-size: 13px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: #D4230A;
+      margin-bottom: 20px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid rgba(212,35,10,0.25);
+    }
+    .menu-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(245,240,235,0.07);
+    }
+    .menu-item:last-child { border-bottom: none; }
+    .menu-item-left { flex: 1; }
+    .menu-item-name {
+      font-family: Arial, sans-serif;
+      font-size: 15px;
+      font-weight: bold;
+      color: #F5F0EB;
+    }
+    .menu-item-desc {
+      font-family: Arial, sans-serif;
+      font-size: 13px;
+      color: rgba(245,240,235,0.5);
+      margin-top: 3px;
+    }
+    .menu-item-price {
+      font-family: Arial Black, sans-serif;
+      font-size: 15px;
+      font-weight: 900;
+      color: #F2A500;
+      margin-left: 16px;
+      white-space: nowrap;
+    }
+    /* Sauce chips */
+    .sauce-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 8px;
+    }
+    .sauce-chip {
+      background: rgba(212,35,10,0.12);
+      border: 1px solid rgba(212,35,10,0.3);
+      color: #F5F0EB;
+      font-family: Arial, sans-serif;
+      font-size: 13px;
+      padding: 6px 14px;
+      border-radius: 2px;
+      font-weight: bold;
+    }
+    .sauce-chip.hot { border-color: #D4230A; color: #D4230A; }
+    /* Food photo placeholder */
+    .food-photo-placeholder {
+      background: rgba(255,255,255,0.03);
+      border: 2px dashed rgba(242,165,0,0.2);
+      border-radius: 6px;
+      padding: 32px;
+      text-align: center;
+      color: rgba(245,240,235,0.25);
+      font-family: Arial, sans-serif;
+      font-size: 12px;
+      font-style: italic;
+      margin-top: 40px;
+    }
+    .menu-note {
+      background: rgba(242,165,0,0.07);
+      border-left: 3px solid #F2A500;
+      padding: 16px 20px;
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      color: rgba(245,240,235,0.8);
+      margin-top: 32px;
+      border-radius: 0 4px 4px 0;
+    }
+
+    /* ─── BOOKING ─── */
+    #reserve { background: #1A1A1A; }
+    .booking-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: start;
+    }
+    .booking-copy p {
+      font-size: 16px;
+      line-height: 1.75;
+      color: rgba(245,240,235,0.8);
+      margin-bottom: 14px;
+    }
+    .booking-copy .highlight {
+      color: #F2A500;
+      font-weight: bold;
+    }
+    #klar-bookings {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(212,35,10,0.3);
+      border-radius: 6px;
+      padding: 36px 32px;
+    }
+    .widget-title {
+      font-family: Arial Black, Impact, sans-serif;
+      font-size: 18px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #F2A500;
+      margin-bottom: 24px;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .form-group.full { grid-column: 1 / -1; }
+    .form-group label {
+      font-family: Arial, sans-serif;
+      font-size: 11px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: rgba(245,240,235,0.55);
+    }
+    .form-group input,
+    .form-group select {
+      background: rgba(26,26,26,0.9);
+      border: 1px solid rgba(245,240,235,0.15);
+      border-radius: 3px;
+      color: #F5F0EB;
+      font-family: Arial, sans-serif;
+      font-size: 15px;
+      padding: 12px 14px;
+      width: 100%;
+      transition: border-color 0.2s;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+    .form-group input:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: #D4230A;
+    }
+    .form-group select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23F2A500' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 36px;
+      cursor: pointer;
+    }
+    .form-group select option { background: #1A1A1A; }
+    .btn-book {
+      width: 100%;
+      background: #D4230A;
+      color: #fff;
+      font-family: Arial Black, Impact, sans-serif;
+      font-size: 16px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      padding: 17px 24px;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      margin-top: 8px;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-book:hover { background: #b81e08; transform: translateY(-1px); }
+    .widget-note {
+      font-family: Arial, sans-serif;
+      font-size: 12px;
+      color: rgba(245,240,235,0.35);
+      text-align: center;
+      margin-top: 14px;
+    }
+
+    /* ─── HOURS ─── */
+    #hours { background: #111; }
+    .hours-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .hours-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(245,240,235,0.07);
+      border-radius: 4px;
+      padding: 18px 20px;
+    }
+    .hours-day {
+      font-family: Arial, sans-serif;
+      font-size: 12px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: rgba(245,240,235,0.5);
+      margin-bottom: 6px;
+    }
+    .hours-time {
+      font-family: Arial Black, Impact, sans-serif;
+      font-size: 18px;
+      font-weight: 900;
+      color: #F2A500;
+    }
+    .hours-card.weekend { border-color: rgba(212,35,10,0.3); }
+    .hours-card.weekend .hours-time { color: #D4230A; }
+    .hours-note {
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      color: rgba(245,240,235,0.55);
+      margin-top: 8px;
+    }
+
+    /* ─── REVIEWS ─── */
+    #reviews { background: #1A1A1A; }
+    .reviews-header {
+      display: flex;
+      align-items: flex-end;
+      gap: 24px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+    .reviews-header .big-rating {
+      font-family: Arial Black, Impact, sans-serif;
+      font-size: 72px;
+      font-weight: 900;
+      color: #F2A500;
+      line-height: 1;
+    }
+    .reviews-header .rating-detail {
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      color: rgba(245,240,235,0.6);
+      margin-top: 4px;
+    }
+    .reviews-header .stars-row {
+      font-size: 22px;
+      color: #F2A500;
+      letter-spacing: 2px;
+    }
+    .review-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .review-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(245,240,235,0.07);
+      border-radius: 4px;
+      padding: 24px;
+    }
+    .review-quote {
+      font-size: 15px;
+      line-height: 1.65;
+      color: rgba(245,240,235,0.85);
+      font-style: italic;
+      margin-bottom: 14px;
+    }
+    .review-author {
+      font-family: Arial, sans-serif;
+      font-size: 12px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: rgba(245,240,235,0.4);
+    }
+    .review-stars {
+      color: #F2A500;
+      font-size: 14px;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+    }
+
+    /* ─── LOCATION ─── */
+    #contact { background: #111; }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: start;
+    }
+    .contact-block {
+      margin-bottom: 32px;
+    }
+    .contact-block-title {
+      font-family: Arial, sans-serif;
+      font-size: 11px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: #D4230A;
+      margin-bottom: 10px;
+    }
+    .contact-block p {
+      font-size: 16px;
+      color: #F5F0EB;
+      line-height: 1.6;
+    }
+    .contact-block a {
+      color: #F2A500;
+      font-weight: bold;
+    }
+    .contact-block a:hover { text-decoration: underline; }
+    .social-links {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+    .social-link {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(245,240,235,0.12);
+      color: #F5F0EB;
+      font-family: Arial, sans-serif;
+      font-size: 13px;
+      font-weight: bold;
+      padding: 8px 16px;
+      border-radius: 3px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .social-link:hover { border-color: #F2A500; color: #F2A500; }
+    .map-placeholder {
+      background: rgba(255,255,255,0.03);
+      border: 2px dashed rgba(245,240,235,0.1);
+      border-radius: 6px;
+      aspect-ratio: 4/3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 10px;
+      color: rgba(245,240,235,0.3);
+      font-family: Arial, sans-serif;
+      font-size: 13px;
+    }
+    .map-placeholder a {
+      margin-top: 8px;
+      background: #D4230A;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      font-size: 13px;
+      font-weight: bold;
+      padding: 10px 20px;
+      border-radius: 3px;
+      transition: background 0.2s;
+    }
+    .map-placeholder a:hover { background: #b81e08; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: #0d0d0d;
+      border-top: 2px solid #D4230A;
+      padding: 40px 24px;
+      text-align: center;
+    }
+    .footer-inner { max-width: 1100px; margin: 0 auto; }
+    .footer-logo {
+      font-family: Arial Black, Impact, sans-serif;
+      font-size: 22px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #F2A500;
+      margin-bottom: 8px;
+    }
+    .footer-address {
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      color: rgba(245,240,235,0.45);
+      margin-bottom: 20px;
+    }
+    .footer-links {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+    .footer-links a {
+      font-family: Arial, sans-serif;
+      font-size: 13px;
+      color: rgba(245,240,235,0.5);
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: #F2A500; }
+    .footer-powered {
+      font-family: Arial, sans-serif;
+      font-size: 12px;
+      color: rgba(245,240,235,0.25);
+      border-top: 1px solid rgba(245,240,235,0.07);
+      padding-top: 20px;
+      margin-top: 4px;
+    }
+    .footer-powered a { color: rgba(245,240,235,0.4); transition: color 0.2s; }
+    .footer-powered a:hover { color: #F2A500; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .about-grid,
+      .booking-wrap,
+      .contact-grid,
+      .menu-columns { grid-template-columns: 1fr; gap: 32px; }
+      .form-row { grid-template-columns: 1fr; }
+      .about-stats { grid-template-columns: 1fr 1fr; }
+      section { padding: 56px 20px; }
+      .hero { min-height: 70vh; }
+      #klar-bookings { padding: 24px 18px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- DEMO BANNER -->
+  <div class="demo-banner">
+    This is a demo preview built by Klar — interested in your own professional website?
+    <a href="https://preview.klarsystems.com/sippuran-siipibaari-ylojarvi/proposal/">See the full proposal</a>
+  </div>
+
+  <!-- NAVIGATION -->
+  <nav>
+    <div class="nav-inner">
+      <div class="nav-logo">Sippuran <span>Siipibaari</span></div>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#reserve">Reserve</a></li>
+        <li><a href="#hours">Hours</a></li>
+        <li><a href="#contact">Location</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-photo-placeholder">
+      <span class="photo-label">Your photo here</span>
+    </div>
+    <div class="hero-content">
+      <div class="hero-badge">Ylöjärvi's Wing Bar — Since 2009</div>
+      <h1 class="hero-title">
+        The Real<br><span class="fire">Hot Wings</span><br>Experience
+      </h1>
+      <p class="hero-tagline">"Aidot hot wingsit!" — Authentic American wings, right here in Pirkanmaa</p>
+      <div class="hero-rating">
+        <div class="stars-display">4.3 / 5</div>
+        <div>
+          <div style="font-family:Arial,sans-serif;font-size:13px;color:rgba(245,240,235,0.6);">295 Google reviews</div>
+        </div>
+      </div>
+      <div class="hero-cta-row">
+        <a href="#reserve" class="btn-primary">Reserve a Table</a>
+        <a href="#menu" class="btn-secondary">See the Menu</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-inner">
+      <div class="about-grid">
+        <div class="about-text">
+          <p class="section-label">About Us</p>
+          <h2 class="section-title">Pirkanmaa's Wing <span class="accent">Legend</span></h2>
+          <div class="divider"></div>
+          <p>
+            Sippuran Siipibaari has been serving the best chicken wings in Ylöjärvi since <strong>2009</strong>.
+            Born in Soppeenmäki, we've spent over 15 years perfecting the art of the hot wing —
+            with authentic American-style recipes and a passion for quality that keeps locals coming back.
+          </p>
+          <p>
+            Our chicken is <strong>sourced entirely from Finland</strong>, ensuring freshness and supporting local farming.
+            We toss our wings in the legendary <strong>Siipiweikot sauces</strong> — from mild BBQ to face-melting X-hot —
+            so every bite delivers exactly the heat level you're after.
+          </p>
+          <p>
+            Join us at the bar, grab a cold one with your <strong>A-licence drinks</strong>,
+            and settle in for some wings. Summer? Our <strong>terrace</strong> is waiting.
+            Bringing a group? You're in the right place.
+          </p>
+          <div class="about-stats">
+            <div class="stat-card">
+              <span class="stat-num">2009</span>
+              <span class="stat-lbl">Est. in Ylöjärvi</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-num">4.3</span>
+              <span class="stat-lbl">Google Rating</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-num">295</span>
+              <span class="stat-lbl">Reviews</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-num">7+</span>
+              <span class="stat-lbl">Wing Sauces</span>
+            </div>
+          </div>
+        </div>
+        <div class="interior-placeholder">
+          <div class="ph-icon">[img]</div>
+          <span>Interior photo coming soon</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MENU -->
+  <section id="menu">
+    <div class="section-inner">
+      <p class="section-label">What We Serve</p>
+      <h2 class="section-title">The <span class="accent">Menu</span></h2>
+      <div class="divider"></div>
+      <p class="menu-intro">
+        Authentic American hot wings, golden nuggets, chicken baskets, and fries —
+        paired with your choice of sauce. Finnish chicken, real flavour.
+      </p>
+
+      <div class="menu-columns">
+        <!-- Signature Sets -->
+        <div>
+          <div class="menu-group-title">Wing Sets</div>
+          <div class="menu-item">
+            <div class="menu-item-left">
+              <div class="menu-item-name">10 Wings + Dip</div>
+              <div class="menu-item-desc">10 crispy hot wings with your choice of sauce</div>
+            </div>
+            <div class="menu-item-price">13,20 &euro;</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-left">
+              <div class="menu-item-name">20 Wings + 2 Dips</div>
+              <div class="menu-item-desc">20 wings with two sauce choices — the crowd pleaser</div>
+            </div>
+            <div class="menu-item-price">19,90 &euro;</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-left">
+              <div class="menu-item-name">Sippuran Siipisetti</div>
+              <div class="menu-item-desc">The big family set — wings, sauces, sides</div>
+            </div>
+            <div class="menu-item-price">49,90 &euro;</div>
+          </div>
+        </div>
+
+        <!-- More -->
+        <div>
+          <div class="menu-group-title">Chicken &amp; Sides</div>
+          <div class="menu-item">
+            <div class="menu-item-left">
+              <div class="menu-item-name">Kanakori</div>
+              <div class="menu-item-desc">Chicken basket meal</div>
+            </div>
+            <div class="menu-item-price">17,50 &euro;</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-left">
+              <div class="menu-item-name">Nugettiateria</div>
+              <div class="menu-item-desc">Nuggets meal — crispy and golden</div>
+            </div>
+            <div class="menu-item-price">12,80 &euro;</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-left">
+              <div class="menu-item-name">Fries (Ranut)</div>
+              <div class="menu-item-desc">Golden crispy fries — legendary according to regulars</div>
+            </div>
+            <div class="menu-item-price"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sauces -->
+      <div class="menu-group-title">Siipiweikot Sauces — Choose Your Heat</div>
+      <div class="sauce-grid">
+        <span class="sauce-chip">Aura</span>
+        <span class="sauce-chip">Garlic</span>
+        <span class="sauce-chip">BBQ</span>
+        <span class="sauce-chip">Remoulade</span>
+        <span class="sauce-chip">Curry</span>
+        <span class="sauce-chip">Chili</span>
+        <span class="sauce-chip hot">X-Hot</span>
+      </div>
+
+      <div class="menu-note">
+        All chicken is sourced in Finland. A-licence bar — cold beers and drinks available alongside your wings.
+      </div>
+
+      <div class="food-photo-placeholder">
+        <div>Food photos coming soon</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- KLAR BOOKINGS WIDGET -->
+  <section id="reserve">
+    <div class="section-inner">
+      <div class="booking-wrap">
+        <div class="booking-copy">
+          <p class="section-label">Table Reservation</p>
+          <h2 class="section-title">Reserve Your <span class="accent">Table</span></h2>
+          <div class="divider"></div>
+          <p>
+            Coming in with the crew? Reserve your table and skip the wait.
+            Sippuran Siipibaari is the perfect spot for group wing nights —
+            just pick your date and we'll have a table ready for you.
+          </p>
+          <p>
+            <span class="highlight">Booking is fast and free</span> — no phone call needed.
+            Groups and families especially welcome.
+            Summer terrace available — mention your preference in the notes.
+          </p>
+          <p>
+            For urgent requests, call us: <a href="tel:+35833486211" style="color:#F2A500;font-weight:bold;">03 3486211</a>
+          </p>
+        </div>
+
+        <!-- KLAR BOOKINGS WIDGET -->
+        <div id="klar-bookings">
+          <div class="widget-title">Reserve a Table</div>
+          <form onsubmit="return false;">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="booking-date">Date</label>
+                <input type="date" id="booking-date" name="date" required>
+              </div>
+              <div class="form-group">
+                <label for="booking-time">Time</label>
+                <input type="time" id="booking-time" name="time" min="11:00" max="22:00" required>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="booking-guests">Party Size</label>
+                <select id="booking-guests" name="party_size" required>
+                  <option value="">Guests...</option>
+                  <option value="1">1 person</option>
+                  <option value="2">2 people</option>
+                  <option value="3">3 people</option>
+                  <option value="4">4 people</option>
+                  <option value="5">5 people</option>
+                  <option value="6">6 people</option>
+                  <option value="7">7 people</option>
+                  <option value="8">8 people</option>
+                  <option value="9">9 people</option>
+                  <option value="10">10+ people</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="booking-name">Name</label>
+                <input type="text" id="booking-name" name="name" placeholder="Your name" required>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group full">
+                <label for="booking-phone">Phone</label>
+                <input type="tel" id="booking-phone" name="phone" placeholder="e.g. 040 123 4567">
+              </div>
+            </div>
+            <button type="submit" class="btn-book">Reserve Now</button>
+          </form>
+          <p class="widget-note">Powered by Klar Bookings &mdash; free for guests</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- HOURS -->
+  <section id="hours">
+    <div class="section-inner">
+      <p class="section-label">When We're Open</p>
+      <h2 class="section-title">Opening <span class="accent">Hours</span></h2>
+      <div class="divider"></div>
+      <div class="hours-grid">
+        <div class="hours-card">
+          <div class="hours-day">Monday</div>
+          <div class="hours-time">11:00 – 22:00</div>
+        </div>
+        <div class="hours-card">
+          <div class="hours-day">Tuesday</div>
+          <div class="hours-time">11:00 – 22:00</div>
+        </div>
+        <div class="hours-card">
+          <div class="hours-day">Wednesday</div>
+          <div class="hours-time">11:00 – 22:00</div>
+        </div>
+        <div class="hours-card">
+          <div class="hours-day">Thursday</div>
+          <div class="hours-time">11:00 – 22:00</div>
+        </div>
+        <div class="hours-card weekend">
+          <div class="hours-day">Friday</div>
+          <div class="hours-time">11:00 – 23:00</div>
+        </div>
+        <div class="hours-card weekend">
+          <div class="hours-day">Saturday</div>
+          <div class="hours-time">12:00 – 23:00</div>
+        </div>
+        <div class="hours-card">
+          <div class="hours-day">Sunday</div>
+          <div class="hours-time">12:00 – 22:00</div>
+        </div>
+      </div>
+      <p class="hours-note">Kitchen hours may vary. Call ahead for large group bookings: <a href="tel:+35833486211" style="color:#F2A500;">03 3486211</a></p>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section id="reviews">
+    <div class="section-inner">
+      <p class="section-label">What People Say</p>
+      <h2 class="section-title">Guest <span class="accent">Reviews</span></h2>
+      <div class="divider"></div>
+      <div class="reviews-header">
+        <div>
+          <div class="big-rating">4.3</div>
+          <div class="stars-row">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <div class="rating-detail">295 Google reviews</div>
+        </div>
+        <div style="font-family:Arial,sans-serif;font-size:15px;color:rgba(245,240,235,0.6);max-width:400px;">
+          Ylöjärvi's most-reviewed wing restaurant.
+          Consistently praised for flavour, atmosphere, and fast friendly service.
+        </div>
+      </div>
+      <div class="review-grid">
+        <div class="review-card">
+          <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="review-quote">"If you are a friend of hot wings and cozy atmosphere get ur meal from Sippuran siipipaari!"</p>
+          <div class="review-author">TripAdvisor Reviewer</div>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="review-quote">"The wings are the best but the restaurant also offers e.g. nuggets. The service is super friendly, and you will get the foods very quickly."</p>
+          <div class="review-author">TripAdvisor Reviewer</div>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="review-quote">"We enjoyed very much the cosy and relaxing atmosphere. Friendly service."</p>
+          <div class="review-author">Google Reviewer</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOCATION & CONTACT -->
+  <section id="contact">
+    <div class="section-inner">
+      <div class="contact-grid">
+        <div>
+          <p class="section-label">Find Us</p>
+          <h2 class="section-title">Location &amp; <span class="accent">Contact</span></h2>
+          <div class="divider"></div>
+
+          <div class="contact-block">
+            <div class="contact-block-title">Address</div>
+            <p>Mastontie 2<br>33470 Ylöjärvi<br>Soppeenmäki</p>
+          </div>
+
+          <div class="contact-block">
+            <div class="contact-block-title">Phone</div>
+            <p><a href="tel:+35833486211">03 3486211</a></p>
+          </div>
+
+          <div class="contact-block">
+            <div class="contact-block-title">Order Online</div>
+            <div class="social-links">
+              <a href="https://wolt.com/en/fin/ylojarvi/restaurant/sippuran-siipipaari" class="social-link" target="_blank" rel="noopener">Wolt</a>
+              <a href="https://www.foodora.fi/restaurant/zkzz/sippuran-siipibaari" class="social-link" target="_blank" rel="noopener">Foodora</a>
+            </div>
+          </div>
+
+          <div class="contact-block">
+            <div class="contact-block-title">Follow Us</div>
+            <div class="social-links">
+              <a href="https://www.instagram.com/sippuransiipipaari/" class="social-link" target="_blank" rel="noopener">Instagram</a>
+              <a href="https://www.facebook.com/Sippuransiipipaari/" class="social-link" target="_blank" rel="noopener">Facebook</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="map-placeholder">
+          <div style="font-style:italic;">Mastontie 2, 33470 Ylöjärvi</div>
+          <a href="https://maps.google.com/maps?q=Mastontie+2+Yl%C3%B6j%C3%A4rvi&z=16" target="_blank" rel="noopener">Open in Google Maps</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-logo">Sippuran Siipibaari</div>
+      <div class="footer-address">Mastontie 2, 33470 Ylöjärvi &mdash; Tel: <a href="tel:+35833486211" style="color:#F2A500;">03 3486211</a></div>
+      <div class="footer-links">
+        <a href="#about">About</a>
+        <a href="#menu">Menu</a>
+        <a href="#reserve">Reserve</a>
+        <a href="#hours">Hours</a>
+        <a href="#contact">Contact</a>
+        <a href="https://wolt.com/en/fin/ylojarvi/restaurant/sippuran-siipipaari" target="_blank" rel="noopener">Order on Wolt</a>
+      </div>
+      <div class="footer-powered">
+        Powered by <a href="https://klarsystems.com" target="_blank" rel="noopener">Klar</a> &mdash; modern websites for Finnish restaurants
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

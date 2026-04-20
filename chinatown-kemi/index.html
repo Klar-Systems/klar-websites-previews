@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<!-- palette: segment 1 default (research palette empty) -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ChinaTown — Kemi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #1F2933;
+      --text: #EFE7DA;
+      --primary: #B56B4A;
+      --accent: #D4A574;
+      --bg-card: #2A3542;
+      --bg-dark: #161E27;
+      --border: rgba(212,165,116,0.25);
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      line-height: 1.6;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Playfair Display', Georgia, serif;
+    }
+
+    /* ---- DEMO BANNER ---- */
+    .demo-banner {
+      background: var(--primary);
+      color: #fff;
+      text-align: center;
+      padding: 10px 16px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    /* ---- NAV ---- */
+    nav {
+      background: var(--bg-dark);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 32px;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-logo {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.4rem;
+      color: var(--accent);
+      letter-spacing: 0.03em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text);
+      text-decoration: none;
+      font-size: 0.9rem;
+      opacity: 0.85;
+      transition: opacity 0.2s, color 0.2s;
+    }
+
+    .nav-links a:hover {
+      opacity: 1;
+      color: var(--accent);
+    }
+
+    /* ---- HERO ---- */
+    .hero {
+      position: relative;
+      min-height: 540px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .hero-photo-placeholder {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #2A1F1A 0%, #1F2933 60%, #1A2530 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-photo-placeholder span {
+      color: rgba(239,231,218,0.18);
+      font-size: 1rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(31,41,51,0.45) 0%, rgba(31,41,51,0.72) 100%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 48px 24px;
+      max-width: 720px;
+    }
+
+    .hero-eyebrow {
+      display: inline-block;
+      color: var(--accent);
+      font-size: 0.8rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      border: 1px solid var(--border);
+      padding: 4px 14px;
+      border-radius: 2px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 3.4rem);
+      color: var(--text);
+      line-height: 1.15;
+      margin-bottom: 18px;
+    }
+
+    .hero h1 span {
+      color: var(--accent);
+    }
+
+    .hero-sub {
+      font-size: 1.05rem;
+      color: rgba(239,231,218,0.82);
+      margin-bottom: 28px;
+      max-width: 520px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .rating-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(181,107,74,0.18);
+      border: 1px solid var(--primary);
+      border-radius: 4px;
+      padding: 8px 18px;
+      font-size: 0.92rem;
+    }
+
+    .rating-number {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.4rem;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .rating-label {
+      color: rgba(239,231,218,0.72);
+      font-size: 0.8rem;
+    }
+
+    .btn {
+      display: inline-block;
+      background: var(--primary);
+      color: #fff;
+      text-decoration: none;
+      padding: 14px 32px;
+      border-radius: 3px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .btn:hover {
+      background: #C97B58;
+      transform: translateY(-1px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+    }
+
+    .btn-outline:hover {
+      background: var(--accent);
+      color: var(--bg);
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 28px;
+    }
+
+    /* ---- SECTION SHARED ---- */
+    section {
+      padding: 72px 24px;
+    }
+
+    .section-inner {
+      max-width: 1060px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+
+    .section-title {
+      font-size: clamp(1.7rem, 3.5vw, 2.4rem);
+      color: var(--text);
+      margin-bottom: 16px;
+    }
+
+    .section-intro {
+      color: rgba(239,231,218,0.72);
+      max-width: 580px;
+      margin-bottom: 48px;
+      font-size: 1.0rem;
+    }
+
+    .divider {
+      width: 48px;
+      height: 2px;
+      background: var(--primary);
+      margin: 20px 0 40px;
+    }
+
+    /* ---- ABOUT ---- */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    @media (max-width: 680px) {
+      .about-grid { grid-template-columns: 1fr; }
+    }
+
+    .about-photo-placeholder {
+      background: var(--bg-card);
+      border: 1px dashed var(--border);
+      border-radius: 4px;
+      height: 320px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      color: rgba(239,231,218,0.35);
+      font-size: 0.88rem;
+      letter-spacing: 0.06em;
+    }
+
+    .features-list {
+      list-style: none;
+      margin-top: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .features-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 0.95rem;
+      color: rgba(239,231,218,0.85);
+    }
+
+    .feature-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--primary);
+      margin-top: 8px;
+      flex-shrink: 0;
+    }
+
+    /* ---- MENU ---- */
+    #menu {
+      background: var(--bg-dark);
+    }
+
+    .menu-categories {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+
+    .menu-cat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 20px 18px;
+    }
+
+    .menu-cat-card h4 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1rem;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+
+    .menu-cat-card p {
+      font-size: 0.82rem;
+      color: rgba(239,231,218,0.55);
+    }
+
+    .menu-photo-placeholder {
+      background: var(--bg-card);
+      border: 1px dashed var(--border);
+      border-radius: 4px;
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(239,231,218,0.35);
+      font-size: 0.88rem;
+      letter-spacing: 0.06em;
+    }
+
+    .signature-dishes {
+      margin-top: 40px;
+    }
+
+    .signature-dishes h3 {
+      font-size: 1.2rem;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+
+    .dishes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 14px;
+    }
+
+    .dish-card {
+      background: var(--bg);
+      border-left: 3px solid var(--primary);
+      padding: 14px 16px;
+      border-radius: 0 3px 3px 0;
+    }
+
+    .dish-card .dish-name {
+      font-weight: 600;
+      font-size: 0.92rem;
+      color: var(--text);
+    }
+
+    /* ---- REVIEWS ---- */
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .review-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 22px 20px;
+    }
+
+    .review-quote {
+      font-size: 0.93rem;
+      color: rgba(239,231,218,0.82);
+      line-height: 1.65;
+      margin-bottom: 16px;
+      font-style: italic;
+    }
+
+    .review-author {
+      font-size: 0.8rem;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .review-rating {
+      font-size: 0.78rem;
+      color: rgba(239,231,218,0.45);
+      margin-top: 4px;
+    }
+
+    /* ---- BOOKING ---- */
+    #booking {
+      background: var(--bg-dark);
+    }
+
+    .klar-bookings {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 36px 32px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .klar-bookings h3 {
+      font-size: 1.4rem;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .klar-bookings .booking-note {
+      font-size: 0.85rem;
+      color: rgba(239,231,218,0.55);
+      margin-bottom: 28px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    @media (max-width: 520px) {
+      .form-row { grid-template-columns: 1fr; }
+      .klar-bookings { padding: 24px 18px; }
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-group label {
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(239,231,218,0.55);
+    }
+
+    .form-group input,
+    .form-group select {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      color: var(--text);
+      padding: 11px 12px;
+      font-size: 0.93rem;
+      font-family: inherit;
+      appearance: none;
+      -webkit-appearance: none;
+      transition: border-color 0.2s;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    .form-group input[type="date"]::-webkit-calendar-picker-indicator {
+      filter: invert(0.7);
+    }
+
+    .booking-btn {
+      width: 100%;
+      margin-top: 8px;
+      padding: 15px;
+      font-size: 1rem;
+    }
+
+    .booking-demo-note {
+      text-align: center;
+      font-size: 0.78rem;
+      color: rgba(239,231,218,0.35);
+      margin-top: 14px;
+    }
+
+    /* ---- HOURS + CONTACT ---- */
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+    }
+
+    @media (max-width: 620px) {
+      .info-grid { grid-template-columns: 1fr; }
+    }
+
+    .hours-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+
+    .hours-table tr {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hours-table td {
+      padding: 9px 0;
+      color: rgba(239,231,218,0.82);
+    }
+
+    .hours-table td:first-child {
+      color: var(--accent);
+      width: 50%;
+    }
+
+    .hours-table .closed {
+      color: rgba(239,231,218,0.35);
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 20px;
+      font-size: 0.92rem;
+    }
+
+    .contact-icon {
+      width: 34px;
+      height: 34px;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .contact-icon svg {
+      width: 15px;
+      height: 15px;
+      fill: var(--accent);
+    }
+
+    .contact-item a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .contact-item a:hover {
+      text-decoration: underline;
+    }
+
+    .contact-item .label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: rgba(239,231,218,0.4);
+      margin-bottom: 2px;
+    }
+
+    /* ---- FOOTER ---- */
+    footer {
+      background: var(--bg-dark);
+      border-top: 1px solid var(--border);
+      padding: 32px 24px;
+      text-align: center;
+    }
+
+    .footer-name {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.2rem;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .footer-address {
+      font-size: 0.83rem;
+      color: rgba(239,231,218,0.45);
+      margin-bottom: 16px;
+    }
+
+    .footer-powered {
+      font-size: 0.75rem;
+      color: rgba(239,231,218,0.3);
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- DEMO BANNER -->
+  <div class="demo-banner">This is a demo — preview website for ChinaTown, Kemi</div>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">ChinaTown</div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#reviews">Reviews</a></li>
+      <li><a href="#booking">Reserve</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-photo-placeholder">
+      <span>Your photo here</span>
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">Kemi City Centre</div>
+      <h1>Kemi's Best <span>Chinese</span> Restaurant</h1>
+      <p class="hero-sub">Real Chinese food with big portions, a wide menu, and friendly family service — right in the heart of Kemi.</p>
+      <div class="rating-badge">
+        <div>
+          <div class="rating-number">4.3 / 5</div>
+          <div class="rating-label">342 Google reviews</div>
+        </div>
+      </div>
+      <div class="hero-actions">
+        <a href="#booking" class="btn">Reserve a Table</a>
+        <a href="#menu" class="btn btn-outline">View Menu</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-inner">
+      <div class="about-grid">
+        <div>
+          <div class="section-label">About Us</div>
+          <h2 class="section-title">A Family Restaurant with Authentic Chinese Roots</h2>
+          <div class="divider"></div>
+          <p style="color: rgba(239,231,218,0.78); font-size:0.97rem;">
+            ChinaTown has been serving Kemi from Keskuspuistokatu for years. We are a small, family-run restaurant where the kitchen is built around real Chinese cooking — woks, fried rice, noodle dishes, spring rolls — alongside sushi, kebab, pizza and grills. Every meal comes with a salad, and the portions are known across the city for being generous.
+          </p>
+          <ul class="features-list">
+            <li><span class="feature-dot"></span><span>Authentic Chinese kitchen run by a Chinese family</span></li>
+            <li><span class="feature-dot"></span><span>Wide menu: Chinese wok, sushi, kebab, pizza, grill</span></li>
+            <li><span class="feature-dot"></span><span>Big portions at moderate prices</span></li>
+            <li><span class="feature-dot"></span><span>Friendly, welcoming staff every visit</span></li>
+            <li><span class="feature-dot"></span><span>Wheelchair accessible</span></li>
+          </ul>
+        </div>
+        <div>
+          <div class="about-photo-placeholder">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" style="color:rgba(239,231,218,0.25)"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Interior photo coming soon</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MENU -->
+  <section id="menu">
+    <div class="section-inner">
+      <div class="section-label">What We Serve</div>
+      <h2 class="section-title">A Menu for Every Taste</h2>
+      <div class="divider"></div>
+      <p class="section-intro">From classic Chinese wok dishes to sushi, kebab and grilled plates — there is always something for everyone.</p>
+
+      <div class="menu-categories">
+        <div class="menu-cat-card">
+          <h4>Chinese Wok</h4>
+          <p>Stir-fries, fried rice and noodle dishes</p>
+        </div>
+        <div class="menu-cat-card">
+          <h4>Sushi</h4>
+          <p>Fresh rolls and nigiri selections</p>
+        </div>
+        <div class="menu-cat-card">
+          <h4>Spring Rolls &amp; Gyoza</h4>
+          <p>Classic starters and dumplings</p>
+        </div>
+        <div class="menu-cat-card">
+          <h4>Kebab</h4>
+          <p>Served with bread, salad and sauces</p>
+        </div>
+        <div class="menu-cat-card">
+          <h4>Pizza</h4>
+          <p>Stone-baked, a variety of toppings</p>
+        </div>
+        <div class="menu-cat-card">
+          <h4>Grill &amp; Burgers</h4>
+          <p>Grilled plates and burgers</p>
+        </div>
+      </div>
+
+      <div class="menu-photo-placeholder">Food photos coming soon</div>
+
+      <div class="signature-dishes">
+        <h3>Signature Dishes</h3>
+        <div class="dishes-grid">
+          <div class="dish-card"><div class="dish-name">Fumei Chicken</div></div>
+          <div class="dish-card"><div class="dish-name">Peking Chicken in Spicy Sauce</div></div>
+          <div class="dish-card"><div class="dish-name">Sichuan Beef</div></div>
+          <div class="dish-card"><div class="dish-name">ChinaTown Special Beef</div></div>
+          <div class="dish-card"><div class="dish-name">Chicken Balls</div></div>
+        </div>
+        <p style="font-size:0.8rem; color:rgba(239,231,218,0.4); margin-top:16px;">Full menu available in the restaurant. Every main course includes a salad.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section id="reviews">
+    <div class="section-inner">
+      <div class="section-label">What Guests Say</div>
+      <h2 class="section-title">4.3 / 5 — 342 Reviews</h2>
+      <div class="divider"></div>
+      <div class="reviews-grid">
+        <div class="review-card">
+          <p class="review-quote">"Very good Chinese food at a moderate price."</p>
+          <div class="review-author">Ilkka S.</div>
+          <div class="review-rating">5 / 5 — TripAdvisor</div>
+        </div>
+        <div class="review-card">
+          <p class="review-quote">"Big variety on the menu, big portions, nice staff!"</p>
+          <div class="review-author">asanz94</div>
+          <div class="review-rating">4 / 5 — TripAdvisor</div>
+        </div>
+        <div class="review-card">
+          <p class="review-quote">"Real Chinese food. Big portions... Still very good food and best Chinese in Kemi."</p>
+          <div class="review-author">348atih</div>
+          <div class="review-rating">5 / 5 — TripAdvisor</div>
+        </div>
+        <div class="review-card">
+          <p class="review-quote">"Doesn't matter what you order, I promise it's good. Best Asian food in town."</p>
+          <div class="review-author">Aleksi Y.</div>
+          <div class="review-rating">5 / 5 — TripAdvisor</div>
+        </div>
+        <div class="review-card">
+          <p class="review-quote">"Very traditional, staff are very friendly — best Chinese restaurant in town."</p>
+          <div class="review-author">Queko C.</div>
+          <div class="review-rating">5 / 5 — TripAdvisor</div>
+        </div>
+        <div class="review-card">
+          <p class="review-quote">"It was a very enjoyable meal and the food was excellent and reasonably priced."</p>
+          <div class="review-author">Christopher J.</div>
+          <div class="review-rating">5 / 5 — TripAdvisor</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOOKING -->
+  <section id="booking">
+    <div class="section-inner">
+      <div style="text-align:center; margin-bottom:40px;">
+        <div class="section-label" style="text-align:center;">Online Reservations</div>
+        <h2 class="section-title">Reserve Your Table</h2>
+        <p style="color:rgba(239,231,218,0.6); font-size:0.92rem; max-width:460px; margin:0 auto;">Skip the wait. Book your table in advance and arrive to a seat ready for you.</p>
+      </div>
+
+      <div class="klar-bookings">
+        <h3>Make a Reservation</h3>
+        <p class="booking-note">We are open Wed–Fri 14:00–21:00 and Sat–Sun 13:00–21:00. Closed Monday and Tuesday.</p>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="book-name">Your Name</label>
+            <input type="text" id="book-name" placeholder="Full name">
+          </div>
+          <div class="form-group">
+            <label for="book-phone">Phone Number</label>
+            <input type="tel" id="book-phone" placeholder="+358 ...">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="book-date">Date</label>
+            <input type="date" id="book-date">
+          </div>
+          <div class="form-group">
+            <label for="book-time">Time</label>
+            <select id="book-time">
+              <option value="">Select time</option>
+              <option value="13:00">13:00</option>
+              <option value="13:30">13:30</option>
+              <option value="14:00">14:00</option>
+              <option value="14:30">14:30</option>
+              <option value="15:00">15:00</option>
+              <option value="15:30">15:30</option>
+              <option value="16:00">16:00</option>
+              <option value="16:30">16:30</option>
+              <option value="17:00">17:00</option>
+              <option value="17:30">17:30</option>
+              <option value="18:00">18:00</option>
+              <option value="18:30">18:30</option>
+              <option value="19:00">19:00</option>
+              <option value="19:30">19:30</option>
+              <option value="20:00">20:00</option>
+              <option value="20:30">20:30</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-bottom:16px;">
+          <label for="book-party">Party Size</label>
+          <select id="book-party">
+            <option value="">Number of guests</option>
+            <option value="1">1 person</option>
+            <option value="2">2 people</option>
+            <option value="3">3 people</option>
+            <option value="4">4 people</option>
+            <option value="5">5 people</option>
+            <option value="6">6 people</option>
+            <option value="7">7 people</option>
+            <option value="8">8 people</option>
+          </select>
+        </div>
+
+        <button class="btn booking-btn">Reserve My Table</button>
+        <p class="booking-demo-note">Demo only — no booking will be sent</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOURS + CONTACT -->
+  <section id="contact">
+    <div class="section-inner">
+      <div class="info-grid">
+        <div>
+          <div class="section-label">Opening Hours</div>
+          <h2 class="section-title" style="font-size:1.6rem;">When We Are Open</h2>
+          <div class="divider"></div>
+          <table class="hours-table">
+            <tbody>
+              <tr><td>Monday</td><td class="closed">Closed</td></tr>
+              <tr><td>Tuesday</td><td class="closed">Closed</td></tr>
+              <tr><td>Wednesday</td><td>14:00 – 21:00</td></tr>
+              <tr><td>Thursday</td><td>14:00 – 21:00</td></tr>
+              <tr><td>Friday</td><td>14:00 – 21:00</td></tr>
+              <tr><td>Saturday</td><td>13:00 – 21:00</td></tr>
+              <tr><td>Sunday</td><td>13:00 – 21:00</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div>
+          <div class="section-label">Find Us</div>
+          <h2 class="section-title" style="font-size:1.6rem;">Contact &amp; Location</h2>
+          <div class="divider"></div>
+
+          <div class="contact-item">
+            <div class="contact-icon">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 10.999h2C22 5.869 18.127 2 12.99 2v2C17.052 4 20 6.943 20 10.999z"/><path d="M13 8c2.103 0 3 .897 3 3h2c0-3.225-1.775-5-5-5v2zm3.422 5.443a1.001 1.001 0 0 0-1.391.043l-2.393 2.461c-.576-.11-1.734-.471-2.926-1.66-1.192-1.193-1.553-2.354-1.66-2.926l2.459-2.394a1 1 0 0 0 .043-1.391L6.859 3.513a1 1 0 0 0-1.391-.087l-2.17 1.861a1 1 0 0 0-.29.649c-.015.25-.301 6.172 4.291 10.766C11.305 20.707 16.323 21 17.705 21c.202 0 .326-.006.359-.008a.992.992 0 0 0 .648-.291l1.86-2.171a1 1 0 0 0-.086-1.391l-4.064-3.696z"/></svg>
+            </div>
+            <div>
+              <div class="label">Phone</div>
+              <a href="tel:+358406540818">+358 40 654 0818</a>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            </div>
+            <div>
+              <div class="label">Address</div>
+              <span style="color: rgba(239,231,218,0.78);">Keskuspuistokatu 28, 94100 Kemi</span>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22 0H2C.9 0 0 .9 0 2v20l4-4h18c1.1 0 2-.9 2-2V2c0-1.1-.9-2-2-2zm0 16H3.17L2 17.17V2h20v14zM6 9h2v2H6zm4 0h2v2h-2zm4 0h2v2h-2z"/></svg>
+            </div>
+            <div>
+              <div class="label">Follow Us</div>
+              <a href="https://www.facebook.com/kemi.ravintola.Chinatown/" target="_blank" rel="noopener">Facebook</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-name">ChinaTown</div>
+    <div class="footer-address">Keskuspuistokatu 28, 94100 Kemi</div>
+    <div style="font-size:0.8rem; color:rgba(239,231,218,0.35);">
+      Wed–Fri 14:00–21:00 &nbsp;|&nbsp; Sat–Sun 13:00–21:00
+    </div>
+    <div class="footer-powered">Powered by Klar</div>
+  </footer>
+
+</body>
+</html>

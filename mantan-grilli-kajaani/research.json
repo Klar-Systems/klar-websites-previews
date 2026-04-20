@@ -1,0 +1,103 @@
+{
+  "basic": {
+    "name": "Mantan Grilli-Kioski",
+    "restaurant_name": "Mantan Grilli-Kioski",
+    "slug": "mantan-grilli-kajaani",
+    "address": "Sudenpolku 15, 87300 Kajaani",
+    "phone": "050 5011260",
+    "city": "Kajaani",
+    "cuisine_type": {
+      "value": "Finnish grilli — kebab, hamburgers, sausage dishes, meat pasties",
+      "source_url": "https://www.sluurpy.com/en/kajaani/restaurant/6031948/mantan-grillikioski",
+      "source_quote": "Mega Manta",
+      "confidence": "high",
+      "source_type": "website"
+    },
+    "opening_hours": {
+      "value": "Mon-Fri 10:00-22:00, Sat 11:00-22:00, Sun 12:00-22:00",
+      "source_url": "https://www.foodyas.com/FI/Kajaani/2105976802961386/Mantan-Grilli",
+      "source_quote": "Maanantai 10:00 - 22:00 Tiistai 10:00 - 22:00 Keskiviikko 10:00 - 22:00",
+      "confidence": "high",
+      "source_type": "website"
+    },
+    "segment": {
+      "value": 2,
+      "source_url": "https://www.sluurpy.com/en/kajaani/restaurant/6031948/mantan-grillikioski",
+      "source_quote": "Mega Manta",
+      "confidence": "high",
+      "source_type": "website"
+    },
+    "is_chain": {
+      "value": false,
+      "source_url": "https://www.sluurpy.com/en/kajaani/restaurant/6031948/mantan-grillikioski",
+      "source_quote": "Mega Manta",
+      "confidence": "high",
+      "source_type": "website"
+    },
+    "is_closed": {
+      "value": false,
+      "source_url": "https://www.foodyas.com/FI/Kajaani/2105976802961386/Mantan-Grilli",
+      "source_quote": "Maanantai 10:00 - 22:00 Tiistai 10:00 - 22:00 Keskiviikko 10:00 - 22:00",
+      "confidence": "high",
+      "source_type": "website"
+    },
+    "has_existing_website": {
+      "value": false,
+      "source_url": "https://www.sluurpy.com/en/kajaani/restaurant/6031948/mantan-grillikioski",
+      "source_quote": "Mega Manta",
+      "confidence": "high",
+      "source_type": "website"
+    },
+    "google_rating": 4.2,
+    "review_count": 1037,
+    "restaurant_name_gen": "Mantan Grillin"
+  },
+  "menu": {
+    "cuisine_style": {
+      "value": "Finnish grilli — kebab, hamburgers, sausage dishes, meat pasties",
+      "source_url": "https://www.sluurpy.com/en/kajaani/restaurant/6031948/mantan-grillikioski",
+      "source_quote": "Mega Manta",
+      "confidence": "high",
+      "source_type": "website"
+    },
+    "signature_dishes": [
+      "Mega Manta",
+      "Kebab Ranskalaiset",
+      "Aurajuustoburgeri"
+    ],
+    "categories": [
+      "Grill food",
+      "Kebab",
+      "Burgers"
+    ],
+    "price_range": {
+      "value": "EUR",
+      "source_url": "",
+      "confidence": "inferred",
+      "source_type": "inferred"
+    },
+    "notes": []
+  },
+  "reviews": [
+    {
+      "text": "Vuosia hyvaa grilliruokaa tehnyt paikka...Jaatavan kokoiset annokset ja ei ole hinnalla pilattu.",
+      "rating": 4,
+      "source_url": "https://www.sluurpy.com/en/kajaani/restaurant/6031948/mantan-grillikioski",
+      "source_quote": "Mega Manta",
+      "confidence": "high"
+    }
+  ],
+  "links": {
+    "preview_link": "https://preview.klarsystems.com/mantan-grilli-kajaani/",
+    "calendly_link": "https://calendly.com/lomberg-klarsystems"
+  },
+  "personality": {
+    "design_brief": "Bold unpretentious Finnish grilli aesthetic — red and yellow palette evoking roadside kiosk energy, strong typography for the menu, gritty and authentic feel celebrating Kajaani's most legendary fast-food institution. Hero imagery of sizzling kebab and giant portions.",
+    "research_depth": "tier_2",
+    "vibe_summary": "Bold Kajaani grilli kioski known for huge portions and quality kebab.",
+    "review_themes": [
+      "best kebab in Kajaani",
+      "giant portions"
+    ]
+  }
+}

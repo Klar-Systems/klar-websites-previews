@@ -1,0 +1,110 @@
+{
+  "basic": {
+    "name": "Lehtimäen Grilli",
+    "restaurant_name": "Lehtimäen Grilli",
+    "slug": "lehtimaen-grilli-porvoo",
+    "address": "Hamarintie 45, 06400 Porvoo",
+    "phone": "040 5340096",
+    "city": "Porvoo",
+    "cuisine_type": {
+      "value": "Finnish grilli — hamburgers, makkaraperunat, meat pies, fries",
+      "source_url": "https://www.sluurpy.com/en/porvoo/restaurant/6037467/lehtim%C3%A4en-grilli",
+      "source_quote": "Lihis ja juustoburgeri ensiluokkaisia, mutta 55 minuutin odotusaika sunnuntaina",
+      "confidence": "high",
+      "source_type": "website"
+    },
+    "opening_hours": {
+      "value": "Mon-Thu 10:30-20:00, Fri 10:30-21:00, Sat 12:00-21:00, Sun 12:00-20:00",
+      "source_url": "https://eat.fi/en/porvoo/lehtimaen-grilli",
+      "source_quote": "10:30- 20:00",
+      "confidence": "high",
+      "source_type": "website"
+    },
+    "segment": {
+      "value": 2,
+      "source_url": "https://www.sluurpy.com/en/porvoo/restaurant/6037467/lehtim%C3%A4en-grilli",
+      "source_quote": "Lihis ja juustoburgeri ensiluokkaisia, mutta 55 minuutin odotusaika sunnuntaina",
+      "confidence": "high",
+      "source_type": "website"
+    },
+    "is_chain": {
+      "value": false,
+      "source_url": "https://www.sluurpy.com/en/porvoo/restaurant/6037467/lehtim%C3%A4en-grilli",
+      "source_quote": "Lehtimäen Grilli Hamarintie 45, 06400 - Porvoo",
+      "confidence": "high",
+      "source_type": "website"
+    },
+    "is_closed": {
+      "value": false,
+      "source_url": "https://eat.fi/en/porvoo/lehtimaen-grilli",
+      "source_quote": "10:30- 20:00",
+      "confidence": "high",
+      "source_type": "website"
+    },
+    "has_existing_website": {
+      "value": false,
+      "source_url": "https://www.sluurpy.com/en/porvoo/restaurant/6037467/lehtim%C3%A4en-grilli",
+      "source_quote": "Lihis ja juustoburgeri ensiluokkaisia, mutta 55 minuutin odotusaika sunnuntaina",
+      "confidence": "high",
+      "source_type": "website"
+    },
+    "google_rating": 4.5,
+    "review_count": 1159,
+    "restaurant_name_gen": "Lehtimäen Grillin"
+  },
+  "menu": {
+    "cuisine_style": {
+      "value": "Finnish grilli — hamburgers, makkaraperunat, meat pies, fries",
+      "source_url": "https://www.sluurpy.com/en/porvoo/restaurant/6037467/lehtim%C3%A4en-grilli",
+      "source_quote": "Lihis ja juustoburgeri ensiluokkaisia, mutta 55 minuutin odotusaika sunnuntaina",
+      "confidence": "high",
+      "source_type": "website"
+    },
+    "signature_dishes": [
+      "Hampurilainen",
+      "Makkaraperunat",
+      "Lihapiiras"
+    ],
+    "categories": [
+      "Grill food",
+      "Burgers",
+      "Snacks"
+    ],
+    "price_range": {
+      "value": "EUR",
+      "source_url": "",
+      "confidence": "inferred",
+      "source_type": "inferred"
+    },
+    "notes": []
+  },
+  "reviews": [
+    {
+      "text": "Lihis ja juustoburgeri ensiluokkaisia, mutta 55 minuutin odotusaika sunnuntaina klo 14 paikkeilla tiputti kolme tahta arvosanasta.",
+      "rating": 3,
+      "source_url": "https://www.sluurpy.com/en/porvoo/restaurant/6037467/lehtim%C3%A4en-grilli",
+      "source_quote": "Lihis ja juustoburgeri ensiluokkaisia, mutta 55 minuutin odotusaika sunnuntaina",
+      "confidence": "high"
+    },
+    {
+      "text": "Lihis ja juustoburgeri ensiluokkaisia, mutta 55 minuutin odotusaika sunnuntaina klo 14 paikkeilla tiputti kolme tahta arvosanasta.",
+      "rating": 3,
+      "source_url": "https://www.sluurpy.com/en/porvoo/restaurant/6037467/lehtim%C3%A4en-grilli",
+      "source_quote": "Lihis ja juustoburgeri ensiluokkaisia, mutta 55 minuutin odotusaika sunnuntaina",
+      "confidence": "high"
+    }
+  ],
+  "links": {
+    "preview_link": "https://preview.klarsystems.com/lehtimaen-grilli-porvoo/",
+    "calendly_link": "https://calendly.com/lomberg-klarsystems"
+  },
+  "personality": {
+    "design_brief": "Unpretentious roadside grilli kiosk with decades of local loyalty. Bold warm colours — deep red or forest green with cream accents. Chunky typography, no fuss. Emphasise generous portions, honest homemade food, and the classic Finnish grilli atmosphere.",
+    "research_depth": "tier_2",
+    "vibe_summary": "Unpretentious roadside grilli with loyal locals and generous portions.",
+    "review_themes": [
+      "generous portions",
+      "quality burgers"
+    ]
+  }
+}

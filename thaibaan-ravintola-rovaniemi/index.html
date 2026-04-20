@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thaibaan Ravintola — Authentic Thai Restaurant in Rovaniemi</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #2B2B2B;
+            background: #FAF5ED;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Demo Banner */
+        .demo-banner {
+            background: #1A2E1A;
+            color: #FAF5ED;
+            text-align: center;
+            padding: 12px 20px;
+            font-size: 13px;
+        }
+
+        .demo-banner a {
+            color: #C8A020;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .demo-banner a:hover {
+            text-decoration: underline;
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, #1A2E1A 0%, #2D4A2D 60%, #3A5C3A 100%);
+            color: #FAF5ED;
+            padding: 110px 20px 90px;
+            text-align: center;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: #C8A020;
+            color: #1A2E1A;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            padding: 6px 16px;
+            border-radius: 20px;
+            margin-bottom: 22px;
+        }
+
+        .hero h1 {
+            font-size: 52px;
+            font-weight: 800;
+            margin-bottom: 14px;
+            line-height: 1.15;
+            font-family: Georgia, 'Times New Roman', serif;
+        }
+
+        .hero-subtitle {
+            font-size: 20px;
+            opacity: 0.88;
+            margin-bottom: 14px;
+        }
+
+        .hero-rating {
+            font-size: 15px;
+            opacity: 0.78;
+            margin-bottom: 36px;
+        }
+
+        .hero-rating strong {
+            color: #C8A020;
+            font-size: 18px;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            background: #C8A020;
+            color: #1A2E1A;
+            padding: 15px 34px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 16px;
+            transition: background 0.2s, transform 0.2s;
+        }
+
+        .btn-primary:hover {
+            background: #a8881a;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            display: inline-block;
+            border: 2px solid rgba(250,245,237,0.6);
+            color: #FAF5ED;
+            padding: 13px 28px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: border-color 0.2s, background 0.2s;
+        }
+
+        .btn-outline:hover {
+            border-color: #FAF5ED;
+            background: rgba(250,245,237,0.1);
+        }
+
+        /* Hero photo placeholder */
+        .hero-photo {
+            margin-top: 50px;
+            height: 320px;
+            background: rgba(255,255,255,0.07);
+            border-radius: 12px;
+            border: 2px dashed rgba(200,160,32,0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(250,245,237,0.5);
+            font-size: 15px;
+            letter-spacing: 0.5px;
+        }
+
+        /* About */
+        .about {
+            padding: 80px 20px;
+            background: #FAF5ED;
+        }
+
+        .section-label {
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #C8A020;
+            margin-bottom: 10px;
+        }
+
+        .about h2 {
+            font-size: 38px;
+            font-weight: 800;
+            color: #1A2E1A;
+            margin-bottom: 20px;
+            font-family: Georgia, 'Times New Roman', serif;
+        }
+
+        .about p {
+            font-size: 16px;
+            line-height: 1.85;
+            color: #444;
+            margin-bottom: 16px;
+            max-width: 700px;
+        }
+
+        .about-highlight {
+            display: inline-block;
+            background: #1A2E1A;
+            color: #FAF5ED;
+            font-size: 14px;
+            font-weight: 600;
+            padding: 8px 18px;
+            border-radius: 6px;
+            margin-top: 8px;
+        }
+
+        .about-photos {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-top: 40px;
+        }
+
+        .photo-placeholder {
+            height: 240px;
+            background: #EDE8DF;
+            border-radius: 10px;
+            border: 2px dashed #C8A020;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #888;
+            font-size: 14px;
+        }
+
+        .photo-placeholder.tall {
+            height: 500px;
+        }
+
+        /* Menu */
+        .menu-section {
+            padding: 80px 20px;
+            background: #1A2E1A;
+            color: #FAF5ED;
+        }
+
+        .menu-section .section-label {
+            color: #C8A020;
+        }
+
+        .menu-section h2 {
+            font-size: 38px;
+            font-weight: 800;
+            color: #FAF5ED;
+            margin-bottom: 40px;
+            font-family: Georgia, 'Times New Roman', serif;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 28px;
+        }
+
+        .menu-category {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(200,160,32,0.3);
+            border-radius: 10px;
+            padding: 24px;
+        }
+
+        .menu-category h3 {
+            font-size: 16px;
+            font-weight: 700;
+            color: #C8A020;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 18px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(200,160,32,0.3);
+        }
+
+        .menu-item {
+            margin-bottom: 14px;
+        }
+
+        .menu-item-name {
+            font-weight: 600;
+            font-size: 15px;
+            color: #FAF5ED;
+        }
+
+        .menu-item-desc {
+            font-size: 13px;
+            color: rgba(250,245,237,0.6);
+            margin-top: 2px;
+        }
+
+        .menu-note {
+            margin-top: 28px;
+            padding: 16px;
+            background: rgba(200,160,32,0.1);
+            border-left: 3px solid #C8A020;
+            border-radius: 0 6px 6px 0;
+            font-size: 13px;
+            color: rgba(250,245,237,0.75);
+        }
+
+        /* Booking Widget */
+        .booking-section {
+            padding: 80px 20px;
+            background: #FAF5ED;
+            text-align: center;
+        }
+
+        .booking-section .section-label {
+            color: #C8A020;
+        }
+
+        .booking-section h2 {
+            font-size: 38px;
+            font-weight: 800;
+            color: #1A2E1A;
+            margin-bottom: 10px;
+            font-family: Georgia, 'Times New Roman', serif;
+        }
+
+        .booking-section > .container > p {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 36px;
+        }
+
+        .booking-card {
+            max-width: 480px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px 32px;
+            border-radius: 14px;
+            border: 1px solid #DDD5C8;
+            box-shadow: 0 4px 20px rgba(26,46,26,0.10);
+        }
+
+        .booking-form-row {
+            margin-bottom: 16px;
+            text-align: left;
+        }
+
+        .booking-form-row label {
+            display: block;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: #666;
+            margin-bottom: 6px;
+        }
+
+        .booking-form-row input,
+        .booking-form-row select {
+            width: 100%;
+            padding: 13px 15px;
+            border: 1px solid #DDD5C8;
+            border-radius: 8px;
+            font-size: 15px;
+            font-family: inherit;
+            background: #FAF5ED;
+            color: #2B2B2B;
+            appearance: none;
+            -webkit-appearance: none;
+        }
+
+        .booking-form-row input:focus,
+        .booking-form-row select:focus {
+            outline: none;
+            border-color: #C8A020;
+            background: white;
+        }
+
+        .booking-btn {
+            width: 100%;
+            padding: 16px 20px;
+            background: #1A2E1A;
+            color: #FAF5ED;
+            border: none;
+            border-radius: 8px;
+            font-size: 17px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 8px;
+            transition: background 0.2s, transform 0.2s;
+            letter-spacing: 0.3px;
+        }
+
+        .booking-btn:hover {
+            background: #2D4A2D;
+            transform: translateY(-1px);
+        }
+
+        .booking-caption {
+            font-size: 12px;
+            color: #999;
+            margin-top: 14px;
+            text-align: center;
+        }
+
+        /* Reviews */
+        .reviews-section {
+            padding: 80px 20px;
+            background: #F0EBE0;
+        }
+
+        .reviews-section .section-label {
+            color: #C8A020;
+        }
+
+        .reviews-section h2 {
+            font-size: 38px;
+            font-weight: 800;
+            color: #1A2E1A;
+            margin-bottom: 12px;
+            font-family: Georgia, 'Times New Roman', serif;
+        }
+
+        .rating-summary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: #1A2E1A;
+            color: #FAF5ED;
+            padding: 10px 20px;
+            border-radius: 8px;
+            margin-bottom: 36px;
+            font-size: 15px;
+        }
+
+        .rating-number {
+            font-size: 28px;
+            font-weight: 800;
+            color: #C8A020;
+        }
+
+        .review-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .review-card {
+            background: white;
+            padding: 28px;
+            border-radius: 10px;
+            border: 1px solid #DDD5C8;
+        }
+
+        .review-text {
+            font-size: 15px;
+            color: #444;
+            line-height: 1.7;
+            margin-bottom: 14px;
+            font-style: italic;
+        }
+
+        .review-author {
+            font-weight: 700;
+            color: #1A2E1A;
+            font-size: 14px;
+        }
+
+        .review-source {
+            font-size: 12px;
+            color: #999;
+            margin-top: 2px;
+        }
+
+        /* Hours & Location */
+        .info-section {
+            padding: 80px 20px;
+            background: #FAF5ED;
+        }
+
+        .info-section .section-label {
+            color: #C8A020;
+        }
+
+        .info-section h2 {
+            font-size: 38px;
+            font-weight: 800;
+            color: #1A2E1A;
+            margin-bottom: 40px;
+            font-family: Georgia, 'Times New Roman', serif;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .info-card {
+            background: white;
+            padding: 28px;
+            border-radius: 10px;
+            border: 1px solid #DDD5C8;
+        }
+
+        .info-card h3 {
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #C8A020;
+            margin-bottom: 18px;
+        }
+
+        .hours-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .hours-table td {
+            padding: 9px 0;
+            font-size: 15px;
+            border-bottom: 1px solid #F0EBE0;
+            color: #333;
+        }
+
+        .hours-table td:first-child {
+            font-weight: 600;
+            color: #1A2E1A;
+            width: 55%;
+        }
+
+        .info-card address {
+            font-style: normal;
+            font-size: 15px;
+            color: #444;
+            line-height: 1.8;
+            margin-bottom: 16px;
+        }
+
+        .info-card a {
+            color: #1A2E1A;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        .info-card a:hover {
+            color: #C8A020;
+        }
+
+        .map-link {
+            display: inline-block;
+            font-size: 14px;
+            color: #C8A020;
+            font-weight: 600;
+            text-decoration: none;
+            margin-top: 12px;
+        }
+
+        .map-link:hover {
+            text-decoration: underline;
+        }
+
+        .interior-placeholder {
+            margin-top: 32px;
+            height: 280px;
+            background: #EDE8DF;
+            border-radius: 10px;
+            border: 2px dashed #C8A020;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #888;
+            font-size: 14px;
+        }
+
+        /* Footer */
+        .footer {
+            background: #111E11;
+            color: rgba(250,245,237,0.75);
+            padding: 44px 20px;
+            text-align: center;
+        }
+
+        .footer-name {
+            font-size: 20px;
+            font-weight: 800;
+            color: #FAF5ED;
+            font-family: Georgia, 'Times New Roman', serif;
+            margin-bottom: 6px;
+        }
+
+        .footer p {
+            font-size: 13px;
+            margin-bottom: 4px;
+            line-height: 1.6;
+        }
+
+        .footer a {
+            color: #C8A020;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-divider {
+            border: none;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            margin: 20px auto;
+            max-width: 300px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero-subtitle {
+                font-size: 17px;
+            }
+
+            .about h2,
+            .menu-section h2,
+            .booking-section h2,
+            .reviews-section h2,
+            .info-section h2 {
+                font-size: 30px;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-photos {
+                grid-template-columns: 1fr;
+            }
+
+            .about, .menu-section, .booking-section, .reviews-section, .info-section {
+                padding: 60px 20px;
+            }
+
+            .hero {
+                padding: 80px 20px 60px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Demo Banner -->
+    <div class="demo-banner">
+        This is a demo preview built by Klar Systems for Thaibaan Ravintola.
+        <a href="https://preview.klarsystems.com/thaibaan-ravintola-rovaniemi/proposal/">See the full proposal</a>
+    </div>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-badge">Thai Restaurant — Rovaniemi</div>
+            <h1>Thaibaan Ravintola</h1>
+            <p class="hero-subtitle">Authentic Thai Cuisine in the Heart of Rovaniemi</p>
+            <p class="hero-rating"><strong>4.5</strong> / 5 &nbsp;&middot;&nbsp; 274 Google reviews &nbsp;&middot;&nbsp; Kauppakeskus Rinteenkulma</p>
+            <div class="hero-actions">
+                <a href="#book" class="btn-primary">Reserve a Table</a>
+                <a href="#menu" class="btn-outline">View Menu</a>
+            </div>
+            <div class="hero-photo">Your photo here — Thai dishes, interior, or team</div>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section class="about">
+        <div class="container">
+            <p class="section-label">About Us</p>
+            <h2>Thailand Comes to Lapland</h2>
+            <p>
+                Thaibaan Ravintola is Rovaniemi's standout Thai restaurant — a gem for anyone seeking authentic, mouthwatering Thai flavours in northern Finland. Located on the second floor of Kauppakeskus Rinteenkulma on Koskikatu, we bring vibrant, spicy, and fresh flavours of Thailand right to your table.
+            </p>
+            <p>
+                From aromatic curries and classic Pad Thai to fragrant Tom Yum soups and fresh spring rolls, every dish is prepared with care and authentic ingredients. Our staff are happy to guide you through the menu and accommodate dietary preferences — including vegan adaptations on request.
+            </p>
+            <span class="about-highlight">4.5 stars &middot; 274 reviews &middot; Koskikatu 25, 2nd Floor</span>
+
+            <div class="about-photos">
+                <div class="photo-placeholder">Food photos coming soon</div>
+                <div class="photo-placeholder">Interior photo coming soon</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu -->
+    <section class="menu-section" id="menu">
+        <div class="container">
+            <p class="section-label">Our Menu</p>
+            <h2>Thai Classics &amp; Chef Specials</h2>
+            <div class="menu-grid">
+
+                <div class="menu-category">
+                    <h3>Soups</h3>
+                    <div class="menu-item">
+                        <div class="menu-item-name">Tom Yum</div>
+                        <div class="menu-item-desc">Hot and sour soup with lemongrass and herbs</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-name">Tom Yum with Seafood</div>
+                        <div class="menu-item-desc">Rich seafood version of the classic</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-name">Tom Kha</div>
+                        <div class="menu-item-desc">Creamy coconut galangal soup</div>
+                    </div>
+                </div>
+
+                <div class="menu-category">
+                    <h3>Curries</h3>
+                    <div class="menu-item">
+                        <div class="menu-item-name">Green Curry</div>
+                        <div class="menu-item-desc">Aromatic coconut green curry — vegan option with tofu</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-name">Red Curry</div>
+                        <div class="menu-item-desc">Rich red coconut curry — vegan option with tofu</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-name">Massaman Curry</div>
+                        <div class="menu-item-desc">Mild, slow-cooked curry with peanuts and potato</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-name">Panang Curry</div>
+                        <div class="menu-item-desc">Thick, fragrant curry with kaffir lime</div>
+                    </div>
+                </div>
+
+                <div class="menu-category">
+                    <h3>Noodles &amp; Rice</h3>
+                    <div class="menu-item">
+                        <div class="menu-item-name">Pad Thai</div>
+                        <div class="menu-item-desc">Classic stir-fried rice noodles with egg, bean sprouts</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-name">Pad See Ew</div>
+                        <div class="menu-item-desc">Flat rice noodles in savoury sauce</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-name">Fried Rice with Chicken</div>
+                        <div class="menu-item-desc">Thai-style jasmine fried rice</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-name">Fried Rice with Tofu</div>
+                        <div class="menu-item-desc">Vegetable fried rice, vegan-friendly</div>
+                    </div>
+                </div>
+
+                <div class="menu-category">
+                    <h3>Starters &amp; Stir-fries</h3>
+                    <div class="menu-item">
+                        <div class="menu-item-name">Spring Rolls</div>
+                        <div class="menu-item-desc">Crispy Thai spring rolls with dipping sauce</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-name">Fried Omelette</div>
+                        <div class="menu-item-desc">Thai-style omelette, light and fluffy</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-name">Stir-fried Vegetables</div>
+                        <div class="menu-item-desc">Seasonal vegetables in oyster or soy sauce</div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="menu-note">
+                This is a sample menu — the full menu is available at the restaurant. Many dishes can be adapted for vegan and gluten-free diets. Ask our staff for guidance.
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Widget -->
+    <section class="booking-section" id="book">
+        <div class="container">
+            <p class="section-label">Reservations</p>
+            <h2>Book a Table</h2>
+            <p>Reserve your table in seconds — no account needed, no fees.</p>
+            <div class="booking-card">
+                <form onsubmit="return false;">
+                    <div class="booking-form-row">
+                        <label for="res-date">Date</label>
+                        <input type="date" id="res-date" name="date">
+                    </div>
+                    <div class="booking-form-row">
+                        <label for="res-time">Time</label>
+                        <select id="res-time" name="time">
+                            <option value="">Select time</option>
+                            <option value="12:00">12:00</option>
+                            <option value="12:30">12:30</option>
+                            <option value="13:00">13:00</option>
+                            <option value="13:30">13:30</option>
+                            <option value="14:00">14:00</option>
+                            <option value="14:30">14:30</option>
+                            <option value="15:00">15:00</option>
+                            <option value="17:00">17:00</option>
+                            <option value="17:30">17:30</option>
+                            <option value="18:00">18:00</option>
+                            <option value="18:30">18:30</option>
+                            <option value="19:00">19:00</option>
+                            <option value="19:30">19:30</option>
+                            <option value="20:00">20:00</option>
+                        </select>
+                    </div>
+                    <div class="booking-form-row">
+                        <label for="res-guests">Party Size</label>
+                        <select id="res-guests" name="guests">
+                            <option value="1">1 guest</option>
+                            <option value="2" selected>2 guests</option>
+                            <option value="3">3 guests</option>
+                            <option value="4">4 guests</option>
+                            <option value="5">5 guests</option>
+                            <option value="6">6 guests</option>
+                            <option value="7">7 guests</option>
+                            <option value="8">8 guests</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="booking-btn">Reserve Now</button>
+                </form>
+                <p class="booking-caption">Powered by Klar Bookings — no commissions, no per-cover fees.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews -->
+    <section class="reviews-section" id="reviews">
+        <div class="container">
+            <p class="section-label">Guest Reviews</p>
+            <h2>What Our Guests Say</h2>
+            <div class="rating-summary">
+                <span class="rating-number">4.5</span>
+                <span>/ 5 &nbsp;&middot;&nbsp; 274 Google reviews</span>
+            </div>
+            <div class="review-grid">
+                <div class="review-card">
+                    <p class="review-text">"It's a gem for anyone looking for authentic and mouthwatering dishes."</p>
+                    <p class="review-author">Wanderlog visitor</p>
+                    <p class="review-source">via Wanderlog</p>
+                </div>
+                <div class="review-card">
+                    <p class="review-text">"Very nice red curry — staff patiently explained all the options and helped us choose."</p>
+                    <p class="review-author">Mantelimamma</p>
+                    <p class="review-source">via HappyCow</p>
+                </div>
+                <div class="review-card">
+                    <p class="review-text">"Clearly marked menu, helpful staff and a warm atmosphere. Rare to find food like this in Rovaniemi."</p>
+                    <p class="review-author">Emma &amp; Sonja</p>
+                    <p class="review-source">via HappyCow</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hours & Location -->
+    <section class="info-section" id="contact">
+        <div class="container">
+            <p class="section-label">Find Us</p>
+            <h2>Hours &amp; Location</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>Opening Hours</h3>
+                    <table class="hours-table">
+                        <tr>
+                            <td>Monday — Friday</td>
+                            <td>12:00 — 21:00</td>
+                        </tr>
+                        <tr>
+                            <td>Saturday</td>
+                            <td>12:00 — 20:00</td>
+                        </tr>
+                        <tr>
+                            <td>Sunday</td>
+                            <td>12:00 — 20:00</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="info-card">
+                    <h3>Address &amp; Phone</h3>
+                    <address>
+                        Kauppakeskus Rinteenkulma<br>
+                        Koskikatu 25, 2nd Floor<br>
+                        96200 Rovaniemi, Finland
+                    </address>
+                    <a href="tel:+358400234748">+358 40 0234748</a><br>
+                    <a class="map-link" href="https://maps.google.com/?cid=11209514358634530054" target="_blank" rel="noopener">View on Google Maps</a>
+                </div>
+            </div>
+            <div class="interior-placeholder">Interior photo coming soon</div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p class="footer-name">Thaibaan Ravintola</p>
+            <p>Kauppakeskus Rinteenkulma, Koskikatu 25 (2nd Floor), 96200 Rovaniemi</p>
+            <p><a href="tel:+358400234748">+358 40 0234748</a></p>
+            <hr class="footer-divider">
+            <p>Powered by Klar Systems — this is a demo preview for Thaibaan Ravintola.</p>
+            <p style="margin-top:6px;">
+                <a href="https://preview.klarsystems.com/thaibaan-ravintola-rovaniemi/proposal/">View full proposal</a>
+            </p>
+        </div>
+    </footer>
+
+</body>
+</html>

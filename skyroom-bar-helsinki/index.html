@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Skyroom Bar — Helsinki Rooftop Cocktail Bar</title>
+  <!-- palette: research palette used (#1a1a2e bg, #c9a84c accent) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: #0e0e1c;
+      color: #e8e2d6;
+      font-family: 'DM Sans', system-ui, sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
+    }
+
+    /* ===== DEMO BANNER ===== */
+    .demo-banner {
+      background: #c9a84c;
+      color: #0e0e1c;
+      text-align: center;
+      padding: 10px 20px;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    /* ===== NAV ===== */
+    nav {
+      position: fixed;
+      top: 37px;
+      left: 0; right: 0;
+      z-index: 900;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 48px;
+      background: linear-gradient(to bottom, rgba(14,14,28,0.95) 0%, rgba(14,14,28,0) 100%);
+      transition: background 0.3s;
+    }
+    .nav-logo {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 22px;
+      color: #c9a84c;
+      text-decoration: none;
+      letter-spacing: 0.04em;
+    }
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: #e8e2d6;
+      text-decoration: none;
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      opacity: 0.85;
+      transition: opacity 0.2s, color 0.2s;
+    }
+    .nav-links a:hover { opacity: 1; color: #c9a84c; }
+
+    /* ===== HERO ===== */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 80px 48px;
+      position: relative;
+      overflow: hidden;
+      background: #1a1a2e;
+    }
+    .hero-photo-placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px dashed rgba(201,168,76,0.25);
+      color: rgba(201,168,76,0.5);
+      font-size: 14px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      z-index: 0;
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(14,14,28,0.92) 0%, rgba(14,14,28,0.2) 60%, rgba(14,14,28,0.1) 100%);
+      z-index: 1;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 720px;
+    }
+    .hero-eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #c9a84c;
+      margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: clamp(48px, 7vw, 88px);
+      line-height: 1.05;
+      color: #ffffff;
+      margin-bottom: 24px;
+    }
+    .hero h1 span { color: #c9a84c; }
+    .hero-desc {
+      font-size: 18px;
+      font-weight: 300;
+      color: rgba(232,226,214,0.8);
+      max-width: 520px;
+      margin-bottom: 40px;
+    }
+    .hero-rating {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(201,168,76,0.12);
+      border: 1px solid rgba(201,168,76,0.3);
+      padding: 10px 20px;
+      font-size: 14px;
+      color: #c9a84c;
+      letter-spacing: 0.06em;
+    }
+    .hero-rating .rating-number {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 22px;
+      color: #c9a84c;
+    }
+    .hero-scroll {
+      margin-top: 48px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(232,226,214,0.45);
+    }
+    .hero-scroll-line {
+      width: 40px;
+      height: 1px;
+      background: rgba(201,168,76,0.4);
+    }
+
+    /* ===== SECTIONS ===== */
+    section { padding: 96px 48px; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+    .section-label {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #c9a84c;
+      margin-bottom: 16px;
+    }
+    h2 {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: clamp(32px, 4vw, 52px);
+      line-height: 1.1;
+      color: #ffffff;
+      margin-bottom: 24px;
+    }
+    .lead-text {
+      font-size: 18px;
+      font-weight: 300;
+      color: rgba(232,226,214,0.75);
+      max-width: 600px;
+      margin-bottom: 48px;
+    }
+
+    /* ===== ABOUT / STORY ===== */
+    .about { background: #0e0e1c; }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+    .about-photo {
+      aspect-ratio: 4/5;
+      background: #1a1a2e;
+      border: 2px dashed rgba(201,168,76,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(201,168,76,0.4);
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .about-body p {
+      color: rgba(232,226,214,0.75);
+      margin-bottom: 20px;
+    }
+    .about-facts {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 40px;
+    }
+    .fact-item {
+      border-left: 2px solid #c9a84c;
+      padding-left: 16px;
+    }
+    .fact-number {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 32px;
+      color: #c9a84c;
+      line-height: 1;
+    }
+    .fact-label {
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(232,226,214,0.5);
+      margin-top: 4px;
+    }
+
+    /* ===== DRINKS / MENU ===== */
+    .drinks { background: #13132a; }
+    .drinks-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      margin-top: 48px;
+    }
+    .drink-card {
+      background: #1a1a2e;
+      padding: 32px;
+      transition: background 0.2s;
+    }
+    .drink-card:hover { background: #1e1e38; }
+    .drink-card-icon {
+      width: 36px;
+      height: 36px;
+      margin-bottom: 16px;
+    }
+    .drink-card h3 {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 20px;
+      color: #ffffff;
+      margin-bottom: 8px;
+    }
+    .drink-card p {
+      font-size: 14px;
+      color: rgba(232,226,214,0.6);
+      line-height: 1.55;
+    }
+    .menu-photo {
+      margin-top: 48px;
+      height: 280px;
+      background: #1a1a2e;
+      border: 2px dashed rgba(201,168,76,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(201,168,76,0.4);
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    /* ===== VIEWS ===== */
+    .views { background: #0e0e1c; }
+    .views-quote {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: clamp(22px, 3vw, 34px);
+      color: rgba(232,226,214,0.9);
+      line-height: 1.4;
+      border-left: 3px solid #c9a84c;
+      padding-left: 32px;
+      margin: 48px 0;
+      max-width: 700px;
+    }
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      margin-top: 48px;
+    }
+    .review-card {
+      background: #1a1a2e;
+      padding: 28px 32px;
+      border-top: 2px solid rgba(201,168,76,0.3);
+    }
+    .review-card blockquote {
+      font-size: 15px;
+      color: rgba(232,226,214,0.75);
+      line-height: 1.65;
+      font-style: italic;
+      margin-bottom: 16px;
+    }
+    .review-author {
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #c9a84c;
+    }
+
+    /* ===== HOURS ===== */
+    .hours { background: #13132a; }
+    .hours-table {
+      width: 100%;
+      max-width: 480px;
+      border-collapse: collapse;
+      margin-top: 32px;
+    }
+    .hours-table tr { border-bottom: 1px solid rgba(201,168,76,0.1); }
+    .hours-table td {
+      padding: 14px 0;
+      font-size: 15px;
+      color: rgba(232,226,214,0.75);
+    }
+    .hours-table td:first-child {
+      font-weight: 500;
+      color: #ffffff;
+      width: 40%;
+    }
+    .hours-note {
+      margin-top: 24px;
+      padding: 16px 20px;
+      background: rgba(201,168,76,0.08);
+      border-left: 3px solid #c9a84c;
+      font-size: 13px;
+      color: rgba(232,226,214,0.7);
+      max-width: 480px;
+    }
+
+    /* ===== EVENTS & CONTACT ===== */
+    .contact { background: #0e0e1c; }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+    .events-list {
+      margin-top: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .event-item {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      padding: 20px;
+      background: #1a1a2e;
+      border-left: 3px solid #c9a84c;
+    }
+    .event-icon {
+      flex-shrink: 0;
+      width: 40px;
+      height: 40px;
+      background: rgba(201,168,76,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .event-icon svg { width: 20px; height: 20px; fill: #c9a84c; }
+    .event-title {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 18px;
+      color: #ffffff;
+      margin-bottom: 4px;
+    }
+    .event-desc {
+      font-size: 14px;
+      color: rgba(232,226,214,0.6);
+      line-height: 1.5;
+    }
+    .contact-info {
+      margin-top: 40px;
+    }
+    .contact-info h3 {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 28px;
+      color: #ffffff;
+      margin-bottom: 24px;
+    }
+    .contact-row {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      margin-bottom: 20px;
+    }
+    .contact-row svg {
+      width: 18px;
+      height: 18px;
+      fill: #c9a84c;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .contact-row-body {
+      font-size: 15px;
+      color: rgba(232,226,214,0.75);
+      line-height: 1.55;
+    }
+    .contact-row-body a {
+      color: #c9a84c;
+      text-decoration: none;
+    }
+    .contact-row-body a:hover { text-decoration: underline; }
+    .contact-cta {
+      display: inline-block;
+      margin-top: 32px;
+      padding: 14px 36px;
+      background: #c9a84c;
+      color: #0e0e1c;
+      font-weight: 500;
+      font-size: 13px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background 0.2s, opacity 0.2s;
+    }
+    .contact-cta:hover { background: #d4b660; }
+
+    /* ===== DIVIDER ===== */
+    .gold-divider {
+      width: 60px;
+      height: 2px;
+      background: #c9a84c;
+      margin: 0 0 40px;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: #08081a;
+      padding: 40px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      border-top: 1px solid rgba(201,168,76,0.15);
+    }
+    .footer-brand {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 18px;
+      color: #c9a84c;
+    }
+    .footer-center {
+      font-size: 13px;
+      color: rgba(232,226,214,0.4);
+      text-align: center;
+    }
+    .footer-klar {
+      font-size: 12px;
+      color: rgba(232,226,214,0.35);
+      letter-spacing: 0.08em;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      nav { padding: 16px 24px; }
+      section { padding: 64px 24px; }
+      .hero { padding: 80px 24px 60px; }
+      .about-grid,
+      .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+      .drinks-grid { grid-template-columns: 1fr 1fr; }
+      .reviews-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      footer { flex-direction: column; text-align: center; }
+    }
+    @media (max-width: 560px) {
+      .drinks-grid { grid-template-columns: 1fr; }
+      .about-facts { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- DEMO BANNER -->
+  <div class="demo-banner">This is a demo — not the official Skyroom Bar website</div>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">Skyroom Bar</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#drinks">Drinks</a></li>
+      <li><a href="#views">Views</a></li>
+      <li><a href="#hours">Hours</a></li>
+      <li><a href="#events">Events &amp; Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-photo-placeholder">Your photo here</div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">16th Floor — Clarion Hotel Helsinki — Jätkäsaari</p>
+      <h1>Helsinki<br />from <span>above</span></h1>
+      <p class="hero-desc">A rooftop cocktail bar perched above the city, where panoramic harbour views meet Nordic-chic interiors and handcrafted drinks.</p>
+      <div class="hero-rating">
+        <span class="rating-number">4.4</span>
+        <span>/ 5 &nbsp;&nbsp;|&nbsp;&nbsp; 844 Google reviews</span>
+      </div>
+      <div class="hero-scroll">
+        <div class="hero-scroll-line"></div>
+        <span>Scroll to explore</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="section-inner">
+      <div class="about-grid">
+        <div class="about-photo">Interior photo coming soon</div>
+        <div class="about-body">
+          <p class="section-label">About Skyroom Bar</p>
+          <h2>A view unlike any other in Helsinki</h2>
+          <div class="gold-divider"></div>
+          <p>Skyroom Bar sits on the 16th floor of Clarion Hotel Helsinki, wrapping guests in floor-to-ceiling glass that frames the West Harbour, city rooftops, and — on a clear evening — the horizon all the way out to sea.</p>
+          <p>The interior is Nordic chic: clean lines, warm lighting, and walls hung with works by Finnish and international artists. It is a place designed for those who want to feel the city rather than simply visit it.</p>
+          <p>On Friday and Saturday nights, resident DJs set the mood while the bar team puts their craft on full display.</p>
+          <div class="about-facts">
+            <div class="fact-item">
+              <div class="fact-number">16</div>
+              <div class="fact-label">Floors up</div>
+            </div>
+            <div class="fact-item">
+              <div class="fact-number">200</div>
+              <div class="fact-label">Guest capacity</div>
+            </div>
+            <div class="fact-item">
+              <div class="fact-number">4.4</div>
+              <div class="fact-label">Google rating</div>
+            </div>
+            <div class="fact-item">
+              <div class="fact-number">21+</div>
+              <div class="fact-label">After 20:00</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DRINKS -->
+  <section class="drinks" id="drinks">
+    <div class="section-inner">
+      <p class="section-label">What we serve</p>
+      <h2>Craft cocktails with a view</h2>
+      <p class="lead-text">Our bartenders combine slightly surprising flavours into signature drinks that go well beyond the menu. Alongside them: classics, mocktails, fine wines, and champagne.</p>
+      <div class="drinks-grid">
+        <div class="drink-card">
+          <svg class="drink-card-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 4l20 0 -10 16z" stroke="#c9a84c" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
+            <line x1="18" y1="20" x2="18" y2="30" stroke="#c9a84c" stroke-width="1.5"/>
+            <line x1="12" y1="30" x2="24" y2="30" stroke="#c9a84c" stroke-width="1.5"/>
+          </svg>
+          <h3>Signature Cocktails</h3>
+          <p>Original recipes crafted by the bar team — layered, precise, and designed to complement the atmosphere above the rooftops.</p>
+        </div>
+        <div class="drink-card">
+          <svg class="drink-card-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="10" y="8" width="16" height="20" rx="2" stroke="#c9a84c" stroke-width="1.5" fill="none"/>
+            <line x1="10" y1="14" x2="26" y2="14" stroke="#c9a84c" stroke-width="1.5"/>
+          </svg>
+          <h3>Classic Cocktails</h3>
+          <p>The timeless canon — executed with care using quality spirits, fresh juices, and correct technique.</p>
+        </div>
+        <div class="drink-card">
+          <svg class="drink-card-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="18" cy="18" r="10" stroke="#c9a84c" stroke-width="1.5" fill="none"/>
+            <path d="M14 18 q4 -6 8 0" stroke="#c9a84c" stroke-width="1.5" fill="none"/>
+          </svg>
+          <h3>Mocktails</h3>
+          <p>Zero-alcohol drinks with the same attention to flavour — complex, refreshing, and equally worth the trip up.</p>
+        </div>
+        <div class="drink-card">
+          <svg class="drink-card-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M11 8 q7 4 14 0 l-2 14 q-5 4 -10 0z" stroke="#c9a84c" stroke-width="1.5" fill="none"/>
+          </svg>
+          <h3>Wine &amp; Champagne</h3>
+          <p>A curated selection of bottles chosen to suit the occasion, whether it is a quiet evening or a cause for celebration.</p>
+        </div>
+        <div class="drink-card">
+          <svg class="drink-card-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="8" y="12" width="20" height="14" rx="2" stroke="#c9a84c" stroke-width="1.5" fill="none"/>
+            <path d="M12 12 V10 a6 6 0 0 1 12 0 V12" stroke="#c9a84c" stroke-width="1.5" fill="none"/>
+          </svg>
+          <h3>Light Bites</h3>
+          <p>Small savoury plates to share — the ideal companion to an evening of cocktails and conversation.</p>
+        </div>
+        <div class="drink-card">
+          <svg class="drink-card-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 28 L18 8 L30 28 Z" stroke="#c9a84c" stroke-width="1.5" fill="none" stroke-linejoin="round"/>
+            <line x1="10" y1="22" x2="26" y2="22" stroke="#c9a84c" stroke-width="1"/>
+          </svg>
+          <h3>Cocktail School</h3>
+          <p>Groups of 8–25 can book a guided cocktail-making experience — a shareable, hands-on event above Helsinki. Priced at €64 per person.</p>
+        </div>
+      </div>
+      <div class="menu-photo">Food photos coming soon</div>
+    </div>
+  </section>
+
+  <!-- VIEWS / REVIEWS -->
+  <section class="views" id="views">
+    <div class="section-inner">
+      <p class="section-label">What guests say</p>
+      <h2>The view is the centrepiece</h2>
+      <div class="gold-divider"></div>
+      <blockquote class="views-quote">
+        "The Sky Room is on the 16th floor of the Clarion Hotel overlooking the sea. Modern and tastefully designed, with great all-round views. A great place to relax with friends."
+      </blockquote>
+      <div class="reviews-grid">
+        <div class="review-card">
+          <blockquote>"Had a lovely evening at Sky Room with an amazing sunset view. The best part was the bartender Benjamin, who made us cocktails of his own — the best drinks I have ever had, not exaggerating."</blockquote>
+          <div class="review-author">Reetta — Google review</div>
+        </div>
+        <div class="review-card">
+          <blockquote>"Stunning bay views from here. They have a box full of small binoculars to get a better look. Definitely a must-visit in Helsinki."</blockquote>
+          <div class="review-author">Verified visitor</div>
+        </div>
+        <div class="review-card">
+          <blockquote>"Good view with nice drinks. The windows of the bar are floor to ceiling and most are well placed over the West Harbour. A genuinely special spot."</blockquote>
+          <div class="review-author">Verified visitor</div>
+        </div>
+        <div class="review-card">
+          <blockquote>"We went for the sunset and the view did not disappoint. The bar delivers a premium rooftop atmosphere that is hard to find elsewhere in the city."</blockquote>
+          <div class="review-author">Verified visitor</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOURS -->
+  <section class="hours" id="hours">
+    <div class="section-inner">
+      <p class="section-label">Opening hours</p>
+      <h2>Come for sunset, stay for the night</h2>
+      <div class="gold-divider"></div>
+      <table class="hours-table">
+        <tbody>
+          <tr>
+            <td>Monday – Thursday</td>
+            <td>17:00 – 00:00</td>
+          </tr>
+          <tr>
+            <td>Friday</td>
+            <td>15:00 – 01:00</td>
+          </tr>
+          <tr>
+            <td>Saturday</td>
+            <td>15:00 – 01:00</td>
+          </tr>
+          <tr>
+            <td>Sunday</td>
+            <td>18:00 – 00:00</td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="hours-note">Please note: Skyroom Bar operates a 21-year age limit after 20:00 on all evenings. Valid ID required upon entry.</p>
+    </div>
+  </section>
+
+  <!-- EVENTS & CONTACT -->
+  <section class="contact" id="events">
+    <div class="section-inner">
+      <div class="contact-grid">
+        <!-- Events column -->
+        <div>
+          <p class="section-label">Private events &amp; hire</p>
+          <h2>Make it a Skyroom night</h2>
+          <div class="gold-divider"></div>
+          <p style="color:rgba(232,226,214,0.7); margin-bottom: 8px;">Helsinki's highest venue for private celebrations, corporate gatherings, and unforgettable evenings. Capacity up to 200 guests with full venue buyout available.</p>
+          <div class="events-list">
+            <div class="event-item">
+              <div class="event-icon">
+                <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M10 2a8 8 0 1 0 0 16A8 8 0 0 0 10 2zm0 3v5l3 3-1 1-4-4V5h2z"/>
+                </svg>
+              </div>
+              <div>
+                <div class="event-title">Table service packages</div>
+                <div class="event-desc">Reserved table with minimum spend of €350 for up to 8 guests, including table service and savoury bites.</div>
+              </div>
+            </div>
+            <div class="event-item">
+              <div class="event-icon">
+                <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M13 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0zM18 8a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM6 8a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM0 18v-1a5 5 0 0 1 5-5h10a5 5 0 0 1 5 5v1H0z"/>
+                </svg>
+              </div>
+              <div>
+                <div class="event-title">Full venue hire</div>
+                <div class="event-desc">Exclusive access for up to 200 guests — birthdays, corporate events, product launches, and private parties above the Helsinki skyline.</div>
+              </div>
+            </div>
+            <div class="event-item">
+              <div class="event-icon">
+                <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M9 12l-4-4 1-1 3 3 7-7 1 1z"/>
+                  <circle cx="10" cy="10" r="9" fill="none" stroke="#c9a84c" stroke-width="1.5"/>
+                </svg>
+              </div>
+              <div>
+                <div class="event-title">Cocktail school</div>
+                <div class="event-desc">Guided bar experience for groups of 8–25 people at €64 per person. A memorable team activity with professional bartenders.</div>
+              </div>
+            </div>
+            <div class="event-item">
+              <div class="event-icon">
+                <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M18 5l-8 8-4-4-1 1 5 5 9-9z"/>
+                </svg>
+              </div>
+              <div>
+                <div class="event-title">DJ nights — Fri &amp; Sat</div>
+                <div class="event-desc">Resident DJs every Friday and Saturday evening. Outdoor terrace available during warmer months.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact column -->
+        <div class="contact-info">
+          <h3>Find us or get in touch</h3>
+          <div class="contact-row">
+            <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <path d="M10 2C6.686 2 4 4.686 4 8c0 4.418 6 10 6 10s6-5.582 6-10c0-3.314-2.686-6-6-6zm0 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"/>
+            </svg>
+            <div class="contact-row-body">
+              Tyynenmerenkatu 2, 00220 Helsinki<br />
+              16th floor, Clarion Hotel Helsinki<br />
+              Jätkäsaari
+            </div>
+          </div>
+          <div class="contact-row">
+            <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 3a2 2 0 0 1 2-2h2.586a1 1 0 0 1 .707.293l2.414 2.414a1 1 0 0 1 0 1.414L8.293 6.535A12.01 12.01 0 0 0 13.465 11.707l1.414-1.414a1 1 0 0 1 1.414 0l2.414 2.414a1 1 0 0 1 .293.707V16a2 2 0 0 1-2 2c-7.732 0-14-6.268-14-14z"/>
+            </svg>
+            <div class="contact-row-body">
+              <a href="tel:+358108503820">+358 10 850 3820</a>
+            </div>
+          </div>
+          <div class="contact-row">
+            <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="10" cy="10" r="9" fill="none" stroke="#c9a84c" stroke-width="1.5"/>
+              <path d="M10 6v4l3 3" stroke="#c9a84c" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            </svg>
+            <div class="contact-row-body">
+              Mon–Thu 17:00–00:00<br />
+              Fri–Sat 15:00–01:00<br />
+              Sun 18:00–00:00
+            </div>
+          </div>
+          <a href="https://calendly.com/lomberg-klarsystems" class="contact-cta" target="_blank" rel="noopener">Enquire about events</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-brand">Skyroom Bar</div>
+    <div class="footer-center" style="font-size:12px; color:rgba(232,226,214,0.35);">
+      Tyynenmerenkatu 2, 00220 Helsinki &nbsp;|&nbsp; Clarion Hotel Helsinki, 16th floor
+    </div>
+    <div class="footer-klar">Powered by Klar</div>
+  </footer>
+
+</body>
+</html>

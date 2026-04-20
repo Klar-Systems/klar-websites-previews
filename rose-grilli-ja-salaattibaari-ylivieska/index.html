@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rose Grilli ja Salaattibaari — Ylivieska's favourite grill since 2010</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --red: #c0392b;
+            --red-dark: #96281b;
+            --red-light: #e74c3c;
+            --bg: #f5f5f0;
+            --dark: #1a1a1a;
+            --mid: #444;
+            --light-text: #666;
+            --white: #ffffff;
+            --card-bg: #ffffff;
+            --border: #e0ddd8;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        /* Demo Banner */
+        .demo-banner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--red);
+            color: #fff;
+            padding: 11px 20px;
+            text-align: center;
+            font-size: 13px;
+            font-weight: 500;
+            z-index: 1000;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+        }
+
+        .demo-banner a {
+            color: #fff;
+            font-weight: 700;
+            text-decoration: underline;
+            margin-left: 8px;
+        }
+
+        .demo-banner a:hover {
+            color: #ffe0de;
+        }
+
+        body {
+            padding-top: 42px;
+        }
+
+        /* Typography */
+        h1, h2, h3 {
+            font-family: 'Oswald', sans-serif;
+            letter-spacing: 1px;
+        }
+
+        h2 {
+            font-size: 38px;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 40px;
+            text-transform: uppercase;
+        }
+
+        h2.light {
+            color: var(--white);
+        }
+
+        /* Hero */
+        .hero {
+            background: var(--dark);
+            min-height: 92vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 60px 24px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(160deg, #2a0a08 0%, #1a1a1a 60%, #0a0a0a 100%);
+            z-index: 0;
+        }
+
+        .hero-photo-placeholder {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 0;
+            opacity: 0.18;
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
+            color: #fff;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border: 2px dashed rgba(255,255,255,0.25);
+            margin: 20px;
+            border-radius: 4px;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 760px;
+        }
+
+        .hero-eyebrow {
+            font-size: 13px;
+            color: var(--red-light);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            font-weight: 600;
+            margin-bottom: 18px;
+        }
+
+        .hero h1 {
+            font-size: 78px;
+            font-weight: 700;
+            color: #fff;
+            line-height: 1.05;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .hero-sub {
+            font-size: 20px;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 10px;
+            font-weight: 400;
+        }
+
+        .hero-since {
+            font-size: 14px;
+            color: rgba(255,255,255,0.45);
+            margin-bottom: 32px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .rating-pill {
+            display: inline-block;
+            background: rgba(192,57,43,0.18);
+            border: 1px solid rgba(192,57,43,0.5);
+            color: #ff8a80;
+            padding: 8px 20px;
+            border-radius: 40px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 36px;
+            letter-spacing: 0.5px;
+        }
+
+        .cta-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .btn-call {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--red);
+            color: #fff;
+            padding: 20px 48px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-family: 'Oswald', sans-serif;
+            font-size: 26px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: background 0.2s, transform 0.2s;
+            box-shadow: 0 6px 20px rgba(192,57,43,0.4);
+        }
+
+        .btn-call:hover {
+            background: var(--red-light);
+            transform: translateY(-3px);
+        }
+
+        .btn-call-icon {
+            display: inline-block;
+            width: 22px;
+            height: 22px;
+        }
+
+        .call-note {
+            font-size: 13px;
+            color: rgba(255,255,255,0.45);
+            letter-spacing: 1px;
+        }
+
+        /* Section layout */
+        .section-wrap {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 72px 24px;
+        }
+
+        /* Highlights strip */
+        .highlights {
+            background: var(--red);
+            padding: 0;
+        }
+
+        .highlights-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            divide: solid;
+        }
+
+        .highlight-item {
+            padding: 36px 32px;
+            text-align: center;
+            border-right: 1px solid rgba(255,255,255,0.15);
+        }
+
+        .highlight-item:last-child {
+            border-right: none;
+        }
+
+        .highlight-num {
+            font-family: 'Oswald', sans-serif;
+            font-size: 44px;
+            font-weight: 700;
+            color: #fff;
+            line-height: 1;
+            margin-bottom: 6px;
+        }
+
+        .highlight-label {
+            font-size: 13px;
+            color: rgba(255,255,255,0.75);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Menu section */
+        .menu-section {
+            background: var(--bg);
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .menu-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-top: 3px solid var(--red);
+            border-radius: 4px;
+            padding: 28px 24px;
+        }
+
+        .menu-card h3 {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 14px;
+            text-transform: uppercase;
+        }
+
+        .menu-item {
+            font-size: 14px;
+            color: var(--mid);
+            padding: 6px 0;
+            border-bottom: 1px solid var(--border);
+            line-height: 1.4;
+        }
+
+        .menu-item:last-child {
+            border-bottom: none;
+        }
+
+        .menu-photo-placeholder {
+            background: #ebe9e4;
+            border: 2px dashed #ccc;
+            border-radius: 4px;
+            height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            color: #aaa;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 24px;
+        }
+
+        .menu-note {
+            font-size: 13px;
+            color: var(--light-text);
+            text-align: center;
+            margin-top: 12px;
+            font-style: italic;
+        }
+
+        /* Signature dish highlight */
+        .signature-section {
+            background: var(--dark);
+            color: #fff;
+        }
+
+        .signature-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 72px 24px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .signature-text h2 {
+            color: #fff;
+            margin-bottom: 20px;
+        }
+
+        .signature-text p {
+            font-size: 16px;
+            color: rgba(255,255,255,0.7);
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .signature-badge {
+            display: inline-block;
+            background: rgba(192,57,43,0.25);
+            border: 1px solid rgba(192,57,43,0.5);
+            color: #ff8a80;
+            padding: 8px 16px;
+            border-radius: 3px;
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            margin-right: 6px;
+        }
+
+        .signature-photo-placeholder {
+            background: #2a2a2a;
+            border: 2px dashed #444;
+            border-radius: 6px;
+            height: 320px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Reviews */
+        .reviews-section {
+            background: var(--bg);
+        }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        .review-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 28px 24px;
+        }
+
+        .review-rating {
+            font-family: 'Oswald', sans-serif;
+            font-size: 14px;
+            color: var(--red);
+            font-weight: 600;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        .review-text {
+            font-size: 15px;
+            color: var(--mid);
+            font-style: italic;
+            line-height: 1.7;
+        }
+
+        .review-author {
+            font-size: 13px;
+            color: var(--light-text);
+            margin-top: 12px;
+        }
+
+        /* Info section */
+        .info-section {
+            background: var(--card-bg);
+            border-top: 1px solid var(--border);
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 32px;
+        }
+
+        .info-block {
+            padding: 28px 24px;
+            border-left: 3px solid var(--red);
+            background: var(--bg);
+            border-radius: 0 4px 4px 0;
+        }
+
+        .info-block h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--dark);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+
+        .info-block p, .info-block a {
+            font-size: 15px;
+            color: var(--mid);
+            line-height: 1.7;
+        }
+
+        .info-block a {
+            color: var(--red);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .info-block a:hover {
+            text-decoration: underline;
+        }
+
+        /* CTA section */
+        .cta-section {
+            background: var(--red);
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            color: #fff;
+            margin-bottom: 14px;
+        }
+
+        .cta-section p {
+            color: rgba(255,255,255,0.8);
+            font-size: 17px;
+            margin-bottom: 32px;
+        }
+
+        .btn-call-white {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: #fff;
+            color: var(--red);
+            padding: 20px 48px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-family: 'Oswald', sans-serif;
+            font-size: 26px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: background 0.2s, transform 0.2s;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+        }
+
+        .btn-call-white:hover {
+            background: #ffe0de;
+            transform: translateY(-3px);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            padding: 28px 24px;
+            text-align: center;
+            font-size: 13px;
+            color: #777;
+        }
+
+        footer a {
+            color: #aaa;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            color: #fff;
+        }
+
+        /* Divider accent */
+        .accent-line {
+            width: 48px;
+            height: 3px;
+            background: var(--red);
+            margin-bottom: 20px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 52px;
+            }
+
+            h2 {
+                font-size: 30px;
+            }
+
+            .highlights-inner {
+                grid-template-columns: 1fr;
+            }
+
+            .highlight-item {
+                border-right: none;
+                border-bottom: 1px solid rgba(255,255,255,0.15);
+            }
+
+            .highlight-item:last-child {
+                border-bottom: none;
+            }
+
+            .signature-inner {
+                grid-template-columns: 1fr;
+                gap: 36px;
+                padding: 48px 24px;
+            }
+
+            .signature-photo-placeholder {
+                height: 220px;
+            }
+
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .btn-call, .btn-call-white {
+                font-size: 22px;
+                padding: 18px 32px;
+            }
+
+            .section-wrap {
+                padding: 52px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Demo Banner -->
+    <div class="demo-banner">
+        This is a demo — the final website will be built together with you.
+        <a href="https://calendly.com/lomberg-klarsystems">Book a free call &rarr;</a>
+    </div>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-photo-placeholder">Your photo here</div>
+        <div class="hero-content">
+            <div class="hero-eyebrow">Ylivieska &mdash; Torikatu 8</div>
+            <h1>Rose Grilli<br>ja Salaattibaari</h1>
+            <p class="hero-sub">Burgers &bull; Kebab &bull; Salad Bar &bull; Grilli classics</p>
+            <p class="hero-since">Since 2010 &mdash; Ylivieska's favourite grill</p>
+            <div class="rating-pill">4.3 / 5 &nbsp;&bull;&nbsp; 730 Google reviews</div>
+            <div class="cta-group">
+                <a href="tel:08420042" class="btn-call">
+                    <svg class="btn-call-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 01.01 2.18 2 2 0 012 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z"/></svg>
+                    Call to Order &nbsp; 08 420042
+                </a>
+                <span class="call-note">Eat in &bull; Takeaway &bull; No delivery apps</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Highlights strip -->
+    <div class="highlights">
+        <div class="highlights-inner">
+            <div class="highlight-item">
+                <div class="highlight-num">4.3</div>
+                <div class="highlight-label">Google rating</div>
+            </div>
+            <div class="highlight-item">
+                <div class="highlight-num">730</div>
+                <div class="highlight-label">Reviews</div>
+            </div>
+            <div class="highlight-item">
+                <div class="highlight-num">15+</div>
+                <div class="highlight-label">Years serving Ylivieska</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Signature dish section -->
+    <div class="signature-section">
+        <div class="signature-inner">
+            <div class="signature-text">
+                <h2 class="light">The Whole-Meat Burger</h2>
+                <div class="accent-line"></div>
+                <p>
+                    Rose Grilli is famous for its kokoliha (whole-meat) burgers — thick, juicy patties that keep locals coming back. The double kokoliha burger with two 100&nbsp;g patties has earned the title <em>"best burgers in Ylivieska"</em> from review after review.
+                </p>
+                <p>
+                    Pair it with the salad bar, crispy fries, or go for the full grill experience with sausages, kebab, and starters.
+                </p>
+                <span class="signature-badge">Kokolihapihvi Burger</span>
+                <span class="signature-badge">Double Kokoliha</span>
+                <span class="signature-badge">Salad Bar</span>
+            </div>
+            <div class="signature-photo-placeholder">Food photos coming soon</div>
+        </div>
+    </div>
+
+    <!-- Menu -->
+    <section class="menu-section">
+        <div class="section-wrap">
+            <h2>Our Menu</h2>
+            <div class="menu-grid">
+                <div class="menu-card">
+                    <h3>Burgers</h3>
+                    <div class="menu-item">Kokolihapihvi Burger</div>
+                    <div class="menu-item">Double Kokoliha Burger (2 x 100 g)</div>
+                    <div class="menu-item">Classic Burger</div>
+                </div>
+                <div class="menu-card">
+                    <h3>Kebab</h3>
+                    <div class="menu-item">Kebab Pita</div>
+                    <div class="menu-item">Kebab Plate</div>
+                    <div class="menu-item">Kebab with fries</div>
+                </div>
+                <div class="menu-card">
+                    <h3>Grilli Classics</h3>
+                    <div class="menu-item">Makkaraperunat (Sausage &amp; Fries)</div>
+                    <div class="menu-item">Grilled Sausage</div>
+                    <div class="menu-item">Fries</div>
+                </div>
+                <div class="menu-card">
+                    <h3>Starters &amp; Sides</h3>
+                    <div class="menu-item">Jalapeno Poppers</div>
+                    <div class="menu-item">Mozzarella Sticks</div>
+                    <div class="menu-item">Onion Rings</div>
+                </div>
+                <div class="menu-card">
+                    <h3>Salad Bar</h3>
+                    <div class="menu-item">Build-your-own salad</div>
+                    <div class="menu-item">Fresh toppings daily</div>
+                    <div class="menu-item">Pineapple available separately</div>
+                </div>
+            </div>
+            <div class="menu-photo-placeholder">Food photos coming soon</div>
+            <p class="menu-note">Full menu displayed in-store. Prices subject to change.</p>
+        </div>
+    </section>
+
+    <!-- Reviews -->
+    <section class="reviews-section">
+        <div class="section-wrap">
+            <h2>What People Say</h2>
+            <div class="reviews-grid">
+                <div class="review-card">
+                    <div class="review-rating">5/5 &mdash; Google</div>
+                    <p class="review-text">"The best whole-meat burgers in Ylivieska."</p>
+                    <div class="review-author">Customer review</div>
+                </div>
+                <div class="review-card">
+                    <div class="review-rating">5/5 &mdash; Google</div>
+                    <p class="review-text">"The best grill in Ylivieska &mdash; beats every grill in Kokkola too."</p>
+                    <div class="review-author">Customer review</div>
+                </div>
+                <div class="review-card">
+                    <div class="review-rating">Google &mdash; 4.3 / 5</div>
+                    <p class="review-text">"Service is great and consistently friendly. Clean premises."</p>
+                    <div class="review-author">Customer review</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Info: Location, Hours, Contact -->
+    <section class="info-section">
+        <div class="section-wrap">
+            <h2>Find Us</h2>
+            <div class="info-grid">
+                <div class="info-block">
+                    <h3>Address</h3>
+                    <p>Torikatu 8<br>84100 Ylivieska<br>Finland</p>
+                </div>
+                <div class="info-block">
+                    <h3>Phone</h3>
+                    <p><a href="tel:08420042">08 420042</a></p>
+                    <p style="font-size:13px; color:#999; margin-top:8px;">Call to place your order or ask about today's specials.</p>
+                </div>
+                <div class="info-block">
+                    <h3>Opening Hours</h3>
+                    <p>Contact us or check our Facebook page for current hours.</p>
+                    <p style="margin-top:8px;"><a href="https://www.facebook.com/RoseGrilli/" target="_blank" rel="noopener">Facebook &rarr;</a></p>
+                </div>
+                <div class="info-block">
+                    <h3>Good to Know</h3>
+                    <p>Eat in &bull; Takeaway available<br>No Wolt or Foodora delivery<br>Terrace seating in summer</p>
+                </div>
+            </div>
+            <div class="menu-photo-placeholder" style="margin-top: 36px; height: 200px;">Interior photo coming soon</div>
+        </div>
+    </section>
+
+    <!-- CTA section -->
+    <section class="cta-section">
+        <div class="section-wrap" style="text-align:center;">
+            <h2>Ready to Order?</h2>
+            <p>Call us and we will have your food ready. Eat in or takeaway.</p>
+            <a href="tel:08420042" class="btn-call-white">
+                <svg style="width:22px;height:22px;flex-shrink:0;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 01.01 2.18 2 2 0 012 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z"/></svg>
+                08 420042
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>Rose Grilli ja Salaattibaari &mdash; Torikatu 8, 84100 Ylivieska &mdash;
+        <a href="tel:08420042">08 420042</a> &mdash;
+        <a href="https://www.facebook.com/RoseGrilli/" target="_blank" rel="noopener">Facebook</a></p>
+        <p style="margin-top: 8px;">Powered by Klar &mdash; <a href="https://klarsystems.com" target="_blank" rel="noopener">klarsystems.com</a> &mdash; Demo version</p>
+    </footer>
+
+</body>
+</html>

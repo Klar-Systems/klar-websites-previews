@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Keskuskonttori — Finland's Only Cat Restaurant | Varkaus</title>
+  <style>
+    /* ---- Reset & Base ---- */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: Georgia, 'Times New Roman', serif;
+      background: #FFFFFF;
+      color: #2c1a0e;
+      line-height: 1.7;
+    }
+
+    /* ---- Demo Banner ---- */
+    .demo-banner {
+      background: #2c1a0e;
+      color: #f5e6d3;
+      text-align: center;
+      padding: 10px 20px;
+      font-size: 0.82rem;
+      letter-spacing: 0.05em;
+      font-family: Arial, sans-serif;
+    }
+    .demo-banner a {
+      color: #d4a96a;
+      text-decoration: underline;
+    }
+
+    /* ---- Navigation ---- */
+    nav {
+      position: sticky;
+      top: 0;
+      background: rgba(255,255,255,0.97);
+      border-bottom: 1px solid #e8ddd4;
+      z-index: 100;
+      padding: 0 24px;
+    }
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+    }
+    .nav-logo {
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: #2c1a0e;
+      text-decoration: none;
+      letter-spacing: 0.04em;
+    }
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: #5a3a1a;
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-family: Arial, sans-serif;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .nav-links a:hover { color: #8B4513; }
+    .nav-cta {
+      background: #8B4513;
+      color: #fff !important;
+      padding: 8px 18px;
+      border-radius: 3px;
+    }
+    .nav-cta:hover { background: #6b3310 !important; color: #fff !important; }
+
+    /* ---- Hero ---- */
+    .hero {
+      position: relative;
+      min-height: 88vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+      background: #f5ede2;
+    }
+    .hero-photo-placeholder {
+      position: absolute;
+      inset: 0;
+      background: #e8d8c4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hero-photo-placeholder span {
+      font-family: Arial, sans-serif;
+      font-size: 0.85rem;
+      color: #a08060;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: 1px dashed #c0a080;
+      padding: 12px 24px;
+      border-radius: 2px;
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(44,26,14,0.55) 0%, rgba(44,26,14,0.75) 100%);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 780px;
+      padding: 40px 24px;
+      color: #f5e6d3;
+    }
+    .hero-eyebrow {
+      font-family: Arial, sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #d4a96a;
+      margin-bottom: 20px;
+    }
+    .hero-title {
+      font-size: clamp(2.2rem, 5vw, 3.6rem);
+      line-height: 1.15;
+      font-weight: normal;
+      margin-bottom: 22px;
+      color: #fff;
+    }
+    .hero-subtitle {
+      font-size: 1.15rem;
+      color: #f0dcc0;
+      margin-bottom: 36px;
+      max-width: 580px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .hero-badges {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+    }
+    .badge {
+      font-family: Arial, sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border: 1px solid rgba(212,169,106,0.6);
+      color: #d4a96a;
+      border-radius: 2px;
+    }
+    .hero-rating {
+      font-family: Arial, sans-serif;
+      font-size: 0.88rem;
+      color: #d4a96a;
+      margin-bottom: 32px;
+    }
+    .hero-rating strong { color: #fff; font-size: 1.1rem; }
+    .btn-primary {
+      display: inline-block;
+      background: #8B4513;
+      color: #fff;
+      padding: 14px 34px;
+      text-decoration: none;
+      font-family: Arial, sans-serif;
+      font-size: 0.88rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border-radius: 3px;
+      border: none;
+      cursor: pointer;
+    }
+    .btn-primary:hover { background: #6b3310; }
+
+    /* ---- Section base ---- */
+    section { padding: 80px 24px; }
+    .container { max-width: 1100px; margin: 0 auto; }
+    .section-label {
+      font-family: Arial, sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #8B4513;
+      margin-bottom: 14px;
+    }
+    .section-title {
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      font-weight: normal;
+      color: #2c1a0e;
+      line-height: 1.25;
+    }
+    .divider {
+      width: 50px;
+      height: 2px;
+      background: #8B4513;
+      margin: 22px 0 28px;
+    }
+
+    /* ---- About Section ---- */
+    .about { background: #fff; }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: start;
+      margin-top: 50px;
+    }
+    .about-text p {
+      color: #4a2e12;
+      margin-bottom: 18px;
+      font-size: 1.02rem;
+    }
+    .about-photo-placeholder {
+      background: #e8d8c4;
+      aspect-ratio: 4/3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 2px;
+    }
+    .about-photo-placeholder span {
+      font-family: Arial, sans-serif;
+      font-size: 0.78rem;
+      color: #a08060;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-align: center;
+      border: 1px dashed #c0a080;
+      padding: 12px 20px;
+      border-radius: 2px;
+    }
+    .facts-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 60px;
+    }
+    .fact-card {
+      background: #f5ede2;
+      padding: 28px 22px;
+      border-radius: 3px;
+      border-top: 3px solid #8B4513;
+    }
+    .fact-card .fact-number {
+      font-size: 2rem;
+      color: #8B4513;
+      font-weight: normal;
+      margin-bottom: 6px;
+    }
+    .fact-card .fact-label {
+      font-family: Arial, sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #5a3a1a;
+    }
+    .fact-card .fact-desc {
+      font-size: 0.9rem;
+      color: #4a2e12;
+      margin-top: 8px;
+    }
+
+    /* ---- Cats Section ---- */
+    .cats-section {
+      background: #2c1a0e;
+      color: #f5e6d3;
+      text-align: center;
+    }
+    .cats-section .section-label { color: #d4a96a; }
+    .cats-section .section-title { color: #fff; }
+    .cats-section .divider { background: #d4a96a; margin-left: auto; margin-right: auto; }
+    .cats-section p {
+      max-width: 640px;
+      margin: 0 auto 20px;
+      color: #e0c9a8;
+      font-size: 1.02rem;
+    }
+    .cats-quote {
+      font-style: italic;
+      font-size: 1.15rem;
+      color: #d4a96a;
+      max-width: 560px;
+      margin: 32px auto 0;
+      line-height: 1.6;
+    }
+
+    /* ---- Menu Section ---- */
+    .menu-section { background: #f5ede2; }
+    .menu-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: start;
+      margin-top: 50px;
+    }
+    .menu-photo-placeholder {
+      background: #e0ccb4;
+      aspect-ratio: 4/3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 2px;
+    }
+    .menu-photo-placeholder span {
+      font-family: Arial, sans-serif;
+      font-size: 0.78rem;
+      color: #8a6840;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-align: center;
+      border: 1px dashed #b09070;
+      padding: 12px 20px;
+      border-radius: 2px;
+    }
+    .menu-items { display: flex; flex-direction: column; gap: 28px; }
+    .menu-item {
+      border-left: 3px solid #8B4513;
+      padding-left: 20px;
+    }
+    .menu-item h3 {
+      font-size: 1.12rem;
+      color: #2c1a0e;
+      font-weight: normal;
+      margin-bottom: 6px;
+    }
+    .menu-item p {
+      font-size: 0.9rem;
+      color: #5a3a1a;
+    }
+    .menu-note {
+      margin-top: 36px;
+      background: #fff;
+      border-left: 3px solid #d4a96a;
+      padding: 18px 22px;
+      border-radius: 0 3px 3px 0;
+    }
+    .menu-note p {
+      font-size: 0.9rem;
+      color: #4a2e12;
+      font-family: Arial, sans-serif;
+    }
+
+    /* ---- Reviews ---- */
+    .reviews-section { background: #fff; }
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      margin-top: 50px;
+    }
+    .review-card {
+      background: #f5ede2;
+      padding: 28px 24px;
+      border-radius: 3px;
+    }
+    .review-rating {
+      font-family: Arial, sans-serif;
+      font-size: 0.8rem;
+      color: #8B4513;
+      letter-spacing: 0.08em;
+      margin-bottom: 12px;
+    }
+    .review-quote {
+      font-style: italic;
+      color: #2c1a0e;
+      font-size: 0.97rem;
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+    .review-author {
+      font-family: Arial, sans-serif;
+      font-size: 0.78rem;
+      color: #8a6840;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    /* ---- Booking Section ---- */
+    .booking-section {
+      background: #8B4513;
+      color: #fff;
+    }
+    .booking-section .section-label { color: #f0d4a8; }
+    .booking-section .section-title { color: #fff; }
+    .booking-section .divider { background: #f0d4a8; }
+    .booking-section > .container > p {
+      color: #f0d4a8;
+      margin-bottom: 40px;
+      max-width: 560px;
+    }
+    #klar-bookings {
+      background: #fff;
+      border-radius: 4px;
+      padding: 40px;
+      max-width: 560px;
+    }
+    #klar-bookings h3 {
+      font-size: 1.25rem;
+      color: #2c1a0e;
+      margin-bottom: 28px;
+      font-weight: normal;
+    }
+    .booking-fields {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .booking-field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .booking-field label {
+      font-family: Arial, sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #5a3a1a;
+    }
+    .booking-field input,
+    .booking-field select {
+      border: 1px solid #d8c8b4;
+      border-radius: 3px;
+      padding: 10px 12px;
+      font-size: 0.95rem;
+      color: #2c1a0e;
+      font-family: Georgia, serif;
+      background: #fff;
+      width: 100%;
+    }
+    .booking-field input:focus,
+    .booking-field select:focus {
+      outline: 2px solid #8B4513;
+      border-color: #8B4513;
+    }
+    .booking-field-full {
+      grid-column: 1 / -1;
+    }
+    .btn-reserve {
+      width: 100%;
+      background: #8B4513;
+      color: #fff;
+      border: none;
+      padding: 14px;
+      font-family: Arial, sans-serif;
+      font-size: 0.9rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border-radius: 3px;
+      cursor: pointer;
+      margin-top: 8px;
+    }
+    .btn-reserve:hover { background: #6b3310; }
+    .booking-note {
+      font-family: Arial, sans-serif;
+      font-size: 0.78rem;
+      color: #8a6840;
+      margin-top: 14px;
+      text-align: center;
+    }
+
+    /* ---- Hours & Info ---- */
+    .hours-section { background: #f5ede2; }
+    .hours-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      margin-top: 50px;
+    }
+    .hours-table { width: 100%; }
+    .hours-table tr {
+      border-bottom: 1px solid #e0ccb4;
+    }
+    .hours-table td {
+      padding: 12px 0;
+      font-size: 0.95rem;
+      color: #4a2e12;
+    }
+    .hours-table td:last-child {
+      text-align: right;
+      font-family: Arial, sans-serif;
+    }
+    .hours-table .day-bold td {
+      font-weight: bold;
+      color: #2c1a0e;
+    }
+    .info-block { margin-bottom: 28px; }
+    .info-block .info-label {
+      font-family: Arial, sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #8B4513;
+      margin-bottom: 8px;
+    }
+    .info-block p, .info-block a {
+      color: #4a2e12;
+      font-size: 0.97rem;
+      text-decoration: none;
+    }
+    .info-block a:hover { color: #8B4513; text-decoration: underline; }
+    .map-placeholder {
+      background: #e0ccb4;
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 3px;
+      margin-top: 20px;
+    }
+    .map-placeholder span {
+      font-family: Arial, sans-serif;
+      font-size: 0.78rem;
+      color: #8a6840;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    /* ---- Footer ---- */
+    footer {
+      background: #2c1a0e;
+      color: #c0a07a;
+      padding: 40px 24px;
+      text-align: center;
+    }
+    .footer-inner { max-width: 1100px; margin: 0 auto; }
+    .footer-name {
+      font-size: 1.1rem;
+      color: #f5e6d3;
+      margin-bottom: 8px;
+    }
+    .footer-address {
+      font-family: Arial, sans-serif;
+      font-size: 0.82rem;
+      letter-spacing: 0.06em;
+      margin-bottom: 4px;
+    }
+    .footer-phone a {
+      color: #d4a96a;
+      text-decoration: none;
+      font-family: Arial, sans-serif;
+      font-size: 0.88rem;
+    }
+    .footer-divider {
+      border: none;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      margin: 24px auto;
+      max-width: 300px;
+    }
+    .footer-powered {
+      font-family: Arial, sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #7a5a38;
+    }
+    .footer-powered a {
+      color: #a07848;
+      text-decoration: none;
+    }
+
+    /* ---- Responsive ---- */
+    @media (max-width: 768px) {
+      .about-grid,
+      .menu-grid,
+      .hours-grid { grid-template-columns: 1fr; gap: 36px; }
+      .facts-row { grid-template-columns: 1fr; }
+      .reviews-grid { grid-template-columns: 1fr; }
+      .booking-fields { grid-template-columns: 1fr; }
+      #klar-bookings { padding: 24px 20px; }
+      .nav-links { display: none; }
+      .about-photo-placeholder { order: -1; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Demo Banner -->
+  <div class="demo-banner">
+    This is a demo website prepared for Keskuskonttori by Klar.
+    Interested in a real site with online reservations?
+    <a href="https://calendly.com/lomberg-klarsystems">Book a free 15-minute call</a>.
+  </div>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-inner">
+      <a class="nav-logo" href="#">Keskuskonttori</a>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#cats">The Cats</a></li>
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#klar-bookings">Reserve</a></li>
+        <li><a href="#hours">Hours</a></li>
+        <li><a href="#klar-bookings" class="nav-cta">Book a Table</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-photo-placeholder">
+      <span>Your photo here</span>
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Varkaus, Finland &mdash; Est. 1840s building</p>
+      <h1 class="hero-title">Finland's Only Cat Restaurant</h1>
+      <p class="hero-subtitle">
+        Six cats. A 180-year-old building. Authentic Italian pizza praised as Varkaus's finest.
+        Luca and Katja welcome you to something genuinely one of a kind.
+      </p>
+      <div class="hero-badges">
+        <span class="badge">Cat Restaurant</span>
+        <span class="badge">Italian Trattoria</span>
+        <span class="badge">Zero-Kilometer Kitchen</span>
+        <span class="badge">Historic 1840s Building</span>
+      </div>
+      <p class="hero-rating">Google rating <strong>4.4</strong> &mdash; 302 reviews</p>
+      <a href="#klar-bookings" class="btn-primary">Reserve a Table</a>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="about" id="about">
+    <div class="container">
+      <p class="section-label">Our Story</p>
+      <h2 class="section-title">A Living Cultural Landmark in Varkaus</h2>
+      <div class="divider"></div>
+      <div class="about-grid">
+        <div class="about-text">
+          <p>
+            Nestled inside a historic wooden building dating to the 1840s, Keskuskonttori
+            is far more than a restaurant. Across nearly 1,900 square metres and three floors
+            you will find an Italian trattoria, a gallery, a hostel, event spaces &mdash;
+            and six resident cats who roam the dining room freely.
+          </p>
+          <p>
+            The restaurant is run by Luca and Katja, an Italian-Finnish couple who opened
+            their doors with a clear vision: create an honest, living space that brings
+            people together. Luca's Italian heritage shapes the kitchen; Katja's Finnish
+            sensibility shapes the warmth of the welcome.
+          </p>
+          <p>
+            Everything here is intentional. The furniture is recycled or handmade.
+            The walls carry local art and archival photographs of Varkaus's industrial past.
+            Ideas are always evolving &mdash; because Keskuskonttori, above all, wants
+            to make things possible.
+          </p>
+        </div>
+        <div class="about-photo-placeholder">
+          <span>Interior photo coming soon</span>
+        </div>
+      </div>
+
+      <div class="facts-row">
+        <div class="fact-card">
+          <div class="fact-number">1840s</div>
+          <div class="fact-label">Historic Building</div>
+          <div class="fact-desc">One of Varkaus's oldest surviving wooden structures, full of character and history.</div>
+        </div>
+        <div class="fact-card">
+          <div class="fact-number">4.4</div>
+          <div class="fact-label">Google Rating</div>
+          <div class="fact-desc">Based on 302 guest reviews &mdash; consistently one of Varkaus's most loved restaurants.</div>
+        </div>
+        <div class="fact-card">
+          <div class="fact-number">1,900 m&sup2;</div>
+          <div class="fact-label">Space to Explore</div>
+          <div class="fact-desc">Three floors housing a trattoria, art gallery, hostel, board games, billiards, and private dining rooms.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cats -->
+  <section class="cats-section" id="cats">
+    <div class="container">
+      <p class="section-label">Finland's Only Cat Restaurant</p>
+      <h2 class="section-title">Six Resident Cats. One Unforgettable Meal.</h2>
+      <div class="divider"></div>
+      <p>
+        Keskuskonttori holds a distinction unlike any other restaurant in Finland:
+        six cats live here and wander freely among the tables. They are not a gimmick &mdash;
+        they are part of the atmosphere, as much as the warm lighting and the smell of
+        fresh pizza from the kitchen.
+      </p>
+      <p>
+        Guests consistently mention the cats as a highlight of their visit.
+        Families with children love it. Solo travellers find unexpected company.
+        And everyone leaves with a story.
+      </p>
+      <blockquote class="cats-quote">
+        "Cats are good therapists and stress relievers. Their presence brings joy and contentment."
+        <br>&mdash; Luca &amp; Katja
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- Menu -->
+  <section class="menu-section" id="menu">
+    <div class="container">
+      <p class="section-label">Food &amp; Drink</p>
+      <h2 class="section-title">No Printed Menu. Just Good Food.</h2>
+      <div class="divider"></div>
+      <div class="menu-grid">
+        <div class="menu-items">
+          <div class="menu-item">
+            <h3>Pizza &mdash; Varkaus's Finest</h3>
+            <p>
+              Authentic Italian pizzas, known well beyond the city limits.
+              Made fresh daily, including gluten-free options.
+              Guests routinely call it the best pizza in Varkaus &mdash; and they keep coming back to prove it.
+            </p>
+          </div>
+          <div class="menu-item">
+            <h3>Lunch Buffet</h3>
+            <p>
+              A generous weekday lunch buffet served until 19:00,
+              reflecting whatever is freshest and best that day.
+              After 19:00, the kitchen turns to pizza.
+            </p>
+          </div>
+          <div class="menu-item">
+            <h3>Tiramisu &mdash; Grandmother's Recipe</h3>
+            <p>
+              Luca's grandmother's tiramisu recipe, made the old way.
+              A dessert that guests still talk about long after leaving Varkaus.
+            </p>
+          </div>
+          <div class="menu-item">
+            <h3>Pastries &amp; Coffee</h3>
+            <p>
+              Homemade baked goods and good coffee throughout the day.
+              A natural stopping point whether you are here for an hour or an afternoon.
+            </p>
+          </div>
+          <div class="menu-note">
+            <p>
+              <strong>We do not use a printed menu.</strong> Food is prepared fresh each day based
+              on availability and what is at its best. The kilometre-zero ("kilometri nolla")
+              philosophy means we do not buy anything new if we can avoid it &mdash;
+              everything is sourced, recycled, or made in-house.
+            </p>
+          </div>
+        </div>
+        <div class="menu-photo-placeholder">
+          <span>Food photos coming soon</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reviews -->
+  <section class="reviews-section" id="reviews">
+    <div class="container">
+      <p class="section-label">What Guests Say</p>
+      <h2 class="section-title">Loved by Visitors Near and Far</h2>
+      <div class="divider"></div>
+      <div class="reviews-grid">
+        <div class="review-card">
+          <div class="review-rating">5 / 5 &mdash; TripAdvisor</div>
+          <p class="review-quote">"Superb pizzas with a lovely bohemian environment"</p>
+          <div class="review-author">&mdash; Pia J</div>
+        </div>
+        <div class="review-card">
+          <div class="review-rating">5 / 5 &mdash; TripAdvisor</div>
+          <p class="review-quote">"Amazing, unique place with awesome staff and delicious pizza!"</p>
+          <div class="review-author">&mdash; Blanca</div>
+        </div>
+        <div class="review-card">
+          <div class="review-rating">5 / 5 &mdash; TripAdvisor</div>
+          <p class="review-quote">"Wonderful personal interior. The food is delicious."</p>
+          <div class="review-author">&mdash; Dynel</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Booking Widget -->
+  <section class="booking-section" id="klar-bookings">
+    <div class="container">
+      <p class="section-label">Reservations</p>
+      <h2 class="section-title">Reserve Your Table</h2>
+      <div class="divider"></div>
+      <p>Book a table at Finland's only cat restaurant. Lunch, dinner, or an afternoon visit &mdash; we look forward to welcoming you.</p>
+
+      <div id="klar-bookings-widget">
+        <form onsubmit="return false;" aria-label="Table reservation form">
+          <h3>Reserve a Table at Keskuskonttori</h3>
+          <div class="booking-fields">
+            <div class="booking-field">
+              <label for="booking-date">Date</label>
+              <input type="date" id="booking-date" name="date" required>
+            </div>
+            <div class="booking-field">
+              <label for="booking-time">Time</label>
+              <input type="time" id="booking-time" name="time" required min="10:00" max="21:00">
+            </div>
+            <div class="booking-field">
+              <label for="booking-guests">Party Size</label>
+              <select id="booking-guests" name="party_size" required>
+                <option value="">Guests</option>
+                <option value="1">1 person</option>
+                <option value="2">2 people</option>
+                <option value="3">3 people</option>
+                <option value="4">4 people</option>
+                <option value="5">5 people</option>
+                <option value="6">6 people</option>
+                <option value="7">7 people</option>
+                <option value="8">8 people</option>
+                <option value="9">9 people</option>
+                <option value="10">10+ people</option>
+              </select>
+            </div>
+            <div class="booking-field">
+              <label for="booking-name">Your Name</label>
+              <input type="text" id="booking-name" name="name" placeholder="Full name" required>
+            </div>
+            <div class="booking-field booking-field-full">
+              <label for="booking-email">Email Address</label>
+              <input type="email" id="booking-email" name="email" placeholder="your@email.com" required>
+            </div>
+          </div>
+          <button type="submit" class="btn-reserve">Reserve Now</button>
+          <p class="booking-note">You will receive a confirmation by email. For large groups, call us directly.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Hours & Location -->
+  <section class="hours-section" id="hours">
+    <div class="container">
+      <p class="section-label">Find Us</p>
+      <h2 class="section-title">Hours &amp; Location</h2>
+      <div class="divider"></div>
+      <div class="hours-grid">
+        <div>
+          <table class="hours-table">
+            <tbody>
+              <tr>
+                <td>Monday &ndash; Friday</td>
+                <td>10:00 &ndash; 21:00</td>
+              </tr>
+              <tr>
+                <td>Saturday</td>
+                <td>11:00 &ndash; 21:00</td>
+              </tr>
+              <tr>
+                <td>Sunday</td>
+                <td>12:00 &ndash; 18:00</td>
+              </tr>
+            </tbody>
+          </table>
+          <p style="font-family: Arial, sans-serif; font-size: 0.82rem; color: #8a6840; margin-top: 14px;">
+            Lunch buffet served until 19:00 on weekdays. Kitchen turns to pizza after 19:00.
+            Hours may vary &mdash; check Facebook for updates.
+          </p>
+        </div>
+        <div>
+          <div class="info-block">
+            <div class="info-label">Address</div>
+            <p>Taipaleentie 15, 78250 Varkaus</p>
+          </div>
+          <div class="info-block">
+            <div class="info-label">Phone</div>
+            <p><a href="tel:+358408793225">040 8793225</a></p>
+          </div>
+          <div class="info-block">
+            <div class="info-label">Follow Us</div>
+            <p><a href="https://www.facebook.com/Keskuskonttori" target="_blank" rel="noopener">facebook.com/Keskuskonttori</a></p>
+          </div>
+          <div class="map-placeholder">
+            <span>Map coming soon</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-inner">
+      <p class="footer-name">Keskuskonttori</p>
+      <p class="footer-address">Taipaleentie 15, 78250 Varkaus, Finland</p>
+      <p class="footer-phone"><a href="tel:+358408793225">040 8793225</a></p>
+      <hr class="footer-divider">
+      <p class="footer-powered">
+        Powered by Klar &mdash; <a href="https://klarsystems.com" target="_blank" rel="noopener">klarsystems.com</a>
+        &mdash; online reservations for Finnish restaurants
+      </p>
+    </div>
+  </footer>
+
+</body>
+</html>

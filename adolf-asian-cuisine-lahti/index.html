@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adolf Asian Cuisine — Sushi, Wok & Teppanyaki in Lahti</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+  <!-- palette: inferred pan-Asian city-center — charcoal ground, red primary, gold accent -->
+  <style>
+    :root {
+      --bg: #0E0A0A;
+      --bg-warm: #17100F;
+      --bg-card: #1F1716;
+      --fg: #F2E8D5;
+      --fg-dim: #9A8E7D;
+      --primary: #C9393E;
+      --accent: #D4A04A;
+      --rule: rgba(212,160,74,0.20);
+      --heading: 'Outfit', -apple-system, sans-serif;
+      --body: 'DM Sans', -apple-system, sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--body);
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; }
+
+    .demo-banner {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      background: var(--primary); color: #fff; text-align: center;
+      padding: 10px 16px; font-size: 0.82rem;
+    }
+    .demo-banner a { color: #fff; font-weight: 700; text-decoration: underline; margin-left: 8px; }
+
+    .container { max-width: 1060px; margin: 0 auto; padding: 0 24px; }
+    section { padding: 80px 0; }
+    .label {
+      font-family: var(--heading); font-size: 0.7rem; font-weight: 700;
+      letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px;
+    }
+    h2 {
+      font-family: var(--heading); font-size: clamp(1.8rem, 4vw, 2.5rem);
+      font-weight: 700; line-height: 1.15; margin-bottom: 20px;
+    }
+    p.sub { color: var(--fg-dim); max-width: 560px; font-size: 0.95rem; }
+
+    /* Hero */
+    .hero { padding-top: 130px; padding-bottom: 40px; }
+    .hero-inner { display: grid; grid-template-columns: 1.25fr 1fr; gap: 48px; align-items: center; }
+    .hero h1 {
+      font-family: var(--heading); font-size: clamp(2.4rem, 5.8vw, 3.6rem);
+      font-weight: 800; line-height: 1.04; margin-bottom: 16px; letter-spacing: -0.01em;
+    }
+    .hero h1 .hl { color: var(--primary); }
+    .hero-desc { color: var(--fg-dim); font-size: 1rem; margin-bottom: 24px; max-width: 480px; }
+    .badge-row { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+    .badge { display: inline-flex; align-items: center; gap: 8px;
+      background: var(--bg-card); padding: 9px 16px; border-radius: 40px;
+      font-size: 0.82rem; border: 1px solid var(--rule); }
+    .badge .num { font-weight: 700; color: var(--accent); font-size: 1.05rem; }
+    .tag-badge { background: transparent; color: var(--fg-dim); }
+
+    .img-placeholder {
+      background: var(--bg-warm); border: 1px solid var(--rule);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--fg-dim); font-size: 0.72rem; letter-spacing: 0.12em;
+      text-transform: uppercase; border-radius: 10px;
+    }
+    .img-hero { aspect-ratio: 4/3; width: 100%; }
+    .img-food { aspect-ratio: 1/1; width: 100%; }
+    .img-interior { aspect-ratio: 3/2; width: 100%; }
+
+    /* Features */
+    .features { background: var(--bg-warm); }
+    .feat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 32px; }
+    .feat-card {
+      background: var(--bg-card); border-radius: 10px; padding: 26px;
+      border-top: 3px solid var(--primary);
+    }
+    .feat-card h3 { font-family: var(--heading); font-size: 1.05rem; margin-bottom: 8px; }
+    .feat-card p { font-size: 0.88rem; color: var(--fg-dim); }
+
+    /* Menu */
+    .menu-head { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    .menu-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 36px; }
+    .menu-block h3 {
+      font-family: var(--heading); font-size: 1.15rem; margin-bottom: 14px;
+      padding-bottom: 8px; border-bottom: 1px solid var(--rule); color: var(--accent);
+    }
+    .menu-block li { list-style: none; padding: 9px 0; font-size: 0.92rem; color: var(--fg);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      display: flex; justify-content: space-between; gap: 16px; }
+    .menu-block li .price { color: var(--fg-dim); font-size: 0.82rem; }
+    .menu-note { margin-top: 28px; font-size: 0.82rem; color: var(--fg-dim); font-style: italic; text-align: center; }
+
+    /* Reviews */
+    .rev-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 22px; margin-top: 32px; }
+    .rev-card { background: var(--bg-card); border-radius: 10px; padding: 26px; border-left: 3px solid var(--accent); }
+    .rev-card blockquote { font-size: 0.95rem; font-style: italic; line-height: 1.7; margin-bottom: 10px; }
+    .rev-card cite { font-size: 0.76rem; color: var(--fg-dim); font-style: normal; }
+
+    /* Booking */
+    .booking { background: linear-gradient(160deg, #1A0F0E 0%, var(--bg) 100%);
+      border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+    .book-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+    .book-card {
+      background: var(--bg-card); border-radius: 12px; padding: 32px;
+      border: 1px solid var(--rule);
+    }
+    .book-card h3 { font-family: var(--heading); font-size: 1.3rem; margin-bottom: 6px; }
+    .book-card .book-sub { font-size: 0.84rem; color: var(--fg-dim); margin-bottom: 20px; }
+    .book-form { display: grid; gap: 12px; }
+    .book-form label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--fg-dim); }
+    .book-form input, .book-form select {
+      width: 100%; padding: 11px 14px; background: var(--bg); border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 6px; color: var(--fg); font-family: var(--body); font-size: 0.9rem;
+    }
+    .book-form button {
+      padding: 13px; background: var(--primary); color: #fff; border: none; border-radius: 6px;
+      font-family: var(--heading); font-size: 1rem; font-weight: 700; cursor: pointer; margin-top: 6px;
+      letter-spacing: 0.02em;
+    }
+    .book-form button:hover { background: #a82e33; }
+    .book-powered { font-size: 0.7rem; color: var(--fg-dim); margin-top: 10px; text-align: center; }
+
+    /* Hours + Map */
+    .info-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-top: 36px; }
+    .hours-tbl { width: 100%; }
+    .hours-tbl td { padding: 9px 0; font-size: 0.9rem; }
+    .hours-tbl td:first-child { color: var(--fg-dim); width: 130px; }
+    .hours-tbl td:last-child { text-align: right; }
+    .map-frame { width: 100%; aspect-ratio: 16/9; border: 0; border-radius: 8px;
+      filter: grayscale(0.65) invert(0.88) contrast(0.88); }
+
+    /* Contact */
+    .contact { background: var(--bg-warm); }
+    .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 28px; margin-top: 28px; }
+    .contact-item h4 { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.14em; color: var(--accent); margin-bottom: 6px; }
+    .contact-item a { color: var(--fg); text-decoration: none; font-size: 1.05rem; font-weight: 500; }
+    .contact-item a:hover { color: var(--accent); }
+
+    footer { padding: 36px 0; text-align: center; font-size: 0.76rem; color: var(--fg-dim);
+      border-top: 1px solid rgba(255,255,255,0.05); }
+    footer a { color: var(--fg-dim); }
+
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    @media (max-width: 768px) {
+      .hero-inner, .book-grid, .info-cols, .menu-cols { grid-template-columns: 1fr; }
+      .feat-grid { grid-template-columns: 1fr; }
+      section { padding: 56px 0; }
+      .hero { padding-top: 110px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="demo-banner">
+    This is a demo — the final website will be built together based on your preferences.
+    <a href="https://preview.klarsystems.com/adolf-asian-cuisine-lahti/proposal/">See the offer</a>
+  </div>
+
+  <section class="hero">
+    <div class="container">
+      <div class="hero-inner">
+        <div>
+          <div class="label">Lahti — Rautatienkatu</div>
+          <h1><span class="hl">Adolf</span> Asian Cuisine</h1>
+          <p class="hero-desc">Sushi counter, wok station, teppanyaki grill and a dessert buffet — all under one small roof in the center of Lahti.</p>
+          <div class="badge-row">
+            <div class="badge"><span class="num">4.7</span> / 5 &nbsp;|&nbsp; 127 reviews</div>
+            <div class="badge tag-badge">Sushi &middot; Wok &middot; Teppanyaki</div>
+          </div>
+        </div>
+        <div class="img-placeholder img-hero" aria-label="Your photo here"><span>Your photo here</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="features reveal">
+    <div class="container">
+      <div class="label">Why Adolf</div>
+      <h2>Three tables, one short walk from the station</h2>
+      <div class="feat-grid">
+        <div class="feat-card">
+          <h3>Sushi-first buffet</h3>
+          <p>A full sushi counter plus wok dishes, teppanyaki, and a dessert buffet — one price, one seat.</p>
+        </div>
+        <div class="feat-card">
+          <h3>Family friendly</h3>
+          <p>High chairs for small ones and a chocolate fountain for the older kids. Groups welcome.</p>
+        </div>
+        <div class="feat-card">
+          <h3>Central Lahti</h3>
+          <p>Rautatienkatu 15, a few minutes from the railway station. Easy to reach, easy to leave well fed.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="reveal">
+    <div class="container">
+      <div class="menu-head">
+        <div>
+          <div class="label">Menu</div>
+          <h2>From the sushi counter &amp; wok station</h2>
+        </div>
+      </div>
+      <div class="menu-cols">
+        <div class="menu-block">
+          <h3>Sushi</h3>
+          <ul>
+            <li><span>Aburi Sake Nigiri, 8 pcs</span><span class="price">€9.00</span></li>
+            <li><span>Tonnikala Nigiri, 8 pcs</span><span class="price">€9.00</span></li>
+            <li><span>Kampanja combos</span><span class="price">from €12</span></li>
+          </ul>
+        </div>
+        <div class="menu-block">
+          <h3>Annokset &amp; Wok</h3>
+          <ul>
+            <li><span>Kung Pao Chicken combo</span><span class="price">€12.00</span></li>
+            <li><span>Black pepper beef + spring rolls + sushi</span><span class="price">€12.00</span></li>
+            <li><span>Chicken Balls + Fried Noodles</span><span class="price">€12.00</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="img-placeholder img-food" style="max-width: 300px; margin: 36px auto 0;" aria-label="Food photos coming soon"><span>Food photos coming soon</span></div>
+      <p class="menu-note">This is a demo — the menu will be updated together with you.</p>
+    </div>
+  </section>
+
+  <section class="reveal" style="background: var(--bg-warm);">
+    <div class="container">
+      <div class="label">Reviews</div>
+      <h2>What guests say</h2>
+      <div class="rev-grid">
+        <div class="rev-card">
+          <blockquote>"Their sushi selection was quite good and everything tasted delicious...definitely worth a visit."</blockquote>
+          <cite>JariJK, via TripAdvisor</cite>
+        </div>
+        <div class="rev-card">
+          <blockquote>"This restaurant looks small but it is surprisingly good, also for kids (high chairs and the chocolate fountain for bigger children)."</blockquote>
+          <cite>JariJK, via TripAdvisor</cite>
+        </div>
+        <div class="rev-card">
+          <blockquote>"Teppanyaki is also available and the dessert buffet was quite good, too."</blockquote>
+          <cite>JariJK, via TripAdvisor</cite>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="booking reveal" id="booking">
+    <div class="container">
+      <div class="book-grid">
+        <div>
+          <div class="label">Reserve</div>
+          <h2>Book a table at Adolf</h2>
+          <p class="sub">Teppanyaki for a group, a sushi seat for two, or a family table with the chocolate fountain — reserve ahead and we will have it ready.</p>
+          <div class="img-placeholder img-interior" style="margin-top: 28px;" aria-label="Interior photo coming soon"><span>Interior photo coming soon</span></div>
+        </div>
+        <div class="book-card klar-bookings" id="klar-bookings-widget">
+          <h3>Klar Bookings</h3>
+          <p class="book-sub">Reserve in seconds — no account needed, no fees.</p>
+          <form class="book-form" onsubmit="return false;">
+            <div>
+              <label for="b-date">Date</label>
+              <input type="date" id="b-date" name="date" required>
+            </div>
+            <div>
+              <label for="b-time">Time</label>
+              <select id="b-time" name="time">
+                <option value="11:00">11:00</option>
+                <option value="11:30">11:30</option>
+                <option value="12:00">12:00</option>
+                <option value="12:30">12:30</option>
+                <option value="13:00">13:00</option>
+                <option value="17:00">17:00</option>
+                <option value="18:00" selected>18:00</option>
+                <option value="18:30">18:30</option>
+                <option value="19:00">19:00</option>
+                <option value="19:30">19:30</option>
+                <option value="20:00">20:00</option>
+              </select>
+            </div>
+            <div>
+              <label for="b-guests">Guests</label>
+              <select id="b-guests" name="guests">
+                <option value="1">1 guest</option>
+                <option value="2" selected>2 guests</option>
+                <option value="3">3 guests</option>
+                <option value="4">4 guests</option>
+                <option value="5">5 guests</option>
+                <option value="6">6+ guests</option>
+              </select>
+            </div>
+            <button type="submit">Reserve</button>
+          </form>
+          <div class="book-powered">Powered by Klar Bookings — no fees, no commissions</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="reveal">
+    <div class="container">
+      <div class="label">Visit</div>
+      <h2>Find us on Rautatienkatu</h2>
+      <div class="info-cols">
+        <div>
+          <table class="hours-tbl">
+            <tr><td>Monday</td><td>10:30 &ndash; 20:30</td></tr>
+            <tr><td>Tuesday</td><td>10:30 &ndash; 20:30</td></tr>
+            <tr><td>Wednesday</td><td>10:30 &ndash; 20:30</td></tr>
+            <tr><td>Thursday</td><td>10:30 &ndash; 20:30</td></tr>
+            <tr><td>Friday</td><td>10:30 &ndash; 20:30</td></tr>
+            <tr><td>Saturday</td><td>10:30 &ndash; 20:30</td></tr>
+            <tr><td>Sunday</td><td>10:30 &ndash; 20:30</td></tr>
+          </table>
+          <p style="font-size: 0.82rem; color: var(--fg-dim); margin-top: 12px;">
+            Buffet, à la carte, and takeaway all served during opening hours
+          </p>
+        </div>
+        <div>
+          <iframe class="map-frame" src="https://maps.google.com/maps?q=Rautatienkatu+15+Lahti&output=embed" allowfullscreen loading="lazy"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact reveal">
+    <div class="container">
+      <div class="label">Contact</div>
+      <h2>Get in touch</h2>
+      <div class="contact-grid">
+        <div class="contact-item">
+          <h4>Phone</h4>
+          <a href="tel:+358469400221">+358 46 9400221</a>
+        </div>
+        <div class="contact-item">
+          <h4>Address</h4>
+          <span>Rautatienkatu 15, 15110 Lahti</span>
+        </div>
+        <div class="contact-item">
+          <h4>Order online</h4>
+          <a href="https://wolt.com/en/fin/lahti/restaurant/adolf-asian-cuisine" target="_blank" rel="noopener">Wolt</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>Adolf Asian Cuisine — Rautatienkatu 15, 15110 Lahti — <a href="tel:+358469400221">+358 46 9400221</a></p>
+      <p style="margin-top: 6px;">&copy; 2026 Adolf Asian Cuisine. Powered by Klar.</p>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var obs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('visible'); });
+      }, { threshold: 0.12 });
+      document.querySelectorAll('.reveal').forEach(function(el) { obs.observe(el); });
+    });
+  </script>
+</body>
+</html>

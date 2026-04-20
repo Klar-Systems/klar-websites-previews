@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<!-- Segment 3 palette fallback: no palette in research.json — using warm terracotta override for Bosnian bakery-café context: bg #2A1F16, text #F0E8DC, primary #8C4A2F, accent #C9853C -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meli Café &amp; Bakery — Bosnian Bakery-Café in Kallio, Helsinki</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #1E1610;
+      --surface:  #2A1F16;
+      --surface2: #332619;
+      --text:     #F0E8DC;
+      --muted:    #9A8272;
+      --primary:  #8C4A2F;
+      --accent:   #C9853C;
+      --border:   rgba(201,133,60,0.2);
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', system-ui, sans-serif;
+      font-size: 1rem;
+      line-height: 1.65;
+    }
+
+    /* --- DEMO BANNER --- */
+    .demo-banner {
+      background: var(--accent);
+      color: #1E1610;
+      text-align: center;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.55rem 1rem;
+    }
+
+    /* --- NAV --- */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(30,22,16,0.94);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.9rem 2rem;
+    }
+    .nav-logo {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 1.3rem;
+      color: var(--accent);
+    }
+    .nav-tagline {
+      font-size: 0.68rem;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      margin-left: 0.75rem;
+      border-left: 1px solid var(--border);
+      padding-left: 0.75rem;
+      display: inline;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    /* --- HERO --- */
+    .hero {
+      position: relative;
+      min-height: 88vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 5rem 1.5rem;
+      overflow: hidden;
+    }
+    .hero-photo-placeholder {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(160deg, #3A2510 0%, #1E1610 60%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.1);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 60%, rgba(201,133,60,0.08) 0%, rgba(30,22,16,0.65) 65%);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 740px;
+    }
+    .hero-eyebrow {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.2rem;
+    }
+    h1 {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: clamp(2.6rem, 7vw, 5.5rem);
+      line-height: 1.05;
+      color: var(--text);
+      margin-bottom: 0.6rem;
+    }
+    .hero-sub {
+      font-size: 1.1rem;
+      color: var(--muted);
+      max-width: 500px;
+      margin: 0 auto 2.5rem;
+    }
+    .hero-cta-row {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #1E1610;
+      border: none;
+      border-radius: 4px;
+      padding: 0.85rem 2rem;
+      font-size: 0.9rem;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .btn-primary:hover { opacity: 0.86; }
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 1.5px solid var(--border);
+      border-radius: 4px;
+      padding: 0.85rem 2rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* --- RATING STRIP --- */
+    .rating-strip {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .stat-block {
+      flex: 1;
+      min-width: 150px;
+      text-align: center;
+      padding: 1.5rem 1rem;
+      border-right: 1px solid var(--border);
+    }
+    .stat-block:last-child { border-right: none; }
+    .stat-num {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 1.8rem;
+      color: var(--accent);
+      display: block;
+    }
+    .stat-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* --- SECTIONS --- */
+    section { padding: 5rem 1.5rem; }
+    .container { max-width: 1040px; margin: 0 auto; }
+    h2 {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: clamp(1.9rem, 4vw, 2.7rem);
+      margin-bottom: 1rem;
+      color: var(--text);
+    }
+    .section-sub {
+      color: var(--muted);
+      max-width: 560px;
+      margin-bottom: 3rem;
+    }
+
+    /* --- STORY SECTION --- */
+    .story-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+    @media (max-width: 680px) { .story-grid { grid-template-columns: 1fr; } }
+    .story-text p { color: var(--muted); margin-bottom: 1rem; }
+    .story-text p:last-child { margin-bottom: 0; }
+    .story-text strong { color: var(--text); font-weight: 600; }
+    .interior-photo-placeholder {
+      background: var(--surface2);
+      border: 1px dashed var(--border);
+      border-radius: 8px;
+      height: 340px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-size: 0.85rem;
+      letter-spacing: 0.06em;
+    }
+
+    /* --- PROMISE BADGES --- */
+    .promise-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.25rem;
+      margin-top: 3rem;
+    }
+    .promise-card {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1.5rem 1.4rem;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+    .promise-icon {
+      color: var(--accent);
+      flex-shrink: 0;
+      width: 32px;
+      height: 32px;
+      margin-top: 2px;
+    }
+    .promise-card h4 {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 1.05rem;
+      color: var(--text);
+      margin-bottom: 0.3rem;
+    }
+    .promise-card p { font-size: 0.85rem; color: var(--muted); }
+
+    /* --- MENU SECTION --- */
+    .menu-section { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .menu-photo-placeholder {
+      background: var(--surface2);
+      border: 1px dashed var(--border);
+      border-radius: 8px;
+      height: 220px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-size: 0.85rem;
+      letter-spacing: 0.06em;
+      margin-bottom: 2.5rem;
+    }
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+    }
+    .menu-category {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1.5rem;
+    }
+    .menu-category h4 {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 1.1rem;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .menu-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 0.4rem 0;
+      border-bottom: 1px solid rgba(201,133,60,0.08);
+    }
+    .menu-item:last-child { border-bottom: none; }
+    .menu-item-name { font-size: 0.9rem; color: var(--text); }
+    .menu-item-price { font-size: 0.85rem; color: var(--muted); font-weight: 500; white-space: nowrap; margin-left: 0.5rem; }
+
+    /* --- HOURS --- */
+    .hours-section { background: var(--bg); }
+    .hours-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+    @media (max-width: 640px) { .hours-grid { grid-template-columns: 1fr; } }
+    .hours-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .hours-table tr { border-bottom: 1px solid var(--border); }
+    .hours-table td {
+      padding: 0.75rem 0;
+      font-size: 0.925rem;
+      color: var(--text);
+    }
+    .hours-table td:last-child {
+      text-align: right;
+      color: var(--accent);
+      font-weight: 500;
+    }
+    .hours-table tr.closed td { color: var(--muted); }
+    .hours-table tr.closed td:last-child { color: var(--muted); }
+    .hours-note {
+      margin-top: 1.5rem;
+      font-size: 0.85rem;
+      color: var(--muted);
+      border-left: 2px solid var(--border);
+      padding-left: 1rem;
+    }
+    .hours-aside h3 {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 1.5rem;
+      color: var(--text);
+      margin-bottom: 1rem;
+    }
+    .hours-aside p { color: var(--muted); font-size: 0.9rem; margin-bottom: 0.75rem; }
+
+    /* --- TESTIMONIALS --- */
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+    .testimonial {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1.75rem;
+    }
+    .testimonial blockquote {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: var(--text);
+      font-style: italic;
+      margin-bottom: 1rem;
+    }
+    .testimonial cite {
+      font-size: 0.78rem;
+      color: var(--muted);
+      font-style: normal;
+    }
+
+    /* --- CONTACT --- */
+    .contact-section {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+    }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    @media (max-width: 680px) { .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; } }
+    .contact-info h3 {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 1.6rem;
+      color: var(--text);
+      margin-bottom: 1.5rem;
+    }
+    .contact-detail { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2rem; }
+    .contact-row { display: flex; flex-direction: column; gap: 0.15rem; }
+    .contact-row .label {
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+    }
+    .contact-row a, .contact-row .value {
+      color: var(--text);
+      text-decoration: none;
+      font-size: 1rem;
+    }
+    .contact-row a:hover { color: var(--accent); }
+    .social-links { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 0.5rem; }
+    .social-link {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 0.5rem 1rem;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.83rem;
+      font-weight: 500;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .social-link:hover { color: var(--accent); border-color: var(--accent); }
+    .map-embed {
+      width: 100%;
+      height: 300px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      filter: grayscale(0.2) sepia(0.15);
+    }
+
+    /* --- WOLT LINK --- */
+    .wolt-block {
+      margin-top: 1.5rem;
+      padding: 1.2rem 1.5rem;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+    }
+    .wolt-block p { font-size: 0.85rem; color: var(--muted); margin-bottom: 0.5rem; }
+    .wolt-block a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+    .wolt-block a:hover { text-decoration: underline; }
+
+    /* --- FOOTER --- */
+    footer {
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 2rem 1.5rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+    footer .powered { margin-top: 0.4rem; }
+
+    @media (max-width: 640px) {
+      nav { padding: 0.85rem 1.25rem; }
+      .nav-links { display: none; }
+      .nav-tagline { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- DEMO BANNER -->
+  <div class="demo-banner">This is a demo — not the live site</div>
+
+  <!-- NAV -->
+  <nav>
+    <div>
+      <span class="nav-logo">Meli Café &amp; Bakery</span>
+      <span class="nav-tagline">Kallio, Helsinki</span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#hours">Hours</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" aria-label="Hero">
+    <div class="hero-photo-placeholder" aria-hidden="true">Your photo here</div>
+    <div class="hero-overlay" aria-hidden="true"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Bosnian Bakery-Café &mdash; Kallio, Helsinki</p>
+      <h1>Meli Café<br>&amp; Bakery</h1>
+      <p class="hero-sub">Everything baked from scratch overnight. Lepina, kifla, buhtla — and the best stuffed baguettes in Kallio. No freezer. No microwave.</p>
+      <div class="hero-cta-row">
+        <a href="#menu" class="btn-primary">See the Menu</a>
+        <a href="#contact" class="btn-outline">Find Us</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- RATING STRIP -->
+  <div class="rating-strip">
+    <div class="stat-block">
+      <span class="stat-num">4.6 / 5</span>
+      <span class="stat-label">Google Rating</span>
+    </div>
+    <div class="stat-block">
+      <span class="stat-num">710</span>
+      <span class="stat-label">Google Reviews</span>
+    </div>
+    <div class="stat-block">
+      <span class="stat-num">Helsinginkatu 11</span>
+      <span class="stat-label">Kallio, Helsinki</span>
+    </div>
+    <div class="stat-block">
+      <span class="stat-num">Tue–Sun</span>
+      <span class="stat-label">Open six days</span>
+    </div>
+  </div>
+
+  <!-- STORY -->
+  <section aria-labelledby="story-heading">
+    <div class="container">
+      <div class="story-grid">
+        <div class="story-text">
+          <h2 id="story-heading">Baked Every Night.<br>Ready Every Morning.</h2>
+          <p>Meli Café &amp; Bakery was opened by <strong>Ermin Softic</strong> — a Bosnian who moved to Finland 24 years ago — and his wife, in the heart of Kallio on Helsinginkatu. The space was gutted and rebuilt from a former pizza place. The oven fits around a hundred loaves at a time.</p>
+          <p>Ermin bakes through the night so that when the doors open, everything on the counter is fresh from that morning. No batch baked yesterday. No frozen dough reheated. The rule of the house: <strong>no freezer, no microwave</strong>.</p>
+          <p>The result is what draws the queues on Sunday mornings: lepina, kifla and buhtla alongside stuffed baguettes, croissants, omelettes, salads and freshly squeezed juices. Breakfast all day, because as Ermin puts it, there's no good reason to stop serving it at ten.</p>
+        </div>
+        <div class="interior-photo-placeholder" aria-label="Interior photo placeholder">Interior photo coming soon</div>
+      </div>
+
+      <div class="promise-row">
+        <div class="promise-card">
+          <svg class="promise-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <path d="M12 2C8 2 5 5 5 9c0 5 7 13 7 13s7-8 7-13c0-4-3-7-7-7z"/><circle cx="12" cy="9" r="2.5"/>
+          </svg>
+          <div>
+            <h4>No Freezer</h4>
+            <p>Every item is baked fresh each night. Nothing comes out of a freezer.</p>
+          </div>
+        </div>
+        <div class="promise-card">
+          <svg class="promise-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/>
+          </svg>
+          <div>
+            <h4>No Microwave</h4>
+            <p>Everything served is either freshly baked or freshly made. That's the policy.</p>
+          </div>
+        </div>
+        <div class="promise-card">
+          <svg class="promise-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+          <div>
+            <h4>Breakfast All Day</h4>
+            <p>No artificial cut-off. Omelettes, stuffed baguettes and pastries available whenever you arrive.</p>
+          </div>
+        </div>
+        <div class="promise-card">
+          <svg class="promise-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+          </svg>
+          <div>
+            <h4>The Owner Remembers You</h4>
+            <p>Regulars report that Ermin remembers their usual order. That kind of place.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MENU -->
+  <section id="menu" class="menu-section" aria-labelledby="menu-heading">
+    <div class="container">
+      <h2 id="menu-heading">What We Bake</h2>
+      <p class="section-sub">Bosnian bakery specialities alongside café staples. The selection changes daily — these are the regulars.</p>
+      <div class="menu-photo-placeholder" aria-label="Food photos placeholder">Food photos coming soon</div>
+      <div class="menu-grid">
+        <div class="menu-category">
+          <h4>Balkan Specialities</h4>
+          <div class="menu-item">
+            <span class="menu-item-name">Ham &amp; Cheese Lepina</span>
+            <span class="menu-item-price">6.60</span>
+          </div>
+          <div class="menu-item">
+            <span class="menu-item-name">Kifla</span>
+            <span class="menu-item-price">from 3.50</span>
+          </div>
+          <div class="menu-item">
+            <span class="menu-item-name">Buhtla</span>
+            <span class="menu-item-price">from 3.00</span>
+          </div>
+        </div>
+        <div class="menu-category">
+          <h4>Stuffed Baguettes</h4>
+          <div class="menu-item">
+            <span class="menu-item-name">Egg &amp; Bacon Baguette</span>
+            <span class="menu-item-price">7.50</span>
+          </div>
+          <div class="menu-item">
+            <span class="menu-item-name">Salmon &amp; Tomato Baguette</span>
+            <span class="menu-item-price">from 8.00</span>
+          </div>
+          <div class="menu-item">
+            <span class="menu-item-name">Vegetarian options</span>
+            <span class="menu-item-price">varies</span>
+          </div>
+        </div>
+        <div class="menu-category">
+          <h4>Pastries &amp; Sweet</h4>
+          <div class="menu-item">
+            <span class="menu-item-name">Nutella Croissant</span>
+            <span class="menu-item-price">4.20</span>
+          </div>
+          <div class="menu-item">
+            <span class="menu-item-name">Chocolate Doughnut</span>
+            <span class="menu-item-price">4.00</span>
+          </div>
+          <div class="menu-item">
+            <span class="menu-item-name">Daily pastries</span>
+            <span class="menu-item-price">from 3.00</span>
+          </div>
+        </div>
+        <div class="menu-category">
+          <h4>Warm Dishes &amp; Drinks</h4>
+          <div class="menu-item">
+            <span class="menu-item-name">Smoked Salmon Omelette</span>
+            <span class="menu-item-price">9.60</span>
+          </div>
+          <div class="menu-item">
+            <span class="menu-item-name">Caesar Salad</span>
+            <span class="menu-item-price">13.90</span>
+          </div>
+          <div class="menu-item">
+            <span class="menu-item-name">Freshly Squeezed Juices</span>
+            <span class="menu-item-price">from 4.00</span>
+          </div>
+        </div>
+      </div>
+      <p style="margin-top: 1.5rem; font-size: 0.85rem; color: var(--muted);">Coffee by Kaffa Roastery. Prices shown are indicative — please check in-store for the current list. No alcohol served.</p>
+    </div>
+  </section>
+
+  <!-- HOURS -->
+  <section id="hours" class="hours-section" aria-labelledby="hours-heading">
+    <div class="container">
+      <h2 id="hours-heading">Opening Hours</h2>
+      <div class="hours-grid">
+        <div>
+          <table class="hours-table" aria-label="Opening hours">
+            <tbody>
+              <tr class="closed"><td>Monday</td><td>Closed</td></tr>
+              <tr><td>Tuesday</td><td>08:00 – 18:00</td></tr>
+              <tr><td>Wednesday</td><td>08:00 – 18:00</td></tr>
+              <tr><td>Thursday</td><td>08:00 – 18:00</td></tr>
+              <tr><td>Friday</td><td>08:00 – 18:00</td></tr>
+              <tr><td>Saturday</td><td>09:00 – 18:00</td></tr>
+              <tr><td>Sunday</td><td>10:00 – 18:00</td></tr>
+            </tbody>
+          </table>
+          <p class="hours-note">Sunday mornings can get busy — locals queue for the weekend pastries. Arriving early is worth it.</p>
+        </div>
+        <div class="hours-aside">
+          <h3>Also in Jätkäsaari</h3>
+          <p>A second Meli location operates at Länsisatamankatu 18 in Jätkäsaari. Same bakery, same approach.</p>
+          <p>Order ahead or get delivery via Wolt.</p>
+          <a href="https://wolt.com/en/fin/helsinki/restaurant/meli-cafe-bakery"
+             class="btn-primary"
+             style="display:inline-block; margin-top:0.5rem;"
+             target="_blank" rel="noopener">Order on Wolt</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section aria-labelledby="reviews-heading" style="background: var(--surface); border-top: 1px solid var(--border);">
+    <div class="container">
+      <h2 id="reviews-heading">What People Say</h2>
+      <p class="section-sub">4.6 / 5 across 710 Google reviews.</p>
+      <div class="testimonials-grid">
+        <div class="testimonial">
+          <blockquote>"Absolutely the best place for having breakfast in Kallio. Super delicious baguettes and omelettes."</blockquote>
+          <cite>TripAdvisor review</cite>
+        </div>
+        <div class="testimonial">
+          <blockquote>"The owner has a phenomenal memory — he always remembers what I usually order."</blockquote>
+          <cite>TripAdvisor review</cite>
+        </div>
+        <div class="testimonial">
+          <blockquote>"Everything is fresh. They take great care in the selection of ingredients and have something new and different every day."</blockquote>
+          <cite>TripAdvisor review</cite>
+        </div>
+        <div class="testimonial">
+          <blockquote>"Popular neighbourhood bakery where locals queue up Sunday mornings for stuffed baguettes and savoury croissants."</blockquote>
+          <cite>Corner.inc</cite>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="contact-section" aria-labelledby="contact-heading">
+    <div class="container">
+      <h2 id="contact-heading">Find Us</h2>
+      <div class="contact-grid">
+        <div class="contact-info">
+          <h3>Meli Café &amp; Bakery</h3>
+          <div class="contact-detail">
+            <div class="contact-row">
+              <span class="label">Address</span>
+              <span class="value">Helsinginkatu 11, 00520 Helsinki</span>
+            </div>
+            <div class="contact-row">
+              <span class="label">Neighbourhood</span>
+              <span class="value">Kallio, Helsinki</span>
+            </div>
+            <div class="contact-row">
+              <span class="label">Phone</span>
+              <a href="tel:+358504408228">+358 50 440 8228</a>
+            </div>
+          </div>
+          <p style="font-size:0.83rem; color:var(--muted); margin-bottom:0.75rem;">Follow us for daily specials and what's fresh:</p>
+          <div class="social-links">
+            <a href="https://www.facebook.com/CafeMeliHesari/" class="social-link" target="_blank" rel="noopener">Facebook</a>
+            <a href="https://www.instagram.com/cafemelihesari/" class="social-link" target="_blank" rel="noopener">Instagram</a>
+          </div>
+          <div class="wolt-block">
+            <p>Also available for delivery:</p>
+            <a href="https://wolt.com/en/fin/helsinki/restaurant/meli-cafe-bakery" target="_blank" rel="noopener">Order via Wolt</a>
+          </div>
+        </div>
+        <div>
+          <iframe
+            class="map-embed"
+            title="Meli Café and Bakery location map"
+            src="https://maps.google.com/maps?q=Helsinginkatu+11+Helsinki&z=16&output=embed"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div>Meli Café &amp; Bakery &mdash; Helsinginkatu 11, 00520 Helsinki</div>
+    <div class="powered">Powered by Klar</div>
+  </footer>
+
+</body>
+</html>

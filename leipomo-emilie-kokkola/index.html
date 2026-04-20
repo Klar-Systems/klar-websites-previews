@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Bakery &amp; Café Emilie — Kokkola</title>
+<style>
+/* palette: segment 1 default (research palette empty) */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+:root{
+  --bg:#1F2933;
+  --bg-soft:#252f3b;
+  --bg-card:#2b3645;
+  --text:#EFE7DA;
+  --muted:rgba(239,231,218,0.58);
+  --mute-strong:rgba(239,231,218,0.82);
+  --primary:#B56B4A;
+  --primary-hi:#cc7f5c;
+  --accent:#D4A574;
+  --rule:rgba(212,165,116,0.15);
+  --serif:'Playfair Display',Georgia,Cambria,serif;
+  --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
+}
+html,body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.6;-webkit-font-smoothing:antialiased}
+body{min-height:100vh}
+a{color:inherit;text-decoration:none}
+
+/* Demo banner */
+.demo-banner{background:#161e27;border-bottom:1px solid var(--rule);font-size:13px}
+.demo-banner .inner{max-width:1140px;margin:0 auto;padding:11px 24px;display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center;justify-content:space-between;color:var(--mute-strong)}
+.demo-banner strong{color:var(--accent);font-weight:700;letter-spacing:0.08em;text-transform:uppercase;font-size:11px;margin-right:6px}
+.demo-banner a.cta{color:var(--bg);background:var(--accent);padding:7px 14px;font-weight:700;font-size:11px;letter-spacing:0.1em;text-transform:uppercase}
+.demo-banner a.cta:hover{background:#fff}
+
+/* Layout */
+.container{max-width:1140px;margin:0 auto;padding:0 24px}
+
+/* Nav */
+.nav{border-bottom:1px solid var(--rule)}
+.nav .inner{max-width:1140px;margin:0 auto;padding:20px 24px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.wordmark{font-family:var(--serif);font-size:20px;letter-spacing:-0.01em;display:flex;align-items:baseline;gap:8px}
+.wordmark .sub{font-family:var(--sans);font-size:10px;letter-spacing:0.28em;text-transform:uppercase;color:var(--muted)}
+.nav-links{display:flex;gap:26px;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted)}
+.nav-links a:hover{color:var(--accent)}
+.nav-phone{font-family:var(--serif);font-size:16px;color:var(--accent)}
+.nav-phone:hover{color:#fff}
+@media(max-width:860px){.nav-links{display:none}}
+
+/* Hero */
+.hero{padding:88px 0 112px;position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;left:0;right:0;top:0;height:1px;background:linear-gradient(90deg,transparent,var(--accent) 40%,var(--primary) 60%,transparent)}
+.hero .grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:72px;align-items:center}
+@media(max-width:940px){.hero{padding:56px 0 76px}.hero .grid{grid-template-columns:1fr;gap:44px}}
+.eyebrow{font-size:11px;letter-spacing:0.24em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:22px;display:flex;align-items:center;gap:14px}
+.eyebrow::before{content:"";flex:0 0 28px;height:1px;background:var(--accent)}
+.hero h1{font-family:var(--serif);font-size:clamp(46px,7.5vw,96px);line-height:0.98;letter-spacing:-0.018em;font-weight:700}
+.hero h1 em{color:var(--accent);font-style:italic;font-weight:400}
+.hero .tagline{margin-top:24px;font-size:18px;line-height:1.6;color:var(--mute-strong);max-width:500px}
+.hero .meta-row{margin-top:30px;display:flex;flex-wrap:wrap;gap:12px 24px;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)}
+.hero .meta-row span{display:flex;align-items:center;gap:8px}
+.hero .meta-row span::before{content:"";width:5px;height:5px;background:var(--primary-hi);transform:rotate(45deg);display:inline-block}
+.hero-cta{margin-top:40px;display:flex;flex-wrap:wrap;gap:12px}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;gap:10px;padding:16px 26px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;font-size:12px;border:1.5px solid transparent;transition:all 0.18s ease;cursor:pointer;font-family:var(--sans)}
+.btn-primary{background:var(--primary);color:var(--text);border-color:var(--primary)}
+.btn-primary:hover{background:var(--primary-hi);transform:translateY(-1px)}
+.btn-outline{border-color:var(--text);color:var(--text);background:transparent}
+.btn-outline:hover{border-color:var(--accent);color:var(--accent)}
+.btn-accent{background:var(--accent);color:var(--bg);border-color:var(--accent)}
+.btn-accent:hover{background:#fff}
+
+/* Hero photo placeholder */
+.hero-photo{position:relative;background:var(--bg-card);border:1px solid var(--rule);overflow:hidden}
+.hero-photo::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--primary),var(--accent));z-index:2}
+.hero-photo .photo-placeholder{aspect-ratio:4/5;background:radial-gradient(circle at 35% 30%,rgba(212,165,116,0.20),transparent 55%),linear-gradient(155deg,#2e3d4e 10%,#161e27 90%);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.hero-photo .photo-placeholder::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(-45deg,transparent 0 24px,rgba(181,107,74,0.04) 24px 48px)}
+.hero-photo .photo-placeholder .ph-label{position:relative;z-index:2;text-align:center;color:var(--muted);font-size:10px;letter-spacing:0.28em;text-transform:uppercase;padding:20px;max-width:220px;line-height:1.8}
+.hero-photo .photo-placeholder .ph-label strong{display:block;color:var(--accent);margin-bottom:10px;font-size:11px;letter-spacing:0.22em}
+.hero-photo .meta{padding:22px 24px;border-top:1px solid var(--rule);font-size:13px;color:var(--muted)}
+.hero-photo .meta strong{color:var(--accent);font-family:var(--serif);font-style:italic}
+
+/* Section */
+.section{padding:100px 0;border-top:1px solid var(--rule);position:relative}
+.section-eyebrow{font-family:var(--serif);font-style:italic;font-size:13px;color:var(--primary-hi);margin-bottom:14px}
+.section-title{font-family:var(--serif);font-size:clamp(34px,5vw,60px);line-height:1.05;letter-spacing:-0.01em;margin-bottom:24px;max-width:760px;font-weight:700}
+.section-title em{font-style:italic;color:var(--accent);font-weight:400}
+.section-intro{font-size:16px;line-height:1.7;color:var(--mute-strong);max-width:580px;margin-bottom:56px}
+
+/* Menu */
+.menu-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+@media(max-width:720px){.menu-grid{grid-template-columns:1fr}}
+.dish-card{background:var(--bg-card);border:1px solid var(--rule);padding:30px;display:flex;flex-direction:column;gap:16px;transition:border-color 0.18s ease;min-height:200px;position:relative}
+.dish-card:hover{border-color:var(--accent)}
+.dish-card .dish-tag{font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:var(--accent);font-family:var(--sans)}
+.dish-card h3{font-family:var(--serif);font-size:22px;line-height:1.2;font-weight:700}
+.dish-card .dish-desc{font-size:14px;line-height:1.6;color:var(--muted);margin-top:auto}
+.dish-card .dish-badge{display:inline-block;margin-top:14px;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent);border:1px solid rgba(212,165,116,0.35);padding:4px 10px}
+
+.menu-cats{margin-top:52px;padding:36px;background:var(--bg-soft);border:1px dashed rgba(212,165,116,0.25);display:grid;grid-template-columns:repeat(5,1fr);gap:20px}
+@media(max-width:880px){.menu-cats{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.menu-cats{grid-template-columns:1fr}}
+.cat-item{text-align:center;padding:10px 0}
+.cat-item .cat-name{font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--mute-strong)}
+
+/* About */
+.about-layout{display:grid;grid-template-columns:1fr 0.85fr;gap:80px;align-items:center}
+@media(max-width:940px){.about-layout{grid-template-columns:1fr;gap:44px}}
+.about-text p{font-size:17px;line-height:1.75;color:var(--mute-strong);margin-bottom:18px}
+.about-text .pull-quote{font-family:var(--serif);font-style:italic;font-size:24px;line-height:1.4;color:var(--accent);border-left:3px solid var(--primary);padding:8px 0 8px 22px;margin:28px 0;font-weight:400}
+.about-photo .photo-placeholder{aspect-ratio:3/4;background:linear-gradient(145deg,#2b3645,#161e27);border:1px solid var(--rule);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:28px;position:relative;overflow:hidden}
+.about-photo .photo-placeholder::before{content:"";position:absolute;inset:16px;border:1px solid rgba(212,165,116,0.18)}
+.about-photo .photo-placeholder .ph-label{text-align:center;color:var(--muted);font-size:10px;letter-spacing:0.26em;text-transform:uppercase;z-index:2;max-width:180px;line-height:1.8}
+.about-photo .photo-placeholder .ph-label strong{display:block;font-family:var(--serif);font-style:italic;font-size:38px;color:var(--accent);margin-bottom:12px;letter-spacing:normal;text-transform:none}
+
+/* Reservations widget */
+.reserve-wrap{background:var(--bg-card);border:1px solid var(--rule);padding:56px;display:grid;grid-template-columns:0.9fr 1.1fr;gap:56px;align-items:center}
+@media(max-width:860px){.reserve-wrap{grid-template-columns:1fr;padding:36px;gap:32px}}
+.reserve-copy .badge{display:inline-block;font-size:10px;letter-spacing:0.28em;text-transform:uppercase;color:var(--accent);border:1px solid var(--accent);padding:5px 11px;margin-bottom:20px}
+.reserve-copy h3{font-family:var(--serif);font-size:30px;line-height:1.15;margin-bottom:14px;font-weight:700}
+.reserve-copy h3 em{color:var(--accent);font-style:italic;font-weight:400}
+.reserve-copy p{font-size:14px;color:var(--muted);line-height:1.65;margin-bottom:20px}
+.reserve-copy .capacity-note{font-size:13px;color:var(--muted);padding:14px 0;border-top:1px solid var(--rule);display:flex;gap:10px;align-items:center}
+.reserve-copy .capacity-note::before{content:"◆";color:var(--accent);font-size:8px}
+
+/* The Klar Bookings widget form */
+.klar-widget{background:var(--bg);border:1px solid var(--rule);padding:30px;display:flex;flex-direction:column;gap:0}
+.klar-widget-header{font-size:10px;letter-spacing:0.24em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:20px;display:flex;align-items:center;gap:10px}
+.klar-widget-header::after{content:"";flex:1;height:1px;background:var(--rule)}
+.klar-form{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.klar-form .full{grid-column:1/-1}
+.klar-label{display:block;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;font-weight:600}
+.klar-field{background:var(--bg-card);border:1px solid var(--rule);padding:13px 15px;font-family:var(--sans);font-size:14px;color:var(--text);width:100%;display:flex;align-items:center;justify-content:space-between;cursor:pointer;transition:border-color 0.15s ease}
+.klar-field:hover,.klar-field:focus{border-color:var(--accent);outline:none}
+.klar-field select,.klar-field input{background:transparent;border:none;color:var(--text);font-family:var(--sans);font-size:14px;width:100%;cursor:pointer;outline:none}
+.klar-field select option{background:var(--bg-card);color:var(--text)}
+.klar-submit{grid-column:1/-1;background:var(--primary);color:var(--text);border:none;padding:16px 24px;font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;width:100%;transition:background 0.18s ease;display:flex;align-items:center;justify-content:center;gap:8px}
+.klar-submit:hover{background:var(--primary-hi)}
+.klar-powered{text-align:center;margin-top:14px;font-size:10px;color:var(--muted);letter-spacing:0.1em}
+.klar-powered span{color:var(--accent)}
+
+/* Hours & Location */
+.hl-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px}
+@media(max-width:840px){.hl-grid{grid-template-columns:1fr;gap:36px}}
+.hours-heading{font-family:var(--serif);font-size:24px;margin-bottom:22px;color:var(--accent);font-weight:700}
+.hours-line{display:flex;justify-content:space-between;padding:11px 0;border-bottom:1px solid var(--rule);font-size:14px;color:var(--mute-strong)}
+.hours-line .day{letter-spacing:0.12em;text-transform:uppercase;font-size:11px;color:var(--muted)}
+.hours-line .time{font-family:var(--serif);font-size:15px;color:var(--text)}
+.hours-note{margin-top:16px;font-size:13px;color:var(--muted);line-height:1.6}
+.location-block{background:var(--bg-card);border:1px solid var(--rule);padding:32px;display:flex;flex-direction:column;gap:20px}
+.location-block address{font-style:normal;font-family:var(--serif);font-size:20px;line-height:1.5;color:var(--text)}
+.location-block address span{display:block;font-family:var(--sans);font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-top:6px}
+.map-frame{aspect-ratio:16/10;background:linear-gradient(140deg,#2b3645,#161e27);border:1px dashed var(--rule);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:11px;letter-spacing:0.2em;text-transform:uppercase;margin-top:18px}
+
+/* Contact */
+.contact-row{display:grid;grid-template-columns:1.2fr 1fr;gap:56px;align-items:start}
+@media(max-width:840px){.contact-row{grid-template-columns:1fr;gap:32px}}
+.phone-huge{display:block;font-family:var(--serif);font-size:clamp(34px,5.2vw,56px);line-height:1;color:var(--accent);margin-bottom:14px;font-weight:700}
+.phone-huge:hover{color:#fff}
+.contact-desc{font-size:15px;color:var(--muted);max-width:420px;line-height:1.7}
+.channels{display:flex;flex-direction:column;gap:10px;margin-top:4px}
+.channels a{padding:15px 20px;border:1px solid var(--rule);display:flex;align-items:center;justify-content:space-between;font-size:13px;letter-spacing:0.05em;color:var(--mute-strong);transition:all 0.18s ease;gap:12px}
+.channels a:hover{border-color:var(--accent);color:var(--accent)}
+.channels a .platform{font-family:var(--serif);font-style:italic;color:var(--accent)}
+
+/* Footer */
+footer{padding:64px 0 36px;border-top:1px solid var(--rule);margin-top:56px}
+footer .grid{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:36px;margin-bottom:36px}
+@media(max-width:680px){footer .grid{grid-template-columns:1fr;gap:24px}}
+footer h4{font-size:10px;letter-spacing:0.24em;text-transform:uppercase;color:var(--muted);margin-bottom:14px;font-weight:700}
+footer p,footer a{font-size:13px;color:var(--mute-strong);line-height:1.85}
+footer a:hover{color:var(--accent)}
+footer .tagline{font-family:var(--serif);font-size:15px;color:var(--text);line-height:1.5;max-width:300px;margin-top:8px;font-style:italic}
+footer .bottom{padding-top:24px;border-top:1px solid var(--rule);display:flex;flex-wrap:wrap;gap:8px;justify-content:space-between;font-size:11px;color:var(--muted);letter-spacing:0.08em}
+footer .bottom a.klar{color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;font-size:11px}
+footer .bottom a.klar:hover{color:var(--accent)}
+</style>
+</head>
+<body>
+
+<div class="demo-banner">
+  <div class="inner">
+    <span><strong>This is a demo.</strong> A Klar Systems preview built for Bakery &amp; Café Emilie.</span>
+    <a class="cta" href="https://preview.klarsystems.com/leipomo-emilie-kokkola/proposal/">See the proposal →</a>
+  </div>
+</div>
+
+<nav class="nav">
+  <div class="inner">
+    <a href="#top" class="wordmark">Bakery &amp; Café Emilie <span class="sub">Kokkola</span></a>
+    <span class="nav-links">
+      <a href="#menu">Specialties</a>
+      <a href="#about">About</a>
+      <a href="#reserve">Reserve</a>
+      <a href="#hours">Hours</a>
+    </span>
+    <a class="nav-phone" href="tel:+358681316065">06 831 6065</a>
+  </div>
+</nav>
+
+<section class="hero" id="top">
+  <div class="container">
+    <div class="grid">
+      <div>
+        <div class="eyebrow">Kokkola · Tehtaankatu 45</div>
+        <h1>Freshly baked,<br>every <em>morning.</em></h1>
+        <p class="tagline">A neighbourhood bakery and café in Kokkola — sweet and savory pastries straight from the oven, and a warm room to sit and enjoy them.</p>
+        <div class="meta-row">
+          <span>4.5 / 5 — 219 reviews</span>
+          <span>Mon–Fri 06:30–16:30</span>
+          <span>Private event space for up to 40</span>
+        </div>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#reserve">Reserve a table</a>
+          <a class="btn btn-outline" href="#menu">Our specialties</a>
+        </div>
+      </div>
+      <div class="hero-photo">
+        <div class="photo-placeholder">
+          <div class="ph-label"><strong>Your photo here</strong>Fresh pastries from the oven — morning light, warm tones.</div>
+        </div>
+        <div class="meta">Bakery &amp; Café Emilie · <strong>Tehtaankatu 45, Kokkola</strong></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="menu">
+  <div class="container">
+    <div class="section-eyebrow">From the bakery</div>
+    <h2 class="section-title">Baked with care, <em>every day.</em></h2>
+    <p class="section-intro">A selection of sweet and savory pastries baked on-site. Below are two of the specialties our customers keep coming back for. The full range is available in the café.</p>
+
+    <div class="menu-grid">
+      <div class="dish-card">
+        <span class="dish-tag">Specialty cake</span>
+        <h3>Täytekakku</h3>
+        <p class="dish-desc">A classic Finnish filled layer cake — moist, home-style, and made to order for celebrations and gatherings.</p>
+        <span class="dish-badge">Made to order</span>
+      </div>
+      <div class="dish-card">
+        <span class="dish-tag">Savory pastry</span>
+        <h3>Gluteeniton suolainen piirakka</h3>
+        <p class="dish-desc">A savory gluten-free pie — one of the bakery's most praised items, available daily from the counter.</p>
+        <span class="dish-badge">Gluten-free</span>
+      </div>
+    </div>
+
+    <div class="menu-cats">
+      <div class="cat-item"><div class="cat-name">Sweet pastries</div></div>
+      <div class="cat-item"><div class="cat-name">Savory pastries</div></div>
+      <div class="cat-item"><div class="cat-name">Custom cakes</div></div>
+      <div class="cat-item"><div class="cat-name">Gluten-free</div></div>
+      <div class="cat-item"><div class="cat-name">Coffee &amp; drinks</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="about">
+  <div class="container">
+    <div class="about-layout">
+      <div class="about-text">
+        <div class="section-eyebrow">About the bakery</div>
+        <h2 class="section-title">A cozy spot in <em>Kokkola.</em></h2>
+        <p>Bakery &amp; Café Emilie is a neighbourhood bakery where you can pick up fresh pastries to take away or settle in and enjoy them on-site. The café has several table groups and a separate room available for private events and celebrations — for gatherings of up to approximately 40 guests.</p>
+        <p>Gluten-free options are available daily. Free parking is right outside.</p>
+        <div class="pull-quote">"Cozy atmosphere of the bakery café, filled with the aroma of freshly baked goods."</div>
+      </div>
+      <div class="about-photo">
+        <div class="photo-placeholder">
+          <div class="ph-label"><strong>Emilie</strong>Interior photo coming soon</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="reserve">
+  <div class="container">
+    <div class="section-eyebrow">Klar Bookings</div>
+    <h2 class="section-title">Reserve your <em>table.</em></h2>
+    <p class="section-intro" style="margin-bottom:40px">Book a table at Bakery &amp; Café Emilie online — choose your date, time, and party size below. For private event enquiries, please call us.</p>
+
+    <div class="reserve-wrap">
+      <div class="reserve-copy">
+        <span class="badge">Online reservations</span>
+        <h3>Book a <em>table</em></h3>
+        <p>Select your preferred date, time slot, and the number of guests. We will confirm your reservation by email or phone.</p>
+        <div class="capacity-note">Event space available for up to 40 guests — call to enquire.</div>
+      </div>
+
+      <div>
+        <div class="klar-widget">
+          <div class="klar-widget-header">Klar Bookings</div>
+          <form class="klar-form" onsubmit="return false;">
+            <div>
+              <label class="klar-label" for="booking-date">Date</label>
+              <div class="klar-field">
+                <input type="date" id="booking-date" name="date" aria-label="Select date">
+              </div>
+            </div>
+            <div>
+              <label class="klar-label" for="booking-time">Time</label>
+              <div class="klar-field">
+                <select id="booking-time" name="time" aria-label="Select time">
+                  <option value="">Select time</option>
+                  <option value="07:00">07:00</option>
+                  <option value="08:00">08:00</option>
+                  <option value="09:00">09:00</option>
+                  <option value="10:00">10:00</option>
+                  <option value="11:00">11:00</option>
+                  <option value="12:00">12:00</option>
+                  <option value="13:00">13:00</option>
+                  <option value="14:00">14:00</option>
+                  <option value="15:00">15:00</option>
+                  <option value="16:00">16:00</option>
+                </select>
+              </div>
+            </div>
+            <div class="full">
+              <label class="klar-label" for="booking-guests">Party size</label>
+              <div class="klar-field">
+                <select id="booking-guests" name="guests" aria-label="Number of guests">
+                  <option value="">Number of guests</option>
+                  <option value="1">1 guest</option>
+                  <option value="2">2 guests</option>
+                  <option value="3">3 guests</option>
+                  <option value="4">4 guests</option>
+                  <option value="5">5 guests</option>
+                  <option value="6">6 guests</option>
+                  <option value="7">7 guests</option>
+                  <option value="8">8 guests</option>
+                  <option value="9">9 guests</option>
+                  <option value="10">10 guests</option>
+                  <option value="10+">More than 10</option>
+                </select>
+              </div>
+            </div>
+            <button type="submit" class="klar-submit">Reserve →</button>
+          </form>
+          <div class="klar-powered">Powered by <span>Klar Bookings</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="hours">
+  <div class="container">
+    <div class="section-eyebrow">Find us</div>
+    <h2 class="section-title">Hours &amp; <em>location.</em></h2>
+    <div class="hl-grid">
+      <div>
+        <div class="hours-heading">Opening hours</div>
+        <div class="hours-line"><span class="day">Monday</span><span class="time">06:30–16:30</span></div>
+        <div class="hours-line"><span class="day">Tuesday</span><span class="time">06:30–16:30</span></div>
+        <div class="hours-line"><span class="day">Wednesday</span><span class="time">06:30–16:30</span></div>
+        <div class="hours-line"><span class="day">Thursday</span><span class="time">06:30–16:30</span></div>
+        <div class="hours-line"><span class="day">Friday</span><span class="time">06:30–16:30</span></div>
+        <div class="hours-line"><span class="day">Saturday</span><span class="time">09:00–14:00</span></div>
+        <div class="hours-line"><span class="day">Sunday</span><span class="time">Closed</span></div>
+        <p class="hours-note">Private event space available with or without catering — contact us to enquire.</p>
+      </div>
+      <div>
+        <div class="location-block">
+          <address>
+            Tehtaankatu 45<br>67100 Kokkola<br>Finland
+            <span>Free parking on-site</span>
+          </address>
+          <a class="btn btn-outline" href="https://maps.google.com/?q=Tehtaankatu+45,+67100+Kokkola" target="_blank" rel="noopener">Open in Google Maps →</a>
+        </div>
+        <div class="map-frame">Map coming soon</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="contact">
+  <div class="container">
+    <div class="section-eyebrow">Get in touch</div>
+    <h2 class="section-title">Contact <em>us.</em></h2>
+    <div class="contact-row">
+      <div>
+        <a class="phone-huge" href="tel:+358681316065">06 831 6065</a>
+        <p class="contact-desc">Call us for reservations, private event bookings, or to ask about our daily specials and custom cake orders.</p>
+      </div>
+      <div class="channels">
+        <a href="mailto:leipomoemilie@gmail.com">
+          <span>Email us</span>
+          <span class="platform">leipomoemilie@gmail.com</span>
+        </a>
+        <a href="https://www.instagram.com/emilieleipomo/" target="_blank" rel="noopener">
+          <span>Instagram</span>
+          <span class="platform">@emilieleipomo</span>
+        </a>
+        <a href="https://www.facebook.com/p/Leipomo-Emilie-Oy-100054535027351/" target="_blank" rel="noopener">
+          <span>Facebook</span>
+          <span class="platform">Leipomo Emilie Oy</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="grid">
+      <div>
+        <h4>Bakery &amp; Café Emilie</h4>
+        <p class="tagline">Fresh from the oven, every morning in Kokkola.</p>
+        <p style="margin-top:16px;font-size:13px;color:var(--muted)">Tehtaankatu 45, 67100 Kokkola<br>+358 6 831 6065<br>leipomoemilie@gmail.com</p>
+      </div>
+      <div>
+        <h4>Hours</h4>
+        <p>Mon–Fri: 06:30–16:30<br>Saturday: 09:00–14:00<br>Sunday: Closed</p>
+      </div>
+      <div>
+        <h4>Links</h4>
+        <p><a href="#reserve">Reserve a table</a><br><a href="https://www.instagram.com/emilieleipomo/" target="_blank" rel="noopener">Instagram</a><br><a href="https://www.facebook.com/p/Leipomo-Emilie-Oy-100054535027351/" target="_blank" rel="noopener">Facebook</a></p>
+      </div>
+    </div>
+    <div class="bottom">
+      <span>© Bakery &amp; Café Emilie · Tehtaankatu 45, 67100 Kokkola</span>
+      <a class="klar" href="https://klarsystems.com" target="_blank" rel="noopener">Powered by Klar · klarsystems.com</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

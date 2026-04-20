@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Itiksen Mangal — Turkish Mangal Grill, Helsinki</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background: #f9f5ee;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Demo banner */
+        .demo-banner {
+            background: #1a1a1a;
+            color: #f9f5ee;
+            text-align: center;
+            padding: 10px 20px;
+            font-size: 13px;
+        }
+
+        .demo-banner a {
+            color: #c9a84c;
+            text-decoration: underline;
+            font-weight: 600;
+        }
+
+        /* Nav */
+        nav {
+            background: #fff;
+            border-bottom: 1px solid #e8e0d0;
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-logo {
+            font-size: 20px;
+            font-weight: 700;
+            color: #8B0000;
+            letter-spacing: -0.3px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #1a1a1a;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: #8B0000;
+        }
+
+        /* Hero */
+        .hero {
+            background: #8B0000;
+            color: #f9f5ee;
+            padding: 100px 24px 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(0,0,0,0.18) 0%, rgba(0,0,0,0.05) 100%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(201,168,76,0.25);
+            border: 1px solid #c9a84c;
+            color: #c9a84c;
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: 52px;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 16px;
+            color: #f9f5ee;
+        }
+
+        .hero-sub {
+            font-size: 20px;
+            color: rgba(249,245,238,0.85);
+            margin-bottom: 12px;
+        }
+
+        .hero-rating {
+            font-size: 16px;
+            color: #c9a84c;
+            font-weight: 600;
+            margin-bottom: 36px;
+        }
+
+        .hero-cta-group {
+            display: flex;
+            gap: 14px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            background: #c9a84c;
+            color: #1a1a1a;
+            padding: 14px 32px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 15px;
+            transition: background 0.2s, transform 0.2s;
+        }
+
+        .btn-primary:hover {
+            background: #b8963f;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            display: inline-block;
+            background: transparent;
+            border: 2px solid rgba(249,245,238,0.5);
+            color: #f9f5ee;
+            padding: 14px 32px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            transition: border-color 0.2s;
+        }
+
+        .btn-secondary:hover {
+            border-color: #f9f5ee;
+        }
+
+        /* Photo strip */
+        .photo-strip {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3px;
+            background: #1a1a1a;
+        }
+
+        .photo-box {
+            background: #e8e0d0;
+            aspect-ratio: 4/3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #8B0000;
+            font-size: 13px;
+            font-weight: 600;
+            text-align: center;
+            padding: 12px;
+        }
+
+        /* About */
+        .about {
+            padding: 80px 24px;
+            background: #fff;
+        }
+
+        .section-label {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #8B0000;
+            margin-bottom: 10px;
+        }
+
+        .about h2 {
+            font-size: 34px;
+            font-weight: 800;
+            color: #1a1a1a;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .about p {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #444;
+            margin-bottom: 16px;
+            max-width: 680px;
+        }
+
+        .about-highlight {
+            display: inline-block;
+            background: #f9f5ee;
+            border-left: 4px solid #8B0000;
+            padding: 14px 20px;
+            border-radius: 0 8px 8px 0;
+            font-size: 15px;
+            color: #1a1a1a;
+            font-style: italic;
+            margin-top: 8px;
+            max-width: 600px;
+        }
+
+        /* Menu */
+        .menu {
+            padding: 80px 24px;
+            background: #f9f5ee;
+        }
+
+        .menu h2 {
+            font-size: 34px;
+            font-weight: 800;
+            margin-bottom: 40px;
+            color: #1a1a1a;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .menu-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 28px;
+            border: 1px solid #e8e0d0;
+        }
+
+        .menu-card h3 {
+            font-size: 16px;
+            font-weight: 700;
+            color: #8B0000;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 16px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #e8e0d0;
+        }
+
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 10px 0;
+            border-bottom: 1px solid #f0ebe0;
+            gap: 12px;
+        }
+
+        .menu-item:last-child {
+            border-bottom: none;
+        }
+
+        .item-name {
+            font-size: 14px;
+            color: #1a1a1a;
+            font-weight: 500;
+            flex: 1;
+        }
+
+        .item-desc {
+            font-size: 12px;
+            color: #888;
+            margin-top: 2px;
+        }
+
+        .item-price {
+            font-size: 14px;
+            font-weight: 700;
+            color: #8B0000;
+            white-space: nowrap;
+        }
+
+        .menu-photo {
+            background: #e8e0d0;
+            border-radius: 8px;
+            aspect-ratio: 16/7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #8B0000;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+
+        /* Booking */
+        .booking {
+            padding: 80px 24px;
+            background: #8B0000;
+        }
+
+        .booking-inner {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .booking-intro .section-label {
+            color: #c9a84c;
+        }
+
+        .booking-intro h2 {
+            font-size: 34px;
+            font-weight: 800;
+            color: #f9f5ee;
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+
+        .booking-intro p {
+            font-size: 15px;
+            color: rgba(249,245,238,0.8);
+            line-height: 1.7;
+        }
+
+        .booking-card {
+            background: #fff;
+            border-radius: 14px;
+            padding: 36px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+        }
+
+        .booking-card h3 {
+            font-size: 22px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 6px;
+        }
+
+        .booking-sub {
+            font-size: 13px;
+            color: #888;
+            margin-bottom: 24px;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 12px;
+            font-weight: 700;
+            color: #444;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 11px 14px;
+            border: 1.5px solid #ddd;
+            border-radius: 7px;
+            font-size: 14px;
+            font-family: inherit;
+            color: #1a1a1a;
+            background: #fff;
+            transition: border-color 0.2s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #8B0000;
+            box-shadow: 0 0 0 3px rgba(139,0,0,0.08);
+        }
+
+        .reserve-btn {
+            width: 100%;
+            padding: 14px;
+            background: #8B0000;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 8px;
+            transition: background 0.2s;
+            font-family: inherit;
+        }
+
+        .reserve-btn:hover {
+            background: #6e0000;
+        }
+
+        .booking-note {
+            text-align: center;
+            font-size: 12px;
+            color: #888;
+            margin-top: 12px;
+        }
+
+        /* Rating strip */
+        .rating-strip {
+            background: #1a1a1a;
+            padding: 40px 24px;
+            text-align: center;
+        }
+
+        .rating-strip-inner {
+            display: flex;
+            justify-content: center;
+            gap: 48px;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 36px;
+            font-weight: 800;
+            color: #c9a84c;
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: rgba(249,245,238,0.7);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Hours & Location */
+        .info {
+            padding: 80px 24px;
+            background: #fff;
+        }
+
+        .info h2 {
+            font-size: 34px;
+            font-weight: 800;
+            margin-bottom: 40px;
+            color: #1a1a1a;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .hours-table {
+            background: #f9f5ee;
+            border-radius: 10px;
+            padding: 24px;
+        }
+
+        .hours-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #e8e0d0;
+            font-size: 14px;
+        }
+
+        .hours-row:last-child {
+            border-bottom: none;
+        }
+
+        .hours-day {
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .hours-time {
+            color: #555;
+        }
+
+        .location-box {
+            background: #f9f5ee;
+            border-radius: 10px;
+            padding: 24px;
+        }
+
+        .location-box p {
+            font-size: 15px;
+            color: #444;
+            margin-bottom: 12px;
+            line-height: 1.6;
+        }
+
+        .location-box strong {
+            color: #1a1a1a;
+        }
+
+        .location-box a {
+            color: #8B0000;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .location-box a:hover {
+            text-decoration: underline;
+        }
+
+        .map-placeholder {
+            background: #e8e0d0;
+            border-radius: 8px;
+            height: 160px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #8B0000;
+            font-size: 13px;
+            font-weight: 600;
+            margin-top: 16px;
+        }
+
+        /* Contact */
+        .contact {
+            padding: 60px 24px;
+            background: #f9f5ee;
+        }
+
+        .contact h2 {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 28px;
+            color: #1a1a1a;
+        }
+
+        .contact-cards {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .contact-card {
+            background: #fff;
+            border-radius: 10px;
+            padding: 20px 24px;
+            border: 1px solid #e8e0d0;
+            min-width: 200px;
+        }
+
+        .contact-card-label {
+            font-size: 11px;
+            font-weight: 700;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+        }
+
+        .contact-card-value {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .contact-card-value a {
+            color: #8B0000;
+            text-decoration: none;
+        }
+
+        .contact-card-value a:hover {
+            text-decoration: underline;
+        }
+
+        /* Interior photo placeholder */
+        .interior-placeholder {
+            background: #e8e0d0;
+            aspect-ratio: 16/5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #8B0000;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        /* Footer */
+        footer {
+            background: #1a1a1a;
+            color: rgba(249,245,238,0.7);
+            padding: 36px 24px;
+            text-align: center;
+        }
+
+        footer p {
+            font-size: 13px;
+            margin-bottom: 6px;
+        }
+
+        footer a {
+            color: #c9a84c;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero-sub {
+                font-size: 16px;
+            }
+
+            .photo-strip {
+                grid-template-columns: 1fr;
+            }
+
+            .booking-inner {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .rating-strip-inner {
+                gap: 28px;
+            }
+
+            .stat-number {
+                font-size: 28px;
+            }
+
+            nav .nav-links {
+                display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding: 70px 20px 60px;
+            }
+
+            .hero-cta-group {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn-primary, .btn-secondary {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Demo Banner -->
+    <div class="demo-banner">
+        This is a demo preview built by Klar Systems for Itiksen Mangal.
+        &nbsp;|&nbsp;
+        <a href="https://preview.klarsystems.com/itiksen-mangal-helsinki/proposal/">See the full proposal</a>
+    </div>
+
+    <!-- Nav -->
+    <nav>
+        <div class="nav-logo">Itiksen Mangal</div>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#menu">Menu</a></li>
+            <li><a href="#reserve">Reserve</a></li>
+            <li><a href="#info">Hours &amp; Location</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">Turkish Mangal Grill &mdash; Helsinki</div>
+            <h1>Itiksen Mangal</h1>
+            <p class="hero-sub">Charcoal-grilled meat. Authentic Turkish flavors. Itäkeskus.</p>
+            <p class="hero-rating">4.5 / 5 &mdash; 264 Google reviews</p>
+            <div class="hero-cta-group">
+                <a href="#reserve" class="btn-primary">Reserve a Table</a>
+                <a href="#menu" class="btn-secondary">View Menu</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Photo strip -->
+    <div class="photo-strip">
+        <div class="photo-box">Your photo here</div>
+        <div class="photo-box">Food photos coming soon</div>
+        <div class="photo-box">Interior photo coming soon</div>
+    </div>
+
+    <!-- About -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="section-label">Our Story</div>
+            <h2>The Mangal Difference</h2>
+            <p>Itiksen Mangal is a Turkish charcoal-grill restaurant on Hansasilta bridge in Itäkeskus, east Helsinki. We specialize in <strong>mangal</strong> &mdash; the traditional method of grilling over real charcoal, which gives meat a smoky depth no gas grill can replicate.</p>
+            <p>Every plate arrives with charcoal-grilled meat, sumac onions, grilled tomato and chili, fresh bread, and yogurt sauce. Alongside our grilled dishes, we serve pide, lahmacun, meze, falafel, and homemade soup.</p>
+            <div class="about-highlight">
+                "The soul of the dish is undeniably the meat &mdash; fresh, tender and above all well-cooked and seasoned." &mdash; Helsingin Ravintolat
+            </div>
+        </div>
+    </section>
+
+    <!-- Rating strip -->
+    <div class="rating-strip">
+        <div class="rating-strip-inner">
+            <div class="stat-item">
+                <div class="stat-number">4.5</div>
+                <div class="stat-label">Google Rating</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">264</div>
+                <div class="stat-label">Reviews</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">2005</div>
+                <div class="stat-label">Est.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Menu -->
+    <section class="menu" id="menu">
+        <div class="container">
+            <div class="section-label">What We Serve</div>
+            <h2>Our Menu</h2>
+
+            <div class="menu-photo">Food photos coming soon</div>
+
+            <div class="menu-grid">
+                <div class="menu-card">
+                    <h3>Mangal Grill</h3>
+                    <div class="menu-item">
+                        <div>
+                            <div class="item-name">Mangal Plate</div>
+                            <div class="item-desc">Charcoal-grilled meat, rice, sumac onion, grilled tomato, bread &amp; yogurt</div>
+                        </div>
+                        <div class="item-price">&euro;20</div>
+                    </div>
+                    <div class="menu-item">
+                        <div>
+                            <div class="item-name">Mixed Grill</div>
+                            <div class="item-desc">Selection of charcoal-grilled meats</div>
+                        </div>
+                        <div class="item-price">&euro;22</div>
+                    </div>
+                    <div class="menu-item">
+                        <div>
+                            <div class="item-name">Chicken Mangal</div>
+                            <div class="item-desc">Charcoal-grilled chicken with sides</div>
+                        </div>
+                        <div class="item-price">&euro;19</div>
+                    </div>
+                </div>
+
+                <div class="menu-card">
+                    <h3>Turkish Classics</h3>
+                    <div class="menu-item">
+                        <div>
+                            <div class="item-name">Pide</div>
+                            <div class="item-desc">Traditional Turkish flatbread with your choice of filling</div>
+                        </div>
+                        <div class="item-price">&euro;14</div>
+                    </div>
+                    <div class="menu-item">
+                        <div>
+                            <div class="item-name">Lahmacun</div>
+                            <div class="item-desc">Thin Turkish meat flatbread</div>
+                        </div>
+                        <div class="item-price">&euro;9</div>
+                    </div>
+                    <div class="menu-item">
+                        <div>
+                            <div class="item-name">Kebab</div>
+                            <div class="item-desc">Classic kebab plate with sides</div>
+                        </div>
+                        <div class="item-price">&euro;16</div>
+                    </div>
+                </div>
+
+                <div class="menu-card">
+                    <h3>Starters &amp; Sides</h3>
+                    <div class="menu-item">
+                        <div>
+                            <div class="item-name">Meze Plate</div>
+                            <div class="item-desc">Salad, bread, yogurt sauce &amp; cooked vegetables</div>
+                        </div>
+                        <div class="item-price">&euro;10</div>
+                    </div>
+                    <div class="menu-item">
+                        <div>
+                            <div class="item-name">Falafel</div>
+                            <div class="item-desc">Crispy chickpea fritters, vegetarian</div>
+                        </div>
+                        <div class="item-price">&euro;12</div>
+                    </div>
+                    <div class="menu-item">
+                        <div>
+                            <div class="item-name">Soup of the Day</div>
+                            <div class="item-desc">Traditional Turkish soup</div>
+                        </div>
+                        <div class="item-price">&euro;7</div>
+                    </div>
+                </div>
+            </div>
+
+            <p style="font-size:13px;color:#888;margin-top:24px;">Menu and prices are illustrative for this demo. Contact us for the current menu.</p>
+        </div>
+    </section>
+
+    <!-- Booking Widget -->
+    <section class="booking" id="reserve">
+        <div class="booking-inner">
+            <div class="booking-intro">
+                <div class="section-label">Klar Bookings</div>
+                <h2>Reserve a Table</h2>
+                <p>Book directly with us &mdash; no third-party fees, no commissions. Choose your date, time, and party size and we'll confirm your reservation.</p>
+            </div>
+            <div class="booking-card">
+                <h3>Make a Reservation</h3>
+                <p class="booking-sub">Takes under 30 seconds. No account required.</p>
+                <form onsubmit="event.preventDefault(); return false;">
+                    <div class="form-group">
+                        <label for="res-date">Date</label>
+                        <input type="date" id="res-date" min="">
+                    </div>
+                    <div class="form-group">
+                        <label for="res-time">Time</label>
+                        <select id="res-time">
+                            <option value="">Select a time</option>
+                            <option value="11:00">11:00</option>
+                            <option value="11:30">11:30</option>
+                            <option value="12:00">12:00</option>
+                            <option value="12:30">12:30</option>
+                            <option value="13:00">13:00</option>
+                            <option value="13:30">13:30</option>
+                            <option value="14:00">14:00</option>
+                            <option value="14:30">14:30</option>
+                            <option value="15:00">15:00</option>
+                            <option value="16:00">16:00</option>
+                            <option value="17:00">17:00</option>
+                            <option value="17:30">17:30</option>
+                            <option value="18:00">18:00</option>
+                            <option value="18:30">18:30</option>
+                            <option value="19:00">19:00</option>
+                            <option value="19:30">19:30</option>
+                            <option value="20:00">20:00</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="res-guests">Party Size</label>
+                        <select id="res-guests">
+                            <option value="1">1 guest</option>
+                            <option value="2" selected>2 guests</option>
+                            <option value="3">3 guests</option>
+                            <option value="4">4 guests</option>
+                            <option value="5">5 guests</option>
+                            <option value="6">6 guests</option>
+                            <option value="7">7 guests</option>
+                            <option value="8">8 guests</option>
+                            <option value="9">9 guests</option>
+                            <option value="10">10 guests</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="reserve-btn">Reserve Now</button>
+                </form>
+                <p class="booking-note">Powered by Klar Bookings &mdash; no fees, no commissions.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hours & Location -->
+    <section class="info" id="info">
+        <div class="container">
+            <h2>Hours &amp; Location</h2>
+            <div class="info-grid">
+                <div>
+                    <div class="section-label">Opening Hours</div>
+                    <div class="hours-table">
+                        <div class="hours-row">
+                            <span class="hours-day">Monday</span>
+                            <span class="hours-time">11:00 &ndash; 20:30</span>
+                        </div>
+                        <div class="hours-row">
+                            <span class="hours-day">Tuesday</span>
+                            <span class="hours-time">11:00 &ndash; 20:30</span>
+                        </div>
+                        <div class="hours-row">
+                            <span class="hours-day">Wednesday</span>
+                            <span class="hours-time">11:00 &ndash; 20:30</span>
+                        </div>
+                        <div class="hours-row">
+                            <span class="hours-day">Thursday</span>
+                            <span class="hours-time">11:00 &ndash; 20:30</span>
+                        </div>
+                        <div class="hours-row">
+                            <span class="hours-day">Friday</span>
+                            <span class="hours-time">11:00 &ndash; 20:30</span>
+                        </div>
+                        <div class="hours-row">
+                            <span class="hours-day">Saturday</span>
+                            <span class="hours-time">11:00 &ndash; 20:30</span>
+                        </div>
+                        <div class="hours-row">
+                            <span class="hours-day">Sunday</span>
+                            <span class="hours-time">11:00 &ndash; 20:30</span>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="section-label">Find Us</div>
+                    <div class="location-box">
+                        <p><strong>Address</strong><br>Gotlanninkatu 2<br>00930 Helsinki</p>
+                        <p><strong>Near</strong><br>Itäkeskus &mdash; Hansasilta bridge, above Itäväylä</p>
+                        <p><strong>Phone</strong><br><a href="tel:+358442300220">044 2300220</a></p>
+                        <p><a href="https://maps.google.com/?cid=14663472556766902412" target="_blank">Open in Google Maps &rarr;</a></p>
+                        <div class="map-placeholder">Interior photo coming soon</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="contact">
+        <div class="container">
+            <h2>Contact Us</h2>
+            <div class="contact-cards">
+                <div class="contact-card">
+                    <div class="contact-card-label">Phone</div>
+                    <div class="contact-card-value"><a href="tel:+358442300220">044 2300220</a></div>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-card-label">Address</div>
+                    <div class="contact-card-value">Gotlanninkatu 2, 00930 Helsinki</div>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-card-label">Follow Us</div>
+                    <div class="contact-card-value"><a href="https://www.facebook.com/itiksenmangal/" target="_blank">Facebook</a></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interior placeholder -->
+    <div class="interior-placeholder">Your photo here</div>
+
+    <!-- Footer -->
+    <footer>
+        <p>Powered by Klar Systems &mdash; this is a demo preview for Itiksen Mangal.</p>
+        <p style="margin-top:8px;">
+            <a href="https://preview.klarsystems.com/itiksen-mangal-helsinki/proposal/">View proposal</a>
+            &nbsp;&nbsp;&bull;&nbsp;&nbsp;
+            <a href="https://calendly.com/lomberg-klarsystems">Book a call with Klar</a>
+        </p>
+        <p style="margin-top:16px;font-size:12px;opacity:0.5;">&copy; 2026 Itiksen Mangal. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Set min date to today
+        const dateInput = document.getElementById('res-date');
+        if (dateInput) {
+            const today = new Date();
+            const dd = String(today.getDate()).padStart(2, '0');
+            const mm = String(today.getMonth() + 1).padStart(2, '0');
+            const yyyy = today.getFullYear();
+            dateInput.min = yyyy + '-' + mm + '-' + dd;
+        }
+    </script>
+
+</body>
+</html>

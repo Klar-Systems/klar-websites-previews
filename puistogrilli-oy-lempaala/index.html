@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Puistogrilli Oy — Valkeakoski's #1 Grilli Since 2014</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #111008;
+            color: #f0ede8;
+            line-height: 1.6;
+        }
+
+        /* ── Demo Banner ── */
+        .demo-banner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, #d4891a 0%, #b8730f 100%);
+            color: #111008;
+            padding: 12px 20px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 13px;
+            z-index: 9999;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.5);
+        }
+
+        .demo-banner a {
+            color: #111008;
+            font-weight: 700;
+            text-decoration: underline;
+            margin-left: 8px;
+        }
+
+        .demo-banner a:hover {
+            opacity: 0.8;
+        }
+
+        body {
+            padding-top: 46px;
+        }
+
+        /* ── Typography ── */
+        h1, h2, h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #d4891a;
+        }
+
+        h1 { font-size: 80px; line-height: 1.05; margin-bottom: 14px; }
+        h2 { font-size: 48px; margin-bottom: 40px; position: relative; padding-bottom: 14px; }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 3px;
+            background: #d4891a;
+        }
+
+        /* ── Nav ── */
+        nav {
+            background: rgba(17, 16, 8, 0.97);
+            backdrop-filter: blur(8px);
+            padding: 0 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
+            border-bottom: 1px solid rgba(212, 137, 26, 0.2);
+        }
+
+        .nav-logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 26px;
+            color: #d4891a;
+            letter-spacing: 3px;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #c8c0b0;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover { color: #d4891a; }
+
+        .nav-cta {
+            background: #d4891a;
+            color: #111008 !important;
+            padding: 10px 22px;
+            border-radius: 4px;
+            font-weight: 700 !important;
+        }
+
+        .nav-cta:hover { background: #b8730f; color: #111008 !important; }
+
+        /* ── Hero ── */
+        .hero {
+            min-height: 92vh;
+            background: linear-gradient(160deg, #1a1508 0%, #0e0d06 50%, #1a1208 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 80px 30px 60px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at 50% 60%, rgba(212, 137, 26, 0.07) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-photo-placeholder {
+            width: 100%;
+            max-width: 900px;
+            height: 340px;
+            background: rgba(212, 137, 26, 0.06);
+            border: 2px dashed rgba(212, 137, 26, 0.3);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(212, 137, 26, 0.5);
+            font-size: 15px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 48px;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 820px;
+        }
+
+        .hero-eyebrow {
+            font-size: 14px;
+            font-weight: 600;
+            color: #d4891a;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: 96px;
+            text-shadow: 0 4px 24px rgba(0,0,0,0.9);
+            margin-bottom: 16px;
+        }
+
+        .hero-tagline {
+            font-size: 22px;
+            color: #c8b898;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+
+        .hero-sub {
+            font-size: 16px;
+            color: #888;
+            margin-bottom: 44px;
+            font-style: italic;
+        }
+
+        .rating-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(212, 137, 26, 0.12);
+            border: 1px solid rgba(212, 137, 26, 0.4);
+            border-radius: 6px;
+            padding: 12px 24px;
+            color: #d4891a;
+            font-weight: 700;
+            font-size: 17px;
+            margin-bottom: 40px;
+        }
+
+        .rating-number { font-size: 28px; }
+        .rating-sep { color: rgba(212, 137, 26, 0.4); }
+
+        /* ── CTA Buttons ── */
+        .cta-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 32px;
+        }
+
+        .cta-call {
+            display: inline-block;
+            background: #d4891a;
+            color: #111008;
+            padding: 20px 44px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 30px;
+            letter-spacing: 2px;
+            font-weight: 700;
+            text-transform: uppercase;
+            transition: all 0.25s ease;
+            box-shadow: 0 8px 28px rgba(212, 137, 26, 0.3);
+        }
+
+        .cta-call:hover {
+            background: #b8730f;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 36px rgba(212, 137, 26, 0.45);
+        }
+
+        .cta-wolt {
+            display: inline-block;
+            background: transparent;
+            color: #d4891a;
+            padding: 18px 36px;
+            border-radius: 6px;
+            border: 2px solid #d4891a;
+            text-decoration: none;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 26px;
+            letter-spacing: 2px;
+            font-weight: 700;
+            text-transform: uppercase;
+            transition: all 0.25s ease;
+        }
+
+        .cta-wolt:hover {
+            background: rgba(212, 137, 26, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .phone-display {
+            font-size: 15px;
+            color: #888;
+            margin-top: 4px;
+            letter-spacing: 1px;
+        }
+
+        /* ── Section layout ── */
+        .section-wrap {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 40px;
+        }
+
+        .section-dark {
+            background: #0d0c07;
+        }
+
+        .section-mid {
+            background: #141208;
+        }
+
+        /* ── Feature strips ── */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 24px;
+            margin-top: 16px;
+        }
+
+        .feature-card {
+            background: rgba(212, 137, 26, 0.07);
+            border: 1px solid rgba(212, 137, 26, 0.18);
+            border-radius: 8px;
+            padding: 28px 24px;
+            text-align: center;
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(212, 137, 26, 0.15);
+            border-radius: 50%;
+            margin: 0 auto 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .feature-icon svg {
+            width: 24px;
+            height: 24px;
+            stroke: #d4891a;
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .feature-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 22px;
+            color: #d4891a;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .feature-text {
+            font-size: 14px;
+            color: #a09880;
+            line-height: 1.6;
+        }
+
+        /* ── Menu ── */
+        .menu-intro {
+            font-size: 17px;
+            color: #a09880;
+            margin-bottom: 40px;
+            max-width: 640px;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .menu-card {
+            background: rgba(212, 137, 26, 0.06);
+            border: 1px solid rgba(212, 137, 26, 0.15);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: border-color 0.2s;
+        }
+
+        .menu-card:hover {
+            border-color: rgba(212, 137, 26, 0.4);
+        }
+
+        .menu-photo-placeholder {
+            width: 100%;
+            height: 160px;
+            background: rgba(212, 137, 26, 0.05);
+            border-bottom: 1px solid rgba(212, 137, 26, 0.12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(212, 137, 26, 0.35);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .menu-card-body {
+            padding: 20px 22px;
+        }
+
+        .menu-card-name {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 24px;
+            color: #d4891a;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+        }
+
+        .menu-card-desc {
+            font-size: 14px;
+            color: #a09880;
+            margin-bottom: 12px;
+        }
+
+        .menu-card-price {
+            font-size: 20px;
+            font-weight: 700;
+            color: #f0ede8;
+        }
+
+        .menu-badge {
+            display: inline-block;
+            background: rgba(212, 137, 26, 0.18);
+            color: #d4891a;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 3px 10px;
+            border-radius: 3px;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+
+        /* ── Categories ── */
+        .category-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 32px;
+        }
+
+        .category-tag {
+            background: rgba(212, 137, 26, 0.1);
+            border: 1px solid rgba(212, 137, 26, 0.25);
+            color: #c8b090;
+            padding: 8px 18px;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        /* ── Reviews ── */
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .review-card {
+            background: rgba(212, 137, 26, 0.06);
+            border: 1px solid rgba(212, 137, 26, 0.15);
+            border-radius: 8px;
+            padding: 24px;
+        }
+
+        .review-stars {
+            color: #d4891a;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .review-text {
+            font-size: 15px;
+            color: #c8c0b0;
+            line-height: 1.7;
+            font-style: italic;
+            margin-bottom: 16px;
+        }
+
+        .review-author {
+            font-size: 13px;
+            color: #888;
+            font-weight: 600;
+        }
+
+        /* ── Order section ── */
+        .order-section {
+            background: linear-gradient(135deg, rgba(212, 137, 26, 0.12) 0%, rgba(212, 137, 26, 0.05) 100%);
+            border-top: 3px solid #d4891a;
+            border-bottom: 3px solid #d4891a;
+            text-align: center;
+        }
+
+        .order-section h2 {
+            font-size: 56px;
+            margin-bottom: 16px;
+        }
+
+        .order-section h2::after { display: none; }
+
+        .order-desc {
+            font-size: 18px;
+            color: #a09880;
+            max-width: 580px;
+            margin: 0 auto 40px;
+        }
+
+        .phone-number-large {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 64px;
+            color: #d4891a;
+            letter-spacing: 3px;
+            display: block;
+            text-decoration: none;
+            margin-bottom: 12px;
+            transition: color 0.2s;
+        }
+
+        .phone-number-large:hover { color: #f0a030; }
+
+        /* ── Interior photo ── */
+        .interior-placeholder {
+            width: 100%;
+            height: 320px;
+            background: rgba(212, 137, 26, 0.05);
+            border: 2px dashed rgba(212, 137, 26, 0.2);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(212, 137, 26, 0.4);
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 40px 0;
+        }
+
+        /* ── About ── */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-text p {
+            font-size: 17px;
+            color: #a09880;
+            line-height: 1.8;
+            margin-bottom: 18px;
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .stat-box {
+            background: rgba(212, 137, 26, 0.08);
+            border: 1px solid rgba(212, 137, 26, 0.2);
+            border-radius: 8px;
+            padding: 24px 20px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 48px;
+            color: #d4891a;
+            line-height: 1;
+            margin-bottom: 6px;
+        }
+
+        .stat-label {
+            font-size: 13px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* ── Info ── */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 24px;
+        }
+
+        .info-card {
+            background: rgba(212, 137, 26, 0.06);
+            border: 1px solid rgba(212, 137, 26, 0.15);
+            border-radius: 8px;
+            padding: 28px 24px;
+        }
+
+        .info-card h3 {
+            font-size: 22px;
+            margin-bottom: 16px;
+            letter-spacing: 1px;
+        }
+
+        .info-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+            align-items: flex-start;
+        }
+
+        .info-row svg {
+            width: 18px;
+            height: 18px;
+            stroke: #d4891a;
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .info-row span {
+            font-size: 15px;
+            color: #a09880;
+            line-height: 1.5;
+        }
+
+        .info-row a {
+            color: #d4891a;
+            text-decoration: none;
+        }
+
+        .info-row a:hover { text-decoration: underline; }
+
+        /* ── Footer ── */
+        footer {
+            background: #080807;
+            border-top: 1px solid rgba(212, 137, 26, 0.15);
+            padding: 40px;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 30px;
+            color: #d4891a;
+            letter-spacing: 3px;
+            margin-bottom: 16px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 24px;
+            justify-content: center;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #666;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover { color: #d4891a; }
+
+        .footer-powered {
+            font-size: 12px;
+            color: #444;
+            margin-top: 20px;
+        }
+
+        .footer-powered a {
+            color: #666;
+            text-decoration: none;
+        }
+
+        .footer-powered a:hover { color: #d4891a; }
+
+        /* ── Responsive ── */
+        @media (max-width: 768px) {
+            h1 { font-size: 56px; }
+            h2 { font-size: 36px; }
+            .hero h1 { font-size: 64px; }
+            .section-wrap { padding: 60px 20px; }
+            nav { padding: 0 20px; }
+            .nav-links { display: none; }
+            .about-grid { grid-template-columns: 1fr; }
+            .phone-number-large { font-size: 48px; }
+            .order-section h2 { font-size: 40px; }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 { font-size: 48px; }
+            .cta-call { font-size: 24px; padding: 18px 32px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Demo Banner -->
+    <div class="demo-banner">
+        This is a demo preview — not the live website.
+        <a href="https://calendly.com/lomberg-klarsystems">Get your own site — book a free call</a>
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+        <a href="#" class="nav-logo">Puistogrilli</a>
+        <ul class="nav-links">
+            <li><a href="#menu">Menu</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#reviews">Reviews</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="tel:0504493473" class="nav-cta">Call to Order</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-photo-placeholder">Your photo here</div>
+        <div class="hero-content">
+            <p class="hero-eyebrow">Valkeakoski — Since 2014</p>
+            <h1>Puistogrilli</h1>
+            <p class="hero-tagline">Valkeakoski's most-reviewed restaurant — real grilli, real portions</p>
+            <p class="hero-sub">Sääksmäentie 18 &nbsp;|&nbsp; Valkeakoski</p>
+
+            <div class="rating-badge">
+                <span class="rating-number">4.3</span>
+                <span class="rating-sep">/</span>
+                <span>5.0</span>
+                <span class="rating-sep">&nbsp;|&nbsp;</span>
+                <span>733 Google reviews</span>
+            </div>
+
+            <div class="cta-group">
+                <a href="tel:0504493473" class="cta-call">
+                    Call to Order &mdash; 050 4493473
+                </a>
+                <a href="https://wolt.com/en/fin/valkeakoski/restaurant/puistogrilli" target="_blank" class="cta-wolt">
+                    Order on Wolt
+                </a>
+            </div>
+            <p class="phone-display">Open daily — call us or order via Wolt</p>
+        </div>
+    </section>
+
+    <!-- Why Puistogrilli -->
+    <div class="section-dark">
+        <div class="section-wrap">
+            <h2>Why Valkeakoski Keeps Coming Back</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+                    </div>
+                    <div class="feature-title">733 Reviews</div>
+                    <div class="feature-text">The most-reviewed restaurant in Valkeakoski with a 4.3-star rating built over more than a decade.</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+                    </div>
+                    <div class="feature-title">Since 2014</div>
+                    <div class="feature-text">Over ten years of serving Valkeakoski. The kind of local grilli that families return to again and again.</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24"><path d="M20 7H4C2.9 7 2 7.9 2 9v10c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2z"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+                    </div>
+                    <div class="feature-title">Big Portions</div>
+                    <div class="feature-text">Generous helpings at honest prices. Customers consistently praise the value and the size of every plate.</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                    </div>
+                    <div class="feature-title">Family Favourite</div>
+                    <div class="feature-text">Kids' meals on the menu and a relaxed atmosphere that works for everyone from solo lunch to the whole family.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Menu -->
+    <div class="section-mid" id="menu">
+        <div class="section-wrap">
+            <h2>Signature Dishes</h2>
+            <p class="menu-intro">Classic grilli cooking done right — burgers, steak platters, baskets, and all the Finnish grilli favourites. Also available for delivery via Wolt.</p>
+
+            <div class="menu-grid">
+                <div class="menu-card">
+                    <div class="menu-photo-placeholder">Food photos coming soon</div>
+                    <div class="menu-card-body">
+                        <div class="menu-card-name">Makkaraperunat</div>
+                        <div class="menu-card-desc">The Finnish grilli classic — sausage and fries, done properly.</div>
+                        <div class="menu-card-price">&euro;15.00</div>
+                    </div>
+                </div>
+                <div class="menu-card">
+                    <div class="menu-photo-placeholder">Food photos coming soon</div>
+                    <div class="menu-card-body">
+                        <div class="menu-card-name">Kontio <span class="menu-badge">Big Burger</span></div>
+                        <div class="menu-card-desc">Our flagship large burger — loaded and built to satisfy.</div>
+                        <div class="menu-card-price">&euro;19.50</div>
+                    </div>
+                </div>
+                <div class="menu-card">
+                    <div class="menu-photo-placeholder">Food photos coming soon</div>
+                    <div class="menu-card-body">
+                        <div class="menu-card-name">Puistiksen Pamaus <span class="menu-badge">Big Burger</span></div>
+                        <div class="menu-card-desc">Puistogrilli's signature large burger — a local legend.</div>
+                        <div class="menu-card-price">&euro;19.00</div>
+                    </div>
+                </div>
+                <div class="menu-card">
+                    <div class="menu-photo-placeholder">Food photos coming soon</div>
+                    <div class="menu-card-body">
+                        <div class="menu-card-name">BBQ</div>
+                        <div class="menu-card-desc">Steak platter with BBQ sauce — hearty and satisfying.</div>
+                        <div class="menu-card-price">&euro;16.50</div>
+                    </div>
+                </div>
+                <div class="menu-card">
+                    <div class="menu-photo-placeholder">Food photos coming soon</div>
+                    <div class="menu-card-body">
+                        <div class="menu-card-name">Herkkukori</div>
+                        <div class="menu-card-desc">Basket meal — a crowd-pleasing grilli favourite.</div>
+                        <div class="menu-card-price">&euro;17.00</div>
+                    </div>
+                </div>
+                <div class="menu-card">
+                    <div class="menu-photo-placeholder">Food photos coming soon</div>
+                    <div class="menu-card-body">
+                        <div class="menu-card-name">Triplajuusto</div>
+                        <div class="menu-card-desc">Triple cheese burger — for when one layer isn't enough.</div>
+                        <div class="menu-card-price">&euro;13.50</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="category-list">
+                <span class="category-tag">Burgers</span>
+                <span class="category-tag">Large Burgers</span>
+                <span class="category-tag">Steak Platters</span>
+                <span class="category-tag">Meat Pasties</span>
+                <span class="category-tag">Salads</span>
+                <span class="category-tag">Baskets</span>
+                <span class="category-tag">Kids Meals</span>
+                <span class="category-tag">Dips</span>
+                <span class="category-tag">Drinks</span>
+                <span class="category-tag">Beer &amp; Cider (C-licence)</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Call to Order -->
+    <div class="order-section" id="order">
+        <div class="section-wrap">
+            <h2>Order Now</h2>
+            <p class="order-desc">Call us directly to place your order or pick up at the kiosk. We're also on Wolt for home delivery.</p>
+            <a href="tel:0504493473" class="phone-number-large">050 4493473</a>
+            <div class="cta-group" style="margin-top: 24px;">
+                <a href="tel:0504493473" class="cta-call">Call to Order</a>
+                <a href="https://wolt.com/en/fin/valkeakoski/restaurant/puistogrilli" target="_blank" class="cta-wolt">Order via Wolt</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- About -->
+    <div class="section-dark" id="about">
+        <div class="section-wrap">
+            <h2>About Puistogrilli</h2>
+            <div class="about-grid">
+                <div class="about-text">
+                    <p>Puistogrilli Oy has been feeding Valkeakoski since 2014. What started as a small grilli kiosk has grown into the city's most-reviewed dining spot — 733 Google reviews and a 4.3-star rating that keeps climbing.</p>
+                    <p>The menu is Finnish grilli at its best: big burgers, honest steak platters, crispy baskets, meat pasties, and all the classics. Generous portions at straightforward prices — the kind of food that families and locals keep coming back for.</p>
+                    <p>Available both for pick-up at the kiosk on Sääksmäentie 18 and for home delivery through Wolt.</p>
+                </div>
+                <div class="about-stats">
+                    <div class="stat-box">
+                        <div class="stat-number">4.3</div>
+                        <div class="stat-label">Google Rating</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">733</div>
+                        <div class="stat-label">Google Reviews</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">2014</div>
+                        <div class="stat-label">Founded</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">1,170</div>
+                        <div class="stat-label">Instagram Followers</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="interior-placeholder">Interior photo coming soon</div>
+        </div>
+    </div>
+
+    <!-- Reviews -->
+    <div class="section-mid" id="reviews">
+        <div class="section-wrap">
+            <h2>What Customers Say</h2>
+            <div class="reviews-grid">
+                <div class="review-card">
+                    <div class="review-stars">4.3 / 5</div>
+                    <p class="review-text">"The burgers and baskets are excellent and the atmosphere is great."</p>
+                    <div class="review-author">Niko T. &mdash; Google</div>
+                </div>
+                <div class="review-card">
+                    <div class="review-stars">4.3 / 5</div>
+                    <p class="review-text">"Proper grilli portions — big and the service is fantastic."</p>
+                    <div class="review-author">Kalle N. &mdash; Google</div>
+                </div>
+                <div class="review-card">
+                    <div class="review-stars">4.3 / 5</div>
+                    <p class="review-text">"It works. I hadn't been for 11 years but they still serve proper grilli food."</p>
+                    <div class="review-author">Jussi L. &mdash; Google</div>
+                </div>
+                <div class="review-card">
+                    <div class="review-stars">4.3 / 5</div>
+                    <p class="review-text">"Great food and service. Excellent value for money, genuinely."</p>
+                    <div class="review-author">Customer &mdash; eat.fi</div>
+                </div>
+                <div class="review-card">
+                    <div class="review-stars">4.3 / 5</div>
+                    <p class="review-text">"The whole family fell in love straight away — the kids wanted more."</p>
+                    <div class="review-author">Customer &mdash; eat.fi</div>
+                </div>
+                <div class="review-card">
+                    <div class="review-stars">4.3 / 5</div>
+                    <p class="review-text">"Best food spot in Koski."</p>
+                    <div class="review-author">Asa R. &mdash; Google</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact & Info -->
+    <div class="section-dark" id="contact">
+        <div class="section-wrap">
+            <h2>Find Us</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>Location</h3>
+                    <div class="info-row">
+                        <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        <span>Sääksmäentie 18<br>37600 Valkeakoski<br>Finland</span>
+                    </div>
+                </div>
+                <div class="info-card">
+                    <h3>Contact</h3>
+                    <div class="info-row">
+                        <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.38 2 2 0 0 1 3.59 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.57a16 16 0 0 0 6.05 6.05l.89-.89a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                        <span><a href="tel:0504493473">050 4493473</a></span>
+                    </div>
+                    <div class="info-row">
+                        <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                        <span><a href="https://www.facebook.com/Puistogrilli" target="_blank">Facebook</a></span>
+                    </div>
+                    <div class="info-row">
+                        <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                        <span><a href="https://www.instagram.com/puistogrilli/" target="_blank">@puistogrilli</a></span>
+                    </div>
+                </div>
+                <div class="info-card">
+                    <h3>Order &amp; Delivery</h3>
+                    <div class="info-row">
+                        <svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                        <span>Call <a href="tel:0504493473">050 4493473</a> to order for pick-up</span>
+                    </div>
+                    <div class="info-row">
+                        <svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+                        <span>Home delivery via <a href="https://wolt.com/en/fin/valkeakoski/restaurant/puistogrilli" target="_blank">Wolt</a></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-logo">Puistogrilli Oy</div>
+        <div class="footer-links">
+            <a href="#menu">Menu</a>
+            <a href="#about">About</a>
+            <a href="#reviews">Reviews</a>
+            <a href="#contact">Contact</a>
+            <a href="https://wolt.com/en/fin/valkeakoski/restaurant/puistogrilli" target="_blank">Wolt</a>
+            <a href="https://www.facebook.com/Puistogrilli" target="_blank">Facebook</a>
+            <a href="https://www.instagram.com/puistogrilli/" target="_blank">Instagram</a>
+        </div>
+        <p style="color:#555; font-size:14px;">Sääksmäentie 18, 37600 Valkeakoski &nbsp;|&nbsp; <a href="tel:0504493473" style="color:#d4891a; text-decoration:none;">050 4493473</a></p>
+        <p class="footer-powered">Powered by Klar &nbsp;&mdash;&nbsp; <a href="https://klarsystems.com" target="_blank">klarsystems.com</a></p>
+    </footer>
+
+</body>
+</html>

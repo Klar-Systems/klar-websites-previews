@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JR Fast Food — Pieksämäki's station-side grill since the '80s</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#141414;
+    --bg-raised:#1d1d1d;
+    --fg:#F5F1EA;
+    --fg-dim:#a8a29a;
+    --primary:#E04B1E;
+    --accent:#F2C75C;
+    --rule:#2a2a2a;
+    --mono:'Inter',monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+    background:var(--bg);color:var(--fg);line-height:1.6;
+    padding-top:46px;
+  }
+  a{color:inherit;text-decoration:none}
+
+  /* Demo banner */
+  .demo-banner{
+    position:fixed;top:0;left:0;right:0;
+    background:linear-gradient(135deg,var(--primary) 0%,#c53c10 100%);
+    color:#fff;padding:10px 16px;text-align:center;
+    font-size:13px;font-weight:500;z-index:1000;
+    box-shadow:0 2px 10px rgba(0,0,0,.4);
+  }
+  .demo-banner a{font-weight:700;text-decoration:underline;margin-left:6px}
+
+  .wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+
+  /* Hero */
+  .hero{
+    padding:80px 20px 60px;
+    background:
+      radial-gradient(1200px 400px at 80% -10%, rgba(224,75,30,.18), transparent 60%),
+      radial-gradient(800px 300px at 0% 100%, rgba(242,199,92,.08), transparent 70%),
+      var(--bg);
+    border-bottom:1px solid var(--rule);
+  }
+  .hero-inner{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1.2fr 1fr;gap:48px;align-items:center}
+  .eyebrow{
+    color:var(--accent);font-family:'Archivo Black',sans-serif;
+    letter-spacing:.18em;font-size:12px;text-transform:uppercase;margin-bottom:18px;
+  }
+  h1{
+    font-family:'Archivo Black',sans-serif;
+    font-size:clamp(42px,7vw,78px);line-height:.98;
+    letter-spacing:-.01em;margin-bottom:20px;text-transform:uppercase;
+  }
+  h1 .accent{color:var(--primary)}
+  .lede{color:var(--fg-dim);font-size:18px;max-width:520px;margin-bottom:28px}
+  .meta-row{display:flex;gap:24px;flex-wrap:wrap;color:var(--fg-dim);font-size:14px;margin-bottom:32px}
+  .meta-row strong{color:var(--fg)}
+  .rating{
+    display:inline-flex;align-items:baseline;gap:6px;
+    background:var(--bg-raised);border:1px solid var(--rule);
+    padding:6px 12px;border-radius:999px;font-size:14px;
+  }
+  .rating .num{color:var(--accent);font-weight:700;font-family:'Archivo Black',sans-serif}
+
+  .cta-row{display:flex;gap:12px;flex-wrap:wrap}
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;
+    padding:16px 24px;border-radius:4px;font-weight:600;
+    font-size:15px;letter-spacing:.02em;transition:transform .15s ease,background .15s;
+  }
+  .btn-primary{background:var(--primary);color:#fff}
+  .btn-primary:hover{background:#c53c10;transform:translateY(-1px)}
+  .btn-ghost{background:transparent;color:var(--fg);border:1px solid var(--rule)}
+  .btn-ghost:hover{border-color:var(--accent)}
+
+  .hero-card{
+    background:var(--bg-raised);border:1px solid var(--rule);
+    border-radius:6px;padding:28px;
+  }
+  .hero-card h3{font-family:'Archivo Black',sans-serif;font-size:14px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:16px}
+  .phone-big{font-family:'Archivo Black',sans-serif;font-size:34px;color:var(--fg);display:block;margin:10px 0;letter-spacing:-.01em}
+  .phone-big:hover{color:var(--primary)}
+  .hero-card p{color:var(--fg-dim);font-size:14px;margin-bottom:8px}
+
+  .img-placeholder{
+    background:var(--bg-raised);border:1px solid var(--rule);
+    display:flex;align-items:center;justify-content:center;
+    color:var(--fg-dim);font-family:var(--mono);font-size:11px;
+    letter-spacing:.15em;text-transform:uppercase;text-align:center;padding:16px;
+  }
+  .img-hero{aspect-ratio:16/9;width:100%;margin-top:24px;border-radius:6px}
+  .img-food{aspect-ratio:1/1;width:100%;border-radius:4px}
+  .img-interior{aspect-ratio:3/2;width:100%;border-radius:6px}
+
+  /* Sections */
+  section{padding:80px 20px;border-bottom:1px solid var(--rule)}
+  .section-head{max-width:1080px;margin:0 auto 40px;display:flex;align-items:baseline;justify-content:space-between;gap:20px;flex-wrap:wrap}
+  h2{font-family:'Archivo Black',sans-serif;font-size:clamp(32px,5vw,48px);text-transform:uppercase;line-height:1}
+  .tag{color:var(--accent);font-family:'Archivo Black',sans-serif;letter-spacing:.16em;font-size:11px;text-transform:uppercase}
+
+  /* Call to order */
+  .order-section{
+    background:linear-gradient(180deg,var(--bg) 0%,#1a0d06 100%);
+  }
+  .order-card{
+    max-width:720px;margin:0 auto;text-align:center;
+    border:1px solid var(--rule);border-radius:8px;padding:56px 32px;
+    background:var(--bg-raised);
+  }
+  .order-card .tag{display:block;margin-bottom:16px}
+  .order-card h2{margin-bottom:18px}
+  .order-card p{color:var(--fg-dim);font-size:17px;margin-bottom:32px;max-width:480px;margin-left:auto;margin-right:auto}
+  .phone-huge{
+    display:inline-block;font-family:'Archivo Black',sans-serif;
+    font-size:clamp(40px,7vw,64px);color:var(--primary);
+    padding:14px 36px;border:2px solid var(--primary);border-radius:6px;
+    letter-spacing:-.01em;transition:all .2s ease;
+  }
+  .phone-huge:hover{background:var(--primary);color:#fff}
+  .hours-note{color:var(--fg-dim);font-size:13px;margin-top:18px}
+
+  /* Menu */
+  .menu-wrap{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
+  .menu-list{display:grid;gap:20px}
+  .menu-cat{
+    border:1px solid var(--rule);border-radius:6px;padding:20px 24px;background:var(--bg-raised);
+  }
+  .menu-cat h3{
+    font-family:'Archivo Black',sans-serif;font-size:15px;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--accent);margin-bottom:10px;
+  }
+  .menu-cat p{color:var(--fg);font-size:15px;line-height:1.7}
+  .menu-cat .signature{color:var(--primary);font-weight:600}
+  .menu-note{
+    margin-top:24px;color:var(--fg-dim);font-size:13px;
+    font-style:italic;border-left:2px solid var(--accent);padding-left:14px;
+  }
+  .menu-photos{display:grid;gap:16px}
+
+  /* Reviews */
+  .reviews-grid{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+  .review-card{
+    border:1px solid var(--rule);border-radius:6px;padding:28px;
+    background:var(--bg-raised);
+  }
+  .review-card blockquote{
+    font-size:17px;line-height:1.55;color:var(--fg);
+    margin-bottom:16px;font-style:italic;position:relative;padding-left:16px;
+  }
+  .review-card blockquote::before{
+    content:"“";position:absolute;left:-2px;top:-10px;font-size:44px;color:var(--primary);line-height:1;font-family:Georgia,serif;
+  }
+  .review-card cite{color:var(--fg-dim);font-size:13px;font-style:normal;letter-spacing:.03em}
+
+  /* About */
+  .about-wrap{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1.3fr 1fr;gap:48px;align-items:center}
+  .about-wrap p{color:var(--fg-dim);font-size:17px;margin-bottom:18px;line-height:1.75}
+  .about-wrap p strong{color:var(--fg)}
+  .quirk{
+    border-left:3px solid var(--accent);padding:8px 20px;margin-top:24px;
+    color:var(--fg);font-size:15px;background:rgba(242,199,92,.05);
+  }
+  .quirk .label{display:block;color:var(--accent);font-family:'Archivo Black',sans-serif;letter-spacing:.16em;font-size:11px;text-transform:uppercase;margin-bottom:6px}
+
+  /* Hours & location */
+  .info-grid{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:40px}
+  .info-block{border:1px solid var(--rule);border-radius:6px;padding:28px;background:var(--bg-raised)}
+  .info-block h3{font-family:'Archivo Black',sans-serif;font-size:14px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:20px}
+  .hours-list{display:grid;gap:8px}
+  .hours-row{display:flex;justify-content:space-between;font-size:15px;padding:6px 0;border-bottom:1px dashed var(--rule)}
+  .hours-row:last-child{border-bottom:none}
+  .hours-row span:last-child{color:var(--fg-dim);font-variant-numeric:tabular-nums}
+  .addr{color:var(--fg);font-size:16px;line-height:1.7}
+  .addr a{color:var(--accent);text-decoration:underline;text-decoration-color:rgba(242,199,92,.4);text-underline-offset:4px}
+  .map-frame{margin-top:20px;border:1px solid var(--rule);border-radius:6px;overflow:hidden}
+  .map-frame iframe{width:100%;height:280px;display:block;border:0;filter:grayscale(.4) brightness(.85)}
+
+  /* Footer */
+  footer{padding:40px 20px 48px;text-align:center;color:var(--fg-dim);font-size:13px}
+  footer .foot-line{margin-bottom:10px}
+  footer strong{color:var(--fg)}
+  footer .klar{color:var(--accent);font-family:'Archivo Black',sans-serif;letter-spacing:.16em;font-size:11px;text-transform:uppercase;margin-top:18px;display:block}
+
+  /* Mobile */
+  @media (max-width:820px){
+    .hero{padding:48px 20px 40px}
+    .hero-inner{grid-template-columns:1fr;gap:32px}
+    .menu-wrap,.about-wrap,.info-grid{grid-template-columns:1fr;gap:28px}
+    section{padding:56px 20px}
+    .order-card{padding:40px 20px}
+    .demo-banner{font-size:12px}
+    body{padding-top:58px}
+  }
+
+  /* Scroll-reveal */
+  .reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease, transform .6s ease}
+  .reveal.show{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<div class="demo-banner">
+  Tämä on demo — lopullinen sivusto rakennetaan yhdessä teidän toiveiden mukaan.
+  <a href="https://preview.klarsystems.com/jr-fast-food-pieksamaki/proposal/">Katso tarjous →</a>
+</div>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="eyebrow">Pieksämäki · Since the 1980s</div>
+      <h1>Burgers, kebab &<br><span class="accent">grilled plates</span><br>by the station.</h1>
+      <p class="lede">Cheese burgers, fries, kebab meals and cold drinks — served 87 metres from Pieksämäki railway station. Walk in, call ahead, grab it to go.</p>
+      <div class="meta-row">
+        <span class="rating"><span class="num">4.2</span> / 5 · <strong>431</strong> Google reviews</span>
+        <span>Myllykatu 9, 76100 Pieksämäki</span>
+      </div>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#order">Call to order</a>
+        <a class="btn btn-ghost" href="#menu">See the menu</a>
+      </div>
+    </div>
+    <div>
+      <div class="hero-card">
+        <h3>Order by phone</h3>
+        <a class="phone-big" href="tel:+358153411900">015 341 900</a>
+        <p>Open today — call and we'll have it ready for pickup.</p>
+      </div>
+      <div class="img-placeholder img-hero" aria-label="Your photo here">Your photo here · storefront on Myllykatu</div>
+    </div>
+  </div>
+</header>
+
+<!-- CALL TO ORDER (primary Seg 2 CTA) -->
+<section id="order" class="order-section">
+  <div class="order-card reveal">
+    <span class="tag">Hungry?</span>
+    <h2>Call and order</h2>
+    <p>The fastest way to get your burger, kebab plate or fries ready at the counter — phone the grill directly.</p>
+    <a class="phone-huge" href="tel:+358153411900">015 341 900</a>
+    <p class="hours-note">Kitchen open late on Fridays &amp; Saturdays until 22:45.</p>
+  </div>
+</section>
+
+<!-- MENU -->
+<section id="menu">
+  <div class="section-head">
+    <div>
+      <span class="tag">What's on the grill</span>
+      <h2>The menu</h2>
+    </div>
+    <p style="max-width:360px;color:var(--fg-dim);font-size:14px">Classic Finnish grill-kiosk fare — the cheese burgers get repeat mentions in reviews from Finland and abroad.</p>
+  </div>
+  <div class="menu-wrap reveal">
+    <div class="menu-list">
+      <div class="menu-cat">
+        <h3>Burgers</h3>
+        <p><span class="signature">Cheeseburger</span> — the one people keep coming back for.</p>
+      </div>
+      <div class="menu-cat">
+        <h3>Grilled platters</h3>
+        <p><span class="signature">Grilliannos</span> — grilled meat plate with sides.</p>
+      </div>
+      <div class="menu-cat">
+        <h3>Kebab meals</h3>
+        <p><span class="signature">Kebab-ateria</span> — kebab with french fries.</p>
+      </div>
+      <div class="menu-cat">
+        <h3>Fries &amp; sides</h3>
+        <p>French fries, grill-counter sides.</p>
+      </div>
+      <div class="menu-cat">
+        <h3>Cold drinks</h3>
+        <p>Soft drinks and cold beverages.</p>
+      </div>
+      <p class="menu-note">Demo site — the full menu with prices is added together with you before launch.</p>
+    </div>
+    <div class="menu-photos">
+      <div class="img-placeholder img-food" aria-label="Your photo here">Your photo here · cheeseburger</div>
+      <div class="img-placeholder img-food" aria-label="Your photo here">Your photo here · grilled plate</div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section>
+  <div class="section-head">
+    <div>
+      <span class="tag">What customers say</span>
+      <h2>4.2 / 5 on Google</h2>
+    </div>
+    <p style="max-width:360px;color:var(--fg-dim);font-size:14px">431 Google reviews plus coverage on TripAdvisor, Eat.fi and RestaurantGuru.</p>
+  </div>
+  <div class="reviews-grid reveal">
+    <div class="review-card">
+      <blockquote>The best cheese hamburgers in Finland.</blockquote>
+      <cite>— Finntrainfan, via TripAdvisor</cite>
+    </div>
+    <div class="review-card">
+      <blockquote>Good food, pleasant service, good price, good location.</blockquote>
+      <cite>— Charlie W, via TripAdvisor</cite>
+    </div>
+    <div class="review-card">
+      <blockquote>Good grilled food at reasonable prices — the service has always been good.</blockquote>
+      <cite>— Tear, via Eat.fi (translated)</cite>
+    </div>
+    <div class="review-card">
+      <blockquote>Excellent burgers and grilled platters — really good quality.</blockquote>
+      <cite>— Eat.fi reviewer (translated)</cite>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section>
+  <div class="section-head">
+    <div>
+      <span class="tag">About</span>
+      <h2>Station-side since the '80s</h2>
+    </div>
+  </div>
+  <div class="about-wrap reveal">
+    <div>
+      <p>JR Fast Food has been grilling on Myllykatu for decades — <strong>87 metres from Pieksämäki railway station</strong>. A classic Finnish grill kiosk: burgers, fries, kebab meals, cold drinks, no fuss.</p>
+      <p>Locals know it for the cheese burgers and the late Friday and Saturday hours. Travellers know it as the place you can reach in under two minutes after stepping off the train.</p>
+      <div class="quirk">
+        <span class="label">Local quirk</span>
+        The Elvis-themed restroom was installed in 1997 to mark twenty years since Elvis Presley's passing. It has been covered by Helsingin Sanomat and Yle.
+      </div>
+    </div>
+    <div class="img-placeholder img-interior" aria-label="Your photo here">Your photo here · grill counter / Elvis-WC</div>
+  </div>
+</section>
+
+<!-- HOURS + LOCATION -->
+<section>
+  <div class="section-head">
+    <div>
+      <span class="tag">Visit</span>
+      <h2>Hours &amp; location</h2>
+    </div>
+  </div>
+  <div class="info-grid reveal">
+    <div class="info-block">
+      <h3>Opening hours</h3>
+      <div class="hours-list">
+        <div class="hours-row"><span>Mon</span><span>10:30 – 20:45</span></div>
+        <div class="hours-row"><span>Tue</span><span>10:30 – 20:45</span></div>
+        <div class="hours-row"><span>Wed</span><span>10:30 – 20:45</span></div>
+        <div class="hours-row"><span>Thu</span><span>10:30 – 20:45</span></div>
+        <div class="hours-row"><span>Fri</span><span>10:30 – 22:45</span></div>
+        <div class="hours-row"><span>Sat</span><span>11:00 – 22:45</span></div>
+        <div class="hours-row"><span>Sun</span><span>12:00 – 19:45</span></div>
+      </div>
+    </div>
+    <div class="info-block">
+      <h3>Find us</h3>
+      <p class="addr">
+        Myllykatu 9<br>
+        76100 Pieksämäki<br>
+        87 m from the railway station<br><br>
+        <a href="tel:+358153411900">015 341 900</a>
+      </p>
+      <div class="map-frame">
+        <iframe loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=Myllykatu+9+76100+Pieks%C3%A4m%C3%A4ki&z=16&output=embed" title="JR Fast Food on Google Maps"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-line"><strong>JR Fast Food</strong> · Myllykatu 9, 76100 Pieksämäki</div>
+  <div class="foot-line"><a href="tel:+358153411900">015 341 900</a></div>
+  <div class="foot-line">© 2026 JR Fast Food</div>
+  <span class="klar">Powered by Klar</span>
+</footer>
+
+<script>
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('show'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>

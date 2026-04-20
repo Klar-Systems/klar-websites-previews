@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- palette: segment 2 default (research palette empty) -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hämeentien Autoburger — Grill &amp; Drive-In, Forssa</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #141414;
+      --text:     #F5F1EA;
+      --primary:  #E04B1E;
+      --accent:   #F2C75C;
+      --surface:  #1E1E1E;
+      --border:   #2A2A2A;
+      --muted:    #888;
+      --heading:  'Archivo Black', 'Helvetica Neue', Arial, sans-serif;
+      --body:     'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--body);
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    /* ── DEMO BANNER ── */
+    .demo-banner {
+      background: var(--accent);
+      color: #141414;
+      text-align: center;
+      padding: 10px 20px;
+      font-family: var(--body);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    .demo-banner a {
+      color: #141414;
+      text-decoration: underline;
+      font-weight: 700;
+    }
+
+    /* ── NAV ── */
+    nav {
+      background: #0d0d0d;
+      border-bottom: 1px solid var(--border);
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 40px;
+      z-index: 900;
+    }
+    .nav-logo {
+      font-family: var(--heading);
+      font-size: 20px;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: -0.01em;
+    }
+    .nav-logo span { color: var(--primary); }
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-cta {
+      background: var(--primary);
+      color: #fff !important;
+      padding: 8px 18px;
+      border-radius: 4px;
+      font-weight: 600 !important;
+      transition: background 0.2s !important;
+    }
+    .nav-cta:hover { background: #c73d14 !important; color: #fff !important; }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      min-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 0 64px;
+      overflow: hidden;
+    }
+    .hero-photo-placeholder {
+      position: absolute;
+      inset: 0;
+      background: #1a1a1a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .hero-photo-placeholder-label {
+      font-family: var(--body);
+      font-size: 12px;
+      color: #444;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(14,14,14,0.97) 0%, rgba(14,14,14,0.55) 50%, rgba(14,14,14,0.15) 100%);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 900px;
+      padding: 0 40px;
+    }
+    .hero-eyebrow {
+      font-family: var(--body);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 16px;
+    }
+    .hero-title {
+      font-family: var(--heading);
+      font-size: clamp(42px, 7vw, 86px);
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+      color: var(--text);
+      margin-bottom: 20px;
+    }
+    .hero-title .accent { color: var(--primary); }
+    .hero-tagline {
+      font-size: 18px;
+      color: rgba(245,241,234,0.7);
+      max-width: 540px;
+      margin-bottom: 40px;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .btn-order {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--primary);
+      color: #fff;
+      text-decoration: none;
+      font-family: var(--heading);
+      font-size: 18px;
+      letter-spacing: 0.01em;
+      padding: 18px 36px;
+      border-radius: 4px;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-order:hover { background: #c73d14; transform: translateY(-1px); }
+    .btn-order svg { flex-shrink: 0; }
+    .hero-meta {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      color: rgba(245,241,234,0.5);
+      font-size: 13px;
+      margin-top: 32px;
+    }
+    .hero-meta-dot {
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: rgba(245,241,234,0.3);
+    }
+    .hero-rating {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    /* ── SECTIONS SHARED ── */
+    section { padding: 96px 24px; }
+    .container { max-width: 1040px; margin: 0 auto; }
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: var(--heading);
+      font-size: clamp(32px, 5vw, 52px);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin-bottom: 24px;
+    }
+
+    /* ── ABOUT ── */
+    .about { background: var(--bg); border-top: 1px solid var(--border); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .about-body p { color: rgba(245,241,234,0.75); margin-bottom: 16px; }
+    .about-body p:last-child { margin-bottom: 0; }
+    .about-photo {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      aspect-ratio: 4/3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    .photo-icon {
+      width: 48px;
+      height: 48px;
+      border: 2px dashed #333;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .photo-label {
+      font-size: 11px;
+      color: #555;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+    .stat-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      margin-top: 48px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .stat-item {
+      background: var(--surface);
+      padding: 28px 24px;
+      text-align: center;
+    }
+    .stat-num {
+      font-family: var(--heading);
+      font-size: 36px;
+      color: var(--accent);
+      letter-spacing: -0.02em;
+      display: block;
+    }
+    .stat-desc {
+      font-size: 12px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-top: 4px;
+    }
+
+    /* ── MENU ── */
+    .menu-section { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .menu-intro { max-width: 600px; color: rgba(245,241,234,0.65); margin-bottom: 56px; }
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 48px;
+    }
+    .menu-card {
+      background: #1a1a1a;
+      padding: 28px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      transition: background 0.2s;
+    }
+    .menu-card:hover { background: #222; }
+    .menu-card-name {
+      font-family: var(--heading);
+      font-size: 18px;
+      letter-spacing: -0.01em;
+      color: var(--text);
+    }
+    .menu-card-desc {
+      font-size: 13px;
+      color: var(--muted);
+      flex: 1;
+    }
+    .menu-card-price {
+      font-size: 15px;
+      color: var(--accent);
+      font-weight: 600;
+      margin-top: 8px;
+    }
+    .menu-categories {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .menu-tag {
+      font-size: 12px;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      padding: 4px 12px;
+      border-radius: 2px;
+      letter-spacing: 0.04em;
+    }
+    .menu-photo {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      height: 240px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 48px;
+    }
+
+    /* ── CALL TO ORDER ── */
+    .cta-section {
+      background: var(--primary);
+      padding: 100px 24px;
+      text-align: center;
+    }
+    .cta-section .section-label { color: rgba(255,255,255,0.65); }
+    .cta-section .section-title { color: #fff; margin-bottom: 16px; }
+    .cta-sub {
+      color: rgba(255,255,255,0.8);
+      font-size: 17px;
+      max-width: 480px;
+      margin: 0 auto 48px;
+    }
+    .btn-call {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      background: #fff;
+      color: var(--primary);
+      text-decoration: none;
+      font-family: var(--heading);
+      font-size: 26px;
+      letter-spacing: -0.01em;
+      padding: 22px 48px;
+      border-radius: 4px;
+      transition: transform 0.15s, box-shadow 0.15s;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.25);
+    }
+    .btn-call:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,0,0,0.35); }
+    .btn-call svg { flex-shrink: 0; }
+    .cta-note {
+      margin-top: 24px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.6);
+    }
+
+    /* ── HOURS ── */
+    .hours-section { background: var(--bg); border-top: 1px solid var(--border); }
+    .hours-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .hours-table { width: 100%; border-collapse: collapse; }
+    .hours-table tr { border-bottom: 1px solid var(--border); }
+    .hours-table tr:last-child { border-bottom: none; }
+    .hours-table td {
+      padding: 14px 0;
+      font-size: 15px;
+    }
+    .hours-table td:last-child {
+      text-align: right;
+      color: var(--accent);
+      font-weight: 600;
+    }
+    .hours-note {
+      margin-top: 20px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .location-block { display: flex; flex-direction: column; gap: 24px; }
+    .location-address {
+      font-family: var(--heading);
+      font-size: 22px;
+      letter-spacing: -0.01em;
+      line-height: 1.3;
+    }
+    .location-detail {
+      font-size: 14px;
+      color: rgba(245,241,234,0.6);
+      line-height: 1.7;
+    }
+    .location-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--primary);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      border: 1px solid var(--primary);
+      padding: 10px 20px;
+      border-radius: 4px;
+      width: fit-content;
+      transition: background 0.2s, color 0.2s;
+    }
+    .location-cta:hover { background: var(--primary); color: #fff; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #0d0d0d;
+      border-top: 1px solid var(--border);
+      padding: 48px 24px 32px;
+    }
+    .footer-inner {
+      max-width: 1040px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid var(--border);
+    }
+    .footer-brand-name {
+      font-family: var(--heading);
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+    .footer-brand-name span { color: var(--primary); }
+    .footer-brand-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
+    .footer-col-title {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+    .footer-col p {
+      font-size: 14px;
+      color: rgba(245,241,234,0.6);
+      line-height: 1.7;
+    }
+    .footer-col a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+    .footer-col a:hover { text-decoration: underline; }
+    .footer-bottom {
+      max-width: 1040px;
+      margin: 28px auto 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      color: #444;
+    }
+    .powered-by { color: #444; text-decoration: none; }
+    .powered-by:hover { color: var(--muted); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { top: 36px; }
+      .nav-links { display: none; }
+      .hero-content { padding: 0 20px; }
+      .about-grid { grid-template-columns: 1fr; gap: 40px; }
+      .about-photo { display: none; }
+      .stat-strip { grid-template-columns: 1fr; }
+      .hours-grid { grid-template-columns: 1fr; gap: 48px; }
+      .footer-inner { grid-template-columns: 1fr; gap: 28px; }
+      .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
+      .btn-call { font-size: 20px; padding: 18px 32px; }
+      .demo-banner { top: 0; font-size: 11px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- DEMO BANNER -->
+  <div class="demo-banner">
+    This is a demo website for Hämeentien Autoburger &mdash; built to show what your online presence could look like.
+  </div>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">Hämeentien <span>Autoburger</span></a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#hours">Hours</a></li>
+      <li><a href="#order" class="nav-cta">Call to Order</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-photo-placeholder" aria-hidden="true">
+      <div style="width:56px;height:56px;border:2px dashed #2a2a2a;border-radius:4px;"></div>
+      <span class="hero-photo-placeholder-label">Your photo here</span>
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Forssa &mdash; Grilli &amp; Drive-In</p>
+      <h1 class="hero-title">Hämeentien<br><span class="accent">Autoburger</span></h1>
+      <p class="hero-tagline">Forssa's drive-in grill for over 30 years. Generous portions, Finnish-sourced meat, and food that tastes like it should.</p>
+      <div class="hero-actions">
+        <a href="tel:0453136070" class="btn-order">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.58 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.56a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.72 16z"/>
+          </svg>
+          Order by phone
+        </a>
+      </div>
+      <div class="hero-meta">
+        <div class="hero-rating">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="var(--accent)" stroke="none" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          4.2
+        </div>
+        <div class="hero-meta-dot"></div>
+        <span>574 reviews</span>
+        <div class="hero-meta-dot"></div>
+        <span>Hämeentie 31, Forssa</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-body">
+          <p class="section-label">Our Story</p>
+          <h2 class="section-title">Forssa's grill for 30+ years</h2>
+          <p>Hämeentien Autoburger has been part of Forssa's streetscape for over thirty years &mdash; a drive-in grill that locals keep coming back to. New owners, same no-nonsense spirit.</p>
+          <p>Portions are generous by principle. The takeout container is always filled to the brim &mdash; no skimping on ingredients or size. Meat is sourced from Finland wherever possible.</p>
+          <p>Pull up, order at the window, and eat right away. No booking, no waiting, no fuss.</p>
+        </div>
+        <div class="about-photo" aria-label="Interior photo coming soon">
+          <div class="photo-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          </div>
+          <span class="photo-label">Interior photo coming soon</span>
+        </div>
+      </div>
+
+      <div class="stat-strip">
+        <div class="stat-item">
+          <span class="stat-num">30+</span>
+          <span class="stat-desc">Years in Forssa</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">4.2</span>
+          <span class="stat-desc">Google rating</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">574</span>
+          <span class="stat-desc">Customer reviews</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MENU -->
+  <section class="menu-section" id="menu">
+    <div class="container">
+      <p class="section-label">What We Serve</p>
+      <h2 class="section-title">The menu</h2>
+      <p class="menu-intro">Grill classics &mdash; burgers, pork cutlets, sausage plates and fries. Everything made to order, nothing skimped on.</p>
+
+      <div class="menu-grid">
+
+        <div class="menu-card">
+          <span class="menu-card-name">Tuplajuusto</span>
+          <span class="menu-card-desc">Double burger &mdash; two patties, two slices of cheese. The real deal.</span>
+          <span class="menu-card-price">7,90 &euro;</span>
+        </div>
+
+        <div class="menu-card">
+          <span class="menu-card-name">Porsaanleike</span>
+          <span class="menu-card-desc">Classic pork cutlet &mdash; a grill staple done properly.</span>
+          <span class="menu-card-price">11,90 &euro;</span>
+        </div>
+
+        <div class="menu-card">
+          <span class="menu-card-name">Nakkiperunat</span>
+          <span class="menu-card-desc">Sausage and fries &mdash; simple, satisfying, quick.</span>
+          <span class="menu-card-price">9,50 &euro;</span>
+        </div>
+
+        <div class="menu-card">
+          <span class="menu-card-name">Lihis + makkara</span>
+          <span class="menu-card-desc">Meat patty and sausage on the same plate.</span>
+          <span class="menu-card-price">7,90 &euro;</span>
+        </div>
+
+        <div class="menu-card">
+          <span class="menu-card-name">Kasvislautanen</span>
+          <span class="menu-card-desc">Small fries, veggie patty, three onion rings and pineapple &mdash; the vegetarian option.</span>
+          <span class="menu-card-price">8,90 &euro;</span>
+        </div>
+
+      </div>
+
+      <div class="menu-categories">
+        <span class="menu-tag">Burgers</span>
+        <span class="menu-tag">Pork cutlets</span>
+        <span class="menu-tag">Fries</span>
+        <span class="menu-tag">Sausage plates</span>
+        <span class="menu-tag">Vegetarian</span>
+      </div>
+
+      <div class="menu-photo" aria-label="Food photos coming soon">
+        <div class="photo-icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        </div>
+        <span class="photo-label">Food photos coming soon</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CALL TO ORDER -->
+  <section class="cta-section" id="order">
+    <div class="container">
+      <p class="section-label">Ready to eat?</p>
+      <h2 class="section-title">Call to order</h2>
+      <p class="cta-sub">Pick up the phone and your food will be ready. No apps, no delivery fees &mdash; straight to you.</p>
+      <a href="tel:0453136070" class="btn-call">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.58 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.56a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.72 16z"/>
+        </svg>
+        045 3136070
+      </a>
+      <p class="cta-note">Or drive in &mdash; Hämeentie 31, 30100 Forssa</p>
+    </div>
+  </section>
+
+  <!-- HOURS & LOCATION -->
+  <section class="hours-section" id="hours">
+    <div class="container">
+      <div class="hours-grid">
+        <div>
+          <p class="section-label">Opening Hours</p>
+          <h2 class="section-title">When we're open</h2>
+          <table class="hours-table">
+            <tbody>
+              <tr>
+                <td>Monday &ndash; Thursday</td>
+                <td>10:00 &ndash; 20:00</td>
+              </tr>
+              <tr>
+                <td>Friday</td>
+                <td>10:00 &ndash; 21:00</td>
+              </tr>
+              <tr>
+                <td>Saturday</td>
+                <td>11:00 &ndash; 21:00</td>
+              </tr>
+              <tr>
+                <td>Sunday</td>
+                <td>12:00 &ndash; 20:00</td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="hours-note">Hours may vary on public holidays. Call ahead to confirm: <a href="tel:0453136070" style="color:var(--primary);text-decoration:none;">045 3136070</a></p>
+        </div>
+
+        <div class="location-block">
+          <div>
+            <p class="section-label">Find Us</p>
+            <p class="location-address">Hämeentie 31<br>30100 Forssa</p>
+          </div>
+          <p class="location-detail">
+            Easy to reach by car &mdash; a proper drive-in grill right on Hämeentie.<br><br>
+            Phone: <a href="tel:0453136070" style="color:var(--primary);text-decoration:none;">045 3136070</a><br>
+            Email: <a href="mailto:hameentienburger@gmail.com" style="color:var(--primary);text-decoration:none;">hameentienburger@gmail.com</a>
+          </p>
+          <a href="https://maps.google.com/?cid=10943242780620965882" target="_blank" rel="noopener" class="location-cta">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="10" r="3"/><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"/></svg>
+            Open in Google Maps
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <p class="footer-brand-name">Hämeentien <span>Autoburger</span></p>
+        <p class="footer-brand-desc">Grill &amp; drive-in on Hämeentie, Forssa.<br>Over 30 years of honest grill food.</p>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-title">Contact</p>
+        <p>
+          <a href="tel:0453136070">045 3136070</a><br>
+          Hämeentie 31<br>
+          30100 Forssa
+        </p>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-title">Order</p>
+        <p>
+          Call us to order for pickup.<br>
+          Also available on Wolt and Foodora.
+        </p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Hämeentien Autoburger Oy</span>
+      <a href="https://klarsystems.com" target="_blank" rel="noopener" class="powered-by">Powered by Klar</a>
+    </div>
+  </footer>
+
+</body>
+</html>

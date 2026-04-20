@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Juova Hanahuone — Finnish Craft Beer Taproom, Helsinki</title>
+  <style>
+    /* palette: research-derived — dark taproom with amber/gold accents */
+    :root {
+      --bg:        #1A1410;
+      --text:      #F2EDE4;
+      --primary:   #C4862A;
+      --accent:    #E8B84B;
+      --surface:   #24201A;
+      --border:    #3A3228;
+      --muted:     #9B8E7E;
+
+      --heading-family: 'DM Serif Display', Georgia, serif;
+      --body-family:    'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+      --max-w: 1100px;
+      --gap:   clamp(1.5rem, 4vw, 3rem);
+    }
+
+    /* ── Reset ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--body-family);
+      font-size: 17px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── Typography ── */
+    h1, h2, h3, h4 { font-family: var(--heading-family); line-height: 1.2; }
+    h1 { font-size: clamp(2.6rem, 6vw, 4.2rem); letter-spacing: -0.02em; }
+    h2 { font-size: clamp(1.9rem, 4vw, 2.8rem); }
+    h3 { font-size: clamp(1.2rem, 2.5vw, 1.5rem); }
+
+    /* ── Layout helpers ── */
+    .container {
+      max-width: var(--max-w);
+      margin-inline: auto;
+      padding-inline: clamp(1.25rem, 5vw, 2.5rem);
+    }
+    .section { padding-block: clamp(4rem, 8vw, 7rem); }
+    .section--dark  { background: var(--bg); }
+    .section--surface { background: var(--surface); }
+
+    /* ── Photo placeholders ── */
+    .photo-placeholder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #2E2418 0%, #3A2E1C 100%);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-family: var(--body-family);
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .photo-placeholder--hero   { aspect-ratio: 21 / 9; min-height: 420px; }
+    .photo-placeholder--square { aspect-ratio: 1 / 1; }
+    .photo-placeholder--wide   { aspect-ratio: 16 / 9; }
+    .photo-placeholder--tall   { aspect-ratio: 4 / 5; }
+
+    /* ── Nav ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(26, 20, 16, 0.93);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      max-width: var(--max-w);
+      margin-inline: auto;
+      padding-inline: clamp(1.25rem, 5vw, 2.5rem);
+      padding-block: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+    .nav-logo {
+      font-family: var(--heading-family);
+      font-size: 1.35rem;
+      color: var(--accent);
+      white-space: nowrap;
+    }
+    .nav-links {
+      display: flex;
+      gap: clamp(1rem, 2.5vw, 2rem);
+      list-style: none;
+      flex-wrap: wrap;
+    }
+    .nav-links a {
+      font-size: 0.87rem;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--muted);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ── Hero ── */
+    .hero {
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-image {
+      position: relative;
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(26,20,16,0.25) 0%,
+        rgba(26,20,16,0.72) 60%,
+        rgba(26,20,16,0.96) 100%
+      );
+    }
+    .hero-content {
+      position: relative;
+      max-width: var(--max-w);
+      margin-inline: auto;
+      padding-inline: clamp(1.25rem, 5vw, 2.5rem);
+      padding-block: clamp(3rem, 7vw, 5rem);
+    }
+    /* Hero content is layered on top of hero image via negative margin */
+    .hero-below-image {
+      position: relative;
+      margin-top: -160px;
+    }
+    .hero-eyebrow {
+      display: inline-block;
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid var(--primary);
+      padding: 0.35em 0.9em;
+      border-radius: 2px;
+      margin-bottom: 1.25rem;
+    }
+    .hero h1 { color: var(--text); margin-bottom: 1rem; }
+    .hero-tagline {
+      font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+      color: var(--muted);
+      max-width: 560px;
+      margin-bottom: 2rem;
+      line-height: 1.55;
+    }
+    .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    /* ── Buttons ── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5em;
+      padding: 0.75em 1.6em;
+      border-radius: 3px;
+      font-family: var(--body-family);
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: none;
+      white-space: nowrap;
+    }
+    .btn-primary {
+      background: var(--primary);
+      color: #0F0C0A;
+    }
+    .btn-primary:hover { background: var(--accent); }
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-outline:hover { border-color: var(--primary); color: var(--accent); }
+
+    /* ── Stats bar ── */
+    .stats-bar {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .stats-inner {
+      max-width: var(--max-w);
+      margin-inline: auto;
+      padding-inline: clamp(1.25rem, 5vw, 2.5rem);
+      padding-block: 1.5rem;
+      display: flex;
+      gap: 2.5rem;
+      flex-wrap: wrap;
+    }
+    .stat {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+    .stat-value {
+      font-family: var(--heading-family);
+      font-size: 1.8rem;
+      color: var(--accent);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 0.8rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ── About ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--gap);
+      align-items: center;
+    }
+    .about-text { }
+    .about-eyebrow {
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 0.75rem;
+      display: block;
+    }
+    .about-text h2 { margin-bottom: 1.25rem; }
+    .about-text p {
+      color: var(--muted);
+      margin-bottom: 1rem;
+      font-size: 1.05rem;
+    }
+    .about-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1.5rem;
+    }
+    .tag {
+      font-size: 0.78rem;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      padding: 0.3em 0.8em;
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      color: var(--muted);
+    }
+
+    /* ── Taps / Drinks ── */
+    .taps-header {
+      text-align: center;
+      margin-bottom: clamp(2rem, 5vw, 3.5rem);
+    }
+    .taps-eyebrow {
+      display: block;
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 0.75rem;
+    }
+    .taps-header h2 { margin-bottom: 0.75rem; }
+    .taps-header p { color: var(--muted); max-width: 520px; margin-inline: auto; }
+
+    .taps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1px;
+      border: 1px solid var(--border);
+    }
+    .tap-card {
+      background: var(--surface);
+      padding: 1.75rem 1.5rem;
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .tap-card:last-child { border-right: none; }
+    .tap-number {
+      font-family: var(--heading-family);
+      font-size: 2.5rem;
+      color: var(--border);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+    .tap-card h3 { margin-bottom: 0.4rem; color: var(--text); }
+    .tap-card p { color: var(--muted); font-size: 0.92rem; }
+
+    .breweries-strip {
+      margin-top: 2.5rem;
+      padding: 1.5rem;
+      border: 1px solid var(--border);
+      background: var(--surface);
+    }
+    .breweries-label {
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.75rem;
+      display: block;
+    }
+    .breweries-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 1.5rem;
+    }
+    .brewery-name {
+      font-size: 0.9rem;
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .food-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+      margin-top: 2.5rem;
+    }
+    .food-item {
+      padding: 1.25rem;
+      border: 1px solid var(--border);
+      background: var(--surface);
+    }
+    .food-item h4 {
+      font-family: var(--heading-family);
+      font-size: 1.05rem;
+      margin-bottom: 0.3rem;
+      color: var(--text);
+    }
+    .food-item p { font-size: 0.87rem; color: var(--muted); }
+
+    /* ── Reviews ── */
+    .reviews-header {
+      margin-bottom: clamp(2rem, 5vw, 3rem);
+    }
+    .reviews-eyebrow {
+      display: block;
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 0.75rem;
+    }
+    .rating-line {
+      display: flex;
+      align-items: baseline;
+      gap: 0.75rem;
+      margin-top: 0.75rem;
+      flex-wrap: wrap;
+    }
+    .rating-score {
+      font-family: var(--heading-family);
+      font-size: 2.2rem;
+      color: var(--accent);
+    }
+    .rating-label { font-size: 0.85rem; color: var(--muted); }
+    .rating-count { color: var(--muted); font-size: 0.9rem; }
+
+    .quotes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.25rem;
+    }
+    .quote-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 1.75rem 1.5rem;
+      position: relative;
+    }
+    .quote-mark {
+      font-family: var(--heading-family);
+      font-size: 3.5rem;
+      color: var(--primary);
+      line-height: 0.6;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+    .quote-text {
+      font-size: 0.97rem;
+      color: var(--text);
+      line-height: 1.65;
+      margin-bottom: 1rem;
+      font-style: italic;
+    }
+    .quote-author {
+      font-size: 0.82rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .quote-rating { font-size: 0.82rem; color: var(--accent); font-weight: 600; margin-bottom: 0.5rem; }
+
+    /* ── Events ── */
+    .events-header {
+      margin-bottom: clamp(2rem, 5vw, 3rem);
+    }
+    .events-eyebrow {
+      display: block;
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 0.75rem;
+    }
+    .events-header p { color: var(--muted); max-width: 560px; margin-top: 0.75rem; }
+
+    .events-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 2rem;
+    }
+    .event-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 1.75rem 1.5rem;
+    }
+    .event-type {
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 0.6rem;
+      display: block;
+    }
+    .event-card h3 { margin-bottom: 0.5rem; font-size: 1.2rem; }
+    .event-card p { color: var(--muted); font-size: 0.92rem; }
+
+    .events-contact {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .events-contact-text h3 { margin-bottom: 0.35rem; }
+    .events-contact-text p { color: var(--muted); font-size: 0.95rem; }
+
+    /* ── Hours & Location ── */
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--gap);
+      align-items: start;
+    }
+    .hours-eyebrow {
+      display: block;
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 0.75rem;
+    }
+    .info-grid h2 { margin-bottom: 1.5rem; }
+    .hours-table { width: 100%; border-collapse: collapse; }
+    .hours-table tr { border-bottom: 1px solid var(--border); }
+    .hours-table tr:last-child { border-bottom: none; }
+    .hours-table td { padding: 0.7rem 0; font-size: 0.95rem; }
+    .hours-table td:first-child { color: var(--muted); width: 50%; }
+    .hours-table td:last-child { color: var(--text); font-weight: 500; text-align: right; }
+    .hours-note {
+      margin-top: 1rem;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .map-placeholder {
+      aspect-ratio: 4 / 3;
+      background: linear-gradient(135deg, #1E1A14 0%, #2A2418 100%);
+      border: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      text-align: center;
+      padding: 2rem;
+    }
+    .map-placeholder .map-icon { font-size: 1rem; font-weight: 700; color: var(--primary); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.25rem; }
+    .map-placeholder .map-address {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-top: 0.25rem;
+    }
+    .map-placeholder .map-sub { font-size: 0.85rem; color: var(--muted); }
+    .map-placeholder .map-link {
+      margin-top: 1rem;
+      font-size: 0.82rem;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--primary);
+      border: 1px solid var(--primary);
+      padding: 0.4em 0.9em;
+      border-radius: 2px;
+      transition: all 0.2s;
+    }
+    .map-placeholder .map-link:hover { background: var(--primary); color: #0F0C0A; }
+
+    /* ── Contact / Footer ── */
+    .contact-section {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+    }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: var(--gap);
+    }
+    .contact-brand h3 {
+      font-family: var(--heading-family);
+      font-size: 1.5rem;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+    .contact-brand p { color: var(--muted); font-size: 0.92rem; max-width: 300px; }
+    .contact-col h4 {
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+    .contact-col ul { list-style: none; }
+    .contact-col li {
+      margin-bottom: 0.6rem;
+      font-size: 0.92rem;
+      color: var(--muted);
+    }
+    .contact-col a:hover { color: var(--accent); }
+    .contact-phone {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .contact-email { word-break: break-all; }
+
+    .footer-bottom {
+      border-top: 1px solid var(--border);
+      padding-block: 1.25rem;
+    }
+    .footer-bottom-inner {
+      max-width: var(--max-w);
+      margin-inline: auto;
+      padding-inline: clamp(1.25rem, 5vw, 2.5rem);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .footer-copy { font-size: 0.82rem; color: var(--muted); }
+    .footer-klar {
+      font-size: 0.78rem;
+      color: var(--border);
+      letter-spacing: 0.04em;
+    }
+
+    /* ── Divider line ── */
+    .line-accent {
+      display: block;
+      width: 3rem;
+      height: 2px;
+      background: var(--primary);
+      margin-bottom: 1.25rem;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .about-grid { grid-template-columns: 1fr; }
+      .info-grid  { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .hero-below-image { margin-top: -80px; }
+      .events-contact { flex-direction: column; align-items: flex-start; }
+    }
+    @media (max-width: 540px) {
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Demo Banner ── -->
+  <div style="background:#1E1710; border-bottom:1px solid #C4862A; padding:0.6rem 1.25rem; text-align:center; font-size:0.82rem; color:#E8B84B; letter-spacing:0.05em;">
+    This is a demo site — <a href="https://preview.klarsystems.com/ravintola-juova-hanahuone-helsinki/proposal/" style="color:#E8B84B; text-decoration:underline;">view proposal</a>
+  </div>
+
+  <!-- ── Navigation ── -->
+  <nav>
+    <div class="nav-inner">
+      <span class="nav-logo">Juova Hanahuone</span>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#taps">Taps & Food</a></li>
+        <li><a href="#events">Events</a></li>
+        <li><a href="#hours">Hours</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ── Hero ── -->
+  <section class="hero" id="top">
+    <div class="hero-image">
+      <div class="photo-placeholder photo-placeholder--hero" aria-label="Interior photo coming soon">
+        <span>Interior photo coming soon</span>
+      </div>
+      <div class="hero-overlay"></div>
+    </div>
+    <div class="hero-below-image">
+      <div class="hero-content">
+        <span class="hero-eyebrow">Finnish Craft Beer Taproom · Helsinki</span>
+        <h1>25 taps.<br>One address.</h1>
+        <p class="hero-tagline">Helsinki's dedicated home for Finnish microbrewery beer — cozy, unpretentious, and two minutes from the central station.</p>
+        <div class="hero-ctas">
+          <a href="#taps" class="btn btn-primary">See what's on tap</a>
+          <a href="#events" class="btn btn-outline">Upcoming events</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Stats bar ── -->
+  <div class="stats-bar">
+    <div class="stats-inner">
+      <div class="stat">
+        <span class="stat-value">4.6</span>
+        <span class="stat-label">Google rating</span>
+      </div>
+      <div class="stat">
+        <span class="stat-value">491</span>
+        <span class="stat-label">Google reviews</span>
+      </div>
+      <div class="stat">
+        <span class="stat-value">25+</span>
+        <span class="stat-label">Taps on draft</span>
+      </div>
+      <div class="stat">
+        <span class="stat-value">308</span>
+        <span class="stat-label">Beers in rotation</span>
+      </div>
+      <div class="stat">
+        <span class="stat-value">110 k</span>
+        <span class="stat-label">Untappd check-ins</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── About ── -->
+  <section class="section section--dark" id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-text">
+          <span class="about-eyebrow">Our story</span>
+          <span class="line-accent"></span>
+          <h2>A shared taproom born from Finnish craft brewing</h2>
+          <p>Juova Hanahuone started as a co-operation of Finnish microbreweries — a single place where locals could discover the full breadth of what Finland's craft beer scene had to offer. The idea was simple: bring the breweries to one address, pour from the source, and keep it real.</p>
+          <p>Today, the taproom features 25 rotating taps from breweries including Olarin Panimo, ETKO, Tuju, Mallassepät, CoolHead, Pien, Maistila and Tired Uncle — plus hundreds more in cans and bottles. Board games, a curated whiskey selection, wines, ciders, and a cozy interior with bold brewery-branded areas round out the experience.</p>
+          <p>We're on the ground floor of Kaisaniemenkatu 3, a two-minute walk from Helsinki Central Railway Station and right next to the Kaisaniemi metro stop.</p>
+          <div class="about-tags">
+            <span class="tag">Finnish craft beer</span>
+            <span class="tag">25+ taps</span>
+            <span class="tag">Board games</span>
+            <span class="tag">Outdoor terrace</span>
+            <span class="tag">Pet-friendly</span>
+            <span class="tag">Child-friendly</span>
+          </div>
+        </div>
+        <div>
+          <div class="photo-placeholder photo-placeholder--tall" aria-label="Your photo here">
+            <span>Your photo here</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Taps & Food ── -->
+  <section class="section section--surface" id="taps">
+    <div class="container">
+      <div class="taps-header">
+        <span class="taps-eyebrow">What we pour</span>
+        <h2>On tap and in bottle</h2>
+        <p>Almost exclusively Finnish microbreweries, rotating regularly. If it's good and it's Finnish, there's a good chance it'll end up on one of our taps.</p>
+      </div>
+
+      <div class="taps-grid">
+        <div class="tap-card">
+          <div class="tap-number">25+</div>
+          <h3>Finnish craft on draft</h3>
+          <p>Rotating taps from local microbreweries — IPAs, NEIPAs, lagers, stouts, sours. The list changes as new releases come in.</p>
+        </div>
+        <div class="tap-card">
+          <div class="tap-number">300+</div>
+          <h3>Cans &amp; bottles</h3>
+          <p>A deep back-catalogue of Finnish and international craft beer — by the can or bottle, to drink in or take away.</p>
+        </div>
+        <div class="tap-card">
+          <div class="tap-number">—</div>
+          <h3>Wines &amp; whiskeys</h3>
+          <p>A curated selection of wines and a strong whiskey list for those who prefer something other than beer.</p>
+        </div>
+        <div class="tap-card">
+          <div class="tap-number">—</div>
+          <h3>Ciders &amp; cocktails</h3>
+          <p>Finnish and international ciders on tap or in bottle. Cocktails available for those who want something mixed.</p>
+        </div>
+      </div>
+
+      <div class="breweries-strip">
+        <span class="breweries-label">Featured breweries</span>
+        <div class="breweries-list">
+          <span class="brewery-name">Olarin Panimo</span>
+          <span class="brewery-name">ETKO</span>
+          <span class="brewery-name">Tuju</span>
+          <span class="brewery-name">Mallassepät</span>
+          <span class="brewery-name">CoolHead</span>
+          <span class="brewery-name">Pien</span>
+          <span class="brewery-name">Maistila</span>
+          <span class="brewery-name">Tired Uncle</span>
+        </div>
+      </div>
+
+      <div class="food-row">
+        <div class="food-item">
+          <h4>Tapas</h4>
+          <p>Small plates and bar snacks to go with your beer.</p>
+        </div>
+        <div class="food-item">
+          <h4>Patatas bravas</h4>
+          <p>Classic crispy potatoes — a reliable bar staple.</p>
+        </div>
+        <div class="food-item">
+          <h4>Hot dogs</h4>
+          <p>Simple, satisfying, and just what you want with a pint.</p>
+        </div>
+        <div class="food-item">
+          <h4>Quesadillas</h4>
+          <p>Warm and filling — a favourite alongside craft beer.</p>
+        </div>
+        <div class="food-item">
+          <h4>Pulled pork</h4>
+          <p>Bar food done right. Worth coming back for.</p>
+        </div>
+      </div>
+
+      <p style="margin-top:1.5rem; font-size:0.85rem; color:var(--muted);">
+        Food menu is served daily. Full bar snacks selection available — ask at the counter.
+      </p>
+    </div>
+  </section>
+
+  <!-- ── Reviews ── -->
+  <section class="section section--dark" id="reviews">
+    <div class="container">
+      <div class="reviews-header">
+        <span class="reviews-eyebrow">What people say</span>
+        <h2>Regulars and first-timers agree</h2>
+        <div class="rating-line">
+          <span class="rating-score">4.6</span>
+          <span class="rating-label">/ 5</span>
+          <span class="rating-count">491 Google reviews &mdash; #4 beer bar in Helsinki on TripAdvisor</span>
+        </div>
+      </div>
+
+      <div class="quotes-grid">
+        <div class="quote-card">
+          <span class="quote-mark">"</span>
+          <div class="quote-rating">5/5</div>
+          <p class="quote-text">Best place to try Finnish craft beers. 28 taps and few hundred more on cans and bottles. Great whiskey collection as well.</p>
+          <span class="quote-author">Johan F — TripAdvisor</span>
+        </div>
+        <div class="quote-card">
+          <span class="quote-mark">"</span>
+          <div class="quote-rating">5/5</div>
+          <p class="quote-text">Relaxed vibe, excellent beer selection. The prices are quite reasonable compared to the lagers in central pubs.</p>
+          <span class="quote-author">Jari Virtanen — TripAdvisor</span>
+        </div>
+        <div class="quote-card">
+          <span class="quote-mark">"</span>
+          <div class="quote-rating">5/5</div>
+          <p class="quote-text">This taproom promoting especially a few better-known Finnish craft breweries is a must for all beerthusiast visiting Helsinki.</p>
+          <span class="quote-author">Heikki O — TripAdvisor</span>
+        </div>
+        <div class="quote-card">
+          <span class="quote-mark">"</span>
+          <div class="quote-rating">5/5</div>
+          <p class="quote-text">We were only in Helsinki for a week, but ended up visiting here x4 times. The ambience is spot on.</p>
+          <span class="quote-author">Jill B — TripAdvisor</span>
+        </div>
+        <div class="quote-card">
+          <span class="quote-mark">"</span>
+          <div class="quote-rating">5/5</div>
+          <p class="quote-text">Great bar — excellent choice of craft beer with at least 25 different taps. Very good vibe in there. The pulled pork was amazing.</p>
+          <span class="quote-author">Darren M — TripAdvisor</span>
+        </div>
+        <div class="quote-card">
+          <span class="quote-mark">"</span>
+          <div class="quote-rating">5/5</div>
+          <p class="quote-text">An excellent bar, especially if you are a beer lover. There are dozens of varieties, local and imported, by the bottle, by the can, by the draft.</p>
+          <span class="quote-author">zuv — TripAdvisor</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Events ── -->
+  <section class="section section--surface" id="events">
+    <div class="container">
+      <div class="events-header">
+        <span class="events-eyebrow">Events</span>
+        <h2>More than a bar</h2>
+        <p>Juova Hanahuone is a regular venue for brewery showcases, tap takeovers, seasonal festivals and Helsinki Beer Week events. Follow us on Facebook or Instagram for the current schedule.</p>
+      </div>
+
+      <div class="events-grid">
+        <div class="event-card">
+          <span class="event-type">Annual festival</span>
+          <h3>Lagerfest!</h3>
+          <p>Our flagship autumn festival — seasonal and classic lagers from Finland and worldwide. Poured in generous 1-litre portions. DJ Xybo on Saturday evenings.</p>
+        </div>
+        <div class="event-card">
+          <span class="event-type">Brewery showcase</span>
+          <h3>ETKO Showcase</h3>
+          <p>Full tap takeovers featuring new ETKO releases and collaborations. One of Helsinki's best meet-the-brewer events.</p>
+        </div>
+        <div class="event-card">
+          <span class="event-type">Beer week</span>
+          <h3>Helsinki Beer Week</h3>
+          <p>Juova Hanahuone is a regular host venue for Helsinki Beer Week — international showcases, rare tappings and collaborative releases.</p>
+        </div>
+        <div class="event-card">
+          <span class="event-type">Tap takeover</span>
+          <h3>Meet the Brewer</h3>
+          <p>Regular evenings where participating breweries take over the taps and the brewers themselves come in to pour and talk about their beers.</p>
+        </div>
+      </div>
+
+      <div class="events-contact">
+        <div class="events-contact-text">
+          <h3>Private events &amp; group bookings</h3>
+          <p>Want to host a private event, organise a group visit or discuss a brewery showcase? Get in touch — we'd be happy to talk.</p>
+        </div>
+        <a href="mailto:info@juova.beer" class="btn btn-primary">info@juova.beer</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Hours & Location ── -->
+  <section class="section section--dark" id="hours">
+    <div class="container">
+      <div class="info-grid">
+        <div>
+          <span class="hours-eyebrow">Opening hours</span>
+          <h2>We're open every day</h2>
+          <table class="hours-table">
+            <tbody>
+              <tr>
+                <td>Monday — Thursday</td>
+                <td>12:00 — 00:00</td>
+              </tr>
+              <tr>
+                <td>Friday</td>
+                <td>12:00 — 02:00</td>
+              </tr>
+              <tr>
+                <td>Saturday</td>
+                <td>12:00 — 02:00</td>
+              </tr>
+              <tr>
+                <td>Sunday</td>
+                <td>12:00 — 00:00</td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="hours-note">Event nights may have extended hours. Follow our social channels for updates.</p>
+
+          <div style="margin-top:2rem;">
+            <span class="hours-eyebrow">Find us</span>
+            <p style="font-size:1.05rem; font-weight:600; margin-bottom:0.3rem;">Kaisaniemenkatu 3 b</p>
+            <p style="color:var(--muted);">00100 Helsinki · Kluuvi</p>
+            <p style="color:var(--muted); margin-top:0.4rem; font-size:0.92rem;">2 min walk from Helsinki Central Station<br>Next to Kaisaniemi metro station</p>
+            <p style="margin-top:1rem;">
+              <a href="tel:+358413149666" class="btn btn-outline" style="display:inline-flex;">
+                +358 41 314 9666
+              </a>
+            </p>
+          </div>
+        </div>
+
+        <div>
+          <div class="map-placeholder">
+            <div class="map-icon">Location</div>
+            <div class="map-address">Kaisaniemenkatu 3 b</div>
+            <div class="map-sub">00100 Helsinki · Kluuvi</div>
+            <a
+              href="https://maps.google.com/maps?q=Kaisaniemenkatu+3+b+Helsinki"
+              target="_blank"
+              rel="noopener"
+              class="map-link"
+            >Open in Google Maps</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Contact / Footer ── -->
+  <section class="section contact-section" id="contact">
+    <div class="container">
+      <div class="contact-grid">
+        <div class="contact-brand">
+          <h3>Juova Hanahuone</h3>
+          <p>Finnish craft beer taproom in the heart of Helsinki. 25+ rotating taps, hundreds of cans and bottles, regular events. Open daily from noon.</p>
+          <div style="margin-top:1.25rem; display:flex; gap:0.75rem; flex-wrap:wrap;">
+            <a
+              href="https://www.facebook.com/juovahanahuone/"
+              target="_blank"
+              rel="noopener"
+              class="btn btn-outline"
+              style="font-size:0.82rem; padding:0.5em 1em;"
+            >Facebook</a>
+            <a
+              href="https://www.instagram.com/juovahelsinki/"
+              target="_blank"
+              rel="noopener"
+              class="btn btn-outline"
+              style="font-size:0.82rem; padding:0.5em 1em;"
+            >Instagram</a>
+          </div>
+        </div>
+
+        <div class="contact-col">
+          <h4>Contact</h4>
+          <ul>
+            <li>
+              <a href="tel:+358413149666" class="contact-phone">+358 41 314 9666</a>
+            </li>
+            <li>
+              <a href="mailto:info@juova.beer" class="contact-email">info@juova.beer</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="contact-col">
+          <h4>Address</h4>
+          <ul>
+            <li>Kaisaniemenkatu 3 b</li>
+            <li>00100 Helsinki</li>
+            <li style="margin-top:0.5rem;">
+              <a
+                href="https://maps.google.com/maps?q=Kaisaniemenkatu+3+b+Helsinki"
+                target="_blank"
+                rel="noopener"
+                style="color:var(--primary);"
+              >Get directions →</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Footer bottom ── -->
+  <div class="footer-bottom">
+    <div class="footer-bottom-inner">
+      <span class="footer-copy">© Juova Hanahuone, Helsinki</span>
+      <span class="footer-klar">Website by Klar Systems</span>
+    </div>
+  </div>
+
+</body>
+</html>

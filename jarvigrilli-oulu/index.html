@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Järvigrilli — Classic Finnish Grill, Oulu</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #1A0F00;
+      --bg-card:   #231400;
+      --bg-section:#1E1200;
+      --yellow:    #F5C842;
+      --amber:     #E8A020;
+      --orange:    #D95A10;
+      --red:       #C0392B;
+      --muted:     #8C6A3A;
+      --text:      #F0DEB0;
+      --border:    #3D2800;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Georgia', serif;
+      line-height: 1.65;
+      font-size: 16px;
+    }
+
+    /* ── DEMO BANNER ─────────────────────────────────────────────── */
+    .demo-banner {
+      background: var(--red);
+      color: #fff;
+      text-align: center;
+      padding: 10px 16px;
+      font-family: 'Arial', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    /* ── NAV ─────────────────────────────────────────────────────── */
+    nav {
+      background: #110900;
+      border-bottom: 2px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 32px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-logo {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--yellow);
+      letter-spacing: 0.04em;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-family: 'Arial', sans-serif;
+      font-size: 0.88rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--yellow); }
+
+    /* ── HERO ────────────────────────────────────────────────────── */
+    .hero {
+      position: relative;
+      min-height: 88vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 64px 24px 80px;
+      overflow: hidden;
+    }
+
+    .hero-photo-placeholder {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(160deg, #2B1500 0%, #1A0F00 45%, #0D0700 100%);
+      z-index: 0;
+    }
+
+    /* retro grill-sign stripe */
+    .hero-photo-placeholder::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        repeating-linear-gradient(
+          -45deg,
+          transparent,
+          transparent 40px,
+          rgba(217, 90, 16, 0.05) 40px,
+          rgba(217, 90, 16, 0.05) 80px
+        );
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 720px;
+    }
+
+    .hero-eyebrow {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 18px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.8rem, 7vw, 5.2rem);
+      color: var(--yellow);
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+      margin-bottom: 10px;
+      text-shadow: 0 2px 24px rgba(245, 200, 66, 0.25);
+    }
+
+    .hero-sub {
+      font-size: 1.15rem;
+      color: var(--amber);
+      margin-bottom: 12px;
+      letter-spacing: 0.02em;
+    }
+
+    .hero-tagline {
+      font-size: 1rem;
+      color: var(--muted);
+      margin-bottom: 40px;
+      font-style: italic;
+    }
+
+    .cta-button {
+      display: inline-block;
+      background: var(--orange);
+      color: #fff;
+      font-family: 'Arial', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 18px 44px;
+      border-radius: 4px;
+      border: 2px solid rgba(255,255,255,0.15);
+      box-shadow: 0 4px 24px rgba(217, 90, 16, 0.45);
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+    }
+
+    .cta-button:hover {
+      background: #BF4C08;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(217, 90, 16, 0.55);
+    }
+
+    .hero-phone-note {
+      margin-top: 16px;
+      font-family: 'Arial', sans-serif;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    /* ── SECTION BASE ────────────────────────────────────────────── */
+    section {
+      padding: 80px 24px;
+    }
+
+    .section-inner {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      color: var(--yellow);
+      margin-bottom: 24px;
+      line-height: 1.15;
+    }
+
+    .divider {
+      width: 48px;
+      height: 3px;
+      background: var(--orange);
+      margin-bottom: 28px;
+    }
+
+    /* ── ABOUT ───────────────────────────────────────────────────── */
+    .about { background: var(--bg-section); }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+
+    .photo-placeholder {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: linear-gradient(135deg, #2D1800 0%, #1A0F00 100%);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-family: 'Arial', sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .about-text p { margin-bottom: 16px; color: var(--text); }
+
+    .heritage-tag {
+      display: inline-block;
+      background: var(--border);
+      color: var(--amber);
+      font-family: 'Arial', sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 2px;
+      margin-bottom: 20px;
+    }
+
+    /* ── REVIEWS ─────────────────────────────────────────────────── */
+    .reviews { background: var(--bg); }
+
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 8px;
+    }
+
+    .review-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--orange);
+      border-radius: 4px;
+      padding: 24px 26px;
+    }
+
+    .review-text {
+      font-style: italic;
+      color: var(--text);
+      margin-bottom: 14px;
+      line-height: 1.7;
+    }
+
+    .review-author {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ── MENU ────────────────────────────────────────────────────── */
+    .menu-section { background: var(--bg-section); }
+
+    .menu-intro {
+      margin-bottom: 36px;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+    }
+
+    .menu-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .menu-card-photo {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: linear-gradient(135deg, #2D1800 0%, #1A0F00 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-family: 'Arial', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .menu-card-body { padding: 20px 22px 24px; }
+
+    .menu-item-name {
+      font-size: 1.15rem;
+      color: var(--yellow);
+      margin-bottom: 6px;
+    }
+
+    .menu-item-finnish {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.78rem;
+      color: var(--orange);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .menu-item-desc {
+      font-size: 0.92rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .menu-cta-band {
+      margin-top: 40px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 28px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .menu-cta-band p {
+      color: var(--text);
+      font-size: 1rem;
+    }
+
+    /* ── HOURS ───────────────────────────────────────────────────── */
+    .hours-section { background: var(--bg); }
+
+    .hours-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+
+    .hours-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .hours-table tr { border-bottom: 1px solid var(--border); }
+    .hours-table tr:last-child { border-bottom: none; }
+
+    .hours-table td {
+      padding: 11px 4px;
+      font-family: 'Arial', sans-serif;
+      font-size: 0.92rem;
+    }
+
+    .hours-table td:first-child { color: var(--muted); }
+    .hours-table td:last-child  { color: var(--amber); text-align: right; }
+
+    .hours-note {
+      margin-top: 20px;
+      font-size: 0.88rem;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    /* ── CONTACT ─────────────────────────────────────────────────── */
+    .contact-section { background: var(--bg-section); }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+
+    .contact-block { margin-bottom: 28px; }
+
+    .contact-label {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 8px;
+    }
+
+    .contact-value {
+      font-size: 1.05rem;
+      color: var(--text);
+    }
+
+    .contact-value a {
+      color: var(--amber);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .contact-value a:hover { color: var(--yellow); }
+
+    .contact-map-placeholder {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: linear-gradient(135deg, #2D1800 0%, #1A0F00 100%);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-family: 'Arial', sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .contact-cta {
+      margin-top: 32px;
+    }
+
+    /* ── FOOTER ──────────────────────────────────────────────────── */
+    footer {
+      background: #110900;
+      border-top: 2px solid var(--border);
+      padding: 40px 24px;
+      text-align: center;
+    }
+
+    .footer-name {
+      font-size: 1.2rem;
+      color: var(--yellow);
+      margin-bottom: 6px;
+    }
+
+    .footer-address {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    .footer-meta {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-top: 20px;
+    }
+
+    .footer-meta a {
+      color: var(--muted);
+      text-decoration: none;
+    }
+
+    .powered {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-top: 8px;
+    }
+
+    /* ── RESPONSIVE ──────────────────────────────────────────────── */
+    @media (max-width: 680px) {
+      nav { padding: 12px 18px; }
+      .nav-links { display: none; }
+      .about-grid,
+      .reviews-grid,
+      .hours-grid,
+      .contact-grid { grid-template-columns: 1fr; }
+      .hours-grid .photo-placeholder { display: none; }
+      .menu-cta-band { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- DEMO BANNER -->
+  <div class="demo-banner">This is a demo website — not the official Järvigrilli site</div>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="#hero">Järvigrilli</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#hours">Hours</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero" class="hero">
+    <div class="hero-photo-placeholder"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Since 1973 — Oulu, Finland</p>
+      <h1>Järvigrilli</h1>
+      <p class="hero-sub">Classic Finnish Grilli — Lakeside, Oulu</p>
+      <p class="hero-tagline">Honest food, legendary burgers, open late.</p>
+      <a href="tel:0504479589" class="cta-button">Call to Order</a>
+      <p class="hero-phone-note">050 447 9589</p>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="about">
+    <div class="section-inner">
+      <div class="about-grid">
+        <div class="about-text">
+          <p class="section-label">Our Story</p>
+          <h2 class="section-title">A Grilli Legend Since 1973</h2>
+          <div class="divider"></div>
+          <span class="heritage-tag">Est. 1973</span>
+          <p>
+            Järvigrilli has fed the people of Oulu for over fifty years. Tucked beside
+            the lake on Järvitie, it started as a roadside kiosk and grew into one of
+            the most beloved fast-food stops in Northern Finland.
+          </p>
+          <p>
+            The formula has never changed: real ingredients, a generous hand, and
+            prices that make sense. Whether you pull up after work or roll in past
+            midnight on a Friday, the grill is on and the portions are serious.
+          </p>
+          <p>
+            This is Finnish grilli culture at its most authentic — no shortcuts,
+            no pretension, just food that does the job.
+          </p>
+        </div>
+        <div class="photo-placeholder">Photo — exterior</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section class="reviews">
+    <div class="section-inner">
+      <p class="section-label">What People Say</p>
+      <h2 class="section-title">Straight from the Regulars</h2>
+      <div class="divider"></div>
+      <div class="reviews-grid">
+        <div class="review-card">
+          <p class="review-text">
+            "Good Finnish grill, traditional stuff with nice price vs quality.
+            When hungry, take Puokkari Special — it's huge."
+          </p>
+          <p class="review-author">Google Review</p>
+        </div>
+        <div class="review-card">
+          <p class="review-text">
+            "Traditional Finnish grilli with a big menu for choosing."
+          </p>
+          <p class="review-author">Google Review</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MENU -->
+  <section id="menu" class="menu-section">
+    <div class="section-inner">
+      <p class="section-label">What We Serve</p>
+      <h2 class="section-title">The Menu</h2>
+      <div class="divider"></div>
+      <p class="menu-intro">
+        Finnish grilli classics done properly. Big portions, straightforward prices.
+        Call to hear today's full menu.
+      </p>
+
+      <div class="menu-grid">
+
+        <div class="menu-card">
+          <div class="menu-card-photo photo-placeholder">Photo — burger</div>
+          <div class="menu-card-body">
+            <h3 class="menu-item-name">Whole-Meat Burger</h3>
+            <p class="menu-item-finnish">Kokolihahampurilainen</p>
+            <p class="menu-item-desc">
+              A hand-formed patty of whole ground beef, grilled to order.
+              Served in a toasted bun with fresh toppings. The no-nonsense
+              standard that keeps regulars coming back.
+            </p>
+          </div>
+        </div>
+
+        <div class="menu-card">
+          <div class="menu-card-photo photo-placeholder">Photo — Puokkari Special</div>
+          <div class="menu-card-body">
+            <h3 class="menu-item-name">Puokkari Special</h3>
+            <p class="menu-item-finnish">Signature Mega Burger</p>
+            <p class="menu-item-desc">
+              The house legend. A double-stacked, sauce-loaded, fully loaded
+              monster of a burger. One is a meal. Recommended when seriously
+              hungry — it earns its reputation.
+            </p>
+          </div>
+        </div>
+
+        <div class="menu-card">
+          <div class="menu-card-photo photo-placeholder">Photo — makkaraperunat</div>
+          <div class="menu-card-body">
+            <h3 class="menu-item-name">Grilled Sausage with Fries</h3>
+            <p class="menu-item-finnish">Makkaraperunat</p>
+            <p class="menu-item-desc">
+              The Finnish grilli staple. Proper grilled makkara alongside
+              a generous pile of fries. Simple, satisfying, exactly what
+              a late-night stop should be.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="menu-cta-band">
+        <p>Full menu available by phone — call ahead or place your order when you arrive.</p>
+        <a href="tel:0504479589" class="cta-button">Call to Order</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOURS -->
+  <section id="hours" class="hours-section">
+    <div class="section-inner">
+      <p class="section-label">When We're Open</p>
+      <h2 class="section-title">Opening Hours</h2>
+      <div class="divider"></div>
+      <div class="hours-grid">
+        <div>
+          <table class="hours-table">
+            <tbody>
+              <tr>
+                <td>Monday</td>
+                <td>10:00 – 01:00</td>
+              </tr>
+              <tr>
+                <td>Tuesday</td>
+                <td>10:00 – 01:00</td>
+              </tr>
+              <tr>
+                <td>Wednesday</td>
+                <td>10:00 – 01:00</td>
+              </tr>
+              <tr>
+                <td>Thursday</td>
+                <td>10:00 – 01:00</td>
+              </tr>
+              <tr>
+                <td>Friday</td>
+                <td>10:00 – 04:00</td>
+              </tr>
+              <tr>
+                <td>Saturday</td>
+                <td>10:00 – 04:00</td>
+              </tr>
+              <tr>
+                <td>Sunday</td>
+                <td>11:00 – 01:00</td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="hours-note">Hours may vary on public holidays. Call ahead to confirm.</p>
+        </div>
+        <div class="photo-placeholder">Photo — night grill</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="contact-section">
+    <div class="section-inner">
+      <p class="section-label">Find Us</p>
+      <h2 class="section-title">Contact</h2>
+      <div class="divider"></div>
+      <div class="contact-grid">
+        <div>
+          <div class="contact-block">
+            <p class="contact-label">Address</p>
+            <p class="contact-value">Järvitie 16, 90550 Oulu</p>
+          </div>
+          <div class="contact-block">
+            <p class="contact-label">Phone</p>
+            <p class="contact-value">
+              <a href="tel:0504479589">050 447 9589</a>
+            </p>
+          </div>
+          <div class="contact-block">
+            <p class="contact-label">Cuisine</p>
+            <p class="contact-value">Finnish Grilli — Burgers, Sausages, Fast Food</p>
+          </div>
+          <div class="contact-cta">
+            <a href="tel:0504479589" class="cta-button">Call to Order</a>
+          </div>
+        </div>
+        <div class="contact-map-placeholder photo-placeholder">Map placeholder</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p class="footer-name">Järvigrilli</p>
+    <p class="footer-address">Järvitie 16, 90550 Oulu &mdash; 050 447 9589</p>
+    <p class="footer-meta">Open Mon–Thu until 01:00 &nbsp;|&nbsp; Fri–Sat until 04:00 &nbsp;|&nbsp; Sun until 01:00</p>
+    <p class="powered">Powered by Klar</p>
+  </footer>
+
+</body>
+</html>

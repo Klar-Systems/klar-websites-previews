@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mantan Grilli-Kioski — Kajaani</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --red:    #CC2200;
+      --red-dk: #991900;
+      --yellow: #FFD700;
+      --bg:     #1A0000;
+      --bg2:    #250000;
+      --bg3:    #300500;
+      --text:   #F5E8D0;
+      --muted:  #B89878;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Arial Black', 'Arial Bold', Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    /* ── DEMO BANNER ── */
+    .demo-banner {
+      background: var(--yellow);
+      color: #1A0000;
+      text-align: center;
+      padding: 10px 16px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    /* ── NAV ── */
+    nav {
+      background: var(--bg);
+      border-bottom: 3px solid var(--red);
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-logo {
+      font-size: 1.2rem;
+      font-weight: 900;
+      color: var(--yellow);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text);
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--yellow); }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      background: var(--bg2);
+      overflow: hidden;
+      min-height: 520px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 60px 24px;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        135deg,
+        transparent,
+        transparent 28px,
+        rgba(204,34,0,0.06) 28px,
+        rgba(204,34,0,0.06) 30px
+      );
+      pointer-events: none;
+    }
+
+    .photo-placeholder {
+      background: linear-gradient(145deg, #2E0500, #3D0A00);
+      border: 2px solid var(--red-dk);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .hero-photo {
+      width: 100%;
+      max-width: 780px;
+      height: 260px;
+      margin-bottom: 36px;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--yellow);
+      margin-bottom: 14px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      font-weight: 900;
+      color: var(--yellow);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      line-height: 1.1;
+      margin-bottom: 12px;
+      text-shadow: 3px 3px 0 var(--red);
+    }
+
+    .hero-sub {
+      font-size: 1.05rem;
+      color: var(--text);
+      max-width: 480px;
+      margin: 0 auto 32px;
+      font-weight: 400;
+    }
+
+    .cta-button {
+      display: inline-block;
+      background: var(--red);
+      color: var(--yellow);
+      font-size: 1.15rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 18px 44px;
+      border-radius: 3px;
+      border: 3px solid var(--yellow);
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .cta-button:hover {
+      background: var(--yellow);
+      color: var(--red);
+    }
+
+    .hero-note {
+      margin-top: 18px;
+      font-size: 0.8rem;
+      color: var(--muted);
+      font-weight: 400;
+    }
+
+    /* ── SECTIONS ── */
+    section {
+      padding: 72px 24px;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 10px;
+    }
+
+    .section-title {
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 900;
+      color: var(--yellow);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 24px;
+    }
+
+    /* ── ABOUT ── */
+    .about { background: var(--bg3); }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .about-photo {
+      height: 280px;
+      width: 100%;
+    }
+
+    .about-text p {
+      color: var(--text);
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+
+    .about-text p:last-child { margin-bottom: 0; }
+
+    /* ── MENU ── */
+    .menu { background: var(--bg); }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 24px;
+      margin-top: 8px;
+    }
+
+    .menu-card {
+      background: var(--bg3);
+      border: 2px solid var(--red-dk);
+      border-radius: 4px;
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+
+    .menu-card:hover { border-color: var(--yellow); }
+
+    .menu-photo {
+      height: 160px;
+      width: 100%;
+    }
+
+    .menu-body {
+      padding: 18px 16px;
+    }
+
+    .menu-name {
+      font-size: 1.05rem;
+      font-weight: 900;
+      color: var(--yellow);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 4px;
+    }
+
+    .menu-finnish {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--red);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .menu-desc {
+      font-size: 0.88rem;
+      color: var(--muted);
+      font-weight: 400;
+      line-height: 1.6;
+    }
+
+    /* ── HOURS ── */
+    .hours { background: var(--bg3); }
+
+    .hours-table {
+      width: 100%;
+      max-width: 420px;
+      border-collapse: collapse;
+      font-size: 0.95rem;
+    }
+
+    .hours-table tr {
+      border-bottom: 1px solid rgba(204,34,0,0.25);
+    }
+
+    .hours-table tr:last-child { border-bottom: none; }
+
+    .hours-table td {
+      padding: 10px 4px;
+      color: var(--text);
+    }
+
+    .hours-table td:first-child {
+      font-weight: 700;
+      color: var(--yellow);
+      width: 130px;
+    }
+
+    .hours-note {
+      margin-top: 20px;
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    /* ── CONTACT ── */
+    .contact { background: var(--bg); }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+    }
+
+    .contact-block h3 {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 10px;
+    }
+
+    .contact-block p {
+      font-size: 1rem;
+      color: var(--text);
+      font-weight: 400;
+      line-height: 1.7;
+    }
+
+    .contact-block a {
+      color: var(--yellow);
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .contact-block a:hover { text-decoration: underline; }
+
+    .contact-cta {
+      margin-top: 32px;
+    }
+
+    .contact-cta .cta-button {
+      font-size: 1rem;
+      padding: 16px 36px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--bg2);
+      border-top: 3px solid var(--red);
+      text-align: center;
+      padding: 28px 24px;
+    }
+
+    footer .footer-name {
+      font-size: 0.95rem;
+      font-weight: 900;
+      color: var(--yellow);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    footer .footer-addr {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    footer .powered {
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 680px) {
+      .nav-links { display: none; }
+
+      .about-grid,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero h1 { font-size: 2.2rem; }
+
+      .cta-button { padding: 16px 32px; font-size: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- REQUIREMENT 1: Demo banner -->
+  <div class="demo-banner">This is a demo website — not the official Mantan Grilli-Kioski site</div>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="#hero">Mantan Grilli-Kioski</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#hours">Hours</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="photo-placeholder hero-photo">Restaurant photo</div>
+    <p class="hero-eyebrow">Kajaani's legendary grilli kiosk</p>
+    <h1>Mantan<br>Grilli-Kioski</h1>
+    <p class="hero-sub">Giant portions. Honest grilli food. Served hot from the kiosk since day one.</p>
+    <!-- REQUIREMENT 2 and 3: CTA button with tel: link -->
+    <a href="tel:0505011260" class="cta-button">Call to Order</a>
+    <p class="hero-note">050 5011260 &mdash; Mon&ndash;Fri 10:00&ndash;22:00 &nbsp;|&nbsp; Sat 11:00&ndash;22:00 &nbsp;|&nbsp; Sun 12:00&ndash;22:00</p>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="photo-placeholder about-photo">Kiosk exterior photo</div>
+        <div class="about-text">
+          <p class="section-label">About us</p>
+          <h2 class="section-title">A Kajaani Institution</h2>
+          <p>Mantan Grilli-Kioski is a proper Finnish roadside grill kiosk in the Sudenpolku neighbourhood of Kajaani. No frills, no pretence — just large, satisfying portions of classic Finnish grilli food at honest prices.</p>
+          <p>From the legendary Mega Manta to crispy Kebab Ranskalaiset, every order is made fresh and handed over fast. This is the kind of place Kajaani locals have been coming back to for years.</p>
+          <p>Order by phone and pick up hot from the kiosk.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MENU -->
+  <section class="menu" id="menu">
+    <div class="container">
+      <p class="section-label">What we serve</p>
+      <h2 class="section-title">The Menu</h2>
+      <div class="menu-grid">
+
+        <div class="menu-card">
+          <div class="photo-placeholder menu-photo">Mega Manta photo</div>
+          <div class="menu-body">
+            <p class="menu-name">Mega Manta</p>
+            <p class="menu-finnish">The house special</p>
+            <p class="menu-desc">The signature item. An oversized grilli portion stacked high — exactly what the name promises. Order one and you will not leave hungry.</p>
+          </div>
+        </div>
+
+        <div class="menu-card">
+          <div class="photo-placeholder menu-photo">Kebab fries photo</div>
+          <div class="menu-body">
+            <p class="menu-name">Kebab Ranskalaiset</p>
+            <p class="menu-finnish">Kebab with fries</p>
+            <p class="menu-desc">Generous kebab meat served over a full portion of crispy fries. A Finnish grilli classic, done properly.</p>
+          </div>
+        </div>
+
+        <div class="menu-card">
+          <div class="photo-placeholder menu-photo">Blue cheese burger photo</div>
+          <div class="menu-body">
+            <p class="menu-name">Aurajuustoburgeri</p>
+            <p class="menu-finnish">Blue cheese burger</p>
+            <p class="menu-desc">A bold beef burger loaded with Finnish Aura blue cheese. Sharp, creamy, and satisfying — one of the best burgers in Kajaani.</p>
+          </div>
+        </div>
+
+        <div class="menu-card">
+          <div class="photo-placeholder menu-photo">Sausage fries photo</div>
+          <div class="menu-body">
+            <p class="menu-name">Makkararanskalaiset</p>
+            <p class="menu-finnish">Sausage with fries</p>
+            <p class="menu-desc">Grilled Finnish sausage alongside a heap of golden fries. Simple, filling, and a longtime favourite at the kiosk.</p>
+          </div>
+        </div>
+
+        <div class="menu-card">
+          <div class="photo-placeholder menu-photo">Lihapiirakka photo</div>
+          <div class="menu-body">
+            <p class="menu-name">Lihapiirakka</p>
+            <p class="menu-finnish">Meat pasty</p>
+            <p class="menu-desc">A traditional Finnish deep-fried meat pasty — golden crust, savoury filling. The perfect quick bite from the kiosk window.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- HOURS -->
+  <section class="hours" id="hours">
+    <div class="container">
+      <p class="section-label">When we are open</p>
+      <h2 class="section-title">Opening Hours</h2>
+      <table class="hours-table">
+        <tbody>
+          <tr>
+            <td>Monday</td>
+            <td>10:00 &ndash; 22:00</td>
+          </tr>
+          <tr>
+            <td>Tuesday</td>
+            <td>10:00 &ndash; 22:00</td>
+          </tr>
+          <tr>
+            <td>Wednesday</td>
+            <td>10:00 &ndash; 22:00</td>
+          </tr>
+          <tr>
+            <td>Thursday</td>
+            <td>10:00 &ndash; 22:00</td>
+          </tr>
+          <tr>
+            <td>Friday</td>
+            <td>10:00 &ndash; 22:00</td>
+          </tr>
+          <tr>
+            <td>Saturday</td>
+            <td>11:00 &ndash; 22:00</td>
+          </tr>
+          <tr>
+            <td>Sunday</td>
+            <td>12:00 &ndash; 22:00</td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="hours-note">Hours may vary on public holidays. Call ahead to confirm.</p>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="container">
+      <p class="section-label">Find us</p>
+      <h2 class="section-title">Contact</h2>
+      <div class="contact-grid">
+        <div class="contact-block">
+          <h3>Address</h3>
+          <p>
+            Mantan Grilli-Kioski<br>
+            Sudenpolku 15<br>
+            87300 Kajaani<br>
+            Finland
+          </p>
+        </div>
+        <div class="contact-block">
+          <h3>Phone</h3>
+          <p>
+            <a href="tel:0505011260">050 5011260</a>
+          </p>
+          <p class="contact-cta">
+            <a href="tel:0505011260" class="cta-button">Call to Order</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p class="footer-name">Mantan Grilli-Kioski</p>
+    <p class="footer-addr">Sudenpolku 15, 87300 Kajaani</p>
+    <!-- REQUIREMENT 4: Powered by Klar as plain text in a paragraph -->
+    <p class="powered">Powered by Klar</p>
+  </footer>
+
+</body>
+</html>
