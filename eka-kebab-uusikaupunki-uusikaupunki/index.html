@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eka Kebab Uusikaupunki — Kebab and Pizza, Uusikaupunki</title>
+  <!-- Palette: classic kebab restaurant — near-black bg, red primary, amber accent. Seg2. -->
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0F0A00;
+      --surface: #1A1200;
+      --red: #C0392B;
+      --gold: #F39C12;
+      --text: #F5ECD7;
+      --muted: #9A8060;
+      --border: #2E2010;
+    }
+
+    body { font-family: 'Arial', sans-serif; background: var(--bg); color: var(--text); }
+
+    /* NAV */
+    nav {
+      background: rgba(15,10,0,0.97);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky; top: 0; z-index: 100;
+    }
+    .logo { font-size: 1.5rem; font-weight: 900; letter-spacing: 1px; color: var(--gold); text-transform: uppercase; }
+    .nav-links a { color: var(--muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--red); }
+
+    /* HERO */
+    .hero {
+      background: var(--surface);
+      padding: 5rem 2rem;
+      text-align: center;
+      position: relative;
+      border-bottom: 3px solid var(--red);
+    }
+    .hero-photo-placeholder {
+      position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(to bottom, #1a1200 0%, #0f0a00 100%);
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,0.05); font-size: 0.85rem;
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 720px; margin: 0 auto; }
+    .hero-tag {
+      display: inline-block;
+      border: 2px solid var(--red);
+      color: var(--red);
+      padding: 0.3rem 1rem;
+      font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase;
+      margin-bottom: 1.5rem; font-weight: 700;
+    }
+    .hero h1 { font-size: 3rem; font-weight: 900; color: #fff; text-transform: uppercase; letter-spacing: 2px; line-height: 1.1; margin-bottom: 1rem; }
+    .hero h1 span { color: var(--red); }
+    .hero p { color: var(--muted); font-size: 1.05rem; line-height: 1.7; max-width: 520px; margin: 0 auto 2rem; }
+    .hero-cta { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--red); color: #fff;
+      padding: 1rem 2.5rem; font-weight: 900; font-size: 1rem;
+      letter-spacing: 1px; text-transform: uppercase;
+      text-decoration: none; display: inline-block; transition: opacity 0.2s;
+    }
+    .btn-primary:hover { opacity: 0.85; }
+    .btn-outline {
+      border: 2px solid var(--gold); color: var(--gold);
+      padding: 1rem 2.5rem; font-size: 1rem; letter-spacing: 1px; font-weight: 700;
+      text-transform: uppercase; text-decoration: none; display: inline-block; transition: background 0.2s;
+    }
+    .btn-outline:hover { background: rgba(243,156,18,0.1); }
+
+    /* PHOTO PLACEHOLDER */
+    .photo-placeholder {
+      background: #252015; color: #5a4a30;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.85rem; border-radius: 2px;
+    }
+
+    /* ABOUT */
+    .about { max-width: 900px; margin: 0 auto; padding: 4rem 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+    @media (max-width: 640px) { .about { grid-template-columns: 1fr; } }
+    .about-text h2 { font-size: 2rem; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; color: var(--gold); margin-bottom: 1rem; }
+    .about-text p { color: var(--muted); line-height: 1.75; margin-bottom: 0.85rem; }
+    .about-img { height: 300px; }
+    .about-img .photo-placeholder { height: 100%; }
+
+    /* MENU */
+    .menu-section { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 4rem 2rem; }
+    .menu-inner { max-width: 900px; margin: 0 auto; }
+    .menu-inner h2 { font-size: 2rem; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; color: var(--gold); text-align: center; margin-bottom: 2rem; }
+    .menu-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+    @media (max-width: 640px) { .menu-cols { grid-template-columns: 1fr; } }
+    .menu-col h3 { color: var(--red); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+    .menu-col p { color: var(--muted); font-size: 0.88rem; line-height: 1.7; }
+    .highlight-box { background: var(--red); padding: 1.25rem; text-align: center; margin-top: 1.5rem; }
+    .highlight-box h3 { color: #fff; font-size: 1.1rem; font-weight: 900; }
+    .highlight-box p { color: rgba(255,255,255,0.85); font-size: 0.9rem; margin-top: 0.25rem; }
+    .price-tag { color: var(--gold); font-size: 1.5rem; font-weight: 900; display: block; margin-top: 0.5rem; }
+
+    /* CALL TO ORDER */
+    .cta-section { text-align: center; padding: 3.5rem 2rem; background: var(--red); }
+    .cta-section h2 { color: #fff; font-size: 2rem; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 0.75rem; }
+    .cta-section p { color: rgba(255,255,255,0.85); font-size: 1rem; margin-bottom: 1.5rem; }
+    .cta-phone { display: inline-block; background: #fff; color: var(--red); padding: 1rem 2.5rem; font-size: 1.3rem; font-weight: 900; text-decoration: none; letter-spacing: 1px; transition: opacity 0.2s; }
+    .cta-phone:hover { opacity: 0.9; }
+
+    /* CONTACT & HOURS */
+    .contact-section { max-width: 900px; margin: 0 auto; padding: 4rem 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+    @media (max-width: 640px) { .contact-section { grid-template-columns: 1fr; } }
+    .contact-section h2 { font-size: 1.8rem; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; color: var(--gold); margin-bottom: 1.25rem; }
+    .contact-line { color: var(--text); margin-bottom: 0.5rem; }
+    .contact-line a { color: var(--gold); text-decoration: none; }
+    .contact-line a:hover { text-decoration: underline; }
+    .hours-table { border-collapse: collapse; width: 100%; margin-top: 0.75rem; }
+    .hours-table td { padding: 0.4rem 0; color: var(--muted); font-size: 0.9rem; }
+    .hours-table td:first-child { color: var(--text); font-weight: 700; padding-right: 1.5rem; }
+
+    /* MAP */
+    .map-wrap { height: 280px; }
+    .map-wrap iframe { width: 100%; height: 100%; border: 0; filter: grayscale(0.3); }
+
+    /* FOOTER */
+    footer { background: #080500; border-top: 3px solid var(--red); padding: 2rem; text-align: center; color: var(--muted); font-size: 0.85rem; }
+    footer strong { color: var(--text); }
+
+    /* Demo banner */
+    .demo-banner {
+      background: rgba(0,0,0,0.85);
+      border-bottom: 1px solid #555;
+      color: rgba(255,255,255,0.8);
+      text-align: center;
+      padding: 0.6rem 1rem;
+      font-size: 0.85rem;
+    }
+    .demo-banner strong { color: #fff; }
+    .demo-banner a { color: #F39C12; text-decoration: none; margin-left: 0.5rem; }
+    .demo-banner a:hover { text-decoration: underline; }
+    .hero-rating { display: inline-block; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: 3px; padding: 0.3rem 0.7rem; font-size: 0.9rem; color: inherit; margin-bottom: 1.5rem; }
+    .hero-rating strong { color: #F39C12; }
+    .footer-klar { font-size: 0.8rem; color: rgba(255,255,255,0.3); margin-top: 0.5rem; }
+  </style>
+</head>
+<body>
+
+<!-- Demo banner -->
+<div class="demo-banner">
+  <strong>This is a demo</strong> &mdash; a free preview built for Eka Kebab Uusikaupunki.
+  <a href="https://preview.klarsystems.com/eka-kebab-uusikaupunki-uusikaupunki/proposal/" target="_blank" rel="noopener">View the full proposal &rarr;</a>
+</div>
+
+  <nav>
+    <div class="logo">Eka Kebab</div>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#menu">Menu</a>
+      <a href="#contact">Find Us</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-photo-placeholder">Your photo here</div>
+    <div class="hero-content">
+      <div class="hero-tag">Kebab &amp; Pizza &middot; Uusikaupunki &middot; Open Daily</div>
+      <h1>Kebab &amp; <span>Pizza</span></h1>
+      <p>Uusikaupunki's kebab-pizza destination at the bus station. Lunch deals from €7.50. Open daily 11-22 with home delivery.</p>
+      <div class="hero-rating"><strong>4.0</strong> Google rating (284 reviews)</div>
+      <div class="hero-cta">
+        <a href="tel:+35828441188" class="btn-primary">Call to Order</a>
+        <a href="#menu" class="btn-outline">View Menu</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="about-text">
+      <h2>Your Local Kebab</h2>
+      <p>Eka Kebab Uusikaupunki is the city's go-to for kebab and pizza, right at the bus station on Rauhankatu 1. Open every day from 11AM, with lunch deals Monday to Friday and home delivery until 9:30PM.</p>
+      <p>37+ dishes on the menu — kebab plates, pizzas, and great value lunch deals at €7.50. Wheelchair accessible, outdoor seating, and card payments accepted.</p>
+    </div>
+    <div class="about-img">
+      <div class="photo-placeholder">Restaurant photo coming soon</div>
+    </div>
+  </section>
+
+  <!-- MENU -->
+  <section class="menu-section" id="menu">
+    <div class="menu-inner">
+      <h2>Our Menu</h2>
+      <div class="menu-cols">
+        <div class="menu-col">
+          <h3>Kebab</h3>
+          <p>Full kebab plate menu — 9 varieties. From classic kebab plates to mixed combinations. Choose your sauce, salad and side.</p>
+          <div class="highlight-box">
+            <h3>Lunch Deal</h3>
+            <p>Kebab or pizza, Mon–Fri 11:00–15:00</p>
+            <span class="price-tag">€7.50</span>
+          </div>
+        </div>
+        <div class="menu-col">
+          <h3>Pizza</h3>
+          <p>25 pizza varieties — from classic Margherita to fully loaded specials. Thin crust, generous toppings. Order by number or ask for recommendations.</p>
+          <div class="menu-col" style="margin-top:1rem; padding:1rem; background:rgba(255,255,255,0.04); border-left:3px solid var(--gold);">
+            <h3 style="color:var(--gold); font-size:0.85rem; text-transform:uppercase; letter-spacing:2px; margin-bottom:0.5rem;">Delivery</h3>
+            <p>Home delivery available daily 11:00–21:30. Call to order.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CALL TO ORDER -->
+  <section class="cta-section">
+    <h2>Order Now</h2>
+    <p>Call us to order for pickup or delivery. Open daily 11AM–10PM.</p>
+    <a href="tel:+35828441188" class="cta-phone">+358 2 844 1188</a>
+  </section>
+
+  <!-- CONTACT & HOURS -->
+  <section class="contact-section" id="contact">
+    <div>
+      <h2>Find Us</h2>
+      <div class="contact-line">Rauhankatu 1, 23500 Uusikaupunki</div>
+      <div class="contact-line" style="color:var(--muted); font-size:0.9rem;">(At the bus station / linja-autoasema)</div>
+      <div class="contact-line" style="margin-top:0.5rem;"><a href="tel:+35828441188">+358 2 844 1188</a></div>
+      <div class="contact-line"><a href="mailto:ekakebab@windowslive.com">ekakebab@windowslive.com</a></div>
+      <div class="contact-line" style="margin-top:0.5rem; color:var(--muted); font-size:0.9rem;">Wheelchair accessible &middot; Outdoor seating &middot; Card accepted</div>
+    </div>
+    <div>
+      <h2>Opening Hours</h2>
+      <table class="hours-table">
+        <tr><td>Mon – Fri</td><td>11:00 – 22:00</td></tr>
+        <tr><td>Sat – Sun</td><td>12:00 – 22:00</td></tr>
+      </table>
+      <p style="margin-top:1rem; font-size:0.88rem; color:var(--muted);">Lunch deals Mon-Fri 11:00-15:00 &middot; Delivery until 21:30</p>
+    </div>
+  </section>
+
+  <!-- MAP -->
+  <div class="map-wrap">
+    <iframe
+      src="https://maps.google.com/maps?q=Rauhankatu+1+Uusikaupunki&z=16&output=embed"
+      title="Eka Kebab Uusikaupunki location map"
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </div>
+
+  <footer>
+    <strong>Eka Kebab Uusikaupunki</strong> &middot; Rauhankatu 1, 23500 Uusikaupunki &middot; <a href="tel:+35828441188" style="color:var(--gold)">+358 2 844 1188</a>
+    <div class="footer-klar">Powered by Klar</div>
+  </footer>
+
+</body>
+</html>

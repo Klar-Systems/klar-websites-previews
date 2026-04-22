@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pizza Stoppi – Pizza Delivery in Jyväskylä</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --red: #c0161a;
+      --red-dark: #8b0f12;
+      --dark: #111111;
+      --dark-mid: #1e1e1e;
+      --white: #ffffff;
+      --off-white: #f8f8f8;
+      --light-gray: #f2f2f2;
+      --text: #1a1a1a;
+      --muted: #555555;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: Arial, Helvetica, sans-serif; color: var(--text); background: var(--white); line-height: 1.6; }
+
+    /* DEMO BANNER */
+    .demo-banner {
+      background: var(--red);
+      color: #fff;
+      text-align: center;
+      padding: 10px 20px;
+      font-size: 0.85rem;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    .demo-banner a { color: #fff; font-weight: bold; text-decoration: underline; }
+
+    /* NAV */
+    nav {
+      background: var(--dark);
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .nav-brand { font-size: 1.3rem; font-weight: bold; color: #fff; letter-spacing: 0.02em; }
+    .nav-brand span { color: var(--red); }
+    .nav-links { display: flex; gap: 20px; flex-wrap: wrap; }
+    .nav-links a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
+    .nav-links a:hover { color: #fff; }
+    .nav-cta { background: var(--red); color: #fff !important; padding: 8px 18px; border-radius: 3px; font-weight: bold; }
+
+    /* HERO */
+    .hero {
+      background: var(--dark);
+      color: var(--white);
+      padding: 80px 24px 64px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: repeating-linear-gradient(
+        -45deg,
+        rgba(192,22,26,0.04),
+        rgba(192,22,26,0.04) 2px,
+        transparent 2px,
+        transparent 12px
+      );
+    }
+    .hero-content { position: relative; z-index: 1; }
+    .hero-badge {
+      display: inline-block;
+      background: var(--red);
+      color: #fff;
+      padding: 5px 16px;
+      border-radius: 3px;
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      font-weight: bold;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 6vw, 3.5rem);
+      color: #fff;
+      margin-bottom: 8px;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+    }
+    .hero h1 span { color: var(--red); }
+    .hero-tagline {
+      font-size: 1.1rem;
+      max-width: 540px;
+      margin: 0 auto 28px;
+      color: rgba(255,255,255,0.8);
+    }
+    .hero-meta {
+      display: flex;
+      justify-content: center;
+      gap: 28px;
+      flex-wrap: wrap;
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 36px;
+    }
+    .hero-meta strong { color: #fff; }
+    .hero-cta-group { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--red);
+      color: #fff;
+      padding: 14px 28px;
+      border-radius: 3px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1rem;
+      display: inline-block;
+      transition: background 0.2s;
+    }
+    .btn-primary:hover { background: #a51215; }
+    .btn-outline {
+      border: 2px solid rgba(255,255,255,0.5);
+      color: #fff;
+      padding: 12px 26px;
+      border-radius: 3px;
+      text-decoration: none;
+      font-size: 1rem;
+      display: inline-block;
+    }
+
+    /* SECTION COMMON */
+    section { padding: 60px 24px; }
+    .container { max-width: 900px; margin: 0 auto; }
+    .section-title { font-size: 1.7rem; color: var(--red); margin-bottom: 8px; font-weight: 900; }
+    .section-divider { width: 40px; height: 4px; background: var(--red); margin: 0 0 28px 0; }
+    .section-divider.center { margin: 0 auto 28px; }
+
+    /* NIGHT DELIVERY BANNER */
+    .night-banner {
+      background: var(--red-dark);
+      color: #fff;
+      padding: 28px 24px;
+      text-align: center;
+    }
+    .night-banner h2 { font-size: 1.4rem; font-weight: 900; margin-bottom: 8px; }
+    .night-banner p { opacity: 0.85; font-size: 0.95rem; }
+    .night-banner .order-links { margin-top: 16px; display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .night-banner .order-links a {
+      background: #fff;
+      color: var(--red-dark);
+      padding: 10px 20px;
+      font-weight: bold;
+      text-decoration: none;
+      border-radius: 3px;
+      font-size: 0.95rem;
+    }
+
+    /* ABOUT */
+    .about { background: var(--off-white); }
+    .about-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+    .about p { color: var(--muted); margin-bottom: 16px; }
+    .about-stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .about-stat { background: #fff; border-left: 4px solid var(--red); padding: 16px; }
+    .about-stat .number { font-size: 1.8rem; font-weight: bold; color: var(--red); line-height: 1; }
+    .about-stat .label { font-size: 0.85rem; color: var(--muted); margin-top: 4px; }
+
+    /* MENU HIGHLIGHTS */
+    .menu-highlights { background: var(--white); }
+    .pizza-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+    .pizza-card {
+      background: var(--off-white);
+      border-top: 4px solid var(--red);
+      padding: 24px 20px;
+    }
+    .pizza-card h3 { font-size: 1rem; color: var(--text); margin-bottom: 8px; font-weight: bold; }
+    .pizza-card p { font-size: 0.9rem; color: var(--muted); }
+
+    /* ORDER */
+    .order-section { background: var(--light-gray); text-align: center; }
+    .order-options { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-bottom: 20px; }
+    .order-option {
+      background: #fff;
+      border: 2px solid #ddd;
+      padding: 20px 24px;
+      text-align: center;
+      flex: 1;
+      min-width: 180px;
+    }
+    .order-option h3 { color: var(--red); margin-bottom: 8px; font-size: 1rem; }
+    .order-option p { font-size: 0.9rem; color: var(--muted); }
+    .order-option a { display: block; margin-top: 12px; color: var(--red); font-weight: bold; text-decoration: none; }
+
+    /* HOURS */
+    .hours { background: var(--dark); color: #fff; }
+    .hours .section-title { color: var(--red); }
+    .hours-table { width: 100%; max-width: 500px; border-collapse: collapse; }
+    .hours-table tr { border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .hours-table td { padding: 10px 0; font-size: 0.95rem; }
+    .hours-table .day { color: rgba(255,255,255,0.7); }
+    .hours-table .time { text-align: right; color: var(--red); font-weight: bold; }
+    .hours-note { margin-top: 16px; font-size: 0.85rem; color: rgba(255,255,255,0.5); font-style: italic; }
+
+    /* CONTACT */
+    .contact { background: var(--white); }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+    .contact-item { margin-bottom: 20px; }
+    .contact-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--red); margin-bottom: 4px; }
+    .contact-value { font-size: 1rem; color: var(--text); }
+    .contact-value a { color: var(--red); text-decoration: none; }
+    .contact-value a:hover { text-decoration: underline; }
+    .map-placeholder { background: var(--off-white); border: 2px dashed #ccc; padding: 40px; text-align: center; color: var(--muted); font-size: 0.9rem; }
+
+    /* PROPOSAL CTA */
+    .proposal-cta { background: var(--red); color: #fff; text-align: center; padding: 60px 24px; }
+    .proposal-cta h2 { font-size: 1.7rem; margin-bottom: 12px; font-weight: 900; }
+    .proposal-cta p { margin-bottom: 28px; opacity: 0.9; max-width: 500px; margin-left: auto; margin-right: auto; margin-bottom: 28px; }
+    .btn-white { background: #fff; color: var(--red); padding: 14px 32px; border-radius: 3px; text-decoration: none; font-weight: bold; font-size: 1rem; display: inline-block; }
+
+    /* FOOTER */
+    footer { background: var(--dark); color: rgba(255,255,255,0.5); text-align: center; padding: 24px; font-size: 0.85rem; }
+    footer a { color: rgba(255,255,255,0.7); text-decoration: none; }
+
+    @media (max-width: 640px) {
+      .about-inner { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .hero { padding: 60px 16px 48px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- DEMO BANNER -->
+  <div class="demo-banner">
+    This is a demo preview built by Klar Systems for Pizza Stoppi &mdash;
+    <a href="https://preview.klarsystems.com/pizza-stoppi-jyvaskyla/proposal/">View the full proposal</a>
+  </div>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-brand">Pizza <span>Stoppi</span></div>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#menu">Menu</a>
+      <a href="#order">Order</a>
+      <a href="#hours">Hours</a>
+      <a href="#contact">Contact</a>
+      <a href="tel:+358401245687" class="nav-cta">Call to Order</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-content">
+      <div class="hero-badge">Fast Pizza &bull; Night Delivery</div>
+      <h1>Pizza <span>Stoppi</span></h1>
+      <p class="hero-tagline">Fast, fresh pizzas in Jyväskylä — and night delivery when you need it most.</p>
+      <div class="hero-meta">
+        <span><strong>4.4 / 5</strong> &bull; 323 reviews</span>
+        <span>Sepänkatu 5, Jyväskylä</span>
+        <span>Wolt &bull; Foodora &bull; Phone</span>
+      </div>
+      <div class="hero-cta-group">
+        <a href="tel:+358401245687" class="btn-primary">Call to Order</a>
+        <a href="#order" class="btn-outline">Order Online</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- NIGHT DELIVERY BANNER -->
+  <div class="night-banner">
+    <h2>Night Delivery Available</h2>
+    <p>Pizza Stoppi delivers when other places are already closed. Order through Wolt or Foodora late into the night.</p>
+    <div class="order-links">
+      <a href="https://wolt.com/fi/fin/jyvaskyla/restaurant/pizza-stoppi" target="_blank" rel="noopener">Order on Wolt</a>
+      <a href="https://www.foodora.fi/en/restaurant/yn4v/pizzastoppi-yokuljetus" target="_blank" rel="noopener">Order on Foodora</a>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="container">
+      <div class="about-inner">
+        <div>
+          <h2 class="section-title">Jyväskylä's Pizza Stop</h2>
+          <div class="section-divider"></div>
+          <p>Pizza Stoppi is Jyväskylä's go-to neighbourhood pizzeria on Sepänkatu. Fast, no-fuss, always fresh — the kind of place that delivers exactly what it promises.</p>
+          <p>What sets Pizza Stoppi apart: night delivery. When it's late and you need a real pizza, Stoppi is still on. Order through Wolt or Foodora, or call directly.</p>
+          <p>Over 323 Google reviews with a 4.4 rating prove that speed and quality can go hand in hand.</p>
+        </div>
+        <div class="about-stat-grid">
+          <div class="about-stat">
+            <div class="number">4.4</div>
+            <div class="label">Google rating</div>
+          </div>
+          <div class="about-stat">
+            <div class="number">323+</div>
+            <div class="label">Customer reviews</div>
+          </div>
+          <div class="about-stat">
+            <div class="number">Night</div>
+            <div class="label">Late delivery available</div>
+          </div>
+          <div class="about-stat">
+            <div class="number">Wolt</div>
+            <div class="label">Also on Foodora</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MENU HIGHLIGHTS -->
+  <section class="menu-highlights" id="menu">
+    <div class="container">
+      <h2 class="section-title">Menu Highlights</h2>
+      <div class="section-divider"></div>
+      <div class="pizza-grid">
+        <div class="pizza-card">
+          <h3>Classic Pizzas</h3>
+          <p>All the classics done right — Margherita, Pepperoni, Quattro Stagioni and more, made fresh every time.</p>
+        </div>
+        <div class="pizza-card">
+          <h3>House Specials</h3>
+          <p>Stoppi's own signature combinations — extra toppings, bold flavours, fan favourites.</p>
+        </div>
+        <div class="pizza-card">
+          <h3>Vegetarian Options</h3>
+          <p>A solid selection of meat-free pizzas using fresh vegetables and quality cheese.</p>
+        </div>
+        <div class="pizza-card">
+          <h3>Night Delivery Menu</h3>
+          <p>The full menu available late into the night — order through Wolt or Foodora.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ORDER -->
+  <section class="order-section" id="order">
+    <div class="container">
+      <h2 class="section-title" style="text-align:center;">How to Order</h2>
+      <div class="section-divider center"></div>
+      <div class="order-options">
+        <div class="order-option">
+          <h3>Call Ahead</h3>
+          <p>Call to order for fast pickup at Sepänkatu 5.</p>
+          <a href="tel:+358401245687">+358 40 1245687</a>
+        </div>
+        <div class="order-option">
+          <h3>Wolt</h3>
+          <p>Home delivery day and night through Wolt.</p>
+          <a href="https://wolt.com/fi/fin/jyvaskyla/restaurant/pizza-stoppi" target="_blank" rel="noopener">Order on Wolt</a>
+        </div>
+        <div class="order-option">
+          <h3>Foodora</h3>
+          <p>Night delivery available on Foodora too.</p>
+          <a href="https://www.foodora.fi/en/restaurant/yn4v/pizzastoppi-yokuljetus" target="_blank" rel="noopener">Order on Foodora</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOURS -->
+  <section class="hours" id="hours">
+    <div class="container">
+      <h2 class="section-title">Opening Hours</h2>
+      <div class="section-divider"></div>
+      <table class="hours-table">
+        <tr>
+          <td class="day">Monday – Thursday</td>
+          <td class="time">11:00 AM – 11:00 PM</td>
+        </tr>
+        <tr>
+          <td class="day">Friday – Saturday</td>
+          <td class="time">11:00 AM – 3:00 AM</td>
+        </tr>
+        <tr>
+          <td class="day">Sunday</td>
+          <td class="time">12:00 PM – 10:00 PM</td>
+        </tr>
+      </table>
+      <p class="hours-note">Night delivery via Wolt and Foodora. Call to confirm current hours: +358 40 1245687</p>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="container">
+      <h2 class="section-title">Find Us</h2>
+      <div class="section-divider"></div>
+      <div class="contact-grid">
+        <div>
+          <div class="contact-item">
+            <div class="contact-label">Address</div>
+            <div class="contact-value">Sepänkatu 5, 40720 Jyväskylä</div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-label">Phone</div>
+            <div class="contact-value"><a href="tel:+358401245687">+358 40 1245687</a></div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-label">Email</div>
+            <div class="contact-value"><a href="mailto:stoppi.ravintola@gmail.com">stoppi.ravintola@gmail.com</a></div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-label">Follow Us</div>
+            <div class="contact-value">
+              <a href="https://www.facebook.com/pizzastoppi/" target="_blank" rel="noopener">Facebook</a>
+              &nbsp;&bull;&nbsp;
+              <a href="https://www.instagram.com/pizzastoppi/" target="_blank" rel="noopener">Instagram</a>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="map-placeholder">
+            <p>Sepänkatu 5, 40720 Jyväskylä</p>
+            <p style="margin-top:8px;"><a href="https://maps.google.com/?q=Pizza+Stoppi+Jyvaskyla" target="_blank" rel="noopener" style="color: var(--red);">Open in Google Maps</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROPOSAL CTA -->
+  <section class="proposal-cta">
+    <h2>Want a website like this for your pizzeria?</h2>
+    <p>This demo was built by Klar Systems. We create fast, beautiful websites for Finnish restaurants.</p>
+    <a href="https://preview.klarsystems.com/pizza-stoppi-jyvaskyla/proposal/" class="btn-white">View Proposal for Pizza Stoppi</a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2024 Pizza Stoppi &bull; Sepänkatu 5, 40720 Jyväskylä &bull; <a href="tel:+358401245687">+358 40 1245687</a></p>
+    <p style="margin-top:8px;">Powered by Klar &mdash; <a href="https://klarsystems.com">klarsystems.com</a></p>
+  </footer>
+
+</body>
+</html>

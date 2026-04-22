@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Ruokakeidas &mdash; Grill, Pizza &amp; Kebab in Oulainen</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #FFF8F3;
+      color: #1C1007;
+      line-height: 1.65;
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+    }
+    h1, h2, h3 { font-family: 'Oswald', sans-serif; line-height: 1.18; color: #1C1007; font-weight: 700; letter-spacing: 0.02em; }
+    h1 { font-size: clamp(2.4rem, 5vw, 3.8rem); }
+    h2 { font-size: clamp(1.8rem, 3.2vw, 2.6rem); margin-bottom: 0.6em; }
+    h3 { font-size: 1.25rem; margin-bottom: 0.4em; }
+    p { margin-bottom: 0.9em; color: #1C1007; }
+    a { color: #C0390B; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .container { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+    section { padding: 80px 0; }
+    section + section { border-top: 1px solid #E8D5C0; }
+
+    /* Demo banner */
+    .demo-banner {
+      background: #1C1007;
+      color: #FFF8F3;
+      text-align: center;
+      padding: 12px 24px;
+      font-size: 0.88rem;
+      letter-spacing: 0.02em;
+      position: sticky; top: 0; z-index: 1000;
+    }
+    .demo-banner a { color: #F4763A; text-decoration: underline; margin-left: 6px; }
+
+    /* Nav */
+    nav { background: #FFF8F3; border-bottom: 1px solid #E8D5C0; padding: 16px 0; position: sticky; top: 42px; z-index: 900; }
+    nav .container { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .nav-brand { font-family: 'Oswald', sans-serif; font-size: 1.3rem; color: #1C1007; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+    .nav-links { display: flex; list-style: none; gap: 28px; flex-wrap: wrap; }
+    .nav-links a { color: #1C1007; font-size: 0.86rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; }
+    .nav-links a:hover { color: #C0390B; text-decoration: none; }
+
+    /* Hero */
+    .hero { padding: 0; display: grid; grid-template-columns: 1.1fr 1fr; min-height: 520px; }
+    .hero-content { display: flex; flex-direction: column; justify-content: center; padding: 72px 56px; background: #FFF8F3; }
+    .hero-eyebrow { font-size: 0.78rem; letter-spacing: 0.18em; text-transform: uppercase; color: #C0390B; margin-bottom: 16px; }
+    .hero h1 { margin-bottom: 20px; }
+    .hero-sub { font-size: 1.08rem; color: #6B4A2A; margin-bottom: 32px; max-width: 440px; }
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn-primary, .btn-secondary { display: inline-block; padding: 14px 24px; font-weight: 600; font-size: 0.93rem; letter-spacing: 0.05em; text-transform: uppercase; border-radius: 2px; }
+    .btn-primary { background: #C0390B; color: #FFF8F3; }
+    .btn-primary:hover { filter: brightness(1.1); text-decoration: none; }
+    .btn-secondary { background: transparent; color: #1C1007; border: 1px solid #1C1007; }
+    .btn-secondary:hover { background: #1C1007; color: #FFF8F3; text-decoration: none; }
+
+    .hero-visual { background: #F4E8D8; display: flex; align-items: center; justify-content: center; padding: 48px; border-left: 1px solid #E8D5C0; }
+    .img-placeholder { width: 100%; aspect-ratio: 4/5; background: #E8D5C0; display: flex; align-items: center; justify-content: center; color: #6B4A2A; font-size: 0.88rem; letter-spacing: 0.08em; text-transform: uppercase; }
+
+    /* Menu highlight */
+    .menu-section { background: #1C1007; color: #FFF8F3; }
+    .menu-section h2 { color: #FFF8F3; }
+    .menu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 40px; }
+    .menu-card { background: #2E1C0C; padding: 32px; border: 1px solid #3D2510; }
+    .menu-card h3 { color: #F4763A; margin-bottom: 8px; }
+    .menu-card p { color: #C8A888; font-size: 0.96rem; margin-bottom: 0; }
+
+    /* About */
+    .about { background: #FFFFFF; }
+    .about-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 56px; align-items: start; }
+    .about p { font-size: 1.05rem; }
+    .stat-row { display: flex; gap: 36px; margin-top: 28px; padding-top: 28px; border-top: 1px solid #E8D5C0; }
+    .stat strong { display: block; font-family: 'Oswald', sans-serif; font-size: 2.4rem; color: #C0390B; }
+    .stat span { font-size: 0.82rem; color: #6B4A2A; text-transform: uppercase; letter-spacing: 0.08em; }
+    .about-photo { aspect-ratio: 1/1; background: #E8D5C0; display: flex; align-items: center; justify-content: center; color: #6B4A2A; font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase; }
+
+    /* Contact */
+    .contact { background: #FFFFFF; }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; }
+    .contact-block { margin-bottom: 28px; }
+    .contact-block strong { display: block; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.1em; color: #6B4A2A; margin-bottom: 6px; }
+    .contact-block a { color: #1C1007; font-size: 1.05rem; display: block; }
+    .contact-block a:hover { color: #C0390B; }
+    .hours-line { font-size: 1.0rem; color: #1C1007; }
+    .map-placeholder { aspect-ratio: 4/3; background: #E8D5C0; display: flex; align-items: center; justify-content: center; color: #6B4A2A; font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase; text-align: center; padding: 24px; }
+
+    /* Footer */
+    footer { background: #1C1007; color: #FFF8F3; padding: 40px 0; text-align: center; }
+    footer .container { display: flex; flex-direction: column; gap: 12px; align-items: center; }
+    footer p { color: #FFF8F3; opacity: 0.7; font-size: 0.85rem; margin: 0; }
+    .powered-by { font-size: 0.78rem; opacity: 0.55; letter-spacing: 0.1em; text-transform: uppercase; }
+
+    /* Responsive */
+    @media (max-width: 860px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero-content { padding: 56px 28px; }
+      .hero-visual { padding: 28px; border-left: 0; border-top: 1px solid #E8D5C0; }
+      .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 36px; }
+      .menu-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="demo-banner">
+    This is a demo preview built for Ruokakeidas.
+    <a href="https://preview.klarsystems.com/ruokakeidas-oulainen/proposal/">See the full proposal &rarr;</a>
+  </div>
+  <nav>
+    <div class="container">
+      <span class="nav-brand">Ruokakeidas</span>
+      <ul class="nav-links">
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#visit">Visit</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-content">
+      <p class="hero-eyebrow">Oulainen</p>
+      <h1>Ruokakeidas</h1>
+      <p class="hero-sub">Pizza, kebab and grill in the heart of Oulainen. Fresh, fast, and filling.</p>
+      <div class="hero-actions">
+        <a href="tel:08474222" class="btn-primary">Call to order</a>
+        <a href="#menu" class="btn-secondary">See the menu</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="img-placeholder">Your photo here</div>
+    </div>
+  </header>
+
+  <section id="menu" class="menu-section">
+    <div class="container">
+      <h2>What we serve</h2>
+      <p style="color:#C8A888; max-width:640px;">From stone-baked pizzas to kebab platters and classic grill favourites &mdash; a full menu at everyday prices.</p>
+      <div class="menu-grid">
+        <div class="menu-card">
+          <h3>Pizza</h3>
+          <p>Classic and specialty pizzas made to order. Generous toppings, crispy base, ready fast.</p>
+        </div>
+        <div class="menu-card">
+          <h3>Kebab</h3>
+          <p>Freshly carved kebab in pita, box or plate &mdash; with salad, sauces and the works.</p>
+        </div>
+        <div class="menu-card">
+          <h3>Grill &amp; Burger</h3>
+          <p>Burgers, fries, and grill plates. Ice cream to finish. Something for everyone.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="about">
+    <div class="container">
+      <div class="about-grid">
+        <div>
+          <h2>Oulainen&rsquo;s go-to grill</h2>
+          <p>Ruokakeidas &mdash; also known as Oulaisten Grilli ja Pizza &mdash; has been serving the people of Oulainen from Asemakatu 1, right in the city centre. Pizza, kebab, burgers, salads, ice cream &mdash; under one roof at prices that make sense.</p>
+          <p>We have an A-licence, wheelchair-accessible entrance, and a full dining room. Whether you eat in or take away, we&rsquo;ve got you covered seven days a week.</p>
+          <div class="stat-row">
+            <div class="stat"><strong>3.9</strong><span>Google rating</span></div>
+            <div class="stat"><strong>311+</strong><span>Reviews</span></div>
+          </div>
+        </div>
+        <div class="about-photo">Interior photo coming soon</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="visit" class="contact">
+    <div class="container">
+      <h2>Visit us</h2>
+      <div class="contact-grid">
+        <div>
+          <div class="contact-block">
+            <strong>Address</strong>
+            <a href="https://maps.google.com/?q=Asemakatu+1,+86300+Oulainen" target="_blank" rel="noopener">Asemakatu 1, 86300 Oulainen</a>
+          </div>
+          <div class="contact-block">
+            <strong>Hours</strong>
+            <p class="hours-line">Mon&ndash;Thu 10:30&ndash;21:00, Fri 10:30&ndash;22:00, Sat 12:00&ndash;22:00, Sun 12:00&ndash;21:00</p>
+          </div>
+          <div class="contact-block">
+            <strong>Phone</strong>
+            <a href="tel:08474222">08474222</a>
+          </div>
+          <div class="contact-block">
+            <strong>Email</strong>
+            <a href="mailto:ruokakeidas@hotmail.com">ruokakeidas@hotmail.com</a>
+          </div>
+        </div>
+        <div class="map-placeholder">Map of Asemakatu 1, 86300 Oulainen<br>coming soon</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="container">
+      <h2>Get in touch</h2>
+      <div class="contact-grid">
+        <div>
+          <p>Questions about the menu, group orders, or catering? Call us or send an email &mdash; we&rsquo;ll get back to you the same day.</p>
+          <div class="contact-block">
+            <strong>Reach us directly</strong>
+            <a href="tel:08474222">08474222</a>
+            <a href="mailto:ruokakeidas@hotmail.com">ruokakeidas@hotmail.com</a>
+          </div>
+        </div>
+        <div>
+          <a style="display:block; padding: 8px 0; color: #1C1007; font-size: 0.95rem;" href="https://www.facebook.com/p/Ruokakeidas-Oulainen-100062410997935/" target="_blank" rel="noopener">Facebook &rarr; Ruokakeidas Oulainen</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>&copy; Ruokakeidas &mdash; Oulainen, Finland</p>
+      <p class="powered-by">Powered by Klar</p>
+    </div>
+  </footer>
+</body>
+</html>

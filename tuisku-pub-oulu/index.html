@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tuisku Pub — Neighbourhood Pub, Oulu</title>
+  <!-- Palette: dark pub tones — near-black bg, warm amber-orange primary. Seg3 bar. -->
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0D0D1A;
+      --surface: #161624;
+      --red: #D94F2B;
+      --gold: #F5A623;
+      --text: #E8DCC8;
+      --muted: #9A8A70;
+      --border: #2A2A3A;
+    }
+
+    body { font-family: 'Arial', sans-serif; background: var(--bg); color: var(--text); }
+
+    /* NAV */
+    nav {
+      background: rgba(13,13,26,0.97);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky; top: 0; z-index: 100;
+    }
+    .logo { font-size: 1.6rem; font-weight: 900; letter-spacing: 2px; color: var(--gold); text-transform: uppercase; }
+    .nav-links a { color: var(--muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--red); }
+
+    /* HERO */
+    .hero {
+      background: var(--surface);
+      padding: 6rem 2rem;
+      text-align: center;
+      position: relative;
+      border-bottom: 2px solid var(--red);
+    }
+    .hero-photo-placeholder {
+      position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(to bottom, #1a1a30 0%, #0d0d1a 100%);
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,0.06); font-size: 0.85rem;
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 720px; margin: 0 auto; }
+    .hero-tag {
+      display: inline-block;
+      border: 1px solid var(--red);
+      color: var(--red);
+      padding: 0.25rem 0.75rem;
+      font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+    .hero h1 { font-size: 3.5rem; font-weight: 900; color: #fff; text-transform: uppercase; letter-spacing: 3px; line-height: 1.1; margin-bottom: 1rem; }
+    .hero h1 span { color: var(--gold); }
+    .hero p { color: var(--muted); font-size: 1.05rem; line-height: 1.7; max-width: 500px; margin: 0 auto 2.5rem; }
+    .hero-cta { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--red); color: #fff;
+      padding: 0.9rem 2.2rem; font-weight: 700; font-size: 0.95rem;
+      letter-spacing: 1px; text-transform: uppercase;
+      text-decoration: none; display: inline-block; transition: opacity 0.2s;
+    }
+    .btn-primary:hover { opacity: 0.85; }
+    .btn-outline {
+      border: 1px solid var(--gold); color: var(--gold);
+      padding: 0.9rem 2.2rem; font-size: 0.95rem; letter-spacing: 1px;
+      text-transform: uppercase; text-decoration: none; display: inline-block; transition: background 0.2s;
+    }
+    .btn-outline:hover { background: rgba(245,166,35,0.1); }
+
+    /* PHOTO PLACEHOLDER */
+    .photo-placeholder {
+      background: #1e1e30; color: #5a5a7a;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.85rem; border-radius: 2px;
+    }
+
+    /* VENUE */
+    .venue { max-width: 900px; margin: 0 auto; padding: 4.5rem 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+    @media (max-width: 640px) { .venue { grid-template-columns: 1fr; } }
+    .venue-text h2 { font-size: 2rem; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; color: var(--gold); margin-bottom: 1rem; }
+    .venue-text p { color: var(--muted); line-height: 1.75; margin-bottom: 0.85rem; }
+    .venue-img { height: 320px; }
+    .venue-img .photo-placeholder { height: 100%; }
+
+    /* FEATURES */
+    .features { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 4rem 2rem; }
+    .features-inner { max-width: 900px; margin: 0 auto; }
+    .features h2 { font-size: 2rem; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; color: var(--gold); text-align: center; margin-bottom: 2.5rem; }
+    .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+    @media (max-width: 640px) { .features-grid { grid-template-columns: 1fr; } }
+    .feature-item { text-align: center; }
+    .feature-item h3 { color: var(--red); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 0.5rem; margin-top: 0.5rem; }
+    .feature-item p { color: var(--muted); font-size: 0.9rem; line-height: 1.6; }
+
+    /* EVENTS / CONTACT */
+    .events-contact { max-width: 900px; margin: 0 auto; padding: 4.5rem 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+    @media (max-width: 640px) { .events-contact { grid-template-columns: 1fr; } }
+    .events-contact h2 { font-size: 1.8rem; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; color: var(--gold); margin-bottom: 1.25rem; }
+    .events-contact p { color: var(--muted); line-height: 1.75; margin-bottom: 0.75rem; }
+    .contact-line { color: var(--text); margin-bottom: 0.5rem; }
+    .contact-line a { color: var(--gold); text-decoration: none; }
+    .contact-line a:hover { text-decoration: underline; }
+    .hours-table { border-collapse: collapse; width: 100%; margin-top: 0.75rem; }
+    .hours-table td { padding: 0.4rem 0; color: var(--muted); font-size: 0.9rem; }
+    .hours-table td:first-child { color: var(--text); font-weight: 700; padding-right: 1.5rem; }
+
+    /* MAP */
+    .map-wrap { height: 280px; }
+    .map-wrap iframe { width: 100%; height: 100%; border: 0; filter: grayscale(0.3); }
+
+    /* FOOTER */
+    footer { background: #06060F; border-top: 2px solid var(--red); padding: 2rem; text-align: center; color: var(--muted); font-size: 0.85rem; }
+    footer strong { color: var(--text); }
+
+    /* Demo banner */
+    .demo-banner {
+      background: rgba(0,0,0,0.85);
+      border-bottom: 1px solid #555;
+      color: rgba(255,255,255,0.8);
+      text-align: center;
+      padding: 0.6rem 1rem;
+      font-size: 0.85rem;
+    }
+    .demo-banner strong { color: #fff; }
+    .demo-banner a { color: #F5A623; text-decoration: none; margin-left: 0.5rem; }
+    .demo-banner a:hover { text-decoration: underline; }
+    .hero-rating { display: inline-block; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: 3px; padding: 0.3rem 0.7rem; font-size: 0.9rem; color: inherit; margin-bottom: 1.5rem; }
+    .hero-rating strong { color: #F5A623; }
+    .footer-klar { font-size: 0.8rem; color: rgba(255,255,255,0.3); margin-top: 0.5rem; }
+  </style>
+</head>
+<body>
+
+<!-- Demo banner -->
+<div class="demo-banner">
+  <strong>This is a demo</strong> &mdash; a free preview built for Tuisku Pub.
+  <a href="https://preview.klarsystems.com/tuisku-pub-oulu/proposal/" target="_blank" rel="noopener">View the full proposal &rarr;</a>
+</div>
+
+  <nav>
+    <div class="logo">Tuisku Pub</div>
+    <div class="nav-links">
+      <a href="#venue">The Pub</a>
+      <a href="#events">Events</a>
+      <a href="#contact">Find Us</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-photo-placeholder">Your photo here</div>
+    <div class="hero-content">
+      <div class="hero-tag">Karaoke · Billiards · Sports · Tuira, Oulu</div>
+      <h1>Oulu's <span>Tuira</span> Local</h1>
+      <p>Your neighbourhood pub since 1992. Free billiards, karaoke nights, sports on every screen. Cold beers, warm atmosphere — on Valtatie 57.</p>
+      <div class="hero-rating"><strong>4.0</strong> Google rating (300+ reviews)</div>
+      <div class="hero-cta">
+        <a href="#events" class="btn-primary">What's On</a>
+        <a href="#contact" class="btn-outline">Find Us</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- VENUE -->
+  <section class="venue" id="venue">
+    <div class="venue-text">
+      <h2>The Pub</h2>
+      <p>Tuisku Pub has been the heartbeat of Tuira since 1992. Whether you're in for a cold beer after work, a karaoke night with friends, or catching the match on the big screen — this is your place.</p>
+      <p>Free pool tables, a full bar, and the kind of welcoming atmosphere that keeps regulars coming back year after year. You'll find us on Valtatie 57, right in the centre of Tuira.</p>
+    </div>
+    <div class="venue-img">
+      <div class="photo-placeholder">Interior photo coming soon</div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features">
+    <div class="features-inner">
+      <h2>What We Offer</h2>
+      <div class="features-grid">
+        <div class="feature-item">
+          <h3>Karaoke Nights</h3>
+          <p>Regular karaoke evenings — pick a song, grab the mic, and make the night your own.</p>
+        </div>
+        <div class="feature-item">
+          <h3>Free Billiards</h3>
+          <p>Pool tables available for all guests at no charge. Just pick up a cue and play.</p>
+        </div>
+        <div class="feature-item">
+          <h3>Sports On Screen</h3>
+          <p>Catch the big games with a cold beer in hand. Multiple screens showing live sports.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EVENTS & CONTACT -->
+  <section class="events-contact" id="events">
+    <div>
+      <h2>Events</h2>
+      <p>Karaoke nights, sports viewing evenings, and more — follow us on Facebook for the current schedule and upcoming events.</p>
+      <p>Hosting a private event or birthday party? Get in touch — we're happy to accommodate groups.</p>
+      <div class="photo-placeholder" style="height:200px; margin-top:1rem;">Bar photo coming soon</div>
+    </div>
+    <div id="contact">
+      <h2>Find Us</h2>
+      <div class="contact-line">Valtatie 57, 90500 Oulu</div>
+      <div class="contact-line"><a href="tel:+358447542588">+358 44 754 2588</a></div>
+      <div class="contact-line"><a href="mailto:pubtuisku@gmail.com">pubtuisku@gmail.com</a></div>
+      <h2 style="margin-top:2rem;">Opening Hours</h2>
+      <table class="hours-table">
+        <tr><td>Mon – Fri</td><td>Evenings</td></tr>
+        <tr><td>Sat – Sun</td><td>Evenings</td></tr>
+        <tr><td></td><td>Check Facebook for current hours</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- MAP -->
+  <div class="map-wrap">
+    <iframe
+      src="https://maps.google.com/maps?q=Valtatie+57+Oulu&z=16&output=embed"
+      title="Tuisku Pub location map"
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </div>
+
+  <footer>
+    <strong>Tuisku Pub</strong> &middot; Valtatie 57, 90500 Oulu &middot; <a href="tel:+358447542588" style="color:var(--gold)">+358 44 754 2588</a>
+    <div class="footer-klar">Powered by Klar</div>
+  </footer>
+
+</body>
+</html>

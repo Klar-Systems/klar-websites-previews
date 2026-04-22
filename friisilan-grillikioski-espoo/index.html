@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Friisilän Grillikioski — Espoo's Classic Grill Since 1985</title>
+  <!-- Palette: bold grill colours — near-black bg, warm red primary, amber accent. Seg2 grilli. -->
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #111111;
+      --surface: #1C1C1C;
+      --red: #D94F2B;
+      --gold: #F5A623;
+      --text: #F5F0E8;
+      --muted: #9A8A7A;
+      --border: #2E2E2E;
+    }
+
+    body { font-family: 'Arial', sans-serif; background: var(--bg); color: var(--text); }
+
+    /* NAV */
+    nav {
+      background: rgba(17,17,17,0.97);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky; top: 0; z-index: 100;
+    }
+    .logo { font-size: 1.4rem; font-weight: 900; letter-spacing: 1px; color: var(--gold); text-transform: uppercase; }
+    .nav-links a { color: var(--muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--red); }
+
+    /* HERO */
+    .hero {
+      background: var(--surface);
+      padding: 5rem 2rem;
+      text-align: center;
+      position: relative;
+      border-bottom: 3px solid var(--red);
+    }
+    .hero-photo-placeholder {
+      position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(to bottom, #222 0%, #111 100%);
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,0.05); font-size: 0.85rem;
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 720px; margin: 0 auto; }
+    .hero-tag {
+      display: inline-block;
+      border: 2px solid var(--red);
+      color: var(--red);
+      padding: 0.3rem 1rem;
+      font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase;
+      margin-bottom: 1.5rem; font-weight: 700;
+    }
+    .hero h1 { font-size: 3rem; font-weight: 900; color: #fff; text-transform: uppercase; letter-spacing: 2px; line-height: 1.1; margin-bottom: 1rem; }
+    .hero h1 span { color: var(--red); }
+    .hero p { color: var(--muted); font-size: 1.05rem; line-height: 1.7; max-width: 540px; margin: 0 auto 2rem; }
+    .hero-cta { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--red); color: #fff;
+      padding: 1rem 2.5rem; font-weight: 900; font-size: 1rem;
+      letter-spacing: 1px; text-transform: uppercase;
+      text-decoration: none; display: inline-block; transition: opacity 0.2s;
+    }
+    .btn-primary:hover { opacity: 0.85; }
+    .btn-outline {
+      border: 2px solid var(--gold); color: var(--gold);
+      padding: 1rem 2.5rem; font-size: 1rem; letter-spacing: 1px; font-weight: 700;
+      text-transform: uppercase; text-decoration: none; display: inline-block; transition: background 0.2s;
+    }
+    .btn-outline:hover { background: rgba(245,166,35,0.1); }
+
+    /* PHOTO PLACEHOLDER */
+    .photo-placeholder {
+      background: #252525; color: #5a5a5a;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.85rem; border-radius: 2px;
+    }
+
+    /* ABOUT */
+    .about { max-width: 900px; margin: 0 auto; padding: 4rem 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+    @media (max-width: 640px) { .about { grid-template-columns: 1fr; } }
+    .about-text h2 { font-size: 2rem; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; color: var(--gold); margin-bottom: 1rem; }
+    .about-text p { color: var(--muted); line-height: 1.75; margin-bottom: 0.85rem; }
+    .about-img { height: 300px; }
+    .about-img .photo-placeholder { height: 100%; }
+
+    /* MENU */
+    .menu-section { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 4rem 2rem; }
+    .menu-inner { max-width: 900px; margin: 0 auto; }
+    .menu-inner h2 { font-size: 2rem; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; color: var(--gold); text-align: center; margin-bottom: 2rem; }
+    .menu-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+    @media (max-width: 640px) { .menu-grid { grid-template-columns: 1fr; } }
+    .menu-item { background: #252525; padding: 1.25rem; border-left: 3px solid var(--red); }
+    .menu-item h3 { color: var(--text); font-size: 1rem; font-weight: 700; margin-bottom: 0.25rem; }
+    .menu-item .price { color: var(--gold); font-weight: 900; font-size: 1.1rem; }
+    .menu-item p { color: var(--muted); font-size: 0.88rem; line-height: 1.5; margin-top: 0.3rem; }
+
+    /* CALL TO ORDER */
+    .cta-section { text-align: center; padding: 3.5rem 2rem; background: var(--red); }
+    .cta-section h2 { color: #fff; font-size: 2rem; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 0.75rem; }
+    .cta-section p { color: rgba(255,255,255,0.85); font-size: 1rem; margin-bottom: 1.5rem; }
+    .cta-phone { display: inline-block; background: #fff; color: var(--red); padding: 1rem 2.5rem; font-size: 1.3rem; font-weight: 900; text-decoration: none; letter-spacing: 1px; transition: opacity 0.2s; }
+    .cta-phone:hover { opacity: 0.9; }
+
+    /* CONTACT & HOURS */
+    .contact-section { max-width: 900px; margin: 0 auto; padding: 4rem 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+    @media (max-width: 640px) { .contact-section { grid-template-columns: 1fr; } }
+    .contact-section h2 { font-size: 1.8rem; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; color: var(--gold); margin-bottom: 1.25rem; }
+    .contact-line { color: var(--text); margin-bottom: 0.5rem; }
+    .contact-line a { color: var(--gold); text-decoration: none; }
+    .contact-line a:hover { text-decoration: underline; }
+    .hours-table { border-collapse: collapse; width: 100%; margin-top: 0.75rem; }
+    .hours-table td { padding: 0.4rem 0; color: var(--muted); font-size: 0.9rem; }
+    .hours-table td:first-child { color: var(--text); font-weight: 700; padding-right: 1.5rem; }
+
+    /* MAP */
+    .map-wrap { height: 280px; }
+    .map-wrap iframe { width: 100%; height: 100%; border: 0; filter: grayscale(0.3); }
+
+    /* FOOTER */
+    footer { background: #080808; border-top: 3px solid var(--red); padding: 2rem; text-align: center; color: var(--muted); font-size: 0.85rem; }
+    footer strong { color: var(--text); }
+
+    /* Demo banner */
+    .demo-banner {
+      background: rgba(0,0,0,0.85);
+      border-bottom: 1px solid #555;
+      color: rgba(255,255,255,0.8);
+      text-align: center;
+      padding: 0.6rem 1rem;
+      font-size: 0.85rem;
+    }
+    .demo-banner strong { color: #fff; }
+    .demo-banner a { color: #F5A623; text-decoration: none; margin-left: 0.5rem; }
+    .demo-banner a:hover { text-decoration: underline; }
+    .hero-rating { display: inline-block; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 3px; padding: 0.3rem 0.75rem; font-size: 0.9rem; color: inherit; margin-bottom: 1.5rem; }
+    .hero-rating strong { color: #F5A623; }
+    .footer-klar { font-size: 0.8rem; color: rgba(255,255,255,0.3); margin-top: 0.5rem; }
+  </style>
+</head>
+<body>
+
+<!-- Demo banner -->
+<div class="demo-banner">
+  <strong>This is a demo</strong> &mdash; a free preview built for Friisilän Grillikioski.
+  <a href="https://preview.klarsystems.com/friisilan-grillikioski-espoo/proposal/" target="_blank" rel="noopener">View the full proposal &rarr;</a>
+</div>
+
+  <nav>
+    <div class="logo">Friisilän Grillikioski</div>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#menu">Menu</a>
+      <a href="#contact">Find Us</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-photo-placeholder">Your photo here</div>
+    <div class="hero-content">
+      <div class="hero-tag">Espoo's Classic Grill Since 1985</div>
+      <h1>Burgers <span>Done Right</span></h1>
+      <p>Fresh burgers, crispy fries, and legendary flavour at Friisiläntie 2. The Mega Cajun is waiting. Call and order, or come by.</p>
+      <div class="hero-rating"><strong>4.7</strong> Google rating &middot; Ranked #69 of 274 in Espoo</div>
+      <div class="hero-cta">
+        <a href="tel:+358404124183" class="btn-primary">Call to Order</a>
+        <a href="#menu" class="btn-outline">View Menu</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="about-text">
+      <h2>Espoo's Classic Grill</h2>
+      <p>Friisilän Grillikioski has been serving Espoo since 1985. Over 40 years of fresh burgers made to order — no frozen patties, no shortcuts. Just quality ingredients and honest grill food.</p>
+      <p>From a classic cheese burger at €7 to the legendary Mega Cajun at 1.6kg and €36 — there's something for every appetite at Friisiläntie 2. Outdoor seating available.</p>
+      <p>Open weekdays from 8AM, Saturdays from 11AM. Wolt delivery also available.</p>
+    </div>
+    <div class="about-img">
+      <div class="photo-placeholder">Grill photo coming soon</div>
+    </div>
+  </section>
+
+  <!-- MENU -->
+  <section class="menu-section" id="menu">
+    <div class="menu-inner">
+      <h2>Our Menu</h2>
+      <div class="menu-grid">
+        <div class="menu-item">
+          <h3>Juustohampurilainen</h3>
+          <div class="price">€7.00</div>
+          <p>Classic cheese burger — the house staple.</p>
+        </div>
+        <div class="menu-item">
+          <h3>Pekonihampurilainen</h3>
+          <div class="price">€12.00</div>
+          <p>Bacon burger — stacked and satisfying.</p>
+        </div>
+        <div class="menu-item">
+          <h3>Cajunhampurilainen</h3>
+          <div class="price">€16.00</div>
+          <p>Spicy Cajun burger — bold and flavourful.</p>
+        </div>
+        <div class="menu-item">
+          <h3>Megacajunhampurilainen</h3>
+          <div class="price">€36.00</div>
+          <p>1.6kg of Cajun glory. Espoo's most legendary burger challenge.</p>
+        </div>
+        <div class="menu-item">
+          <h3>Ranskalaiset</h3>
+          <div class="price">€8.00</div>
+          <p>Crispy french fries — the perfect side.</p>
+        </div>
+        <div class="menu-item">
+          <h3>Meal Deal</h3>
+          <div class="price">from €15.20</div>
+          <p>Burger + fries + 0.5L drink. Best value at the grill.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CALL TO ORDER -->
+  <section class="cta-section">
+    <h2>Order Now</h2>
+    <p>Call us directly to order — or come by for takeaway. Also available on Wolt.</p>
+    <a href="tel:+358404124183" class="cta-phone">+358 40 412 4183</a>
+  </section>
+
+  <!-- CONTACT & HOURS -->
+  <section class="contact-section" id="contact">
+    <div>
+      <h2>Find Us</h2>
+      <div class="contact-line">Friisiläntie 2, 02240 Espoo</div>
+      <div class="contact-line"><a href="tel:+358404124183">+358 40 412 4183</a></div>
+      <div class="contact-line"><a href="mailto:kirill.viren@saunalahti.fi">kirill.viren@saunalahti.fi</a></div>
+      <div class="contact-line" style="margin-top:0.5rem; color:var(--muted); font-size:0.9rem;">Parking available &middot; Outdoor seating &middot; Card accepted</div>
+    </div>
+    <div>
+      <h2>Opening Hours</h2>
+      <table class="hours-table">
+        <tr><td>Mon – Fri</td><td>08:00 – 20:00</td></tr>
+        <tr><td>Saturday</td><td>11:00 – 18:00</td></tr>
+        <tr><td>Sunday</td><td>Closed</td></tr>
+      </table>
+      <p style="margin-top:1rem; font-size:0.88rem; color:var(--muted);">Grill open Mon-Fri 8-19, Sat 11-17:30</p>
+    </div>
+  </section>
+
+  <!-- MAP -->
+  <div class="map-wrap">
+    <iframe
+      src="https://maps.google.com/maps?q=Friisil%C3%A4ntie+2+Espoo&z=16&output=embed"
+      title="Friisilän Grillikioski location map"
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </div>
+
+  <footer>
+    <strong>Friisilän Grillikioski</strong> &middot; Friisiläntie 2, 02240 Espoo &middot; <a href="tel:+358404124183" style="color:var(--gold)">+358 40 412 4183</a>
+    <div class="footer-klar">Powered by Klar</div>
+  </footer>
+
+</body>
+</html>
