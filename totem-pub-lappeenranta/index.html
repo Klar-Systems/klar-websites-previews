@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Totem Pub — Lappeenranta</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0D0D0D;
+      --surface: #161616;
+      --text: #F0EFEC;
+      --muted: #A09880;
+      --primary: #D4411C;
+      --warm: #C8873A;
+      --border: rgba(212,65,28,0.2);
+    }
+    body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', Arial, sans-serif; font-size: 16px; line-height: 1.7; }
+
+    /* Demo banner */
+    .demo-banner {
+      background: #8B2510;
+      color: #F0EFEC;
+      text-align: center;
+      padding: 10px 16px;
+      font-size: 14px;
+      font-weight: 600;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .demo-banner a { color: #F0C878; text-decoration: underline; }
+
+    /* Nav */
+    nav {
+      background: rgba(13,13,13,0.97);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      position: sticky;
+      top: 40px;
+      z-index: 90;
+    }
+    .logo { font-size: 20px; font-weight: 800; color: var(--primary); letter-spacing: 0.06em; text-transform: uppercase; }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: 14px; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero {
+      background: linear-gradient(160deg, #050505 0%, #0D0D0D 50%, #1A0A05 100%);
+      padding: 90px 24px 80px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+    }
+    .hero-tag {
+      display: inline-block;
+      background: rgba(212,65,28,0.15);
+      border: 1px solid rgba(212,65,28,0.4);
+      color: var(--primary);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 5px 16px;
+      border-radius: 20px;
+      margin-bottom: 24px;
+    }
+    .hero h1 { font-size: clamp(40px, 7vw, 76px); font-weight: 900; line-height: 1.0; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.04em; }
+    .hero h1 span { color: var(--primary); }
+    .hero p { color: var(--muted); font-size: 18px; max-width: 560px; margin: 0 auto 32px; }
+    .rating-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(212,65,28,0.1);
+      border: 1px solid rgba(212,65,28,0.3);
+      padding: 8px 20px;
+      border-radius: 30px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--warm);
+    }
+
+    /* Section common */
+    section { padding: 72px 24px; }
+    .section-inner { max-width: 900px; margin: 0 auto; }
+    section h2 { font-size: 30px; font-weight: 800; margin-bottom: 40px; text-transform: uppercase; letter-spacing: 0.04em; }
+    section h2 span { color: var(--primary); }
+
+    /* Features */
+    .features { background: var(--surface); }
+    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+    .feature-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 24px;
+    }
+    .feature-card h3 { font-size: 17px; font-weight: 700; margin-bottom: 8px; color: var(--primary); text-transform: uppercase; letter-spacing: 0.04em; }
+    .feature-card p { color: var(--muted); font-size: 14px; line-height: 1.6; }
+
+    /* Photos placeholder row */
+    .photos-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 32px; }
+    .img-placeholder { background: rgba(212,65,28,0.06); border: 1px solid var(--border); border-radius: 8px; aspect-ratio: 4/3; display: flex; align-items: center; justify-content: center; color: var(--muted); font-size: 13px; }
+
+    /* Events */
+    .events-section { background: linear-gradient(135deg, #050505, #1A0A05); }
+    .events-section h2 span { color: var(--primary); }
+    .events-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+    .event-block h3 { font-size: 20px; font-weight: 700; color: var(--primary); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.04em; }
+    .event-block p { color: var(--muted); font-size: 15px; line-height: 1.7; margin-bottom: 16px; }
+    .event-block a { color: var(--warm); text-decoration: none; font-weight: 700; }
+    .event-block a:hover { text-decoration: underline; }
+
+    /* Hours */
+    .hours-section { background: var(--surface); }
+    .hours-table { max-width: 480px; margin: 0 auto; }
+    .hours-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 15px;
+    }
+    .hours-row:last-child { border-bottom: none; }
+    .hours-row .day { color: var(--muted); }
+    .hours-row .time { color: var(--text); font-weight: 600; }
+    .hours-note { text-align: center; margin-top: 20px; color: var(--primary); font-weight: 700; font-size: 15px; }
+
+    /* Map */
+    .map-wrapper { border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
+    .map-wrapper iframe { display: block; width: 100%; height: 320px; border: none; }
+    .address-line { text-align: center; margin-top: 16px; color: var(--muted); font-size: 15px; }
+    .phone-link { text-align: center; margin-top: 12px; }
+    .phone-link a { color: var(--warm); text-decoration: none; font-weight: 700; font-size: 18px; }
+    .phone-link a:hover { text-decoration: underline; }
+
+    /* Klar promo */
+    .klar-promo {
+      background: linear-gradient(135deg, #050505, #1A0A05);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 48px 32px;
+      text-align: center;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .klar-promo .badge {
+      display: inline-block;
+      background: var(--primary);
+      color: #F0EFEC;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 20px;
+    }
+    .klar-promo h2 { font-size: 28px; font-weight: 800; margin-bottom: 12px; color: var(--text); text-transform: uppercase; letter-spacing: 0.03em; }
+    .klar-promo p { color: var(--muted); max-width: 540px; margin: 0 auto 28px; text-transform: none; font-weight: 400; }
+    .pricing { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; margin-bottom: 32px; }
+    .price-item { text-align: center; }
+    .price-label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; }
+    .price-amount { font-size: 28px; font-weight: 800; color: var(--warm); }
+    .price-old { text-decoration: line-through; color: #555; font-size: 14px; }
+    .founder-badge { font-size: 13px; color: var(--warm); font-weight: 600; margin-bottom: 24px; }
+    .btn-proposal {
+      display: inline-block;
+      background: var(--primary);
+      color: #F0EFEC;
+      font-size: 15px;
+      font-weight: 700;
+      padding: 14px 32px;
+      border-radius: 8px;
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      transition: background 0.2s;
+    }
+    .btn-proposal:hover { background: #8B2510; }
+
+    /* Footer */
+    footer {
+      background: #050505;
+      border-top: 1px solid var(--border);
+      padding: 32px 24px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    footer a { color: var(--muted); text-decoration: none; }
+    footer a:hover { color: var(--warm); }
+    footer .powered { margin-top: 8px; font-size: 12px; color: #444; }
+
+    @media (max-width: 640px) {
+      .events-grid { grid-template-columns: 1fr; }
+      .photos-row { grid-template-columns: 1fr 1fr; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="demo-banner">
+    This is a demo website — <a href="https://preview.klarsystems.com/totem-pub-lappeenranta/proposal/">View Full Proposal</a>
+  </div>
+
+  <nav>
+    <div class="logo">Totem Pub</div>
+    <ul class="nav-links">
+      <li><a href="#features">The Pub</a></li>
+      <li><a href="#events">Events</a></li>
+      <li><a href="#hours">Hours</a></li>
+      <li><a href="#location">Location</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-tag">Pub &amp; Bar — Lappeenranta</div>
+    <h1><span>Totem</span> Pub</h1>
+    <p>Perinteinen kaiken kansan baari Lappeenrannan ytimessä. Karaoke joka ilta, biljardi, livemusiikkia ja hyvät juomat — tervetuloa kaikki.</p>
+    <div class="rating-badge">
+      4.1 / 5 &nbsp;&middot;&nbsp; 354 reviews on Google
+    </div>
+  </section>
+
+  <section class="features" id="features">
+    <div class="section-inner">
+      <h2>The <span>Pub</span></h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <h3>Karaoke</h3>
+          <p>Karaokea joka päivä klo 21 alkaen. Tule laulamaan — niin hyvät kuin huonotkin laulajat ovat tervetulleita.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Billiards</h3>
+          <p>Billiardipöydat käytettavissä koko aukioloajan. Haasta ystäväsi tai löydä uusia pelikumppaneita baarissa.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Live Music</h3>
+          <p>Regular live music nights at Totem. Check our events schedule or follow us on Instagram for upcoming performances.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Drinks and Bar</h3>
+          <p>A full bar with beer, spirits, and pub staples — all at fair pub prices. Alcohol service until midnight.</p>
+        </div>
+      </div>
+      <div class="photos-row">
+        <div class="img-placeholder">Photo: Bar area</div>
+        <div class="img-placeholder">Photo: Karaoke night</div>
+        <div class="img-placeholder">Photo: Live music</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="events-section" id="events">
+    <div class="section-inner">
+      <h2>Events and <span>Contact</span></h2>
+      <div class="events-grid">
+        <div class="event-block">
+          <h3>Private Events</h3>
+          <p>Booking Totem for a private party, birthday celebration, or group evening? We can accommodate private bookings. Contact us to discuss the details.</p>
+          <p>Live music and karaoke nights can be arranged for your event. Get in touch early — popular dates fill fast.</p>
+          <a href="tel:+358401460928">+358 40 1460928</a>
+        </div>
+        <div class="event-block">
+          <h3>Contact Us</h3>
+          <p>Raatimiehenkatu 17, 53100 Lappeenranta<br>Downtown — easy to find.</p>
+          <p>
+            Phone: <a href="tel:+358401460928">+358 40 1460928</a><br>
+            Email: <a href="mailto:mobar.ravintolat@gmail.com">mobar.ravintolat@gmail.com</a>
+          </p>
+          <p><a href="https://www.instagram.com/ravintolatotem/" target="_blank" rel="noopener">Instagram</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="hours-section" id="hours">
+    <div class="section-inner">
+      <h2>Opening <span>Hours</span></h2>
+      <div class="hours-table">
+        <div class="hours-row"><span class="day">Monday</span><span class="time">14:00 – 01:00</span></div>
+        <div class="hours-row"><span class="day">Tuesday</span><span class="time">14:00 – 01:00</span></div>
+        <div class="hours-row"><span class="day">Wednesday</span><span class="time">14:00 – 01:00</span></div>
+        <div class="hours-row"><span class="day">Thursday</span><span class="time">14:00 – 01:00</span></div>
+        <div class="hours-row"><span class="day">Friday</span><span class="time">14:00 – 01:00</span></div>
+        <div class="hours-row"><span class="day">Saturday</span><span class="time">12:00 – 01:00</span></div>
+        <div class="hours-row"><span class="day">Sunday</span><span class="time">12:00 – 01:00</span></div>
+      </div>
+      <p class="hours-note">Karaoke daily from 21:00</p>
+    </div>
+  </section>
+
+  <section id="location">
+    <div class="section-inner">
+      <h2>Find <span>Us</span></h2>
+      <div class="map-wrapper">
+        <iframe src="https://maps.google.com/maps?q=Raatimiehenkatu+17+53100+Lappeenranta&z=16&output=embed" title="Totem Pub map" loading="lazy"></iframe>
+      </div>
+      <p class="address-line">Raatimiehenkatu 17, 53100 Lappeenranta</p>
+      <p class="phone-link"><a href="tel:+358401460928">+358 40 1460928</a></p>
+    </div>
+  </section>
+
+  <section style="padding: 48px 24px;">
+    <div class="klar-promo">
+      <span class="badge">Klar Sites</span>
+      <h2>Oma sivusto Totem Pubille</h2>
+      <p>Klar Sites rakentaa Totem Pubille oman verkkosivuston — tapahtumat, karaoke-aikataulu, aukioloajat ja yhteydenotto. Lappeenrantalaiset löytävät teidät Googlesta.</p>
+      <div class="pricing">
+        <div class="price-item">
+          <div class="price-label">Setup</div>
+          <div class="price-amount">980 €</div>
+        </div>
+        <div class="price-item">
+          <div class="price-label">Monthly</div>
+          <div class="price-amount">40 €/kk</div>
+          <div class="price-old">79 €/kk</div>
+        </div>
+      </div>
+      <div class="founder-badge">Perustajajäsen — 20 paikkaa</div>
+      <a href="https://preview.klarsystems.com/totem-pub-lappeenranta/proposal/" class="btn-proposal">View Full Proposal</a>
+    </div>
+  </section>
+
+  <footer>
+    <div><strong>Totem Pub</strong> &middot; Raatimiehenkatu 17, 53100 Lappeenranta &middot; <a href="tel:+358401460928">+358 40 1460928</a></div>
+    <div class="powered">Powered by Klar &middot; <a href="https://preview.klarsystems.com/totem-pub-lappeenranta/proposal/">View Proposal</a></div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sushi Like — Nummela, Vihti</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #1A1A2E;
+      --surface: #22223E;
+      --text: #F5F0E8;
+      --muted: #B8B0A0;
+      --primary: #C9A84C;
+      --accent: #2D7A2D;
+      --border: rgba(201,168,76,0.25);
+    }
+    body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', Arial, sans-serif; font-size: 16px; line-height: 1.6; }
+
+    /* Demo banner */
+    .demo-banner {
+      background: #B8860B;
+      color: #fff;
+      text-align: center;
+      padding: 10px 16px;
+      font-size: 14px;
+      font-weight: 600;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .demo-banner a { color: #fff; text-decoration: underline; }
+
+    /* Nav */
+    nav {
+      background: rgba(26,26,46,0.97);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      position: sticky;
+      top: 40px;
+      z-index: 90;
+    }
+    .logo { font-size: 20px; font-weight: 700; color: var(--primary); letter-spacing: 0.04em; }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: 14px; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero {
+      background: linear-gradient(135deg, #0D0D1E 0%, #1A1A2E 50%, #0F1F0F 100%);
+      padding: 80px 24px 60px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+    }
+    .hero-tag {
+      display: inline-block;
+      background: rgba(201,168,76,0.15);
+      border: 1px solid var(--primary);
+      color: var(--primary);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 20px;
+      margin-bottom: 20px;
+    }
+    .hero h1 { font-size: clamp(36px, 6vw, 64px); font-weight: 800; line-height: 1.1; margin-bottom: 16px; }
+    .hero h1 span { color: var(--primary); }
+    .hero p { color: var(--muted); font-size: 18px; max-width: 560px; margin: 0 auto 32px; }
+    .rating-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(201,168,76,0.12);
+      border: 1px solid rgba(201,168,76,0.3);
+      padding: 8px 18px;
+      border-radius: 30px;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    /* Booking widget */
+    .booking-section {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 36px 32px;
+      max-width: 640px;
+      margin: -20px auto 0;
+      position: relative;
+      z-index: 10;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+    }
+    .booking-section h2 { font-size: 22px; font-weight: 700; margin-bottom: 8px; color: var(--text); }
+    .booking-section p { color: var(--muted); font-size: 14px; margin-bottom: 24px; }
+    .klar-bookings-widget { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+    .klar-bookings-widget label { display: block; font-size: 12px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 5px; }
+    .klar-bookings-widget input,
+    .klar-bookings-widget select {
+      width: 100%;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text);
+      padding: 10px 12px;
+      font-size: 14px;
+      outline: none;
+    }
+    .klar-bookings-widget input:focus,
+    .klar-bookings-widget select:focus { border-color: var(--primary); }
+    .btn-reserve {
+      grid-column: 1 / -1;
+      background: var(--primary);
+      color: #1A1A2E;
+      font-size: 16px;
+      font-weight: 700;
+      border: none;
+      border-radius: 8px;
+      padding: 14px;
+      cursor: pointer;
+      margin-top: 4px;
+      letter-spacing: 0.03em;
+      transition: background 0.2s;
+    }
+    .btn-reserve:hover { background: #DFC060; }
+
+    /* Section common */
+    section { padding: 72px 24px; max-width: 900px; margin: 0 auto; }
+    section h2 { font-size: 32px; font-weight: 700; margin-bottom: 40px; text-align: center; }
+    section h2 span { color: var(--primary); }
+
+    /* Menu */
+    .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+    .menu-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 24px;
+    }
+    .menu-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 8px; color: var(--primary); }
+    .menu-card p { color: var(--muted); font-size: 14px; line-height: 1.5; }
+
+    /* Reviews */
+    .reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+    .review-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 24px;
+    }
+    .review-stars { color: var(--primary); font-size: 14px; margin-bottom: 12px; font-weight: 700; }
+    .review-card p { color: var(--muted); font-size: 14px; font-style: italic; line-height: 1.6; margin-bottom: 12px; }
+    .review-card cite { font-size: 12px; color: #888; font-style: normal; }
+
+    /* Hours */
+    .hours-table { max-width: 480px; margin: 0 auto; }
+    .hours-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 15px;
+    }
+    .hours-row:last-child { border-bottom: none; }
+    .hours-row .day { color: var(--muted); }
+    .hours-row .time { color: var(--text); font-weight: 600; }
+
+    /* Map */
+    .map-wrapper { border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
+    .map-wrapper iframe { display: block; width: 100%; height: 320px; border: none; }
+    .address-line { text-align: center; margin-top: 16px; color: var(--muted); font-size: 15px; }
+    .phone-link a { color: var(--primary); text-decoration: none; font-weight: 700; font-size: 18px; }
+    .phone-link a:hover { text-decoration: underline; }
+
+    /* Klar promo */
+    .klar-promo {
+      background: linear-gradient(135deg, #0D0D1E, #1A2E1A);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 48px 32px;
+      text-align: center;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .klar-promo .badge {
+      display: inline-block;
+      background: var(--primary);
+      color: #1A1A2E;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 20px;
+    }
+    .klar-promo h2 { font-size: 28px; font-weight: 700; margin-bottom: 12px; }
+    .klar-promo p { color: var(--muted); max-width: 540px; margin: 0 auto 28px; }
+    .pricing { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; margin-bottom: 32px; }
+    .price-item { text-align: center; }
+    .price-label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; }
+    .price-amount { font-size: 28px; font-weight: 800; color: var(--primary); }
+    .price-note { font-size: 12px; color: var(--muted); }
+    .price-old { text-decoration: line-through; color: #888; font-size: 14px; }
+    .founder-badge { font-size: 13px; color: var(--primary); font-weight: 600; margin-bottom: 24px; }
+    .btn-proposal {
+      display: inline-block;
+      background: var(--primary);
+      color: #1A1A2E;
+      font-size: 15px;
+      font-weight: 700;
+      padding: 14px 32px;
+      border-radius: 8px;
+      text-decoration: none;
+      letter-spacing: 0.03em;
+      transition: background 0.2s;
+    }
+    .btn-proposal:hover { background: #DFC060; }
+
+    /* Footer */
+    footer {
+      background: #0D0D1E;
+      border-top: 1px solid var(--border);
+      padding: 32px 24px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    footer .powered { margin-top: 8px; font-size: 12px; color: #666; }
+    footer .powered a { color: var(--muted); text-decoration: none; }
+    footer .powered a:hover { color: var(--primary); }
+
+    @media (max-width: 600px) {
+      .klar-bookings-widget { grid-template-columns: 1fr; }
+      .booking-section { padding: 28px 20px; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="demo-banner">
+    This is a demo website — <a href="https://preview.klarsystems.com/sushi-like-vihti/proposal/">View Full Proposal</a>
+  </div>
+
+  <nav>
+    <div class="logo">Sushi Like</div>
+    <ul class="nav-links">
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#reviews">Reviews</a></li>
+      <li><a href="#hours">Hours</a></li>
+      <li><a href="#location">Location</a></li>
+      <li><a href="#reserve">Reserve</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-tag">Nummela, Vihti</div>
+    <h1>Fresh <span>Sushi</span> &amp;<br>Chinese Cuisine</h1>
+    <p>Nummela's most-loved sushi and Chinese restaurant — fresh rolls, generous portions, and a lunch buffet that keeps the regulars coming back.</p>
+    <div class="rating-badge">
+      4.2 / 5 &nbsp;&middot;&nbsp; 368 reviews on Google
+    </div>
+  </section>
+
+  <div style="padding: 0 24px; max-width: 900px; margin: 0 auto;">
+    <div class="booking-section" id="reserve">
+      <h2>Reserve a Table</h2>
+      <p>Book your sushi dinner directly — no middlemen, no commission.</p>
+      <div class="klar-bookings-widget" id="klar-bookings">
+        <div>
+          <label for="date">Date</label>
+          <input type="date" id="date" name="date">
+        </div>
+        <div>
+          <label for="time">Time</label>
+          <select id="time" name="time">
+            <option value="">Select time</option>
+            <option>11:00</option>
+            <option>12:00</option>
+            <option>13:00</option>
+            <option>14:00</option>
+            <option>15:00</option>
+            <option>16:00</option>
+            <option>17:00</option>
+            <option>18:00</option>
+            <option>19:00</option>
+          </select>
+        </div>
+        <div>
+          <label for="party">Guests</label>
+          <select id="party" name="party_size">
+            <option value="">1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+            <option>7</option>
+            <option>8</option>
+          </select>
+        </div>
+        <button class="btn-reserve" type="button">Reserve</button>
+      </div>
+    </div>
+  </div>
+
+  <section id="menu">
+    <h2>What We <span>Serve</span></h2>
+    <div class="menu-grid">
+      <div class="menu-card">
+        <h3>Sushi &amp; Sashimi</h3>
+        <p>Fresh sushi rolls, nigiri and assortment platters made in-house daily. Properly seasoned rice — the detail that keeps guests coming back.</p>
+      </div>
+      <div class="menu-card">
+        <h3>Lunch Buffet</h3>
+        <p>Weekdays 10:30–14:30. Warm Asian dishes, salads, soups, noodles, and a fresh sushi selection — refilled regularly from the kitchen.</p>
+      </div>
+      <div class="menu-card">
+        <h3>Chinese Specialties</h3>
+        <p>Beef, chicken, pork and seafood dishes with rice and noodles. Generous portions, classic Chinese-Finnish flavours.</p>
+      </div>
+      <div class="menu-card">
+        <h3>Vegetarian Options</h3>
+        <p>Falafel, tofu and vegetable dishes alongside the full menu. Clearly marked, always available.</p>
+      </div>
+      <div class="menu-card">
+        <h3>Appetizers</h3>
+        <p>Miso soup, tempura, edamame and spring rolls to start. Pair with any main or as a lighter lunch choice.</p>
+      </div>
+      <div class="menu-card">
+        <h3>Takeaway</h3>
+        <p>Full menu available for takeaway and Wolt delivery. Call ahead or order online — ready when you are.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="reviews" style="background: rgba(34,34,62,0.4); max-width: 100%; padding: 72px 24px;">
+    <div style="max-width: 900px; margin: 0 auto;">
+      <h2>What Guests <span>Say</span></h2>
+      <div class="reviews-grid">
+        <div class="review-card">
+          <div class="review-stars">4.2 / 5 — Google Reviews</div>
+          <p>"Best sushi in the area — cooked and seasoned rice, buffet is worth visiting."</p>
+          <cite>via Restaurant Guru</cite>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">4.2 / 5 — Google Reviews</div>
+          <p>"Good service and wonderful atmosphere with nice owner couple."</p>
+          <cite>via Restaurant Guru</cite>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">4.2 / 5 — Google Reviews</div>
+          <p>"Herkullisia susheja — fresh and delicious every visit."</p>
+          <cite>via Wolt</cite>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="hours">
+    <h2>Opening <span>Hours</span></h2>
+    <div class="hours-table">
+      <div class="hours-row"><span class="day">Monday</span><span class="time">11:00 – 20:00</span></div>
+      <div class="hours-row"><span class="day">Tuesday</span><span class="time">11:00 – 20:00</span></div>
+      <div class="hours-row"><span class="day">Wednesday</span><span class="time">11:00 – 20:00</span></div>
+      <div class="hours-row"><span class="day">Thursday</span><span class="time">11:00 – 20:00</span></div>
+      <div class="hours-row"><span class="day">Friday</span><span class="time">11:00 – 20:00</span></div>
+      <div class="hours-row"><span class="day">Saturday</span><span class="time">12:00 – 20:00</span></div>
+      <div class="hours-row"><span class="day">Sunday</span><span class="time">12:00 – 20:00</span></div>
+      <div class="hours-row" style="border-top: 1px solid var(--border); margin-top: 8px; padding-top: 12px;">
+        <span class="day">Lunch buffet (Mon–Fri)</span><span class="time">10:30 – 14:30</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="location">
+    <h2>Find <span>Us</span></h2>
+    <div class="map-wrapper">
+      <iframe src="https://maps.google.com/maps?q=Ratastie+13+D+03100+Nummela&z=16&output=embed" title="Sushi Like map" loading="lazy"></iframe>
+    </div>
+    <p class="address-line">Ratastie 13 D, 03100 Nummela (Vihti)</p>
+    <p class="phone-link" style="text-align:center; margin-top:12px;">
+      <a href="tel:+358505628389">+358 50 5628389</a>
+    </p>
+  </section>
+
+  <section style="padding: 48px 24px;">
+    <div class="klar-promo">
+      <span class="badge">Klar Bookings</span>
+      <h2>Your Own Website — Direct Bookings</h2>
+      <p>Klar Bookings gives Sushi Like its own website with a built-in reservation system. No commissions, no third-party platforms — guests book directly with you.</p>
+      <div class="pricing">
+        <div class="price-item">
+          <div class="price-label">Setup</div>
+          <div class="price-amount">980 €</div>
+        </div>
+        <div class="price-item">
+          <div class="price-label">Monthly</div>
+          <div class="price-amount">40 €/kk</div>
+          <div class="price-old">79 €/kk</div>
+        </div>
+      </div>
+      <div class="founder-badge">Perustajajäsen — 20 paikkaa</div>
+      <a href="https://preview.klarsystems.com/sushi-like-vihti/proposal/" class="btn-proposal">View Full Proposal</a>
+    </div>
+  </section>
+
+  <footer>
+    <div><strong>Sushi Like</strong> &middot; Ratastie 13 D, 03100 Nummela &middot; <a href="tel:+358505628389">+358 50 5628389</a></div>
+    <div class="powered">Powered by Klar &middot; <a href="https://preview.klarsystems.com/sushi-like-vihti/proposal/">View Proposal</a></div>
+  </footer>
+
+</body>
+</html>

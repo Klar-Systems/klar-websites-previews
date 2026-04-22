@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Royal Mekong Ravintola — Pan-Asian Buffet in Hyvinkää</title>
+<!-- palette: research-derived (#0F1A1C bg, #F2EBDC text, #B8862A primary, #8C2A2E accent) -->
+<style>
+  :root {
+    --bg: #0F1A1C;
+    --bg-alt: #162224;
+    --text: #F2EBDC;
+    --text-muted: #C8BBA8;
+    --primary: #B8862A;
+    --accent: #8C2A2E;
+    --border: rgba(184,134,42,0.25);
+    --font-heading: 'Playfair Display', Georgia, serif;
+    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: var(--font-body); line-height: 1.6; }
+
+  /* --- DEMO BANNER --- */
+  .demo-banner {
+    background: var(--primary); color: #0F1A1C; text-align: center;
+    padding: 0.6rem 1rem; font-size: 0.82rem; font-weight: 600;
+    letter-spacing: 0.03em;
+  }
+  .demo-banner a { color: #0F1A1C; font-weight: 700; }
+
+  /* --- NAVIGATION --- */
+  nav {
+    position: sticky; top: 0; width: 100%; z-index: 100;
+    background: rgba(15,26,28,0.97); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 0.8rem 2rem;
+  }
+  .nav-brand { font-family: var(--font-heading); font-size: 1.2rem; color: var(--primary); letter-spacing: 0.02em; }
+  .nav-links { display: flex; gap: 1.5rem; list-style: none; }
+  .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--primary); }
+  @media (max-width: 600px) { .nav-links { display: none; } }
+
+  /* --- HERO --- */
+  .hero {
+    min-height: 90vh; display: flex; align-items: center;
+    padding: 5rem 2rem 4rem;
+    background: linear-gradient(135deg, var(--bg) 0%, #0A1416 60%, #1A0A0C 100%);
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 70% 40%, rgba(140,42,46,0.12) 0%, transparent 60%),
+                radial-gradient(ellipse at 20% 80%, rgba(184,134,42,0.08) 0%, transparent 50%);
+  }
+  .hero-content { max-width: 620px; position: relative; z-index: 1; }
+  .hero-label { font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--primary); margin-bottom: 1rem; }
+  .hero-title { font-family: var(--font-heading); font-size: clamp(2.2rem, 5vw, 3.8rem); line-height: 1.15; color: var(--text); margin-bottom: 1rem; }
+  .hero-title span { color: var(--primary); }
+  .hero-sub { font-size: 1.05rem; color: var(--text-muted); margin-bottom: 2rem; max-width: 500px; }
+  .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--primary); color: #0F1A1C; font-weight: 700;
+    padding: 0.9rem 2rem; border-radius: 4px; text-decoration: none;
+    font-size: 0.95rem; letter-spacing: 0.03em; transition: background 0.2s, transform 0.15s;
+  }
+  .btn-primary:hover { background: #d4a03a; transform: translateY(-1px); }
+  .btn-outline {
+    border: 1px solid var(--primary); color: var(--primary);
+    padding: 0.9rem 2rem; border-radius: 4px; text-decoration: none;
+    font-size: 0.95rem; letter-spacing: 0.03em; transition: all 0.2s;
+  }
+  .btn-outline:hover { background: rgba(184,134,42,0.1); }
+
+  /* --- HERO PHOTO PLACEHOLDER --- */
+  .hero-photo {
+    position: absolute; right: 0; top: 0; bottom: 0; width: 40%;
+    background: linear-gradient(135deg, #1A2A2C, #2A1A10);
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column; gap: 0.5rem; font-size: 0.8rem;
+    color: rgba(242,235,220,0.25); letter-spacing: 0.08em; text-transform: uppercase;
+    border-left: 1px solid var(--border);
+  }
+  .hero-photo .photo-label { font-size: 0.75rem; }
+  @media (max-width: 768px) { .hero-photo { display: none; } .hero-content { max-width: 100%; } }
+
+  /* --- SECTION LAYOUT --- */
+  section { padding: 5rem 2rem; }
+  .container { max-width: 1100px; margin: 0 auto; }
+  .section-label { font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--primary); margin-bottom: 0.75rem; }
+  .section-title { font-family: var(--font-heading); font-size: clamp(1.8rem, 3.5vw, 2.5rem); color: var(--text); margin-bottom: 1rem; }
+  .section-subtitle { color: var(--text-muted); font-size: 1rem; max-width: 580px; margin-bottom: 2.5rem; }
+  .divider { width: 48px; height: 2px; background: var(--primary); margin-bottom: 2rem; }
+
+  /* --- BOOKING WIDGET (Klar Bookings) --- */
+  #booking {
+    background: var(--bg-alt);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .booking-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+  @media (max-width: 768px) { .booking-wrap { grid-template-columns: 1fr; gap: 2rem; } }
+  .booking-info .lead { font-size: 1.05rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 1.25rem; }
+  .booking-info .phone-link { color: var(--primary); text-decoration: none; font-size: 0.95rem; }
+  .booking-info .phone-link:hover { text-decoration: underline; }
+  .klar-bookings-widget {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    border-radius: 8px; padding: 2rem;
+  }
+  .widget-title { font-family: var(--font-heading); font-size: 1.3rem; color: var(--text); margin-bottom: 1.5rem; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+  @media (max-width: 560px) { .form-row { grid-template-columns: 1fr; } }
+  .form-group { display: flex; flex-direction: column; gap: 0.35rem; }
+  .form-group label { font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); }
+  .form-group select, .form-group input[type="date"] {
+    background: rgba(15,26,28,0.8); border: 1px solid var(--border);
+    color: var(--text); padding: 0.65rem 0.85rem; border-radius: 4px;
+    font-size: 0.95rem; font-family: var(--font-body);
+    appearance: none; -webkit-appearance: none;
+    cursor: pointer; transition: border-color 0.2s;
+  }
+  .form-group select:focus, .form-group input:focus { outline: none; border-color: var(--primary); }
+  .form-group select option { background: #0F1A1C; }
+  .form-row-full { margin-bottom: 1.25rem; }
+  .btn-reserve {
+    width: 100%; background: var(--primary); color: #0F1A1C;
+    font-weight: 700; font-size: 1rem; letter-spacing: 0.05em;
+    padding: 1rem; border: none; border-radius: 4px; cursor: pointer;
+    font-family: var(--font-body); transition: background 0.2s, transform 0.15s;
+    margin-top: 0.5rem;
+  }
+  .btn-reserve:hover { background: #d4a03a; transform: translateY(-1px); }
+  .widget-note { font-size: 0.75rem; color: var(--text-muted); text-align: center; margin-top: 0.75rem; }
+
+  /* --- MENU --- */
+  #menu { background: var(--bg); }
+  .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; }
+  .menu-card {
+    background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+    border-radius: 6px; overflow: hidden;
+  }
+  .menu-card-photo {
+    height: 160px; background: linear-gradient(135deg, #1A2A2C, #2A1A10);
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column; gap: 0.4rem; color: rgba(242,235,220,0.22);
+    font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em;
+  }
+  .menu-card-body { padding: 1.25rem; }
+  .menu-card-body h3 { font-family: var(--font-heading); font-size: 1.1rem; color: var(--text); margin-bottom: 0.4rem; }
+  .menu-card-body p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.5; }
+  .buffet-badge {
+    display: inline-block; background: var(--accent); color: #F2EBDC;
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase; padding: 0.25rem 0.6rem; border-radius: 3px;
+    margin-bottom: 0.75rem;
+  }
+
+  /* --- REVIEWS --- */
+  #reviews { background: var(--bg-alt); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+  .review-card {
+    background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+    border-radius: 6px; padding: 1.5rem;
+  }
+  .review-score { font-weight: 700; color: var(--primary); font-size: 1.1rem; margin-bottom: 0.75rem; }
+  .review-text { font-size: 0.95rem; color: var(--text-muted); line-height: 1.6; font-style: italic; margin-bottom: 0.75rem; }
+  .review-author { font-size: 0.78rem; color: rgba(242,235,220,0.4); letter-spacing: 0.05em; }
+  .rating-summary { display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2.5rem; flex-wrap: wrap; }
+  .rating-big { font-family: var(--font-heading); font-size: 3.5rem; color: var(--primary); line-height: 1; }
+  .rating-detail { color: var(--text-muted); font-size: 0.9rem; }
+  .rating-detail strong { color: var(--text); }
+
+  /* --- INFO --- */
+  #info { background: var(--bg); }
+  .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 2rem; }
+  .info-card { padding: 1.5rem 0; border-top: 1px solid var(--border); }
+  .info-card h3 { font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--primary); margin-bottom: 0.75rem; }
+  .info-card p, .info-card a { font-size: 0.95rem; color: var(--text-muted); line-height: 1.7; }
+  .info-card a { color: var(--primary); text-decoration: none; }
+  .info-card a:hover { text-decoration: underline; }
+  .map-placeholder {
+    width: 100%; height: 300px; background: linear-gradient(135deg, #162224, #1A2A2C);
+    border-radius: 6px; border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column; gap: 0.5rem; color: rgba(242,235,220,0.25);
+    font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em;
+    margin-top: 2rem;
+  }
+  .hours-table { width: 100%; border-collapse: collapse; }
+  .hours-table tr { border-bottom: 1px solid rgba(184,134,42,0.1); }
+  .hours-table td { padding: 0.4rem 0; font-size: 0.88rem; color: var(--text-muted); }
+  .hours-table td:first-child { color: var(--text); font-weight: 500; width: 120px; }
+
+  /* --- FOOTER --- */
+  footer {
+    background: rgba(10,12,12,0.97); border-top: 1px solid var(--border);
+    padding: 2.5rem 2rem; text-align: center;
+  }
+  footer .footer-brand { font-family: var(--font-heading); font-size: 1.1rem; color: var(--primary); margin-bottom: 0.5rem; }
+  footer p { font-size: 0.85rem; color: rgba(242,235,220,0.4); margin-bottom: 0.35rem; }
+  footer a { color: rgba(184,134,42,0.65); text-decoration: none; }
+  footer .powered { font-size: 0.75rem; color: rgba(242,235,220,0.2); margin-top: 1rem; }
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- DEMO BANNER — This is a demo preview for Royal Mekong Ravintola -->
+<div class="demo-banner">
+  This is a demo website — <a href="https://preview.klarsystems.com/royal-mekong-ravintola-hyvinkaa/proposal/">View Full Proposal</a>
+</div>
+
+<!-- NAVIGATION -->
+<nav>
+  <div class="nav-brand">Royal Mekong</div>
+  <ul class="nav-links">
+    <li><a href="#booking">Reserve a Table</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#info">Visit Us</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-label">Pan-Asian Restaurant &middot; Hyvinkää</div>
+    <h1 class="hero-title">
+      Hyvinkää's Favourite<br><span>Pan-Asian Buffet</span>
+    </h1>
+    <p class="hero-sub">
+      Fresh sushi, Thai curries, Chinese classics and Cambodian-inspired dishes —
+      all under one roof at Kauppakeskus Willa. Rated #7 of 176 restaurants in Hyvinkää.
+    </p>
+    <div class="hero-cta">
+      <a href="#booking" class="btn-primary">Reserve a Table</a>
+      <a href="#menu" class="btn-outline">View Menu</a>
+    </div>
+  </div>
+  <div class="hero-photo">
+    <div class="photo-label">Your photo here</div>
+  </div>
+</section>
+
+<!-- KLAR BOOKINGS RESERVATION WIDGET -->
+<section id="booking">
+  <div class="container">
+    <div class="booking-wrap">
+      <div class="booking-info">
+        <div class="section-label">Klar Bookings</div>
+        <h2 class="section-title">Reserve Your Table</h2>
+        <div class="divider"></div>
+        <p class="lead">
+          Book a table for lunch buffet or à la carte dinner online in seconds.
+          Families, colleagues, and groups welcome — no cover charges, no per-head fees.
+        </p>
+        <p class="lead">
+          Prefer to call? <a href="tel:+358194766" class="phone-link">019 476 677</a>
+        </p>
+        <p style="font-size:0.85rem;color:rgba(242,235,220,0.4);margin-top:1rem;">
+          Mon–Thu 11:00–21:00 &middot; Fri–Sat 11:00–22:00 &middot; Sun 12:00–20:00<br>
+          Lunch buffet daily — until 15:00 (17:00 weekends)
+        </p>
+      </div>
+      <!-- Klar Bookings Widget: date + time + party size + Reserve -->
+      <div class="klar-bookings-widget" id="klar-bookings">
+        <div class="widget-title">Book a Table</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="booking-date">Date</label>
+            <input type="date" id="booking-date" name="date">
+          </div>
+          <div class="form-group">
+            <label for="booking-time">Time</label>
+            <select id="booking-time" name="time">
+              <option value="">Select time</option>
+              <option value="11:00">11:00</option>
+              <option value="11:30">11:30</option>
+              <option value="12:00">12:00</option>
+              <option value="12:30">12:30</option>
+              <option value="13:00">13:00</option>
+              <option value="13:30">13:30</option>
+              <option value="14:00">14:00</option>
+              <option value="15:00">15:00</option>
+              <option value="16:00">16:00</option>
+              <option value="17:00">17:00</option>
+              <option value="18:00">18:00</option>
+              <option value="19:00">19:00</option>
+              <option value="20:00">20:00</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row-full">
+          <div class="form-group">
+            <label for="booking-guests">Party Size</label>
+            <select id="booking-guests" name="party_size">
+              <option value="">Number of guests</option>
+              <option value="1">1 person</option>
+              <option value="2">2 people</option>
+              <option value="3">3 people</option>
+              <option value="4">4 people</option>
+              <option value="5">5 people</option>
+              <option value="6">6 people</option>
+              <option value="7">7 people</option>
+              <option value="8">8 people</option>
+              <option value="10">10 people</option>
+              <option value="12">12+ people</option>
+            </select>
+          </div>
+        </div>
+        <button class="btn-reserve" type="button" onclick="handleBooking()">Reserve — Klar Bookings</button>
+        <div class="widget-note">Instant confirmation &middot; No credit card required</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MENU HIGHLIGHTS -->
+<section id="menu">
+  <div class="container">
+    <div class="section-label">What We Serve</div>
+    <h2 class="section-title">Pan-Asian Menu</h2>
+    <div class="divider"></div>
+    <p class="section-subtitle">From the fresh sushi counter to Thai red curries and Chinese-Cambodian classics — every day, made fresh.</p>
+    <div class="menu-grid">
+      <div class="menu-card">
+        <div class="menu-card-photo">
+          <span>Food photos coming soon</span>
+        </div>
+        <div class="menu-card-body">
+          <div class="buffet-badge">Buffet daily</div>
+          <h3>Lunch Buffet with Sushi</h3>
+          <p>Fresh sushi refilled from the kitchen, warm Asian dishes, salads, soups and noodles. Weekdays from 11:00, weekends until 17:00.</p>
+        </div>
+      </div>
+      <div class="menu-card">
+        <div class="menu-card-photo">
+          <span>Food photos coming soon</span>
+        </div>
+        <div class="menu-card-body">
+          <h3>Red Saraman Curry</h3>
+          <p>Thai red curry — choice of chicken, beef, jumbo shrimps or fish. Served with rice, spice level to your preference.</p>
+        </div>
+      </div>
+      <div class="menu-card">
+        <div class="menu-card-photo">
+          <span>Food photos coming soon</span>
+        </div>
+        <div class="menu-card-body">
+          <h3>Tom Yam Soup</h3>
+          <p>Spicy, well-flavoured hot shrimp soup — a customer favourite and a staple of the pan-Asian a la carte menu.</p>
+        </div>
+      </div>
+      <div class="menu-card">
+        <div class="menu-card-photo">
+          <span>Food photos coming soon</span>
+        </div>
+        <div class="menu-card-body">
+          <h3>Chinese &amp; Cambodian Classics</h3>
+          <p>Traditional soft meat stews, stir-fries, fried fish in sweet-sour sauce — from Chinese, Malaysian, and Cambodian traditions.</p>
+        </div>
+      </div>
+    </div>
+    <p style="font-size:0.85rem;color:rgba(242,235,220,0.4);margin-top:1rem;">
+      A la carte kitchen open until 21:00 weekdays, 22:00 Fri–Sat.
+    </p>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section id="reviews">
+  <div class="container">
+    <div class="section-label">Guest Reviews</div>
+    <h2 class="section-title">What Guests Say</h2>
+    <div class="divider"></div>
+    <div class="rating-summary">
+      <div class="rating-big">4.1</div>
+      <div class="rating-detail">
+        <strong>373 reviews on Google</strong><br>
+        Ranked #7 of 176 restaurants in Hyvinkää
+      </div>
+    </div>
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="review-score">4.1 / 5</div>
+        <p class="review-text">"Best Asian in Hyvinkää, really versatile lunch and delicious."</p>
+        <div class="review-author">— via Eat.fi</div>
+      </div>
+      <div class="review-card">
+        <div class="review-score">4.1 / 5</div>
+        <p class="review-text">"It was easy to see that the staff is proud of their work. Place was clean, buffet included tasty sushi."</p>
+        <div class="review-author">— Anders_FI, via TripAdvisor</div>
+      </div>
+      <div class="review-card">
+        <div class="review-score">4.1 / 5</div>
+        <p class="review-text">"For 9.50 euros you get a good selection of Asian cuisine."</p>
+        <div class="review-author">— ja55e, via TripAdvisor</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INFO -->
+<section id="info">
+  <div class="container">
+    <div class="section-label">Visit Us</div>
+    <h2 class="section-title">Find Royal Mekong</h2>
+    <div class="divider"></div>
+    <div class="info-grid">
+      <div class="info-card">
+        <h3>Address</h3>
+        <p>Torikatu 7, 05800 Hyvinkää<br>Kauppakeskus Willa, 2nd floor<br>(Toritaso, Willa shopping centre)</p>
+      </div>
+      <div class="info-card">
+        <h3>Opening Hours</h3>
+        <table class="hours-table">
+          <tr><td>Mon–Thu</td><td>11:00–21:00</td></tr>
+          <tr><td>Fri–Sat</td><td>11:00–22:00</td></tr>
+          <tr><td>Sun</td><td>12:00–20:00</td></tr>
+          <tr><td colspan="2" style="font-size:0.8rem;padding-top:0.5rem;color:rgba(242,235,220,0.4);">Lunch buffet until 15:00 (17:00 weekends)</td></tr>
+        </table>
+      </div>
+      <div class="info-card">
+        <h3>Contact</h3>
+        <p><a href="tel:+358194766">019 476 677</a><br>
+        <a href="mailto:royalmekongravintola.hyvinkaa@gmail.com">royalmekongravintola.hyvinkaa@gmail.com</a></p>
+        <p style="margin-top:0.75rem;"><a href="https://www.facebook.com/royalmekongravintola" target="_blank" rel="noopener">Facebook page</a></p>
+      </div>
+      <div class="info-card">
+        <h3>Parking &amp; Access</h3>
+        <p>Free parking at Kauppakeskus Willa.<br>Accessible entrance via the shopping centre. Lift available.</p>
+      </div>
+    </div>
+    <div class="map-placeholder">
+      <span>Interior photo coming soon</span>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">Royal Mekong Ravintola</div>
+  <p>Torikatu 7 &middot; Kauppakeskus Willa, 2nd floor &middot; 05800 Hyvinkää</p>
+  <p><a href="tel:+358194766">019 476 677</a> &middot; <a href="mailto:royalmekongravintola.hyvinkaa@gmail.com">royalmekongravintola.hyvinkaa@gmail.com</a></p>
+  <div class="powered">Powered by Klar &middot; <a href="https://preview.klarsystems.com/royal-mekong-ravintola-hyvinkaa/proposal/">View Proposal</a></div>
+</footer>
+
+<script>
+function handleBooking() {
+  var date = document.getElementById('booking-date').value;
+  var time = document.getElementById('booking-time').value;
+  var guests = document.getElementById('booking-guests').value;
+  if (!date || !time || !guests) {
+    alert('Please select a date, time, and party size to complete your reservation.');
+    return;
+  }
+  alert('Thank you! Your reservation request for ' + guests + ' guest(s) on ' + date + ' at ' + time + ' has been received. We will confirm at 019 476 677.');
+}
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('booking-date').min = new Date().toISOString().split('T')[0];
+});
+</script>
+
+</body>
+</html>

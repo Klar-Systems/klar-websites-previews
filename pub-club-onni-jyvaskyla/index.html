@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pub & Club Onni — Karaoke, Bingo & Nightlife, Jyväskylä</title>
+  <!-- Palette: inferred from adult karaoke/club archetype (Seg 3, Café-Bar). No real-site palette available. -->
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #18120A;
+      --surface: #221A0E;
+      --green: #2A6B3A;
+      --gold: #D4A520;
+      --text: #F0E8D0;
+      --muted: #A09070;
+      --border: #352A18;
+    }
+
+    body { font-family: 'Arial', sans-serif; background: var(--bg); color: var(--text); }
+
+    nav {
+      background: rgba(24,18,10,0.97);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 2rem;
+      display: flex; justify-content: space-between; align-items: center;
+      position: sticky; top: 0; z-index: 100;
+    }
+    .logo { font-size: 1.5rem; font-weight: 900; color: var(--gold); letter-spacing: 2px; text-transform: uppercase; }
+    .nav-links a { color: var(--muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--gold); }
+
+    /* HERO */
+    .hero {
+      padding: 6rem 2rem;
+      text-align: center;
+      position: relative;
+      background: var(--surface);
+      border-bottom: 3px solid var(--gold);
+    }
+    .hero-bg { position: absolute; top:0; left:0; right:0; bottom:0; background: linear-gradient(160deg, #120d06 0%, #18120a 70%); }
+    .hero-photo-placeholder { position: absolute; top:0; left:0; right:0; bottom:0; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.06); font-size: 0.85rem; }
+    .hero-content { position: relative; z-index:1; max-width: 720px; margin: 0 auto; }
+    .hero-tag { display: inline-block; border: 1px solid var(--gold); color: var(--gold); padding: 0.3rem 0.8rem; font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 1.5rem; }
+    .hero h1 { font-size: 3rem; font-weight: 900; color: #fff; line-height: 1.1; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 2px; }
+    .hero p { color: var(--muted); font-size: 1rem; line-height: 1.75; max-width: 520px; margin: 0 auto 2.5rem; }
+    .hero-cta { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn-primary { background: var(--gold); color: #18120a; padding: 0.9rem 2rem; font-weight: 700; font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase; text-decoration: none; display: inline-block; transition: opacity 0.2s; }
+    .btn-primary:hover { opacity: 0.85; }
+    .btn-outline { border: 1px solid var(--muted); color: var(--muted); padding: 0.9rem 2rem; font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase; text-decoration: none; display: inline-block; transition: border-color 0.2s, color 0.2s; }
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+    .photo-placeholder { background: #2a1e10; color: #5a4a28; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; border-radius: 2px; }
+
+    /* WEEKLY PROGRAMME */
+    .programme { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 4rem 2rem; }
+    .programme-inner { max-width: 900px; margin: 0 auto; }
+    .programme h2 { font-size: 1.9rem; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; color: var(--gold); text-align: center; margin-bottom: 0.5rem; }
+    .programme-sub { text-align: center; color: var(--muted); margin-bottom: 2.5rem; font-size: 0.95rem; }
+    .programme-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; }
+    @media (max-width: 700px) { .programme-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 400px) { .programme-grid { grid-template-columns: 1fr; } }
+    .prog-card { background: rgba(212,165,32,0.06); border: 1px solid var(--border); border-radius: 4px; padding: 1.5rem 1rem; text-align: center; }
+    .prog-card.highlight { border-color: var(--gold); background: rgba(212,165,32,0.12); }
+    .prog-day { font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); font-weight: 700; margin-bottom: 0.5rem; }
+    .prog-icon { font-size: 2rem; display: block; margin-bottom: 0.5rem; }
+    .prog-event { color: var(--text); font-weight: 700; font-size: 0.95rem; margin-bottom: 0.3rem; }
+    .prog-note { color: var(--muted); font-size: 0.8rem; line-height: 1.5; }
+
+    /* ABOUT */
+    .about { max-width: 900px; margin: 0 auto; padding: 4.5rem 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+    @media (max-width: 640px) { .about { grid-template-columns: 1fr; } }
+    .about h2 { font-size: 1.8rem; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; color: var(--gold); margin-bottom: 1rem; }
+    .about p { color: var(--muted); line-height: 1.75; margin-bottom: 0.85rem; }
+    .about-img { height: 300px; }
+    .about-img .photo-placeholder { height: 100%; }
+
+    /* FEATURES STRIP */
+    .features { background: var(--green); padding: 1.5rem 2rem; }
+    .features-inner { max-width: 900px; margin: 0 auto; display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap; }
+    .feat-item { text-align: center; color: #fff; }
+    .feat-item .icon { font-size: 1.6rem; display: block; margin-bottom: 0.35rem; }
+    .feat-item span { font-size: 0.8rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+
+    /* EVENTS & CONTACT */
+    .events-contact { max-width: 900px; margin: 0 auto; padding: 4.5rem 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+    @media (max-width: 640px) { .events-contact { grid-template-columns: 1fr; } }
+    .events-contact h2 { font-size: 1.8rem; font-weight: 900; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
+    .events-contact p { color: var(--muted); line-height: 1.75; margin-bottom: 0.75rem; }
+    .contact-line { color: var(--text); margin-bottom: 0.5rem; font-size: 0.95rem; }
+    .contact-line a { color: var(--gold); text-decoration: none; }
+    .contact-line a:hover { text-decoration: underline; }
+    .hours-table { border-collapse: collapse; width: 100%; margin-top: 0.75rem; }
+    .hours-table td { padding: 0.4rem 0; color: var(--muted); font-size: 0.9rem; }
+    .hours-table td:first-child { color: var(--text); font-weight: 700; padding-right: 1.5rem; white-space: nowrap; }
+
+    .map-wrap { height: 280px; }
+    .map-wrap iframe { width: 100%; height: 100%; border: 0; }
+
+    footer { background: #080604; border-top: 2px solid var(--gold); padding: 2rem; text-align: center; color: var(--muted); font-size: 0.85rem; }
+    footer strong { color: var(--text); }
+
+    /* Demo banner */
+    .demo-banner {
+      background: rgba(0,0,0,0.85);
+      border-bottom: 1px solid #555;
+      color: rgba(255,255,255,0.8);
+      text-align: center;
+      padding: 0.6rem 1rem;
+      font-size: 0.85rem;
+    }
+    .demo-banner strong { color: #fff; }
+    .demo-banner a { color: #D4A017; text-decoration: none; margin-left: 0.5rem; }
+    .demo-banner a:hover { text-decoration: underline; }
+    .hero-rating { display: inline-block; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: 3px; padding: 0.3rem 0.7rem; font-size: 0.9rem; color: inherit; margin-bottom: 1.5rem; }
+    .hero-rating strong { color: #D4A017; }
+    .footer-klar { font-size: 0.8rem; color: rgba(255,255,255,0.3); margin-top: 0.5rem; }
+  </style>
+</head>
+<body>
+
+<!-- Demo banner -->
+<div class="demo-banner">
+  <strong>This is a demo</strong> &mdash; a free preview built for Pub & Club Onni.
+  <a href="https://preview.klarsystems.com/pub-club-onni-jyvaskyla/proposal/" target="_blank" rel="noopener">View the full proposal &rarr;</a>
+</div>
+
+  <nav>
+    <div class="logo">Pub & Club Onni</div>
+    <div class="nav-links">
+      <a href="#programme">Events</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-photo-placeholder">Your photo here</div>
+    <div class="hero-content">
+      <div class="hero-tag">Jyväskylä · Yliopistonkatu 38</div>
+      <h1>Jyväskylä's<br>Full-Programme<br>Adult Pub</h1>
+      <p>Karaoke every night. Bingo on Wednesdays. Trivia on Thursdays. Weekend dancing with DJ. Billiards and board games during the day — all at Pub & Club Onni.</p>
+            <div class="hero-rating"><strong>3.8</strong> Google rating (586 reviews)</div>
+      <div class="hero-cta">
+        <a href="#programme" class="btn-primary">This Week's Events</a>
+        <a href="#contact" class="btn-outline">Find Us</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- WEEKLY PROGRAMME -->
+  <section class="programme" id="programme">
+    <div class="programme-inner">
+      <h2>Weekly Programme</h2>
+      <p class="programme-sub">Something happening every night of the week — check what's on</p>
+      <div class="programme-grid">
+        <div class="prog-card">
+          <div class="prog-day">Mon – Tue</div>
+          <span class="prog-icon"></span>
+          <div class="prog-event">Karaoke</div>
+          <div class="prog-note">From opening until midnight</div>
+        </div>
+        <div class="prog-card highlight">
+          <div class="prog-day">Wednesday</div>
+          <span class="prog-icon"></span>
+          <div class="prog-event">Bingo Night</div>
+          <div class="prog-note">Free entry — prizes every round</div>
+        </div>
+        <div class="prog-card highlight">
+          <div class="prog-day">Thursday</div>
+          <span class="prog-icon"></span>
+          <div class="prog-event">Trivia Night</div>
+          <div class="prog-note">Test your knowledge with the crowd</div>
+        </div>
+        <div class="prog-card highlight">
+          <div class="prog-day">Fri – Sat</div>
+          <span class="prog-icon"></span>
+          <div class="prog-event">DJ Disco</div>
+          <div class="prog-note">Dance floor open until 03:00</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES STRIP -->
+  <div class="features">
+    <div class="features-inner">
+      <div class="feat-item"><span class="icon"></span><span>Karaoke</span></div>
+      <div class="feat-item"><span class="icon"></span><span>Billiards</span></div>
+      <div class="feat-item"><span class="icon"></span><span>Bingo</span></div>
+      <div class="feat-item"><span class="icon"></span><span>Trivia</span></div>
+      <div class="feat-item"><span class="icon"></span><span>Weekend Dancing</span></div>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div>
+      <h2>Jyväskylä's Adult Pub</h2>
+      <p>Pub & Club Onni is the most varied pub in central Jyväskylä — a daytime hangout and evening entertainment venue rolled into one. Billiards and board games from opening, karaoke every night, and the city's best pub events calendar from Wednesday through Saturday.</p>
+      <p>Good drinks at honest prices, a proper terrace and a crowd that knows how to have a good time. On weekends the DJ takes over and Onni becomes the go-to dance venue for Jyväskylä adults.</p>
+    </div>
+    <div class="about-img">
+      <div class="photo-placeholder">Interior photo coming soon</div>
+    </div>
+  </section>
+
+  <!-- EVENTS & CONTACT -->
+  <section class="events-contact" id="events">
+    <div>
+      <h2>Group Events</h2>
+      <p>Pub & Club Onni is a popular venue for birthday parties, work nights out and group celebrations. Karaoke, dancing, billiards and a lively crowd make it an easy choice for any occasion.</p>
+      <p>For group bookings or event enquiries, contact us directly by email or phone.</p>
+      <div class="photo-placeholder" style="height:200px; margin-top:1rem;">Interior photos coming soon</div>
+    </div>
+    <div id="contact">
+      <h2>Find Us</h2>
+      <div class="contact-line"> Yliopistonkatu 38, 40100 Jyväskylä</div>
+      <div class="contact-line"> <a href="tel:+358509119817">050 9119817</a></div>
+      <div class="contact-line"> <a href="mailto:sara.niskanen@tulikuuma.fi">sara.niskanen@tulikuuma.fi</a></div>
+      <h2 style="margin-top:2rem; font-size:1.3rem; letter-spacing:1px;">Opening Hours</h2>
+      <table class="hours-table">
+        <tr><td>Mon – Tue</td><td>09:00 – 00:00</td></tr>
+        <tr><td>Wed – Thu</td><td>09:00 – 02:00</td></tr>
+        <tr><td>Fri – Sat</td><td>09:00 – 03:00</td></tr>
+        <tr><td>Sunday</td><td>09:00 – 02:00</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- MAP -->
+  <div class="map-wrap">
+    <iframe
+      src="https://maps.google.com/maps?q=Yliopistonkatu+38+Jyvaskyla&z=16&output=embed"
+      title="Pub & Club Onni location map"
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </div>
+
+  <footer>
+    <strong>Pub & Club Onni</strong> · Yliopistonkatu 38, 40100 Jyväskylä · <a href="mailto:sara.niskanen@tulikuuma.fi" style="color:var(--gold)">sara.niskanen@tulikuuma.fi</a>
+      <div class="footer-klar">Powered by Klar</div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vakiopaine — Cultural Bar in Jyvaskyla</title>
+  <!-- Palette inferred: #1A1208 bg, #EDE8DC text, #7D4A1E primary, #C8A050 accent -->
+  <!-- Typography: warm serif display, honest sans body — cultural bar identity -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #1A1208;
+      --bg-card: #231a0e;
+      --text: #EDE8DC;
+      --muted: #9A8E78;
+      --primary: #7D4A1E;
+      --primary-hover: #6a3d18;
+      --accent: #C8A050;
+      --border: rgba(237,232,220,0.1);
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: 'Source Sans 3', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 17px; line-height: 1.65; }
+
+    /* DEMO BANNER */
+    .demo-banner { background: #0e0b06; border-bottom: 1px solid rgba(125,74,30,0.5); padding: 0.6rem 1.5rem; text-align: center; font-size: 0.85rem; color: var(--muted); }
+    .demo-banner a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; margin-left: 0.5rem; }
+
+    /* NAV */
+    nav { position: sticky; top: 0; z-index: 100; background: rgba(26,18,8,0.96); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); padding: 0 1.5rem; display: flex; align-items: center; justify-content: space-between; height: 60px; }
+    .nav-brand { font-family: 'Playfair Display', Georgia, serif; font-size: 1.25rem; color: var(--accent); text-decoration: none; letter-spacing: 0.02em; }
+    .nav-links { display: flex; gap: 1.8rem; list-style: none; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.88rem; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-cta { background: var(--primary) !important; color: var(--text) !important; padding: 0.4rem 1rem; border-radius: 3px; }
+    .nav-cta:hover { background: var(--primary-hover) !important; }
+
+    /* HERO */
+    .hero { min-height: 88vh; display: flex; align-items: center; padding: 5rem 4rem 4rem; max-width: 1100px; margin: 0 auto; }
+    .hero-text { max-width: 680px; }
+    .hero-eyebrow { font-size: 0.78rem; letter-spacing: 0.18em; font-weight: 600; color: var(--accent); text-transform: uppercase; margin-bottom: 1rem; }
+    .hero-text h1 { font-family: 'Playfair Display', Georgia, serif; font-size: clamp(3rem, 8vw, 5rem); line-height: 1.05; color: var(--text); margin-bottom: 0.5rem; }
+    .hero-text h1 em { font-style: italic; color: var(--accent); }
+    .hero-tagline { font-size: 1.1rem; color: var(--muted); margin-bottom: 2rem; line-height: 1.55; max-width: 520px; }
+    .hero-pills { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2.5rem; }
+    .pill { background: rgba(125,74,30,0.18); border: 1px solid rgba(125,74,30,0.45); color: var(--accent); padding: 0.3rem 0.8rem; border-radius: 2px; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
+    .hero-cta-row { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary { background: var(--primary); color: var(--text); padding: 0.75rem 1.8rem; border-radius: 3px; text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: background 0.2s; display: inline-block; }
+    .btn-primary:hover { background: var(--primary-hover); }
+    .btn-outline { border: 1px solid rgba(237,232,220,0.3); color: var(--text); padding: 0.75rem 1.8rem; border-radius: 3px; text-decoration: none; font-weight: 500; font-size: 0.95rem; transition: border-color 0.2s; display: inline-block; }
+    .btn-outline:hover { border-color: var(--text); }
+    .hero-photo { margin-top: 3.5rem; border-radius: 4px; overflow: hidden; border: 1px solid var(--border); }
+    .photo-placeholder { aspect-ratio: 16/9; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 0.5rem; color: var(--muted); font-size: 0.85rem; background: #241a0c; }
+
+    /* SECTIONS */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+    .section-label { font-size: 0.75rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); font-weight: 600; margin-bottom: 0.6rem; }
+    .section-heading { font-family: 'Playfair Display', Georgia, serif; font-size: clamp(1.8rem, 4vw, 2.8rem); color: var(--text); line-height: 1.15; margin-bottom: 1.5rem; }
+
+    /* IDENTITY SECTION */
+    .identity-section { padding: 6rem 0; border-top: 1px solid var(--border); }
+    .identity-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+    .identity-copy p { color: var(--muted); line-height: 1.75; margin-bottom: 1rem; }
+    .identity-copy p:last-child { margin-bottom: 0; }
+    .identity-highlight { background: var(--bg-card); border: 1px solid var(--border); border-radius: 4px; padding: 1.5rem; margin-top: 1.5rem; }
+    .identity-highlight p { color: var(--text); font-style: italic; font-size: 1rem; margin: 0; }
+    .feat-list { list-style: none; margin-top: 1.5rem; }
+    .feat-list li { display: flex; gap: 0.75rem; align-items: flex-start; padding: 0.6rem 0; border-bottom: 1px solid var(--border); color: var(--muted); font-size: 0.95rem; }
+    .feat-list li:last-child { border-bottom: none; }
+    .feat-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); margin-top: 0.55rem; flex-shrink: 0; }
+
+    /* EVENTS SECTION */
+    .events-section { padding: 6rem 0; border-top: 1px solid var(--border); }
+    .events-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2.5rem; }
+    .event-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 4px; padding: 1.75rem; }
+    .event-type { font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); font-weight: 600; margin-bottom: 0.5rem; }
+    .event-card h3 { font-family: 'Playfair Display', Georgia, serif; font-size: 1.25rem; color: var(--text); margin-bottom: 0.5rem; }
+    .event-card p { color: var(--muted); font-size: 0.9rem; line-height: 1.6; }
+
+    /* REVIEWS */
+    .reviews-section { padding: 6rem 0; border-top: 1px solid var(--border); }
+    .review-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2.5rem; }
+    .review-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 4px; padding: 1.75rem; }
+    .review-rating { font-size: 0.78rem; letter-spacing: 0.12em; color: var(--accent); font-weight: 600; text-transform: uppercase; margin-bottom: 0.75rem; }
+    .review-text { color: var(--text); font-style: italic; font-size: 0.95rem; line-height: 1.65; margin-bottom: 1rem; }
+    .review-author { color: var(--muted); font-size: 0.82rem; }
+    .rating-badge { display: flex; align-items: center; gap: 1.25rem; margin-top: 2.5rem; padding: 1.5rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 4px; max-width: 300px; }
+    .rating-num { font-family: 'Playfair Display', Georgia, serif; font-size: 3.5rem; color: var(--accent); line-height: 1; }
+    .rating-text { color: var(--muted); font-size: 0.85rem; line-height: 1.5; }
+
+    /* CONTACT */
+    .contact-section { padding: 6rem 0; border-top: 1px solid var(--border); }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; margin-top: 2.5rem; }
+    .contact-block { margin-bottom: 2rem; }
+    .contact-block h3 { font-family: 'Playfair Display', Georgia, serif; font-size: 1.1rem; color: var(--text); margin-bottom: 0.75rem; }
+    .info-row { display: flex; gap: 1rem; padding: 0.45rem 0; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+    .info-row strong { color: var(--muted); min-width: 90px; flex-shrink: 0; }
+    .info-row:last-child { border-bottom: none; }
+    .contact-form { background: var(--bg-card); border: 1px solid var(--border); border-radius: 4px; padding: 2rem; }
+    .contact-form h3 { font-family: 'Playfair Display', Georgia, serif; font-size: 1.1rem; color: var(--text); margin-bottom: 1.5rem; }
+    .form-group { margin-bottom: 1.1rem; }
+    .form-group label { display: block; font-size: 0.82rem; font-weight: 600; color: var(--muted); margin-bottom: 0.4rem; letter-spacing: 0.06em; text-transform: uppercase; }
+    .form-group input, .form-group textarea, .form-group select { width: 100%; background: rgba(237,232,220,0.06); border: 1px solid var(--border); border-radius: 3px; padding: 0.65rem 0.9rem; color: var(--text); font-size: 0.93rem; font-family: inherit; }
+    .form-group input:focus, .form-group textarea:focus, .form-group select:focus { outline: none; border-color: var(--accent); }
+    .form-group select option { background: #231a0e; }
+    .form-group textarea { min-height: 110px; resize: vertical; }
+    .btn-send { background: var(--primary); color: var(--text); border: none; border-radius: 3px; padding: 0.75rem 1.8rem; font-size: 0.95rem; font-weight: 600; cursor: pointer; font-family: inherit; transition: background 0.2s; }
+    .btn-send:hover { background: var(--primary-hover); }
+
+    /* FOOTER */
+    footer { background: #0e0a05; border-top: 1px solid var(--border); padding: 2.5rem 1.5rem; text-align: center; }
+    .footer-brand { font-family: 'Playfair Display', Georgia, serif; font-size: 1.6rem; color: var(--accent); margin-bottom: 0.3rem; }
+    .footer-sub { color: var(--muted); font-size: 0.85rem; margin-bottom: 1.25rem; }
+    .footer-links { display: flex; justify-content: center; gap: 2rem; margin-bottom: 1.25rem; flex-wrap: wrap; }
+    .footer-links a { color: var(--muted); text-decoration: none; font-size: 0.85rem; }
+    .footer-links a:hover { color: var(--text); }
+    .footer-copy { color: rgba(154,142,120,0.4); font-size: 0.75rem; }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .hero { padding: 4rem 1.5rem 3rem; }
+      .identity-grid, .contact-grid { grid-template-columns: 1fr; }
+      .events-grid, .review-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- DEMO BANNER -->
+<div class="demo-banner">
+  This is a demo &mdash; your real website, ready to launch.
+  <a href="https://preview.klarsystems.com/vakiopaine-jyvaskyla/proposal/" target="_blank" rel="noopener">View proposal &rarr;</a>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-brand">Vakiopaine</a>
+  <ul class="nav-links">
+    <li><a href="#identity">About</a></li>
+    <li><a href="#events">Events</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#contact" class="nav-cta">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <p class="hero-eyebrow">Kauppakatu 6 &middot; Jyvaskyla</p>
+    <h1>Jyvaskyla&rsquo;s<br /><em>Cultural Bar</em></h1>
+    <p class="hero-tagline">Live music, underground bands, theatre in the basement, and art on the walls &mdash; Vakiopaine has been the most characterful bar in central Jyvaskyla since day one.</p>
+    <div class="hero-pills">
+      <span class="pill">Live Music</span>
+      <span class="pill">Theatre</span>
+      <span class="pill">Art Exhibitions</span>
+      <span class="pill">Craft Beer</span>
+    </div>
+    <div class="hero-cta-row">
+      <a href="#contact" class="btn-primary">Contact Us</a>
+      <a href="#events" class="btn-outline">Events</a>
+    </div>
+    <div class="hero-photo">
+      <div class="photo-placeholder">
+        <span>[Bar interior with live music stage]</span>
+        <span style="font-size:0.75rem;">Photo of Vakiopaine bar — Kauppakatu 6</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IDENTITY -->
+<section class="identity-section" id="identity">
+  <div class="container">
+    <div class="identity-grid">
+      <div>
+        <p class="section-label">About</p>
+        <h2 class="section-heading">A bar where<br />culture comes first</h2>
+        <div class="identity-copy">
+          <p>Vakiopaine is Jyvaskyla's most beloved cultural bar &mdash; 4.5 stars from 392 Google reviewers. Located at Kauppakatu 6 in central Jyvaskyla, it brings together university students, artists, and bohemian regulars under one roof.</p>
+          <p>The basement hosts theatre performances. The walls carry rotating art exhibitions. The stage welcomes underground and live music acts. And behind the bar: Finnish craft beers including HIISI on tap, alongside Sandels and a solid drink selection.</p>
+          <div class="identity-highlight">
+            <p>"Jyvaskyla's most characterful and cosy place. A rich offering of art experiences."</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <p class="section-label">What we offer</p>
+        <ul class="feat-list">
+          <li><span class="feat-dot"></span><span>Live music nights with underground and local bands</span></li>
+          <li><span class="feat-dot"></span><span>Basement theatre performances and shows</span></li>
+          <li><span class="feat-dot"></span><span>Rotating art exhibitions on the bar walls</span></li>
+          <li><span class="feat-dot"></span><span>Craft beer on tap &mdash; HIISI Juicy Pale Ale, Sandels and more</span></li>
+          <li><span class="feat-dot"></span><span>Welcoming atmosphere for students and regulars alike</span></li>
+          <li><span class="feat-dot"></span><span>Central Jyvaskyla location at Kauppakatu 6</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EVENTS -->
+<section class="events-section" id="events">
+  <div class="container">
+    <p class="section-label">What's on</p>
+    <h2 class="section-heading">Events at Vakiopaine</h2>
+    <div class="events-grid">
+      <div class="event-card">
+        <p class="event-type">Live Music</p>
+        <h3>Bands &amp; Gigs</h3>
+        <p>From underground acts to established local bands &mdash; live music is a core part of what Vakiopaine is about. Check our Facebook for upcoming gig nights.</p>
+      </div>
+      <div class="event-card">
+        <p class="event-type">Theatre</p>
+        <h3>Basement Stage</h3>
+        <p>Our basement is home to theatre performances and experimental shows. A unique venue in central Jyvaskyla for performers and audiences alike.</p>
+      </div>
+      <div class="event-card">
+        <p class="event-type">Art</p>
+        <h3>Exhibitions</h3>
+        <p>The walls of Vakiopaine rotate through art exhibitions from local and visiting artists. Culture alongside your drink &mdash; that is what makes this place different.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews-section" id="reviews">
+  <div class="container">
+    <p class="section-label">What people say</p>
+    <h2 class="section-heading">4.5 stars &middot; 392 reviews</h2>
+    <div class="review-grid">
+      <div class="review-card">
+        <div class="review-rating">4.5 / 5 &middot; Google</div>
+        <p class="review-text">"This was my favourite to hang out, see music and have a drink in JKL."</p>
+        <p class="review-author">&mdash; James C, TripAdvisor</p>
+      </div>
+      <div class="review-card">
+        <div class="review-rating">4.5 / 5 &middot; Google</div>
+        <p class="review-text">"A staple in Jyvaskyla. Vakiopaine has a lovely bohemian atmosphere, with good drink selection."</p>
+        <p class="review-author">&mdash; Samu P, TripAdvisor</p>
+      </div>
+      <div class="review-card">
+        <div class="review-rating">4.5 / 5 &middot; Google</div>
+        <p class="review-text">"Ylakaupungin ykkonen. Omaleimainen ja monipuolinen kulttuurikapakka."</p>
+        <p class="review-author">&mdash; Paivi Hirvi, Sluurpy</p>
+      </div>
+    </div>
+    <div class="rating-badge">
+      <div class="rating-num">4.5</div>
+      <div class="rating-text">Google rating<br />392 reviews</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="container">
+    <p class="section-label">Get in touch</p>
+    <h2 class="section-heading">Contact &amp;<br />Event bookings</h2>
+    <div class="contact-grid">
+      <div>
+        <div class="contact-block" style="margin-bottom:2rem;">
+          <h3>Location &amp; Hours</h3>
+          <div class="info-row"><strong>Address</strong> Kauppakatu 6, 40100 Jyvaskyla</div>
+          <div class="info-row"><strong>Hours</strong> Check Facebook for current hours</div>
+          <div class="info-row"><strong>Note</strong> Hours vary by event nights</div>
+        </div>
+        <div class="contact-block" style="margin-bottom:2rem;">
+          <h3>Contact</h3>
+          <div class="info-row"><strong>Phone</strong> <a href="tel:+358146207760" style="color:var(--accent);">014 620 776</a></div>
+          <div class="info-row"><strong>Email</strong> <a href="mailto:baari@vakiopaine.net" style="color:var(--accent);">baari@vakiopaine.net</a></div>
+          <div class="info-row"><strong>Facebook</strong> <a href="https://www.facebook.com/vakiopainebaari" style="color:var(--accent);">@vakiopainebaari</a></div>
+        </div>
+        <div class="contact-block">
+          <h3>Event Inquiries</h3>
+          <p style="color:var(--muted); font-size:0.9rem;">Want to perform, exhibit, or host an event at Vakiopaine? Reach out by email or use the contact form.</p>
+        </div>
+      </div>
+      <div class="contact-form">
+        <h3>Send a message</h3>
+        <div class="form-group">
+          <label for="c-name">Name</label>
+          <input type="text" id="c-name" name="name" placeholder="Your name" />
+        </div>
+        <div class="form-group">
+          <label for="c-email">Email</label>
+          <input type="email" id="c-email" name="email" placeholder="your@email.com" />
+        </div>
+        <div class="form-group">
+          <label for="c-topic">Topic</label>
+          <select id="c-topic" name="topic">
+            <option value="">Select topic</option>
+            <option value="event">Event inquiry</option>
+            <option value="band">Band / performer booking</option>
+            <option value="art">Art exhibition</option>
+            <option value="private">Private event</option>
+            <option value="general">General question</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="c-msg">Message</label>
+          <textarea id="c-msg" name="message" placeholder="Your message..."></textarea>
+        </div>
+        <button class="btn-send" type="button">Send Message</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">Vakiopaine</div>
+  <p class="footer-sub">Cultural bar &middot; Kauppakatu 6, Jyvaskyla</p>
+  <div class="footer-links">
+    <a href="#identity">About</a>
+    <a href="#events">Events</a>
+    <a href="#reviews">Reviews</a>
+    <a href="#contact">Contact</a>
+    <a href="tel:+358146207760">014 620 776</a>
+  </div>
+  <p class="footer-copy">&copy; 2026 Vakiopaine &middot; Kauppakatu 6, 40100 Jyvaskyla</p>
+  <p class="footer-copy" style="margin-top:0.5rem;">Powered by Klar</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Torin kebab-grilli Toijala — Finnish Beef Kebab in Akaa</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --red:#c1272d;
+  --yellow:#f5b302;
+  --black:#161616;
+  --cream:#fff7e6;
+  --grey:#444;
+}
+body { font-family:'Helvetica Neue',Arial,sans-serif; color:var(--black); background:var(--cream); line-height:1.55; }
+.demo-banner { background:var(--black); color:var(--yellow); padding:10px 20px; text-align:center; font-size:14px; }
+.demo-banner a { color:var(--yellow); text-decoration:underline; }
+header { background:var(--red); color:var(--cream); padding:18px 32px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px; }
+.logo { font-size:26px; font-weight:900; letter-spacing:1px; }
+.logo small { display:block; font-size:11px; letter-spacing:3px; opacity:0.85; font-weight:400; }
+.call-now { background:var(--yellow); color:var(--black); padding:12px 24px; text-decoration:none; font-weight:700; border-radius:4px; font-size:16px; }
+.call-now:hover { background:var(--cream); }
+.hero { background:linear-gradient(rgba(0,0,0,0.5),rgba(193,39,45,0.6)),var(--red); color:var(--cream); padding:90px 24px; text-align:center; }
+.hero h1 { font-size:54px; line-height:1.1; margin-bottom:14px; }
+.hero h1 span { color:var(--yellow); display:block; font-size:24px; font-weight:400; letter-spacing:6px; margin-bottom:8px; }
+.hero p { font-size:19px; max-width:680px; margin:0 auto 26px; }
+.rating { font-size:14px; opacity:0.9; }
+.cta-row { margin-top:32px; }
+.btn-call { background:var(--yellow); color:var(--black); padding:18px 36px; font-size:20px; font-weight:700; text-decoration:none; border-radius:4px; display:inline-block; }
+.btn-call:hover { background:#fff; }
+.btn-call .num { display:block; font-size:28px; letter-spacing:2px; margin-top:4px; }
+.section { padding:72px 24px; max-width:1100px; margin:0 auto; }
+.section h2 { font-size:34px; color:var(--red); margin-bottom:24px; text-align:center; text-transform:uppercase; letter-spacing:2px; }
+.about p { font-size:17px; max-width:780px; margin:0 auto 14px; text-align:center; }
+.unique { font-style:italic; color:var(--red); font-size:18px; text-align:center; }
+.menu-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:18px; margin-top:30px; }
+.menu-card { background:#fff; padding:22px; border-top:4px solid var(--yellow); box-shadow:0 2px 8px rgba(0,0,0,0.06); }
+.menu-card h3 { color:var(--red); margin-bottom:6px; font-size:19px; }
+.menu-card p { color:var(--grey); font-size:14px; }
+.order-banner { background:var(--black); color:var(--cream); padding:50px 24px; text-align:center; }
+.order-banner h2 { color:var(--yellow); margin-bottom:14px; text-transform:uppercase; letter-spacing:2px; font-size:30px; }
+.order-banner p { font-size:16px; max-width:560px; margin:0 auto 24px; }
+.reviews { background:#fff; }
+.review-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:24px; margin-top:24px; }
+.review { padding:22px; background:var(--cream); border-left:3px solid var(--red); }
+.review p { font-style:italic; margin-bottom:10px; }
+.review small { color:var(--grey); }
+.img-placeholder { background:repeating-linear-gradient(45deg,var(--red) 0 12px,var(--yellow) 12px 24px); color:var(--black); display:flex; align-items:center; justify-content:center; min-height:180px; font-weight:700; font-size:13px; letter-spacing:2px; text-transform:uppercase; padding:8px; text-align:center; }
+.gallery { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px; margin-top:28px; }
+.contact-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:30px; max-width:900px; margin:24px auto 0; }
+.contact-grid h4 { color:var(--yellow); font-size:13px; letter-spacing:2px; margin-bottom:6px; text-transform:uppercase; }
+.contact-grid a { color:var(--cream); text-decoration:none; font-size:17px; }
+.contact-grid a:hover { color:var(--yellow); }
+.contact { background:var(--black); color:var(--cream); }
+.contact h2 { color:var(--yellow); }
+footer { background:var(--red); color:var(--cream); padding:22px; text-align:center; font-size:13px; }
+footer a { color:var(--yellow); }
+@media (max-width:640px) {
+  .hero h1 { font-size:36px; }
+  header { padding:14px; }
+  .hero { padding:60px 16px; }
+}
+</style>
+</head>
+<body>
+
+<div class="demo-banner">
+  This is a demo preview built for Torin kebab-grilli — see the <a href="https://preview.klarsystems.com/torin-kebab-grilli-akaa/proposal/">full proposal here</a>.
+</div>
+
+<header>
+  <div class="logo">TORIN KEBAB-GRILLI<small>TOIJALA · SINCE 1987</small></div>
+  <a href="tel:+35835424968" class="call-now">Call to Order</a>
+</header>
+
+<section class="hero">
+  <h1><span>FINNISH 100% BEEF</span>Real Kebab. No Shortcuts.</h1>
+  <p>Toijala square's longest-running grill — gluten-free Finnish beef kebab, generous portions, and proper Finnish service since 1987.</p>
+  <div class="rating">4.0 / 5 — 340 Google reviews</div>
+  <div class="cta-row">
+    <a href="tel:+35835424968" class="btn-call">Call to Order<span class="num">+358 3 542 4968</span></a>
+  </div>
+</section>
+
+<section class="section about">
+  <h2>About Torin kebab-grilli</h2>
+  <p>Torin kebab-grilli Toijala has been serving Akaa since 1987 from its spot on Toijala square. We grill our own gluten-free Finnish 100% beef kebab daily — generous portions and the same Finnish straight-talk service that's kept regulars coming back for over 35 years.</p>
+  <p class="unique">"Generous portions and good Finnish service" — what locals say.</p>
+</section>
+
+<section class="section">
+  <h2>From the Menu</h2>
+  <div class="menu-grid">
+    <div class="menu-card"><h3>Kebab Plate</h3><p>Generous portion of Finnish 100% beef kebab with rice or fries, salad and your choice of sauce.</p></div>
+    <div class="menu-card"><h3>Kebab Roll</h3><p>Fresh tortilla wrap stuffed with kebab, salad, sauces — the take-away classic.</p></div>
+    <div class="menu-card"><h3>Kebab Pizza</h3><p>Hand-stretched pizza topped with our own kebab meat and cheese.</p></div>
+    <div class="menu-card"><h3>Burgers</h3><p>Hand-pressed Finnish beef burgers — single, double or with kebab on top.</p></div>
+    <div class="menu-card"><h3>Salads</h3><p>Big kebab or chicken salad — fresh greens, tomatoes, cucumber, dressing.</p></div>
+    <div class="menu-card"><h3>Sides</h3><p>French fries, sweet potato fries, onion rings — all hot from the fryer.</p></div>
+  </div>
+  <div class="gallery">
+    <div class="img-placeholder">Food photos coming soon</div>
+    <div class="img-placeholder">Food photos coming soon</div>
+    <div class="img-placeholder">Food photos coming soon</div>
+  </div>
+</section>
+
+<section class="order-banner">
+  <h2>Hungry? Call &amp; Pick Up.</h2>
+  <p>Skip the apps. Skip the commission. Call us, we'll have your order ready when you arrive — no waiting, no fees.</p>
+  <a href="tel:+35835424968" class="btn-call">Call to Order<span class="num">+358 3 542 4968</span></a>
+</section>
+
+<section class="section reviews">
+  <h2>What Locals Say</h2>
+  <div class="review-grid">
+    <div class="review">
+      <p>"herkulliset ja runsaat annokset sekä hyvä suomalainen palvelu"</p>
+      <small>— Foodyas review</small>
+    </div>
+    <div class="review">
+      <p>"The truth is that you will really like perfectly cooked kebabs."</p>
+      <small>— Restaurant Guru review</small>
+    </div>
+    <div class="review">
+      <p>"Gluteeniton suomalainen 100% naudanlihaKEBAB"</p>
+      <small>— from the grill itself</small>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>Inside the Grill</h2>
+  <div class="gallery">
+    <div class="img-placeholder">Interior photo coming soon</div>
+    <div class="img-placeholder">Interior photo coming soon</div>
+  </div>
+</section>
+
+<section class="section contact">
+  <h2>Find Us</h2>
+  <div class="contact-grid">
+    <div>
+      <h4>Address</h4>
+      <p>Kurkelantie 1<br>37800 Akaa (Toijala)</p>
+    </div>
+    <div>
+      <h4>Phone</h4>
+      <p><a href="tel:+35835424968">+358 3 542 4968</a></p>
+    </div>
+    <div>
+      <h4>Hours</h4>
+      <p>Mon 11:00–21:00<br>Tue–Thu 11:00–22:00<br>Fri 11:00–03:00<br>Sat 13:00–03:00<br>Sun 13:00–21:00</p>
+    </div>
+    <div>
+      <h4>Order</h4>
+      <p><a href="tel:+35835424968">Call to Order</a></p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  Torin kebab-grilli Toijala · Kurkelantie 1, 37800 Akaa · <a href="tel:+35835424968">+358 3 542 4968</a><br>
+  Powered by <a href="https://klarsystems.com">Klar</a>
+</footer>
+
+</body>
+</html>

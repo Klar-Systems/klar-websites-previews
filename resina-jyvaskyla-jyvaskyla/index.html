@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<!-- Demo preview — this is a demo site built for Resina, Jyväskylä -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Resina — Jyväskylä's Legendary Karaoke Pub</title>
+  <!-- Palette: inferred from nightclub/karaoke bar archetype — deep purple bg, light lavender text, vivid violet primary, hot pink accent -->
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #1A0A2E;
+      --bg2:      #24103D;
+      --bg3:      #2E1550;
+      --text:     #F5E6FF;
+      --muted:    #B89FD8;
+      --primary:  #9B1FFF;
+      --accent:   #FF2D78;
+      --accent2:  #FFB800;
+      --border:   rgba(155, 31, 255, 0.25);
+    }
+
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', system-ui, sans-serif; line-height: 1.6; }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5%; height: 62px;
+      background: rgba(26, 10, 46, 0.92); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo { font-size: 1.3rem; font-weight: 800; letter-spacing: 0.05em; color: var(--text); text-decoration: none; }
+    .nav-logo span { color: var(--primary); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-cta {
+      background: var(--primary); color: #fff; border: none; border-radius: 6px;
+      padding: 0.55rem 1.2rem; font-size: 0.88rem; font-weight: 700;
+      cursor: pointer; text-decoration: none; transition: background 0.2s;
+    }
+    .nav-cta:hover { background: #7D12E0; }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      min-height: 100vh; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; text-align: center;
+      padding: 6rem 5% 5rem;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0; z-index: 0;
+      background: linear-gradient(160deg, #2E0A5C 0%, #1A0A2E 50%, #3D0070 100%);
+    }
+    .hero-bg::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 30% 60%, rgba(255, 45, 120, 0.18) 0%, transparent 60%),
+                  radial-gradient(ellipse at 70% 30%, rgba(155, 31, 255, 0.22) 0%, transparent 55%);
+    }
+    .hero-photo {
+      position: absolute; inset: 0; z-index: 1;
+      background: linear-gradient(135deg, rgba(26,10,46,0.7) 0%, rgba(26,10,46,0.4) 100%);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .hero-placeholder {
+      width: 100%; height: 100%; position: absolute; inset: 0;
+      background: repeating-linear-gradient(
+        45deg,
+        rgba(155,31,255,0.05) 0px, rgba(155,31,255,0.05) 10px,
+        transparent 10px, transparent 20px
+      );
+      display: flex; align-items: center; justify-content: center;
+    }
+    .hero-placeholder-label {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+      color: rgba(245,230,255,0.25); font-size: 0.85rem; letter-spacing: 0.1em;
+      text-transform: uppercase; pointer-events: none;
+    }
+    .hero-content { position: relative; z-index: 2; max-width: 780px; }
+    .hero-badge {
+      display: inline-block; margin-bottom: 1.4rem;
+      background: rgba(155,31,255,0.2); border: 1px solid rgba(155,31,255,0.5);
+      color: #D09FFF; border-radius: 999px; padding: 0.4rem 1.2rem;
+      font-size: 0.78rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+    }
+    .hero h1 {
+      font-size: clamp(2.6rem, 7vw, 5rem);
+      font-weight: 900; line-height: 1.05;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, #F5E6FF 0%, #D09FFF 50%, #FF2D78 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      margin-bottom: 1.2rem;
+    }
+    .hero-sub {
+      font-size: clamp(1.05rem, 2.5vw, 1.25rem);
+      color: var(--muted); max-width: 560px; margin: 0 auto 2.4rem;
+    }
+    .hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--accent); color: #fff; border: none;
+      border-radius: 8px; padding: 0.9rem 2rem;
+      font-size: 1rem; font-weight: 800; cursor: pointer; text-decoration: none;
+      box-shadow: 0 4px 20px rgba(255,45,120,0.35);
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 28px rgba(255,45,120,0.5); }
+    .btn-outline {
+      background: transparent; color: var(--text);
+      border: 1.5px solid rgba(245,230,255,0.3); border-radius: 8px;
+      padding: 0.9rem 2rem; font-size: 1rem; font-weight: 700;
+      cursor: pointer; text-decoration: none; transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--text); }
+    .hero-stats {
+      margin-top: 3rem; display: flex; gap: 2.5rem; justify-content: center; flex-wrap: wrap;
+    }
+    .stat { text-align: center; }
+    .stat-val { font-size: 1.8rem; font-weight: 900; color: var(--accent2); display: block; }
+    .stat-label { font-size: 0.78rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+
+    /* ── SECTIONS ── */
+    section { padding: 5rem 5%; }
+    .section-title {
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      font-weight: 800; margin-bottom: 0.6rem;
+    }
+    .section-sub { color: var(--muted); margin-bottom: 3rem; max-width: 580px; font-size: 1.05rem; }
+    .divider { width: 48px; height: 4px; border-radius: 2px; background: var(--accent); margin: 0.8rem 0 1.4rem; }
+
+    /* ── ABOUT ── */
+    .about-inner {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+      max-width: 1100px; margin: 0 auto;
+    }
+    .about-photo-block {
+      aspect-ratio: 4/3; border-radius: 12px; overflow: hidden;
+      background: var(--bg3); border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--muted); font-size: 0.85rem; text-transform: uppercase;
+      letter-spacing: 0.1em; position: relative;
+    }
+    .about-photo-block::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: repeating-linear-gradient(
+        -45deg, rgba(155,31,255,0.06) 0px, rgba(155,31,255,0.06) 8px,
+        transparent 8px, transparent 16px
+      );
+    }
+    .about-text h2 { font-size: 2rem; font-weight: 800; margin-bottom: 1rem; }
+    .about-text p { color: var(--muted); margin-bottom: 1rem; font-size: 1.02rem; }
+    .highlight { color: var(--accent); font-weight: 700; }
+    .features-list { list-style: none; margin-top: 1.5rem; display: flex; flex-direction: column; gap: 0.7rem; }
+    .features-list li {
+      display: flex; align-items: center; gap: 0.7rem;
+      color: var(--text); font-size: 0.96rem;
+    }
+    .features-list li::before {
+      content: '&#9654;'; color: var(--accent); font-size: 0.85rem; flex-shrink: 0;
+    }
+
+    /* ── EVENTS ── */
+    .events-section { background: var(--bg2); }
+    .events-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 1.5rem;
+      max-width: 1100px; margin: 0 auto;
+    }
+    .event-card {
+      background: var(--bg3); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.8rem;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .event-card:hover { transform: translateY(-4px); border-color: var(--primary); }
+    .event-day {
+      font-size: 0.72rem; font-weight: 800; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 0.6rem;
+    }
+    .event-name { font-size: 1.2rem; font-weight: 800; margin-bottom: 0.5rem; }
+    .event-desc { font-size: 0.92rem; color: var(--muted); }
+    .event-icon { font-size: 2.2rem; margin-bottom: 1rem; }
+
+    /* ── HOURS ── */
+    .hours-section { background: var(--bg); }
+    .hours-inner { max-width: 700px; margin: 0 auto; }
+    .hours-grid { display: flex; flex-direction: column; gap: 0.5rem; }
+    .hours-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0.7rem 0; border-bottom: 1px solid var(--border);
+      font-size: 0.96rem;
+    }
+    .hours-row:last-child { border-bottom: none; }
+    .day-name { color: var(--muted); min-width: 110px; }
+    .day-time { font-weight: 700; }
+    .closed { color: rgba(245,230,255,0.3); }
+    .special-note {
+      margin-top: 1.5rem; padding: 1rem 1.2rem;
+      background: rgba(155,31,255,0.1); border: 1px solid rgba(155,31,255,0.25);
+      border-radius: 8px; font-size: 0.9rem; color: var(--muted);
+    }
+
+    /* ── REVIEWS ── */
+    .reviews-section { background: var(--bg2); }
+    .reviews-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 1.5rem;
+      max-width: 1100px; margin: 0 auto;
+    }
+    .review-card {
+      background: var(--bg3); border: 1px solid var(--border); border-radius: 12px;
+      padding: 1.5rem; position: relative;
+    }
+    .review-stars { color: var(--accent2); margin-bottom: 0.8rem; font-size: 0.9rem; }
+    .review-text { font-size: 0.97rem; color: var(--text); margin-bottom: 1rem; font-style: italic; line-height: 1.65; }
+    .review-source { font-size: 0.78rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+    .reviews-badge {
+      text-align: center; margin-bottom: 2.5rem;
+      font-size: 1.1rem; color: var(--muted);
+    }
+    .reviews-badge strong { color: var(--accent2); font-size: 1.5rem; }
+
+    /* ── CONTACT ── */
+    .contact-section { background: var(--bg3); }
+    .contact-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start;
+    }
+    .contact-info h2 { font-size: 2rem; font-weight: 800; margin-bottom: 1.5rem; }
+    .contact-item {
+      display: flex; align-items: flex-start; gap: 0.9rem; margin-bottom: 1.2rem;
+    }
+    .contact-icon {
+      width: 36px; height: 36px; border-radius: 8px; flex-shrink: 0;
+      background: rgba(155,31,255,0.2); display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+    }
+    .contact-label { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.2rem; }
+    .contact-val { font-weight: 700; font-size: 0.96rem; }
+    .contact-val a { color: var(--accent); text-decoration: none; }
+    .contact-val a:hover { text-decoration: underline; }
+    .contact-form-block {
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: 12px; padding: 2rem;
+    }
+    .contact-form-block h3 { font-size: 1.3rem; font-weight: 800; margin-bottom: 0.5rem; }
+    .contact-form-block p { font-size: 0.9rem; color: var(--muted); margin-bottom: 1.5rem; }
+    .form-group { margin-bottom: 1.1rem; }
+    .form-group label { display: block; font-size: 0.8rem; color: var(--muted); margin-bottom: 0.3rem; text-transform: uppercase; letter-spacing: 0.06em; }
+    .form-group input, .form-group textarea {
+      width: 100%; background: var(--bg2); border: 1px solid var(--border);
+      color: var(--text); border-radius: 6px; padding: 0.7rem 0.9rem;
+      font-size: 0.94rem; outline: none; transition: border-color 0.2s;
+      font-family: inherit;
+    }
+    .form-group input:focus, .form-group textarea:focus { border-color: var(--primary); }
+    .form-group textarea { resize: vertical; min-height: 80px; }
+    .form-submit {
+      width: 100%; background: var(--primary); color: #fff;
+      border: none; border-radius: 8px; padding: 0.8rem;
+      font-size: 0.96rem; font-weight: 800; cursor: pointer;
+      transition: background 0.2s;
+    }
+    .form-submit:hover { background: #7D12E0; }
+    .call-to-action-bar {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+      padding: 3rem 5%; text-align: center;
+    }
+    .cta-bar-title { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 900; margin-bottom: 0.8rem; }
+    .cta-bar-sub { color: rgba(255,255,255,0.85); margin-bottom: 1.5rem; font-size: 1.05rem; }
+    .btn-white {
+      background: #fff; color: var(--primary); border: none;
+      border-radius: 8px; padding: 0.9rem 2.2rem;
+      font-size: 1rem; font-weight: 800; cursor: pointer; text-decoration: none;
+      transition: transform 0.15s;
+    }
+    .btn-white:hover { transform: translateY(-2px); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--bg); padding: 2.5rem 5%; text-align: center;
+      border-top: 1px solid var(--border);
+    }
+    .footer-logo { font-size: 1.1rem; font-weight: 800; margin-bottom: 0.5rem; }
+    .footer-logo span { color: var(--primary); }
+    footer p { font-size: 0.83rem; color: var(--muted); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .about-inner, .contact-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .nav-links { display: none; }
+      .hero-stats { gap: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="#">Re<span>sina</span></a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#events">Events</a></li>
+      <li><a href="#hours">Hours</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a class="nav-cta" href="tel:+358503056884">Call Us</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-photo">
+      <div class="hero-placeholder">
+        <span class="hero-placeholder-label">Your photo here</span>
+      </div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-badge">Jyväskylä City Centre · Since Day One</div>
+      <h1>Karaoke. Music.<br>Legendary Nights.</h1>
+      <p class="hero-sub">Jyväskylä's most celebrated karaoke pub. Karaoke stage, dance floor, and a crowd that actually cheers you on — at Yliopistonkatu 36.</p>
+      <div class="hero-actions">
+        <a class="btn-primary" href="#events">See Events</a>
+        <a class="btn-outline" href="#contact">Get in Touch</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><span class="stat-val">3.9</span><span class="stat-label">Google Rating</span></div>
+        <div class="stat"><span class="stat-val">510+</span><span class="stat-label">Reviews</span></div>
+        <div class="stat"><span class="stat-val">225</span><span class="stat-label">Seats</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about-section" id="about">
+    <div class="about-inner">
+      <div class="about-photo-block">
+        <span style="position:relative;z-index:1;">Interior photo coming soon</span>
+      </div>
+      <div class="about-text">
+        <h2>The Heart of Jyväskylä Nightlife</h2>
+        <div class="divider"></div>
+        <p>Resina is Jyväskylä's legendary karaoke pub — the city-centre spot where the night truly begins. A karaoke stage and dance floor under one roof, with a crowd that knows how to have fun.</p>
+        <p>Whether you're warming up the week with a quiet Thursday pub quiz or closing out Friday on the dance floor, <span class="highlight">Resina delivers the city's best karaoke experience</span> — consistent sound, huge song library, and staff that make everyone feel welcome.</p>
+        <ul class="features-list">
+          <li>Karaoke stage with top-class sound system</li>
+          <li>Dance floor and late-night disco from 22:00 on Fri & Sat</li>
+          <li>Pub quiz every Thursday at 20:30</li>
+          <li>Sunday bingo from 21:00</li>
+          <li>225 seats — room for groups big and small</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- EVENTS -->
+  <section class="events-section" id="events">
+    <div style="max-width:1100px;margin:0 auto;">
+      <p class="section-title">What's On</p>
+      <div class="divider"></div>
+      <p class="section-sub">Regular events every week — plus special nights throughout the year.</p>
+      <div class="events-grid">
+        <div class="event-card">
+          <div class="event-icon">[MIC]</div>
+          <div class="event-day">Every Night</div>
+          <div class="event-name">Karaoke Stage</div>
+          <div class="event-desc">Jyväskylä's best karaoke sound system. Thousands of songs across all genres. Get up and sing — the crowd is on your side.</div>
+        </div>
+        <div class="event-card">
+          <div class="event-icon">[MUSIC]</div>
+          <div class="event-day">Fri &amp; Sat from 22:00</div>
+          <div class="event-name">Disco Night</div>
+          <div class="event-desc">The dance floor opens up when the karaoke heats up. Fri &amp; Sat disco runs until 04:30 — Jyväskylä's latest night out.</div>
+        </div>
+        <div class="event-card">
+          <div class="event-icon">[QUIZ]</div>
+          <div class="event-day">Thursdays at 20:30</div>
+          <div class="event-name">Pub Quiz</div>
+          <div class="event-desc">Test your knowledge over a pint. Pub quiz every Thursday — gather your team and compete for bragging rights.</div>
+        </div>
+        <div class="event-card">
+          <div class="event-icon">[BINGO]</div>
+          <div class="event-day">Sundays at 21:00</div>
+          <div class="event-name">Bingo Night</div>
+          <div class="event-desc">Sunday bingo with a twist — Super Sundays run all evening. A relaxed way to round out the weekend.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOURS -->
+  <section class="hours-section" id="hours">
+    <div class="hours-inner">
+      <p class="section-title">Opening Hours</p>
+      <div class="divider"></div>
+      <p class="section-sub" style="margin-bottom:2rem;">We're open most evenings — late on weekends.</p>
+      <div class="hours-grid">
+        <div class="hours-row"><span class="day-name">Monday</span><span class="day-time closed">Closed</span></div>
+        <div class="hours-row"><span class="day-name">Tuesday</span><span class="day-time">20:00 – 03:00</span></div>
+        <div class="hours-row"><span class="day-name">Wednesday</span><span class="day-time">20:00 – 03:00</span></div>
+        <div class="hours-row"><span class="day-name">Thursday</span><span class="day-time">20:00 – 03:00</span></div>
+        <div class="hours-row"><span class="day-name">Friday</span><span class="day-time">18:00 – 04:30 <span style="color:var(--accent);font-size:0.8rem;">Disco from 22:00</span></span></div>
+        <div class="hours-row"><span class="day-name">Saturday</span><span class="day-time">18:00 – 04:30 <span style="color:var(--accent);font-size:0.8rem;">Disco from 22:00</span></span></div>
+        <div class="hours-row"><span class="day-name">Sunday</span><span class="day-time">20:00 – 03:00</span></div>
+      </div>
+      <div class="special-note">Kitchen information not available online — please call us for details.</div>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section class="reviews-section" id="reviews">
+    <div style="max-width:1100px;margin:0 auto;">
+      <p class="section-title">What People Say</p>
+      <div class="divider"></div>
+      <div class="reviews-badge">Rated <strong>3.9</strong> on Google · 510+ reviews</div>
+      <div class="reviews-grid">
+        <div class="review-card">
+          <div class="review-stars">3.9 / 5</div>
+          <p class="review-text">"The best karaoke spot in Jyväskylä — relaxed atmosphere and the best sound system."</p>
+          <span class="review-source">Google Review</span>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">3.9 / 5</div>
+          <p class="review-text">"The finest karaoke in Jyväskylä, we recommend it."</p>
+          <span class="review-source">Suomi24</span>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">3.9 / 5</div>
+          <p class="review-text">"Genuinely excellent service and top-class sound. Highly recommend."</p>
+          <span class="review-source">Suomi24</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT & EVENTS ENQUIRY -->
+  <section class="contact-section" id="contact">
+    <div class="contact-inner">
+      <div class="contact-info">
+        <h2>Find Us &amp; Get in Touch</h2>
+        <div class="divider"></div>
+        <div class="contact-item">
+          <div class="contact-icon" aria-hidden="true">&#9679;</div>
+          <div>
+            <div class="contact-label">Address</div>
+            <div class="contact-val">Yliopistonkatu 36<br>40100 Jyväskylä</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon" aria-hidden="true">&#9742;</div>
+          <div>
+            <div class="contact-label">Phone</div>
+            <div class="contact-val"><a href="tel:+358503056884">+358 50 3056884</a></div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon" aria-hidden="true">@</div>
+          <div>
+            <div class="contact-label">Email</div>
+            <div class="contact-val"><a href="mailto:info@pubresina.fi">info@pubresina.fi</a></div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon" aria-hidden="true">&#9650;</div>
+          <div>
+            <div class="contact-label">Location</div>
+            <div class="contact-val">Jyväskylä city centre — 2 min walk from the university</div>
+          </div>
+        </div>
+        <div style="margin-top:2rem;">
+          <div class="contact-label" style="margin-bottom:0.8rem;">Follow us</div>
+          <a href="https://www.facebook.com/karaokepubresina/" style="color:var(--accent);font-weight:700;text-decoration:none;margin-right:1.2rem;">Facebook</a>
+          <a href="https://www.instagram.com/karaokepubresina/" style="color:var(--accent);font-weight:700;text-decoration:none;">Instagram</a>
+        </div>
+      </div>
+      <div class="contact-form-block">
+        <h3>Private Events &amp; Enquiries</h3>
+        <p>Planning a birthday, work night out, or private karaoke party? Get in touch and we'll make it happen.</p>
+        <form onsubmit="return false;">
+          <div class="form-group">
+            <label>Your name</label>
+            <input type="text" placeholder="Name" />
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" placeholder="your@email.fi" />
+          </div>
+          <div class="form-group">
+            <label>Message</label>
+            <textarea placeholder="Tell us about your event or question..."></textarea>
+          </div>
+          <button class="form-submit" type="submit">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BAR -->
+  <div class="call-to-action-bar">
+    <p class="cta-bar-title">Ready for a legendary night out?</p>
+    <p class="cta-bar-sub">Call us or drop by — open from Tuesday through Sunday.</p>
+    <a class="btn-white" href="tel:+358503056884">Call +358 50 3056884</a>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">Re<span>sina</span></div>
+    <p>Yliopistonkatu 36, 40100 Jyväskylä · <a href="mailto:info@pubresina.fi" style="color:var(--muted);">info@pubresina.fi</a></p>
+    <p style="margin-top:0.4rem;">Jyväskylä's legendary karaoke pub</p>
+    <p style="margin-top:1rem;font-size:0.75rem;color:rgba(184,159,216,0.5);">Powered by Klar</p>
+  </footer>
+
+</body>
+</html>

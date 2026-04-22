@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Next Step &mdash; Sports bar &amp; karaoke in the heart of Varkaus</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #15110D;
+      color: #F4E8D8;
+      line-height: 1.65;
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+    }
+    h1, h2, h3 { font-family: 'Playfair Display', serif; line-height: 1.18; color: #F4E8D8; font-weight: 600; }
+    h1 { font-size: clamp(2.2rem, 5vw, 3.6rem); letter-spacing: -0.01em; }
+    h2 { font-size: clamp(1.7rem, 3.2vw, 2.4rem); margin-bottom: 0.6em; }
+    h3 { font-size: 1.2rem; margin-bottom: 0.4em; }
+    p { margin-bottom: 0.9em; color: #F4E8D8; }
+    a { color: #D6692A; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .container { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+    section { padding: 84px 0; }
+    section + section { border-top: 1px solid #3A2E22; }
+
+    /* Demo banner */
+    .demo-banner {
+      background: #F4E8D8;
+      color: #15110D;
+      text-align: center;
+      padding: 12px 24px;
+      font-size: 0.88rem;
+      letter-spacing: 0.02em;
+      position: sticky; top: 0; z-index: 1000;
+    }
+    .demo-banner a { color: #D6692A; text-decoration: underline; margin-left: 6px; }
+
+    /* Nav */
+    nav { background: #15110D; border-bottom: 1px solid #3A2E22; padding: 18px 0; position: sticky; top: 42px; z-index: 900; }
+    nav .container { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .nav-brand { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: #F4E8D8; font-weight: 700; }
+    .nav-links { display: flex; list-style: none; gap: 28px; flex-wrap: wrap; }
+    .nav-links a { color: #F4E8D8; font-size: 0.86rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; }
+    .nav-links a:hover { color: #D6692A; text-decoration: none; }
+
+    /* Hero */
+    .hero { padding: 0; display: grid; grid-template-columns: 1.05fr 1fr; min-height: 540px; }
+    .hero-content { display: flex; flex-direction: column; justify-content: center; padding: 72px 56px; background: #15110D; }
+    .hero-eyebrow { font-size: 0.78rem; letter-spacing: 0.18em; text-transform: uppercase; color: #D6692A; margin-bottom: 18px; }
+    .hero h1 { margin-bottom: 24px; }
+    .hero-sub { font-size: 1.08rem; color: #B8A98E; margin-bottom: 32px; max-width: 460px; }
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn-primary, .btn-secondary { display: inline-block; padding: 14px 24px; font-weight: 600; font-size: 0.93rem; letter-spacing: 0.05em; text-transform: uppercase; border-radius: 2px; }
+    .btn-primary { background: #D6692A; color: #15110D; }
+    .btn-primary:hover { filter: brightness(1.1); text-decoration: none; }
+    .btn-secondary { background: transparent; color: #F4E8D8; border: 1px solid #F4E8D8; }
+    .btn-secondary:hover { background: #F4E8D8; color: #15110D; text-decoration: none; }
+
+    .hero-visual { background: #1F1813; display: flex; align-items: center; justify-content: center; padding: 48px; border-left: 1px solid #3A2E22; }
+    .img-placeholder { width: 100%; aspect-ratio: 4/5; background: #3A2E22; display: flex; align-items: center; justify-content: center; color: #B8A98E; font-size: 0.88rem; letter-spacing: 0.08em; text-transform: uppercase; }
+
+    /* About */
+    .about { background: #1F1813; }
+    .about-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 56px; align-items: start; }
+    .about p { font-size: 1.05rem; }
+    .stat-row { display: flex; gap: 36px; margin-top: 28px; padding-top: 28px; border-top: 1px solid #3A2E22; }
+    .stat strong { display: block; font-family: 'Playfair Display', serif; font-size: 2rem; color: #D6692A; }
+    .stat span { font-size: 0.82rem; color: #B8A98E; text-transform: uppercase; letter-spacing: 0.08em; }
+    .about-photo { aspect-ratio: 1/1; background: #3A2E22; display: flex; align-items: center; justify-content: center; color: #B8A98E; font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase; }
+
+    /* Events */
+    .events-intro { max-width: 640px; margin-bottom: 40px; color: #B8A98E; font-size: 1.05rem; }
+    .events-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .event-card { background: #1F1813; padding: 32px; border: 1px solid #3A2E22; }
+    .event-card h3 { color: #D6692A; }
+    .event-card p { color: #B8A98E; font-size: 0.96rem; margin-bottom: 0; }
+
+    /* Contact */
+    .contact { background: #1F1813; }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; }
+    .contact-block { margin-bottom: 28px; }
+    .contact-block strong { display: block; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.1em; color: #B8A98E; margin-bottom: 6px; }
+    .contact-block a { color: #F4E8D8; font-size: 1.05rem; }
+    .contact-block a:hover { color: #D6692A; }
+    .hours-line { font-size: 1.0rem; color: #F4E8D8; }
+    .social-link { display: block; padding: 8px 0; color: #F4E8D8; font-size: 0.95rem; }
+    .social-link:hover { color: #D6692A; text-decoration: none; }
+    .map-placeholder { aspect-ratio: 4/3; background: #3A2E22; display: flex; align-items: center; justify-content: center; color: #B8A98E; font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase; text-align: center; padding: 24px; }
+
+    /* Footer */
+    footer { background: #F4E8D8; color: #15110D; padding: 40px 0; text-align: center; }
+    footer .container { display: flex; flex-direction: column; gap: 12px; align-items: center; }
+    footer p { color: #15110D; opacity: 0.7; font-size: 0.85rem; margin: 0; }
+    .powered-by { font-size: 0.78rem; opacity: 0.55; letter-spacing: 0.1em; text-transform: uppercase; }
+
+    /* Responsive */
+    @media (max-width: 860px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero-content { padding: 56px 28px; }
+      .hero-visual { padding: 28px; border-left: 0; border-top: 1px solid #3A2E22; }
+      .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 36px; }
+      .events-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="demo-banner">
+    This is a demo preview built for Next Step.
+    <a href="https://preview.klarsystems.com/next-step-varkaus/proposal/">See the full proposal &rarr;</a>
+  </div>
+  <nav>
+    <div class="container">
+      <span class="nav-brand">Next Step</span>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#events">Events</a></li>
+        <li><a href="#visit">Visit</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-content">
+      <p class="hero-eyebrow">Varkaus</p>
+      <h1>Next Step</h1>
+      <p class="hero-sub">Sports bar &amp; karaoke in the heart of Varkaus.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary">Get in touch</a>
+        <a href="#events" class="btn-secondary">What&rsquo;s on</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="img-placeholder">Your photo here</div>
+    </div>
+  </header>
+
+  <section id="about" class="about">
+    <div class="container">
+      <div class="about-grid">
+        <div>
+          <h2>A Varkaus institution</h2>
+          <p>Next Step is Varkaus's go-to sports bar — pool tables, pinball, big-screen sports, and karaoke nights that fill every weekend. We've been the meeting point for locals and visitors alike for over a decade.</p>
+          <p>Three hundred and fifty-three reviews on Google, a steady 3.8-star average, and a regulars' table that's never empty for long. That's the room you're walking into.</p>
+          <div class="stat-row">
+            <div class="stat"><strong>3.8</strong><span>Google rating</span></div>
+            <div class="stat"><strong>353</strong><span>Reviews</span></div>
+          </div>
+        </div>
+        <div class="about-photo">Interior photo coming soon</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="events">
+    <div class="container">
+      <h2>What&rsquo;s on</h2>
+      <p class="events-intro">Karaoke is our heartbeat. Live sports broadcasts, themed nights, and weekend DJs round out the calendar. Drop by for the regular slate or watch the door for special evenings — every week we run something a little different.</p>
+      <div class="events-grid">
+        <article class="event-card"><h3>Karaoke nights</h3><p>The mic is open most evenings. Sing solo or grab the table next to yours and turn it into a duet.</p></article><article class="event-card"><h3>Live sports</h3><p>Big-screen broadcasts of Liiga, Premier League, F1, and major tournaments. Cheer with the crowd, not your phone.</p></article><article class="event-card"><h3>Weekend DJ &amp; theme nights</h3><p>Friday and Saturday late-night DJ sets and the occasional theme evening — follow us on Instagram for the next one.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="visit" class="contact">
+    <div class="container">
+      <h2>Visit us</h2>
+      <div class="contact-grid">
+        <div>
+          <div class="contact-block">
+            <strong>Address</strong>
+            <a href="https://maps.google.com/?q=Ahlströminkatu+17,+78250+Varkaus" target="_blank" rel="noopener">Ahlströminkatu 17, 78250 Varkaus</a>
+          </div>
+          <div class="contact-block">
+            <strong>Hours</strong>
+            <p class="hours-line">Ma–To 11:00–02:00, Pe–La 11:00–04:00, Su 11:00–02:00</p>
+          </div>
+          <div class="contact-block">
+            <strong>Phone</strong>
+            <a href="tel:+358400958859">+358 40 0958859</a>
+          </div>
+          <div class="contact-block">
+            <strong>Email</strong>
+            <a href="mailto:ravintolanextstep@gmail.com">ravintolanextstep@gmail.com</a>
+          </div>
+        </div>
+        <div class="map-placeholder">Map of Ahlströminkatu 17, 78250 Varkaus<br>coming soon</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="container">
+      <h2>Get in touch</h2>
+      <div class="contact-grid">
+        <div>
+          <p>Questions about events, private bookings, or whether we can fit your group on a busy night? Drop us a line or call &mdash; we read everything that comes in.</p>
+          <div class="contact-block">
+            <strong>Reach us directly</strong>
+            <a href="tel:+358400958859">+358 40 0958859</a>
+            <a href="mailto:ravintolanextstep@gmail.com">ravintolanextstep@gmail.com</a>
+          </div>
+        </div>
+        <div>
+          <a class="social-link" href="https://instagram.com/nextstep_vrk" target="_blank" rel="noopener">Instagram &rarr; @nextstep_vrk</a>
+          
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>&copy; Next Step &mdash; Varkaus, Finland</p>
+      <p class="powered-by">Powered by Klar</p>
+    </div>
+  </footer>
+</body>
+</html>

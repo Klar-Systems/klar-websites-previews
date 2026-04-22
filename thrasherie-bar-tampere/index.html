@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thrasherie Bar — Metal Bar in Tampere</title>
+  <!-- Palette inferred: #0D0D0D bg, #F0EEE8 text, #8B1A1A primary, #C0A060 accent -->
+  <!-- Typography: bold condensed display, honest sans body — inferred from metal bar identity -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@600;700&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0D0D0D;
+      --bg-card: #181818;
+      --text: #F0EEE8;
+      --muted: #A09888;
+      --primary: #8B1A1A;
+      --primary-hover: #721414;
+      --accent: #C0A060;
+      --border: rgba(240,238,232,0.1);
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: 'Source Sans 3', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 17px; line-height: 1.65; }
+
+    /* DEMO BANNER */
+    .demo-banner { background: #1a0000; border-bottom: 1px solid rgba(139,26,26,0.5); padding: 0.6rem 1.5rem; text-align: center; font-size: 0.85rem; color: var(--muted); }
+    .demo-banner a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; margin-left: 0.5rem; }
+
+    /* NAV */
+    nav { position: sticky; top: 0; z-index: 100; background: rgba(13,13,13,0.95); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); padding: 0 1.5rem; display: flex; align-items: center; justify-content: space-between; height: 60px; }
+    .nav-brand { font-family: 'Oswald', Impact, sans-serif; font-size: 1.3rem; letter-spacing: 0.08em; color: var(--accent); text-decoration: none; text-transform: uppercase; }
+    .nav-links { display: flex; gap: 1.8rem; list-style: none; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.88rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-cta { background: var(--primary) !important; color: var(--text) !important; padding: 0.4rem 1rem; border-radius: 3px; }
+    .nav-cta:hover { background: var(--primary-hover) !important; }
+
+    /* HERO */
+    .hero { min-height: 85vh; display: flex; align-items: center; padding: 5rem 4rem 4rem; max-width: 1100px; margin: 0 auto; }
+    .hero-text { max-width: 680px; }
+    .hero-eyebrow { font-size: 0.78rem; letter-spacing: 0.16em; font-weight: 600; color: var(--primary); text-transform: uppercase; margin-bottom: 1rem; }
+    .hero-text h1 { font-family: 'Oswald', Impact, sans-serif; font-size: clamp(3rem, 8vw, 5.5rem); line-height: 1; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text); margin-bottom: 0.5rem; }
+    .hero-text h1 em { font-style: normal; color: var(--accent); }
+    .hero-tagline { font-size: 1.1rem; color: var(--muted); margin-bottom: 2rem; line-height: 1.5; max-width: 520px; }
+    .hero-pills { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2.5rem; }
+    .pill { background: rgba(139,26,26,0.15); border: 1px solid rgba(139,26,26,0.4); color: var(--accent); padding: 0.3rem 0.8rem; border-radius: 2px; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
+    .hero-photo { margin-top: 3rem; border-radius: 4px; overflow: hidden; border: 1px solid var(--border); }
+    .photo-placeholder { aspect-ratio: 16/9; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 0.5rem; color: var(--muted); font-size: 0.85rem; background: #1c1c1c; }
+    .photo-placeholder svg { opacity: 0.3; }
+
+    /* SECTION */
+    section { padding: 5rem 1.5rem; }
+    .container { max-width: 1100px; margin: 0 auto; }
+    .section-label { font-size: 0.75rem; letter-spacing: 0.14em; font-weight: 700; color: var(--primary); text-transform: uppercase; margin-bottom: 0.4rem; }
+    .section-heading { font-family: 'Oswald', Impact, sans-serif; font-size: clamp(2rem, 4vw, 3rem); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 1.2rem; line-height: 1.1; }
+
+    /* IDENTITY */
+    .identity-section { background: var(--bg-card); }
+    .id-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: 2.5rem; align-items: start; }
+    .id-text p { color: var(--muted); margin-bottom: 1rem; }
+    .id-text p:last-child { margin-bottom: 0; }
+    .id-photo { border-radius: 4px; overflow: hidden; border: 1px solid var(--border); }
+
+    /* EVENTS */
+    .events-section { background: var(--bg); }
+    .event-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; margin-top: 2.5rem; }
+    .event-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 4px; padding: 1.5rem; border-left: 3px solid var(--primary); transition: border-color 0.2s; }
+    .event-card:hover { border-color: var(--accent); }
+    .event-type { font-size: 0.72rem; letter-spacing: 0.12em; font-weight: 700; color: var(--primary); text-transform: uppercase; margin-bottom: 0.4rem; }
+    .event-card h3 { font-family: 'Oswald', Impact, sans-serif; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--accent); margin-bottom: 0.4rem; }
+    .event-card p { color: var(--muted); font-size: 0.9rem; }
+
+    /* REVIEWS */
+    .reviews-section { background: var(--bg-card); }
+    .review-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem; margin-top: 2.5rem; }
+    .review-card { background: var(--bg); border: 1px solid var(--border); border-radius: 4px; padding: 1.5rem; }
+    .review-rating { font-size: 0.72rem; letter-spacing: 0.1em; font-weight: 700; color: var(--accent); text-transform: uppercase; margin-bottom: 0.75rem; }
+    .review-text { color: var(--text); font-size: 0.95rem; font-style: italic; margin-bottom: 0.8rem; line-height: 1.55; }
+    .review-author { color: var(--muted); font-size: 0.8rem; }
+    .rating-badge { display: inline-flex; align-items: center; gap: 0.75rem; background: rgba(192,160,96,0.08); border: 1px solid rgba(192,160,96,0.2); border-radius: 4px; padding: 0.75rem 1.25rem; margin-top: 2rem; }
+    .rating-num { font-family: 'Oswald', Impact, sans-serif; font-size: 2.2rem; color: var(--accent); letter-spacing: 0.04em; }
+    .rating-text { color: var(--muted); font-size: 0.85rem; line-height: 1.3; }
+
+    /* CONTACT / EVENTS SECTION */
+    .contact-section { background: var(--bg); }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: 2.5rem; }
+    .contact-block h3 { font-family: 'Oswald', Impact, sans-serif; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--accent); margin-bottom: 1rem; }
+    .info-row { display: flex; gap: 0.75rem; margin-bottom: 0.6rem; font-size: 0.92rem; color: var(--muted); }
+    .info-row strong { color: var(--text); min-width: 80px; }
+    .contact-form { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 2rem; }
+    .contact-form h3 { font-family: 'Oswald', Impact, sans-serif; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); margin-bottom: 1.5rem; }
+    .form-group { margin-bottom: 1rem; }
+    .form-group label { display: block; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.35rem; }
+    .form-group input, .form-group textarea, .form-group select { width: 100%; background: var(--bg); border: 1px solid var(--border); border-radius: 3px; padding: 0.65rem 0.85rem; color: var(--text); font-family: inherit; font-size: 0.95rem; transition: border-color 0.2s; }
+    .form-group input:focus, .form-group textarea:focus, .form-group select:focus { outline: none; border-color: var(--primary); }
+    .form-group textarea { resize: vertical; min-height: 100px; }
+    .btn-send { background: var(--primary); color: var(--text); border: none; border-radius: 3px; padding: 0.85rem 2rem; font-family: 'Oswald', Impact, sans-serif; font-size: 1rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; cursor: pointer; width: 100%; transition: background 0.2s; }
+    .btn-send:hover { background: var(--primary-hover); }
+
+    /* FOOTER */
+    footer { background: #050505; border-top: 1px solid var(--border); padding: 2.5rem 1.5rem; text-align: center; }
+    .footer-brand { font-family: 'Oswald', Impact, sans-serif; font-size: 1.6rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); margin-bottom: 0.3rem; }
+    .footer-sub { color: var(--muted); font-size: 0.85rem; margin-bottom: 1.25rem; }
+    .footer-links { display: flex; justify-content: center; gap: 2rem; margin-bottom: 1.25rem; flex-wrap: wrap; }
+    .footer-links a { color: var(--muted); text-decoration: none; font-size: 0.85rem; }
+    .footer-links a:hover { color: var(--text); }
+    .footer-copy { color: rgba(160,152,136,0.4); font-size: 0.75rem; }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .hero { padding: 3rem 1.5rem; min-height: auto; }
+      .id-grid { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- DEMO BANNER -->
+<div class="demo-banner">
+  This is a demo &mdash; your real website, ready to launch.
+  <a href="https://preview.klarsystems.com/thrasherie-bar-tampere/proposal/" target="_blank" rel="noopener">View proposal &rarr;</a>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-brand">Thrasherie Bar</a>
+  <ul class="nav-links">
+    <li><a href="#identity">About</a></li>
+    <li><a href="#events">Events</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#contact" class="nav-cta">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-text">
+    <p class="hero-eyebrow">Tampere &middot; Hameenkatu 30 &middot; Open daily from 14:00</p>
+    <h1><em>Metal</em> for<br />everybody.</h1>
+    <p class="hero-tagline">Tampere's finest metal bar at the corner of Hameenkatu and Hameenpuisto &mdash; 4.5 stars from 406 reviewers. Rock to black metal, the legendary Rassisshot, and a stage that never lets up.</p>
+    <div class="hero-pills">
+      <span class="pill">Metal Music</span>
+      <span class="pill">Live Events</span>
+      <span class="pill">Rassisshot</span>
+      <span class="pill">Open Until 03:00</span>
+    </div>
+    <a href="#contact" style="display:inline-block; background:var(--primary); color:var(--text); text-decoration:none; padding:0.85rem 2rem; border-radius:3px; font-family:'Oswald',Impact,sans-serif; font-size:1rem; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; transition:background 0.2s;" onmouseover="this.style.background='#721414'" onmouseout="this.style.background='#8B1A1A'">Get in Touch</a>
+    <div class="hero-photo" style="margin-top:2rem;">
+      <div class="photo-placeholder">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+        <span>Your photo here</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- IDENTITY -->
+<section class="identity-section" id="identity">
+  <div class="container">
+    <p class="section-label">Who we are</p>
+    <h2 class="section-heading">Tampere's home<br />of heavy</h2>
+    <div class="id-grid">
+      <div class="id-text">
+        <p>Thrasherie Bar is Tampere's dedicated metal and rock venue &mdash; and has been since it opened its doors at Hameenkatu 30. From rock to black metal, the growing music selection is curated by staff who live and breathe the music.</p>
+        <p>The bar opens daily at 14:00 and stays open until 02:00 on weekdays, 03:00 on Fridays and Saturdays. The legendary Rassisshot has become a Tampere institution. Song requests are always welcome &mdash; just ask the staff.</p>
+        <p>Located at the corner of Hameenkatu and Hameenpuisto in the heart of Tampere. Credit cards accepted. No attitude required &mdash; metal really is for everybody.</p>
+      </div>
+      <div class="id-photo">
+        <div class="photo-placeholder">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="opacity:0.3"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+          <span>Interior photo coming soon</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EVENTS -->
+<section class="events-section" id="events">
+  <div class="container">
+    <p class="section-label">Whats on</p>
+    <h2 class="section-heading">Events &amp;<br />live nights</h2>
+    <p style="color:var(--muted); max-width:540px; margin-bottom:0;">From underground acts to legendary nights &mdash; check our social channels or get in touch for the latest lineup.</p>
+    <div class="event-grid">
+      <div class="event-card">
+        <p class="event-type">Every night</p>
+        <h3>Music All Night</h3>
+        <p>Rock to black metal, curated by the staff. Request your favourite track and they will make it happen.</p>
+      </div>
+      <div class="event-card">
+        <p class="event-type">Weekend specials</p>
+        <h3>Late Night Sessions</h3>
+        <p>Doors open at 14:00 daily. Friday and Saturday we go until 03:00. Happy hour specials on selected drinks.</p>
+      </div>
+      <div class="event-card">
+        <p class="event-type">For bands</p>
+        <h3>Play at Thrasherie</h3>
+        <p>We host live acts and welcome new bands. Contact us to discuss a booking at the Tampere metal hub.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews-section" id="reviews">
+  <div class="container">
+    <p class="section-label">What people say</p>
+    <h2 class="section-heading">4.5 stars &middot; 406 reviews</h2>
+    <div class="review-grid">
+      <div class="review-card">
+        <div class="review-rating">4.5 / 5 &middot; Google</div>
+        <p class="review-text">"Suomen paras Heavy-mesta, aina hyva meno!"</p>
+        <p class="review-author">&mdash; Ville Vainio, Google</p>
+      </div>
+      <div class="review-card">
+        <div class="review-rating">4.5 / 5 &middot; Google</div>
+        <p class="review-text">"Great atmosphere. Exactly what a metal bar should be."</p>
+        <p class="review-author">&mdash; Linda S., Google</p>
+      </div>
+      <div class="review-card">
+        <div class="review-rating">4.5 / 5 &middot; Google</div>
+        <p class="review-text">"The best place in Tampere for a proper metal night out."</p>
+        <p class="review-author">&mdash; Tomi R., Google</p>
+      </div>
+    </div>
+    <div class="rating-badge">
+      <div class="rating-num">4.5</div>
+      <div class="rating-text">Google rating<br />406 reviews</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT &amp; EVENTS SECTION -->
+<section class="contact-section" id="contact">
+  <div class="container">
+    <p class="section-label">Get in touch</p>
+    <h2 class="section-heading">Contact &amp;<br />bookings</h2>
+    <div class="contact-grid">
+      <div>
+        <div class="contact-block" style="margin-bottom:2rem;">
+          <h3>Location &amp; Hours</h3>
+          <div class="info-row"><strong>Address</strong> Hameenkatu 30, 33200 Tampere</div>
+          <div class="info-row"><strong>Location</strong> Corner of Hameenkatu and Hameenpuisto</div>
+          <div class="info-row"><strong>Sun&ndash;Thu</strong> 14:00&ndash;02:00</div>
+          <div class="info-row"><strong>Fri&ndash;Sat</strong> 14:00&ndash;03:00</div>
+        </div>
+        <div class="contact-block" style="margin-bottom:2rem;">
+          <h3>Contact</h3>
+          <div class="info-row"><strong>Phone</strong> <a href="tel:+358504411927" style="color:var(--accent);">050 4411927</a></div>
+          <div class="info-row"><strong>Email</strong> <a href="mailto:info@thrasheriebar.com" style="color:var(--accent);">info@thrasheriebar.com</a></div>
+          <div class="info-row"><strong>Facebook</strong> <a href="https://www.facebook.com/thrasheriebar" style="color:var(--accent);">@thrasheriebar</a></div>
+          <div class="info-row"><strong>Instagram</strong> <a href="https://www.instagram.com/thrasheriebartampere" style="color:var(--accent);">@thrasheriebartampere</a></div>
+        </div>
+        <div class="contact-block">
+          <h3>For Bands</h3>
+          <p style="color:var(--muted); font-size:0.9rem;">Want to play at Thrasherie? We welcome bands of all metal and rock styles. Drop us an email or use the form.</p>
+        </div>
+      </div>
+      <div class="contact-form">
+        <h3>Send a message</h3>
+        <div class="form-group">
+          <label for="c-name">Name</label>
+          <input type="text" id="c-name" name="name" placeholder="Your name" />
+        </div>
+        <div class="form-group">
+          <label for="c-email">Email</label>
+          <input type="email" id="c-email" name="email" placeholder="your@email.com" />
+        </div>
+        <div class="form-group">
+          <label for="c-topic">Topic</label>
+          <select id="c-topic" name="topic">
+            <option value="">Select topic</option>
+            <option value="event">Event inquiry</option>
+            <option value="band">Band booking</option>
+            <option value="private">Private event</option>
+            <option value="general">General question</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="c-msg">Message</label>
+          <textarea id="c-msg" name="message" placeholder="Your message..."></textarea>
+        </div>
+        <button class="btn-send" type="button">Send Message</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">Thrasherie Bar</div>
+  <p class="footer-sub">Metal for everybody &middot; Hämeenkatu 30, Tampere</p>
+  <div class="footer-links">
+    <a href="#identity">About</a>
+    <a href="#events">Events</a>
+    <a href="#reviews">Reviews</a>
+    <a href="#contact">Contact</a>
+    <a href="tel:+358504411927">050 4411927</a>
+  </div>
+  <p class="footer-copy">&copy; 2026 Thrasherie Bar &middot; Hämeenkatu 30, 33200 Tampere</p>
+  <p class="footer-copy" style="margin-top:0.5rem;">Powered by Klar</p>
+</footer>
+
+</body>
+</html>

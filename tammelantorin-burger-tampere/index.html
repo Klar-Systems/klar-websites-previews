@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tammelantorin Burger &mdash; Grill at Tammelantori, Tampere</title>
+<!-- palette: inferred from outdoor grill kiosk (dark charcoal, orange-red, warm yellow) -->
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #1A0A00;
+    --bg2: #241100;
+    --text: #F5EED8;
+    --text-muted: #C4A87C;
+    --primary: #D44000;
+    --accent: #F5C33C;
+    --border: rgba(245,195,60,0.22);
+  }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: 'Helvetica Neue', Arial, sans-serif; line-height: 1.65; }
+
+  /* DEMO BANNER */
+  .demo-banner { background: #D44000; color: #F5EED8; text-align: center; padding: 0.6rem 1rem; font-size: 0.82rem; letter-spacing: 0.05em; position: relative; z-index: 200; }
+  .demo-banner a { color: #F5C33C; font-weight: 700; text-decoration: underline; margin-left: 6px; }
+
+  /* NAV */
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(26,10,0,0.95); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); }
+  .nav-inner { max-width: 1100px; margin: 0 auto; padding: 1rem 1.5rem; display: flex; align-items: center; justify-content: space-between; }
+  .nav-logo { font-size: 1.1rem; font-weight: 900; color: var(--accent); letter-spacing: 0.05em; text-transform: uppercase; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.85rem; letter-spacing: 0.06em; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* HERO */
+  .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; padding: 6rem 1.5rem 4rem; }
+  .hero-bg { position: absolute; inset: 0; background: linear-gradient(150deg, #1A0A00 0%, #2C1200 60%, #1A0A00 100%); }
+  .hero-glow { position: absolute; top: 40%; left: 50%; transform: translate(-50%, -50%); width: 500px; height: 500px; background: radial-gradient(circle, rgba(212,64,0,0.22) 0%, transparent 70%); border-radius: 50%; pointer-events: none; }
+  .hero-content { position: relative; text-align: center; max-width: 680px; }
+  .hero-tag { font-size: 0.75rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.5rem; }
+  .hero-title { font-size: clamp(2.5rem, 7vw, 5rem); font-weight: 900; line-height: 1.05; margin-bottom: 1.5rem; letter-spacing: -0.01em; }
+  .hero-title span { color: var(--primary); }
+  .hero-sub { font-size: 1.05rem; color: var(--text-muted); margin-bottom: 2.5rem; max-width: 500px; margin-left: auto; margin-right: auto; }
+  .hero-cta { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  .hero-photo { width: 100%; max-width: 580px; height: 270px; background: linear-gradient(135deg, #241100 0%, #3A1A00 100%); border: 1px solid var(--border); border-radius: 6px; display: flex; align-items: center; justify-content: center; color: var(--text-muted); font-size: 0.85rem; margin: 3rem auto 0; letter-spacing: 0.1em; }
+
+  /* PHONE CTA */
+  .phone-section { background: var(--primary); padding: 3rem 1.5rem; text-align: center; }
+  .phone-section h2 { font-size: 1.5rem; font-weight: 900; margin-bottom: 0.75rem; color: var(--text); text-transform: uppercase; letter-spacing: 0.05em; }
+  .phone-big { display: inline-block; font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 900; color: var(--accent); text-decoration: none; letter-spacing: 0.04em; }
+  .phone-big:hover { color: #fff; }
+  .phone-note { font-size: 0.85rem; color: rgba(245,238,216,0.75); margin-top: 0.75rem; }
+
+  /* MENU */
+  .menu-bg { background: var(--bg2); }
+  .menu-inner { max-width: 1100px; margin: 0 auto; padding: 6rem 1.5rem; }
+  .menu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3rem; }
+  .menu-card { padding: 2rem; border: 1px solid var(--border); border-radius: 6px; background: rgba(212,64,0,0.06); }
+  .menu-icon { font-size: 1.5rem; margin-bottom: 0.75rem; color: var(--accent); }
+  .menu-name { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.6rem; color: var(--text); }
+  .menu-desc { font-size: 0.88rem; color: var(--text-muted); line-height: 1.55; }
+
+  /* ABOUT */
+  .section { max-width: 1100px; margin: 0 auto; padding: 6rem 1.5rem; }
+  .section-label { font-size: 0.75rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; }
+  .section-title { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 800; line-height: 1.15; margin-bottom: 2rem; }
+  .divider { border: none; border-top: 1px solid var(--border); }
+
+  /* CONTACT */
+  .contact-bg { background: var(--bg2); }
+  .contact-inner { max-width: 1100px; margin: 0 auto; padding: 6rem 1.5rem; }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+  .contact-box { padding: 2.5rem; border: 1px solid var(--border); border-radius: 6px; }
+  .contact-box h3 { font-size: 1.2rem; font-weight: 800; margin-bottom: 2rem; color: var(--accent); }
+  .info-row { margin-bottom: 1.4rem; }
+  .info-label { font-size: 0.73rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); display: block; margin-bottom: 0.25rem; }
+  .info-value { font-size: 0.95rem; color: var(--text); }
+
+  /* HOURS */
+  .hours-table { width: 100%; border-collapse: collapse; }
+  .hours-table tr { border-bottom: 1px solid var(--border); }
+  .hours-table td { padding: 0.6rem 0; font-size: 0.9rem; color: var(--text-muted); }
+  .hours-table td:first-child { color: var(--text); font-weight: 600; min-width: 130px; }
+
+  /* BTN */
+  .btn { display: inline-block; padding: 0.85rem 2rem; background: var(--primary); color: var(--text); text-decoration: none; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; border-radius: 4px; transition: background 0.2s; }
+  .btn:hover { background: #B33500; }
+  .btn-outline { background: transparent; border: 1px solid var(--accent); color: var(--accent); }
+  .btn-outline:hover { background: var(--accent); color: var(--bg); }
+
+  /* FOOTER */
+  footer { background: #0F0600; border-top: 1px solid var(--border); padding: 2.5rem 1.5rem; }
+  .footer-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 2rem; flex-wrap: wrap; }
+  .footer-brand { font-size: 1rem; font-weight: 900; color: var(--accent); text-transform: uppercase; }
+  .footer-addr { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.3rem; }
+  .footer-copy { font-size: 0.75rem; color: rgba(196,168,124,0.4); }
+
+  @media (max-width: 768px) {
+    .menu-grid, .contact-grid { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+    .footer-inner { flex-direction: column; text-align: center; }
+    .hero-cta { flex-direction: column; align-items: center; }
+    .demo-banner { font-size: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="demo-banner">
+  This is a demo &mdash; your real site will be built together with you.
+  <a href="https://preview.klarsystems.com/tammelantorin-burger-tampere/proposal/">View proposal &rarr;</a>
+</div>
+
+<nav>
+  <div class="nav-inner">
+    <span class="nav-logo">Tammelantorin Burger</span>
+    <ul class="nav-links">
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <p class="hero-tag">Grill Kiosk &middot; Tammelantori, Tampere</p>
+    <h1 class="hero-title">Tammelantorin<br><span>Burger</span></h1>
+    <p class="hero-sub">Classic outdoor grill at Tammelantori. Burgers, sausages, kebab &mdash; straight from the grill. Open until 5am on weekends.</p>
+    <div class="hero-cta">
+      <a href="tel:+358413649310" class="btn">Call to Order</a>
+      <a href="#menu" class="btn btn-outline">See Menu</a>
+    </div>
+  </div>
+  <div class="hero-photo">Your photo here</div>
+</section>
+
+<div class="phone-section">
+  <h2>Order by Phone</h2>
+  <a class="phone-big" href="tel:+358413649310">041 364 9310</a>
+  <p class="phone-note">Call ahead &mdash; we'll have it ready when you arrive at Tammelantori</p>
+</div>
+
+<hr class="divider">
+
+<div class="menu-bg">
+  <div class="menu-inner" id="menu">
+    <p class="section-label">What We Grill</p>
+    <h2 class="section-title">Classic Grill<br>Every Day</h2>
+    <div class="menu-grid">
+      <div class="menu-card">
+        <div class="menu-icon">&#9632;</div>
+        <p class="menu-name">Burgers</p>
+        <p class="menu-desc">Grilled burgers made the old-fashioned way. No nonsense, no tricks &mdash; just good honest food.</p>
+      </div>
+      <div class="menu-card">
+        <div class="menu-icon">&#9670;</div>
+        <p class="menu-name">Sausages &amp; Makkara</p>
+        <p class="menu-desc">Mustat makkarat puolukkahillolla &mdash; a Tammelantori favourite. Grilled sausages with all the trimmings.</p>
+      </div>
+      <div class="menu-card">
+        <div class="menu-icon">&#9679;</div>
+        <p class="menu-name">Kebab &amp; Fries</p>
+        <p class="menu-desc">Kebab and crispy French fries. Late-night staples, reliably done. Available until closing.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<section class="section" id="about">
+  <p class="section-label">About Us</p>
+  <h2 class="section-title">A Tampere<br>Institution</h2>
+  <p style="color:var(--text-muted); max-width:600px; margin-bottom:1rem;">Tammelantorin Burger has been serving the square for years. An outdoor grill kiosk at one of Tampere's most beloved market squares &mdash; unpretentious, reliable, and open very late.</p>
+  <p style="color:var(--text-muted); max-width:600px;">3.9 / 5 on Google &middot; 441 reviews &middot; Open until 5am Fri&ndash;Sat. When you need a burger at 3am, you know where to go.</p>
+</section>
+
+<hr class="divider">
+
+<div class="contact-bg">
+  <div class="contact-inner" id="contact">
+    <p class="section-label">Find Us</p>
+    <h2 class="section-title">Location<br>&amp; Hours</h2>
+    <div class="contact-grid">
+      <div class="contact-box">
+        <h3>Contact</h3>
+        <div class="info-row">
+          <span class="info-label">Address</span>
+          <span class="info-value">Tammelantori, 33100 Tampere</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Phone</span>
+          <span class="info-value"><a href="tel:+358413649310" style="color:inherit;">041 364 9310</a></span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Rating</span>
+          <span class="info-value">3.9 / 5 on Google</span>
+        </div>
+        <a href="tel:+358413649310" class="btn" style="margin-top:1.5rem;">Call Now</a>
+      </div>
+      <div>
+        <p class="section-label" style="margin-bottom:1.5rem;">Opening Hours</p>
+        <table class="hours-table">
+          <tr><td>Mon&ndash;Tue</td><td>11:00&ndash;23:00</td></tr>
+          <tr><td>Wed&ndash;Thu</td><td>11:00&ndash;02:00</td></tr>
+          <tr><td>Friday</td><td>16:00&ndash;05:00</td></tr>
+          <tr><td>Saturday</td><td>16:00&ndash;05:00</td></tr>
+          <tr><td>Sunday</td><td>13:00&ndash;23:00</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <p class="footer-brand">Tammelantorin Burger</p>
+      <p class="footer-addr">Tammelantori, 33100 Tampere</p>
+    </div>
+    <p class="footer-copy">&copy; 2026 Tammelantorin Burger &mdash; <span class="klar">Powered by Klar</span></p>
+  </div>
+</footer>
+
+</body>
+</html>

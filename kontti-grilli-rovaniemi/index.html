@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kontti-Grilli — Grill in Kerava</title>
+  <!-- Palette inferred: #0D1A10 bg, #F2EDE2 text, #5C8A28 primary, #E8A020 accent -->
+  <!-- Typography: bold display, honest sans body — roadside grill identity -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@600;700&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0D1A10;
+      --bg-card: #152015;
+      --text: #F2EDE2;
+      --muted: #8A9E80;
+      --primary: #5C8A28;
+      --primary-hover: #4e7520;
+      --accent: #E8A020;
+      --border: rgba(242,237,226,0.1);
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: 'Source Sans 3', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 17px; line-height: 1.65; }
+
+    /* DEMO BANNER */
+    .demo-banner { background: #0a1208; border-bottom: 1px solid rgba(92,138,40,0.5); padding: 0.6rem 1.5rem; text-align: center; font-size: 0.85rem; color: var(--muted); }
+    .demo-banner a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; margin-left: 0.5rem; }
+
+    /* NAV */
+    nav { position: sticky; top: 0; z-index: 100; background: rgba(13,26,16,0.96); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); padding: 0 1.5rem; display: flex; align-items: center; justify-content: space-between; height: 60px; }
+    .nav-brand { font-family: 'Oswald', Impact, sans-serif; font-size: 1.3rem; letter-spacing: 0.08em; color: var(--accent); text-decoration: none; text-transform: uppercase; }
+    .nav-links { display: flex; gap: 1.8rem; list-style: none; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.88rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-cta { background: var(--primary) !important; color: var(--text) !important; padding: 0.4rem 1rem; border-radius: 3px; }
+    .nav-cta:hover { background: var(--primary-hover) !important; }
+
+    /* HERO */
+    .hero { min-height: 85vh; display: flex; align-items: center; padding: 5rem 4rem 4rem; max-width: 1100px; margin: 0 auto; }
+    .hero-text { max-width: 680px; }
+    .hero-eyebrow { font-size: 0.78rem; letter-spacing: 0.16em; font-weight: 600; color: var(--accent); text-transform: uppercase; margin-bottom: 1rem; }
+    .hero-text h1 { font-family: 'Oswald', Impact, sans-serif; font-size: clamp(3rem, 8vw, 5.5rem); line-height: 1; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text); margin-bottom: 0.5rem; }
+    .hero-text h1 em { font-style: normal; color: var(--accent); }
+    .hero-tagline { font-size: 1.1rem; color: var(--muted); margin-bottom: 2rem; line-height: 1.5; max-width: 520px; }
+    .hero-pills { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2.5rem; }
+    .pill { background: rgba(92,138,40,0.15); border: 1px solid rgba(92,138,40,0.4); color: var(--accent); padding: 0.3rem 0.8rem; border-radius: 2px; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
+
+    /* CALL-TO-ORDER BUTTON (Seg 2 hero feature) */
+    .cta-call { display: inline-flex; align-items: center; gap: 0.75rem; background: var(--accent); color: #0D1A10; padding: 1rem 2rem; border-radius: 3px; text-decoration: none; font-weight: 700; font-size: 1.05rem; font-family: 'Oswald', Impact, sans-serif; letter-spacing: 0.08em; text-transform: uppercase; transition: opacity 0.2s; }
+    .cta-call:hover { opacity: 0.9; }
+    .cta-call-icon { font-size: 1.2rem; }
+    .hero-photo { margin-top: 3rem; border-radius: 4px; overflow: hidden; border: 1px solid var(--border); }
+    .photo-placeholder { aspect-ratio: 16/9; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 0.5rem; color: var(--muted); font-size: 0.85rem; background: #152015; }
+
+    /* SECTIONS */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+    .section-label { font-size: 0.75rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); font-weight: 600; margin-bottom: 0.6rem; }
+    .section-heading { font-family: 'Oswald', Impact, sans-serif; font-size: clamp(1.8rem, 4vw, 2.8rem); color: var(--text); line-height: 1.1; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 0.04em; }
+
+    /* IDENTITY */
+    .identity-section { padding: 6rem 0; border-top: 1px solid var(--border); }
+    .identity-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+    .identity-copy p { color: var(--muted); line-height: 1.75; margin-bottom: 1rem; }
+    .identity-copy p:last-child { margin-bottom: 0; }
+    .identity-highlight { background: var(--bg-card); border: 1px solid var(--border); border-radius: 4px; padding: 1.5rem; margin-top: 1.5rem; }
+    .identity-highlight p { color: var(--text); font-style: italic; font-size: 1rem; margin: 0; }
+    .feat-list { list-style: none; margin-top: 1.5rem; }
+    .feat-list li { display: flex; gap: 0.75rem; align-items: flex-start; padding: 0.6rem 0; border-bottom: 1px solid var(--border); color: var(--muted); font-size: 0.95rem; }
+    .feat-list li:last-child { border-bottom: none; }
+    .feat-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); margin-top: 0.55rem; flex-shrink: 0; }
+
+    /* MENU SECTION */
+    .menu-section { padding: 6rem 0; border-top: 1px solid var(--border); }
+    .menu-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; margin-top: 2.5rem; }
+    .menu-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 4px; padding: 1.75rem; }
+    .menu-category { font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); font-weight: 600; margin-bottom: 0.5rem; }
+    .menu-card h3 { font-family: 'Oswald', Impact, sans-serif; font-size: 1.25rem; color: var(--text); margin-bottom: 0.5rem; text-transform: uppercase; }
+    .menu-card p { color: var(--muted); font-size: 0.9rem; line-height: 1.6; }
+
+    /* REVIEWS */
+    .reviews-section { padding: 6rem 0; border-top: 1px solid var(--border); }
+    .review-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2.5rem; }
+    .review-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 4px; padding: 1.75rem; }
+    .review-rating { font-size: 0.78rem; letter-spacing: 0.12em; color: var(--accent); font-weight: 600; text-transform: uppercase; margin-bottom: 0.75rem; }
+    .review-text { color: var(--text); font-style: italic; font-size: 0.95rem; line-height: 1.65; margin-bottom: 1rem; }
+    .review-author { color: var(--muted); font-size: 0.82rem; }
+    .rating-badge { display: flex; align-items: center; gap: 1.25rem; margin-top: 2.5rem; padding: 1.5rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 4px; max-width: 300px; }
+    .rating-num { font-family: 'Oswald', Impact, sans-serif; font-size: 3.5rem; color: var(--accent); line-height: 1; }
+    .rating-text { color: var(--muted); font-size: 0.85rem; line-height: 1.5; }
+
+    /* CONTACT / ORDER SECTION */
+    .contact-section { padding: 6rem 0; border-top: 1px solid var(--border); }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; margin-top: 2.5rem; }
+    .contact-block { margin-bottom: 2rem; }
+    .contact-block h3 { font-family: 'Oswald', Impact, sans-serif; font-size: 1.1rem; color: var(--text); margin-bottom: 0.75rem; text-transform: uppercase; }
+    .info-row { display: flex; gap: 1rem; padding: 0.45rem 0; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+    .info-row strong { color: var(--muted); min-width: 90px; flex-shrink: 0; }
+    .info-row:last-child { border-bottom: none; }
+    .call-box { background: var(--bg-card); border: 1px solid var(--border); border-radius: 4px; padding: 2rem; text-align: center; }
+    .call-box p { color: var(--muted); font-size: 0.9rem; margin-bottom: 1.5rem; line-height: 1.6; }
+    .cta-call-lg { display: inline-flex; align-items: center; gap: 0.75rem; background: var(--accent); color: #0D1A10; padding: 1rem 2.5rem; border-radius: 3px; text-decoration: none; font-weight: 700; font-size: 1.1rem; font-family: 'Oswald', Impact, sans-serif; letter-spacing: 0.08em; text-transform: uppercase; transition: opacity 0.2s; }
+    .cta-call-lg:hover { opacity: 0.9; }
+
+    /* FOOTER */
+    footer { background: #060e08; border-top: 1px solid var(--border); padding: 2.5rem 1.5rem; text-align: center; }
+    .footer-brand { font-family: 'Oswald', Impact, sans-serif; font-size: 1.6rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); margin-bottom: 0.3rem; }
+    .footer-sub { color: var(--muted); font-size: 0.85rem; margin-bottom: 1.25rem; }
+    .footer-links { display: flex; justify-content: center; gap: 2rem; margin-bottom: 1.25rem; flex-wrap: wrap; }
+    .footer-links a { color: var(--muted); text-decoration: none; font-size: 0.85rem; }
+    .footer-links a:hover { color: var(--text); }
+    .footer-copy { color: rgba(138,158,128,0.4); font-size: 0.75rem; }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .hero { padding: 4rem 1.5rem 3rem; }
+      .identity-grid, .contact-grid { grid-template-columns: 1fr; }
+      .menu-grid { grid-template-columns: 1fr; }
+      .review-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- DEMO BANNER -->
+<div class="demo-banner">
+  This is a demo &mdash; your real website, ready to launch.
+  <a href="https://preview.klarsystems.com/kontti-grilli-rovaniemi/proposal/" target="_blank" rel="noopener">View proposal &rarr;</a>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-brand">Kontti-Grilli</a>
+  <ul class="nav-links">
+    <li><a href="#identity">About</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#contact" class="nav-cta">Order</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <p class="hero-eyebrow">Leppäkorven levähdysalue &middot; Kerava</p>
+    <h1>Kerava&rsquo;s<br /><em>Kontti Grill</em></h1>
+    <p class="hero-tagline">Classic Finnish grill food inside a two-storey shipping container at the Leppäkorven rest area on E75 &mdash; burgers, grill sausages, and fish pies done right.</p>
+    <div class="hero-pills">
+      <span class="pill">Burgers</span>
+      <span class="pill">Grill Sausages</span>
+      <span class="pill">Fish Pies</span>
+      <span class="pill">Open Daily</span>
+    </div>
+    <a href="tel:+358504679226" class="cta-call">
+      <span class="cta-call-icon">&#9742;</span>
+      Call to Order &mdash; 050 4679226
+    </a>
+    <div class="hero-photo">
+      <div class="photo-placeholder">
+        <span>[Kontti-Grilli shipping container exterior]</span>
+        <span style="font-size:0.75rem;">Photo of Kontti-Grilli &mdash; Leppäkorven levähdysalue, Kerava</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IDENTITY -->
+<section class="identity-section" id="identity">
+  <div class="container">
+    <div class="identity-grid">
+      <div>
+        <p class="section-label">About</p>
+        <h2 class="section-heading">The grill in<br />the container</h2>
+        <div class="identity-copy">
+          <p>Kontti-Grilli is one of Kerava's most distinctive grill stops &mdash; 4.0 stars from 394 Google reviewers. The entire restaurant is built inside a large two-storey shipping container at the Leppäkorven rest area on the E75 highway between Helsinki and Lahti.</p>
+          <p>Whether you are a road-tripper, trucker, or local, Kontti-Grilli serves honest Finnish grill food from early morning. Burgers, premium burgers, grill sausages, hot dogs, large grill dishes, and multiple types of fish pies &mdash; all made to order.</p>
+          <div class="identity-highlight">
+            <p>"Traditional Finnish grill food. Tasty and unhealthy as it is supposed to be."</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <p class="section-label">What we serve</p>
+        <ul class="feat-list">
+          <li><span class="feat-dot"></span><span>Burgers and premium burgers</span></li>
+          <li><span class="feat-dot"></span><span>Grill sausages and hot dogs</span></li>
+          <li><span class="feat-dot"></span><span>Large grill dishes</span></li>
+          <li><span class="feat-dot"></span><span>Multiple types of fish pies (lihapiirakat)</span></li>
+          <li><span class="feat-dot"></span><span>Vegetarian option available (Vegekonttikin)</span></li>
+          <li><span class="feat-dot"></span><span>Open from 06:00 on weekdays &mdash; ideal for early road stops</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section class="menu-section" id="menu">
+  <div class="container">
+    <p class="section-label">Menu</p>
+    <h2 class="section-heading">Classic Grill Food</h2>
+    <div class="menu-grid">
+      <div class="menu-card">
+        <p class="menu-category">Burgers</p>
+        <h3>Burgers &amp; Premium Burgers</h3>
+        <p>Classic and premium burger options including the locally famous Keravan kollit. Made to order at the counter.</p>
+      </div>
+      <div class="menu-card">
+        <p class="menu-category">Grill</p>
+        <h3>Sausages &amp; Grill Dishes</h3>
+        <p>Grill sausages, hot dogs, and large grill combo dishes. The full Finnish roadside grill experience.</p>
+      </div>
+      <div class="menu-card">
+        <p class="menu-category">Piirakat</p>
+        <h3>Fish Pies</h3>
+        <p>Multiple types of lihapiirakat (meat pies) &mdash; a Finnish grill staple done well. Call ahead for availability.</p>
+      </div>
+      <div class="menu-card">
+        <p class="menu-category">Vegetarian</p>
+        <h3>Vegekonttikin</h3>
+        <p>Vegetarian option with a vegetable patty in Kontti sauce. Everyone is welcome at Kontti-Grilli.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews-section" id="reviews">
+  <div class="container">
+    <p class="section-label">What people say</p>
+    <h2 class="section-heading">4.0 stars &middot; 394 reviews</h2>
+    <div class="review-grid">
+      <div class="review-card">
+        <div class="review-rating">4.0 / 5 &middot; Google</div>
+        <p class="review-text">"Traditional Finnish grill food. Tasty and unhealthy as it is supposed to be."</p>
+        <p class="review-author">&mdash; Tomi Wickman, TripAdvisor</p>
+      </div>
+      <div class="review-card">
+        <div class="review-rating">4.0 / 5 &middot; Google</div>
+        <p class="review-text">"Small and clean restaurant. Tasty Food...10/10 would recommend."</p>
+        <p class="review-author">&mdash; Samuel S, TripAdvisor</p>
+      </div>
+      <div class="review-card">
+        <div class="review-rating">4.0 / 5 &middot; Google</div>
+        <p class="review-text">"Unique kontti building right at the rest area. Great stop on the way to Lahti."</p>
+        <p class="review-author">&mdash; Google review</p>
+      </div>
+    </div>
+    <div class="rating-badge">
+      <div class="rating-num">4.0</div>
+      <div class="rating-text">Google rating<br />394 reviews</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT / ORDER -->
+<section class="contact-section" id="contact">
+  <div class="container">
+    <p class="section-label">Find us &amp; order</p>
+    <h2 class="section-heading">Call to Order</h2>
+    <div class="contact-grid">
+      <div>
+        <div class="contact-block" style="margin-bottom:2rem;">
+          <h3>Location &amp; Hours</h3>
+          <div class="info-row"><strong>Address</strong> Leppäkorven levähdysalue P, 04250 Kerava</div>
+          <div class="info-row"><strong>Location</strong> E75 rest area between Helsinki and Lahti</div>
+          <div class="info-row"><strong>Mon&ndash;Fri</strong> 06:00&ndash;22:00</div>
+          <div class="info-row"><strong>Saturday</strong> 09:00&ndash;22:00</div>
+          <div class="info-row"><strong>Sunday</strong> 10:00&ndash;20:00</div>
+        </div>
+        <div class="contact-block">
+          <h3>Contact</h3>
+          <div class="info-row"><strong>Phone</strong> <a href="tel:+358504679226" style="color:var(--accent);">050 4679226</a></div>
+          <div class="info-row"><strong>Instagram</strong> <a href="https://www.instagram.com/konttistreetfood" style="color:var(--accent);">@konttistreetfood</a></div>
+          <div class="info-row"><strong>Facebook</strong> <a href="https://www.facebook.com/p/Kontti-grilli-61553879395521/" style="color:var(--accent);">Kontti-grilli</a></div>
+        </div>
+      </div>
+      <div class="call-box">
+        <h3 style="font-family:'Oswald',Impact,sans-serif;font-size:1.3rem;text-transform:uppercase;color:var(--text);margin-bottom:1rem;">Ready to order?</h3>
+        <p>Call us directly and we will have your order ready when you arrive at the Leppäkorven rest area. Fast, honest, Finnish grill food &mdash; no waiting around.</p>
+        <a href="tel:+358504679226" class="cta-call-lg">
+          &#9742; 050 4679226
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">Kontti-Grilli</div>
+  <p class="footer-sub">Finnish grill &middot; Leppäkorven levähdysalue P, Kerava</p>
+  <div class="footer-links">
+    <a href="#identity">About</a>
+    <a href="#menu">Menu</a>
+    <a href="#reviews">Reviews</a>
+    <a href="#contact">Order</a>
+    <a href="tel:+358504679226">050 4679226</a>
+  </div>
+  <p class="footer-copy">&copy; 2026 Kontti-Grilli &middot; Leppäkorven levähdysalue P, 04250 Kerava</p>
+  <p class="footer-copy" style="margin-top:0.5rem;">Powered by Klar</p>
+</footer>
+
+</body>
+</html>

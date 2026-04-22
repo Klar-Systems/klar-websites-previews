@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tullibaari — Karaoke, Sauna & Nightlife, Pori</title>
+  <!-- Palette: inferred from karaoke/sauna nightbar archetype (Seg 3, Café-Bar). No real-site palette available. -->
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #111111;
+      --surface: #1A1A1A;
+      --brown: #7B3F00;
+      --gold: #D4A017;
+      --text: #F0EAD6;
+      --muted: #8A7A60;
+      --border: #2A2A2A;
+    }
+
+    body { font-family: 'Arial', sans-serif; background: var(--bg); color: var(--text); }
+
+    nav {
+      background: rgba(17,17,17,0.97);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 2rem;
+      display: flex; justify-content: space-between; align-items: center;
+      position: sticky; top: 0; z-index: 100;
+    }
+    .logo { font-size: 1.5rem; font-weight: 900; color: var(--gold); letter-spacing: 2px; text-transform: uppercase; }
+    .nav-links a { color: var(--muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--gold); }
+
+    /* HERO */
+    .hero {
+      padding: 6rem 2rem;
+      text-align: center;
+      position: relative;
+      background: var(--surface);
+      border-bottom: 3px solid var(--gold);
+    }
+    .hero-bg { position: absolute; top:0; left:0; right:0; bottom:0; background: linear-gradient(160deg, #1a1005 0%, #111111 70%); }
+    .hero-photo-placeholder { position: absolute; top:0; left:0; right:0; bottom:0; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.06); font-size: 0.85rem; }
+    .hero-content { position: relative; z-index:1; max-width: 720px; margin: 0 auto; }
+    .hero-tag { display: inline-block; border: 1px solid var(--gold); color: var(--gold); padding: 0.3rem 0.8rem; font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 1.5rem; }
+    .hero h1 { font-size: 3.2rem; font-weight: 900; color: #fff; line-height: 1.1; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 2px; }
+    .hero p { color: var(--muted); font-size: 1rem; line-height: 1.75; max-width: 520px; margin: 0 auto 2.5rem; }
+    .hero-cta { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn-primary { background: var(--gold); color: #111; padding: 0.9rem 2rem; font-weight: 700; font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase; text-decoration: none; display: inline-block; transition: opacity 0.2s; }
+    .btn-primary:hover { opacity: 0.85; }
+    .btn-outline { border: 1px solid var(--muted); color: var(--muted); padding: 0.9rem 2rem; font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase; text-decoration: none; display: inline-block; transition: border-color 0.2s, color 0.2s; }
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+    .photo-placeholder { background: #252020; color: #5a4a3a; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; border-radius: 2px; }
+
+    /* USP STRIP */
+    .usp-strip { background: var(--gold); padding: 1.5rem 2rem; }
+    .usp-strip-inner { max-width: 900px; margin: 0 auto; display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap; }
+    .usp-item { text-align: center; color: #1a1005; }
+    .usp-item .icon { font-size: 1.6rem; display: block; margin-bottom: 0.35rem; }
+    .usp-item span { font-size: 0.8rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+
+    /* ABOUT */
+    .about { max-width: 900px; margin: 0 auto; padding: 4.5rem 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+    @media (max-width: 640px) { .about { grid-template-columns: 1fr; } }
+    .about h2 { font-size: 1.8rem; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; color: var(--gold); margin-bottom: 1rem; }
+    .about p { color: var(--muted); line-height: 1.75; margin-bottom: 0.85rem; }
+    .about-img { height: 300px; }
+    .about-img .photo-placeholder { height: 100%; }
+
+    /* SAUNA SECTION */
+    .sauna { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 4rem 2rem; }
+    .sauna-inner { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+    @media (max-width: 640px) { .sauna-inner { grid-template-columns: 1fr; } }
+    .sauna h2 { font-size: 1.8rem; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; color: var(--gold); margin-bottom: 1rem; }
+    .sauna p { color: var(--muted); line-height: 1.75; margin-bottom: 0.75rem; }
+    .sauna-details { background: rgba(212,160,23,0.08); border: 1px solid var(--gold); padding: 1.25rem; border-radius: 3px; margin-top: 1.25rem; }
+    .sauna-detail { display: flex; gap: 0.75rem; align-items: center; color: var(--text); font-size: 0.9rem; margin-bottom: 0.5rem; }
+    .sauna-img { height: 280px; }
+    .sauna-img .photo-placeholder { height: 100%; }
+
+    /* EVENTS */
+    .events-contact { max-width: 900px; margin: 0 auto; padding: 4.5rem 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+    @media (max-width: 640px) { .events-contact { grid-template-columns: 1fr; } }
+    .events-contact h2 { font-size: 1.8rem; font-weight: 900; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
+    .events-contact p { color: var(--muted); line-height: 1.75; margin-bottom: 0.75rem; }
+    .contact-line { color: var(--text); margin-bottom: 0.5rem; font-size: 0.95rem; }
+    .contact-line a { color: var(--gold); text-decoration: none; }
+    .contact-line a:hover { text-decoration: underline; }
+    .hours-table { border-collapse: collapse; width: 100%; margin-top: 0.75rem; }
+    .hours-table td { padding: 0.4rem 0; color: var(--muted); font-size: 0.9rem; }
+    .hours-table td:first-child { color: var(--text); font-weight: 700; padding-right: 1.5rem; white-space: nowrap; }
+
+    .map-wrap { height: 280px; }
+    .map-wrap iframe { width: 100%; height: 100%; border: 0; }
+
+    footer { background: #080808; border-top: 2px solid var(--gold); padding: 2rem; text-align: center; color: var(--muted); font-size: 0.85rem; }
+    footer strong { color: var(--text); }
+
+    /* Demo banner */
+    .demo-banner {
+      background: rgba(0,0,0,0.85);
+      border-bottom: 1px solid #555;
+      color: rgba(255,255,255,0.8);
+      text-align: center;
+      padding: 0.6rem 1rem;
+      font-size: 0.85rem;
+    }
+    .demo-banner strong { color: #fff; }
+    .demo-banner a { color: #D4A017; text-decoration: none; margin-left: 0.5rem; }
+    .demo-banner a:hover { text-decoration: underline; }
+    .hero-rating { display: inline-block; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: 3px; padding: 0.3rem 0.7rem; font-size: 0.9rem; color: inherit; margin-bottom: 1.5rem; }
+    .hero-rating strong { color: #D4A017; }
+    .footer-klar { font-size: 0.8rem; color: rgba(255,255,255,0.3); margin-top: 0.5rem; }
+  </style>
+</head>
+<body>
+
+<!-- Demo banner -->
+<div class="demo-banner">
+  <strong>This is a demo</strong> &mdash; a free preview built for Tullibaari.
+  <a href="https://preview.klarsystems.com/tullibaari-pori/proposal/" target="_blank" rel="noopener">View the full proposal &rarr;</a>
+</div>
+
+  <nav>
+    <div class="logo">Tullibaari</div>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#sauna">Sauna</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-photo-placeholder">Your photo here</div>
+    <div class="hero-content">
+      <div class="hero-tag">Pori · Since 2008</div>
+      <h1>Karaoke,<br>Sauna &<br>Good Times</h1>
+      <p>Two floors, a large year-round terrace, private sauna cabin and all the karaoke, billiards and entertainment you need — right in central Pori.</p>
+            <div class="hero-rating"><strong>3.8</strong> Google rating (596 reviews)</div>
+      <div class="hero-cta">
+        <a href="#sauna" class="btn-primary">Book the Sauna</a>
+        <a href="#contact" class="btn-outline">Find Us</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- USP STRIP -->
+  <div class="usp-strip">
+    <div class="usp-strip-inner">
+      <div class="usp-item"><span class="icon"></span><span>Karaoke</span></div>
+      <div class="usp-item"><span class="icon"></span><span>Sauna Cabin</span></div>
+      <div class="usp-item"><span class="icon"></span><span>Billiards</span></div>
+      <div class="usp-item"><span class="icon"></span><span>Table Football</span></div>
+      <div class="usp-item"><span class="icon"></span><span>Pinball & Poker</span></div>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div>
+      <h2>Pori's Night Bar</h2>
+      <p>Tullibaari has been a Pori institution since 2008. Two floors, a large year-round terrace and more entertainment than you'll find anywhere else in the city — karaoke, billiards, table football, pinball and poker all under one roof.</p>
+      <p>We're open late (Fri–Sat until 5 AM) and built for a good night out. Drinks range from classic beers to craft selections and cocktails at prices that let you stay as long as you like.</p>
+    </div>
+    <div class="about-img">
+      <div class="photo-placeholder">Interior photo coming soon</div>
+    </div>
+  </section>
+
+  <!-- SAUNA SECTION -->
+  <section class="sauna" id="sauna">
+    <div class="sauna-inner">
+      <div>
+        <h2>Private Sauna Cabin</h2>
+        <p>Tullibaari's private sauna cabin is one of Pori's most popular venues for group celebrations, birthday parties, company events and team nights out.</p>
+        <p>The cabin accommodates up to 20 people and includes a spacious lounge with TV and sound system, kitchen facilities, and the option to bring your own food and drinks.</p>
+        <div class="sauna-details">
+          <div class="sauna-detail"> Up to 20 people</div>
+          <div class="sauna-detail"> TV & sound system in lounge</div>
+          <div class="sauna-detail"> Bring your own food & drinks</div>
+          <div class="sauna-detail"> Kitchen facilities available</div>
+        </div>
+        <p style="margin-top:1rem; font-size:0.9rem;">To book, contact us by email or phone.</p>
+      </div>
+      <div class="sauna-img">
+        <div class="photo-placeholder">Interior photo coming soon</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EVENTS & CONTACT -->
+  <section class="events-contact" id="contact">
+    <div>
+      <h2>Events & Karaoke</h2>
+      <p>Karaoke is a nightly fixture at Tullibaari. We also host special events, themed evenings and late-night sessions throughout the year. Check our Facebook page for the latest schedule.</p>
+      <div class="photo-placeholder" style="height:200px; margin-top:1rem;">Food photos coming soon</div>
+    </div>
+    <div>
+      <h2>Find Us</h2>
+      <div class="contact-line"> Itsenäisyydenkatu 44, 28130 Pori</div>
+      <div class="contact-line"> <a href="tel:+358413133617">041 3133617</a></div>
+      <div class="contact-line"> <a href="mailto:ravintola@tullibaari.fi">ravintola@tullibaari.fi</a></div>
+      <h2 style="margin-top:2rem; font-size:1.3rem; letter-spacing:1px;">Opening Hours</h2>
+      <table class="hours-table">
+        <tr><td>Mon – Tue, Sun</td><td>22:00 – 04:30</td></tr>
+        <tr><td>Wed – Thu</td><td>20:00 – 04:30</td></tr>
+        <tr><td>Fri – Sat</td><td>20:00 – 05:00</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- MAP -->
+  <div class="map-wrap">
+    <iframe
+      src="https://maps.google.com/maps?q=Itsenaisyydenkatu+44+Pori&z=16&output=embed"
+      title="Tullibaari location map"
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </div>
+
+  <footer>
+    <strong>Tullibaari</strong> · Itsenäisyydenkatu 44, 28130 Pori · <a href="mailto:ravintola@tullibaari.fi" style="color:var(--gold)">ravintola@tullibaari.fi</a>
+      <div class="footer-klar">Powered by Klar</div>
+  </footer>
+
+</body>
+</html>

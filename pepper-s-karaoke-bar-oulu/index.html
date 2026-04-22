@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pepper's Karaoke Bar &mdash; Karaoke in Oulu</title>
+<!-- palette: inferred from karaoke bar archetype (deep red-black, red, orange) -->
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #1A0505;
+    --bg2: #220808;
+    --text: #F5EDE8;
+    --text-muted: #C4A898;
+    --primary: #CC2200;
+    --accent: #FF9900;
+    --border: rgba(255,153,0,0.22);
+  }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: 'Helvetica Neue', Arial, sans-serif; line-height: 1.65; }
+
+  /* DEMO BANNER */
+  .demo-banner { background: #CC2200; color: #F5EDE8; text-align: center; padding: 0.6rem 1rem; font-size: 0.82rem; letter-spacing: 0.05em; position: relative; z-index: 200; }
+  .demo-banner a { color: #FF9900; font-weight: 700; text-decoration: underline; margin-left: 6px; }
+
+  /* NAV */
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(26,5,5,0.95); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); }
+  .nav-inner { max-width: 1100px; margin: 0 auto; padding: 1rem 1.5rem; display: flex; align-items: center; justify-content: space-between; }
+  .nav-logo { font-size: 1.2rem; font-weight: 900; color: var(--accent); letter-spacing: 0.04em; text-transform: uppercase; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.85rem; letter-spacing: 0.06em; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* HERO */
+  .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; padding: 6rem 1.5rem 4rem; }
+  .hero-bg { position: absolute; inset: 0; background: linear-gradient(160deg, #1A0505 0%, #2A0A0A 60%, #1A0505 100%); }
+  .hero-glow { position: absolute; top: 35%; left: 55%; width: 500px; height: 500px; background: radial-gradient(circle, rgba(204,34,0,0.25) 0%, transparent 70%); border-radius: 50%; pointer-events: none; }
+  .hero-content { position: relative; text-align: center; max-width: 680px; }
+  .hero-tag { font-size: 0.75rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.5rem; }
+  .hero-title { font-size: clamp(2.8rem, 8vw, 5.5rem); font-weight: 900; line-height: 1.05; margin-bottom: 1.5rem; letter-spacing: -0.02em; }
+  .hero-title span { color: var(--primary); }
+  .hero-sub { font-size: 1.05rem; color: var(--text-muted); margin-bottom: 2.5rem; max-width: 480px; margin-left: auto; margin-right: auto; }
+  .hero-cta { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  .hero-photo { width: 100%; max-width: 580px; height: 270px; background: linear-gradient(135deg, #220808 0%, #380E0E 100%); border: 1px solid var(--border); border-radius: 6px; display: flex; align-items: center; justify-content: center; color: var(--text-muted); font-size: 0.85rem; margin: 3rem auto 0; letter-spacing: 0.1em; }
+
+  /* SECTIONS */
+  .section { max-width: 1100px; margin: 0 auto; padding: 6rem 1.5rem; }
+  .section-label { font-size: 0.75rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; }
+  .section-title { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 800; line-height: 1.15; margin-bottom: 2rem; }
+  .divider { border: none; border-top: 1px solid var(--border); }
+
+  /* PROGRAMME */
+  .prog-bg { background: var(--bg2); }
+  .prog-inner { max-width: 1100px; margin: 0 auto; padding: 6rem 1.5rem; }
+  .prog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3rem; }
+  .prog-card { padding: 2rem; border: 1px solid var(--border); border-radius: 6px; background: rgba(204,34,0,0.06); }
+  .prog-day { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem; }
+  .prog-name { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.6rem; color: var(--text); }
+  .prog-desc { font-size: 0.88rem; color: var(--text-muted); line-height: 1.55; }
+  .prog-time { font-size: 0.8rem; color: var(--primary); margin-top: 0.5rem; font-weight: 600; }
+
+  /* FEATURES */
+  .feat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 3rem; }
+  .feat-card { padding: 1.75rem; border-top: 2px solid var(--primary); }
+  .feat-icon { font-size: 1.5rem; margin-bottom: 0.75rem; color: var(--accent); }
+  .feat-name { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.5rem; }
+  .feat-text { font-size: 0.85rem; color: var(--text-muted); line-height: 1.55; }
+
+  /* CONTACT */
+  .contact-bg { background: var(--bg2); }
+  .contact-inner { max-width: 1100px; margin: 0 auto; padding: 6rem 1.5rem; }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+  .contact-box { padding: 2.5rem; border: 1px solid var(--border); border-radius: 6px; background: rgba(255,153,0,0.04); }
+  .contact-box h3 { font-size: 1.2rem; font-weight: 800; margin-bottom: 2rem; color: var(--accent); }
+  .info-row { margin-bottom: 1.4rem; }
+  .info-label { font-size: 0.73rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); display: block; margin-bottom: 0.25rem; }
+  .info-value { font-size: 0.95rem; color: var(--text); }
+
+  /* HOURS TABLE */
+  .hours-table { width: 100%; border-collapse: collapse; }
+  .hours-table tr { border-bottom: 1px solid var(--border); }
+  .hours-table td { padding: 0.6rem 0; font-size: 0.9rem; color: var(--text-muted); }
+  .hours-table td:first-child { color: var(--text); font-weight: 600; min-width: 130px; }
+
+  /* BTN */
+  .btn { display: inline-block; padding: 0.85rem 2rem; background: var(--primary); color: var(--text); text-decoration: none; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; border-radius: 4px; transition: background 0.2s; }
+  .btn:hover { background: #A81A00; }
+  .btn-outline { background: transparent; border: 1px solid var(--accent); color: var(--accent); }
+  .btn-outline:hover { background: var(--accent); color: var(--bg); }
+
+  /* FOOTER */
+  footer { background: #100303; border-top: 1px solid var(--border); padding: 2.5rem 1.5rem; }
+  .footer-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 2rem; flex-wrap: wrap; }
+  .footer-brand { font-size: 1rem; font-weight: 900; color: var(--accent); text-transform: uppercase; }
+  .footer-addr { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.3rem; }
+  .footer-copy { font-size: 0.75rem; color: rgba(196,168,152,0.4); }
+
+  @media (max-width: 768px) {
+    .prog-grid, .feat-grid, .contact-grid { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+    .footer-inner { flex-direction: column; text-align: center; }
+    .hero-cta { flex-direction: column; align-items: center; }
+    .demo-banner { font-size: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="demo-banner">
+  This is a demo &mdash; your real site will be built together with you.
+  <a href="https://preview.klarsystems.com/pepper-s-karaoke-bar-oulu/proposal/">View proposal &rarr;</a>
+</div>
+
+<nav>
+  <div class="nav-inner">
+    <span class="nav-logo">Pepper's</span>
+    <ul class="nav-links">
+      <li><a href="#programme">Programme</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <p class="hero-tag">Karaoke Bar &middot; Oulu</p>
+    <h1 class="hero-title">Pepper's<br><span>Karaoke</span><br>Bar</h1>
+    <p class="hero-sub">Every song deserves to be sung. Open every day from 9am &mdash; a charming local bar in the heart of Oulu.</p>
+    <div class="hero-cta">
+      <a href="#contact" class="btn">Find Us</a>
+      <a href="#programme" class="btn btn-outline">What's On</a>
+    </div>
+  </div>
+  <div class="hero-photo">Your photo here</div>
+</section>
+
+<hr class="divider">
+
+<div class="prog-bg">
+  <div class="prog-inner" id="programme">
+    <p class="section-label">What's On</p>
+    <h2 class="section-title">Something For<br>Every Day</h2>
+    <div class="prog-grid">
+      <div class="prog-card">
+        <p class="prog-day">Every Day</p>
+        <p class="prog-name">Karaoke Open Stage</p>
+        <p class="prog-desc">The mic is yours &mdash; from opening time. Finnish and international songs, all levels welcome. Every song deserves to be sung.</p>
+        <p class="prog-time">From 09:00</p>
+      </div>
+      <div class="prog-card">
+        <p class="prog-day">Every Day</p>
+        <p class="prog-name">Summer Terrace</p>
+        <p class="prog-desc">When the Oulu sun shows up, Pepper's terrace opens. Cold drinks, fresh air, and the city buzz of Isokatu.</p>
+        <p class="prog-time">Seasonal</p>
+      </div>
+      <div class="prog-card">
+        <p class="prog-day">By Request</p>
+        <p class="prog-name">Private Events</p>
+        <p class="prog-desc">Birthday parties, work events, get-togethers &mdash; book Pepper's for your next private occasion. Contact us for details.</p>
+        <p class="prog-time">Enquire for availability</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<section class="section" id="about">
+  <p class="section-label">About Us</p>
+  <h2 class="section-title">Oulu's Classic<br>Karaoke Bar</h2>
+  <p style="color:var(--text-muted); max-width:600px; margin-bottom:1rem;">Pepper's is a charming local bar on Isokatu, right in the heart of Oulu. Open from 9 in the morning, seven days a week. #15 of 192 pubs and bars in Oulu &middot; 3.7 / 5 on Google.</p>
+  <p style="color:var(--text-muted); max-width:600px; margin-bottom:3rem;">Whether you're a karaoke veteran or a first-timer, you'll find a welcoming crowd and a well-stocked bar. Filet americain, light snacks, and all the drinks you need for a good evening.</p>
+  <div class="feat-grid">
+    <div class="feat-card">
+      <div class="feat-icon">&#9835;</div>
+      <p class="feat-name">Karaoke Every Day</p>
+      <p class="feat-text">Extensive song library covering Finnish and international hits. No special occasion needed &mdash; just turn up and sing.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">&#9728;</div>
+      <p class="feat-name">Outdoor Terrace</p>
+      <p class="feat-text">Al fresco drinking in summer on Isokatu. One of the most central terraces in Oulu.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">&#9670;</div>
+      <p class="feat-name">Light Snacks &amp; Bar</p>
+      <p class="feat-text">Filet americain, bar snacks, and a full drinks menu. Affordable prices &mdash; budget up to &euro;8 per person.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<div class="contact-bg">
+  <div class="contact-inner" id="contact">
+    <p class="section-label">Find Us</p>
+    <h2 class="section-title">Location<br>&amp; Opening Hours</h2>
+    <div class="contact-grid">
+      <div class="contact-box">
+        <h3>Contact</h3>
+        <div class="info-row">
+          <span class="info-label">Address</span>
+          <span class="info-value">Isokatu 36, 90100 Oulu</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Phone</span>
+          <span class="info-value"><a href="tel:+35885221444" style="color:inherit;">08 5221 444</a></span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Rating</span>
+          <span class="info-value">3.7 / 5 on Google</span>
+        </div>
+        <a href="tel:+35885221444" class="btn" style="margin-top:1.5rem;">Call Us</a>
+      </div>
+      <div>
+        <p class="section-label" style="margin-bottom:1.5rem;">Opening Hours</p>
+        <table class="hours-table">
+          <tr><td>Mon&ndash;Thu</td><td>09:00&ndash;02:00</td></tr>
+          <tr><td>Fri&ndash;Sat</td><td>09:00&ndash;05:00</td></tr>
+          <tr><td>Sunday</td><td>09:00&ndash;00:00</td></tr>
+        </table>
+        <p style="margin-top:2rem; font-size:0.85rem; color:var(--text-muted);">Central Oulu on Isokatu, near the cathedral. Easy to spot &mdash; just listen for the singing.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <p class="footer-brand">Pepper's Karaoke Bar</p>
+      <p class="footer-addr">Isokatu 36, 90100 Oulu</p>
+    </div>
+    <p class="footer-copy">&copy; 2026 Pepper's Karaoke Bar &mdash; <span class="klar">Powered by Klar</span></p>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nooran Viinibaari &mdash; Wine Bar in Hameenlinna</title>
+<!-- palette: inferred from wine bar archetype (deep burgundy, warm cream, gold) -->
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #1E0D12;
+    --bg2: #2A1320;
+    --text: #F2EAD8;
+    --text-muted: #BBA890;
+    --primary: #8B1A2C;
+    --accent: #C4904A;
+    --border: rgba(196,144,74,0.25);
+  }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: 'Georgia', serif; line-height: 1.7; }
+
+  /* NAV */
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(30,13,18,0.95); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); }
+  .nav-inner { max-width: 1100px; margin: 0 auto; padding: 1rem 1.5rem; display: flex; align-items: center; justify-content: space-between; }
+  .nav-logo { font-size: 1.1rem; letter-spacing: 0.12em; color: var(--accent); font-style: italic; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* HERO */
+  .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; padding: 6rem 1.5rem 4rem; }
+  .hero-bg { position: absolute; inset: 0; background: linear-gradient(135deg, #1E0D12 0%, #2A1320 50%, #1E0D12 100%); }
+  .hero-accent { position: absolute; top: 20%; right: 10%; width: 400px; height: 400px; background: radial-gradient(circle, rgba(139,26,44,0.3) 0%, transparent 70%); border-radius: 50%; }
+  .hero-content { position: relative; text-align: center; max-width: 700px; }
+  .hero-tagline { font-size: 0.8rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.5rem; }
+  .hero-title { font-size: clamp(2.8rem, 7vw, 5rem); line-height: 1.1; margin-bottom: 1.5rem; font-style: italic; }
+  .hero-subtitle { font-size: 1.1rem; color: var(--text-muted); margin-bottom: 2.5rem; font-family: 'Helvetica Neue', Arial, sans-serif; font-weight: 300; }
+  .hero-photo { width: 100%; max-width: 600px; height: 300px; background: linear-gradient(135deg, #2A1320 0%, #3D1A28 100%); border: 1px solid var(--border); border-radius: 4px; display: flex; align-items: center; justify-content: center; color: var(--text-muted); font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 0.85rem; margin: 2rem auto 0; letter-spacing: 0.1em; }
+
+  /* ABOUT */
+  .section { max-width: 1100px; margin: 0 auto; padding: 6rem 1.5rem; }
+  .section-label { font-size: 0.75rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; font-family: 'Helvetica Neue', Arial, sans-serif; }
+  .section-title { font-size: clamp(1.8rem, 4vw, 2.8rem); line-height: 1.2; margin-bottom: 2rem; font-style: italic; }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+  .about-text p { color: var(--text-muted); margin-bottom: 1.2rem; font-family: 'Helvetica Neue', Arial, sans-serif; font-weight: 300; }
+  .about-photo { width: 100%; height: 380px; background: linear-gradient(160deg, #2A1320 0%, #3D1A28 100%); border: 1px solid var(--border); border-radius: 4px; display: flex; align-items: center; justify-content: center; color: var(--text-muted); font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 0.85rem; letter-spacing: 0.1em; }
+  .divider { border: none; border-top: 1px solid var(--border); margin: 0; }
+
+  /* WINE */
+  .wine-section { background: var(--bg2); }
+  .wine-inner { max-width: 1100px; margin: 0 auto; padding: 6rem 1.5rem; }
+  .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 3rem; }
+  .feature-card { padding: 2rem; border: 1px solid var(--border); border-radius: 4px; background: rgba(139,26,44,0.08); }
+  .feature-icon { font-size: 1.8rem; margin-bottom: 1rem; color: var(--accent); }
+  .feature-title { font-size: 1.1rem; margin-bottom: 0.75rem; color: var(--accent); font-style: italic; }
+  .feature-desc { font-size: 0.9rem; color: var(--text-muted); font-family: 'Helvetica Neue', Arial, sans-serif; font-weight: 300; line-height: 1.6; }
+
+  /* EVENTS / CONTACT */
+  .contact-section { background: var(--bg); }
+  .contact-inner { max-width: 1100px; margin: 0 auto; padding: 6rem 1.5rem; }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+  .contact-info h3 { font-size: 1.3rem; margin-bottom: 1.5rem; font-style: italic; color: var(--accent); }
+  .contact-detail { display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 1.2rem; }
+  .contact-detail-label { color: var(--accent); font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; font-family: 'Helvetica Neue', Arial, sans-serif; min-width: 80px; padding-top: 0.1rem; }
+  .contact-detail-text { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 0.95rem; color: var(--text-muted); }
+  .contact-detail-text strong { color: var(--text); display: block; font-weight: 500; margin-bottom: 0.2rem; }
+  .events-box { padding: 2rem; border: 1px solid var(--border); border-radius: 4px; background: var(--bg2); }
+  .events-box h3 { font-size: 1.3rem; margin-bottom: 1.5rem; font-style: italic; color: var(--accent); }
+  .event-item { display: flex; gap: 1rem; margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border); font-family: 'Helvetica Neue', Arial, sans-serif; }
+  .event-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .event-day { font-weight: 600; color: var(--accent); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; min-width: 80px; }
+  .event-desc { font-size: 0.9rem; color: var(--text-muted); }
+  .event-name { color: var(--text); font-weight: 500; display: block; }
+  .btn { display: inline-block; padding: 0.9rem 2rem; background: var(--primary); color: var(--text); text-decoration: none; font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase; border-radius: 3px; transition: background 0.2s; border: 1px solid var(--primary); margin-top: 1.5rem; }
+  .btn:hover { background: #A52236; }
+  .btn-outline { background: transparent; border-color: var(--accent); color: var(--accent); }
+  .btn-outline:hover { background: var(--accent); color: var(--bg); }
+
+  /* FOOTER */
+  footer { background: #130810; border-top: 1px solid var(--border); padding: 2.5rem 1.5rem; }
+  .footer-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 2rem; }
+  .footer-name { font-style: italic; font-size: 1rem; color: var(--accent); }
+  .footer-addr { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 0.8rem; color: var(--text-muted); }
+  .footer-copy { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 0.75rem; color: rgba(187,168,144,0.5); }
+
+  /* DEMO BANNER */
+  .demo-banner { background: #8B1A2C; color: #F2EAD8; text-align: center; padding: 0.6rem 1rem; font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 0.82rem; letter-spacing: 0.05em; position: relative; z-index: 200; }
+  .demo-banner a { color: #C4904A; font-weight: 700; text-decoration: underline; margin-left: 6px; }
+
+  @media (max-width: 768px) {
+    .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .features-grid { grid-template-columns: 1fr; }
+    .footer-inner { flex-direction: column; text-align: center; }
+    .nav-links { display: none; }
+    .demo-banner { font-size: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="demo-banner">
+  This is a demo &mdash; your real site will be built together with you.
+  <a href="https://preview.klarsystems.com/nooran-viinibaari-hameenlinna/proposal/">View proposal &rarr;</a>
+</div>
+
+<nav>
+  <div class="nav-inner">
+    <span class="nav-logo">Nooran Viinibaari</span>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#wine">Wine &amp; Tapas</a></li>
+      <li><a href="#contact">Contact &amp; Events</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-accent"></div>
+  <div class="hero-content">
+    <p class="hero-tagline">Wine Bar &mdash; Hameenlinna</p>
+    <h1 class="hero-title">Nooran<br>Viinibaari</h1>
+    <p class="hero-subtitle">A cosy, owner-run wine bar in the heart of Hameenlinna.<br>Quality wines, tapas, and a terrace &mdash; for an evening to remember.</p>
+    <div class="hero-photo">Your photo here</div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section class="section" id="about">
+  <div class="about-grid">
+    <div class="about-text">
+      <p class="section-label">Our Story</p>
+      <h2 class="section-title">A Wine Bar<br>Built with Passion</h2>
+      <p>Nooran Viinibaari was born from a simple idea: Hameenlinna needed a place where you could unwind with a good glass of wine &mdash; without a dress code or a formal occasion.</p>
+      <p>Owner Noora Vennamo designed and built the bar herself, investing every personal saving into creating a space that feels genuinely welcoming. Today the wine bar shares its home at Kasarmikatu 4 with Juliuksen Olohuone.</p>
+      <p>Rotating art exhibitions, a street-side terrace in summer, and a carefully curated wine list make every visit a little different.</p>
+      <a href="#contact" class="btn btn-outline">Book a Private Event</a>
+    </div>
+    <div class="about-photo">Interior photo coming soon</div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<div class="wine-section">
+  <div class="wine-inner" id="wine">
+    <p class="section-label">What We Offer</p>
+    <h2 class="section-title">Wine, Tapas<br>&amp; Good Company</h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <p class="feature-icon">&#8984;</p>
+        <h3 class="feature-title">Curated Wine Selection</h3>
+        <p class="feature-desc">A thoughtful selection of wines from across Europe &mdash; Noora follows the wine world closely and the list evolves with the seasons.</p>
+      </div>
+      <div class="feature-card">
+        <p class="feature-icon">&#9679;</p>
+        <h3 class="feature-title">Tapas &amp; Cheese Boards</h3>
+        <p class="feature-desc">Cheeses, tapas, and small bites to accompany your wine. Friday and Saturday cheese buffets are a Nooran Viinibaari favourite.</p>
+      </div>
+      <div class="feature-card">
+        <p class="feature-icon">&#9670;</p>
+        <h3 class="feature-title">Art &amp; Atmosphere</h3>
+        <p class="feature-desc">The walls rotate with works from local artists &mdash; exhibitions change every two months, giving every visit a new story to discover.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<div class="contact-section">
+  <div class="contact-inner" id="contact">
+    <p class="section-label">Find Us</p>
+    <h2 class="section-title">Contact<br>&amp; Events</h2>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <h3>Visit Us</h3>
+        <div class="contact-detail">
+          <span class="contact-detail-label">Address</span>
+          <div class="contact-detail-text">Kasarmikatu 4, 13100 Hameenlinna</div>
+        </div>
+        <div class="contact-detail">
+          <span class="contact-detail-label">Phone</span>
+          <div class="contact-detail-text"><a href="tel:+358404878234" style="color:inherit;">040 487 8234</a></div>
+        </div>
+        <div class="contact-detail">
+          <span class="contact-detail-label">Rating</span>
+          <div class="contact-detail-text">4.7 / 5 on Google</div>
+        </div>
+        <div class="contact-detail">
+          <span class="contact-detail-label">Email</span>
+          <div class="contact-detail-text">myynti@nooranviinibaari.fi</div>
+        </div>
+        <div class="contact-detail">
+          <span class="contact-detail-label">Hours</span>
+          <div class="contact-detail-text">Contact us or check Facebook for current hours</div>
+        </div>
+      </div>
+      <div class="events-box">
+        <h3>Events &amp; Private Hire</h3>
+        <div class="event-item">
+          <span class="event-day">Fri&ndash;Sat</span>
+          <div class="event-desc">
+            <span class="event-name">Cheese Buffet</span>
+            Curated cheese selections paired with our wines &mdash; the weekend treat.
+          </div>
+        </div>
+        <div class="event-item">
+          <span class="event-day">Weekdays</span>
+          <div class="event-desc">
+            <span class="event-name">AfterWork</span>
+            Unwind after the working day with a glass and good company.
+          </div>
+        </div>
+        <div class="event-item">
+          <span class="event-day">By request</span>
+          <div class="event-desc">
+            <span class="event-name">Private Events</span>
+            The original wine bar space is available for private parties. Contact us to arrange.
+          </div>
+        </div>
+        <a href="mailto:myynti@nooranviinibaari.fi" class="btn">Enquire About Events</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <p class="footer-name">Nooran Viinibaari</p>
+      <p class="footer-addr">Kasarmikatu 4, 13100 Hameenlinna</p>
+    </div>
+    <p class="footer-copy">&copy; 2026 Nooran Viinibaari &mdash; <span class="klar">Powered by Klar</span></p>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jolene Karaoke Bar &mdash; Karaoke in Pori</title>
+<!-- palette: inferred from karaoke bar archetype (deep purple-black, hot pink, yellow) -->
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #0F0A1E;
+    --bg2: #18102A;
+    --text: #F2ECE8;
+    --text-muted: #A896B4;
+    --primary: #D41661;
+    --accent: #F5C030;
+    --border: rgba(245,192,48,0.2);
+  }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: 'Helvetica Neue', Arial, sans-serif; line-height: 1.6; }
+
+  /* DEMO BANNER */
+  .demo-banner { background: #D41661; color: #F2ECE8; text-align: center; padding: 0.6rem 1rem; font-size: 0.82rem; letter-spacing: 0.05em; position: relative; z-index: 200; }
+  .demo-banner a { color: #F5C030; font-weight: 700; text-decoration: underline; margin-left: 6px; }
+
+  /* NAV */
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(15,10,30,0.95); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); }
+  .nav-inner { max-width: 1100px; margin: 0 auto; padding: 1rem 1.5rem; display: flex; align-items: center; justify-content: space-between; }
+  .nav-logo { font-size: 1.2rem; font-weight: 700; color: var(--accent); letter-spacing: 0.05em; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.85rem; letter-spacing: 0.06em; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* HERO */
+  .hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; overflow: hidden; padding: 6rem 1.5rem 4rem; }
+  .hero-glow { position: absolute; top: 30%; left: 50%; transform: translate(-50%, -50%); width: 600px; height: 600px; background: radial-gradient(circle, rgba(212,22,97,0.2) 0%, transparent 70%); border-radius: 50%; pointer-events: none; }
+  .hero-glow2 { position: absolute; top: 60%; left: 70%; width: 400px; height: 400px; background: radial-gradient(circle, rgba(245,192,48,0.12) 0%, transparent 70%); border-radius: 50%; pointer-events: none; }
+  .hero-content { position: relative; text-align: center; max-width: 700px; }
+  .hero-badge { display: inline-block; font-size: 0.75rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--accent); border: 1px solid var(--border); padding: 0.35rem 1rem; border-radius: 2rem; margin-bottom: 2rem; }
+  .hero-title { font-size: clamp(3rem, 9vw, 6rem); line-height: 1; font-weight: 900; margin-bottom: 1.5rem; letter-spacing: -0.02em; }
+  .hero-title span { color: var(--primary); }
+  .hero-subtitle { font-size: 1.05rem; color: var(--text-muted); margin-bottom: 2.5rem; max-width: 500px; margin-left: auto; margin-right: auto; }
+  .hero-cta { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  .hero-photo { width: 100%; max-width: 600px; height: 280px; background: linear-gradient(135deg, #1A0E2E 0%, #2A1040 100%); border: 1px solid var(--border); border-radius: 6px; display: flex; align-items: center; justify-content: center; color: var(--text-muted); font-size: 0.85rem; margin: 3rem auto 0; letter-spacing: 0.1em; }
+
+  /* SECTIONS */
+  .section { max-width: 1100px; margin: 0 auto; padding: 6rem 1.5rem; }
+  .section-label { font-size: 0.75rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; }
+  .section-title { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 800; line-height: 1.15; margin-bottom: 1.5rem; }
+  .section-body { color: var(--text-muted); max-width: 600px; }
+  .divider { border: none; border-top: 1px solid var(--border); }
+
+  /* PROGRAMME */
+  .prog-section { background: var(--bg2); }
+  .prog-inner { max-width: 1100px; margin: 0 auto; padding: 6rem 1.5rem; }
+  .prog-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; margin-top: 3rem; }
+  .prog-card { padding: 1.75rem; border: 1px solid var(--border); border-radius: 6px; background: rgba(212,22,97,0.05); transition: border-color 0.2s; }
+  .prog-card:hover { border-color: var(--primary); }
+  .prog-day { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem; }
+  .prog-name { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--text); }
+  .prog-desc { font-size: 0.88rem; color: var(--text-muted); line-height: 1.5; }
+  .prog-time { font-size: 0.8rem; color: var(--primary); margin-top: 0.5rem; font-weight: 600; }
+
+  /* FEATURES */
+  .feat-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 3rem; }
+  .feat-item { padding: 1.5rem; border-top: 2px solid var(--primary); }
+  .feat-icon { font-size: 1.6rem; margin-bottom: 0.75rem; color: var(--accent); }
+  .feat-name { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.5rem; }
+  .feat-text { font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; }
+
+  /* CONTACT */
+  .contact-section { background: var(--bg2); }
+  .contact-inner { max-width: 1100px; margin: 0 auto; padding: 6rem 1.5rem; }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+  .contact-card { padding: 2.5rem; border: 1px solid var(--border); border-radius: 6px; background: rgba(245,192,48,0.04); }
+  .contact-card h3 { font-size: 1.2rem; font-weight: 800; margin-bottom: 2rem; color: var(--accent); }
+  .info-row { display: flex; gap: 1rem; margin-bottom: 1.5rem; }
+  .info-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); display: block; margin-bottom: 0.2rem; }
+  .info-value { font-size: 0.95rem; color: var(--text); }
+
+  /* BTN */
+  .btn { display: inline-block; padding: 0.85rem 2rem; background: var(--primary); color: var(--text); text-decoration: none; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; border-radius: 4px; transition: background 0.2s; }
+  .btn:hover { background: #B81253; }
+  .btn-ghost { background: transparent; border: 1px solid var(--accent); color: var(--accent); }
+  .btn-ghost:hover { background: var(--accent); color: var(--bg); }
+
+  /* HOURS TABLE */
+  .hours-table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+  .hours-table tr { border-bottom: 1px solid var(--border); }
+  .hours-table td { padding: 0.6rem 0; font-size: 0.9rem; color: var(--text-muted); }
+  .hours-table td:first-child { color: var(--text); font-weight: 500; min-width: 120px; }
+
+  /* FOOTER */
+  footer { background: #080512; border-top: 1px solid var(--border); padding: 2.5rem 1.5rem; }
+  .footer-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 2rem; flex-wrap: wrap; }
+  .footer-brand { font-size: 1rem; font-weight: 900; color: var(--accent); }
+  .footer-addr { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.3rem; }
+  .footer-copy { font-size: 0.75rem; color: rgba(168,150,180,0.4); }
+
+  @media (max-width: 768px) {
+    .prog-grid, .feat-list, .contact-grid { grid-template-columns: 1fr; }
+    .hero-cta { flex-direction: column; align-items: center; }
+    .nav-links { display: none; }
+    .footer-inner { flex-direction: column; text-align: center; }
+    .demo-banner { font-size: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="demo-banner">
+  This is a demo &mdash; your real site will be built together with you.
+  <a href="https://preview.klarsystems.com/jolene-karaoke-bar-pori/proposal/">View proposal &rarr;</a>
+</div>
+
+<nav>
+  <div class="nav-inner">
+    <span class="nav-logo">Jolene</span>
+    <ul class="nav-links">
+      <li><a href="#programme">Programme</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="hero-content">
+    <span class="hero-badge">Karaoke Bar &middot; Pori</span>
+    <h1 class="hero-title">Jolene<br><span>Karaoke</span><br>Bar</h1>
+    <p class="hero-subtitle">Karaoke from morning to evening in the heart of Pori. Your stage is waiting &mdash; open every day from 10am.</p>
+    <div class="hero-cta">
+      <a href="#contact" class="btn">Find Us</a>
+      <a href="#programme" class="btn btn-ghost">This Week's Programme</a>
+    </div>
+  </div>
+  <div class="hero-photo">Your photo here</div>
+</section>
+
+<hr class="divider">
+
+<div class="prog-section">
+  <div class="prog-inner" id="programme">
+    <p class="section-label">Weekly Programme</p>
+    <h2 class="section-title">There's Always<br>Something On</h2>
+    <div class="prog-grid">
+      <div class="prog-card">
+        <p class="prog-day">Every Day</p>
+        <p class="prog-name">Karaoke All Day</p>
+        <p class="prog-desc">Take the mic whenever you're ready. The karaoke queue is open from opening time &mdash; no special occasion needed.</p>
+        <p class="prog-time">From 10:00</p>
+      </div>
+      <div class="prog-card">
+        <p class="prog-day">Every Day</p>
+        <p class="prog-name">Happy Hour</p>
+        <p class="prog-desc">Affordable prices on drinks from opening. Student and pensioner discounts available every day.</p>
+        <p class="prog-time">10:00&ndash;16:00</p>
+      </div>
+      <div class="prog-card">
+        <p class="prog-day">Monday</p>
+        <p class="prog-name">Trivia Night</p>
+        <p class="prog-desc">Test your knowledge with our weekly quiz. Free entry &mdash; just bring your team and your competitive spirit.</p>
+        <p class="prog-time">From 18:00 &middot; Free entry</p>
+      </div>
+      <div class="prog-card">
+        <p class="prog-day">Saturday</p>
+        <p class="prog-name">Bingo</p>
+        <p class="prog-desc">Saturday bingo &mdash; a Jolene classic. Call your numbers and win. Free entry, good fun.</p>
+        <p class="prog-time">From 16:00 &middot; Free entry</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<section class="section" id="about">
+  <p class="section-label">About Jolene</p>
+  <h2 class="section-title">Pori's Neighbourhood<br>Karaoke Bar</h2>
+  <p class="section-body" style="margin-bottom: 1rem;">Jolene is a genuine neighbourhood pub and karaoke bar in the centre of Pori &mdash; open from 10 in the morning, every single day. Whether you're a regular or a first-timer, the mic is yours.</p>
+  <p class="section-body" style="margin-bottom: 1rem;">3.8 / 5 on Google &middot; Karaoke aamusta iltaan Porin keskustassa</p>
+  <p class="section-body" style="margin-bottom: 3rem;">Billiards, board games, a terrace for summer evenings, and a crowd that knows how to have a good time. No attitude, no dress code &mdash; just Pori at its most itself.</p>
+  <div class="feat-list">
+    <div class="feat-item">
+      <div class="feat-icon">&#9835;</div>
+      <p class="feat-name">Karaoke Every Day</p>
+      <p class="feat-text">Extensive song selection in Finnish and international. Take the stage solo or with friends.</p>
+    </div>
+    <div class="feat-item">
+      <div class="feat-icon">&#9679;</div>
+      <p class="feat-name">Billiards &amp; Games</p>
+      <p class="feat-text">Pool table, board games &mdash; something to do between songs or when you just want to relax.</p>
+    </div>
+    <div class="feat-item">
+      <div class="feat-icon">&#9728;</div>
+      <p class="feat-name">Summer Terrace</p>
+      <p class="feat-text">When the Pori sun comes out, so does the terrace. Perfect for a cold drink before the evening fun begins.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<div class="contact-section">
+  <div class="contact-inner" id="contact">
+    <p class="section-label">Find Us</p>
+    <h2 class="section-title">Location<br>&amp; Opening Hours</h2>
+    <div class="contact-grid">
+      <div class="contact-card">
+        <h3>Contact</h3>
+        <div class="info-row">
+          <div>
+            <span class="info-label">Address</span>
+            <span class="info-value">Antinkatu 21 a, 28100 Pori</span>
+          </div>
+        </div>
+        <div class="info-row">
+          <div>
+            <span class="info-label">Phone</span>
+            <span class="info-value"><a href="tel:+358504321050" style="color:inherit;">050 432 1050</a></span>
+          </div>
+        </div>
+        <div class="info-row">
+          <div>
+            <span class="info-label">Email</span>
+            <span class="info-value">antti.takkunen@tulikuuma.fi</span>
+          </div>
+        </div>
+        <a href="mailto:antti.takkunen@tulikuuma.fi" class="btn" style="margin-top:1.5rem;">Send a Message</a>
+      </div>
+      <div>
+        <table class="hours-table">
+          <tr><td>Monday&ndash;Thursday</td><td>10:00&ndash;02:00</td></tr>
+          <tr><td>Friday&ndash;Saturday</td><td>10:00&ndash;03:00</td></tr>
+          <tr><td>Sunday</td><td>10:00&ndash;02:00</td></tr>
+        </table>
+        <p style="margin-top:2rem; font-size:0.85rem; color:var(--text-muted);">Located 100 metres from the market square in central Pori. Easy to find &mdash; just follow the singing.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <p class="footer-brand">Jolene Karaoke Bar</p>
+      <p class="footer-addr">Antinkatu 21 a, 28100 Pori</p>
+    </div>
+    <p class="footer-copy">&copy; 2026 Jolene Karaoke Bar &mdash; <span class="klar">Powered by Klar</span></p>
+  </div>
+</footer>
+
+</body>
+</html>

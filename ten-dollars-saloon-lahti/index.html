@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ten Dollars Saloon — Rock Bar & Karaoke, Lahti</title>
+  <!-- Palette: inferred from rock/Western saloon bar archetype (Seg 3, Café-Bar). No real-site palette available. -->
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #1A0800;
+      --surface: #220C00;
+      --red: #8B1A1A;
+      --gold: #C8860B;
+      --text: #F5E8C0;
+      --muted: #9A7A50;
+      --border: #3A1A08;
+    }
+
+    body { font-family: 'Arial', sans-serif; background: var(--bg); color: var(--text); }
+
+    nav {
+      background: rgba(26,8,0,0.97);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 2rem;
+      display: flex; justify-content: space-between; align-items: center;
+      position: sticky; top: 0; z-index: 100;
+    }
+    .logo { font-size: 1.4rem; font-weight: 900; color: var(--gold); letter-spacing: 3px; text-transform: uppercase; }
+    .nav-links a { color: var(--muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--gold); }
+
+    /* HERO */
+    .hero {
+      padding: 6rem 2rem;
+      text-align: center;
+      position: relative;
+      background: var(--surface);
+      border-bottom: 3px solid var(--red);
+    }
+    .hero-bg { position: absolute; top:0; left:0; right:0; bottom:0; background: linear-gradient(160deg, #1a0600 0%, #1a0800 70%); }
+    .hero-photo-placeholder { position: absolute; top:0; left:0; right:0; bottom:0; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.06); font-size: 0.85rem; }
+    .hero-content { position: relative; z-index:1; max-width: 720px; margin: 0 auto; }
+    .hero-tag { display: inline-block; border: 1px solid var(--red); color: var(--red); padding: 0.3rem 0.8rem; font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 1.5rem; }
+    .hero h1 { font-size: 3.2rem; font-weight: 900; color: #fff; line-height: 1.1; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 2px; }
+    .hero h1 span { color: var(--gold); }
+    .hero p { color: var(--muted); font-size: 1rem; line-height: 1.75; max-width: 520px; margin: 0 auto 2.5rem; }
+    .hero-cta { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn-primary { background: var(--red); color: #fff; padding: 0.9rem 2rem; font-weight: 700; font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase; text-decoration: none; display: inline-block; transition: opacity 0.2s; }
+    .btn-primary:hover { opacity: 0.85; }
+    .btn-outline { border: 1px solid var(--gold); color: var(--gold); padding: 0.9rem 2rem; font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase; text-decoration: none; display: inline-block; transition: background 0.2s; }
+    .btn-outline:hover { background: rgba(200,134,11,0.1); }
+
+    .photo-placeholder { background: #2a1200; color: #5a3010; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; border-radius: 2px; }
+
+    /* USP STRIP */
+    .usp-strip { background: var(--red); padding: 1.5rem 2rem; }
+    .usp-strip-inner { max-width: 900px; margin: 0 auto; display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap; }
+    .usp-item { text-align: center; color: #fff; }
+    .usp-item .icon { font-size: 1.6rem; display: block; margin-bottom: 0.35rem; }
+    .usp-item span { font-size: 0.8rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+
+    /* ABOUT */
+    .about { max-width: 900px; margin: 0 auto; padding: 4.5rem 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+    @media (max-width: 640px) { .about { grid-template-columns: 1fr; } }
+    .about h2 { font-size: 1.8rem; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; color: var(--gold); margin-bottom: 1rem; }
+    .about p { color: var(--muted); line-height: 1.75; margin-bottom: 0.85rem; }
+    .about-img { height: 300px; }
+    .about-img .photo-placeholder { height: 100%; }
+
+    /* HAPPY HOUR SECTION */
+    .happy-hour { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 4rem 2rem; }
+    .happy-hour-inner { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+    @media (max-width: 640px) { .happy-hour-inner { grid-template-columns: 1fr; } }
+    .happy-hour h2 { font-size: 1.8rem; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; color: var(--gold); margin-bottom: 1rem; }
+    .happy-hour p { color: var(--muted); line-height: 1.75; margin-bottom: 0.75rem; }
+    .hh-box { background: rgba(200,134,11,0.08); border: 1px solid var(--gold); padding: 1.25rem; border-radius: 3px; margin-top: 1.25rem; }
+    .hh-item { display: flex; gap: 0.75rem; align-items: center; color: var(--text); font-size: 0.95rem; margin-bottom: 0.6rem; }
+    .hh-item:last-child { margin-bottom: 0; }
+    .happy-hour-img { height: 280px; }
+    .happy-hour-img .photo-placeholder { height: 100%; }
+
+    /* EVENTS & CONTACT */
+    .events-contact { max-width: 900px; margin: 0 auto; padding: 4.5rem 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+    @media (max-width: 640px) { .events-contact { grid-template-columns: 1fr; } }
+    .events-contact h2 { font-size: 1.8rem; font-weight: 900; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
+    .events-contact p { color: var(--muted); line-height: 1.75; margin-bottom: 0.75rem; }
+    .contact-line { color: var(--text); margin-bottom: 0.5rem; font-size: 0.95rem; }
+    .contact-line a { color: var(--gold); text-decoration: none; }
+    .contact-line a:hover { text-decoration: underline; }
+    .hours-table { border-collapse: collapse; width: 100%; margin-top: 0.75rem; }
+    .hours-table td { padding: 0.4rem 0; color: var(--muted); font-size: 0.9rem; }
+    .hours-table td:first-child { color: var(--text); font-weight: 700; padding-right: 1.5rem; white-space: nowrap; }
+
+    .map-wrap { height: 280px; }
+    .map-wrap iframe { width: 100%; height: 100%; border: 0; }
+
+    footer { background: #0d0400; border-top: 2px solid var(--red); padding: 2rem; text-align: center; color: var(--muted); font-size: 0.85rem; }
+    footer strong { color: var(--text); }
+
+    /* Demo banner */
+    .demo-banner {
+      background: rgba(0,0,0,0.85);
+      border-bottom: 1px solid #555;
+      color: rgba(255,255,255,0.8);
+      text-align: center;
+      padding: 0.6rem 1rem;
+      font-size: 0.85rem;
+    }
+    .demo-banner strong { color: #fff; }
+    .demo-banner a { color: #D4A017; text-decoration: none; margin-left: 0.5rem; }
+    .demo-banner a:hover { text-decoration: underline; }
+    .hero-rating { display: inline-block; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: 3px; padding: 0.3rem 0.7rem; font-size: 0.9rem; color: inherit; margin-bottom: 1.5rem; }
+    .hero-rating strong { color: #D4A017; }
+    .footer-klar { font-size: 0.8rem; color: rgba(255,255,255,0.3); margin-top: 0.5rem; }
+  </style>
+</head>
+<body>
+
+<!-- Demo banner -->
+<div class="demo-banner">
+  <strong>This is a demo</strong> &mdash; a free preview built for Ten Dollars Saloon.
+  <a href="https://preview.klarsystems.com/ten-dollars-saloon-lahti/proposal/" target="_blank" rel="noopener">View the full proposal &rarr;</a>
+</div>
+
+  <nav>
+    <div class="logo">Ten Dollars Saloon</div>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#events">Events</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-photo-placeholder">Your photo here</div>
+    <div class="hero-content">
+      <div class="hero-tag">Lahti · Since 2001 · Open Until 04:00</div>
+      <h1>Lahti's<br><span>Rock</span><br>Saloon</h1>
+      <p>Karaoke, pool table, happy hour and Lahti's longest closing time — right in the centre of the city on Vapaudenkatu. Since 2001.</p>
+            <div class="hero-rating"><strong>3.8</strong> Google rating (548 reviews)</div>
+      <div class="hero-cta">
+        <a href="#events" class="btn-primary">What's On</a>
+        <a href="#contact" class="btn-outline">Find Us</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- USP STRIP -->
+  <div class="usp-strip">
+    <div class="usp-strip-inner">
+      <div class="usp-item"><span class="icon"></span><span>Karaoke</span></div>
+      <div class="usp-item"><span class="icon"></span><span>Pool Table</span></div>
+      <div class="usp-item"><span class="icon"></span><span>Happy Hour</span></div>
+      <div class="usp-item"><span class="icon"></span><span>Rock Atmosphere</span></div>
+      <div class="usp-item"><span class="icon"></span><span>Open Until 04:00</span></div>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div>
+      <h2>Lahti's Rock Karaoke Bar</h2>
+      <p>Ten Dollars Saloon has been rocking Lahti's Vapaudenkatu since 2001. This is the city's rock-themed karaoke institution — honest prices, a proper saloon atmosphere and one of the best late-night closing times in Lahti.</p>
+      <p>Whether you're here for karaoke, pool, drinks or just a good night out, the Saloon delivers. The crowd comes back because the Saloon doesn't pretend to be something it isn't.</p>
+    </div>
+    <div class="about-img">
+      <div class="photo-placeholder">Interior photo coming soon</div>
+    </div>
+  </section>
+
+  <!-- HAPPY HOUR -->
+  <section class="happy-hour" id="events">
+    <div class="happy-hour-inner">
+      <div>
+        <h2>Karaoke & Happy Hour</h2>
+        <p>Karaoke runs nightly at the Saloon — bring a song, bring your friends, or just come to watch. The stage is open to everyone.</p>
+        <p>Happy hour makes the early evening the smart time to arrive — drinks at reduced prices before the night crowd rolls in.</p>
+        <div class="hh-box">
+          <div class="hh-item"> Karaoke every night from opening</div>
+          <div class="hh-item"> Happy hour — affordable drinks to start the night</div>
+          <div class="hh-item"> Pool table available throughout the evening</div>
+          <div class="hh-item"> Open until 04:00 Mon–Sat, 04:00 Sun</div>
+        </div>
+      </div>
+      <div class="happy-hour-img">
+        <div class="photo-placeholder">Bar photos coming soon</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EVENTS & CONTACT -->
+  <section class="events-contact">
+    <div>
+      <h2>Group Nights & Events</h2>
+      <p>Ten Dollars Saloon is a classic choice for birthday parties, bachelor/bachelorette nights and work outings. Karaoke, pool and a late licence make it easy.</p>
+      <p>Follow us on Facebook for upcoming events and specials throughout the year.</p>
+      <div class="photo-placeholder" style="height:200px; margin-top:1rem;">Bar photos coming soon</div>
+    </div>
+    <div id="contact">
+      <h2>Find Us</h2>
+      <div class="contact-line"> Vapaudenkatu 22, 15140 Lahti</div>
+      <div class="contact-line"> <a href="tel:+358037525155">03 7525155</a></div>
+      <div class="contact-line"> <a href="mailto:tendollars@hotmail.fi">tendollars@hotmail.fi</a></div>
+      <h2 style="margin-top:2rem; font-size:1.3rem; letter-spacing:1px;">Opening Hours</h2>
+      <table class="hours-table">
+        <tr><td>Mon – Sat</td><td>18:00 – 04:00</td></tr>
+        <tr><td>Sunday</td><td>21:00 – 04:00</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- MAP -->
+  <div class="map-wrap">
+    <iframe
+      src="https://maps.google.com/maps?q=Vapaudenkatu+22+Lahti&z=16&output=embed"
+      title="Ten Dollars Saloon location map"
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </div>
+
+  <footer>
+    <strong>Ten Dollars Saloon</strong> · Vapaudenkatu 22, 15140 Lahti · <a href="mailto:tendollars@hotmail.fi" style="color:var(--gold)">tendollars@hotmail.fi</a>
+      <div class="footer-klar">Powered by Klar</div>
+  </footer>
+
+</body>
+</html>

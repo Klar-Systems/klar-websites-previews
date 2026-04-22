@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tulikukko — Waterfront Café & Restaurant, Kotka</title>
+  <!-- Palette: inferred from coastal café archetype (Seg 3, Café-Bar). No real-site palette available. -->
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #F5F0E8;
+      --surface: #FFFFFF;
+      --navy: #1E3A5F;
+      --amber: #E8A030;
+      --text: #2C2C2C;
+      --muted: #6B7280;
+      --border: #D1C9B8;
+    }
+
+    body { font-family: 'Georgia', serif; background: var(--bg); color: var(--text); }
+
+    /* Demo banner */
+    .demo-banner {
+      background: #1a2a3a;
+      color: rgba(255,255,255,0.85);
+      text-align: center;
+      padding: 0.6rem 1rem;
+      font-family: 'Arial', sans-serif;
+      font-size: 0.85rem;
+    }
+    .demo-banner strong { color: #fff; }
+    .demo-banner a { color: var(--amber); text-decoration: none; margin-left: 0.5rem; }
+    .demo-banner a:hover { text-decoration: underline; }
+
+    /* NAV */
+    nav {
+      background: var(--navy);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    nav .logo { color: #fff; font-size: 1.4rem; font-weight: 700; letter-spacing: 1px; }
+    nav .nav-links a {
+      color: rgba(255,255,255,0.85);
+      text-decoration: none;
+      margin-left: 1.5rem;
+      font-family: 'Arial', sans-serif;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+    nav .nav-links a:hover { color: var(--amber); }
+
+    /* HERO */
+    .hero {
+      background: var(--navy);
+      color: #fff;
+      padding: 5rem 2rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(135deg, #1E3A5F 0%, #2A5280 50%, #1A3050 100%);
+      opacity: 0.9;
+    }
+    .hero-photo-placeholder {
+      position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(to bottom, #1a4a6e, #0d2b42);
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,0.15);
+      font-family: 'Arial', sans-serif;
+      font-size: 0.9rem;
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 700px; margin: 0 auto; }
+    .hero-eyebrow {
+      display: inline-block;
+      background: var(--amber);
+      color: #1a1a1a;
+      padding: 0.3rem 0.9rem;
+      border-radius: 2px;
+      font-family: 'Arial', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 1.2rem;
+    }
+    .hero h1 { font-size: 3rem; font-weight: 700; line-height: 1.15; margin-bottom: 1rem; }
+    .hero p { font-family: 'Arial', sans-serif; font-size: 1.1rem; color: rgba(255,255,255,0.85); max-width: 500px; margin: 0 auto 2rem; }
+    .hero-rating { display: inline-block; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2); border-radius: 3px; padding: 0.35rem 0.75rem; font-family: 'Arial', sans-serif; font-size: 0.9rem; color: rgba(255,255,255,0.9); margin-bottom: 1.5rem; }
+    .hero-rating strong { color: var(--amber); }
+    .hero-cta-group { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--amber); color: #1a1a1a;
+      padding: 0.85rem 2rem; border-radius: 3px;
+      font-family: 'Arial', sans-serif; font-size: 1rem; font-weight: 700;
+      text-decoration: none; display: inline-block; transition: opacity 0.2s;
+    }
+    .btn-primary:hover { opacity: 0.85; }
+    .btn-secondary {
+      background: transparent; color: #fff;
+      padding: 0.85rem 2rem; border-radius: 3px; border: 2px solid rgba(255,255,255,0.5);
+      font-family: 'Arial', sans-serif; font-size: 1rem;
+      text-decoration: none; display: inline-block; transition: border-color 0.2s;
+    }
+    .btn-secondary:hover { border-color: #fff; }
+
+    /* PHOTO PLACEHOLDER */
+    .photo-placeholder {
+      background: #d8e4ee;
+      color: #8aa3b8;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Arial', sans-serif; font-size: 0.85rem;
+      border-radius: 4px;
+    }
+
+    /* ABOUT */
+    .about {
+      max-width: 900px; margin: 0 auto;
+      padding: 4rem 2rem;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center;
+    }
+    @media (max-width: 640px) { .about { grid-template-columns: 1fr; } }
+    .about-text h2 { font-size: 2rem; color: var(--navy); margin-bottom: 1rem; }
+    .about-text p { font-family: 'Arial', sans-serif; line-height: 1.75; color: var(--muted); margin-bottom: 1rem; }
+    .about-img { height: 300px; }
+    .about-img .photo-placeholder { height: 100%; }
+
+    /* HIGHLIGHTS */
+    .highlights { background: var(--navy); padding: 4rem 2rem; }
+    .highlights-inner { max-width: 900px; margin: 0 auto; }
+    .highlights h2 { color: #fff; font-size: 2rem; text-align: center; margin-bottom: 2.5rem; }
+    .highlight-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    @media (max-width: 640px) { .highlight-grid { grid-template-columns: 1fr; } }
+    .highlight-card {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 6px; padding: 1.5rem; text-align: center;
+    }
+    .highlight-label { font-size: 0.75rem; font-family: 'Arial', sans-serif; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--amber); display: block; margin-bottom: 0.4rem; }
+    .highlight-card h3 { color: var(--amber); font-size: 1rem; font-family: 'Arial', sans-serif; margin-bottom: 0.5rem; }
+    .highlight-card p { color: rgba(255,255,255,0.7); font-family: 'Arial', sans-serif; font-size: 0.9rem; line-height: 1.5; }
+
+    /* MENU PREVIEW */
+    .menu-section { max-width: 900px; margin: 0 auto; padding: 4rem 2rem; }
+    .menu-section h2 { font-size: 2rem; color: var(--navy); margin-bottom: 0.5rem; }
+    .menu-section .subtitle { font-family: 'Arial', sans-serif; color: var(--muted); margin-bottom: 2rem; }
+    .menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    @media (max-width: 640px) { .menu-grid { grid-template-columns: 1fr; } }
+    .menu-item { display: flex; justify-content: space-between; align-items: baseline; padding: 0.75rem 0; border-bottom: 1px solid var(--border); }
+    .menu-item-name { font-family: 'Arial', sans-serif; font-size: 0.95rem; color: var(--text); }
+    .menu-photo-placeholder { height: 200px; margin-bottom: 1.5rem; }
+    .menu-note { font-family: 'Arial', sans-serif; font-size: 0.85rem; color: var(--muted); margin-top: 1rem; font-style: italic; }
+
+    /* EVENTS / CONTACT */
+    .events-contact { background: #EDF3F9; padding: 4rem 2rem; }
+    .events-contact-inner { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+    @media (max-width: 640px) { .events-contact-inner { grid-template-columns: 1fr; } }
+    .events-contact h2 { font-size: 1.8rem; color: var(--navy); margin-bottom: 1rem; }
+    .events-contact p { font-family: 'Arial', sans-serif; line-height: 1.75; color: var(--muted); margin-bottom: 0.75rem; }
+    .contact-item { font-family: 'Arial', sans-serif; margin-bottom: 0.5rem; color: var(--text); }
+    .contact-item a { color: var(--navy); text-decoration: none; }
+    .contact-item a:hover { text-decoration: underline; }
+
+    /* HOURS */
+    .hours-table { font-family: 'Arial', sans-serif; font-size: 0.9rem; width: 100%; border-collapse: collapse; margin-top: 1rem; }
+    .hours-table tr td { padding: 0.35rem 0; color: var(--muted); }
+    .hours-table tr td:first-child { color: var(--text); font-weight: 600; padding-right: 1rem; }
+
+    /* MAP */
+    .map-section { height: 300px; background: #d0dce8; display: flex; align-items: center; justify-content: center; }
+    .map-section iframe { width: 100%; height: 100%; border: 0; }
+
+    /* FOOTER */
+    footer { background: var(--navy); color: rgba(255,255,255,0.6); padding: 2rem; text-align: center; font-family: 'Arial', sans-serif; font-size: 0.85rem; }
+    footer strong { color: #fff; }
+    .footer-klar { font-size: 0.8rem; color: rgba(255,255,255,0.4); margin-top: 0.5rem; }
+  </style>
+</head>
+<body>
+
+<!-- Demo banner -->
+<div class="demo-banner">
+  <strong>This is a demo</strong> &mdash; a free preview built for Tulikukko.
+  <a href="https://preview.klarsystems.com/tulikukko-kotka/proposal/" target="_blank" rel="noopener">View the full proposal &rarr;</a>
+</div>
+
+  <nav>
+    <div class="logo">Tulikukko</div>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#menu">Menu</a>
+      <a href="#events">Events</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-photo-placeholder">Your photo here</div>
+    <div class="hero-content">
+      <span class="hero-eyebrow">Sapokka Marina &middot; Kotka</span>
+      <h1>Sunshine, Sea<br>&amp; Homemade Pastries</h1>
+      <p>Waterfront café-restaurant and archipelago gateway at Kotka's Sapokka marina — open every day, dog-friendly and steps from the sea.</p>
+      <div class="hero-rating"><strong>4.3</strong> Google rating (863 reviews)</div>
+      <div class="hero-cta-group">
+        <a href="#menu" class="btn-primary">See Our Menu</a>
+        <a href="#contact" class="btn-secondary">Find Us</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="about-text">
+      <h2>A Place to Linger by the Water</h2>
+      <p>Tulikukko is Kotka's sunny waterfront pavilion — a café-restaurant and archipelago terminal at the Sapokka marina. Whether you're stopping in after a boat trip, taking a lunch break, or simply chasing the best view in Kotka, this is your spot.</p>
+      <p>In summer, the sun terrace wraps you in warm sea air. In winter, a warm fireplace does the same from inside. Year-round, the kitchen turns out fresh homemade pastries, lunch plates and a wide selection of specialty teas and coffees that we think you won't find anywhere else in the region.</p>
+    </div>
+    <div class="about-img">
+      <div class="photo-placeholder">Interior photo coming soon</div>
+    </div>
+  </section>
+
+  <!-- HIGHLIGHTS -->
+  <section class="highlights">
+    <div class="highlights-inner">
+      <h2>Why Guests Keep Coming Back</h2>
+      <div class="highlight-grid">
+        <div class="highlight-card">
+          <span class="highlight-label">Location</span>
+          <h3>Marina Location</h3>
+          <p>Right at Sapokka water park marina — sea views, boat access and the best terrace in Kotka.</p>
+        </div>
+        <div class="highlight-card">
+          <span class="highlight-label">Drinks</span>
+          <h3>Specialty Teas &amp; Coffees</h3>
+          <p>An exceptionally wide and ever-evolving selection of teas and specialty coffees — a genuine Tulikukko signature.</p>
+        </div>
+        <div class="highlight-card">
+          <span class="highlight-label">Baking</span>
+          <h3>Homemade Baking</h3>
+          <p>Everything baked in-house, every day. Fresh pastries, cakes and warm treats worth stopping for.</p>
+        </div>
+        <div class="highlight-card">
+          <span class="highlight-label">Food</span>
+          <h3>Daily Lunch</h3>
+          <p>Rotating lunch menu including salmon soup and seasonal specials. Good food at honest prices.</p>
+        </div>
+        <div class="highlight-card">
+          <span class="highlight-label">Welcome</span>
+          <h3>Dog-Friendly</h3>
+          <p>Four-legged friends welcome. Fresh water always available on the terrace — just ask.</p>
+        </div>
+        <div class="highlight-card">
+          <span class="highlight-label">Events</span>
+          <h3>Event Catering</h3>
+          <p>Private events, corporate catering and archipelago cruise catering. Get in touch to plan yours.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MENU PREVIEW -->
+  <section class="menu-section" id="menu">
+    <h2>Our Kitchen</h2>
+    <p class="subtitle">Fresh, seasonal and made with care — every day.</p>
+    <div class="menu-photo-placeholder photo-placeholder">Food photos coming soon</div>
+    <div class="menu-grid">
+      <div>
+        <div class="menu-item"><span class="menu-item-name">Salmon Soup</span></div>
+        <div class="menu-item"><span class="menu-item-name">Pan-seared Salmon</span></div>
+        <div class="menu-item"><span class="menu-item-name">Homemade Burger</span></div>
+        <div class="menu-item"><span class="menu-item-name">Daily Lunch Plate</span></div>
+      </div>
+      <div>
+        <div class="menu-item"><span class="menu-item-name">Homemade Pastries</span></div>
+        <div class="menu-item"><span class="menu-item-name">Specialty Teas</span></div>
+        <div class="menu-item"><span class="menu-item-name">Specialty Coffees</span></div>
+        <div class="menu-item"><span class="menu-item-name">Cold Drinks &amp; Ice Cream</span></div>
+      </div>
+    </div>
+    <p class="menu-note">Menu updated seasonally. Full menu on site.</p>
+  </section>
+
+  <!-- EVENTS & CONTACT -->
+  <section class="events-contact" id="events">
+    <div class="events-contact-inner">
+      <div id="contact">
+        <h2>Events &amp; Private Hire</h2>
+        <p>Tulikukko is available for private events, corporate gatherings and archipelago cruise catering. The waterfront location makes it an unforgettable setting for any occasion.</p>
+        <p>For event enquiries, reach out by phone or email — we'll plan it with you.</p>
+        <div class="contact-item">Address: Sapokankatu 3, 48100 Kotka</div>
+        <div class="contact-item">Phone: <a href="tel:+358503805381">050 3805381</a></div>
+        <div class="contact-item">Email: <a href="mailto:kahvila@tulikukko.fi">kahvila@tulikukko.fi</a></div>
+      </div>
+      <div>
+        <h2>Opening Hours</h2>
+        <table class="hours-table">
+          <tr><td>Mon – Sat</td><td>07:30 – 22:00</td></tr>
+          <tr><td>Sunday</td><td>09:00 – 22:00</td></tr>
+        </table>
+        <p style="margin-top:1.5rem; font-family:'Arial',sans-serif; font-size:0.9rem; color:var(--muted);">Open every day of the year. Hours may vary in winter — call ahead for the latest times.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAP -->
+  <div class="map-section">
+    <iframe
+      src="https://maps.google.com/maps?q=Sapokankatu+3+Kotka&z=16&output=embed"
+      title="Tulikukko location map"
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </div>
+
+  <footer>
+    <strong>Tulikukko</strong> &middot; Sapokankatu 3, 48100 Kotka &middot; <a href="tel:+358503805381" style="color:rgba(255,255,255,0.6)">050 3805381</a>
+    <div class="footer-klar">Powered by Klar</div>
+  </footer>
+
+</body>
+</html>

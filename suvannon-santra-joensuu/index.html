@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Suvannon Santra — Karaoke Bar & Nightlife, Joensuu</title>
+  <!-- Palette: inferred from historic wooden building karaoke bar archetype (Seg 3, Café-Bar). No real-site palette available. -->
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #1C0F05;
+      --surface: #241408;
+      --brown: #8B4513;
+      --gold: #C9A84C;
+      --text: #F0E8D8;
+      --muted: #A08060;
+      --border: #3A2510;
+    }
+
+    body { font-family: 'Georgia', serif; background: var(--bg); color: var(--text); }
+
+    nav {
+      background: rgba(28,15,5,0.97);
+      border-bottom: 1px solid var(--border);
+      padding: 1.2rem 2rem;
+      display: flex; justify-content: space-between; align-items: center;
+      position: sticky; top: 0; z-index: 100;
+    }
+    .logo { font-size: 1.5rem; font-weight: 700; color: var(--gold); letter-spacing: 1px; }
+    .nav-links a { color: var(--muted); text-decoration: none; margin-left: 1.5rem; font-family: 'Arial', sans-serif; font-size: 0.9rem; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--gold); }
+
+    /* HERO */
+    .hero {
+      background: var(--surface);
+      padding: 6rem 2rem;
+      text-align: center;
+      position: relative;
+      border-bottom: 2px solid var(--gold);
+    }
+    .hero-bg { position: absolute; top:0; left:0; right:0; bottom:0; background: linear-gradient(135deg, #1c0f05 0%, #2a1a08 60%, #180c03 100%); }
+    .hero-photo-placeholder {
+      position: absolute; top:0; left:0; right:0; bottom:0;
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,0.06); font-family:'Arial',sans-serif; font-size:0.85rem;
+    }
+    .hero-content { position: relative; z-index:1; max-width: 700px; margin: 0 auto; }
+    .hero-tag {
+      display: inline-block; border: 1px solid var(--gold); color: var(--gold);
+      padding: 0.3rem 0.8rem; font-family: 'Arial', sans-serif;
+      font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 1.5rem;
+    }
+    .hero h1 { font-size: 3.2rem; font-weight: 700; color: #fff; line-height: 1.15; margin-bottom: 1rem; }
+    .hero .subtitle { font-family: 'Arial', sans-serif; color: var(--muted); font-size: 1rem; line-height: 1.7; max-width: 500px; margin: 0 auto 2.5rem; }
+    .hero-cta { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn-primary { background: var(--gold); color: #1a0a00; padding: 0.85rem 2rem; font-weight: 700; font-family: 'Arial', sans-serif; text-decoration: none; display: inline-block; letter-spacing: 1px; transition: opacity 0.2s; }
+    .btn-primary:hover { opacity: 0.85; }
+    .btn-outline { border: 1px solid var(--muted); color: var(--muted); padding: 0.85rem 2rem; font-family: 'Arial', sans-serif; text-decoration: none; display: inline-block; transition: border-color 0.2s, color 0.2s; }
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+    .photo-placeholder { background: #2a1a0a; color: #6a4a2a; display: flex; align-items: center; justify-content: center; font-family: 'Arial', sans-serif; font-size: 0.85rem; border-radius: 2px; }
+
+    /* STORY */
+    .story { max-width: 900px; margin: 0 auto; padding: 4.5rem 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+    @media (max-width: 640px) { .story { grid-template-columns: 1fr; } }
+    .story h2 { font-size: 2rem; color: var(--gold); margin-bottom: 1rem; }
+    .story p { font-family: 'Arial', sans-serif; color: var(--muted); line-height: 1.75; margin-bottom: 0.85rem; }
+    .story-img { height: 300px; }
+    .story-img .photo-placeholder { height: 100%; }
+
+    /* FEATURES */
+    .features { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 4rem 2rem; }
+    .features-inner { max-width: 900px; margin: 0 auto; }
+    .features h2 { font-size: 2rem; color: var(--gold); text-align: center; margin-bottom: 2.5rem; }
+    .feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+    @media (max-width: 640px) { .feature-grid { grid-template-columns: 1fr; } }
+    .feature-card { text-align: center; padding: 1.5rem; border: 1px solid var(--border); border-radius: 4px; }
+    .feature-icon { font-size: 2.2rem; display: block; margin-bottom: 0.75rem; }
+    .feature-card h3 { font-family: 'Arial', sans-serif; color: var(--gold); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem; }
+    .feature-card p { font-family: 'Arial', sans-serif; color: var(--muted); font-size: 0.9rem; line-height: 1.6; }
+
+    /* EVENTS & CONTACT */
+    .events-contact { max-width: 900px; margin: 0 auto; padding: 4.5rem 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+    @media (max-width: 640px) { .events-contact { grid-template-columns: 1fr; } }
+    .events-contact h2 { font-size: 1.8rem; color: var(--gold); margin-bottom: 1rem; }
+    .events-contact p { font-family: 'Arial', sans-serif; color: var(--muted); line-height: 1.75; margin-bottom: 0.75rem; }
+    .contact-line { font-family: 'Arial', sans-serif; color: var(--text); margin-bottom: 0.5rem; }
+    .contact-line a { color: var(--gold); text-decoration: none; }
+    .contact-line a:hover { text-decoration: underline; }
+    .hours-table { border-collapse: collapse; width: 100%; margin-top: 0.75rem; }
+    .hours-table td { padding: 0.4rem 0; color: var(--muted); font-family: 'Arial', sans-serif; font-size: 0.9rem; }
+    .hours-table td:first-child { color: var(--text); font-weight: 700; padding-right: 1.5rem; }
+
+    .map-wrap { height: 280px; }
+    .map-wrap iframe { width: 100%; height: 100%; border: 0; }
+
+    footer { background: #0a0503; border-top: 2px solid var(--gold); padding: 2rem; text-align: center; font-family: 'Arial', sans-serif; color: var(--muted); font-size: 0.85rem; }
+    footer strong { color: var(--text); }
+
+    /* Demo banner */
+    .demo-banner {
+      background: rgba(0,0,0,0.85);
+      border-bottom: 1px solid #555;
+      color: rgba(255,255,255,0.8);
+      text-align: center;
+      padding: 0.6rem 1rem;
+      font-size: 0.85rem;
+    }
+    .demo-banner strong { color: #fff; }
+    .demo-banner a { color: #D4A017; text-decoration: none; margin-left: 0.5rem; }
+    .demo-banner a:hover { text-decoration: underline; }
+    .hero-rating { display: inline-block; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: 3px; padding: 0.3rem 0.7rem; font-size: 0.9rem; color: inherit; margin-bottom: 1.5rem; }
+    .hero-rating strong { color: #D4A017; }
+    .footer-klar { font-size: 0.8rem; color: rgba(255,255,255,0.3); margin-top: 0.5rem; }
+  </style>
+</head>
+<body>
+
+<!-- Demo banner -->
+<div class="demo-banner">
+  <strong>This is a demo</strong> &mdash; a free preview built for Suvannon Santra.
+  <a href="https://preview.klarsystems.com/suvannon-santra-joensuu/proposal/" target="_blank" rel="noopener">View the full proposal &rarr;</a>
+</div>
+
+  <nav>
+    <div class="logo">Suvannon Santra</div>
+    <div class="nav-links">
+      <a href="#story">About</a>
+      <a href="#events">Events</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-photo-placeholder">Your photo here</div>
+    <div class="hero-content">
+      <div class="hero-tag">Joensuu · Since the 1850s</div>
+      <h1>The Hottest Karaoke Bar in Joensuu</h1>
+      <p class="subtitle">A stylishly vintage bar and karaoke venue in a historic wooden building on Rantakatu — with a 200-seat summer terrace and billiards room.</p>
+            <div class="hero-rating"><strong>3.9</strong> Google rating (614 reviews)</div>
+      <div class="hero-cta">
+        <a href="#events" class="btn-primary">What's On</a>
+        <a href="#contact" class="btn-outline">Find Us</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- STORY -->
+  <section class="story" id="story">
+    <div>
+      <h2>A Bar with History</h2>
+      <p>Suvannon Santra sits in an 1850s wooden building in Joensuu's peaceful wooden district — a venue with genuine character that no amount of modern fit-out can manufacture.</p>
+      <p>Days here are for billiards, good company and affordable drinks. Evenings are for karaoke — nightly, enthusiastic, and welcoming to everyone from debut singers to old hands.</p>
+    </div>
+    <div class="story-img">
+      <div class="photo-placeholder">Interior photo coming soon</div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features">
+    <div class="features-inner">
+      <h2>Why Joensuu Comes Here</h2>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <span class="feature-icon"></span>
+          <h3>Nightly Karaoke</h3>
+          <p>Karaoke every single day — from opening to close. A wide song selection and a crowd that lives for it.</p>
+        </div>
+        <div class="feature-card">
+          <span class="feature-icon"></span>
+          <h3>Billiards Room</h3>
+          <p>Pool tables available throughout the day. A good excuse to arrive early and stay late.</p>
+        </div>
+        <div class="feature-card">
+          <span class="feature-icon"></span>
+          <h3>200-Seat Terrace</h3>
+          <p>A huge summer terrace in the wooden district — the best outdoor seat in central Joensuu.</p>
+        </div>
+        <div class="feature-card">
+          <span class="feature-icon"></span>
+          <h3>Historic Building</h3>
+          <p>An 1850s wooden property in the peaceful puutalokortteli — genuine atmosphere you can feel.</p>
+        </div>
+        <div class="feature-card">
+          <span class="feature-icon"></span>
+          <h3>Daytime Bar</h3>
+          <p>Affordable drinks and discounts on tap throughout the day. Come when you want, stay as long as you like.</p>
+        </div>
+        <div class="feature-card">
+          <span class="feature-icon"></span>
+          <h3>Private Events</h3>
+          <p>Book the venue for group celebrations, birthday parties or company events. Get in touch for details.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EVENTS & CONTACT -->
+  <section class="events-contact" id="events">
+    <div>
+      <h2>Events & Evenings</h2>
+      <p>Karaoke runs nightly from opening until close. Weekly specials and seasonal events appear throughout the year — follow us on Facebook for the latest schedule.</p>
+      <div class="photo-placeholder" style="height:200px; margin-top:1rem;">Food photos coming soon</div>
+    </div>
+    <div id="contact">
+      <h2>Contact & Hours</h2>
+      <div class="contact-line"> Rantakatu 11-13, 80100 Joensuu</div>
+      <div class="contact-line"> <a href="tel:+358503172477">050 3172477</a></div>
+      <div class="contact-line"> <a href="mailto:susanna.pontinen@tulikuuma.fi">susanna.pontinen@tulikuuma.fi</a></div>
+      <h2 style="margin-top:2rem; font-size:1.3rem;">Opening Hours</h2>
+      <table class="hours-table">
+        <tr><td>Mon – Sun</td><td>10:00 – 02:00</td></tr>
+      </table>
+      <p style="margin-top:1rem; font-family:'Arial',sans-serif; font-size:0.85rem; color:var(--muted);">Open daily. Hours may vary on public holidays.</p>
+    </div>
+  </section>
+
+  <!-- MAP -->
+  <div class="map-wrap">
+    <iframe
+      src="https://maps.google.com/maps?q=Rantakatu+13+Joensuu&z=16&output=embed"
+      title="Suvannon Santra location map"
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </div>
+
+  <footer>
+    <strong>Suvannon Santra</strong> · Rantakatu 11-13, 80100 Joensuu · <a href="tel:+358503172477" style="color:var(--gold)">050 3172477</a>
+      <div class="footer-klar">Powered by Klar</div>
+  </footer>
+
+</body>
+</html>

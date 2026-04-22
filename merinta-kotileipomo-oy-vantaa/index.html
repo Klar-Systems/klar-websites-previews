@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Merinta Kotileipomo — Vantaa</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #F5EDD6;
+      --surface: #FBF6EC;
+      --text: #3D2B1F;
+      --muted: #7A5C3A;
+      --primary: #B5451B;
+      --accent: #7A5C3A;
+      --border: rgba(61,43,31,0.15);
+    }
+    body { background: var(--bg); color: var(--text); font-family: Georgia, 'Times New Roman', serif; font-size: 16px; line-height: 1.7; }
+
+    /* Demo banner */
+    .demo-banner {
+      background: #8B3012;
+      color: #fff;
+      text-align: center;
+      padding: 10px 16px;
+      font-size: 14px;
+      font-weight: 600;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .demo-banner a { color: #FFD9C8; text-decoration: underline; }
+
+    /* Nav */
+    nav {
+      background: var(--text);
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+      position: sticky;
+      top: 40px;
+      z-index: 90;
+    }
+    .logo { font-size: 18px; font-weight: 700; color: var(--bg); letter-spacing: 0.04em; font-family: Georgia, serif; }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a { color: rgba(245,237,214,0.75); text-decoration: none; font-size: 13px; font-family: 'Segoe UI', Arial, sans-serif; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--bg); }
+
+    /* Hero */
+    .hero {
+      background: var(--text);
+      color: var(--bg);
+      padding: 80px 24px 72px;
+      text-align: center;
+    }
+    .hero-tag {
+      display: inline-block;
+      border: 1px solid rgba(245,237,214,0.4);
+      color: rgba(245,237,214,0.8);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 20px;
+      margin-bottom: 20px;
+      font-family: 'Segoe UI', Arial, sans-serif;
+    }
+    .hero h1 { font-size: clamp(36px, 6vw, 62px); font-weight: 700; line-height: 1.15; margin-bottom: 16px; font-family: Georgia, serif; }
+    .hero h1 span { color: #E8916A; }
+    .hero p { color: rgba(245,237,214,0.75); font-size: 18px; max-width: 540px; margin: 0 auto 32px; font-family: 'Segoe UI', Arial, sans-serif; }
+    .rating-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(245,237,214,0.12);
+      border: 1px solid rgba(245,237,214,0.25);
+      padding: 8px 20px;
+      border-radius: 30px;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--bg);
+      font-family: 'Segoe UI', Arial, sans-serif;
+    }
+
+    /* Section common */
+    section { padding: 72px 24px; }
+    .section-inner { max-width: 900px; margin: 0 auto; }
+    section h2 { font-size: 32px; font-weight: 700; margin-bottom: 40px; font-family: Georgia, serif; }
+    section h2 span { color: var(--primary); }
+
+    /* Products */
+    .products { background: var(--surface); }
+    .products-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+    .product-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 24px;
+    }
+    .product-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 8px; color: var(--primary); font-family: Georgia, serif; }
+    .product-card p { color: var(--muted); font-size: 14px; line-height: 1.6; font-family: 'Segoe UI', Arial, sans-serif; }
+
+    /* Reviews */
+    .reviews { background: var(--bg); }
+    .reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+    .review-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 24px;
+    }
+    .review-rating { font-size: 13px; font-weight: 700; color: var(--primary); margin-bottom: 10px; font-family: 'Segoe UI', Arial, sans-serif; }
+    .review-card p { color: var(--muted); font-size: 14px; font-style: italic; line-height: 1.6; margin-bottom: 10px; font-family: 'Segoe UI', Arial, sans-serif; }
+    .review-card cite { font-size: 12px; color: #9A7A5A; font-style: normal; font-family: 'Segoe UI', Arial, sans-serif; }
+
+    /* Custom cakes / contact */
+    .contact-section { background: var(--text); color: var(--bg); }
+    .contact-section h2 { color: var(--bg); }
+    .contact-section h2 span { color: #E8916A; }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+    .contact-block h3 { font-size: 20px; font-weight: 700; margin-bottom: 12px; color: #E8916A; font-family: Georgia, serif; }
+    .contact-block p { color: rgba(245,237,214,0.75); font-size: 15px; line-height: 1.7; margin-bottom: 16px; font-family: 'Segoe UI', Arial, sans-serif; }
+    .contact-block a { color: #E8916A; text-decoration: none; font-weight: 700; font-family: 'Segoe UI', Arial, sans-serif; }
+    .contact-block a:hover { text-decoration: underline; }
+
+    /* Hours */
+    .hours { background: var(--surface); }
+    .hours-table { max-width: 480px; margin: 0 auto; }
+    .hours-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 15px;
+      font-family: 'Segoe UI', Arial, sans-serif;
+    }
+    .hours-row:last-child { border-bottom: none; }
+    .hours-row .day { color: var(--muted); }
+    .hours-row .time { color: var(--text); font-weight: 600; }
+
+    /* Map */
+    .map-wrapper { border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
+    .map-wrapper iframe { display: block; width: 100%; height: 320px; border: none; }
+    .address-line { text-align: center; margin-top: 16px; color: var(--muted); font-size: 15px; font-family: 'Segoe UI', Arial, sans-serif; }
+    .phone-link { text-align: center; margin-top: 12px; }
+    .phone-link a { color: var(--primary); text-decoration: none; font-weight: 700; font-size: 18px; font-family: 'Segoe UI', Arial, sans-serif; }
+    .phone-link a:hover { text-decoration: underline; }
+
+    /* Klar promo */
+    .klar-promo {
+      background: var(--text);
+      color: var(--bg);
+      border-radius: 12px;
+      padding: 48px 32px;
+      text-align: center;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .klar-promo .badge {
+      display: inline-block;
+      background: var(--primary);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 20px;
+      font-family: 'Segoe UI', Arial, sans-serif;
+    }
+    .klar-promo h2 { font-size: 28px; font-weight: 700; margin-bottom: 12px; color: var(--bg); font-family: Georgia, serif; }
+    .klar-promo p { color: rgba(245,237,214,0.75); max-width: 540px; margin: 0 auto 28px; font-family: 'Segoe UI', Arial, sans-serif; }
+    .pricing { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; margin-bottom: 32px; }
+    .price-item { text-align: center; }
+    .price-label { font-size: 12px; color: rgba(245,237,214,0.6); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; font-family: 'Segoe UI', Arial, sans-serif; }
+    .price-amount { font-size: 28px; font-weight: 800; color: #E8916A; font-family: 'Segoe UI', Arial, sans-serif; }
+    .price-old { text-decoration: line-through; color: rgba(245,237,214,0.4); font-size: 14px; font-family: 'Segoe UI', Arial, sans-serif; }
+    .founder-badge { font-size: 13px; color: #E8916A; font-weight: 600; margin-bottom: 24px; font-family: 'Segoe UI', Arial, sans-serif; }
+    .btn-proposal {
+      display: inline-block;
+      background: var(--primary);
+      color: #fff;
+      font-size: 15px;
+      font-weight: 700;
+      padding: 14px 32px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      transition: background 0.2s;
+    }
+    .btn-proposal:hover { background: #8B3012; }
+
+    /* Footer */
+    footer {
+      background: var(--text);
+      padding: 32px 24px;
+      text-align: center;
+      color: rgba(245,237,214,0.6);
+      font-size: 13px;
+      font-family: 'Segoe UI', Arial, sans-serif;
+    }
+    footer a { color: rgba(245,237,214,0.75); text-decoration: none; }
+    footer a:hover { color: var(--bg); }
+    footer .powered { margin-top: 8px; font-size: 12px; color: rgba(245,237,214,0.4); }
+
+    @media (max-width: 640px) {
+      .contact-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="demo-banner">
+    This is a demo website — <a href="https://preview.klarsystems.com/merinta-kotileipomo-oy-vantaa/proposal/">View Full Proposal</a>
+  </div>
+
+  <nav>
+    <div class="logo">Merinta Kotileipomo</div>
+    <ul class="nav-links">
+      <li><a href="#products">Tuotteet</a></li>
+      <li><a href="#reviews">Arvostelut</a></li>
+      <li><a href="#cakes">Tilauskakut</a></li>
+      <li><a href="#hours">Aukioloajat</a></li>
+      <li><a href="#location">Sijainti</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-tag">Kotileipomo &amp; Kahvila — Vantaa</div>
+    <h1>Tuoretta <span>Kotileipurista</span><br>Joka Aamu</h1>
+    <p>Merinta Kotileipomo on Vantaan Matarin rakastettu lähiöleipomo ja kahvila. Tuoreita leivonnaisia, pullia, tilauskakkuja ja hyvää kahvia joka arki.</p>
+    <div class="rating-badge">
+      4.4 / 5 &nbsp;&middot;&nbsp; 372 arvostelua Googlessa
+    </div>
+  </section>
+
+  <section class="products" id="products">
+    <div class="section-inner">
+      <h2>Tuoreet <span>Leivonnaiset</span></h2>
+      <div class="products-grid">
+        <div class="product-card">
+          <h3>Pulla ja kanelipullat</h3>
+          <p>Tuoreita kotitekoisia kanelipullia joka aamuinen — pehmeita, tuoksuvia ja asiakkaiden suosikkeja jo vuosien ajan.</p>
+        </div>
+        <div class="product-card">
+          <h3>Munkit</h3>
+          <p>Tuoreena paistetut munkit ovat talon erikoisuus. Paksu, pehmos — nauti kahvin kanssa tai muuta herkuttelua.</p>
+        </div>
+        <div class="product-card">
+          <h3>Tilauskakut</h3>
+          <p>Bespoke celebration cakes for birthdays, weddings, and events. Order in advance — custom design, homemade quality.</p>
+        </div>
+        <div class="product-card">
+          <h3>Tuore leipä</h3>
+          <p>Daily-baked fresh bread — various loaves, rolls, and savoury snacks. Straight from the oven every morning.</p>
+        </div>
+        <div class="product-card">
+          <h3>Kahvilaherkut</h3>
+          <p>Croissants, wiener pastries, and seasonal specialties alongside great coffee. A proper neighbourhood café experience.</p>
+        </div>
+        <div class="product-card">
+          <h3>Suolaiset herkut</h3>
+          <p>Savoury pastries and snacks for a light lunch or mid-morning break. Freshly made on-site daily.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="reviews" id="reviews">
+    <div class="section-inner">
+      <h2>Mitä Asiakkaat <span>Sanovat</span></h2>
+      <div class="reviews-grid">
+        <div class="review-card">
+          <div class="review-rating">4.4 / 5 — Google Reviews</div>
+          <p>"Munkit ja muut leivonnaiset olivat hyviia, palvelu on ollut mahtavaa ja pulla on ollut erinomaista."</p>
+          <cite>via SuomenLista</cite>
+        </div>
+        <div class="review-card">
+          <div class="review-rating">4.4 / 5 — Google Reviews</div>
+          <p>"Asiakkaat kehuvat erityisesti kahvilan tuoreita leivonnaisia ja ystallistta palvelua."</p>
+          <cite>via SuomenLista</cite>
+        </div>
+        <div class="review-card">
+          <div class="review-rating">4.4 / 5 — Google Reviews</div>
+          <p>"Vantaan paras kotileipomo — tuoreet leivonnaiset joka aamu, tuttu ja turvallinen palvelu."</p>
+          <cite>Google-arvostelu</cite>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact-section" id="cakes">
+    <div class="section-inner">
+      <h2>Tilauskakut ja <span>Yhteydenotto</span></h2>
+      <div class="contact-grid">
+        <div class="contact-block">
+          <h3>Tilauskakut</h3>
+          <p>Bespoke celebration cakes for every occasion — birthdays, anniversaries, confirmations, weddings. Handmade with care in our own bakery. Order at least one week in advance.</p>
+          <p>Contact us by phone or email to discuss your cake design, flavour, and size.</p>
+          <a href="tel:+358400225107">+358 40 0225107</a>
+        </div>
+        <div class="contact-block">
+          <h3>Yhteystiedot</h3>
+          <p>Rekolantie 97, 01400 Vantaa<br>(Matari area, between Rekola and Korso)</p>
+          <p>
+            Phone: <a href="tel:+358400225107">+358 40 0225107</a><br>
+            Email: <a href="mailto:merinta.kotileipomo@gmail.com">merinta.kotileipomo@gmail.com</a>
+          </p>
+          <p>
+            <a href="https://www.facebook.com/leipomokahvilamerinta/" target="_blank" rel="noopener">Facebook</a>
+            &nbsp;&middot;&nbsp;
+            <a href="https://www.instagram.com/leipomokahvilamerinta/" target="_blank" rel="noopener">Instagram</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="hours" id="hours">
+    <div class="section-inner">
+      <h2>Aukiolo<span>ajat</span></h2>
+      <div class="hours-table">
+        <div class="hours-row"><span class="day">Maanantai</span><span class="time">06:00 – 18:00</span></div>
+        <div class="hours-row"><span class="day">Tiistai</span><span class="time">06:00 – 18:00</span></div>
+        <div class="hours-row"><span class="day">Keskiviikko</span><span class="time">06:00 – 18:00</span></div>
+        <div class="hours-row"><span class="day">Torstai</span><span class="time">06:00 – 18:00</span></div>
+        <div class="hours-row"><span class="day">Perjantai</span><span class="time">06:00 – 18:00</span></div>
+        <div class="hours-row"><span class="day">Lauantai</span><span class="time">09:00 – 15:00</span></div>
+        <div class="hours-row"><span class="day">Sunnuntai</span><span class="time">Suljettu</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="location">
+    <div class="section-inner">
+      <h2>Sijainti</h2>
+      <div class="map-wrapper">
+        <iframe src="https://maps.google.com/maps?q=Rekolantie+97+01400+Vantaa&z=16&output=embed" title="Merinta Kotileipomo map" loading="lazy"></iframe>
+      </div>
+      <p class="address-line">Rekolantie 97, 01400 Vantaa (Matari)</p>
+      <p class="phone-link"><a href="tel:+358400225107">+358 40 0225107</a></p>
+    </div>
+  </section>
+
+  <section style="padding: 48px 24px;">
+    <div class="klar-promo">
+      <span class="badge">Klar Sites</span>
+      <h2>Oma Verkkosivusto Kotileipomolle</h2>
+      <p>Klar Sites rakentaa Merinta Kotileipomolle oman sivuston — tilauskakut, leivonnaiset, aukioloajat ja yhteydenotto yhdessä paikassa. Googlesta suoraan teille.</p>
+      <div class="pricing">
+        <div class="price-item">
+          <div class="price-label">Pystytysmaksu</div>
+          <div class="price-amount">980 €</div>
+        </div>
+        <div class="price-item">
+          <div class="price-label">Kuukausimaksu</div>
+          <div class="price-amount">40 €/kk</div>
+          <div class="price-old">79 €/kk</div>
+        </div>
+      </div>
+      <div class="founder-badge">Perustajajäsen — 20 paikkaa</div>
+      <a href="https://preview.klarsystems.com/merinta-kotileipomo-oy-vantaa/proposal/" class="btn-proposal">Katso ehdotus</a>
+    </div>
+  </section>
+
+  <footer>
+    <div><strong>Merinta Kotileipomo</strong> &middot; Rekolantie 97, 01400 Vantaa &middot; <a href="tel:+358400225107">+358 40 0225107</a></div>
+    <div class="powered">Powered by Klar &middot; <a href="https://preview.klarsystems.com/merinta-kotileipomo-oy-vantaa/proposal/">View Proposal</a></div>
+  </footer>
+
+</body>
+</html>

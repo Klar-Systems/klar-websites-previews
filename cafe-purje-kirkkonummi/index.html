@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Café Purje &mdash; Seafront café on the Kantvik harbour</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #F1ECE0;
+      color: #1F2A35;
+      line-height: 1.65;
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+    }
+    h1, h2, h3 { font-family: 'Cormorant Garamond', serif; line-height: 1.18; color: #1F2A35; font-weight: 600; }
+    h1 { font-size: clamp(2.2rem, 5vw, 3.6rem); letter-spacing: -0.01em; }
+    h2 { font-size: clamp(1.7rem, 3.2vw, 2.4rem); margin-bottom: 0.6em; }
+    h3 { font-size: 1.2rem; margin-bottom: 0.4em; }
+    p { margin-bottom: 0.9em; color: #1F2A35; }
+    a { color: #1F5F7A; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .container { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+    section { padding: 84px 0; }
+    section + section { border-top: 1px solid #D6CDB8; }
+
+    /* Demo banner */
+    .demo-banner {
+      background: #1F2A35;
+      color: #F1ECE0;
+      text-align: center;
+      padding: 12px 24px;
+      font-size: 0.88rem;
+      letter-spacing: 0.02em;
+      position: sticky; top: 0; z-index: 1000;
+    }
+    .demo-banner a { color: #1F5F7A; text-decoration: underline; margin-left: 6px; }
+
+    /* Nav */
+    nav { background: #F1ECE0; border-bottom: 1px solid #D6CDB8; padding: 18px 0; position: sticky; top: 42px; z-index: 900; }
+    nav .container { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .nav-brand { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: #1F2A35; font-weight: 700; }
+    .nav-links { display: flex; list-style: none; gap: 28px; flex-wrap: wrap; }
+    .nav-links a { color: #1F2A35; font-size: 0.86rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; }
+    .nav-links a:hover { color: #1F5F7A; text-decoration: none; }
+
+    /* Hero */
+    .hero { padding: 0; display: grid; grid-template-columns: 1.05fr 1fr; min-height: 540px; }
+    .hero-content { display: flex; flex-direction: column; justify-content: center; padding: 72px 56px; background: #F1ECE0; }
+    .hero-eyebrow { font-size: 0.78rem; letter-spacing: 0.18em; text-transform: uppercase; color: #1F5F7A; margin-bottom: 18px; }
+    .hero h1 { margin-bottom: 24px; }
+    .hero-sub { font-size: 1.08rem; color: #5C6B78; margin-bottom: 32px; max-width: 460px; }
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn-primary, .btn-secondary { display: inline-block; padding: 14px 24px; font-weight: 600; font-size: 0.93rem; letter-spacing: 0.05em; text-transform: uppercase; border-radius: 2px; }
+    .btn-primary { background: #1F5F7A; color: #F1ECE0; }
+    .btn-primary:hover { filter: brightness(1.1); text-decoration: none; }
+    .btn-secondary { background: transparent; color: #1F2A35; border: 1px solid #1F2A35; }
+    .btn-secondary:hover { background: #1F2A35; color: #F1ECE0; text-decoration: none; }
+
+    .hero-visual { background: #FFFFFF; display: flex; align-items: center; justify-content: center; padding: 48px; border-left: 1px solid #D6CDB8; }
+    .img-placeholder { width: 100%; aspect-ratio: 4/5; background: #D6CDB8; display: flex; align-items: center; justify-content: center; color: #5C6B78; font-size: 0.88rem; letter-spacing: 0.08em; text-transform: uppercase; }
+
+    /* About */
+    .about { background: #FFFFFF; }
+    .about-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 56px; align-items: start; }
+    .about p { font-size: 1.05rem; }
+    .stat-row { display: flex; gap: 36px; margin-top: 28px; padding-top: 28px; border-top: 1px solid #D6CDB8; }
+    .stat strong { display: block; font-family: 'Cormorant Garamond', serif; font-size: 2rem; color: #1F5F7A; }
+    .stat span { font-size: 0.82rem; color: #5C6B78; text-transform: uppercase; letter-spacing: 0.08em; }
+    .about-photo { aspect-ratio: 1/1; background: #D6CDB8; display: flex; align-items: center; justify-content: center; color: #5C6B78; font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase; }
+
+    /* Events */
+    .events-intro { max-width: 640px; margin-bottom: 40px; color: #5C6B78; font-size: 1.05rem; }
+    .events-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .event-card { background: #FFFFFF; padding: 32px; border: 1px solid #D6CDB8; }
+    .event-card h3 { color: #1F5F7A; }
+    .event-card p { color: #5C6B78; font-size: 0.96rem; margin-bottom: 0; }
+
+    /* Contact */
+    .contact { background: #FFFFFF; }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; }
+    .contact-block { margin-bottom: 28px; }
+    .contact-block strong { display: block; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.1em; color: #5C6B78; margin-bottom: 6px; }
+    .contact-block a { color: #1F2A35; font-size: 1.05rem; }
+    .contact-block a:hover { color: #1F5F7A; }
+    .hours-line { font-size: 1.0rem; color: #1F2A35; }
+    .social-link { display: block; padding: 8px 0; color: #1F2A35; font-size: 0.95rem; }
+    .social-link:hover { color: #1F5F7A; text-decoration: none; }
+    .map-placeholder { aspect-ratio: 4/3; background: #D6CDB8; display: flex; align-items: center; justify-content: center; color: #5C6B78; font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase; text-align: center; padding: 24px; }
+
+    /* Footer */
+    footer { background: #1F2A35; color: #F1ECE0; padding: 40px 0; text-align: center; }
+    footer .container { display: flex; flex-direction: column; gap: 12px; align-items: center; }
+    footer p { color: #F1ECE0; opacity: 0.7; font-size: 0.85rem; margin: 0; }
+    .powered-by { font-size: 0.78rem; opacity: 0.55; letter-spacing: 0.1em; text-transform: uppercase; }
+
+    /* Responsive */
+    @media (max-width: 860px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero-content { padding: 56px 28px; }
+      .hero-visual { padding: 28px; border-left: 0; border-top: 1px solid #D6CDB8; }
+      .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 36px; }
+      .events-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="demo-banner">
+    This is a demo preview built for Café Purje.
+    <a href="https://preview.klarsystems.com/cafe-purje-kirkkonummi/proposal/">See the full proposal &rarr;</a>
+  </div>
+  <nav>
+    <div class="container">
+      <span class="nav-brand">Café Purje</span>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#events">Events</a></li>
+        <li><a href="#visit">Visit</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-content">
+      <p class="hero-eyebrow">Kirkkonummi</p>
+      <h1>Café Purje</h1>
+      <p class="hero-sub">Seafront café on the Kantvik harbour.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary">Get in touch</a>
+        <a href="#events" class="btn-secondary">What&rsquo;s on</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="img-placeholder">Your photo here</div>
+    </div>
+  </header>
+
+  <section id="about" class="about">
+    <div class="container">
+      <div class="about-grid">
+        <div>
+          <h2>Kantvik's seaside terrace</h2>
+          <p>Café Purje sits on the harbour at Kantvik in Kirkkonummi — a covered terrace right on the water, served by the team behind Huikeet. Salty and sweet treats, hot and cold drinks, and a bar licence for the late-summer evenings. Open through the warm season; quiet and protected when the wind picks up.</p>
+          <p>Three hundred and forty-eight reviews and a 4.3-star average from a crowd that knows its terraces. Visitors come for the view; they come back for the calm.</p>
+          <div class="stat-row">
+            <div class="stat"><strong>4.3</strong><span>Google rating</span></div>
+            <div class="stat"><strong>348</strong><span>Reviews</span></div>
+          </div>
+        </div>
+        <div class="about-photo">Interior photo coming soon</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="events">
+    <div class="container">
+      <h2>What&rsquo;s on</h2>
+      <p class="events-intro">We host occasional acoustic evenings and harbour-themed gatherings through summer. The bigger draw is just being here — sea view, heaters under the canopy, and a quiet pace that pulls people in for the whole afternoon.</p>
+      <div class="events-grid">
+        <article class="event-card"><h3>Boater's welcome</h3><p>The harbour brings new visitors every weekend. Tie up, walk over, and let the terrace do the rest.</p></article><article class="event-card"><h3>Sunset evenings</h3><p>Late-summer Fridays and Saturdays — the best seats face the water. Get there before sundown.</p></article><article class="event-card"><h3>Acoustic sets</h3><p>Occasional live music on the terrace through the warm months. Watch our Facebook page for upcoming dates.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="visit" class="contact">
+    <div class="container">
+      <h2>Visit us</h2>
+      <div class="contact-grid">
+        <div>
+          <div class="contact-block">
+            <strong>Address</strong>
+            <a href="https://maps.google.com/?q=Hupisaarentie+1,+02460+Kantvik" target="_blank" rel="noopener">Hupisaarentie 1, 02460 Kantvik</a>
+          </div>
+          <div class="contact-block">
+            <strong>Hours</strong>
+            <p class="hours-line">Pe 16:00–24:00, La 12:00–24:00, Su 12:00–20:00 (kesäaikataulu)</p>
+          </div>
+          <div class="contact-block">
+            <strong>Phone</strong>
+            <a href="tel:+358413266101">+358 41 3266101</a>
+          </div>
+          <div class="contact-block">
+            <strong>Email</strong>
+            <a href="mailto:haloo@huikeet.fi">haloo@huikeet.fi</a>
+          </div>
+        </div>
+        <div class="map-placeholder">Map of Hupisaarentie 1, 02460 Kantvik<br>coming soon</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="container">
+      <h2>Get in touch</h2>
+      <div class="contact-grid">
+        <div>
+          <p>Questions about events, private bookings, or whether we can fit your group on a busy night? Drop us a line or call &mdash; we read everything that comes in.</p>
+          <div class="contact-block">
+            <strong>Reach us directly</strong>
+            <a href="tel:+358413266101">+358 41 3266101</a>
+            <a href="mailto:haloo@huikeet.fi">haloo@huikeet.fi</a>
+          </div>
+        </div>
+        <div>
+          
+          <a class="social-link" href="https://facebook.com/cafepurje" target="_blank" rel="noopener">Facebook &rarr; Café Purje</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>&copy; Café Purje &mdash; Kirkkonummi, Finland</p>
+      <p class="powered-by">Powered by Klar</p>
+    </div>
+  </footer>
+</body>
+</html>
