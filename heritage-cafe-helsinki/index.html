@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Heritage Cafe — Specialty Coffee on Fredrikinkatu, Helsinki</title>
+  <!-- Palette: espresso brown, cream, caramel accent. Seg 3 (café-bar) — contact/events, no booking. -->
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #F5EFE4;
+      --surface: #FAF5EB;
+      --primary: #3E2A1A;
+      --primary-dark: #2A1C10;
+      --accent: #B67A3E;
+      --accent-light: #D9A373;
+      --text: #221812;
+      --muted: #6F5D4E;
+      --border: #E2D6C3;
+    }
+
+    body {
+      font-family: 'Georgia', 'Source Serif Pro', serif;
+      background: var(--bg); color: var(--text); line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: var(--accent); }
+
+    /* DEMO BANNER */
+    .demo-banner {
+      background: var(--primary); color: var(--bg);
+      text-align: center; padding: 0.6rem 1rem;
+      font-size: 0.85rem; letter-spacing: 0.02em;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+    }
+    .demo-banner strong { color: #fff; }
+    .demo-banner a { color: var(--accent-light); text-decoration: none; margin-left: 0.4rem; font-weight: 600; }
+    .demo-banner a:hover { text-decoration: underline; }
+
+    /* NAV */
+    nav {
+      background: rgba(245, 239, 228, 0.96);
+      backdrop-filter: blur(6px);
+      border-bottom: 1px solid var(--border);
+      padding: 1.1rem 2rem;
+      display: flex; justify-content: space-between; align-items: center;
+      position: sticky; top: 0; z-index: 100;
+    }
+    .logo {
+      font-family: 'Georgia', serif;
+      font-size: 1.5rem; font-weight: 700; letter-spacing: 0.08em;
+      color: var(--primary); text-transform: uppercase;
+    }
+    .logo em { font-style: italic; font-weight: 400; color: var(--accent); text-transform: lowercase; letter-spacing: 0.02em; }
+    .nav-links { font-family: 'Helvetica Neue', Arial, sans-serif; }
+    .nav-links a {
+      color: var(--muted); text-decoration: none; margin-left: 1.7rem;
+      font-size: 0.82rem; letter-spacing: 0.15em; text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* HERO */
+    .hero {
+      padding: 6rem 2rem 5rem;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+      background:
+        radial-gradient(circle at 70% 30%, rgba(182, 122, 62, 0.08) 0%, transparent 50%),
+        var(--bg);
+    }
+    .hero-inner { max-width: 760px; margin: 0 auto; }
+    .hero-kicker {
+      display: inline-block;
+      color: var(--accent);
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.72rem; letter-spacing: 0.25em; text-transform: uppercase;
+      margin-bottom: 1.4rem; font-weight: 600;
+    }
+    .hero h1 {
+      font-size: 3.5rem; font-weight: 400; line-height: 1.1;
+      color: var(--primary); margin-bottom: 1.4rem;
+      letter-spacing: -0.01em;
+    }
+    .hero h1 em { font-style: italic; color: var(--accent); }
+    .hero-lede {
+      color: var(--muted); font-size: 1.1rem; max-width: 540px;
+      margin: 0 auto 1.8rem;
+    }
+    .hero-rating {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      background: rgba(62, 42, 26, 0.05);
+      border: 1px solid rgba(62, 42, 26, 0.15);
+      padding: 0.4rem 0.9rem;
+      font-size: 0.88rem; color: var(--muted);
+      margin-bottom: 2rem;
+    }
+    .hero-rating strong { color: var(--primary); font-weight: 700; }
+    .hero-cta { display: flex; gap: 0.85rem; justify-content: center; flex-wrap: wrap; }
+
+    .btn {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      padding: 0.95rem 1.8rem; font-weight: 600; font-size: 0.92rem;
+      text-decoration: none; display: inline-block;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      transition: background 0.2s, color 0.2s;
+    }
+    .btn-primary { background: var(--primary); color: var(--bg); }
+    .btn-primary:hover { background: var(--primary-dark); }
+    .btn-outline {
+      background: transparent; border: 1px solid var(--primary); color: var(--primary);
+    }
+    .btn-outline:hover { background: var(--primary); color: var(--bg); }
+
+    /* SECTIONS */
+    section { padding: 5rem 2rem; }
+    .container { max-width: 1020px; margin: 0 auto; }
+    .section-kicker {
+      display: block; color: var(--accent);
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.72rem; letter-spacing: 0.25em; text-transform: uppercase;
+      font-weight: 600; margin-bottom: 0.7rem;
+    }
+    .section-title {
+      font-family: 'Georgia', serif;
+      font-size: 2.2rem; font-weight: 400; color: var(--primary);
+      margin-bottom: 1rem; letter-spacing: -0.01em;
+    }
+    .section-title em { font-style: italic; color: var(--accent); }
+
+    /* ABOUT */
+    .about-grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: 3.5rem; align-items: center; }
+    @media (max-width: 720px) { .about-grid { grid-template-columns: 1fr; } }
+    .about-text p { color: var(--muted); margin-bottom: 1rem; font-size: 1.05rem; }
+    .about-text p strong { color: var(--text); font-weight: 700; }
+
+    /* PHOTO PLACEHOLDER */
+    .photo-placeholder {
+      aspect-ratio: 4 / 5;
+      background: linear-gradient(145deg, var(--primary) 0%, var(--accent) 100%);
+      opacity: 0.55;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--bg); font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.8rem; letter-spacing: 0.15em;
+      text-transform: uppercase; font-weight: 600;
+      border-radius: 2px;
+    }
+    .photo-placeholder.wide { aspect-ratio: 16 / 9; }
+
+    /* MENU */
+    .menu-section {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .menu-intro { max-width: 620px; margin: 0 auto 2.8rem; text-align: center; color: var(--muted); font-size: 1.05rem; }
+    .menu-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2.5rem 3rem; }
+    @media (max-width: 720px) { .menu-grid { grid-template-columns: 1fr; } }
+    .menu-item {
+      padding-left: 1.2rem;
+      border-left: 1px solid var(--accent);
+    }
+    .menu-item h3 {
+      font-family: 'Georgia', serif;
+      font-size: 1.2rem; font-weight: 700;
+      color: var(--primary); margin-bottom: 0.4rem;
+    }
+    .menu-item p { color: var(--muted); font-size: 0.98rem; }
+    .menu-note {
+      text-align: center; margin-top: 3rem;
+      color: var(--muted); font-size: 0.95rem;
+      font-style: italic;
+    }
+
+    /* REVIEWS */
+    .reviews-section { padding: 5rem 2rem; }
+    .review-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;
+      margin-top: 2.5rem;
+    }
+    @media (max-width: 820px) { .review-grid { grid-template-columns: 1fr; } }
+    .review-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 1.75rem 1.5rem;
+      border-radius: 2px;
+    }
+    .review-stars {
+      color: var(--accent); letter-spacing: 0.15em;
+      font-size: 0.9rem; margin-bottom: 0.85rem;
+    }
+    .review-text {
+      color: var(--text); font-size: 1rem; line-height: 1.65;
+      margin-bottom: 1rem; font-style: italic;
+    }
+    .review-author {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      color: var(--muted); font-size: 0.82rem; letter-spacing: 0.05em;
+    }
+
+    /* EVENTS / CONTACT */
+    .events-section {
+      background: var(--primary); color: var(--bg);
+      padding: 5rem 2rem;
+    }
+    .events-section .section-kicker { color: var(--accent-light); }
+    .events-section .section-title { color: var(--bg); }
+    .events-section .section-title em { color: var(--accent-light); }
+    .events-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+    @media (max-width: 720px) { .events-grid { grid-template-columns: 1fr; } }
+    .events-text p { color: rgba(245, 239, 228, 0.82); margin-bottom: 1rem; font-size: 1.02rem; }
+    .events-details {
+      background: rgba(245, 239, 228, 0.06);
+      border: 1px solid rgba(245, 239, 228, 0.15);
+      padding: 1.5rem 1.75rem;
+    }
+    .events-details h3 {
+      font-family: 'Georgia', serif;
+      font-size: 1.15rem; font-weight: 700;
+      color: var(--bg); margin-bottom: 1rem;
+    }
+    .events-details ul { list-style: none; padding: 0; }
+    .events-details li {
+      color: rgba(245, 239, 228, 0.82);
+      padding: 0.5rem 0;
+      border-bottom: 1px dashed rgba(245, 239, 228, 0.15);
+      font-size: 0.95rem;
+    }
+    .events-details li:last-child { border-bottom: none; }
+    .events-cta {
+      margin-top: 1.5rem;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.95rem; color: rgba(245, 239, 228, 0.9);
+    }
+    .events-cta a {
+      color: var(--accent-light); text-decoration: none; font-weight: 600;
+    }
+    .events-cta a:hover { text-decoration: underline; }
+
+    /* CONTACT & HOURS */
+    .contact-section { background: var(--bg); }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3.5rem; align-items: start; }
+    @media (max-width: 720px) { .contact-grid { grid-template-columns: 1fr; } }
+    .contact-line {
+      color: var(--text); margin-bottom: 0.55rem; font-size: 1.02rem;
+    }
+    .contact-line a { color: var(--accent); text-decoration: none; font-weight: 600; }
+    .contact-line a:hover { text-decoration: underline; }
+    .hours-table { width: 100%; border-collapse: collapse; margin-top: 0.75rem; font-family: 'Helvetica Neue', Arial, sans-serif; }
+    .hours-table td { padding: 0.55rem 0; font-size: 0.95rem; border-bottom: 1px dashed var(--border); }
+    .hours-table td:first-child { color: var(--text); font-weight: 600; }
+    .hours-table td:last-child { color: var(--muted); text-align: right; }
+    .hours-table tr:last-child td { border-bottom: none; }
+
+    /* MAP */
+    .map-wrap { height: 320px; border-top: 1px solid var(--border); }
+    .map-wrap iframe { width: 100%; height: 100%; border: 0; filter: sepia(0.15) saturate(0.9); }
+
+    /* FOOTER */
+    footer {
+      background: var(--primary-dark); color: var(--bg);
+      text-align: center; padding: 2rem; font-size: 0.9rem;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+    }
+    footer strong { color: #fff; font-family: 'Georgia', serif; }
+    footer a { color: var(--accent-light); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+    .footer-klar { margin-top: 0.6rem; font-size: 0.78rem; color: rgba(245, 239, 228, 0.4); letter-spacing: 0.1em; }
+  </style>
+</head>
+<body>
+
+<div class="demo-banner">
+  <strong>This is a demo</strong> &mdash; a free preview built for Heritage Cafe.
+  <a href="https://preview.klarsystems.com/heritage-cafe-helsinki/proposal/" target="_blank" rel="noopener">View the full proposal &rarr;</a>
+</div>
+
+<nav>
+  <div class="logo">HERITAGE <em>cafe</em></div>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#menu">Menu</a>
+    <a href="#events">Events</a>
+    <a href="#visit">Visit</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <span class="hero-kicker">Specialty Coffee &middot; Fredrikinkatu 61A</span>
+    <h1>Slow coffee,<br><em>honest pastries.</em></h1>
+    <p class="hero-lede">A neighbourhood coffeehouse in central Helsinki. Rotating specialty roasters, sandwiches and quiches, and local art on the walls.</p>
+    <div class="hero-rating">
+      <strong>4.7</strong> <span>&middot;</span> <span>Google rating (232 reviews)</span>
+    </div>
+    <div class="hero-cta">
+      <a href="#menu" class="btn btn-primary">See the Menu</a>
+      <a href="#events" class="btn btn-outline">Private Events</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-text">
+        <span class="section-kicker">About</span>
+        <h2 class="section-title">A cafe that <em>takes its coffee seriously</em>.</h2>
+        <p>Heritage Cafe is a small independent coffeehouse on Fredrikinkatu in central Helsinki. We pour specialty coffee from rotating roasters &mdash; the kind of cup where origin, process and roaster actually matter.</p>
+        <p>Alongside the coffee, <strong>pastries, cakes, sandwiches and quiches</strong>, plus vegan-friendly options. Indoor seating, a small outdoor terrace, and local artists&rsquo; work on the walls year-round.</p>
+        <p>Friendly, unhurried, and open from breakfast through evening on weekdays.</p>
+      </div>
+      <div>
+        <div class="photo-placeholder" aria-label="Your photo here">Your photo here</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section class="menu-section" id="menu">
+  <div class="container">
+    <div style="text-align: center;">
+      <span class="section-kicker">Menu</span>
+      <h2 class="section-title">What we serve</h2>
+    </div>
+    <p class="menu-intro">A tight menu by design. Coffee we can vouch for, pastries we&rsquo;d eat ourselves, and light lunches that keep pace with your afternoon.</p>
+    <div class="menu-grid">
+      <div class="menu-item">
+        <h3>Specialty Coffee</h3>
+        <p>Espresso, latte, cappuccino and seasonal specialty brews &mdash; rotating beans from roasters we know personally.</p>
+      </div>
+      <div class="menu-item">
+        <h3>Pastries &amp; Cakes</h3>
+        <p>A daily selection of pastries and cakes, including gluten-free cookies. Banana bread when the kitchen feels like it.</p>
+      </div>
+      <div class="menu-item">
+        <h3>Sandwiches &amp; Quiches</h3>
+        <p>Light lunch made with good bread &mdash; sandwiches and quiches built for an unhurried coffee break.</p>
+      </div>
+      <div class="menu-item">
+        <h3>Hot Chocolate &amp; More</h3>
+        <p>Rich hot chocolate, matcha, and tea &mdash; the supporting cast around the coffee programme.</p>
+      </div>
+    </div>
+    <div class="menu-note">Vegan-friendly options and gluten-free cookies available at the counter.</div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews-section">
+  <div class="container">
+    <div style="text-align: center;">
+      <span class="section-kicker">Guests Say</span>
+      <h2 class="section-title">From the <em>regulars</em>.</h2>
+    </div>
+    <div class="review-grid">
+      <div class="review-card">
+        <div class="review-stars">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
+        <p class="review-text">&ldquo;Incredible coffee, with a deep knowledge of the coffee, process and roasters...I&rsquo;d rate Heritage Cafe as some of the best coffee I&rsquo;ve had.&rdquo;</p>
+        <div class="review-author">Chris O&rsquo;Mara &middot; Google review</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
+        <p class="review-text">&ldquo;Always really friendly staff, yummy treats, and excellent coffee!&rdquo;</p>
+        <div class="review-author">Anna Hakala &middot; Google review</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
+        <p class="review-text">&ldquo;Delicious cafe with a great staff. Food: 5 &middot; Service: 5 &middot; Atmosphere: 5&rdquo;</p>
+        <div class="review-author">Andrew Hamalainen &middot; Google review</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EVENTS / CONTACT CTA -->
+<section class="events-section" id="events">
+  <div class="container">
+    <div class="events-grid">
+      <div class="events-text">
+        <span class="section-kicker">Private Events</span>
+        <h2 class="section-title">Host your evening <em>at Heritage</em>.</h2>
+        <p>The cafe doubles as a small event venue after hours &mdash; private tastings, small birthdays, book launches, art openings with the artist right there at the counter.</p>
+        <p>Indoor seating plus the terrace when the weather agrees. Customisable packages from coffee-only receptions to full catering.</p>
+        <div class="events-cta">
+          Enquire about an event: <a href="tel:+358458402999">+358 45 840 2999</a>
+        </div>
+      </div>
+      <div class="events-details">
+        <h3>Good fit for</h3>
+        <ul>
+          <li>Intimate birthdays &amp; family gatherings</li>
+          <li>Book launches &amp; artist openings</li>
+          <li>Team offsites &amp; breakfast meetings</li>
+          <li>Coffee tastings (cupping on request)</li>
+          <li>Up to a full-cafe private buyout</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT & HOURS -->
+<section class="contact-section" id="visit">
+  <div class="container">
+    <div class="contact-grid">
+      <div>
+        <span class="section-kicker">Visit</span>
+        <h2 class="section-title">Find us</h2>
+        <div class="contact-line">Fredrikinkatu 61A, 00100 Helsinki</div>
+        <div class="contact-line"><a href="tel:+358458402999">+358 45 840 2999</a></div>
+        <div class="contact-line" style="margin-top: 0.8rem;">
+          <a href="https://maps.google.com/maps?q=Fredrikinkatu+61A+Helsinki" target="_blank" rel="noopener">Get directions &rarr;</a>
+        </div>
+        <div class="contact-line" style="margin-top: 1.1rem;">
+          <a href="https://www.instagram.com/heritagecafe_/" target="_blank" rel="noopener">Follow us on Instagram</a>
+        </div>
+      </div>
+      <div>
+        <span class="section-kicker">Hours</span>
+        <h2 class="section-title">Open</h2>
+        <table class="hours-table">
+          <tr><td>Monday</td><td>9:00 &ndash; 20:00</td></tr>
+          <tr><td>Tuesday</td><td>9:00 &ndash; 20:00</td></tr>
+          <tr><td>Wednesday</td><td>9:00 &ndash; 20:00</td></tr>
+          <tr><td>Thursday</td><td>9:00 &ndash; 20:00</td></tr>
+          <tr><td>Friday</td><td>9:00 &ndash; 20:00</td></tr>
+          <tr><td>Saturday</td><td>11:00 &ndash; 18:00</td></tr>
+          <tr><td>Sunday</td><td>12:00 &ndash; 18:00</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MAP -->
+<div class="map-wrap">
+  <iframe
+    src="https://maps.google.com/maps?q=Fredrikinkatu+61A+Helsinki&z=15&output=embed"
+    title="Heritage Cafe location map"
+    loading="lazy"
+    referrerpolicy="no-referrer-when-downgrade">
+  </iframe>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <strong>Heritage Cafe</strong> &middot; Fredrikinkatu 61A, 00100 Helsinki &middot;
+  <a href="tel:+358458402999">+358 45 840 2999</a>
+  <div class="footer-klar">Powered by Klar</div>
+</footer>
+
+</body>
+</html>
