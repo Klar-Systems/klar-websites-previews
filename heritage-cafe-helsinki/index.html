@@ -4,26 +4,32 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Heritage Cafe — Specialty Coffee on Fredrikinkatu, Helsinki</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,700;0,800;0,900;1,700;1,900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg: #F5EFE4;
-      --surface: #FAF5EB;
-      --surface-warm: #F0E6D6;
-      --primary: #3E2A1A;
-      --primary-dark: #2A1C10;
-      --accent: #B67A3E;
-      --accent-light: #D9A373;
-      --accent-glow: rgba(182, 122, 62, 0.12);
-      --text: #221812;
-      --muted: #6F5D4E;
-      --border: #E2D6C3;
-      --cream: #FDF8F0;
+      --bg: #F1EEE9;
+      --surface: #F1EEE9;
+      --surface-warm: #F1EEE9;
+      --primary: #1A1815;
+      --primary-dark: #000000;
+      --accent-red: #D75041;
+      --accent-brown: #83511D;
+      --accent-green: #778E65;
+      --accent: var(--accent-brown);
+      --accent-light: var(--accent-green);
+      --accent-glow: rgba(131, 81, 29, 0.12);
+      --text: #1A1815;
+      --muted: #6E6256;
+      --border: #DDD5C5;
+      --cream: #F1EEE9;
     }
 
     body {
-      font-family: 'Georgia', 'Source Serif Pro', serif;
+      font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
       background: var(--bg); color: var(--text); line-height: 1.65;
       -webkit-font-smoothing: antialiased;
     }
@@ -46,7 +52,7 @@
       background: var(--primary); color: var(--bg);
       text-align: center; padding: 0.6rem 1rem;
       font-size: 0.85rem; letter-spacing: 0.02em;
-      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
     }
     .demo-banner strong { color: #fff; }
     .demo-banner a { color: var(--accent-light); text-decoration: none; margin-left: 0.4rem; font-weight: 600; }
@@ -54,7 +60,7 @@
 
     /* NAV */
     nav {
-      background: rgba(245, 239, 228, 0.96);
+      background: rgba(241, 238, 233, 0.96);
       backdrop-filter: blur(6px);
       border-bottom: 1px solid var(--border);
       padding: 1.1rem 2rem;
@@ -62,12 +68,14 @@
       position: sticky; top: 0; z-index: 100;
     }
     .logo {
-      font-family: 'Georgia', serif;
-      font-size: 1.5rem; font-weight: 700; letter-spacing: 0.08em;
-      color: var(--primary); text-transform: uppercase;
+      display: flex; align-items: center;
+      line-height: 0;
     }
-    .logo em { font-style: italic; font-weight: 400; color: var(--accent); text-transform: lowercase; letter-spacing: 0.02em; }
-    .nav-links { font-family: 'Helvetica Neue', Arial, sans-serif; }
+    .logo img {
+      height: 44px; width: auto;
+      display: block;
+    }
+    .nav-links { font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif; }
     .nav-links a {
       color: var(--muted); text-decoration: none; margin-left: 1.7rem;
       font-size: 0.82rem; letter-spacing: 0.15em; text-transform: uppercase;
@@ -80,23 +88,21 @@
       padding: 6rem 2rem 5rem;
       text-align: center;
       border-bottom: 1px solid var(--border);
-      background:
-        radial-gradient(circle at 70% 30%, rgba(182, 122, 62, 0.08) 0%, transparent 50%),
-        radial-gradient(circle at 20% 80%, rgba(182, 122, 62, 0.05) 0%, transparent 40%),
-        var(--bg);
+      background: var(--bg);
     }
     .hero-inner { max-width: 760px; margin: 0 auto; }
     .hero-kicker {
       display: inline-block;
       color: var(--accent);
-      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
       font-size: 0.72rem; letter-spacing: 0.25em; text-transform: uppercase;
       margin-bottom: 1.4rem; font-weight: 600;
     }
     .hero h1 {
-      font-size: 3.5rem; font-weight: 400; line-height: 1.1;
+      font-family: 'Archivo', 'Inter', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 3.6rem; font-weight: 900; line-height: 1.05;
       color: var(--primary); margin-bottom: 1.4rem;
-      letter-spacing: -0.01em;
+      letter-spacing: -0.02em; text-transform: uppercase;
     }
     .hero h1 em { font-style: italic; color: var(--accent); }
     .hero-lede {
@@ -105,7 +111,7 @@
     }
     .hero-rating {
       display: inline-flex; align-items: center; gap: 0.4rem;
-      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
       background: rgba(62, 42, 26, 0.05);
       border: 1px solid rgba(62, 42, 26, 0.15);
       padding: 0.4rem 0.9rem;
@@ -113,10 +119,11 @@
       margin-bottom: 2rem;
     }
     .hero-rating strong { color: var(--primary); font-weight: 700; }
+    .hero-rating .rating-star { color: var(--accent-brown); font-size: 1rem; line-height: 1; }
     .hero-cta { display: flex; gap: 0.85rem; justify-content: center; flex-wrap: wrap; }
 
     .btn {
-      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
       padding: 0.95rem 1.8rem; font-weight: 600; font-size: 0.92rem;
       text-decoration: none; display: inline-block;
       letter-spacing: 0.08em; text-transform: uppercase;
@@ -137,14 +144,14 @@
     .container { max-width: 1020px; margin: 0 auto; }
     .section-kicker {
       display: block; color: var(--accent);
-      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
       font-size: 0.72rem; letter-spacing: 0.25em; text-transform: uppercase;
       font-weight: 600; margin-bottom: 0.7rem;
     }
     .section-title {
-      font-family: 'Georgia', serif;
-      font-size: 2.2rem; font-weight: 400; color: var(--primary);
-      margin-bottom: 1rem; letter-spacing: -0.01em;
+      font-family: 'Archivo', 'Inter', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 2.2rem; font-weight: 900; color: var(--primary);
+      margin-bottom: 1rem; letter-spacing: -0.01em; text-transform: uppercase;
     }
     .section-title em { font-style: italic; color: var(--accent); }
 
@@ -193,9 +200,9 @@
       border-left: 1px solid var(--accent);
     }
     .menu-item h3 {
-      font-family: 'Georgia', serif;
-      font-size: 1.2rem; font-weight: 700;
-      color: var(--primary); margin-bottom: 0.4rem;
+      font-family: 'Archivo', 'Inter', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 1.2rem; font-weight: 900;
+      color: var(--primary); margin-bottom: 0.4rem; text-transform: uppercase; letter-spacing: 0.02em;
     }
     .menu-item p { color: var(--muted); font-size: 0.98rem; }
     .menu-note {
@@ -209,10 +216,7 @@
        ============================ */
     .shop-section {
       padding: 5.5rem 2rem;
-      background:
-        radial-gradient(ellipse at 30% 50%, rgba(182, 122, 62, 0.07) 0%, transparent 55%),
-        radial-gradient(ellipse at 80% 30%, rgba(62, 42, 26, 0.04) 0%, transparent 45%),
-        var(--cream);
+      background: var(--bg);
       border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
       position: relative;
@@ -260,16 +264,16 @@
       padding: 1.6rem 1.5rem 1.8rem;
     }
     .bean-origin {
-      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
       font-size: 0.68rem; letter-spacing: 0.2em;
       text-transform: uppercase; font-weight: 600;
       color: var(--accent); margin-bottom: 0.5rem;
     }
     .bean-name {
-      font-family: 'Georgia', serif;
-      font-size: 1.35rem; font-weight: 700;
+      font-family: 'Archivo', 'Inter', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 1.35rem; font-weight: 900;
       color: var(--primary); margin-bottom: 0.6rem;
-      line-height: 1.25;
+      line-height: 1.2; text-transform: uppercase; letter-spacing: 0.02em;
     }
     .bean-description {
       color: var(--muted); font-size: 0.95rem;
@@ -281,7 +285,7 @@
       flex-wrap: wrap;
     }
     .bean-detail {
-      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
       font-size: 0.78rem; color: var(--muted);
     }
     .bean-detail strong {
@@ -297,7 +301,7 @@
       border-top: 1px dashed var(--border);
     }
     .bean-price {
-      font-family: 'Georgia', serif;
+      font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
       font-size: 1.35rem; font-weight: 700;
       color: var(--primary);
     }
@@ -334,7 +338,7 @@
       margin-bottom: 1rem; font-style: italic;
     }
     .review-author {
-      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
       color: var(--muted); font-size: 0.82rem; letter-spacing: 0.05em;
     }
 
@@ -355,9 +359,9 @@
       padding: 1.5rem 1.75rem;
     }
     .events-details h3 {
-      font-family: 'Georgia', serif;
-      font-size: 1.15rem; font-weight: 700;
-      color: var(--bg); margin-bottom: 1rem;
+      font-family: 'Archivo', 'Inter', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 1.15rem; font-weight: 900;
+      color: var(--bg); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.04em;
     }
     .events-details ul { list-style: none; padding: 0; }
     .events-details li {
@@ -369,7 +373,7 @@
     .events-details li:last-child { border-bottom: none; }
     .events-cta {
       margin-top: 1.5rem;
-      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
       font-size: 0.95rem; color: rgba(245, 239, 228, 0.9);
     }
     .events-cta a {
@@ -386,7 +390,7 @@
     }
     .contact-line a { color: var(--accent); text-decoration: none; font-weight: 600; }
     .contact-line a:hover { text-decoration: underline; }
-    .hours-table { width: 100%; border-collapse: collapse; margin-top: 0.75rem; font-family: 'Helvetica Neue', Arial, sans-serif; }
+    .hours-table { width: 100%; border-collapse: collapse; margin-top: 0.75rem; font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif; }
     .hours-table td { padding: 0.55rem 0; font-size: 0.95rem; border-bottom: 1px dashed var(--border); }
     .hours-table td:first-child { color: var(--text); font-weight: 600; }
     .hours-table td:last-child { color: var(--muted); text-align: right; }
@@ -400,9 +404,9 @@
     footer {
       background: var(--primary-dark); color: var(--bg);
       text-align: center; padding: 2rem; font-size: 0.9rem;
-      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
     }
-    footer strong { color: #fff; font-family: 'Georgia', serif; }
+    footer strong { color: #fff; font-family: 'Archivo', 'Inter', 'Helvetica Neue', Arial, sans-serif; font-weight: 900; letter-spacing: 0.04em; }
     footer a { color: var(--accent-light); text-decoration: none; }
     footer a:hover { text-decoration: underline; }
     .footer-klar { margin-top: 0.6rem; font-size: 0.78rem; color: rgba(245, 239, 228, 0.4); letter-spacing: 0.1em; }
@@ -415,6 +419,13 @@
     .reveal.visible {
       opacity: 1; transform: translateY(0);
     }
+    /* Per-section accent identity (red / brown / green) */
+    .hero { --accent: var(--accent-red); }
+    .menu-section { --accent: var(--accent-green); }
+    .shop-section { --accent: var(--accent-red); }
+    .events-section { --accent-light: var(--accent-green); }
+    .hero .hero-kicker { color: var(--text); }
+
   </style>
 </head>
 <body>
@@ -425,7 +436,9 @@
 </div>
 
 <nav>
-  <div class="logo">HERITAGE <em>cafe</em></div>
+  <a class="logo" href="#" aria-label="Heritage Cafe — home">
+    <img src="images/heritage-logo.png" alt="Heritage Cafe">
+  </a>
   <div class="nav-links">
     <a href="#about">About</a>
     <a href="#menu">Menu</a>
@@ -439,9 +452,10 @@
 <section class="hero">
   <div class="hero-inner">
     <span class="hero-kicker">Specialty Coffee &middot; Fredrikinkatu 61A</span>
-    <h1>Slow coffee,<br><em>honest pastries.</em></h1>
-    <p class="hero-lede">A neighbourhood coffeehouse in central Helsinki. Rotating specialty roasters, sandwiches and quiches, and local art on the walls.</p>
+    <h1><span style="color: var(--accent-green);">Natural</span> <em style="color: var(--text); font-style: italic;">coffee.</em><br>Honest <em>pastries.</em></h1>
+    <p class="hero-lede">An award-winning coffeehouse in central Helsinki. Rotating specialty roasters, sandwiches and quiches, and local art on the walls.</p>
     <div class="hero-rating">
+      <span class="rating-star" aria-hidden="true">&#9733;</span>
       <strong>4.7</strong> <span>&middot;</span> <span>Google rating (232 reviews)</span>
     </div>
     <div class="hero-cta">
@@ -475,7 +489,7 @@
   <div class="container">
     <div style="text-align: center;" class="reveal">
       <span class="section-kicker">Menu</span>
-      <h2 class="section-title">What we serve</h2>
+      <h2 class="section-title">What we <em>serve</em></h2>
     </div>
     <p class="menu-intro reveal">A tight menu by design. Coffee we can vouch for, pastries we&rsquo;d eat ourselves, and light lunches that keep pace with your afternoon.</p>
     <div class="menu-grid">
@@ -499,11 +513,6 @@
     <div class="menu-note">Vegan-friendly options and gluten-free cookies available at the counter.</div>
   </div>
 </section>
-
-<!-- COSY DIVIDER -->
-<div class="cosy-divider">
-  <span>&#9753;</span>
-</div>
 
 <!-- SHOP OUR BEANS -->
 <section class="shop-section" id="shop">
