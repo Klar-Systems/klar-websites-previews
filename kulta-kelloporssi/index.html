@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Helsingin Kulta- &amp; Kellopörssi — Kultaa, kelloja ja koruja Punavuoressa</title>
 <meta name="description" content="Perinteikäs kulta- ja kelloliike Helsingin Punavuoressa vuodesta 1993. Ostamme ja myymme kultaa, arvokelloja, koruja ja sormuksia. Iso Roobertinkatu 9, Helsinki." />
-<meta name="theme-color" content="#12293F" />
+<meta name="theme-color" content="#4A1217" />
 <meta property="og:type" content="business.business" />
 <meta property="og:title" content="Helsingin Kulta- & Kellopörssi" />
 <meta property="og:description" content="Kultaa, kelloja, koruja ja sormuksia Helsingin Punavuoressa vuodesta 1993. Osto ja myynti." />
@@ -18,16 +18,16 @@
 
 <style>
   :root{
-    --navy:#12293F;
-    --navy-deep:#0E1F30;
-    --navy-2:#1E4468;
+    --red:#6E1B22;
+    --red-deep:#4A1217;
+    --red-2:#8E2A31;
     --ink:#17140F;
     --muted:#5C5852;
     --paper:#FCF9F3;
     --cream:#F4EDE1;
     --line:#E7DECF;
     --gold-1:#F2E2B4; --gold-2:#D7B56A; --gold-3:#A67C32;
-    --shadow:0 30px 70px -34px rgba(14,31,48,.4);
+    --shadow:0 30px 70px -34px rgba(40,12,15,.42);
   }
 
   *{box-sizing:border-box;margin:0;padding:0}
@@ -44,25 +44,25 @@
   .divider{height:2px;border:0;width:66px;
         background:linear-gradient(90deg,transparent,var(--gold-2),var(--gold-3),var(--gold-2),transparent)}
   .divider.center{margin-inline:auto}
-  .eyebrow{font-weight:500;text-transform:uppercase;letter-spacing:.32em;font-size:.8rem;color:var(--navy-2)}
+  .eyebrow{font-weight:500;text-transform:uppercase;letter-spacing:.32em;font-size:.8rem;color:var(--red-2)}
   .eyebrow.on-dark{color:var(--gold-2)}
 
   /* buttons — rectangular, no pills */
   .btn{display:inline-flex;align-items:center;gap:.6rem;padding:1rem 1.9rem;border-radius:2px;
     font-size:1rem;letter-spacing:.06em;text-transform:uppercase;transition:.2s;font-weight:400}
-  .btn-navy{background:var(--navy);color:#F3EEE4}
-  .btn-navy:hover{background:var(--navy-2);transform:translateY(-2px)}
-  .btn-gold{background:linear-gradient(150deg,var(--gold-1),var(--gold-2) 52%,var(--gold-3));color:var(--navy-deep);font-weight:500}
+  .btn-red{background:var(--red);color:#F3EEE4}
+  .btn-red:hover{background:var(--red-2);transform:translateY(-2px)}
+  .btn-gold{background:linear-gradient(150deg,var(--gold-1),var(--gold-2) 52%,var(--gold-3));color:var(--red-deep);font-weight:500}
   .btn-gold:hover{transform:translateY(-2px);filter:brightness(1.04)}
   .btn-outline{border:1px solid rgba(215,181,106,.6);color:#F0E7D5;background:transparent}
   .btn-outline:hover{border-color:var(--gold-2);background:rgba(215,181,106,.1)}
-  .btn-line{border:1px solid var(--navy);color:var(--navy);background:transparent}
-  .btn-line:hover{background:var(--navy);color:#F3EEE4}
+  .btn-line{border:1px solid var(--red);color:var(--red);background:transparent}
+  .btn-line:hover{background:var(--red);color:#F3EEE4}
 
   /* ---------- Header ---------- */
   .goldline{height:3px;background:linear-gradient(90deg,var(--gold-3),var(--gold-1),var(--gold-2),var(--gold-1),var(--gold-3))}
   /* live gold price ticker — very small */
-  .priceband{display:none;background:var(--navy-deep);color:#CDBE9F;
+  .priceband{display:none;background:var(--red-deep);color:#CDBE9F;
     font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;padding:.4rem 0}
   .priceband .wrap{display:flex;align-items:center;justify-content:center;gap:.5rem;flex-wrap:wrap;text-align:center}
   .priceband .dot{width:6px;height:6px;border-radius:50%;background:var(--gold-2);box-shadow:0 0 0 0 rgba(215,181,106,.6);
@@ -74,20 +74,20 @@
     backdrop-filter:saturate(160%) blur(12px);border-bottom:1px solid var(--line)}
   .nav{display:flex;align-items:center;justify-content:space-between;height:88px}
   .brand{line-height:1.05}
-  .brand .bt{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:1.6rem;letter-spacing:.01em;color:var(--navy)}
+  .brand .bt{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:1.6rem;letter-spacing:.01em;color:var(--red)}
   .brand small{display:block;font-family:'Jost',sans-serif;font-weight:400;font-size:.66rem;
     letter-spacing:.3em;text-transform:uppercase;color:var(--muted);margin-top:3px}
   nav ul{display:flex;gap:2.4rem;list-style:none}
   nav ul a{font-size:.92rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);opacity:.75;transition:.2s}
-  nav ul a:hover{opacity:1;color:var(--navy-2)}
-  .nav-cta{display:inline-flex;align-items:center;gap:.5rem;background:var(--navy);color:#F3EEE4;
+  nav ul a:hover{opacity:1;color:var(--red-2)}
+  .nav-cta{display:inline-flex;align-items:center;gap:.5rem;background:var(--red);color:#F3EEE4;
     padding:.68rem 1.25rem;border-radius:2px;font-size:.9rem;letter-spacing:.05em;transition:.2s}
-  .nav-cta:hover{background:var(--navy-2)}
+  .nav-cta:hover{background:var(--red-2)}
   .burger{display:none;background:none;border:0;cursor:pointer;padding:.4rem}
-  .burger span{display:block;width:26px;height:2px;background:var(--navy);margin:6px 0;transition:.25s}
+  .burger span{display:block;width:26px;height:2px;background:var(--red);margin:6px 0;transition:.25s}
 
   /* ---------- Hero ---------- */
-  .hero{display:grid;grid-template-columns:1.02fr .98fr;min-height:min(86vh,740px);background:var(--navy-deep);color:#F1E9DC}
+  .hero{display:grid;grid-template-columns:1.02fr .98fr;min-height:min(86vh,740px);background:var(--red-deep);color:#F1E9DC}
   .hero-text{display:flex;flex-direction:column;justify-content:center;
     padding:clamp(2.6rem,6vw,5.5rem) clamp(1.8rem,5vw,4.5rem);position:relative}
   .hero-text:before{content:"";position:absolute;inset:26px;border:1px solid rgba(215,181,106,.28);pointer-events:none}
@@ -98,9 +98,9 @@
   .hero-actions{display:flex;flex-wrap:wrap;gap:1rem;margin-top:2.4rem}
   .hero-img{position:relative;background:url('images/hero-watch.jpg') center/cover no-repeat;min-height:340px}
   .hero-img:after{content:"";position:absolute;inset:0;
-    background:linear-gradient(90deg,rgba(14,31,48,.6),transparent 32%)}
+    background:linear-gradient(90deg,rgba(58,13,17,.6),transparent 32%)}
   .hero-badge{position:absolute;left:clamp(1.4rem,4vw,3rem);bottom:clamp(1.4rem,4vw,3rem);z-index:2;
-    background:rgba(14,31,48,.74);backdrop-filter:blur(4px);border:1px solid rgba(215,181,106,.42);
+    background:rgba(58,13,17,.76);backdrop-filter:blur(4px);border:1px solid rgba(215,181,106,.42);
     padding:1rem 1.35rem;display:flex;align-items:center;gap:.9rem}
   .hero-badge .big{font-family:'Cormorant Garamond',serif;font-size:2.2rem;line-height:1}
   .hero-badge .sm{font-size:.76rem;letter-spacing:.16em;text-transform:uppercase;color:#C6B79E;line-height:1.3}
@@ -112,7 +112,7 @@
     padding:.2rem 1rem}
   .trust .item + .item{border-left:1px solid var(--line)}
   .trust .item svg{color:var(--gold-3);flex:none}
-  .trust .k{font-family:'Cormorant Garamond',serif;font-size:1.5rem;line-height:1;color:var(--navy)}
+  .trust .k{font-family:'Cormorant Garamond',serif;font-size:1.5rem;line-height:1;color:var(--red)}
   .trust .v{font-size:.85rem;letter-spacing:.03em;color:var(--muted)}
 
   /* ---------- Sections ---------- */
@@ -127,7 +127,7 @@
   .about-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(2.2rem,5vw,4.8rem);align-items:center}
   .about-photo{position:relative;padding:16px}
   .about-photo:before{content:"";position:absolute;inset:0;border:1px solid var(--gold-2);opacity:.7}
-  .about-photo:after{content:"";position:absolute;inset:7px;border:1px solid rgba(30,68,104,.35)}
+  .about-photo:after{content:"";position:absolute;inset:7px;border:1px solid rgba(142,42,49,.32)}
   .about-photo img{position:relative;aspect-ratio:4/5;object-fit:cover;box-shadow:var(--shadow);z-index:1}
   .about-copy p{color:#4E4A44;margin-top:1.25rem;font-size:1.17rem;line-height:1.75}
   .about-copy p strong{color:var(--ink);font-weight:500}
@@ -138,11 +138,11 @@
   /* offerings */
   .offer-sec{background:var(--cream);border-block:1px solid var(--line)}
   .offer{display:grid;grid-template-columns:repeat(3,1fr);gap:1.8rem;margin-top:3.4rem}
-  .tile{position:relative;overflow:hidden;background:var(--navy-deep);box-shadow:var(--shadow);
+  .tile{position:relative;overflow:hidden;background:var(--red-deep);box-shadow:var(--shadow);
     isolation:isolate;min-height:440px;display:flex;flex-direction:column;justify-content:flex-end}
   .tile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform .8s ease}
   .tile:after{content:"";position:absolute;inset:0;z-index:-1;
-    background:linear-gradient(180deg,rgba(14,31,48,.05) 28%,rgba(14,31,48,.5) 60%,rgba(11,24,38,.94))}
+    background:linear-gradient(180deg,rgba(58,13,17,.05) 28%,rgba(58,13,17,.52) 60%,rgba(40,9,12,.95))}
   .tile:hover img{transform:scale(1.06)}
   .tile .tframe{position:absolute;inset:14px;border:1px solid rgba(242,226,180,.4);z-index:1;pointer-events:none}
   .tile .body{position:relative;z-index:2;padding:2rem 1.9rem 2.1rem;color:#F1E9DC}
@@ -152,7 +152,7 @@
 
   /* detail band */
   .band{position:relative;color:#F1E9DC;text-align:center;
-    background:linear-gradient(rgba(14,31,48,.82),rgba(14,31,48,.86)),url('images/pocketwatch.jpg') center/cover fixed;
+    background:linear-gradient(rgba(58,13,17,.84),rgba(40,9,12,.88)),url('images/pocketwatch.jpg') center/cover fixed;
     padding:clamp(5rem,11vw,8.5rem) 0}
   .band .q{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(1.9rem,4vw,3rem);
     max-width:22ch;margin:0 auto;line-height:1.3;color:#F6EEDF}
@@ -180,21 +180,21 @@
   .hrs .t{color:var(--ink);font-size:.98rem;font-variant-numeric:tabular-nums}
   .hrs .t.off{color:var(--muted)}
   .cinfo{margin-top:1.2rem;display:grid;gap:1rem}
-  .cinfo .lab{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--navy-2);display:block;margin-bottom:.2rem}
+  .cinfo .lab{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--red-2);display:block;margin-bottom:.2rem}
   .cinfo .v{font-size:1.02rem;color:var(--ink)}
   .cinfo a.v{border-bottom:1px solid transparent;transition:.2s}
-  .cinfo a.v:hover{color:var(--navy-2);border-color:var(--gold-2)}
+  .cinfo a.v:hover{color:var(--red-2);border-color:var(--gold-2)}
   .info-btns{margin-top:1.7rem;display:flex;flex-wrap:wrap;gap:.7rem}
   .info-btns .btn{padding:.82rem 1.5rem;font-size:.82rem}
 
   .map-wrap{max-width:900px;margin:2.6rem auto 0;border-radius:4px;overflow:hidden;border:1px solid var(--line)}
   .map-wrap iframe{display:block;width:100%;height:250px;border:0;filter:grayscale(.15) contrast(1.02)}
   .map-note{text-align:center;margin-top:1rem;font-size:.9rem;color:var(--muted)}
-  .map-note a{color:var(--navy-2);border-bottom:1px solid var(--gold-2);padding-bottom:1px}
-  .map-note a:hover{color:var(--navy)}
+  .map-note a{color:var(--red-2);border-bottom:1px solid var(--gold-2);padding-bottom:1px}
+  .map-note a:hover{color:var(--red)}
 
   /* ---------- Footer ---------- */
-  footer{background:var(--navy-deep);color:#DDD3C4;padding:4rem 0 2.2rem}
+  footer{background:var(--red-deep);color:#DDD3C4;padding:4rem 0 2.2rem}
   .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:2.6rem}
   .foot-grid h4{font-size:1.75rem;color:#F3EEE4}
   .foot-brand p{color:#9FB0C2;margin-top:1rem;font-size:1rem;max-width:36ch}
@@ -281,7 +281,7 @@
         </div>
       </div>
     </div>
-    <div class="hero-img" role="img" aria-label="Kultainen rannekello tummansinistä taustaa vasten">
+    <div class="hero-img" role="img" aria-label="Kultainen rannekello tummaa taustaa vasten">
       <div class="hero-badge">
         <span class="big gold">30+</span>
         <span class="sm">vuotta<br>Punavuoressa</span>
@@ -403,7 +403,7 @@
             <div><span class="lab">Osoite</span><a class="v" href="https://maps.google.com/?q=Helsingin+Kulta-+%26+Kellop%C3%B6rssi,+Iso+Roobertinkatu+9,+00120+Helsinki" target="_blank" rel="noopener">Iso Roobertinkatu 9, 00120 Helsinki</a></div>
           </div>
           <div class="info-btns">
-            <a class="btn btn-navy" href="tel:+3589645360">Soita meille</a>
+            <a class="btn btn-red" href="tel:+3589645360">Soita meille</a>
             <a class="btn btn-line" href="https://maps.google.com/?q=Helsingin+Kulta-+%26+Kellop%C3%B6rssi,+Iso+Roobertinkatu+9,+00120+Helsinki" target="_blank" rel="noopener">Reittiohjeet</a>
           </div>
         </div>
